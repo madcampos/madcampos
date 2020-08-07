@@ -1,16 +1,21 @@
-### Hi there 👋
+# Hello You! 🙋‍♂️
 
-<!--
-**madcampos/madcampos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I am a developer and designer who likes colorful and beautifull things, good food and puzzles.
 
-Here are some ideas to get you started:
+## 📢 Reach me at
+- LinkedIn: [madcampos](https://www.linkedin.com/in/madcampos/)
+- Instagram: [@madcampos](https://instagram.com/madcampos/)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🛠 Current work
+Working for [@dom-pixel](https://github.com/dom-pixel) in web and app development. With Javascript, PHP, and lots of CSS.
+
+## 🧠 I'm studying
+- React
+- SCRUM
+- Drawing
+
+## ℹ Fun facts
+- I'm left handed.
+- My favorite color is orange.
+- I'm a Scout Leader.
+- I love science fiction.
