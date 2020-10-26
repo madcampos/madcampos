@@ -7,7 +7,7 @@ I am a developer and designer who likes colorful and beautifull things, good foo
 - Instagram: [@madcampos](https://instagram.com/madcampos/)
 
 ## 🛠 Current work
-Working for [@dom-pixel](https://github.com/dom-pixel) in web and app development. With Javascript, PHP, and lots of CSS.
+Working @ [Drag](https://dragapp.com) in web development. With Javascript and lots of CSS.
 
 ## 🧠 I'm studying
 - React
