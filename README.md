@@ -11,11 +11,11 @@ Working @ [Drag](https://dragapp.com) in web development. With Javascript and lo
 
 ## 🧠 I'm studying
 - React
-- SCRUM
+- Scrum
 - Drawing
 
 ## ℹ Fun facts
 - I'm left handed.
 - My favorite color is orange.
-- I'm a Scout Leader.
+- I'm a boy scout leader.
 - I love science fiction.
