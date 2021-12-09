@@ -7,15 +7,15 @@ I am a developer and designer who likes colorful and beautifull things, good foo
 - Instagram: [@madcampos](https://instagram.com/madcampos/)
 
 ## 🛠 Current work
-Working @ [Moka](https://moka.ai) on backend and infrastructure, with lots of Javascript.
+Working @[Mogo](https://mogo.ca) on backend and infrastructure, with lots of Javascript.
 
 ## 🧠 I'm studying
-- React
-- Scrum
-- Drawing
+- Web components
+- Typescript
+- Powershell
 
 ## ℹ Fun facts
 - I'm left handed.
 - My favorite color is orange.
-- I'm a boy scout leader.
+- I'm a boy scout.
 - I love science fiction.
