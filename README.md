@@ -1,6 +1,7 @@
 # Hello You! 🙋‍♂️
 
 I am a developer and designer who likes colorful and beautifull things, good food and puzzles.
+My language of choice is javascript, but I do work with whatever tool gets the job done.
 
 ## 📢 Reach me at
 - LinkedIn: [madcampos](https://www.linkedin.com/in/madcampos/)
