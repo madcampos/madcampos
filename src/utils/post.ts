@@ -63,7 +63,7 @@ function getPostUrl(post: CollectionEntry<'blog'>) {
 
 async function getRelatedPosts(post: CollectionEntry<'blog'>) {
 	const blogEntries = await getCollection('blog');
-	const posts = blogEntries.filter(({ data: { draft } }) => !draft);
+	const posts = blogEntries.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
 
 	const relatedPosts: RelatedPost[] = [];
 
@@ -133,7 +133,7 @@ async function formatPostMetadata(post: CollectionEntry<'blog'>) {
 
 export async function listAllPosts() {
 	const blogEntries = await getCollection('blog');
-	const filteredBlogEntries = blogEntries.filter(({ data: { draft } }) => !draft);
+	const filteredBlogEntries = blogEntries.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
 	const formattedBlogEntries = await Promise.all(filteredBlogEntries.map(async (entry) => formatPostMetadata(entry)));
 	const sortedBlogEntries = formattedBlogEntries.sort(sortPostsByDate);
 
