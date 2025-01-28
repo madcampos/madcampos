@@ -87,7 +87,7 @@ async function getRelatedPosts(post: CollectionEntry<'blog'>) {
 }
 
 function countWords(text: string) {
-	const words = text.split(/\s+/giu)
+	const words = (text?.split(/\s+/giu) ?? [])
 		.filter((wordCandidate) => wordCandidate.length > 0)
 		.filter((wordCandidate) => {
 			const isHeader = (/^#+$/ui).exec(wordCandidate);
@@ -108,7 +108,7 @@ function calculateReadingTime(text: string) {
 }
 
 function countLetters(text: string) {
-	const letters = text.split('').filter((letter) => (/[a-z]/iu).exec(letter));
+	const letters = (text?.split('') ?? []).filter((letter) => (/[a-z]/iu).exec(letter));
 
 	return letters.length;
 }
