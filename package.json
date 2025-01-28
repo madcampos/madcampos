@@ -47,7 +47,7 @@
 		"remark-directive": "^3.0.0",
 		"typescript": "^5.7.2",
 		"unist-util-visit": "^5.0.0",
-		"vfile": "^6.0.3"
+		"web-features": "^2.20.0"
 	},
 	"overrides": {
 		"array-includes": "npm:@nolyfill/array-includes@^1",

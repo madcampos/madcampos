@@ -21,7 +21,7 @@ import remarkBreaks from 'remark-breaks';
 import remarkDirective from 'remark-directive';
 
 import { assetsCache, externalResourcesCache, pagesCache, scriptsCache } from './src/sw-caching.js';
-import { codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
+import { baselineInfo, codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
 
 import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
 
@@ -81,7 +81,7 @@ export default defineConfig({
 				transformerMetaWordHighlight()
 			]
 		},
-		remarkPlugins: [[remarkBehead, { minDepth: 2 }], remarkBreaks, remarkDirective, youtubeEmbed, codepenEmbed],
+		remarkPlugins: [[remarkBehead, { minDepth: 2 }], remarkBreaks, remarkDirective, youtubeEmbed, codepenEmbed, baselineInfo],
 		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'] }]]
 	},
 	integrations: [
