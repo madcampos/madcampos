@@ -20,10 +20,10 @@ import remarkBehead from 'remark-behead';
 import remarkBreaks from 'remark-breaks';
 import remarkDirective from 'remark-directive';
 
-import { assetsCache, externalResourcesCache, pagesCache, scriptsCache } from './src/sw-caching';
+import { assetsCache, externalResourcesCache, pagesCache, scriptsCache } from './src/sw-caching.js';
 import { codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
 
-import hcShikiTheme from './src/assets/css/hc-shiki-theme.json';
+import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
 
 const manifest: PwaOptions['manifest'] = JSON.parse(readFileSync('./src/manifest.json', { encoding: 'utf8' }));
 
@@ -71,11 +71,11 @@ export default defineConfig({
 					explicitTrigger: true,
 					rendererRich: { errorRendering: 'hover' }
 				}),
-				transformerNotationDiff(),
-				transformerNotationHighlight(),
-				transformerNotationWordHighlight(),
-				transformerNotationFocus(),
-				transformerNotationErrorLevel(),
+				transformerNotationDiff({ matchAlgorithm: 'v3' }),
+				transformerNotationHighlight({ matchAlgorithm: 'v3' }),
+				transformerNotationWordHighlight({ matchAlgorithm: 'v3' }),
+				transformerNotationFocus({ matchAlgorithm: 'v3' }),
+				transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
 				transformerRenderWhitespace({ position: 'boundary' }),
 				transformerMetaHighlight(),
 				transformerMetaWordHighlight()

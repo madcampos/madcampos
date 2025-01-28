@@ -1,8 +1,6 @@
-/// <reference types="mdast-util-directive" />
 import type { ElementContent } from 'hast';
 import type { Root } from 'mdast';
-import type { ContainerDirective } from 'mdast-util-directive';
-import type { LeafDirective, TextDirective } from 'mdast-util-directive/lib/index';
+import type { ContainerDirective, LeafDirective, TextDirective } from 'mdast-util-directive';
 import type { VFile } from 'vfile';
 
 import { visit } from 'unist-util-visit';

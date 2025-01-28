@@ -1,4 +1,4 @@
-import { SiteSettings } from './settings.ts';
+import { SiteSettings } from './settings.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (SiteSettings.theme) {
