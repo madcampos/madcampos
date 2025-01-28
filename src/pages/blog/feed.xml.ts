@@ -66,7 +66,7 @@ export const GET: APIRoute = async (context) => {
 				pubDate: post.data.createdAt,
 				categories: post.data.tags,
 				link: `${blogUrl}${post.url}`,
-				...(postMarkdown && { content: postMarkdown.compiledContent() }),
+				...(postMarkdown && { content: await postMarkdown.compiledContent() }),
 				...(image && {
 					enclosure: {
 						url: new URL(image.src, baseUrl).toString(),

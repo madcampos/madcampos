@@ -23,7 +23,7 @@ export const GET: APIRoute = async (context) => {
 		title: "Marco Campos' Site Changelog",
 		description: "Changelog (Version History) for Marco Campos' Website, containing all recent changes.",
 		site: baseUrl.toString(),
-		items: (await getCollection('changelog')).map((changelog) => {
+		items: (await Promise.all((await getCollection('changelog')).map(async (changelog) => {
 			const versionNumber = changelog.id.replace('.md', '');
 			const { versionName } = changelog.data;
 
@@ -31,14 +31,14 @@ export const GET: APIRoute = async (context) => {
 
 			const item: RSSFeedItem = {
 				title: `${versionNumber}${versionName ? ` (${versionName})` : ''}`,
-				description: changelogMarkdown?.compiledContent(),
-				content: changelogMarkdown?.compiledContent(),
+				description: await changelogMarkdown?.compiledContent(),
+				content: await changelogMarkdown?.compiledContent(),
 				pubDate: changelog.data.date,
 				link: new URL(`/changelog.xml#${versionNumber}`, baseUrl).toString()
 			};
 
 			return item;
-		}).sort(({ pubDate: prevPubDate = new Date() }, { pubDate: nextPubDate = new Date() }) => nextPubDate.getTime() - prevPubDate.getTime()),
+		}))).sort(({ pubDate: prevPubDate = new Date() }, { pubDate: nextPubDate = new Date() }) => nextPubDate.getTime() - prevPubDate.getTime()),
 		stylesheet: '/blog/feed.xsl',
 		customData: `
 		<language>en-us</language>
