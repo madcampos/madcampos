@@ -15,18 +15,18 @@ import triangleGuy from '../assets/images/stonks.png';
 const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 ---
 <BaseLayout
-	htmlTitle={['Get Rich', ...GLOBALS.title]}
-	title="Get Rich"
-	description="Get Rich Quickly using these tips!"
+	htmlTitle={['QuickRichClub', ...GLOBALS.title]}
+	title="QuickRichClub"
+	description="Welcome to QuickRichClub!"
 	url="/triangle"
 	tags={['easter egg', 'joke', ...GLOBALS.tags]}
 >
 	<SkipToContent slot="header" />
 	<SiteNav slot="header" />
 
-	<div id="triangle-content">
-		<h1>Get rich!!! Quick!!! Ask me how?!</h1>
+	<h1>Welcome to QuickRichClub!</h1>
 
+	<section>
 		<Image
 			src={triangleGuy}
 			alt="A man with a happy face and his mouth open, holding a fist in front of his body. He is confident, he is strong, he is making money baby!"
@@ -36,10 +36,132 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 			quality={75}
 		/>
 
-		<blockquote>
-			<p>This is totally <em>not</em> a pyramid scheme!</p>
-			<small>Michael Scott</small>
-		</blockquote>
+		<p>
+			Ready to swim in cash? Join QuickRichClub, where everyone can "get rich quick" <small class="tiny-text"
+			>(terms and conditions apply, mainly to everyone except you)</small>! 💸
+		</p>
+
+		<form method="get" action="#">
+			{/* eslint-disable-next-line astro/jsx-a11y/control-has-associated-label */}
+			<input
+				id="email"
+				name="email"
+				type="email"
+				placeholder="Enter your email here"
+				aria-label="Your email"
+				required
+			/>
+			<button type="submit">Join now!</button>
+		</form>
+	</section>
+
+	<section>
+		<h2>Why Choose QuickRichClub?</h2>
+		<ul>
+			<li>
+				<article>
+					<picture>
+						<img src="" alt="" />
+					</picture>
+					<header>
+						<h3>Unbelievable Returns</h3>
+					</header>
+					<p>No, seriously, you'd better not believe them.</p>
+				</article>
+			</li>
+			<li>
+				<article>
+					<picture>
+						<img src="" alt="" />
+					</picture>
+					<header>
+						<h3>Team-Building Extravaganza</h3>
+					</header>
+					<p>
+						Convince your loved ones to join in and put the <span class="fun-text">"fun"</span>
+						<span class="fun-text">"generational debt"</span>!
+					</p>
+				</article>
+			</li>
+			<li>
+				<article>
+					<picture>
+						<img src="" alt="" />
+					</picture>
+					<header>
+						<h3>Risk-Free!</h3>
+					</header>
+					<p>For us, anyway. For you, well, that's another story.</p>
+				</article>
+			</li>
+		</ul>
+	</section>
+
+	<section>
+		<h2>How It "Works"?</h2>
+
+		<p>You will be done in only 3 easy steps!</p>
+
+		<ol>
+			<li>
+				<h3>Join</h3>
+				<p>Hand over your hard-earned cash because why not? <small>(This is not a threat)</small></p>
+			</li>
+			<li>
+				<h3>Recruit</h3>
+				<p>Annoy your friends and family until they give in. Remember, the more they invest, the more…well, that's it.</p>
+			</li>
+			<li>
+				<h3>Profit?!?</h3>
+				<p>Watch as your money magically does absolutely nothing. It's like a miracle, but not the good kind.</p>
+			</li>
+		</ol>
+	</section>
+
+	<section>
+		<h2>Testemonials</h2>
+
+		<ul>
+			<li>
+				<blockquote>
+					<p>QuickRichClub changed my life! Now I have plenty of free time because everyone I know avoids me!</p>
+					<small>A Truly "Satisfied" Member</small>
+				</blockquote>
+			</li>
+			<li>
+				<blockquote>
+					<p>I was skeptical, but now I'm a full believer...in never falling for these schemes again!</p>
+					<small>Lig Ma B.</small>
+				</blockquote>
+			</li>
+			<li>
+				<blockquote>
+					<p>I've never had so many people call me about investment opportunities...mainly to tell me to stop calling them.</p>
+					<small>E. Musk</small>
+				</blockquote>
+			</li>
+			<li>
+				<blockquote>
+					<p>This is totally <em>not</em> a pyramid scheme!</p>
+					<small>Michael Scott</small>
+				</blockquote>
+			</li>
+			<li>
+				<blockquote>
+					<p>Thanks to QuickRichClub, I learned a valuable lesson in financial caution. Also, my friends learned how to block numbers.</p>
+					<small>Mr. Creature</small>
+				</blockquote>
+			</li>
+		</ul>
+	</section>
+
+	<section>
+		<h2>Act Now!</h2>
+
+		<p>
+			Sign up today and experience the thrill of watching your money disappear! Join QuickRichClub—the not-a-pyramid scheme that might make someone rich (spoiler: it's not
+			you)!
+		</p>
 
 		<form method="get" action="#">
 			{/* eslint-disable-next-line astro/jsx-a11y/control-has-associated-label */}
@@ -53,7 +175,7 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 			/>
 			<button type="submit">Access now!</button>
 		</form>
-	</div>
+	</section>
 
 	<small slot="footer">By providing your email you subscribe to a lifetime suply of Sildenafil, also known as "Magic Blue Pills" or "Daddy Little Helpers".</small>
 	<script src="../assets/js/triangle.ts"></script>

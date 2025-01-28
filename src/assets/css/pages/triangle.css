@@ -1,48 +1,24 @@
 @layer pages {
-	body { background: linear-gradient(to bottom right, var(--bg-color), var(--dark-bg-color)); }
-
-	#triangle-content {
-		display: grid;
-		grid-template-areas:
-			'image title'
-			'image quote'
-			'image form'
-			'image .';
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr auto auto 1fr;
-		height: 100%;
-		justify-items: center;
-		max-width: var(--max-width);
-		padding-inline: var(--spacing-large);
+	body {
+		background: linear-gradient(to bottom right, var(--bg-color), var(--dark-bg-color));
+		background-position: center top;
+		background-repeat: no-repeat;
 	}
 
-	#triangle-content img {
-		align-self: end;
-		grid-area: image;
-		height: 100%;
-		object-fit: contain;
-		object-position: center bottom;
-		width: 100%;
-	}
-
-	#triangle-content h1 {
-		align-self: end;
+	h1 {
 		font-family: var(--sans-serif-font-family);
-		font-size: 3em;
-		grid-area: title;
+		font-size: 5em;
 	}
 
-	#triangle-content blockquote small {
+	blockquote small {
 		display: inline-block;
 		text-align: end;
 		width: 100%;
 	}
 
-	#triangle-content blockquote small::before { content: '— '; }
+	blockquote small::before { content: '— '; }
 
-	#triangle-content form { text-align: center; }
-
-	#triangle-content input {
+	input {
 		background-color: var(--dark-bg-color);
 		border: var(--border-style) var(--theme-color) var(--border-width);
 		border-radius: var(--spacing-large);
@@ -52,7 +28,7 @@
 		padding: var(--spacing-small) var(--spacing-medium);
 	}
 
-	#triangle-content button {
+	button {
 		background-color: var(--theme-color);
 		border: var(--border-style) transparent var(--border-width);
 		border-radius: var(--spacing-large);
@@ -69,17 +45,5 @@
 		padding: var(--spacing-small);
 		text-align: center;
 		width: 100%;
-	}
-
-	@media (max-width: 500px) {
-		#triangle-content {
-			grid-template-areas:
-				'title'
-				'quote'
-				'form'
-				'image';
-			grid-template-columns: 1fr;
-			grid-template-rows: repeat(4, auto);
-		}
 	}
 }
