@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
 import SiteNav from '../components/SiteNav/index.astro';
@@ -9,10 +10,15 @@ import { GLOBALS } from '../constants.js';
 
 import '../assets/css/pages/triangle.css';
 
-import triangleGuy from '../assets/images/stonks.png';
+import customer from '../assets/images/piramid/customer.jpg';
+import eMusk from '../assets/images/piramid/e-musk.jpg';
+import ligMa from '../assets/images/piramid/ligma.jpg';
+import mScott from '../assets/images/piramid/m-scott.jpg';
+import mrCreature from '../assets/images/piramid/mr-creature.jpg';
+import richHero from '../assets/images/piramid/rich1.png';
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
+const IMAGE_WIDTHS = [128, 256, 512, 768, richHero.width];
 ---
 <BaseLayout
 	htmlTitle={['QuickRichClub', ...GLOBALS.title]}
@@ -26,42 +32,41 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 
 	<h1>Welcome to QuickRichClub!</h1>
 
-	<section>
+	<section id="hero">
 		<Image
-			src={triangleGuy}
+			src={richHero}
 			alt="A man with a happy face and his mouth open, holding a fist in front of his body. He is confident, he is strong, he is making money baby!"
 			loading="lazy"
 			widths={IMAGE_WIDTHS}
-			sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${triangleGuy.width}px`}
+			sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${richHero.width}px`}
 			quality={75}
 		/>
 
 		<p>
-			Ready to swim in cash? Join QuickRichClub, where everyone can "get rich quick" <small class="tiny-text"
-			>(terms and conditions apply, mainly to everyone except you)</small>! 💸
+			Ready to swim in cash? Join QuickRichClub, where everyone can &ldquo;get rich quick&rdquo;! 💸
+			<small class="tiny-text">(terms and conditions apply, mainly to everyone except you)</small>
 		</p>
 
 		<form method="get" action="#">
-			{/* eslint-disable-next-line astro/jsx-a11y/control-has-associated-label */}
 			<input
 				id="email"
 				name="email"
 				type="email"
 				placeholder="Enter your email here"
-				aria-label="Your email"
+				aria-label="Enter your email here"
 				required
 			/>
 			<button type="submit">Join now!</button>
 		</form>
 	</section>
 
-	<section>
+	<section id="why">
 		<h2>Why Choose QuickRichClub?</h2>
 		<ul>
 			<li>
 				<article>
 					<picture>
-						<img src="" alt="" />
+						<Icon name="uil:bitcoin-circle" title="" />
 					</picture>
 					<header>
 						<h3>Unbelievable Returns</h3>
@@ -72,7 +77,7 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 			<li>
 				<article>
 					<picture>
-						<img src="" alt="" />
+						<Icon name="uil:brain" title="" />
 					</picture>
 					<header>
 						<h3>Team-Building Extravaganza</h3>
@@ -86,7 +91,7 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 			<li>
 				<article>
 					<picture>
-						<img src="" alt="" />
+						<Icon name="uil:fire" title="" />
 					</picture>
 					<header>
 						<h3>Risk-Free!</h3>
@@ -97,7 +102,7 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 		</ul>
 	</section>
 
-	<section>
+	<section id="steps">
 		<h2>How It "Works"?</h2>
 
 		<p>You will be done in only 3 easy steps!</p>
@@ -105,49 +110,92 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 		<ol>
 			<li>
 				<h3>Join</h3>
-				<p>Hand over your hard-earned cash because why not? <small>(This is not a threat)</small></p>
+				<p>Hand over your hard-earned cash because why not?</p>
+				<p><small class="tiny-text">(This is not a threat)</small></p>
 			</li>
 			<li>
 				<h3>Recruit</h3>
-				<p>Annoy your friends and family until they give in. Remember, the more they invest, the more…well, that's it.</p>
+				<p>Annoy your friends and family until they give in.</p>
+				<p>Remember, the more they invest, the more... well, that's it.</p>
 			</li>
 			<li>
 				<h3>Profit?!?</h3>
-				<p>Watch as your money magically does absolutely nothing. It's like a miracle, but not the good kind.</p>
+				<p>Watch as your money magically does absolutely nothing.</p>
+				<p>It's like a miracle, but not the good kind.</p>
 			</li>
 		</ol>
 	</section>
 
-	<section>
-		<h2>Testemonials</h2>
+	<section id="testimonials">
+		<h2>Testimonials</h2>
 
 		<ul>
 			<li>
 				<blockquote>
+					<Image
+						src={customer}
+						alt=""
+						loading="lazy"
+						widths={[128, 256, 512, 768, customer.width]}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${customer.width}px`}
+						quality={75}
+					/>
 					<p>QuickRichClub changed my life! Now I have plenty of free time because everyone I know avoids me!</p>
 					<small>A Truly "Satisfied" Member</small>
 				</blockquote>
 			</li>
 			<li>
 				<blockquote>
-					<p>I was skeptical, but now I'm a full believer...in never falling for these schemes again!</p>
+					<Image
+						src={ligMa}
+						alt=""
+						loading="lazy"
+						widths={[128, 256, 512, 768, ligMa.width]}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${ligMa.width}px`}
+						quality={75}
+					/>
+					<p>I was skeptical, but now I'm a full believer... in never falling for these schemes again!</p>
 					<small>Lig Ma B.</small>
 				</blockquote>
 			</li>
 			<li>
 				<blockquote>
-					<p>I've never had so many people call me about investment opportunities...mainly to tell me to stop calling them.</p>
+					<Image
+						src={eMusk}
+						alt=""
+						loading="lazy"
+						widths={[128, 256, 512, 768, eMusk.width]}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${eMusk.width}px`}
+						quality={75}
+					/>
+					<p>I've never had so many people call me about investment opportunities... mainly to tell me to stop calling them.</p>
 					<small>E. Musk</small>
 				</blockquote>
 			</li>
 			<li>
 				<blockquote>
+					<Image
+						src={mScott}
+						alt=""
+						loading="lazy"
+						widths={[128, 256, 512, 768, mScott.width]}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${mScott.width}px`}
+						quality={75}
+					/>
 					<p>This is totally <em>not</em> a pyramid scheme!</p>
-					<small>Michael Scott</small>
+					<small>M. Scott</small>
 				</blockquote>
 			</li>
 			<li>
 				<blockquote>
+					<Image
+						src={mrCreature}
+						alt=""
+						loading="lazy"
+						widths={[128, 256, 512, 768, mrCreature.width]}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${mrCreature.width}px`}
+						quality={75}
+					/>
 					<p>Thanks to QuickRichClub, I learned a valuable lesson in financial caution. Also, my friends learned how to block numbers.</p>
 					<small>Mr. Creature</small>
 				</blockquote>
@@ -155,16 +203,13 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 		</ul>
 	</section>
 
-	<section>
+	<section id="cta">
 		<h2>Act Now!</h2>
 
-		<p>
-			Sign up today and experience the thrill of watching your money disappear! Join QuickRichClub—the not-a-pyramid scheme that might make someone rich (spoiler: it's not
-			you)!
-		</p>
+		<p>Sign up today and experience the thrill of watching your money disappear! Join QuickRichClub &mdash; the not-a-pyramid scheme that might make someone rich!</p>
+		<p><small class="tiny-text">(spoiler: it's not you)</small></p>
 
 		<form method="get" action="#">
-			{/* eslint-disable-next-line astro/jsx-a11y/control-has-associated-label */}
 			<input
 				id="email"
 				name="email"
@@ -177,6 +222,6 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, triangleGuy.width];
 		</form>
 	</section>
 
-	<small slot="footer">By providing your email you subscribe to a lifetime suply of Sildenafil, also known as "Magic Blue Pills" or "Daddy Little Helpers".</small>
+	<p slot="footer" id="small-print">By providing your email you subscribe to a lifetime suply of Sildenafil, also known as "Magic Blue Pills" or "Daddy Little Helpers".</p>
 	<script src="../assets/js/triangle.ts"></script>
 </BaseLayout>

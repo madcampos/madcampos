@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-	document.querySelector('form')?.addEventListener('submit', (evt) => {
+	document.addEventListener('submit', (evt) => {
 		evt.preventDefault();
 		evt.stopPropagation();
 
