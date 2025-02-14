@@ -1,25 +1,72 @@
 @layer components {
-	.logo-graphics {
+	#logo-graphics {
 		height: 100%;
 		object-fit: contain;
 		paint-order: stroke;
 		width: clamp(var(--min-width, 5rem), 70vmin, var(--medium-width, 30rem));
 	}
 
-	.logo-graphics text {
+	#logo-graphics text { font-size: 0; }
+
+	#logo-graphics tspan { font-size: 8rem; }
+
+	#logo-text-micro:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+	#logo-text-micro:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+	#logo-text-micro:has(tspan:nth-child(9 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+	#logo-text-micro:not(:has(.logo-text-content)) { visibility: hidden; }
+
+	#logo-text-mini:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+	#logo-text-mini:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-end),
+	#logo-text-mini:has(tspan:nth-child(9 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-end),
+	#logo-text-mini:has(tspan:nth-child(10 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(11 of .logo-text-content)) tspan:nth-child(8 of .logo-text-padding-start),
+	#logo-text-mini:has(tspan:nth-child(12 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+	#logo-text-mini:not(:has(.logo-text-content)) { visibility: hidden; }
+
+	#logo-text-full:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(8 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(9 of .logo-text-content)) tspan:nth-child(9 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(10 of .logo-text-content)) tspan:nth-child(10 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(11 of .logo-text-content)) tspan:nth-child(11 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(12 of .logo-text-content)) tspan:nth-child(12 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(13 of .logo-text-content)) tspan:nth-child(13 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(14 of .logo-text-content)) tspan:nth-child(14 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(15 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+	#logo-text-full:has(tspan:nth-child(16 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-end),
+	#logo-text-full:has(tspan:nth-child(17 of .logo-text-content)) tspan:nth-child(15 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(18 of .logo-text-content)) tspan:nth-child(16 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(19 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-end),
+	#logo-text-full:has(tspan:nth-child(20 of .logo-text-content)) tspan:nth-child(17 of .logo-text-padding-start),
+	#logo-text-full:has(tspan:nth-child(21 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+	#logo-text-full:not(:has(.logo-text-content)) { visibility: hidden; }
+
+	#logo-graphics [data-theme] { visibility: hidden; }
+
+	#logo-graphics [data-theme='system'][data-size='full'] { visibility: visible; }
+
+	[data-theme='system'] .logo-part { fill: var(--theme-color, #0080ff); }
+
+	[data-theme='system'] .logo-text {
 		fill: var(--accent-color, #ff8000);
-		fill-rule: nonzero;
 		font-family: 'Mecano-Light', 'Mecano', monospace;
-		font-size: 8rem;
 		font-weight: 300;
-		text-rendering: optimizeLegibility;
 	}
-
-	.logo-graphics g {
-		fill: var(--theme-color, #0080ff);
-		shape-rendering: geometricPrecision;
-	}
-
-	.logo-graphics [data-theme] { display: none; }
-	.logo-graphics [data-theme='system'] { display: block; }
 }
