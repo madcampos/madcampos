@@ -1,0 +1,166 @@
+@layer theme {
+	[data-theme='y2k'] {
+		/* Border */
+		--border-width: 0.2rem;
+		--border-style: ridge;
+		--link-underline: solid;
+		--border-radius: 0;
+		/* Theme colors */
+		--theme-color: aqua;
+		--secondary-color: blue;
+		--accent-color: yellow;
+		--complementary-color: fuchsia;
+		/* Base colors */
+		--text-color: white;
+		--bg-color: black;
+		--dark-bg-color: black;
+		--border-color: yellow;
+		--scrollbar-bg: rgba(255, 255, 255, 0.1);
+		/* Tag colors */
+		--tag-bg: var(--theme-color);
+		--tag-color: var(--dark-bg-color);
+		/* Link colors */
+		--link-color: aqua;
+		--link-visited-color: fuchsia;
+		--link-hover-color: var(--accent-color);
+		--link-active-color: var(--complementary-color);
+		/* Code colors */
+		--diff-add-color: limegreen;
+		--diff-add-bg: rgba(0, 100, 0, 0.3);
+		--diff-remove-color: red;
+		--diff-remove-bg: rgba(193, 0, 0, 0.3);
+		--highlight-color: silver;
+		--highlight-default-bg: rgba(192, 192, 192, 0.2);
+		--highlight-error-color: tomato;
+		--highlight-error-bg: rgba(255, 99, 71, 0.2);
+		--highlight-warning-color: yellow;
+		--highlight-warning-bg: rgba(218, 165, 32, 0.2);
+		/* Icons */
+		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='aqua' d='M15.54 11.29L9.88 5.64a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l4.95 5L8.46 17a1 1 0 0 0 0 1.41a1 1 0 0 0 .71.3a1 1 0 0 0 .71-.3l5.66-5.65a1 1 0 0 0 0-1.47'/%3E%3C/svg%3E");
+		--external-link-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='fuchsia' d='M18 10.82a1 1 0 0 0-1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7.18a1 1 0 0 0 0-2H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-7.18a1 1 0 0 0-1-1m3.92-8.2a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59L8.29 14.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38'/%3E%3C/svg%3E");
+		--hr-decoration-icon: none;
+		/* Fonts */
+		--monospace-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		--sans-serif-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		/* Global settings */
+		accent-color: var(--theme-color);
+		color-scheme: dark;
+	}
+
+	[data-theme='y2k'] body {
+		background-image: url('./y2k/bg.gif');
+		background-repeat: repeat;
+	}
+
+	[data-theme='y2k'] :focus-visible { outline-style: dotted; }
+
+	[data-theme='y2k'] .user-avatar {
+		border-color: silver;
+		border-radius: 0;
+	}
+
+	[data-theme='y2k'] .user-avatar::after { content: none; }
+
+	[data-theme='y2k'] .user-avatar img {
+		filter: grayscale(1);
+		image-rendering: pixelated;
+	}
+
+	[data-theme='y2k'] input {
+		background-color: var(--theme-color);
+		border-color: var(--theme-color);
+		border-radius: 0;
+		border-style: inset;
+		color: var(--bg-color);
+	}
+
+	[data-theme='y2k'] hr { padding: 0; }
+
+	[data-theme='y2k'] input::placeholder { color: var(--bg-color); }
+
+	[data-theme='y2k'] #site-nav a {
+		background-color: var(--theme-color);
+		border-color: var(--theme-color);
+		border-style: outset;
+		border-width: var(--border-width);
+		color: var(--bg-color);
+		height: var(--button-size);
+		padding: var(--spacing-small) var(--spacing-medium);
+	}
+
+	[data-theme='y2k'] button {
+		background-color: var(--theme-color);
+		border-color: var(--theme-color);
+		border-radius: 0;
+		border-style: outset;
+		color: var(--bg-color);
+	}
+
+	[data-theme='y2k'] :is(#site-nav a, button):focus-visible {
+		background-color: var(--text-color);
+		border-color: var(--text-color);
+		color: var(--bg-color);
+	}
+
+	[data-theme='y2k'] :is(#site-nav a, button):hover {
+		background-color: var(--accent-color);
+		border-color: var(--accent-color);
+		color: var(--bg-color);
+		outline-color: var(--accent-color);
+	}
+
+	[data-theme='y2k'] :is(#site-nav a, button):active {
+		background-color: var(--accent-color);
+		border-color: var(--accent-color);
+		color: var(--theme-color);
+		outline-color: var(--theme- color);
+	}
+
+	[data-theme='y2k'] .tag {
+		background-color: var(--tag-bg);
+		padding-inline-start: var(--spacing-medium);
+	}
+
+	[data-theme='y2k'] .tag:focus-within { outline-style: dotted; }
+	[data-theme='y2k'] .tag a:focus-visible { outline: none; }
+
+	[data-theme='y2k'] .tag::before {
+		clip-path: none;
+		content: none;
+		mask: none;
+	}
+
+	[data-theme='y2k'] :is(.post-card, .talk-card, .project-card) { border: silver ridge var(--border-width); }
+	[data-theme='y2k'] .project-card picture {
+		border: silver ridge var(--border-width);
+		mask: none;
+	}
+
+	[data-theme='y2k'] .project-card img { display: none; }
+	[data-theme='y2k'] .project-card img[data-theme-image='y2k'] { display: block; }
+
+	[data-theme='y2k'] .logo-part {
+		fill: url(#sunset);
+		paint-order: stroke;
+		stroke: cyan;
+		stroke-width: 2rem;
+	}
+
+	[data-theme='y2k'] .logo-extras {
+		fill: deeppink;
+		fill-opacity: 0.5;
+		transform: translate(2.5rem, 2.5rem);
+	}
+
+	[data-theme='y2k'] .logo-text {
+		fill: cyan;
+		font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		font-weight: 700;
+		paint-order: stroke;
+		stroke: hotpink;
+		stroke-width: 0.5rem;
+	}
+
+	[data-theme='y2k'] #logo-graphics [data-theme] { visibility: hidden; }
+	[data-theme='y2k'] #logo-graphics [data-theme='y2k'][data-size='full'] { visibility: visible; }
+}
