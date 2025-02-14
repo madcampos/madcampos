@@ -69,13 +69,28 @@
 		cursor: url('./uwu/cursors/hand/1.svg'), auto;
 	}
 
-	[data-theme='uwu'] .logo-graphics > g:not([data-theme='uwu']) { display: none; }
-	[data-theme='uwu'] .logo-graphics > g[data-theme='uwu'] { display: block; }
-	[data-theme='uwu'] .logo-graphics > text {
-		font-family: var(--sans-serif-font-family);
-		transform: translateY(50px) rotate(-4.7deg);
-		transform-origin: center;
+	[data-theme='uwu'] .logo-part {
+		fill: var(--theme-color, dodgerblue);
+		paint-order: stroke;
+		stroke: var(--bg-color, lightpink);
+		stroke-width: 5rem;
 	}
+
+	[data-theme='uwu'] .logo-extras {
+		fill: lavenderblush;
+		paint-order: stroke;
+		stroke: var(--accent-color, darkorchid);
+		stroke-width: 1rem;
+	}
+
+	[data-theme='uwu'] .logo-text {
+		fill: var(--accent-color, darkorchid);
+		font-family: var(--sans-serif-font-family);
+		font-weight: 700;
+	}
+
+	[data-theme='uwu'] #logo-graphics [data-theme] { visibility: hidden; }
+	[data-theme='uwu'] #logo-graphics [data-theme='uwu'][data-size='full'] { visibility: visible; }
 
 	[data-theme='uwu'] #site-nav {
 		--edge-size: 3rem;
