@@ -5,10 +5,11 @@ import './styles.css';
 
 interface Props {
 	image: ImageMetadata;
+	themeImages?: Record<string, ImageMetadata>;
 	imageAlt: string;
 }
 
-const { image, imageAlt } = Astro.props;
+const { image, imageAlt, themeImages } = Astro.props;
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
 const IMAGE_WIDTHS = [128, 256, 512, 768, image.width];
@@ -28,4 +29,19 @@ const IMAGE_WIDTHS = [128, 256, 512, 768, image.width];
 		sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
 		quality={75}
 	/>
+	{
+		Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
+			<Image
+				itemprop="contentUrl"
+				data-theme-image={theme}
+				src={themeImage}
+				alt={imageAlt}
+				loading="lazy"
+				widths={IMAGE_WIDTHS}
+				sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${themeImage.width}px`}
+				quality={75}
+				hidden
+			/>
+		))
+	}
 </picture>

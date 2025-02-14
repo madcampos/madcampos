@@ -12,6 +12,7 @@ export const projectsSchema = ({ image }: SchemaContext) =>
 
 		image: image().optional().describe('The project icon/image.'),
 		imageAlt: zod.string().optional().describe('The project image alt text.'),
+		themeImages: zod.record(zod.string(), image()).optional().describe('A list of images for diferent themes.'),
 
 		techStack: zod.array(zod.string()).optional().describe('The project technologies used.'),
 		repository: zod.string().url().optional().describe('The project repository.')

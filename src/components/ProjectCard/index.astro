@@ -13,13 +13,14 @@ interface Props {
 	url?: string;
 
 	image?: ImageMetadata;
+	themeImages?: Record<string, ImageMetadata>;
 	imageAlt?: string;
 
 	techStack?: string[];
 	repository?: string;
 }
 
-const { status, version, createdAt, updatedAt, image, imageAlt, url, repository, techStack } = Astro.props;
+const { status, version, createdAt, updatedAt, image, imageAlt, themeImages, url, repository, techStack } = Astro.props;
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 ---
@@ -38,6 +39,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 		image && (
 			<ProjectIcon
 				{image}
+				{themeImages}
 				imageAlt={imageAlt ?? ''}
 			/>
 		)
