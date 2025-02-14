@@ -17,6 +17,8 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 		Content
 	};
 }));
+
+console.log(projects);
 ---
 <InternalPageLayout
 	htmlTitle={PROJECTS.title}
@@ -27,7 +29,6 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 	imageAlt="The letter &quot;m&quot; on a monospaced font, in blue, between curly braces.Below it, a subtext of &quot;Proj.&quot; in orange on the lower right corner."
 >
 	<Logo
-		size="full"
 		subtitle="Projects"
 		shortSubtitle="Proj."
 		url={PROJECTS.url}
@@ -48,6 +49,7 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 				url={data.url}
 				image={data.image}
 				imageAlt={data.imageAlt}
+				themeImages={data.themeImages}
 				techStack={data.techStack}
 				repository={data.repository}
 			>
