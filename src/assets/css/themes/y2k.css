@@ -50,7 +50,10 @@
 	[data-theme='y2k'] body {
 		background-image: url('./y2k/bg.gif');
 		background-repeat: repeat;
+		cursor: url('./y2k/arrow.cur'), auto;
 	}
+
+	[data-theme='y2k'] a { cursor: url('./y2k/hand.cur'), pointer; }
 
 	[data-theme='y2k'] :focus-visible { outline-style: dotted; }
 
@@ -94,6 +97,7 @@
 		border-radius: 0;
 		border-style: outset;
 		color: var(--bg-color);
+		cursor: url('./y2k/hand.cur'), pointer;
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):focus-visible {
