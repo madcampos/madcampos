@@ -7,6 +7,8 @@ repository: https://github.com/madcampos/sdrlog/
 url: https://sdrlog.madcampos.dev/
 image: ./assets/05-sdrlog.png
 imageAlt: Shadowrun's logo in a hot pink color with glitch effects applied to it on a dark gray background.
+themeImages:
+  y2k: ./assets/05-sdrlog.png
 techStack:
   - HTML
   - CSS
