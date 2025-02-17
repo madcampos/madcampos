@@ -1,4 +1,7 @@
 @layer components {
+	/* INFO: fix for safari */
+	#theme-switcher { display: inline-block; }
+
 	#theme-switcher button {
 		align-items: center;
 		background: var(--bg-color);
