@@ -8,7 +8,7 @@ url: https://owt.madcampos.dev/
 image: ./assets/20-oldwebtext.png
 imageAlt: A serif upper case "t" in white with an outlined sans-serif uppercase "t" in black. On the background a gradient from light green to teal.
 themeImages:
-  y2k: ./assets/y2k/20-owt.jpg
+  y2k: ./assets/y2k/20-oldwebtext.jpg
 techStack:
   - HTML
   - CSS
