@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" fill-rule="evenodd" viewBox="0 0 113 113">
+	<rect width="100%" height="100%" fill="black" />
+	<path fill="khaki" d="m9.5 34 1.01 3.109h3.27l-2.645 1.922 1.01 3.11L9.5 40.219l-2.645 1.922 1.01-3.11-2.645-1.922h3.27L9.5 34Z">
+		<animate attributeName="fill" begin="2s" dur="2s" repeatCount="indefinite" values="khaki;white;khaki" />
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</path>
+	<path fill="dodgerblue" d="m64.5 20 1.01 3.109h3.27l-2.645 1.922 1.01 3.11-2.645-1.922-2.645 1.922 1.01-3.11-2.645-1.922h3.27L64.5 20Z">
+		<animate attributeName="fill" begin="5s" dur="2s" repeatCount="indefinite" values="dodgerblue;white;dodgerblue" />
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</path>
+	<path fill="white" d="m101 30 1.01 3.109h3.27l-2.645 1.922 1.01 3.11L101 36.219l-2.645 1.922 1.01-3.11-2.645-1.922h3.27L101 30Z" />
+	<path fill="hotpink" d="m74.5 75 1.01 3.109h3.27l-2.645 1.922 1.01 3.11-2.645-1.922-2.645 1.922 1.01-3.11-2.645-1.922h3.27L74.5 75Z">
+		<animate attributeName="fill" begin="3s" dur="2s" repeatCount="indefinite" values="hotpink;white;hotpink" />
+		<animate attributeName="fill-opacity" begin="2s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</path>
+	<path fill="orange" d="m42.5 86 1.01 3.109h3.27l-2.645 1.922 1.01 3.11-2.645-1.922-2.645 1.922 1.01-3.11-2.645-1.922h3.27L42.5 86Z">
+		<animate attributeName="fill" begin="2s" dur="2s" repeatCount="indefinite" values="orange;white;orange" />
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</path>
+	<path fill="mediumspringgreen" d="m105.72 103.859 1.011 3.11H110l-2.645 1.922 1.01 3.109-2.645-1.922-2.645 1.922 1.011-3.109-2.646-1.922h3.27l1.01-3.11Z">
+		<animate attributeName="fill" dur="2s" repeatCount="indefinite" values="mediumspringgreen;white;mediumspringgreen" />
+		<animate attributeName="fill-opacity" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</path>
+	<circle cx="22.5" cy="1.5" r=".5" fill="khaki">
+		<animate attributeName="fill-opacity" begin="2s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="32.5" cy="6.5" r=".5" fill="hotpink">
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="59.5" cy="12.5" r=".5" fill="khaki">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="22.5" cy="22.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="5.5" cy="9.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="77.5" cy="16.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="92.5" cy="4.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="101.5" cy="19.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="2s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="92.5" cy="33.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="2s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="63.5" cy="38.5" r=".5" fill="hotpink">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="51.5" cy="35.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="59.5" cy="45.5" r=".5" fill="dodgerblue">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="71.5" cy="45.5" r=".5" fill="dodgerblue">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="80.5" cy="46.5" r=".5" fill="hotpink">
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="108.5" cy="47.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="95.5" cy="56.5" r=".5" fill="orange">
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="85.5" cy="55.5" r=".5" fill="dodgerblue">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="74.5" cy="57.5" r=".5" fill="hotpink">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="53.5" cy="69.5" r=".5" fill="orange">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="41.5" cy="49.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="23.5" cy="40.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="17.5" cy="61.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="3.5" cy="54.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="14.5" cy="71.5" r=".5" fill="orange">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="31.5" cy="89.5" r=".5" fill="orange">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="4.5" cy="98.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="17.5" cy="106.5" r=".5" fill="orange">
+		<animate attributeName="fill-opacity" begin="2s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="29.5" cy="106.5" r=".5" fill="hotpink">
+		<animate attributeName="fill-opacity" begin="3s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="48.5" cy="108.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="53.5" cy="87.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="5s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="61.5" cy="99.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="67.5" cy="91.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="82.5" cy="105.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="85.5" cy="79.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="99.5" cy="83.5" r=".5" fill="mediumspringgreen">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="36.5" cy="69.5" r=".5" fill="white">
+		<animate attributeName="fill-opacity" begin="11s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+	<circle cx="44.5" cy="73.5" r=".5" fill="hotpink">
+		<animate attributeName="fill-opacity" begin="7s" dur="3s" repeatCount="indefinite" values="1;0.2;1" />
+	</circle>
+</svg>
