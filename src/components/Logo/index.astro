@@ -12,6 +12,14 @@ function generateUniqueId() {
 	return Math.trunc(Math.random() * 1000000).toString(16);
 }
 
+function generateSubtitle(paddingStart: number, paddingEnd: number, subtitle: string) {
+	return [
+		...new Array(paddingStart).fill(0).map(() => `<tspan class="logo-text-padding-end">-</tspan>`),
+		...[...subtitle].map((char) => `<tspan class="logo-text-content">${char}</tspan>`),
+		...new Array(paddingEnd).fill(0).map(() => `<tspan class="logo-text-padding-end">-</tspan>`)
+	].join('');
+}
+
 const { url, urlTitle, subtitle, shortSubtitle } = Astro.props;
 
 const logoLabelId = generateUniqueId();
@@ -27,7 +35,7 @@ const logoLabelId = generateUniqueId();
 		width="100%"
 		height="100%"
 		role="img"
-		aria-labeledby={`logo-label-${logoLabelId}`}
+		aria-labelledby={`logo-label-${logoLabelId}`}
 		shape-rendering="geometricPrecision"
 	>
 		<title id={`logo-label-${logoLabelId}`}>Marco Campos' Logo{url ? `, to ${urlTitle ?? ''}` : ''}</title>
@@ -56,16 +64,7 @@ const logoLabelId = generateUniqueId();
 				fill-rule="nonzero"
 				text-rendering="optimizeLegibility"
 			>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				{[...shortSubtitle].map((char) => <tspan class="logo-text-content">{char}</tspan>)}
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
+				<Fragment set:html={generateSubtitle(7, 2, shortSubtitle)} />
 			</text>
 			<text
 				id="logo-text-mini"
@@ -77,19 +76,7 @@ const logoLabelId = generateUniqueId();
 				fill-rule="nonzero"
 				text-rendering="optimizeLegibility"
 			>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				{[...shortSubtitle].map((char) => <tspan class="logo-text-content">{char}</tspan>)}
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
+				<Fragment set:html={generateSubtitle(8, 4, shortSubtitle)} />
 			</text>
 			<text
 				id="logo-text-full"
@@ -101,28 +88,7 @@ const logoLabelId = generateUniqueId();
 				fill-rule="nonzero"
 				text-rendering="optimizeLegibility"
 			>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				<tspan class="logo-text-padding-start">-</tspan>
-				{[...subtitle].map((char) => <tspan class="logo-text-content">{char}</tspan>)}
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
-				<tspan class="logo-text-padding-end">-</tspan>
+				<Fragment set:html={generateSubtitle(17, 4, subtitle)} />
 			</text>
 		</defs>
 
