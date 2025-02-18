@@ -70,4 +70,11 @@
 		font-family: 'Mecano-Light', 'Mecano', monospace;
 		font-weight: 300;
 	}
+
+	a:focus-visible [data-theme='system'] .logo-part { fill: var(--text-color); }
+	a:focus-visible [data-theme='system'] .logo-text { fill: var(--theme-color); }
+	a:hover [data-theme='system'] .logo-part { fill: var(--link-hover-color); }
+	a:hover [data-theme='system'] .logo-text { fill: var(--theme-color); }
+	a:active [data-theme='system'] .logo-part { fill: var(--link-active-color); }
+	a:active [data-theme='system'] .logo-text { fill: var(--link-active-color); }
 }

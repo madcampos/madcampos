@@ -49,7 +49,8 @@
 
 	[data-theme='uwu'] body {
 		animation: 1s steps(5) infinite uwu-cursor-normal;
-		background: linear-gradient(
+		background-color: var(--bg-color);
+		background-image: linear-gradient(
 			to right,
 			mistyrose var(--spacing-small),
 			lavenderblush var(--spacing-small)
@@ -91,6 +92,42 @@
 
 	[data-theme='uwu'] #logo-graphics [data-theme] { visibility: hidden; }
 	[data-theme='uwu'] #logo-graphics [data-theme='uwu'][data-size='full'] { visibility: visible; }
+
+	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-part {
+		fill: var(--bg-color);
+		stroke: white;
+	}
+
+	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-extras {
+		fill: white;
+		stroke: var(--dark-bg-color);
+	}
+
+	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-text { fill: var(--theme-color); }
+
+	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-part {
+		fill: white;
+		stroke: var(--link-hover-color);
+	}
+
+	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-extras {
+		fill: var(--accent-color);
+		stroke: white;
+	}
+
+	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-text { fill: var(--theme-color); }
+
+	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-part {
+		fill: var(--link-active-color);
+		stroke: white;
+	}
+
+	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-extras {
+		fill: var(--link-active-color);
+		stroke: white;
+	}
+
+	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-text { fill: var(--link-active-color); }
 
 	[data-theme='uwu'] #site-nav {
 		--edge-size: 3rem;
