@@ -12,7 +12,7 @@
 
 	h1 {
 		color: var(--accent-color);
-		font-family: var(--sans-serif-font-family);
+		font-family: var(--text-font-family);
 		font-size: 5em;
 		hyphenate-character: '-';
 		hyphenate-limit-chars: 8 3 2;

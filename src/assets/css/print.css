@@ -2,8 +2,8 @@
 	@media print {
 		:root {
 			--body-text: 12pt;
-			--monospace-font-family: monospace;
-			--sans-serif-font-family: sans-serif;
+			--headers-font-family: monospace;
+			--text-font-family: sans-serif;
 			/* Base colors */
 			--text-color: black;
 			--bg-color: white;

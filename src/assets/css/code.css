@@ -3,7 +3,7 @@
 		background-color: var(--shiki-light-bg, var(--bg-color));
 		border: var(--border-style) var(--border-color) var(--border-width);
 		border-radius: var(--border-radius);
-		font-family: var(--monospace-font-family);
+		font-family: var(--code-font-family);
 		font-size: smaller;
 		overflow: clip;
 		padding: var(--spacing-medium) var(--spacing-small);
@@ -17,7 +17,7 @@
 
 	pre span {
 		color: var(--shiki-light, var(--text-color));
-		font-family: var(--monospace-font-family);
+		font-family: var(--code-font-family);
 		font-style: var(--shiki-light-font-style, normal);
 		font-weight: var(--shiki-light-font-weight, normal);
 		text-decoration: var(--shiki-light-text-decoration, none);

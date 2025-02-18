@@ -87,8 +87,8 @@
 	#theme-switcher .theme-preview-accent-color { fill: var(--accent-color); }
 	#theme-switcher .theme-preview-secondary-color { fill: var(--secondary-color); }
 	#theme-switcher .theme-preview-complementary-color { fill: var(--complementary-color); }
-	#theme-switcher .theme-preview-sans-text { font-family: var(--sans-serif-font-family); }
-	#theme-switcher .theme-preview-mono-text { font-family: var(--monospace-font-family); }
+	#theme-switcher .theme-preview-text-text { font-family: var(--text-font-family); }
+	#theme-switcher .theme-preview-header-text { font-family: var(--headers-font-family); }
 	#theme-switcher .theme-preview-text {
 		fill: var(--text-color);
 		font-size: 28px;

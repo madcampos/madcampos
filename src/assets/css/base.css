@@ -6,7 +6,7 @@
 	html {
 		box-sizing: border-box;
 		color: var(--text-color);
-		font-family: var(--sans-serif-font-family);
+		font-family: var(--text-font-family);
 		font-size: var(--body-text);
 		font-weight: normal;
 		height: 100%;
@@ -108,7 +108,7 @@
 
 	h1, h2, h3, h4, h5, h6, summary {
 		color: var(--theme-color);
-		font-family: var(--monospace-font-family);
+		font-family: var(--headers-font-family);
 		font-weight: bold;
 		line-height: 1.2;
 	}
