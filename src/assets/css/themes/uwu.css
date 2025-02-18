@@ -129,6 +129,10 @@
 
 	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-text { fill: var(--link-active-color); }
 
+	[data-theme='uwu'] ul { list-style: '💖 '; }
+	[data-theme='uwu'] ul ul { list-style: '🦋 '; }
+	[data-theme='uwu'] ul ul ul { list-style: '🦄 '; }
+
 	[data-theme='uwu'] #site-nav {
 		--edge-size: 3rem;
 		background: url('/src/assets/css/themes/uwu/border.svg'), linear-gradient(to top, lightpink, lightpink);
@@ -138,6 +142,8 @@
 		max-width: 100%;
 		padding-block-end: var(--edge-size);
 	}
+
+	[data-theme='uwu'] #site-nav ul { list-style: none; }
 
 	[data-theme='uwu'] :is(.post-card, .project-card, .talk-card) { position: relative; }
 	[data-theme='uwu'] :is(.post-card, .project-card, .talk-card)::after {
