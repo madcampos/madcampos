@@ -59,7 +59,6 @@
 
 	@media (max-width: 850px) {
 		.talk-card {
-			--image-size: var(--avatar-small-size);
 			grid-template-areas:
 				'header'
 				'picture'

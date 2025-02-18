@@ -56,7 +56,6 @@
 
 	@media (max-width: 500px) {
 		.post-card {
-			--image-size: var(--avatar-small-size);
 			grid-template-areas:
 				'header'
 				'picture'
@@ -65,6 +64,11 @@
 				'footer';
 			grid-template-columns: 1fr;
 			grid-template-rows: auto var(--image-size) 1fr auto;
+		}
+
+		.post-card picture {
+			align-self: center center;
+			width: calc(100% - var(--spacing-small));
 		}
 	}
 }
