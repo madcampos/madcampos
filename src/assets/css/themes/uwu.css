@@ -55,6 +55,7 @@
 			mistyrose var(--spacing-small),
 			lavenderblush var(--spacing-small)
 		);
+		background-repeat: repeat;
 		background-size: calc(var(--spacing-small) * 2);
 		cursor: url('./uwu/cursors/normal/1.svg'), auto;
 	}
