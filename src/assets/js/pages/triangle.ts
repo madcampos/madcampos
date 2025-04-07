@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+	if (!document.body.classList.contains('js-denabled')) {
+		return;
+	}
+
 	document.addEventListener('submit', (evt) => {
 		evt.preventDefault();
 		evt.stopPropagation();

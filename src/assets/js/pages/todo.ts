@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+	if (!document.body.classList.contains('js-denabled')) {
+		return;
+	}
+
 	document.addEventListener('change', (evt) => {
 		const target = evt.target as HTMLInputElement;
 
