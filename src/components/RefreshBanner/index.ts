@@ -1,5 +1,5 @@
 import { registerSW } from 'virtual:pwa-register';
-import { SiteSettings } from './settings.js';
+import { SiteSettings } from '../../assets/js/settings.ts';
 
 function setPwaMessage(type: 'offline' | 'refresh') {
 	const pwaToast = document.querySelector('#pwa-toast') as HTMLDivElement;

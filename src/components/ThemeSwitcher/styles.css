@@ -2,6 +2,8 @@
 	/* INFO: fix for safari */
 	#theme-switcher { display: inline-block; }
 
+	body:not(.js-enabled) #theme-switcher { display: none; }
+
 	#theme-switcher button {
 		align-items: center;
 		background: var(--bg-color);

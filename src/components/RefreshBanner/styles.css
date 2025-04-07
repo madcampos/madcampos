@@ -16,6 +16,8 @@
 		z-index: calc(1 * infinity);
 	}
 
+	body:not(.js-enabled) #pwa-toast { display: none; }
+
 	#pwa-toast:is([data-offline], [data-refresh]) { visibility: visible; }
 
 	#pwa-toast div {

@@ -1,6 +1,10 @@
-import { SiteSettings } from './settings.js';
+import { SiteSettings } from '../../assets/js/settings.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+	if (!document.body.classList.contains('js-denabled')) {
+		return;
+	}
+
 	if (SiteSettings.theme) {
 		const themeInput = document.querySelector<HTMLInputElement>(`#theme-switcher input[type="radio"][value="${SiteSettings.theme}"]`);
 

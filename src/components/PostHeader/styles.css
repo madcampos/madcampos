@@ -99,6 +99,8 @@
 		justify-content: center;
 	}
 
+	body:not(.js-enabled) #post-share { display: none; }
+
 	#post-share button {
 		align-items: center;
 		background: var(--bg-color);

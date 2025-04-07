@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+	if (!document.body.classList.contains('js-denabled')) {
+		return;
+	}
+
 	const nativeShareButton = document.querySelector<HTMLButtonElement>('#ps-native');
 	const emailShareButton = document.querySelector<HTMLButtonElement>('#ps-email');
 	const copyShareButton = document.querySelector<HTMLButtonElement>('#ps-copy');
