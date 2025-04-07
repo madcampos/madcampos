@@ -2,9 +2,9 @@
 // @ts-expect-error For some reason this errors
 import { pwaInfo } from 'virtual:pwa-info';
 
-import { BLOG, GLOBALS } from '../constants.js';
+import { BLOG, GLOBALS } from '../../constants.js';
 
-import { join } from '../utils/path.js';
+import { join } from '../../utils/path.js';
 
 import printStylesheet from '../assets/css/print.css?url';
 import defaultSocialImage from '../assets/images/social/social.png';
@@ -122,4 +122,6 @@ const socialImage = join([baseUrl, image ?? defaultSocialImage.src], { trailingS
 	}
 	<!-- Print Stylesheet -->
 	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
+
+	<script src="./index.ts"></script>
 </head>
