@@ -7,7 +7,7 @@ She slowly turned to the kid, her head full of thoughts in the last few days, an
 
 Her tired but sure feet moving through the camp to the tent where the prisoners were held. Aside from a slight greyness to the spots in her fur, one could not say she was getting old, her posture kept the same, her viciousness as a fighter could be said only grew stronger, but something felt different.
 
-When she arrived at the tent three drow were tied to a pole in the center of the tent, their eyes covered and mouths gagged. Two guards stand there  keeping watch of the miserable prisoners.
+When she arrived at the tent three drow were tied to a pole in the center of the tent, their eyes covered and mouths gagged. Two guards stand there keeping watch of the miserable prisoners.
 
 She approached one of the prisoners and removed his gag. His thin face reacted trying to move away and he cried unintelligible words, all she could understand was the despair in his voice. With a light touch as if caressing her loved child she held the prisoner's mouth shut, he now mumbling with more desperation under the soft but strong grasp. With a swift and precise move his jaw was broken and fell open, limp. Along came a guttural screech of pain.
 
