@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const CSS_NAKED_MONTH = 3;
-	const CSS_NAKED_DAY = 7;
+	const CSS_NAKED_DAY = 9;
 	const DAYS_IN_WEEK_COUNT = 6;
 
 	const currentDate = new Date();
@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		cssNakedWeekEnd.setDate(cssNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - cssNakedDay.getDay()));
 
 		if (currentDate.getDate() >= cssNakedWeekBegin.getDate() && currentDate.getDate() <= cssNakedWeekEnd.getDate()) {
-			[...document.querySelectorAll('style, link[rel="stylesheet"]')].forEach((css) => css.remove());
+			[...document.querySelectorAll('style, link[rel~="stylesheet"]')].forEach((css) => css.remove());
+
+			[...document.querySelectorAll('[style]')].forEach((element) => element.removeAttribute('style'));
 		}
 	}
 });
