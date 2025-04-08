@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-	if (!document.body.classList.contains('js-denabled')) {
+	if (!document.body.classList.contains('js-enabled')) {
 		return;
 	}
 
