@@ -13,11 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		const cssNakedDay = new Date();
 		cssNakedDay.setDate(CSS_NAKED_DAY);
 
-		// Slides the week window based on the day of the week that CSS naked day happens.
-		const cssNakedWeekBegin = new Date().setDate(cssNakedDay.getDate() - cssNakedDay.getDay());
-		const cssNakedWeekEnd = new Date().setDate(cssNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - cssNakedDay.getDay()));
+		const cssNakedWeekBegin = new Date();
+		const cssNakedWeekEnd = new Date();
 
-		if (currentDate.getDate() >= cssNakedWeekBegin && currentDate.getDate() <= cssNakedWeekEnd) {
+		// Slides the week window based on the day of the week that CSS naked day happens.
+		cssNakedWeekBegin.setDate(cssNakedDay.getDate() - cssNakedDay.getDay());
+		cssNakedWeekEnd.setDate(cssNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - cssNakedDay.getDay()));
+
+		if (currentDate.getDate() >= cssNakedWeekBegin.getDate() && currentDate.getDate() <= cssNakedWeekEnd.getDate()) {
 			[...document.querySelectorAll('style, link[rel="stylesheet"]')].forEach((css) => css.remove());
 		}
 	}

@@ -8,11 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		const jsNakedDay = new Date();
 		jsNakedDay.setDate(JS_NAKED_DAY);
 
-		// Slides the week window based on the day of the week that js naked day happens.
-		const jsNakedWeekBegin = new Date().setDate(jsNakedDay.getDate() - jsNakedDay.getDay());
-		const jsNakedWeekEnd = new Date().setDate(jsNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - jsNakedDay.getDay()));
+		const jsNakedWeekBegin = new Date();
+		const jsNakedWeekEnd = new Date();
 
-		if (!(currentDate.getDate() >= jsNakedWeekBegin && currentDate.getDate() <= jsNakedWeekEnd)) {
+		// Slides the week window based on the day of the week that js naked day happens.
+		jsNakedWeekBegin.setDate(jsNakedDay.getDate() - jsNakedDay.getDay());
+		jsNakedWeekEnd.setDate(jsNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - jsNakedDay.getDay()));
+
+		if (!(currentDate.getDate() >= jsNakedWeekBegin.getDate() && currentDate.getDate() <= jsNakedWeekEnd.getDate())) {
 			document.body.classList.add('js-enabled');
 		}
 	}
