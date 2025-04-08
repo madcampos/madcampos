@@ -6,11 +6,6 @@
 		width: clamp(var(--min-width, 5rem), 70vmin, var(--medium-width, 30rem));
 	}
 
-	#logo-graphics text { font-size: 8rem; }
-
-	/* INFO: Fix for firefox */
-	.logo-text { font-size: 8rem; }
-
 	#logo-text-micro:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
 	#logo-text-micro:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
 	#logo-text-micro:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),

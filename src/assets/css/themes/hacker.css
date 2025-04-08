@@ -1,0 +1,195 @@
+@layer theme {
+	[data-theme='hacker'] {
+		/* Border */
+		--border-width: medium;
+		--border-style: none;
+		--link-underline: solid;
+		--border-radius: 0;
+		/* Theme colors */
+		--theme-color: lime;
+		--secondary-color: seagreen;
+		--accent-color: seagreen;
+		--complementary-color: seagreen;
+		/* Base colors */
+		--text-color: lime;
+		--bg-color: black;
+		--dark-bg-color: black;
+		--border-color: seagreen;
+		--scrollbar-bg: rgba(255, 255, 255, 0.1);
+		/* Tag colors */
+		--tag-bg: var(--theme-color);
+		--tag-color: var(--dark-bg-color);
+		/* Link colors */
+		--link-color: lime;
+		--link-visited-color: seagreen;
+		--link-hover-color: var(--accent-color);
+		--link-active-color: var(--complementary-color);
+		/* Code colors */
+		--diff-add-color: limegreen;
+		--diff-add-bg: rgba(0, 100, 0, 0.3);
+		--diff-remove-color: red;
+		--diff-remove-bg: rgba(193, 0, 0, 0.3);
+		--highlight-color: silver;
+		--highlight-default-bg: rgba(192, 192, 192, 0.2);
+		--highlight-error-color: tomato;
+		--highlight-error-bg: rgba(255, 99, 71, 0.2);
+		--highlight-warning-color: yellow;
+		--highlight-warning-bg: rgba(218, 165, 32, 0.2);
+		/* Icons */
+		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M15.54 11.29L9.88 5.64a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l4.95 5L8.46 17a1 1 0 0 0 0 1.41a1 1 0 0 0 .71.3a1 1 0 0 0 .71-.3l5.66-5.65a1 1 0 0 0 0-1.47'/%3E%3C/svg%3E");
+		--external-link-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M18 10.82a1 1 0 0 0-1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7.18a1 1 0 0 0 0-2H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-7.18a1 1 0 0 0-1-1m3.92-8.2a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59L8.29 14.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38'/%3E%3C/svg%3E");
+		--hr-decoration-icon: none;
+		/* Fonts */
+		--headers-font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
+		--text-font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
+		/* Global settings */
+		accent-color: var(--theme-color);
+		color-scheme: dark;
+	}
+
+	[data-theme='hacker'] body { background-repeat: no-repeat; }
+
+	[data-theme='hacker'] :focus-visible { outline-style: solid; }
+
+	[data-theme='hacker'] .user-avatar {
+		border-radius: 0;
+		filter: url('#small-pixelate-filter');
+	}
+
+	[data-theme='hacker'] .user-avatar img {
+		filter: grayscale(1);
+		image-rendering: auto;
+	}
+
+	[data-theme='hacker'] .user-avatar::after {
+		mix-blend-mode: color;
+		opacity: 0.8;
+	}
+
+	[data-theme='hacker'] .user-avatar:hover::after { opacity: 0.8; }
+
+	[data-theme='hacker'] input {
+		background-color: var(--secondary-color);
+		border-color: var(--theme-color);
+		border-radius: 0;
+		border-style: solid;
+		color: var(--bg-color);
+	}
+
+	[data-theme='hacker'] hr { padding: 0; }
+
+	[data-theme='hacker'] input::placeholder { color: var(--bg-color); }
+
+	[data-theme='hacker'] #site-nav a {
+		color: var(--text-color);
+		height: var(--button-size);
+		padding: var(--spacing-small) var(--spacing-medium);
+	}
+
+	[data-theme='hacker'] button {
+		background-color: transparent;
+		border-color: var(--theme-color);
+		border-radius: 0;
+		border-style: solid;
+		color: var(--text-color);
+	}
+
+	[data-theme='hacker'] :is(#site-nav a, button):focus-visible {
+		background-color: var(--text-color);
+		border-color: var(--text-color);
+		color: var(--bg-color);
+	}
+
+	[data-theme='hacker'] :is(#site-nav a, button):hover {
+		background-color: var(--accent-color);
+		border-color: var(--accent-color);
+		color: var(--bg-color);
+		outline-color: var(--accent-color);
+	}
+
+	[data-theme='hacker'] :is(#site-nav a, button):active {
+		background-color: var(--accent-color);
+		border-color: var(--accent-color);
+		color: var(--theme-color);
+		outline-color: var(--theme- color);
+	}
+
+	[data-theme='hacker'] .tag {
+		background-color: var(--tag-bg);
+		padding-inline-start: var(--spacing-medium);
+	}
+
+	[data-theme='hacker'] .tag:focus-within { outline-style: dotted; }
+	[data-theme='hacker'] .tag a:focus-visible { outline: none; }
+
+	[data-theme='hacker'] .tag::before {
+		clip-path: none;
+		content: none;
+		mask: none;
+	}
+
+	[data-theme='hacker'] :is(.post-card, .talk-card, .project-card) { border: solid currentColor var(--border-width); }
+
+	[data-theme='hacker'] :is(.post-card, .talk-card) picture { filter: url('#small-pixelate-filter'); }
+
+	[data-theme='hacker'] .project-card picture {
+		border: solid currentColor var(--border-width);
+		display: grid;
+		mask: none;
+		place-items: center;
+		position: relative;
+	}
+
+	[data-theme='hacker'] .project-card picture::after {
+		background: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
+		content: '';
+		display: block;
+		height: 100%;
+		inset: 0;
+		mix-blend-mode: color;
+		opacity: 0.8;
+		position: absolute;
+		width: 100%;
+	}
+
+	[data-theme='hacker'] .project-card img { display: none; }
+	[data-theme='hacker'] .project-card img[data-theme-image='hacker'] { display: block; }
+
+	[data-theme='hacker'] .logo-part { fill: var(--theme-color); }
+
+	[data-theme='hacker'] .logo-text {
+		fill: var(--accent-color);
+		font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
+		font-size: 6rem;
+		font-weight: normal;
+	}
+
+	[data-theme='hacker'] #logo-graphics [data-theme] { visibility: hidden; }
+	[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='full']) { visibility: visible; }
+
+	[data-theme='hacker'] a:focus-visible [data-theme='hacker'] .logo-part { fill: var(--accent-color); }
+	[data-theme='hacker'] a:focus-visible [data-theme='hacker'] .logo-text { fill: var(--theme-color); }
+
+	[data-theme='hacker'] a:hover [data-theme='hacker'] .logo-part { fill: var(--link-hover-color); }
+	[data-theme='hacker'] a:hover [data-theme='hacker'] .logo-text { fill: var(--link-hover-color); }
+
+	[data-theme='hacker'] a:active [data-theme='hacker'] .logo-part { stroke: var(--link-active-color); }
+	[data-theme='hacker'] a:active [data-theme='hacker'] .logo-text { fill: var(--link-active-color); }
+
+	[data-theme='hacker'] pre span {
+		color: var(--text-color);
+		font-style: var(--shiki-contrast-font-style, normal);
+		font-weight: var(--shiki-contrast-font-weight, normal);
+		text-decoration: var(--shiki-contrast-text-decoration, none);
+	}
+
+	@media (max-width: 650px) {
+		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
+		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='mini']) { visibility: visible; }
+	}
+
+	@media (max-width: 450px) {
+		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
+		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='micro']) { visibility: visible; }
+	}
+}

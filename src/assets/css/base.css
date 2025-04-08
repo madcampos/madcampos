@@ -32,7 +32,7 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 
-	*:has(> svg) {
+	*:not([hidden]):has(> svg) {
 		align-items: center;
 		display: inline-flex;
 		gap: 0.3em;

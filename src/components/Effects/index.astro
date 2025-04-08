@@ -1,0 +1,27 @@
+---
+
+---
+
+<div hidden>
+	<svg viewBox="0 0 10 10">
+		<defs>
+			<filter id="small-pixelate-filter">
+				<feGaussianBlur result="blurred-image" stdDeviation="1" />
+				<feImage
+					href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAIAAAACDbGyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAWSURBVAgdY1ywgOEDAwKxgJhIgFQ+AP/vCNK2s+8LAAAAAElFTkSuQmCC"
+					width="3"
+					height="3"
+				/>
+				<feTile result="displacement-map" />
+				<feDisplacementMap
+					in="blurred-image"
+					in2="displacement-map"
+					result="pixelated-image"
+					scale="8"
+					xChannelSelector="R"
+					yChannelSelector="G"
+				/>
+			</filter>
+		</defs>
+	</svg>
+</div>

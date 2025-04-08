@@ -8,6 +8,7 @@ image: ./assets/40-noriture.png
 imageAlt: An orange circle representing an orange slice with 4 segments, with the top right one being 3 curved lines representing the RSS symbol.
 themeImages:
   y2k: ./assets/y2k/40-noriture.jpg
+  hacker: ./assets/hacker/40-noriture.png
 techStack:
   - GitHub Pages
   - Hono

@@ -8,6 +8,7 @@ image: ./assets/01-corny-unicorn.png
 imageAlt: AI generated image of a unicorn head in a pale green with a bright green mane and a corn cob for it's horn.
 themeImages:
   y2k: ./assets/y2k/01-corny-unicorn.jpg
+  hacker: ./assets/hacker/01-corny-unicorn.png
 techStack:
   - HTML
   - CSS

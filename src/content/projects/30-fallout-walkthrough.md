@@ -9,6 +9,7 @@ image: ./assets/30-fallout-walkthrough.png
 imageAlt: "Fallout PipBoy's mascot: A cartoon face of a white guy with blond hair smiling. On the background a gradient from a vibrant blue to light blue."
 themeImages:
   y2k: ./assets/y2k/30-fallout-walkthrough.jpg
+  hacker: ./assets/hacker/30-fallout-walkthrough.png
 techStack:
   - HTML
   - CSS
