@@ -1,9 +1,11 @@
 import { SiteSettings } from '../../assets/js/settings.ts';
 
 document.addEventListener('DOMContentLoaded', () => {
-	if (SiteSettings.enableJs) {
+	if (SiteSettings.js === 'disabled') {
 		return;
 	}
+
+	let shouldRemoveJS = false;
 
 	const JS_NAKED_MONTH = 3;
 	const JS_NAKED_DAY = 24;
@@ -22,7 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		jsNakedWeekEnd.setDate(jsNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - jsNakedDay.getDay()));
 
 		if (!(currentDate.getDate() >= jsNakedWeekBegin.getDate() && currentDate.getDate() <= jsNakedWeekEnd.getDate())) {
-			document.body.classList.add('js-enabled');
+			shouldRemoveJS = true;
 		}
+	}
+
+	if (SiteSettings.js === 'enabled') {
+		shouldRemoveJS = false;
+	}
+
+	if (shouldRemoveJS) {
+		document.body.classList.add('js-enabled');
 	}
 });

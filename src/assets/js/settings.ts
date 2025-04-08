@@ -1,6 +1,6 @@
 export class SiteSettings {
 	static get #settingsAvailable() {
-		return ['debug', 'enableCss', 'enableJs', 'theme', 'pwa'] as const;
+		return ['debug', 'css', 'js', 'enableIab', 'theme', 'pwa'] as const;
 	}
 
 	static #searchParams?: URLSearchParams;
@@ -64,20 +64,30 @@ export class SiteSettings {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
 	}
 
-	static get enableCss() {
-		return SiteSettings.#getSetting('enableCss') === 'true';
+	static get css() {
+		return SiteSettings.#getSetting('css');
 	}
 
-	static set enableCss(value: boolean | undefined) {
-		SiteSettings.#updateSetting('enableCss', value ? 'true' : 'false');
+	static set css(value: string | undefined) {
+		SiteSettings.#updateSetting('css', value);
 	}
 
-	static get enableJs() {
-		return SiteSettings.#getSetting('enableJs') === 'true';
+	// eslint-disable-next-line id-length
+	static get js() {
+		return SiteSettings.#getSetting('js');
 	}
 
-	static set enableJs(value: boolean | undefined) {
-		SiteSettings.#updateSetting('enableJs', value ? 'true' : 'false');
+	// eslint-disable-next-line id-length
+	static set js(value: string | undefined) {
+		SiteSettings.#updateSetting('js', value);
+	}
+
+	static get enableIab() {
+		return SiteSettings.#getSetting('enableIab') === 'true';
+	}
+
+	static set enableIab(value: boolean | undefined) {
+		SiteSettings.#updateSetting('enableIab', value ? 'true' : 'false');
 	}
 
 	static get theme() {
