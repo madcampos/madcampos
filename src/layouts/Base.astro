@@ -3,6 +3,7 @@ import '../assets/css/index.css';
 
 import CSSNakedDay from '../components/CSSNakedDay/index.astro';
 import HtmlHead from '../components/HtmlHead/index.astro';
+import IabEscape from '../components/IabEscape/index.astro';
 import RefreshBanner from '../components/RefreshBanner/index.astro';
 
 interface Props {
@@ -48,6 +49,7 @@ const {
 		{hasFeed}
 	/>
 	<body class:list={[{ 'h-entry': hasFeed }]}>
+		<IabEscape />
 		<CSSNakedDay />
 		<RefreshBanner />
 		<slot name="header"></slot>
