@@ -94,7 +94,7 @@ export default defineConfig({
 			manifest,
 			workbox: {
 				// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-				maximumFileSizeToCacheInBytes: 1024 * 128,
+				maximumFileSizeToCacheInBytes: 1024 * 256,
 				cleanupOutdatedCaches: true,
 				clientsClaim: true,
 				skipWaiting: true,
@@ -113,7 +113,7 @@ export default defineConfig({
 			devOptions: {
 				enabled: false
 			},
-			selfDestroying: false
+			selfDestroying: true
 		}),
 		sitemap({
 			changefreq: 'weekly',
