@@ -61,7 +61,7 @@
 
 	#logo-graphics [data-theme] { visibility: hidden; }
 
-	#logo-graphics [data-theme='system'][data-size='full'] { visibility: visible; }
+	#logo-graphics [data-theme='system']:where([data-size='full']) { visibility: visible; }
 
 	[data-theme='system'] .logo-part { fill: var(--theme-color, #0080ff); }
 
@@ -77,4 +77,14 @@
 	a:hover [data-theme='system'] .logo-text { fill: var(--theme-color); }
 	a:active [data-theme='system'] .logo-part { fill: var(--link-active-color); }
 	a:active [data-theme='system'] .logo-text { fill: var(--link-active-color); }
+
+	@media (max-width: 650px) {
+		#logo-graphics [data-theme='system'] { visibility: hidden; }
+		#logo-graphics [data-theme='system']:where([data-size='mini']) { visibility: visible; }
+	}
+
+	@media (max-width: 450px) {
+		#logo-graphics [data-theme='system'] { visibility: hidden; }
+		#logo-graphics [data-theme='system']:where([data-size='micro']) { visibility: visible; }
+	}
 }

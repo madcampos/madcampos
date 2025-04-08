@@ -92,7 +92,7 @@
 	}
 
 	[data-theme='uwu'] #logo-graphics [data-theme] { visibility: hidden; }
-	[data-theme='uwu'] #logo-graphics [data-theme='uwu'][data-size='full'] { visibility: visible; }
+	[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='full']) { visibility: visible; }
 
 	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-part {
 		fill: var(--bg-color);
@@ -194,6 +194,16 @@
 		inset-inline-end: -20%;
 		pointer-events: none;
 		position: absolute;
+	}
+
+	@media (max-width: 650px) {
+		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
+		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='mini']) { visibility: visible; }
+	}
+
+	@media (max-width: 450px) {
+		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
+		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='micro']) { visibility: visible; }
 	}
 
 	@keyframes uwu-cursor-normal {
