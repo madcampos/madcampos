@@ -1,4 +1,10 @@
+import { SiteSettings } from '../../assets/js/settings.ts';
+
 document.addEventListener('DOMContentLoaded', () => {
+	if (SiteSettings.enableJs) {
+		return;
+	}
+
 	const JS_NAKED_MONTH = 3;
 	const JS_NAKED_DAY = 24;
 	const DAYS_IN_WEEK_COUNT = 6;

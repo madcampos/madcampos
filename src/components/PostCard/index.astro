@@ -20,7 +20,7 @@ interface Props {
 const { url, title, createdAt, image, imageAlt, tags } = Astro.props;
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-const IMAGE_WIDTHS = [256, 512, 768, image?.width ?? 1024];
+const IMAGE_WIDTHS = [256, 512, 768, 1024];
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 ---
 <article class="post-card">
@@ -40,8 +40,9 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				src={image}
 				alt={imageAlt ?? ''}
 				widths={IMAGE_WIDTHS}
-				sizes={`(max-width: 360px) 256px, (max-width: 720px) 512px, (max-width: 1280px) 768px, ${image.width}px`}
+				sizes="(max-width: 360px) 256px, (max-width: 720px) 512px, (max-width: 1280px) 768px, 1024px"
 				quality="high"
+				width={512}
 			/>
 		)
 	}

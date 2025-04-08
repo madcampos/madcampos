@@ -65,65 +65,75 @@ const themes: SiteTheme[] = [
 			<div id="theme-list">
 				{
 					themes.map((theme) => (
-						<label
-							for={`theme-input-${theme.id}`}
-							id={`theme-label-${theme.id}`}
-							class="theme-label"
-						>
-							<input
-								type="radio"
-								name="theme"
-								value={theme.id}
-								id={`theme-input-${theme.id}`}
-								required
-							/>
+						<div>
+							<label
+								for={`theme-input-${theme.id}`}
+								id={`theme-label-${theme.id}`}
+								class="theme-label"
+							>
+								<input
+									type="radio"
+									name="theme"
+									value={theme.id}
+									id={`theme-input-${theme.id}`}
+									required
+								/>
 
-							<svg viewBox="0 0 100 70" class="theme-preview" data-theme={theme.id === 'system' ? 'light' : theme.id} role="presentation">
-								<g>
-									<rect class="theme-preview-bg" x="0" y="0" width="100" height="70" />
+								<svg
+									viewBox="0 0 100 70"
+									class="theme-preview"
+									data-theme={theme.id === 'system' ? 'light' : theme.id}
+									role="presentation"
+									width="100"
+									height="70"
+									display="none"
+								>
+									<g>
+										<rect class="theme-preview-bg" x="0" y="0" width="100" height="70" />
 
-									<text class="theme-preview-text theme-preview-header-text" x="5" y="30" role="presentation">Aa</text>
-									<text class="theme-preview-text theme-preview-text-text" x="5" y="60" role="presentation">Aa</text>
+										<text class="theme-preview-text theme-preview-header-text" x="5" y="30" role="presentation">Aa</text>
+										<text class="theme-preview-text theme-preview-text-text" x="5" y="60" role="presentation">Aa</text>
 
-									<rect class="theme-preview-border theme-preview-dark-bg" x="60" y="20" width="25" height="35" />
-									<circle class="theme-preview-border theme-preview-theme-color" cx="60" cy="20" r="10" />
-									<circle class="theme-preview-border theme-preview-accent-color" cx="60" cy="55" r="10" />
-									<circle class="theme-preview-border theme-preview-complementary-color" cx="85" cy="20" r="10" />
-									<circle class="theme-preview-border theme-preview-secondary-color" cx="85" cy="55" r="10" />
-								</g>
+										<rect class="theme-preview-border theme-preview-dark-bg" x="60" y="20" width="25" height="35" />
+										<circle class="theme-preview-border theme-preview-theme-color" cx="60" cy="20" r="10" />
+										<circle class="theme-preview-border theme-preview-accent-color" cx="60" cy="55" r="10" />
+										<circle class="theme-preview-border theme-preview-complementary-color" cx="85" cy="20" r="10" />
+										<circle class="theme-preview-border theme-preview-secondary-color" cx="85" cy="55" r="10" />
+									</g>
 
+									{
+										theme.dual && (
+											<clipPath id="theme-preview-system-mask">
+												<polygon points="0,70 100,0 100,70" />
+											</clipPath>
+											<g data-theme="dark" clip-path="url(#theme-preview-system-mask)">
+												<rect class="theme-preview-bg" x="0" y="0" width="100" height="70" />
+
+												<text class="theme-preview-text theme-preview-header-text" x="5" y="30" role="presentation">Aa</text>
+												<text class="theme-preview-text theme-preview-text-text" x="5" y="60" role="presentation">Aa</text>
+
+												<rect class="theme-preview-border theme-preview-dark-bg" x="60" y="20" width="25" height="35" />
+												<circle class="theme-preview-border theme-preview-theme-color" cx="60" cy="20" r="10" />
+												<circle class="theme-preview-border theme-preview-accent-color" cx="60" cy="55" r="10" />
+												<circle class="theme-preview-border theme-preview-complementary-color" cx="85" cy="20" r="10" />
+												<circle class="theme-preview-border theme-preview-secondary-color" cx="85" cy="55" r="10" />
+											</g>
+										)
+									}
+								</svg>
+
+								<strong>{theme.name}</strong>
+								<small><em>{theme.description}</em></small>
 								{
-									theme.dual && (
-										<clipPath id="theme-preview-system-mask">
-											<polygon points="0,70 100,0 100,70" />
-										</clipPath>
-										<g data-theme="dark" clip-path="url(#theme-preview-system-mask)">
-											<rect class="theme-preview-bg" x="0" y="0" width="100" height="70" />
-
-											<text class="theme-preview-text theme-preview-header-text" x="5" y="30" role="presentation">Aa</text>
-											<text class="theme-preview-text theme-preview-text-text" x="5" y="60" role="presentation">Aa</text>
-
-											<rect class="theme-preview-border theme-preview-dark-bg" x="60" y="20" width="25" height="35" />
-											<circle class="theme-preview-border theme-preview-theme-color" cx="60" cy="20" r="10" />
-											<circle class="theme-preview-border theme-preview-accent-color" cx="60" cy="55" r="10" />
-											<circle class="theme-preview-border theme-preview-complementary-color" cx="85" cy="20" r="10" />
-											<circle class="theme-preview-border theme-preview-secondary-color" cx="85" cy="55" r="10" />
-										</g>
+									!theme.accessible && (
+										<small>
+											<Icon name="uil:exclamation-triangle" title="" />
+											<strong>Warning: Theme is not fully accessible</strong>
+										</small>
 									)
 								}
-							</svg>
-
-							<strong>{theme.name}</strong>
-							<small><em>{theme.description}</em></small>
-							{
-								!theme.accessible && (
-									<small>
-										<Icon name="uil:exclamation-triangle" title="" />
-										<strong>Warning: Theme is not fully accessible</strong>
-									</small>
-								)
-							}
-						</label>
+							</label>
+						</div>
 					))
 				}
 			</div>

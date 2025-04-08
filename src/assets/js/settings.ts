@@ -1,4 +1,8 @@
 export class SiteSettings {
+	static get #settingsAvailable() {
+		return ['debug', 'enableCss', 'enableJs', 'theme', 'pwa'] as const;
+	}
+
 	static #searchParams?: URLSearchParams;
 
 	static #initializeSettings() {
@@ -8,10 +12,7 @@ export class SiteSettings {
 
 		SiteSettings.#searchParams = new URLSearchParams(document.location.search);
 
-		const settings = Object.getOwnPropertyNames(SiteSettings).filter((key) => !['name', 'length', 'prototype'].includes(key)) as (keyof typeof SiteSettings)[];
-
-		for (const setting of settings) {
-			// eslint-disable-next-line @typescript-eslint/no-base-to-string
+		for (const setting of SiteSettings.#settingsAvailable) {
 			SiteSettings.#updateSetting(setting, SiteSettings[setting]?.toString());
 		}
 	}
@@ -61,6 +62,22 @@ export class SiteSettings {
 
 	static set debug(value: boolean) {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
+	}
+
+	static get enableCss() {
+		return SiteSettings.#getSetting('enableCss') === 'true';
+	}
+
+	static set enableCss(value: boolean | undefined) {
+		SiteSettings.#updateSetting('enableCss', value ? 'true' : 'false');
+	}
+
+	static get enableJs() {
+		return SiteSettings.#getSetting('enableJs') === 'true';
+	}
+
+	static set enableJs(value: boolean | undefined) {
+		SiteSettings.#updateSetting('enableJs', value ? 'true' : 'false');
 	}
 
 	static get theme() {

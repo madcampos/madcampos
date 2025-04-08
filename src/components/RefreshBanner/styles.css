@@ -3,7 +3,7 @@
 		align-items: center;
 		background-color: var(--bg-color);
 		border: var(--border-style) var(--highlight-border-color) var(--border-width);
-		display: flex;
+		display: none;
 		gap: var(--spacing-medium);
 		inset-block-end: var(--spacing-small);
 		inset-inline: 0;
@@ -11,14 +11,13 @@
 		margin-inline: auto;
 		padding: var(--spacing-medium) var(--spacing-large);
 		position: fixed;
-		visibility: hidden;
 		width: clamp(var(--min-width), 100%, var(--medium-width));
 		z-index: calc(1 * infinity);
 	}
 
 	body:not(.js-enabled) #pwa-toast { display: none; }
 
-	#pwa-toast:is([data-offline], [data-refresh]) { visibility: visible; }
+	#pwa-toast:is([data-offline], [data-refresh]) { display: flex; }
 
 	#pwa-toast div {
 		flex-basis: min-content;

@@ -12,7 +12,7 @@ interface Props {
 const { image: avatar, imageAlt: avatarAlt, loading } = Astro.props;
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-const AVATAR_WIDTHS = [128, 256, 512, 768, avatar.width];
+const AVATAR_WIDTHS = [128, 256, 512, 768, 1024];
 ---
 <picture
 	class="user-avatar"
@@ -27,7 +27,8 @@ const AVATAR_WIDTHS = [128, 256, 512, 768, avatar.width];
 		alt={avatarAlt}
 		loading={loading ?? 'lazy'}
 		widths={AVATAR_WIDTHS}
-		sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${avatar.width}px`}
+		width={512}
+		sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
 		quality={75}
 	/>
 </picture>

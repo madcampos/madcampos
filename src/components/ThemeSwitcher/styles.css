@@ -78,6 +78,8 @@
 		overscroll-behavior: contain;
 	}
 
+	#theme-switcher .theme-preview { display: block; }
+
 	#theme-switcher .theme-preview-border {
 		paint-order: stroke;
 		stroke: var(--border-color);

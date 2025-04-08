@@ -36,6 +36,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					alt={imageAlt ?? ''}
 					loading="lazy"
 					widths={IMAGE_WIDTHS}
+					width={256}
 					sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
 					quality={75}
 				/>
