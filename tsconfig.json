@@ -10,6 +10,7 @@
 		"baseUrl": ".",
 		"checkJs": true,
 		"composite": true,
+		"erasableSyntaxOnly": true,
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
