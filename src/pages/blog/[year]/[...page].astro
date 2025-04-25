@@ -15,7 +15,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {
 	const postsList = await listPostPagesByYear();
 
-	return Object.entries(postsList).flatMap(([yearKey, yearPosts]) =>
+	return [...postsList.entries()].flatMap(([yearKey, yearPosts]) =>
 		paginate(yearPosts, {
 			params: {
 				year: yearKey

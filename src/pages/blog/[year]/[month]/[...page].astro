@@ -7,16 +7,16 @@ import { join } from '../../../../utils/path.js';
 import Logo from '../../../../components/Logo/index.astro';
 import BlogPostsLayout from '../../../../layouts/BlogPosts.astro';
 
-import { listPostsPagesByMonth, MAX_POSTS_PER_PAGE } from '../../../../utils/post.js';
+import { listPostsByYearAndMonth, MAX_POSTS_PER_PAGE } from '../../../../utils/post.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {
-	const postsList = await listPostsPagesByMonth();
+	const postsList = await listPostsByYearAndMonth();
 
-	return Object.entries(postsList).flatMap(([yearKey, months]) =>
-		Object.entries(months).flatMap(([monthKey, monthPosts]) =>
+	return [...postsList.entries()].flatMap(([yearKey, months]) =>
+		[...months.entries()].flatMap(([monthKey, monthPosts]) =>
 			paginate(monthPosts, {
 				params: {
 					year: yearKey,

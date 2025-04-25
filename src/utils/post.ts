@@ -1,6 +1,8 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { join } from './path.js';
 
+export type PostSorting = 'ascending' | 'descending';
+
 export const MAX_POSTS_PER_PAGE = 10;
 
 export interface RelatedPost {
@@ -25,11 +27,15 @@ export interface Post extends Omit<CollectionEntry<'blog'>, 'relatedPosts' | 'sl
 	letterCount: number;
 }
 
-function sortPostsByDate(first: Post, second: Post) {
+function sortPostsByDate(first: Post, second: Post, sorting: PostSorting) {
 	const firstDate = new Date(first.data.createdAt);
 	const secondDate = new Date(second.data.createdAt);
 
-	return secondDate.getTime() - firstDate.getTime();
+	if (sorting === 'descending') {
+		return secondDate.getTime() - firstDate.getTime();
+	}
+
+	return firstDate.getTime() - secondDate.getTime();
 }
 
 function getPostDate(post: CollectionEntry<'blog'>) {
@@ -131,60 +137,61 @@ async function formatPostMetadata(post: CollectionEntry<'blog'>) {
 	};
 }
 
-export async function listAllPosts() {
+export async function listAllPosts(sorting: PostSorting = 'descending') {
 	const blogEntries = await getCollection('blog');
 	const filteredBlogEntries = blogEntries.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
 	const formattedBlogEntries = await Promise.all(filteredBlogEntries.map(async (entry) => formatPostMetadata(entry)));
-	const sortedBlogEntries = formattedBlogEntries.sort(sortPostsByDate);
+	const sortedBlogEntries = formattedBlogEntries.sort((postA, postB) => sortPostsByDate(postA, postB, sorting));
 
 	return sortedBlogEntries;
 }
 
-export async function listPostPagesByYear() {
-	const posts = await listAllPosts();
+export async function listPostPagesByYear(sorting: PostSorting = 'descending') {
+	const posts = await listAllPosts(sorting);
 
-	const years: Record<string, Post[]> = {};
+	const years = new Map<string, Post[]>();
 
 	for (const post of posts) {
 		const year = post.year.toString();
 
-		years[year] ??= [];
+		if (!years.has(year)) {
+			years.set(year, []);
+		}
 
-		years[year]?.push(post as Post);
-	}
-
-	for (const year of Object.keys(years)) {
-		years[year]?.sort(sortPostsByDate);
+		years.get(year)?.push(post as Post);
 	}
 
 	return years;
 }
 
-export async function listPostsPagesByMonth() {
-	const posts = await listPostPagesByYear();
-	const postsByMonth: Record<string, Record<string, Post[]>> = {};
+export async function listPostsByYearAndMonth(sorting: PostSorting = 'descending') {
+	const postsByYear = await listPostPagesByYear(sorting);
+	const postsByYearAndMonth = new Map<string, Map<string, Post[]>>();
 
-	for (const year of Object.keys(posts)) {
-		const months: Record<string, Post[]> = {};
-
-		for (const post of posts[year] as Post[]) {
-			const month = post.month.toString();
-
-			months[month] ??= [];
-
-			months[month]?.push(post);
+	for (const [year, posts] of postsByYear.entries()) {
+		if (!postsByYearAndMonth.has(year)) {
+			postsByYearAndMonth.set(year, new Map());
 		}
 
-		postsByMonth[year] ??= {};
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const postsByMonth = postsByYearAndMonth.get(year)!;
 
-		postsByMonth[year] = months;
+		for (const post of posts) {
+			const month = post.month.toString();
+
+			if (!postsByMonth.has(month)) {
+				postsByMonth.set(month, []);
+			}
+
+			postsByMonth.get(month)?.push(post);
+		}
 	}
 
-	return postsByMonth;
+	return postsByYearAndMonth;
 }
 
-export async function listPostPagesByTag() {
-	const posts = await listAllPosts();
+export async function listPostsByTag(sorting: PostSorting = 'descending') {
+	const posts = await listAllPosts(sorting);
 
 	const tags: Record<string, Post[]> = {};
 
@@ -197,22 +204,7 @@ export async function listPostPagesByTag() {
 	}
 
 	for (const tag of Object.keys(tags)) {
-		tags[tag]?.sort(sortPostsByDate);
-	}
-
-	return tags;
-}
-
-export async function listTags() {
-	const posts = await listAllPosts();
-	const tags: string[] = [];
-
-	for (const post of posts) {
-		for (const tag of post.data.tags ?? []) {
-			if (!tags.includes(tag)) {
-				tags.push(tag);
-			}
-		}
+		tags[tag]?.sort((postA, postB) => sortPostsByDate(postA, postB, sorting));
 	}
 
 	return tags;

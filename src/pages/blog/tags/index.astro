@@ -6,14 +6,14 @@ import Logo from '../../../components/Logo/index.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
 import BaseLayout from '../../../layouts/Base.astro';
 
-import { listTags } from '../../../utils/post';
+import { listPostsByTag } from '../../../utils/post';
 
 import '../../../assets/css/pages/internal-page.css';
 import '../../../assets/css/pages/tags.css';
 
 import blogSocialImage from '../../../assets/images/social/social-blog.png';
 
-const tags = await listTags();
+const tags = Object.keys(await listPostsByTag());
 ---
 <BaseLayout
 	htmlTitle={BLOG_TAGS.title}
