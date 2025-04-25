@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		return;
 	}
 
-	let shouldRemoveJS = false;
+	let shouldAddJS = true;
 
 	const JS_NAKED_MONTH = 3;
 	const JS_NAKED_DAY = 24;
@@ -23,16 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		jsNakedWeekBegin.setDate(jsNakedDay.getDate() - jsNakedDay.getDay());
 		jsNakedWeekEnd.setDate(jsNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - jsNakedDay.getDay()));
 
-		if (!(currentDate.getDate() >= jsNakedWeekBegin.getDate() && currentDate.getDate() <= jsNakedWeekEnd.getDate())) {
-			shouldRemoveJS = true;
+		if (currentDate.getDate() >= jsNakedWeekBegin.getDate() && currentDate.getDate() <= jsNakedWeekEnd.getDate()) {
+			shouldAddJS = false;
 		}
 	}
 
 	if (SiteSettings.js === 'enabled') {
-		shouldRemoveJS = false;
+		shouldAddJS = true;
 	}
 
-	if (shouldRemoveJS) {
+	if (shouldAddJS) {
 		document.body.classList.add('js-enabled');
 	}
 });
