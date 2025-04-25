@@ -137,11 +137,14 @@
 		width: var(--icon-size);
 	}
 
-	details[open] summary::before { transform: rotate(90deg); }
+	details[open] > summary::before { transform: rotate(90deg); }
 
 	ul { list-style: '◆ '; }
 	ul ul { list-style: '◇ '; }
 	ul ul ul { list-style: '✢ '; }
+
+	li:has(> details:only-child) { list-style: none; }
+	li:has(> details:only-child) > details > summary::before { margin-inline-start: calc(var(--icon-size) * -1); }
 
 	ol { list-style: decimal-leading-zero; }
 	ol ol { list-style: lower-latin; }
