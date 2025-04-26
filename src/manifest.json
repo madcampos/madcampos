@@ -395,7 +395,7 @@
 		"history": [
 			{
 				"url": "/changelog.xml?utm_source=pwa&utm_medium=changelog&utm_campaign=changelog",
-				"type": "application/rss+xml"
+				"type": "application/atom+xml"
 			}
 		]
 	}
