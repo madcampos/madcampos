@@ -105,7 +105,17 @@
 							</header>
 
 							<div class="item-content">
-								<xsl:value-of disable-output-escaping="yes" select="atom:content"/>
+								<xsl:choose>
+									<xsl:when test="atom:summary">
+										<xsl:value-of select="atom:summary"/>
+									</xsl:when>
+									<xsl:when test="atom:content">
+										<xsl:value-of disable-output-escaping="yes" select="atom:content"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<p>No content</p>
+									</xsl:otherwise>
+								</xsl:choose>
 
 								<p><a><xsl:attribute name="href"><xsl:value-of select="atom:id"/></xsl:attribute>Read more...</a></p>
 							</div>

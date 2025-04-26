@@ -1,6 +1,4 @@
 import type { APIRoute, MarkdownInstance } from 'astro';
-
-import rss, { type RSSFeedItem } from '@astrojs/rss';
 import { getImage } from 'astro:assets';
 
 import { BLOG } from '../../constants.js';
@@ -8,10 +6,11 @@ import { listAllPosts } from '../../utils/post.js';
 
 import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
 
-export const GET: APIRoute = async (context) => {
-	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-	const ONE_WEEK_IN_MINUTES = 60 * 24 * 7;
+// TODO: add pagination
+// Ref: https://stackoverflow.com/questions/1301392/pagination-in-feeds-like-atom-and-rss
+// Ref: https://kevincox.ca/2022/05/06/rss-feed-best-practices/
 
+export const GET: APIRoute = async (context) => {
 	const blogImage = await getImage({ src: defaultImage, format: 'png', width: 512, height: 512 });
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -20,73 +19,60 @@ export const GET: APIRoute = async (context) => {
 	baseUrl.protocol = 'https:';
 
 	const blogUrl = new URL(BLOG.url, baseUrl).toString();
+	const feedUrl = new URL('./feed.xml', blogUrl).toString();
 
 	const allPosts = await listAllPosts();
 	const postFiles = import.meta.glob<MarkdownInstance<{}>>('../../content/blog/**/*.md', { eager: true });
+	const items = await Promise.all(allPosts.map(async (post) => {
+		const image = post.data.image ? await getImage({ src: post.data.image, format: 'png' }) : undefined;
+		const imageTag = image ? `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
 
-	return rss({
-		title: "Marco Campos' Blog",
-		description: BLOG.description,
-		site: blogUrl,
-		xmlns: {
-			atom: 'http://www.w3.org/2005/Atom',
-			media: 'http://search.yahoo.com/mrss/',
-			dc: 'http://purl.org/dc/elements/1.1/'
-		},
-		stylesheet: '/blog/feed.xsl',
-		customData: `
-			<language>en-us</language>
-			<atom:link href="${new URL(blogImage.src, baseUrl).toString()}" rel="self" type="application/rss+xml" />
-			<image>
-				<url>${new URL(blogImage.src, baseUrl).toString()}</url>
-				<title>Marco Campos' Blog</title>
-				<description>The letter &quot;m&quot; on a monospaced font, in blue, between curly braces.Below it, a subtext of &quot;Blog&quot; in orange on the lower right corner.</description>
-				<link>${blogUrl}</link>
-				<width>142</width>
-				<height>116</height>
-			</image>
-			<pubDate>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toUTCString()}</pubDate>
-			<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-			<ttl>${ONE_WEEK_IN_MINUTES}</ttl>
-			<generator>Astro</generator>
-			<dc:creator>Marco Campos</dc:creator>
-		`,
-		items: await Promise.all(allPosts.map(async (post) => {
-			let image;
+		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(post.url)) ?? [];
+		const compiledMarkdown = await postMarkdown?.compiledContent() ?? '';
 
-			if (post.data.image) {
-				image = await getImage({ src: post.data.image, format: 'png' });
-			}
+		const postContent = `
+			${imageTag}
+			${compiledMarkdown}
+		`.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
 
-			const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(post.url)) ?? [];
+		const postTags = post.data.tags?.map((tag) => `<category term="${tag}" />`).join('\n') ?? '';
 
-			const item: RSSFeedItem = {
-				title: post.data.title,
-				description: post.data.summary,
-				pubDate: post.data.createdAt,
-				categories: post.data.tags,
-				link: `${blogUrl}${post.url}`,
-				...(postMarkdown && { content: await postMarkdown.compiledContent() }),
-				...(image && {
-					enclosure: {
-						url: new URL(image.src, baseUrl).toString(),
-						type: 'image/png',
-						length: 0
-					},
-					customData: `
-						<media:content
-							url="${new URL(image.src, baseUrl).toString()}"
-							type="image/png"
-							medium="image"
-							height="${image.options.height ?? '512'}"
-							width="${image.options.width ?? '512'}"
-						/>
-						<media:description type="plain">${post.data.imageAlt ?? ''}</media:description>
-					`
-				})
-			};
+		return `<entry>
+			<id>${new URL(post.url, blogUrl).toString()}</id>
+			<title>${post.data.title.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</title>
+			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
+			<published>${post.data.createdAt}</published>
+			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
+			<summary>${post.data.summary.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</summary>
+			<content type="html">${postContent}</content>
+			${postTags}
+		</entry>`;
+	}));
 
-			return item;
-		}))
+	const atomFeed = `<?xml version="1.0" encoding="UTF-8"?>
+		<?xml-stylesheet type="text/xsl" href="${new URL('feed.xsl', new URL(BLOG.url, baseUrl).toString()).toString()}"?>
+		<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
+			<title>Marco Campos' Blog</title>
+			<subtitle>${BLOG.description}</subtitle>
+			<id>${blogUrl}</id>
+			<link rel="alternate" type="text/html" href="${blogUrl}" />
+			<link rel="self" type="application/atom+xml" href="${feedUrl}" />
+			<updated>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toISOString()}</updated>
+			<generator uri="https://astro.build/">Astro</generator>
+			<logo>${new URL(blogImage.src, baseUrl).toString().replaceAll('&', '&amp;')}</logo>
+			<icon>${new URL(blogImage.src, baseUrl).toString().replaceAll('&', '&amp;')}</icon>
+			<author>
+				<name>Marco Campos</name>
+				<email>me@madcampos.dev</email>
+				<uri>https://madcampos.dev/</uri>
+			</author>
+			${items.join('\n')}
+		</feed>
+	`;
+
+	return new Response(atomFeed, {
+		headers: {
+			'Content-Type': 'application/xml; charset=utf-8'
+		}
 	});
 };
