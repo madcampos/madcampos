@@ -4,8 +4,12 @@
 	"version": "3.5.0",
 	"license": "MIT",
 	"type": "module",
-	"engines": { "node": ">=22.0.0" },
-	"volta": { "node": "22.11.0" },
+	"engines": {
+		"node": ">=22.0.0"
+	},
+	"volta": {
+		"node": "22.11.0"
+	},
 	"scripts": {
 		"prepare": "husky",
 		"postinstall": "astro sync",
@@ -21,7 +25,6 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/rss": "^4.0.11",
 		"@astrojs/sitemap": "^3.3.1",
 		"@iconify-json/brandico": "^1.2.2",
 		"@iconify-json/fa6-brands": "^1.2.5",
@@ -61,7 +64,9 @@
 		"object.fromentries": "npm:@nolyfill/object.fromentries@^1",
 		"object.values": "npm:@nolyfill/object.values@^1",
 		"string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1",
-		"yaml-language-server": { "prettier": ">=2.8.7" }
+		"yaml-language-server": {
+			"prettier": ">=2.8.7"
+		}
 	},
 	"dependencies": {
 		"inapp-spy": "5.0.0"
