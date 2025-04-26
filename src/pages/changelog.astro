@@ -5,10 +5,13 @@ import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
-const changelogs = await Promise.all((await getCollection('changelog')).map(async ({ render, data }) => ({
-	title: data.versionName ? `${data.versionName} - ${formatter.format(data.date)}` : formatter.format(data.date),
-	changelog: await render()
+const changelogs = await Promise.all((await getCollection('changelog')).map(async ({ render, id, data }) => ({
+	title: data.versionName ? `${id} - ${data.versionName}` : id,
+	date: data.date,
+	Content: (await render()).Content
 })));
+
+console.log(changelogs);
 ---
 
 <InternalPageLayout
@@ -28,12 +31,13 @@ const changelogs = await Promise.all((await getCollection('changelog')).map(asyn
 	<Fragment slot="header">Changelog</Fragment>
 
 	{
-		changelogs.map(({ title, changelog }) => (
+		changelogs.map(({ date, title, Content }) => (
 			<article>
 				<header>
 					<h2>{title}</h2>
+					<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
 				</header>
-				<Fragment set:html={changelog} />
+				<Content />
 			</article>
 		))
 	}
