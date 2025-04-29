@@ -3,16 +3,14 @@ import Logo from '../components/Logo/index.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 
+import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
+
 import '../assets/css/pages/todo.css';
 
 interface Task {
 	isDone: boolean;
 	text: string;
 	children?: Task[];
-}
-
-function formatText(text: string) {
-	return text.replaceAll(/\[(?<text>.+?)\]\((?<url>.+?)\)/giu, '<a href="$<url>">$<text></a>');
 }
 
 function renderTask(task: Task) {
@@ -37,7 +35,7 @@ function renderTask(task: Task) {
 					aria-labelledby="label-${taskId}"
 					${task.isDone ? 'checked' : ''}
 				/>
-				<span>${formatText(task.text)}</span>
+				<span>${inlineMarkdownRender(escapeHtmlTags(task.text))}</span>
 			</label>
 			${childTasks}
 		</li>

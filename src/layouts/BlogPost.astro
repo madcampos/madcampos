@@ -2,6 +2,7 @@
 import type { RelatedPost } from '../utils/post';
 
 import { BLOG, BLOG_TAGS } from '../constants.js';
+import { inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 
 import '../assets/css/pages/blog-post.css';
@@ -57,8 +58,8 @@ const formatUpdateDate = (date: Date) =>
 <BaseLayout
 	htmlTitle={[title, 'Blog', 'Marco Campos']}
 	{title}
-	description={summary}
 	{tags}
+	description={inlineMarkdownStrip(summary)}
 	url={postUrl}
 	image={image?.src}
 	{imageAlt}

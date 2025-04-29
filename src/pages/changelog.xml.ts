@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 
 import defaultImage from '../assets/images/logo/logo-micro.png';
 import { BLOG } from '../constants.ts';
+import { escapeHtmlTags } from '../utils/markdown.ts';
 
 export const GET: APIRoute = async (context) => {
 	const siteImage = await getImage({ src: defaultImage, format: 'png', width: 512, height: 512 });
@@ -21,11 +22,11 @@ export const GET: APIRoute = async (context) => {
 	const items = await Promise.all(allLogs.map(async (changelog) => {
 		const [, changelogMarkdown] = Object.entries(changelogFiles).find(([filePath]) => filePath.includes(changelog.id)) ?? [];
 		const compiledMarkdown = await changelogMarkdown?.compiledContent() ?? '';
-		const changelogContent = compiledMarkdown.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
+		const changelogContent = escapeHtmlTags(compiledMarkdown);
 
 		return `<entry>
 			<id>${new URL(`#${changelog.slug}`, changelogUrl).toString()}</id>
-			<title>${changelog.id}${changelog.data.versionName ? ` - ${changelog.data.versionName}` : ''}</title>
+			<title>${changelog.id}${changelog.data.versionName ? ` - ${escapeHtmlTags(changelog.data.versionName)}` : ''}</title>
 			<updated>${changelog.data.date.toISOString()}</updated>
 			<published>${changelog.data.date.toISOString()}</published>
 			<link rel="alternate" type="text/html" href="${new URL(`#${changelog.slug}`, changelogUrl).toString()}" />
@@ -43,8 +44,8 @@ export const GET: APIRoute = async (context) => {
 			<link rel="self" type="application/atom+xml" href="${feedUrl}" />
 			<updated>${new Date(allLogs[0]?.data.date ?? new Date()).toISOString()}</updated>
 			<generator uri="https://astro.build/">Astro</generator>
-			<logo>${new URL(siteImage.src, baseUrl).toString().replaceAll('&', '&amp;')}</logo>
-			<icon>${new URL(siteImage.src, baseUrl).toString().replaceAll('&', '&amp;')}</icon>
+			<logo>${escapeHtmlTags(new URL(siteImage.src, baseUrl).toString())}</logo>
+			<icon>${escapeHtmlTags(new URL(siteImage.src, baseUrl).toString())}</icon>
 			<author>
 				<name>Marco Campos</name>
 				<email>me@madcampos.dev</email>

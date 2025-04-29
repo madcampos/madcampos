@@ -2,6 +2,7 @@ import type { APIRoute, MarkdownInstance } from 'astro';
 import { getImage } from 'astro:assets';
 
 import { BLOG } from '../../constants.js';
+import { escapeHtmlTags } from '../../utils/markdown.js';
 import { listAllPosts } from '../../utils/post.js';
 
 import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
@@ -30,20 +31,20 @@ export const GET: APIRoute = async (context) => {
 		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(post.url)) ?? [];
 		const compiledMarkdown = await postMarkdown?.compiledContent() ?? '';
 
-		const postContent = `
+		const postContent = escapeHtmlTags(`
 			${imageTag}
 			${compiledMarkdown}
-		`.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
+		`);
 
 		const postTags = post.data.tags?.map((tag) => `<category term="${tag}" />`).join('\n') ?? '';
 
 		return `<entry>
 			<id>${new URL(post.url, blogUrl).toString()}</id>
-			<title>${post.data.title.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</title>
+			<title>${escapeHtmlTags(post.data.title)}</title>
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
 			<published>${post.data.createdAt}</published>
 			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
-			<summary>${post.data.summary.replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</summary>
+			<summary>${escapeHtmlTags(post.data.summary)}</summary>
 			<content type="html">${postContent}</content>
 			${postTags}
 		</entry>`;
@@ -59,8 +60,8 @@ export const GET: APIRoute = async (context) => {
 			<link rel="self" type="application/atom+xml" href="${feedUrl}" />
 			<updated>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toISOString()}</updated>
 			<generator uri="https://astro.build/">Astro</generator>
-			<logo>${new URL(blogImage.src, baseUrl).toString().replaceAll('&', '&amp;')}</logo>
-			<icon>${new URL(blogImage.src, baseUrl).toString().replaceAll('&', '&amp;')}</icon>
+			<logo>${escapeHtmlTags(new URL(blogImage.src, baseUrl).toString())}</logo>
+			<icon>${escapeHtmlTags(new URL(blogImage.src, baseUrl).toString())}</icon>
 			<author>
 				<name>Marco Campos</name>
 				<email>me@madcampos.dev</email>
