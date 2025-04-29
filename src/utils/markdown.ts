@@ -220,3 +220,39 @@ export function baselineInfo() {
 		});
 	};
 }
+
+export function inlineMarkdownRender(input: string) {
+	const results = input
+		// Bold
+		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '<strong>$1$2</strong>')
+		// Italics
+		.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '<em>$1$2</em>')
+		// Striketrough
+		.replaceAll(/~~(.+?)~~/igu, '<s>$1</s>')
+		// Inline code
+		.replaceAll(/`(.+?)`/igu, '<code>$1</code>')
+		// Links
+		.replaceAll(/\[(.*?)\]\((.*?)\)/igu, '<a href="$2">$1</a>');
+
+	return results;
+}
+
+export function inlineMarkdownStrip(input: string) {
+	const results = input
+		// Bold
+		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '$1$2')
+		// Italics
+		.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '$1$2')
+		// Striketrough
+		.replaceAll(/~~(.+?)~~/igu, '$1')
+		// Inline code
+		.replaceAll(/`(.+?)`/igu, '$1')
+		// Links
+		.replaceAll(/\[(.*?)\]\((.*?)\)/igu, '$1');
+
+	return results;
+}
+
+export function escapeHtmlTags(input: string) {
+	return input.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
+}
