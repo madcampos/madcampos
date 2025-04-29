@@ -1,6 +1,6 @@
 {
   "accentColor": "#0080ff",
-  "theme": "obsidian",
+  "theme": "system",
   "monospaceFontFamily": "Cascadia Code PL,Monaco",
   "baseFontSizeAction": false,
   "translucency": true,
@@ -9,5 +9,6 @@
   "textFontFamily": "Selawik,Skia",
   "showViewHeader": true,
   "nativeMenus": true,
-  "baseFontSize": 18
+  "baseFontSize": 18,
+  "showRibbon": true
 }

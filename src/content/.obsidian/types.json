@@ -6,6 +6,7 @@
 		"createdAt": "datetime",
 		"relatedPosts": "multitext",
 		"imageAlt": "text",
+		"imageRights": "text",
 		"image": "text",
 		"summary": "text",
 		"title": "text",
