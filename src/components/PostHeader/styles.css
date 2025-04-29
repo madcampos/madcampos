@@ -58,9 +58,11 @@
 	#post-header #back-to-blog { grid-area: menu; }
 	#post-header #post-title { grid-area: title; }
 
-	#post-header #hero-image {
+	#post-header #hero-image { grid-area: hero-image; }
+
+	#post-header #hero-image:is(img),
+	#post-header #hero-image img {
 		border-radius: var(--border-radius);
-		grid-area: hero-image;
 		height: 100%;
 		object-fit: contain;
 		overflow: clip;

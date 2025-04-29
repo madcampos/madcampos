@@ -10,6 +10,7 @@ export const blogSchema = ({ image }: SchemaContext) =>
 
 		image: image().optional().describe('Post\'s Main "hero" image path, relative path to the post file.'),
 		imageAlt: zod.string().optional().describe('Main image alt text.'),
+		imageRights: zod.string().optional().describe('Copyright information for the image, if any.'),
 
 		tags: zod.array(zod.string()).optional().describe('Tags for this post.'),
 		relatedPosts: zod.array(zod.string()).optional().describe('Slugs for posts related to this.'),

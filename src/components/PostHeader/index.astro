@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
+import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 import SiteNav from '../SiteNav/index.astro';
 
 import './styles.css';
@@ -15,6 +16,7 @@ interface Props {
 	hasUpdates?: boolean;
 	image?: ImageMetadata;
 	imageAlt?: string;
+	imageRights?: string;
 	readingTime?: number;
 	wordCount?: number;
 	letterCount?: number;
@@ -29,6 +31,7 @@ const {
 	hasUpdates,
 	image,
 	imageAlt,
+	imageRights,
 	readingTime,
 	wordCount
 } = Astro.props;
@@ -43,7 +46,17 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		</a>
 
 		{
-			image && (
+			image && (imageRights ? (
+				<figure id="hero-image">
+					<Image
+						src={image}
+						alt={imageAlt ?? ''}
+						itemprop="image"
+						loading="eager"
+					/>
+					<figcaption><Fragment set:html={inlineMarkdownRender(escapeHtmlTags(imageRights))} /></figcaption>
+				</figure>
+			) : (
 				<Image
 					id="hero-image"
 					src={image}
@@ -51,11 +64,11 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					itemprop="image"
 					loading="eager"
 				/>
-			)
+			))
 		}
 
 		<blockquote id="post-summary" class="p-summary" itemprop="description">
-			<p>{summary}</p>
+			<p><Fragment set:html={inlineMarkdownRender(escapeHtmlTags(summary))} /></p>
 		</blockquote>
 
 		<aside id="post-metadata">

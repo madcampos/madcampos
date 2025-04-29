@@ -19,6 +19,7 @@ interface Props {
 	summary: string;
 	image?: ImageMetadata;
 	imageAlt?: string;
+	imageRights?: string;
 	createdAt: Date;
 	updatedAt?: Date;
 	updates?: { date: Date, changes: string }[];
@@ -30,7 +31,22 @@ interface Props {
 	letterCount?: number;
 }
 
-const { url, title, summary, image, imageAlt, createdAt, updatedAt, updates, tags, readingTime, wordCount, letterCount, relatedPosts } = Astro.props;
+const {
+	url,
+	title,
+	summary,
+	image,
+	imageAlt,
+	imageRights,
+	createdAt,
+	updatedAt,
+	updates,
+	tags,
+	readingTime,
+	wordCount,
+	letterCount,
+	relatedPosts
+} = Astro.props;
 const postUrl = join([BLOG.url, url]);
 const formatUpdateDate = (date: Date) =>
 	new Intl.DateTimeFormat('en-US', {
@@ -63,6 +79,7 @@ const formatUpdateDate = (date: Date) =>
 		{summary}
 		{image}
 		{imageAlt}
+		{imageRights}
 		{createdAt}
 		{updatedAt}
 		hasUpdates={updates && updates.length > 0}
