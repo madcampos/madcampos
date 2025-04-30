@@ -75,6 +75,7 @@ const {
 					image={post.data.image}
 					imageAlt={post.data.imageAlt}
 					tags={post.data.tags}
+					draft={post.data.draft}
 				>
 					<span slot="title">{post.data.title}</span>
 					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.summary))} />
