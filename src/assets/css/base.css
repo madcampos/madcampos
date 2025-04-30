@@ -169,6 +169,13 @@
 		width: clamp(5rem, 50vw, 20rem);
 	}
 
+	*:not(pre) > code {
+		background-color: var(--dark-bg-color);
+		display: inline-block;
+		font-family: var(--code-font-family);
+		padding-inline: var(--spacing-small);
+	}
+
 	.visually-hidden {
 		border: 0;
 		clip: rect(0, 0, 0, 0);

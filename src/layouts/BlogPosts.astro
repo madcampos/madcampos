@@ -8,6 +8,7 @@ import SkipToContent from '../components/SkipToContent/index.astro';
 import BaseLayout from './Base.astro';
 
 import { BLOG } from '../constants.js';
+import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 
 import '../assets/css/pages/blog.css';
@@ -75,7 +76,8 @@ const {
 					imageAlt={post.data.imageAlt}
 					tags={post.data.tags}
 				>
-					<span slot="title">{post.data.title}</span> {post.data.summary}
+					<span slot="title">{post.data.title}</span>
+					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.summary))} />
 				</PostCard>
 			))
 		}

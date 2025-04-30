@@ -2,7 +2,7 @@ import type { APIRoute, MarkdownInstance } from 'astro';
 import { getImage } from 'astro:assets';
 
 import { BLOG } from '../../constants.js';
-import { escapeHtmlTags } from '../../utils/markdown.js';
+import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 import { listAllPosts } from '../../utils/post.js';
 
 import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
@@ -44,7 +44,7 @@ export const GET: APIRoute = async (context) => {
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
 			<published>${post.data.createdAt}</published>
 			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
-			<summary>${escapeHtmlTags(post.data.summary)}</summary>
+			<summary type="html">${inlineMarkdownRender(escapeHtmlTags(post.data.summary))}</summary>
 			<content type="html">${postContent}</content>
 			${postTags}
 		</entry>`;

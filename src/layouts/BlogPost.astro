@@ -2,7 +2,7 @@
 import type { RelatedPost } from '../utils/post';
 
 import { BLOG, BLOG_TAGS } from '../constants.js';
-import { inlineMarkdownStrip } from '../utils/markdown.js';
+import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 
 import '../assets/css/pages/blog-post.css';
@@ -168,7 +168,8 @@ const formatUpdateDate = (date: Date) =>
 												image={post.image}
 												imageAlt={post.imageAlt}
 											>
-												<span slot="title">{post.title}</span> {post.summary}
+												<span slot="title">{post.title}</span>
+												<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.summary))} />
 											</PostCardSmall>
 										</li>
 									))

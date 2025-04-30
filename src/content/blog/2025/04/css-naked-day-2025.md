@@ -1,6 +1,6 @@
 ---
 title: "CSS Naked Day: 2025"
-summary: Show off your <body>
+summary: Show off your `<body>`
 image: ./assets/css-naked-day.jpg
 imageAlt: A drawing of an old style ad, with a girl looking back at a dog, the dog is pulling the girl's bikini bottom. Overlaid on the girl's butt is the word "CSS".
 createdAt: 2025-04-07T23:22:57.310-04:00
