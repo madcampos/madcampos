@@ -1,8 +1,6 @@
 @layer base {
 	:root { interpolate-size: allow-keywords; }
 
-	:not(:defined) { display: none; }
-
 	html {
 		box-sizing: border-box;
 		color: var(--text-color);
