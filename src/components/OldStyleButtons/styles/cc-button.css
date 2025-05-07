@@ -1,0 +1,20 @@
+button text {
+	font-size: 7px;
+	font-weight: bold;
+}
+
+button text tspan:nth-child(2) {
+	fill: darkorchid;
+	font-family: var(--button-font-oldstyle);
+	font-size: 12px;
+}
+
+button #button-base { fill: whitesmoke; }
+
+button:hover #button-base { fill: darkorchid; }
+button:hover text { fill: pink; }
+button:hover text tspan:nth-child(2) { fill: white; }
+
+button:active use[href='#button-base'] { fill: dimgray; }
+button:active text { fill: white; }
+button:active text tspan:nth-child(2) { fill: hotpink; }

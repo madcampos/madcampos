@@ -1,0 +1,28 @@
+@keyframes js {
+	from { --opacity: 1; }
+	to { --opacity: 0; }
+}
+
+button { animation: 3s steps(2) infinite; }
+button #button-base { fill: tan; }
+button text {
+	font-family: var(--button-font-didone);
+	font-size: 7px;
+	font-weight: bold;
+}
+
+button tspan:nth-child(1) {
+	fill: brown;
+	font-family: var(--button-font-slab);
+	font-size: 10px;
+}
+
+button #button-warning-icon { opacity: var(--opacity); }
+
+button:hover #button-base { fill: peru; }
+
+button:active #button-base { fill: maroon; }
+button:active text { fill: tan; }
+button:active tspan:nth-child(1) { fill: white; }
+
+@media (prefers-reduced-motion: no-preference) { button { animation-name: js; } }

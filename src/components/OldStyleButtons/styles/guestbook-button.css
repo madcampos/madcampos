@@ -1,0 +1,23 @@
+button { animation: 3s ease-in-out infinite; }
+button text {
+	fill: black;
+	font-size: 9px;
+	font-weight: bold;
+}
+
+button .emphasis-text {
+	fill: dodgerblue;
+	font-size: 10px;
+	transform: rotate(var(--rotate));
+	transform-origin: 50% 50%;
+}
+
+button svg { fill: dodgerblue; }
+
+button:hover .emphasis-text { fill: orangered; }
+button:hover svg { fill: orangered; }
+
+button:active .emphasis-text { fill: magenta; }
+button:active svg { fill: magenta; }
+
+@media (prefers-reduced-motion: no-preference) { button { animation-name: swing; } }

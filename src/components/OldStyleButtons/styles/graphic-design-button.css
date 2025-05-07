@@ -1,0 +1,11 @@
+button {
+	--rainbow-color: lime;
+	animation: 3s steps(6) infinite;
+}
+button #button-base { fill: url(#graphic-design-gradient); }
+button text {
+	fill: var(--rainbow-color);
+	font-family: var(--button-font-papyrus);
+}
+
+@media (prefers-reduced-motion: no-preference) { button { animation-name: rainbow; } }

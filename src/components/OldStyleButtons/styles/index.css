@@ -1,0 +1,125 @@
+@layer {
+	@property --rotate {
+		inherits: true;
+		initial-value: 0deg;
+		syntax: '<angle>';
+	}
+
+	@keyframes rainbow {
+		0% {
+			--rainbow-color: red;
+			--rainbow-text-color: white;
+		}
+		16.66% {
+			--rainbow-color: orange;
+			--rainbow-text-color: black;
+		}
+		33.33% {
+			--rainbow-color: yellow;
+			--rainbow-text-color: black;
+		}
+		50% {
+			--rainbow-color: green;
+			--rainbow-text-color: white;
+		}
+		66.66% {
+			--rainbow-color: blue;
+			--rainbow-text-color: white;
+		}
+		83.33% {
+			--rainbow-color: indigo;
+			--rainbow-text-color: white;
+		}
+		100% {
+			--rainbow-color: red;
+			--rainbow-text-color: white;
+		}
+	}
+
+	@keyframes swing {
+		20% { --rotate: 10deg; }
+
+		40% { --rotate: -10deg; }
+
+		60% { --rotate: 5deg; }
+
+		80% { --rotate: -5deg; }
+
+		100% { --rotate: 0deg; }
+	}
+
+	:host { display: block; }
+
+	button {
+		--button-font-oldstyle: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+		--button-font-sans: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+		--button-font-didone: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
+		--button-font-hand: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, cursive;
+		--button-font-papyrus: 'Papyrus', cursive;
+		--button-font-slab: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+		--button-font-humanist: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+		--button-font-ui: system-ui, sans-serif;
+		aspect-ratio: 88 / 31;
+		background: none;
+		border: none;
+		cursor: pointer;
+		height: 2.5rem;
+		margin: var(--spacing-small);
+		padding: 0;
+	}
+
+	button text {
+		font-family: var(--button-font-humanist);
+		font-size: 8px;
+		text-anchor: middle;
+	}
+
+	button .hidden-text {
+		fill: none;
+		font-size: 1px;
+		pointer-events: none;
+		stroke: none;
+		user-select: none;
+	}
+
+	button .button-badge-bg { fill: red; }
+	button .button-badge-text {
+		fill: white;
+		font-family: var(--button-font-humanist);
+		font-size: 7px;
+		font-weight: 900;
+		text-anchor: start;
+		transform: rotate(-90deg);
+		transform-origin: top left;
+	}
+
+	button .emphasis-text {
+		fill: red;
+		font-family: var(--button-font-hand);
+		font-size: 9px;
+		font-weight: bold;
+		paint-order: stroke;
+		stroke: #d3d3d3;
+	}
+
+	button svg {
+		height: 100%;
+		width: 100%;
+	}
+
+	button #button-text-path {
+		stroke-dasharray: 0 7 16 100;
+		stroke-dashoffset: 2;
+		transform: translate(0.5px, 1.5px);
+	}
+
+	button #button-base { fill: #d3d3d3; }
+	button :is(#button-border-up, #button-border-left) { fill: white; }
+	button :is(#button-border-down, #button-border-right) { fill: black; }
+
+	button:hover #button-base { fill: silver; }
+	button:hover .emphasis-text { stroke: silver; }
+
+	button:active :is(#button-border-up, #button-border-left) { fill: black; }
+	button:active :is(#button-border-down, #button-border-right) { fill: white; }
+}

@@ -33,6 +33,7 @@
 	footer {
 		align-items: center;
 		display: flex;
+		gap: var(--spacing-medium);
 		justify-content: end;
 		padding: var(--spacing-large);
 	}
@@ -47,5 +48,7 @@
 			height: clamp(var(--min-width), 60vw, var(--medium-width));
 			width: clamp(var(--min-width), 60vw, var(--medium-width));
 		}
+
+		footer { flex-direction: column; }
 	}
 }

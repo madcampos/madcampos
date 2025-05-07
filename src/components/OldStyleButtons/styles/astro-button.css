@@ -1,0 +1,11 @@
+button #button-text-path {
+	stroke: deeppink;
+	stroke-dasharray: 0 6 28 100;
+}
+
+button .emphasis-text {
+	fill: deeppink;
+	font-size: 11px;
+}
+
+button #button-astro-icon-square { fill: url(#netscape-gradient); }

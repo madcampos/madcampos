@@ -1,0 +1,25 @@
+button #button-base { fill: white; }
+button text {
+	font-size: 8.5px;
+	font-weight: bold;
+	text-anchor: end;
+}
+
+button #icon-php text:nth-of-type(2) {
+	dominant-baseline: middle;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bold;
+	paint-order: stroke;
+	stroke: white;
+	text-anchor: middle;
+}
+
+button:hover #button-base { fill: dimgray; }
+button:hover text { fill: white; }
+button:hover #icon-php text:nth-of-type(2) { stroke: black; }
+
+button:active #button-base { fill: black; }
+button:active text { fill: white; }
+button:active #icon-php text:nth-of-type(2) { stroke: black; }

@@ -1,0 +1,11 @@
+button #button-text-path { stroke: red; }
+button .emphasis-text { fill: red; }
+button .button-badge-bg { fill: red; }
+
+button:hover #button-text-path { stroke: green; }
+button:hover .emphasis-text { fill: green; }
+button:hover .button-badge-bg { fill: green; }
+
+button:active #button-text-path { stroke: blue; }
+button:active .emphasis-text { fill: blue; }
+button:active .button-badge-bg { fill: blue; }

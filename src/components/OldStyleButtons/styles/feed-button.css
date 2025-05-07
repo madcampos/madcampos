@@ -1,0 +1,18 @@
+button #button-base { fill: url('#button-feed-gradient'); }
+button text {
+	fill: white;
+	font-weight: bold;
+}
+
+button #button-text-path { stroke: maroon; }
+button .button-badge-bg { fill: maroon; }
+button .emphasis-text {
+	fill: maroon;
+	stroke: none;
+}
+
+button:hover #button-feed-gradient stop:nth-child(1) { stop-color: orangered; }
+button:hover #button-feed-gradient stop:nth-child(2) { stop-color: orange; }
+
+button:active #button-feed-gradient stop:nth-child(1) { stop-color: firebrick; }
+button:active #button-feed-gradient stop:nth-child(2) { stop-color: orange; }

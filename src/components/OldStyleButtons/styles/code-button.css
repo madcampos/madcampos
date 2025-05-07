@@ -1,0 +1,14 @@
+button #button-base { fill: dodgerblue; }
+button #button-vscode-bg { fill: mediumblue; }
+button text {
+	dominand-baseline: hanging;
+	fill: white;
+	font-family: var(--button-font-ui);
+	text-anchor: start;
+}
+
+button:hover #button-base { fill: mediumblue; }
+button:hover #button-vscode-bg { fill: dodgerblue; }
+
+button:active #button-base { fill: royalblue; }
+button:active #button-vscode-bg { fill: royalblue; }

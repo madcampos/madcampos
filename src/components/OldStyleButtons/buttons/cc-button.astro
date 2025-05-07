@@ -1,0 +1,27 @@
+---
+import buttonStyles from '../styles/cc-button.css?url';
+import baseStyles from '../styles/index.css?url';
+---
+
+<old-style-button>
+	<template shadowrootmode="open">
+		<link rel="stylesheet" href={baseStyles} />
+		<link rel="stylesheet" href={buttonStyles} />
+		<button>
+			<svg viewBox="0 0 88 31">
+				<path id="button-base" d="M0 0h88v31H0z" />
+
+				<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+				<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+				<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+				<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+				<text>
+					<tspan x="50%" y="8">PAGE UNDER</tspan>
+					<tspan x="50%" y="19">CC BY-NC-SA</tspan>
+					<tspan x="50%" y="27">FREE TO SHARE</tspan>
+				</text>
+			</svg>
+		</button>
+	</template>
+</old-style-button>
