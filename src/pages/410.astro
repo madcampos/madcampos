@@ -1,0 +1,31 @@
+---
+import GlitchLogo from '../components/GlitchLogo/index.astro';
+import SiteNav from '../components/SiteNav/index.astro';
+import SkipToContent from '../components/SkipToContent/index.astro';
+import BaseLayout from '../layouts/Base.astro';
+
+import '../assets/css/pages/404.css';
+---
+<BaseLayout
+	htmlTitle={['Dead end']}
+	title="Dead end"
+	description="Dead end"
+	url="/410"
+	tags={['Dead End', 'Error']}
+>
+	<SkipToContent slot="header" />
+	<header slot="header">
+		<SiteNav />
+		<div>
+			<GlitchLogo />
+		</div>
+		<h1>410 - Begone, fool!</h1>
+	</header>
+
+	<div id="contents">
+		<p>This page should not exist, you are here by mistake.</p>
+		<p>
+			<a href="/">Go back home</a>
+		</p>
+	</div>
+</BaseLayout>
