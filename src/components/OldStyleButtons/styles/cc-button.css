@@ -15,6 +15,17 @@ button:hover #button-base { fill: darkorchid; }
 button:hover text { fill: pink; }
 button:hover text tspan:nth-child(2) { fill: white; }
 
-button:active use[href='#button-base'] { fill: dimgray; }
+button:active #button-base { fill: dimgray; }
 button:active text { fill: white; }
 button:active text tspan:nth-child(2) { fill: hotpink; }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button :is(text, text tspan:nth-child(2)) { fill: var(--bg-color); }
+	button #button-base { fill: var(--text-color); }
+
+	button:hover #button-base { fill: var(--bg-color); }
+	button:hover :is(text, text tspan:nth-child(2)) { fill: var(--text-color); }
+
+	button:active #button-base { fill: var(--dark-bg-color); }
+	button:active :is(text, text tspan:nth-child(2)) { fill: var(--theme-color); }
+}

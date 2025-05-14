@@ -9,3 +9,18 @@ button:hover .button-badge-bg { fill: green; }
 button:active #button-text-path { stroke: blue; }
 button:active .emphasis-text { fill: blue; }
 button:active .button-badge-bg { fill: blue; }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button #ie-logo { fill: var(--theme-color); }
+	button #button-text-path { stroke: var(--theme-color); }
+	button .emphasis-text { fill: var(--theme-color); }
+	button .button-badge-bg { fill: var(--theme-color); }
+
+	button:hover #button-text-path { stroke: var(--text-color); }
+	button:hover .emphasis-text { fill: var(--text-color); }
+	button:hover .button-badge-bg { fill: var(--text-color); }
+
+	button:active #button-text-path { stroke: var(--accent-color); }
+	button:active .emphasis-text { fill: var(--accent-color); }
+	button:active .button-badge-bg { fill: var(--accent-color); }
+}

@@ -9,3 +9,9 @@ button text {
 }
 
 @media (prefers-reduced-motion: no-preference) { button { animation-name: rainbow; } }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button { animation-name: none; }
+	button #button-base { fill: var(--accent-color); }
+	button text { fill: var(--dark-bg-color); }
+}

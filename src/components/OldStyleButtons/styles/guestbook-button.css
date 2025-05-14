@@ -21,3 +21,16 @@ button:active .emphasis-text { fill: magenta; }
 button:active svg { fill: magenta; }
 
 @media (prefers-reduced-motion: no-preference) { button { animation-name: swing; } }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button { animation-name: none; }
+	button text { fill: var(--text-color); }
+	button .emphasis-text { fill: var(--theme-color); }
+	button svg { fill: var(--theme-color); }
+
+	button:hover .emphasis-text { fill: var(--accent-color); }
+	button:hover svg { fill: var(--accent-color); }
+
+	button:active .emphasis-text { fill: var(--accent-color); }
+	button:active svg { fill: var(--accent-color); }
+}

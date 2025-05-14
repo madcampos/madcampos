@@ -63,7 +63,8 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		height: 2.5rem;
+		display: inline-block;
+		height: 2rem;
 		margin: var(--spacing-small);
 		padding: 0;
 	}
@@ -122,4 +123,20 @@
 
 	button:active :is(#button-border-up, #button-border-left) { fill: black; }
 	button:active :is(#button-border-down, #button-border-right) { fill: white; }
+
+	@media (prefers-contrast: more), (forced-colors: active) {
+		button text { fill: var(--text-color); }
+		button #button-base { fill: var(--bg-color); }
+		button #button-text-path { stroke: var(--theme-color); }
+		button .button-badge-bg { fill: var(--text-color); }
+		button .button-badge-text { fill: var(--bg-color); }
+
+		button:hover #button-base { fill: var(--dark-bg-color); }
+		button:hover .emphasis-text { stroke: var(--dark-bg-color); }
+
+		button .emphasis-text {
+			fill: var(--theme-color);
+			stroke: var(--bg-color);
+		}
+	}
 }

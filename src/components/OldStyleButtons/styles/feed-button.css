@@ -16,3 +16,15 @@ button:hover #button-feed-gradient stop:nth-child(2) { stop-color: orange; }
 
 button:active #button-feed-gradient stop:nth-child(1) { stop-color: firebrick; }
 button:active #button-feed-gradient stop:nth-child(2) { stop-color: orange; }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button #button-base { fill: var(--bg-color); }
+	button text { fill: var(--theme-color); }
+
+	button #button-text-path { stroke: var(--text-color); }
+	button .button-badge-bg { fill: var(--text-color); }
+	button .button-badge-text { fill: var(--dark-bg-color); }
+	button .emphasis-text { fill: var(--text-color); }
+	button #rss-icon path { fill: var(--theme-color); }
+	button #rss-icon path:last-child { fill: var(--bg-color); }
+}

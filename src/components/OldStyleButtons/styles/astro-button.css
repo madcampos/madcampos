@@ -9,3 +9,15 @@ button .emphasis-text {
 }
 
 button #button-astro-icon-square { fill: url(#netscape-gradient); }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button #button-text-path { stroke: var(--theme-color); }
+	button .emphasis-text { fill: var(--theme-color); }
+	button #netscape-gradient stop { stop-color: var(--theme-color); }
+	button #astro-icon-fire stop { stop-color: var(--text-color); }
+	button #astro-icon path:last-child { fill: var(--dark-bg-color); }
+	button circle {
+		fill: var(--bg-color);
+		stroke: var(--text-color);
+	}
+}
