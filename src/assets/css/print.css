@@ -44,11 +44,12 @@
 			width: fit-content;
 		}
 
+		a[href^='#']::after { display: none; }
+		a[data-footnote-backref] { display: none; }
 		iframe { display: none; }
-
-		#post-share { display: none !important; }
-
-		#site-nav { display: none !important; }
+		#post-share { display: none; }
+		#site-nav { display: none; }
+		#old-buttons { display: none; }
 
 		#related-posts ul { flex-wrap: wrap; }
 
