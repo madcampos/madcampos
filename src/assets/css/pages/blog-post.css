@@ -54,16 +54,17 @@
 		padding-block: var(--spacing-large);
 	}
 
-	hr {
+	#post-separator {
 		border: none;
 		margin-block: calc(var(--spacing-large) * 2) var(--spacing-large);
 		margin-inline: calc(var(--spacing-large) * 4);
 		overflow: visible;
 		padding-inline-start: calc(var(--button-size) * 0.8);
 		position: relative;
+		width: auto;
 	}
 
-	hr::before {
+	#post-separator::before {
 		background-image: var(--hr-decoration-icon);
 		background-position: center;
 		background-repeat: no-repeat;
@@ -80,7 +81,7 @@
 		width: var(--button-size);
 	}
 
-	hr::after {
+	#post-separator::after {
 		border-top: var(--border-width) var(--border-style) var(--theme-color);
 		content: '';
 		display: block;
