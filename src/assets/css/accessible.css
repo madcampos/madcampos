@@ -83,6 +83,13 @@
 			--secondary-color: CanvasText;
 			--accent-color: CanvasText;
 			--complementary-color: CanvasText;
+			/* Base colors */
+			--text-color: CanvasText;
+			--dark-bg-color: Canvas;
+			--bg-color: var(--dark-bg-color);
+			--border-color: var(--theme-color);
+			--scrollbar-bg: Canvas;
+			--highlight-border-color: var(--theme-color);
 			/* Border */
 			--border-style: solid;
 			/* Icons */
