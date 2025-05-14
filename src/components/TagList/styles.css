@@ -24,7 +24,7 @@
 
 	.tag-list .tag * {
 		background-color: transparent;
-		color: inherit !important;
+		color: inherit;
 		outline: none;
 		position: relative;
 	}
