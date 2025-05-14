@@ -9,6 +9,7 @@ import '../assets/css/pages/blog-post.css';
 import '../assets/css/code.css';
 
 import AuthorCard from '../components/AuthorCard/index.astro';
+import OldButtons from '../components/OldStyleButtons/index.astro';
 import PostCardSmall from '../components/PostCardSmall/index.astro';
 import PostHeader from '../components/PostHeader/index.astro';
 import SkipToContent from '../components/SkipToContent/index.astro';
@@ -119,7 +120,7 @@ const formatUpdateDate = (date: Date) =>
 		<slot></slot>
 	</article>
 
-	<hr />
+	<hr id="post-separator" />
 
 	<Fragment slot="footer">
 		<AuthorCard author="marco" />
@@ -190,4 +191,6 @@ const formatUpdateDate = (date: Date) =>
 			</small>
 		</aside>
 	</Fragment>
+
+	<OldButtons slot="footer" />
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import type { Post } from '../utils/post';
 
+import OldButtons from '../components/OldStyleButtons/index.astro';
 import PageHeader from '../components/PageHeader/index.astro';
 import Pagination from '../components/Pagination/index.astro';
 import PostCard from '../components/PostCard/index.astro';
@@ -96,4 +97,6 @@ const {
 		{total}
 		{size}
 	/>
+
+	<OldButtons slot="footer" />
 </BaseLayout>

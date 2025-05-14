@@ -1,6 +1,7 @@
 ---
 import '../assets/css/pages/internal-page.css';
 
+import OldButtons from '../components/OldStyleButtons/index.astro';
 import PageHeader from '../components/PageHeader/index.astro';
 import SkipToContent from '../components/SkipToContent/index.astro';
 import BaseLayout from './Base.astro';
@@ -57,4 +58,5 @@ const {
 	</div>
 
 	<slot name="footer" slot="footer"></slot>
+	<OldButtons slot="footer" />
 </BaseLayout>

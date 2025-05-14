@@ -6,6 +6,7 @@ import { join } from '../../../utils/path.js';
 
 import AuthorCard from '../../../components/AuthorCard/index.astro';
 import Logo from '../../../components/Logo/index.astro';
+import OldButtons from '../../../components/OldStyleButtons/index.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
 import BaseLayout from '../../../layouts/Base.astro';
 
@@ -56,4 +57,6 @@ const authors = await getCollection('authors');
 			}
 		</ul>
 	</div>
+
+	<OldButtons slot="footer" />
 </BaseLayout>

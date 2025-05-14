@@ -6,6 +6,7 @@ import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
 
 import Avatar from '../../../components/Avatar/index.astro';
 import Logo from '../../../components/Logo/index.astro';
+import OldButtons from '../../../components/OldStyleButtons/index.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
 import BaseLayout from '../../../layouts/Base.astro';
 
@@ -62,4 +63,6 @@ const { Content } = await render();
 			<Content />
 		</article>
 	</div>
+
+	<OldButtons slot="footer" />
 </BaseLayout>
