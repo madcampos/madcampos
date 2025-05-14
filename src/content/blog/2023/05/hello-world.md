@@ -105,7 +105,7 @@ So, the "plugin" does the following steps:
 
 The result is this blog that you, dear reader, is reading right now. It is not perfect, but it is a good MVP to be up and running and improve as I go.
 
-The code can be viewed on GitHub on the [`blog/index.ts`](https://github.com/madcampos/madcampos.github.io/blob/main/build/blog/index.ts) file.
+The code can be viewed on GitHub on the [`blog/index.ts`](https://github.com/madcampos/madcampos/blob/main/build/blog/index.ts) file.
 
 ## Next Steps
 

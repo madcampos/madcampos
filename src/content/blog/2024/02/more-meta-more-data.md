@@ -43,7 +43,7 @@ If you want to build something that resembles a blog, a series of pages, or even
 
 It can even be driven by a template that fetches data from a database to construct an HTML. WordPress has been doing it in PHP or all things for over 20 years.
 
-Here is an example of how this works in [this blog](https://github.com/madcampos/madcampos.github.io/blob/2e116b253f27944738d67ee9058e4002c9650cd3/src/components/HtmlHead.astro):
+Here is an example of how this works in [this blog](https://github.com/madcampos/madcampos/blob/2e116b253f27944738d67ee9058e4002c9650cd3/src/components/HtmlHead.astro):
 
 ```astro
 ---

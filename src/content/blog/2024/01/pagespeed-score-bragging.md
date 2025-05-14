@@ -94,7 +94,7 @@ _BUT_... I'm cheating here as my site is built with nice react-y components usin
 
 It is interesting to think about how the site came to be. Before using astro for building it the first attempt of producing a site was in plain HTML and using [Vite](https://vitejs.dev/). It still didn't have any JavaScript and was blazingly fast.
 
-The whole philosophy on how I approach building things is to keep it simple and use the tools available in the best way possible. That means my [first markup](https://github.com/madcampos/madcampos.github.io/blob/f6193b99dec205c840a92088ddb463ae0c6b486b/src/index.html) was already quite accessible.
+The whole philosophy on how I approach building things is to keep it simple and use the tools available in the best way possible. That means my [first markup](https://github.com/madcampos/madcampos/blob/f6193b99dec205c840a92088ddb463ae0c6b486b/src/index.html) was already quite accessible.
 
 ## #Brag
 

@@ -32,7 +32,7 @@ The problem with HTML tags and, by extension the problem with language in genera
 
 ## Anatomy of an Article Page
 
-Let's start with the full markup for the article page and then break it down to it's parts. I'm only showing the `body` here for brevity, but you can see the full template in the [GitHub repo](https://github.com/madcampos/madcampos.github.io/blob/main/src/templates/post.html).
+Let's start with the full markup for the article page and then break it down to it's parts. I'm only showing the `body` here for brevity, but you can see the full template in the [GitHub repo](https://github.com/madcampos/madcampos/blob/main/src/templates/post.html).
 
 ```html
 <body>

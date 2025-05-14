@@ -80,7 +80,7 @@ But the problem was still in the back of my head.
 
 ## RSS Wars: The Feed Strikes Back
 
-My final solution was pretty hacky. Here is the code if you are curious: https://github.com/madcampos/madcampos.github.io/blob/main/src/pages/blog/feed.xml.ts#L27-L38
+My final solution was pretty hacky. Here is the code if you are curious: https://github.com/madcampos/madcampos/blob/main/src/pages/blog/feed.xml.ts#L27-L38
 
 In the end I had to still use the `fs.stat` call, but have to do some processing on the file path so it can point to the correct place where the file is and be found.
 
