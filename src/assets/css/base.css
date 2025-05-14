@@ -176,6 +176,12 @@
 		padding-inline: var(--spacing-small);
 	}
 
+	hr {
+		border: none;
+		border-block-start: var(--theme-color) var(--border-style) var(--border-width);
+		width: clamp(5rem, 70vw, 50rem);
+	}
+
 	.visually-hidden {
 		border: 0;
 		clip: rect(0, 0, 0, 0);
