@@ -1,8 +1,13 @@
 @layer pages {
-	main, #post-footer {
+	main, body > footer {
 		margin-inline: auto;
 		max-width: var(--max-width);
 		width: 100%;
+	}
+
+	body > footer {
+		margin-block-end: var(--spacing-large);
+		padding: var(--spacing-large);
 	}
 
 	#post-contents {
@@ -79,11 +84,6 @@
 		border-top: var(--border-width) var(--border-style) var(--theme-color);
 		content: '';
 		display: block;
-	}
-
-	#post-footer {
-		margin-block-end: var(--spacing-large);
-		padding: var(--spacing-large);
 	}
 
 	#related-posts { margin-block: var(--spacing-large); }
