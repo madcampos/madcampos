@@ -10,8 +10,6 @@ const changelogs = await Promise.all((await getCollection('changelog')).map(asyn
 	date: data.date,
 	Content: (await render()).Content
 })));
-
-console.log(changelogs);
 ---
 
 <InternalPageLayout

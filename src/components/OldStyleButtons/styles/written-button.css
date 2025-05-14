@@ -1,6 +1,6 @@
 button #button-base { fill: white; }
 button text {
-	dominand-baseline: hanging;
+	dominant-baseline: hanging;
 	font-family: var(--button-font-ui);
 	text-anchor: start;
 }

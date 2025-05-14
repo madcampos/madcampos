@@ -1,7 +1,7 @@
 button #button-base { fill: dodgerblue; }
 button #button-vscode-bg { fill: mediumblue; }
 button text {
-	dominand-baseline: hanging;
+	dominant-baseline: hanging;
 	fill: white;
 	font-family: var(--button-font-ui);
 	text-anchor: start;
