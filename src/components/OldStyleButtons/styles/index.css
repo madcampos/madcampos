@@ -59,14 +59,26 @@
 		--button-font-slab: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
 		--button-font-humanist: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 		--button-font-ui: system-ui, sans-serif;
-		aspect-ratio: 88 / 31;
 		background: none;
-		border: none;
+		border: var(--old-button-border);
+		border-radius: var(--old-button-border-radius);
 		cursor: pointer;
-		display: inline-block;
-		height: 2rem;
+		display: inline-flex;
+		height: fit-content;
 		margin: var(--spacing-small);
+		overflow: hidden;
 		padding: 0;
+		position: relative;
+		width: fit-content;
+	}
+
+	button::after {
+		background: var(--old-button-tint);
+		content: '';
+		display: block;
+		inset: 0;
+		mix-blend-mode: var(--old-button-blend-mode);
+		position: absolute;
 	}
 
 	button text {
@@ -104,8 +116,8 @@
 	}
 
 	button svg {
-		height: 100%;
-		width: 100%;
+		aspect-ratio: 88 / 31;
+		height: 2rem;
 	}
 
 	button #button-text-path {
@@ -115,8 +127,17 @@
 	}
 
 	button #button-base { fill: #d3d3d3; }
+	button :is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility); }
 	button :is(#button-border-up, #button-border-left) { fill: white; }
 	button :is(#button-border-down, #button-border-right) { fill: black; }
+
+	button:focus-visible {
+		background-color: var(--bg-color);
+		border-radius: var(--border-radius);
+		color: var(--text-color);
+		outline: var(--theme-color) var(--border-style) var(--border-width);
+		outline-offset: var(--spacing-small);
+	}
 
 	button:hover #button-base { fill: silver; }
 	button:hover .emphasis-text { stroke: silver; }
