@@ -1,0 +1,23 @@
+# Moved to subdomain
+/sdrlog /410 410
+/sdrlog/ /410 410
+
+# Retired
+/tojs-styleguide /410 410
+/tojs-styleguide/ /410 410
+
+# Wrong url, never existed
+/blog/2023/06/07/tabs-web-component /410 410
+/blog/2023/06/07/tabs-web-component/ /410 410
+
+# Permanent redirects
+/accessibility /accessibility/ 308
+/blog/2023/05/hello-world /blog/2023/05/hello-world/ 308
+/blog/2024/02/metadata-for-the-masses /blog/2024/02/metadata-for-the-masses/ 308
+/blog/2024/06/web-components-a11y /blog/2024/06/web-components-a11y/ 308
+
+# Permanent redirects
+/blog/tags/:tag /blog/tags/:tag/ 308
+
+# Test url, doesn't exist anymore
+/blog/tags/:tag/1/ /410 410
