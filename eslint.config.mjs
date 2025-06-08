@@ -11,7 +11,7 @@ const rules = {
 	'arrow-body-style': 'error',
 	'block-scoped-var': 'warn',
 	'camelcase': 'warn',
-	'capitalized-comments': 'warn',
+	'capitalized-comments': 'off',
 	'class-methods-use-this': 'off',
 	'complexity': 'error',
 	'consistent-return': 'off',
