@@ -1,6 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
-
 import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
 import { join } from '../../../utils/path.js';
 
@@ -14,8 +12,9 @@ import '../../../assets/css/pages/internal-page.css';
 import '../../../assets/css/pages/authors.css';
 
 import blogSocialImage from '../../../assets/images/social/social-blog.png';
+import { listAllAuthors } from '../../../utils/authors.js';
 
-const authors = await getCollection('authors');
+const authors = await listAllAuthors();
 ---
 <BaseLayout
 	htmlTitle={BLOG_AUTHOR.title}
@@ -46,11 +45,11 @@ const authors = await getCollection('authors');
 	<div id="contents">
 		<ul id="author-list">
 			{
-				authors.map(({ slug }) => (
+				authors.map(({ id }) => (
 					<li itemprop="itemListElement">
 						<AuthorCard
-							author={slug}
-							url={join([BLOG_AUTHOR.url, slug])}
+							author={id}
+							url={join([BLOG_AUTHOR.url, id])}
 						/>
 					</li>
 				))

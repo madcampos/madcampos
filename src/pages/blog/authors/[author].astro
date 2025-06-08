@@ -18,8 +18,8 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const getStaticPaths = (async () =>
 	(await listAllAuthors()).map((author) => ({
-		params: { author: author.slug },
-		props: { ...author.data, render: author.render, slug: author.slug }
+		params: { author: author.id },
+		props: { ...author.data, render: author.render, id: author.id }
 	}))) satisfies GetStaticPaths;
 
 const {

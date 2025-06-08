@@ -1,4 +1,7 @@
-import { type CollectionEntry, getCollection } from 'astro:content';
+import type { MarkdownInstance } from 'astro';
+import { getImage } from 'astro:assets';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { escapeHtmlTags } from './markdown.ts';
 import { join } from './path.js';
 
 export type PostSorting = 'ascending' | 'descending';
@@ -6,7 +9,7 @@ export type PostSorting = 'ascending' | 'descending';
 export const MAX_POSTS_PER_PAGE = 10;
 
 export interface RelatedPost {
-	slug: string;
+	id: string;
 	url: string;
 	title: string;
 	summary: string;
@@ -15,8 +18,8 @@ export interface RelatedPost {
 	createdAt: Date;
 }
 
-export interface Post extends Omit<CollectionEntry<'blog'>, 'relatedPosts' | 'slug'> {
-	slug: string;
+export interface Post extends Omit<CollectionEntry<'blog'>, 'id' | 'relatedPosts'> {
+	id: string;
 	year: string;
 	month: string;
 	day: string;
@@ -54,17 +57,17 @@ function getPostDate(post: CollectionEntry<'blog'>) {
 	};
 }
 
-function formatPostSlug(post: CollectionEntry<'blog'>) {
-	const slug = post.slug.split('/').pop() ?? '';
+function formatPostId(post: CollectionEntry<'blog'>) {
+	const id = post.id.split('/').pop() ?? '';
 
-	return slug;
+	return id;
 }
 
 function getPostUrl(post: CollectionEntry<'blog'>) {
-	const slug = formatPostSlug(post);
+	const id = formatPostId(post);
 	const { year, month } = getPostDate(post);
 
-	return join([year, month, slug]);
+	return join([year, month, id]);
 }
 
 async function getRelatedPosts(post: CollectionEntry<'blog'>) {
@@ -74,14 +77,14 @@ async function getRelatedPosts(post: CollectionEntry<'blog'>) {
 	const relatedPosts: RelatedPost[] = [];
 
 	for (const relatedPost of post.data.relatedPosts ?? []) {
-		const otherPost = posts.find((entry) => formatPostSlug(entry) === relatedPost);
+		const otherPost = posts.find((entry) => formatPostId(entry) === relatedPost);
 
 		if (otherPost) {
 			relatedPosts.push({
-				slug: formatPostSlug(otherPost),
+				id: formatPostId(otherPost),
 				url: getPostUrl(otherPost),
-				title: otherPost.data.title,
-				summary: otherPost.data.summary,
+				title: escapeHtmlTags(otherPost.data.title),
+				summary: escapeHtmlTags(otherPost.data.summary),
 				image: otherPost.data.image,
 				imageAlt: otherPost.data.imageAlt,
 				createdAt: otherPost.data.createdAt
@@ -120,30 +123,47 @@ function countLetters(text: string) {
 }
 
 async function formatPostMetadata(post: CollectionEntry<'blog'>) {
-	const slug = formatPostSlug(post);
+	const id = formatPostId(post);
 	const { year, month, day } = getPostDate(post);
 
 	return {
 		...post,
-		slug,
+		data: {
+			...post.data,
+			title: escapeHtmlTags(post.data.title),
+			summary: escapeHtmlTags(post.data.summary)
+		},
+		id,
 		year,
 		month,
 		day,
 		url: getPostUrl(post),
 		relatedPosts: await getRelatedPosts(post),
-		readingTime: calculateReadingTime(post.body),
-		wordCount: countWords(post.body),
-		letterCount: countLetters(post.body)
+		readingTime: calculateReadingTime(post.body ?? ''),
+		wordCount: countWords(post.body ?? ''),
+		letterCount: countLetters(post.body ?? '')
 	};
 }
 
 export async function listAllPosts(sorting: PostSorting = 'descending') {
-	const blogEntries = await getCollection('blog');
-	const filteredBlogEntries = blogEntries.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
-	const formattedBlogEntries = await Promise.all(filteredBlogEntries.map(async (entry) => formatPostMetadata(entry)));
-	const sortedBlogEntries = formattedBlogEntries.sort((postA, postB) => sortPostsByDate(postA, postB, sorting));
+	const posts = await getCollection('blog');
+	const postFiles = import.meta.glob<MarkdownInstance<{}>>('../content/blog/**/*.md', { eager: true });
 
-	return sortedBlogEntries;
+	const filteredPosts = posts.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
+	const formattedPosts = await Promise.all(filteredPosts.map(async (post) => {
+		const formattedPost = await formatPostMetadata(post);
+		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(formattedPost.url)) ?? [];
+
+		return {
+			...formattedPost,
+			render: async () => render(formattedPost),
+			renderString: async () => postMarkdown?.compiledContent() ?? '',
+			getImage: async () => formattedPost.data.image ? getImage({ src: formattedPost.data.image, format: 'png' }) : undefined
+		};
+	}));
+	const sortedPosts = formattedPosts.sort((postA, postB) => sortPostsByDate(postA, postB, sorting));
+
+	return sortedPosts;
 }
 
 export async function listPostPagesByYear(sorting: PostSorting = 'descending') {

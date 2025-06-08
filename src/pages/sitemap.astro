@@ -48,9 +48,9 @@ const coolPages: PageMetadata[] = [
 const talksUrl = new URL(TALKS.url, baseUrl).toString();
 const talkPages: PageMetadata[] = [
 	{ title: 'Talks Home', url: talksUrl, description: "A list of talks that I've presented before." },
-	...(await listAllTalks()).map(({ slug, data }) => ({
+	...(await listAllTalks()).map(({ id, data }) => ({
 		title: data.title,
-		url: new URL(slug, talksUrl).toString(),
+		url: new URL(id, talksUrl).toString(),
 		description: data.summary
 	}))
 ];

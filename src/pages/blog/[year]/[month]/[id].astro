@@ -13,7 +13,7 @@ export const getStaticPaths = (async () =>
 			year: post.year,
 			month: post.month,
 			day: post.day,
-			slug: post.slug
+			id: post.id
 		},
 		props: post
 	}))) satisfies GetStaticPaths;

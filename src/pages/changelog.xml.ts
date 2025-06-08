@@ -1,9 +1,9 @@
-import type { APIRoute, MarkdownInstance } from 'astro';
+import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
-import { getCollection } from 'astro:content';
 
 import defaultImage from '../assets/images/logo/logo-micro.png';
 import { BLOG } from '../constants.ts';
+import { listAllChangelogs } from '../utils/changelog.ts';
 import { escapeHtmlTags } from '../utils/markdown.ts';
 
 export const GET: APIRoute = async (context) => {
@@ -16,23 +16,17 @@ export const GET: APIRoute = async (context) => {
 
 	baseUrl.protocol = 'https:';
 
-	const allLogs = (await getCollection('changelog')).sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateA.getTime() - dateB.getTime());
-	const changelogFiles = import.meta.glob<MarkdownInstance<{}>>('../content/changelog/*.md', { eager: true });
-
-	const items = await Promise.all(allLogs.map(async (changelog) => {
-		const [, changelogMarkdown] = Object.entries(changelogFiles).find(([filePath]) => filePath.includes(changelog.id)) ?? [];
-		const compiledMarkdown = await changelogMarkdown?.compiledContent() ?? '';
-		const changelogContent = escapeHtmlTags(compiledMarkdown);
-
-		return `<entry>
-			<id>${new URL(`#${changelog.slug}`, changelogUrl).toString()}</id>
-			<title>${changelog.id}${changelog.data.versionName ? ` - ${escapeHtmlTags(changelog.data.versionName)}` : ''}</title>
+	const allLogs = await listAllChangelogs();
+	const items = await Promise.all(allLogs.map(async (changelog) =>
+		`<entry>
+			<id>${new URL(`#${changelog.id}`, changelogUrl).toString()}</id>
+			<title>${escapeHtmlTags(changelog.title)}}</title>
 			<updated>${changelog.data.date.toISOString()}</updated>
 			<published>${changelog.data.date.toISOString()}</published>
-			<link rel="alternate" type="text/html" href="${new URL(`#${changelog.slug}`, changelogUrl).toString()}" />
-			<content type="html">${changelogContent}</content>
-		</entry>`;
-	}));
+			<link rel="alternate" type="text/html" href="${new URL(`#${changelog.id}`, changelogUrl).toString()}" />
+			<content type="html">${escapeHtmlTags(await changelog.renderString())}</content>
+		</entry>`
+	));
 
 	const atomFeed = `<?xml version="1.0" encoding="UTF-8"?>
 		<?xml-stylesheet type="text/xsl" href="${new URL('feed.xsl', new URL(BLOG.url, baseUrl).toString()).toString()}"?>

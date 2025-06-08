@@ -1,15 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
 import Logo from '../components/Logo/index.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
+import { listAllChangelogs } from '../utils/changelog.ts';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
-const changelogs = await Promise.all((await getCollection('changelog')).map(async ({ render, id, data }) => ({
-	title: data.versionName ? `${id} - ${data.versionName}` : id,
-	date: data.date,
-	Content: (await render()).Content
-})));
+const changelogs = await Promise.all(await listAllChangelogs());
+const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) => {
+	const { Content } = await changelog.render();
+
+	return {
+		Content,
+		title: changelog.title,
+		date: changelog.data.date
+	};
+}));
 ---
 
 <InternalPageLayout
@@ -29,7 +34,7 @@ const changelogs = await Promise.all((await getCollection('changelog')).map(asyn
 	<Fragment slot="header">Changelog</Fragment>
 
 	{
-		changelogs.map(({ date, title, Content }) => (
+		renderedChangelogs.map(({ date, title, Content }) => (
 			<article>
 				<header>
 					<h2>{title}</h2>

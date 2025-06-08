@@ -19,7 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 export const getStaticPaths = (async () =>
 	(await listAllTalks()).map((talk) => ({
 		params: {
-			talk: talk.slug
+			talk: talk.id
 		},
 		props: talk
 	}))) satisfies GetStaticPaths;
@@ -45,7 +45,7 @@ const {
 		techStack
 	}
 } = Astro.props;
-const { talk: slug } = Astro.params;
+const { talk: talkId } = Astro.params;
 const { Content } = await render();
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
 ---
@@ -53,7 +53,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	htmlTitle={[title, ...TALKS.title]}
 	{title}
 	description={summary}
-	url={join([TALKS.url, slug])}
+	url={join([TALKS.url, talkId])}
 	tags={TALKS.tags}
 	image={image?.src}
 	{imageAlt}

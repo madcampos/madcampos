@@ -1,4 +1,4 @@
-import type { APIRoute, MarkdownInstance } from 'astro';
+import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
 
 import { BLOG } from '../../constants.js';
@@ -23,17 +23,13 @@ export const GET: APIRoute = async (context) => {
 	const feedUrl = new URL('./feed.xml', blogUrl).toString();
 
 	const allPosts = await listAllPosts();
-	const postFiles = import.meta.glob<MarkdownInstance<{}>>('../../content/blog/**/*.md', { eager: true });
 	const items = await Promise.all(allPosts.map(async (post) => {
-		const image = post.data.image ? await getImage({ src: post.data.image, format: 'png' }) : undefined;
+		const image = await post.getImage();
 		const imageTag = image ? `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
-
-		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(post.url)) ?? [];
-		const compiledMarkdown = await postMarkdown?.compiledContent() ?? '';
 
 		const postContent = escapeHtmlTags(`
 			${imageTag}
-			${compiledMarkdown}
+			${await post.renderString()}
 		`);
 
 		const postTags = post.data.tags?.map((tag) => `<category term="${tag}" />`).join('\n') ?? '';
@@ -44,7 +40,7 @@ export const GET: APIRoute = async (context) => {
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
 			<published>${post.data.createdAt}</published>
 			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
-			<summary type="html">${inlineMarkdownRender(escapeHtmlTags(post.data.summary))}</summary>
+			<summary type="html">${inlineMarkdownRender(post.data.summary)}</summary>
 			<content type="html">${postContent}</content>
 			${postTags}
 		</entry>`;

@@ -13,7 +13,7 @@ export const blogSchema = ({ image }: SchemaContext) =>
 		imageRights: zod.string().optional().describe('Copyright information for the image, if any.'),
 
 		tags: zod.array(zod.string()).optional().describe('Tags for this post.'),
-		relatedPosts: zod.array(zod.string()).optional().describe('Slugs for posts related to this.'),
+		relatedPosts: zod.array(zod.string()).optional().describe('IDs for posts related to this.'),
 
 		updates: zod.array(zod.object({
 			date: zod.date().describe('The date of the update.'),

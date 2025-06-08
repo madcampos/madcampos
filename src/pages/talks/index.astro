@@ -35,7 +35,7 @@ const talks = await listAllTalks();
 	{
 		talks.map((talk) => (
 			<TalkCard
-				url={join([TALKS.url, talk.slug])}
+				url={join([TALKS.url, talk.id])}
 				isOnline={talk.data.isOnline}
 				address={talk.data.address}
 				event={talk.data.event}
