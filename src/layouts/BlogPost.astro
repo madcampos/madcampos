@@ -59,8 +59,8 @@ const formatUpdateDate = (date: Date) =>
 	}).format(date);
 ---
 <BaseLayout
-	htmlTitle={[title, 'Blog', 'Marco Campos']}
-	{title}
+	htmlTitle={[inlineMarkdownStrip(title), 'Blog', 'Marco Campos']}
+	title={inlineMarkdownStrip(title)}
 	{tags}
 	description={inlineMarkdownStrip(summary)}
 	url={postUrl}
@@ -172,7 +172,8 @@ const formatUpdateDate = (date: Date) =>
 												image={post.image}
 												imageAlt={post.imageAlt}
 											>
-												<span slot="title">{post.title}</span>
+												<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(post.title))} />
+
 												<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.summary))} />
 											</PostCardSmall>
 										</li>

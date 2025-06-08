@@ -78,7 +78,7 @@ const {
 					tags={post.data.tags}
 					draft={post.data.draft}
 				>
-					<span slot="title">{post.data.title}</span>
+					<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(post.data.title))} />
 					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.summary))} />
 				</PostCard>
 			))
