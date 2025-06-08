@@ -19,6 +19,8 @@ import rehypeExternalLinks from 'rehype-external-links';
 import remarkBehead from 'remark-behead';
 import remarkBreaks from 'remark-breaks';
 import remarkDirective from 'remark-directive';
+import remarkHighlight from 'remark-flexible-markers';
+import remarkIns from 'remark-ins';
 
 import { assetsCache, externalResourcesCache, pagesCache, scriptsCache } from './src/sw-caching.js';
 import { baselineInfo, codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
@@ -81,7 +83,16 @@ export default defineConfig({
 				transformerMetaWordHighlight()
 			]
 		},
-		remarkPlugins: [[remarkBehead, { minDepth: 2 }], remarkBreaks, remarkDirective, youtubeEmbed, codepenEmbed, baselineInfo],
+		remarkPlugins: [
+			[remarkBehead, { minDepth: 2 }],
+			remarkBreaks,
+			remarkIns,
+			[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }],
+			remarkDirective,
+			youtubeEmbed,
+			codepenEmbed,
+			baselineInfo
+		],
 		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'] }]]
 	},
 	integrations: [

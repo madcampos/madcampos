@@ -87,7 +87,7 @@ Here is a statement with a footnote.[^1] And another one.[^2]
 ### Definition lists
 
 Definition Title
-: Definition item
+:	Definition item
 
 ### Deleted and inserted text
 
@@ -102,6 +102,7 @@ Definition Title
 ### Highlight text
 
 This text is ==highlighted==.
+=r=red highlight==
 
 ### Subscript and superscript
 
