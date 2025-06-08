@@ -142,7 +142,7 @@
 		width: 100%;
 	}
 
-	@media (max-width: 650px) {
+	@media (max-width: 32.5rem) {
 		#post-header-wrapper {
 			grid-template-areas:
 				'hero-image'

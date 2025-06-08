@@ -8,5 +8,5 @@
 
 	#contents { margin-inline: min(10vw, var(--min-width)); }
 
-	@media (max-width: 768px) { #contents { margin-inline: var(--spacing-large); } }
+	@media (max-width: 38.4rem) { #contents { margin-inline: var(--spacing-large); } }
 }

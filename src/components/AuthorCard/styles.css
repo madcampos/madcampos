@@ -25,7 +25,7 @@
 	}
 	.author-card .author-bio { grid-area: bio; }
 
-	@media (max-width: 768px) {
+	@media (max-width: 38.4rem) {
 		.author-card {
 			grid-template-areas:
 				'avatar'

@@ -64,7 +64,7 @@
 		text-transform: uppercase;
 	}
 
-	@media (max-width: 500px) {
+	@media (max-width: 25rem) {
 		.post-card {
 			grid-template-areas:
 				'header'

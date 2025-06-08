@@ -224,7 +224,7 @@
 		width: 100%;
 	}
 
-	@media (max-width: 800px) {
+	@media (max-width: 40rem) {
 		h1 { font-size: 3em; }
 
 		#hero {

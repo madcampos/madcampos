@@ -215,12 +215,12 @@
 		position: absolute;
 	}
 
-	@media (max-width: 650px) {
+	@media (max-width: 32.5rem) {
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 450px) {
+	@media (max-width: 22.5rem) {
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='micro']) { visibility: visible; }
 	}

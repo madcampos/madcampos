@@ -27,7 +27,7 @@
 		width: clamp(var(--min-width), 70vmin, var(--medium-width));
 	}
 
-	@media (max-width: 500px) {
+	@media (max-width: 25rem) {
 		#page-header img {
 			height: auto;
 			width: calc(100vw - var(--spacing-large) * 2);

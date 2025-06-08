@@ -55,5 +55,5 @@
 		grid-area: content;
 	}
 
-	@media (max-width: 600px) { .post-card { --image-size: var(--avatar-mini-size); } }
+	@media (max-width: 30rem) { .post-card { --image-size: var(--avatar-mini-size); } }
 }

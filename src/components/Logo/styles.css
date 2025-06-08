@@ -73,12 +73,12 @@
 	a:active [data-theme='system'] .logo-part { fill: var(--link-active-color); }
 	a:active [data-theme='system'] .logo-text { fill: var(--link-active-color); }
 
-	@media (max-width: 650px) {
+	@media (max-width: 32.5rem) {
 		#logo-graphics [data-theme='system'] { visibility: hidden; }
 		#logo-graphics [data-theme='system']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 450px) {
+	@media (max-width: 22.5rem) {
 		#logo-graphics [data-theme='system'] { visibility: hidden; }
 		#logo-graphics [data-theme='system']:where([data-size='micro']) { visibility: visible; }
 	}

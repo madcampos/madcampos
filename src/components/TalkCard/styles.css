@@ -57,7 +57,7 @@
 
 	.talk-card .talk-links { grid-area: links; }
 
-	@media (max-width: 850px) {
+	@media (max-width: 42.5rem) {
 		.talk-card {
 			grid-template-areas:
 				'header'

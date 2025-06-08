@@ -33,5 +33,5 @@
 		text-align: center;
 	}
 
-	@media (max-width: 768px) { .pagination-link-text { display: none; } }
+	@media (max-width: 38.4rem) { .pagination-link-text { display: none; } }
 }
