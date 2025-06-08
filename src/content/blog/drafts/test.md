@@ -1,14 +1,16 @@
 ---
-title: Test **MD** & <html>
-summary: Test post with all **markdown** content and <html> tags
+title: Test **_MD_** & <html> content
+summary: Test post with all **_markdown_** content and <html> tags
 image: ./assets/test.jpg
-imageAlt: Test <html> tag
+imageAlt: Test <html> tag and **_markdown_** content.
 createdAt: 9999-12-31T23:59:59.999Z
 draft: true
 tags:
   - Test
   - Markdown
   - HTML
+relatedPosts:
+  - test
 ---
 
 This is a test for markdown syntax.
