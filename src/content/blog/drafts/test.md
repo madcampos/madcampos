@@ -1,7 +1,7 @@
 ---
 title: Test **_MD_** & <html> content
 summary: Test post with all **_markdown_** content and <html> tags
-image: ./assets/test.jpg
+image: ./assets/test.png
 imageAlt: Test <html> tag and **_markdown_** content.
 createdAt: 9999-12-31T23:59:59.999Z
 draft: true
@@ -37,7 +37,7 @@ Here is a [link](https://example.com) and an inline `code` sample.
 
 Here is an image:
 
-![Alt text](./assets/test.jpg)
+![Alt text](./assets/test.png)
 
 ## Paragraphs
 
