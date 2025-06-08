@@ -1,7 +1,7 @@
 @layer vars {
 	:root {
 		/* Sizes */
-		--body-text: 20px;
+		--body-text: 1.25rem;
 		--small-text: 0.75rem;
 		--min-width: 5rem;
 		--medium-width: 30rem;
