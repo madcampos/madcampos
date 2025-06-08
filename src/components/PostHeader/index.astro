@@ -20,6 +20,7 @@ interface Props {
 	readingTime?: number;
 	wordCount?: number;
 	letterCount?: number;
+	draft?: boolean;
 }
 
 const {
@@ -33,7 +34,8 @@ const {
 	imageAlt,
 	imageRights,
 	readingTime,
-	wordCount
+	wordCount,
+	draft
 } = Astro.props;
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
@@ -41,6 +43,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 <SiteNav />
 <header id="post-header">
 	<div id="post-header-wrapper">
+		{draft && <span id="post-draft-tag">DRAFT</span>}
 		<a id="post-title" class="u-uid u-url" href={url}>
 			<h1 class="p-name" itemprop="headline">{title}</h1>
 		</a>

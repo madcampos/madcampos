@@ -5,6 +5,18 @@
 		width: 100%;
 	}
 
+	#post-draft-tag {
+		background-color: var(--accent-color);
+		border-radius: var(--border-radius);
+		color: var(--bg-color);
+		display: inline-block;
+		font-size: 2rem;
+		font-weight: bold;
+		margin: var(--spacing-small);
+		padding: var(--spacing-small) var(--spacing-medium);
+		text-transform: uppercase;
+	}
+
 	#post-header-wrapper {
 		background: var(--bg-color);
 		border: var(--border-style) var(--highlight-border-color) var(--border-width);

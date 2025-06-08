@@ -30,7 +30,8 @@ const {
 		createdAt,
 		updatedAt,
 		updates,
-		tags
+		tags,
+		draft
 	},
 	readingTime,
 	letterCount,
@@ -53,6 +54,7 @@ const { Content } = await render();
 	{readingTime}
 	{wordCount}
 	{letterCount}
+	{draft}
 	{relatedPosts}
 >
 	<Content />

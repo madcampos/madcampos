@@ -31,6 +31,7 @@ interface Props {
 	readingTime?: number;
 	wordCount?: number;
 	letterCount?: number;
+	draft?: boolean;
 }
 
 const {
@@ -47,6 +48,7 @@ const {
 	readingTime,
 	wordCount,
 	letterCount,
+	draft,
 	relatedPosts
 } = Astro.props;
 const postUrl = join([BLOG.url, url]);
@@ -77,6 +79,7 @@ const formatUpdateDate = (date: Date) =>
 	<PostHeader
 		slot="header"
 		url={postUrl}
+		{draft}
 		{title}
 		{summary}
 		{image}
