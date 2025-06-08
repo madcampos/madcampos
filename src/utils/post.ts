@@ -1,7 +1,6 @@
 import type { MarkdownInstance } from 'astro';
 import { getImage } from 'astro:assets';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import { escapeHtmlTags } from './markdown.ts';
 import { join } from './path.js';
 
 export type PostSorting = 'ascending' | 'descending';
@@ -83,8 +82,8 @@ async function getRelatedPosts(post: CollectionEntry<'blog'>) {
 			relatedPosts.push({
 				id: formatPostId(otherPost),
 				url: getPostUrl(otherPost),
-				title: escapeHtmlTags(otherPost.data.title),
-				summary: escapeHtmlTags(otherPost.data.summary),
+				title: otherPost.data.title,
+				summary: otherPost.data.summary,
 				image: otherPost.data.image,
 				imageAlt: otherPost.data.imageAlt,
 				createdAt: otherPost.data.createdAt
@@ -128,11 +127,6 @@ async function formatPostMetadata(post: CollectionEntry<'blog'>) {
 
 	return {
 		...post,
-		data: {
-			...post.data,
-			title: escapeHtmlTags(post.data.title),
-			summary: escapeHtmlTags(post.data.summary)
-		},
 		id,
 		year,
 		month,

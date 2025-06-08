@@ -141,8 +141,12 @@ export function inlineMarkdownRender(input: string) {
 		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '<strong>$1$2</strong>')
 		// Italics
 		.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '<em>$1$2</em>')
-		// Striketrough
-		.replaceAll(/~~(.+?)~~/igu, '<s>$1</s>')
+		// Striketrough (deleted text)
+		.replaceAll(/~~(.+?)~~/igu, '<del>$1</del>')
+		// Underline (inserted text)
+		.replaceAll(/\+\+(.+?)\+\+/igu, '<ins>$1</ins>')
+		// Highlight
+		.replaceAll(/[=]=(.+?)==/igu, '<mark>$1</mark>')
 		// Inline code
 		.replaceAll(/`(.+?)`/igu, '<code>$1</code>')
 		// Links
@@ -157,8 +161,12 @@ export function inlineMarkdownStrip(input: string) {
 		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '$1$2')
 		// Italics
 		.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '$1$2')
-		// Striketrough
+		// Striketrough (deleted text)
 		.replaceAll(/~~(.+?)~~/igu, '$1')
+		// Underline (inserted text)
+		.replaceAll(/\+\+(.+?)\+\+/igu, '$1')
+		// Highlight
+		.replaceAll(/[=]=(.+?)==/igu, '$1')
 		// Inline code
 		.replaceAll(/`(.+?)`/igu, '$1')
 		// Links
