@@ -9,6 +9,7 @@ import { join } from '../../utils/path.js';
 import { listAllTalks } from '../../utils/talks.js';
 
 import talksSocialImage from '../../assets/images/social/social-talks.png';
+import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 
 const talks = await listAllTalks();
 ---
@@ -35,6 +36,7 @@ const talks = await listAllTalks();
 	{
 		talks.map((talk) => (
 			<TalkCard
+				draft={talk.data.draft}
 				url={join([TALKS.url, talk.id])}
 				isOnline={talk.data.isOnline}
 				address={talk.data.address}
@@ -43,7 +45,8 @@ const talks = await listAllTalks();
 				image={talk.data.image}
 				imageAlt={talk.data.imageAlt}
 			>
-				<span slot="title">{talk.data.title}</span> {talk.data.summary}
+				<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.title))} />
+				<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.summary))} />
 			</TalkCard>
 		))
 	}

@@ -31,6 +31,16 @@
 		margin-block-end: var(--spacing-medium);
 	}
 
+	.talk-card .talk-draft-tag {
+		background-color: var(--accent-color);
+		border-radius: var(--border-radius);
+		color: var(--bg-color);
+		display: inline-block;
+		margin: var(--spacing-small);
+		padding: var(--spacing-small) var(--spacing-medium);
+		text-transform: uppercase;
+	}
+
 	.talk-card header aside small { display: flex; }
 
 	.talk-card picture {

@@ -28,6 +28,7 @@ export const getStaticPaths = (async () =>
 const {
 	render,
 	data: {
+		draft,
 		title,
 		summary,
 		date,
@@ -67,7 +68,11 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		urlTitle="Talks Page"
 		slot="logo"
 	/>
-	<Fragment slot="header" itemprop="name">{title}</Fragment>
+
+	{draft && <span slot="header" id="talk-draft-tag">Draft</span>}
+	<Fragment slot="header" itemprop="name">
+		{title}
+	</Fragment>
 
 	<Content />
 

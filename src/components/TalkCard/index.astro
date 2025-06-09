@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
 import './styles.css';
+import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.ts';
 
 interface Props {
 	url?: string;
@@ -13,9 +14,11 @@ interface Props {
 
 	image?: ImageMetadata;
 	imageAlt?: string;
+
+	draft?: boolean;
 }
 
-const { url, event, isOnline, address, date, image, imageAlt } = Astro.props;
+const { url, event, isOnline, address, date, image, imageAlt, draft } = Astro.props;
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
 const IMAGE_WIDTHS = [128, 256, 512, 768, image?.width ?? 1024];
@@ -33,7 +36,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				<Image
 					itemprop="contentUrl"
 					src={image}
-					alt={imageAlt ?? ''}
+					alt={inlineMarkdownStrip(imageAlt ?? '')}
 					loading="lazy"
 					widths={IMAGE_WIDTHS}
 					width={256}
@@ -47,7 +50,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	<header>
 		<a href={url}>
 			<h2 itemprop="name">
-				<slot name="title"></slot>
+				{draft && <span class="talk-draft-tag">Draft</span>} <slot name="title"></slot>
 			</h2>
 		</a>
 
@@ -80,7 +83,9 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						</div>
 
 						<Icon name="uil:presentation-play" title="Event name" />
-						<span>{event}</span>
+						<span>
+							<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(event))} />
+						</span>
 					</small>
 				)
 			}
