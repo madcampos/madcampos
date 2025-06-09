@@ -14,7 +14,8 @@ export async function listAllAuthors() {
 }
 
 export async function getAuthor(authorId: string) {
-	const entry = await getEntry('authors', authorId);
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	const entry = (await getEntry('authors', authorId))!;
 
 	return {
 		...entry,
