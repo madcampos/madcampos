@@ -1,0 +1,22 @@
+@layer pages {
+	details { margin-block: var(--spacing-large); }
+
+	summary header {
+		display: inline-flex;
+		flex-direction: column;
+		gap: var(--spacing-medium);
+	}
+
+	summary h2 { margin: 0; }
+	summary p { margin: 0; }
+
+	.changelog-draft-tag {
+		background-color: var(--accent-color);
+		border-radius: var(--border-radius);
+		color: var(--bg-color);
+		display: inline-block;
+		margin: var(--spacing-small);
+		padding: var(--spacing-small) var(--spacing-medium);
+		text-transform: uppercase;
+	}
+}

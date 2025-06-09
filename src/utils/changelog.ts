@@ -2,21 +2,23 @@ import type { MarkdownInstance } from 'astro';
 import { getCollection, render } from 'astro:content';
 
 export async function listAllChangelogs() {
-	const changelogEntries = await getCollection('changelog');
-	const changelogs = changelogEntries.filter((changelog) => !changelog.data).sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateA.getTime() - dateB.getTime());
+	const collectionEntries = await getCollection('changelog');
+	const collectionFiles = import.meta.glob<MarkdownInstance<{}>>('../content/changelog/**/*.md', { eager: true });
 
-	const changelogFiles = import.meta.glob<MarkdownInstance<{}>>('../content/changelog/*.md', { eager: true });
+	const entries = collectionEntries
+		.filter((entry) => entry.data)
+		.filter(({ data: { draft } }) => !draft || import.meta.env.DEV)
+		.sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateA.getTime() - dateB.getTime())
+		.map((entry) => {
+			const [, entryMarkdown] = Object.entries(collectionFiles).find(([filePath]) => filePath.includes(entry.id)) ?? [];
 
-	const changelogsWithRender = changelogs.map((changelog) => {
-		const [, changelogMarkdown] = Object.entries(changelogFiles).find(([filePath]) => filePath.includes(changelog.id)) ?? [];
+			return {
+				...entry,
+				title: entry.data.versionName ? `${entry.id} - ${entry.data.versionName}` : entry.id,
+				render: async () => render(entry),
+				renderString: async () => entryMarkdown?.compiledContent() ?? ''
+			};
+		});
 
-		return {
-			...changelog,
-			title: changelog.data.versionName ? `${changelog.id} - ${changelog.data.versionName}` : changelog.id,
-			render: async () => render(changelog),
-			renderString: async () => changelogMarkdown?.compiledContent() ?? ''
-		};
-	});
-
-	return changelogsWithRender;
+	return entries;
 }

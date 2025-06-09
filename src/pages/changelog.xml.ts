@@ -4,7 +4,7 @@ import { getImage } from 'astro:assets';
 import defaultImage from '../assets/images/logo/logo-micro.png';
 import { BLOG } from '../constants.ts';
 import { listAllChangelogs } from '../utils/changelog.ts';
-import { escapeHtmlTags } from '../utils/markdown.ts';
+import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.ts';
 
 export const GET: APIRoute = async (context) => {
 	const siteImage = await getImage({ src: defaultImage, format: 'png', width: 512, height: 512 });
@@ -20,7 +20,7 @@ export const GET: APIRoute = async (context) => {
 	const items = await Promise.all(allLogs.map(async (changelog) =>
 		`<entry>
 			<id>${new URL(`#${changelog.id}`, changelogUrl).toString()}</id>
-			<title>${escapeHtmlTags(changelog.title)}}</title>
+			<title>${inlineMarkdownRender(escapeHtmlTags(changelog.title))}</title>
 			<updated>${changelog.data.date.toISOString()}</updated>
 			<published>${changelog.data.date.toISOString()}</published>
 			<link rel="alternate" type="text/html" href="${new URL(`#${changelog.id}`, changelogUrl).toString()}" />

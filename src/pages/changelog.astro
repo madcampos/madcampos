@@ -3,6 +3,9 @@ import Logo from '../components/Logo/index.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
+import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.ts';
+
+import '../assets/css/pages/changelogs.css';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 const changelogs = await Promise.all(await listAllChangelogs());
@@ -12,7 +15,8 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 	return {
 		Content,
 		title: changelog.title,
-		date: changelog.data.date
+		date: changelog.data.date,
+		draft: changelog.data.draft
 	};
 }));
 ---
@@ -34,14 +38,20 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 	<Fragment slot="header">Changelog</Fragment>
 
 	{
-		renderedChangelogs.map(({ date, title, Content }) => (
-			<article>
-				<header>
-					<h2>{title}</h2>
-					<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
-				</header>
-				<Content />
-			</article>
+		renderedChangelogs.map(({ date, title, draft, Content }) => (
+			<details>
+				<summary>
+					<header>
+						<h2>
+							{draft && <span class="changelog-draft-tag">Draft</span>} <Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+						</h2>
+						<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
+					</header>
+				</summary>
+				<article>
+					<Content />
+				</article>
+			</details>
 		))
 	}
 </InternalPageLayout>

@@ -13,7 +13,11 @@ const blogCollection = defineCollection({
 });
 
 const changelogCollection = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/changelog' }),
+	loader: glob({
+		pattern: '**/*.md',
+		base: './src/content/changelog',
+		generateId: (({ entry }) => entry.replace('.md', ''))
+	}),
 	schema: changelogSchema
 });
 
