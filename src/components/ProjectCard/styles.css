@@ -35,6 +35,16 @@
 	.project-card header { grid-area: header; }
 	.project-card header h2 { margin: 0; }
 
+	.project-card header .project-draft-tag {
+		background-color: var(--accent-color);
+		border-radius: var(--border-radius);
+		color: var(--bg-color);
+		display: inline-block;
+		margin: var(--spacing-small);
+		padding: var(--spacing-small) var(--spacing-medium);
+		text-transform: uppercase;
+	}
+
 	.project-card header aside {
 		align-items: center;
 		display: flex;
@@ -55,6 +65,11 @@
 
 	.project-card .project-content { grid-area: content; }
 	.project-card .project-content > *:first-child { margin-block-start: 0; }
+
+	.project-card .project-content img {
+		height: auto;
+		max-width: 100%;
+	}
 
 	.project-card .project-links { grid-area: links; }
 	.project-card .project-info { grid-area: footer; }

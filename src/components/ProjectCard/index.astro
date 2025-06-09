@@ -12,6 +12,8 @@ interface Props {
 	version?: string;
 	url?: string;
 
+	draft?: boolean;
+
 	image?: ImageMetadata;
 	themeImages?: Record<string, ImageMetadata>;
 	imageAlt?: string;
@@ -20,7 +22,7 @@ interface Props {
 	repository?: string;
 }
 
-const { status, version, createdAt, updatedAt, image, imageAlt, themeImages, url, repository, techStack } = Astro.props;
+const { status, version, createdAt, updatedAt, image, imageAlt, themeImages, url, repository, techStack, draft } = Astro.props;
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 ---
@@ -48,7 +50,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 	<header>
 		<a href={url ?? null} rel="noopener noreferrer">
 			<h2 itemprop="name">
-				<slot name="title"></slot>
+				{draft && <span class="project-draft-tag">Draft</span>} <slot name="title"></slot>
 			</h2>
 		</a>
 		<aside>

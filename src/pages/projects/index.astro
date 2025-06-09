@@ -8,6 +8,7 @@ import { PROJECTS } from '../../constants.js';
 import { listAllProjects } from '../../utils/projects.js';
 
 import projectsSocialImage from '../../assets/images/social/social-proj.png';
+import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 
 const projects = await Promise.all((await listAllProjects()).map(async (project) => {
 	const { Content } = await project.render();
@@ -40,6 +41,7 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 	{
 		projects.map(({ Content, data }) => (
 			<ProjectCard
+				draft={data.draft}
 				status={data.status}
 				createdAt={data.createdAt}
 				updatedAt={data.updatedAt}
@@ -51,7 +53,7 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 				techStack={data.techStack}
 				repository={data.repository}
 			>
-				<span slot="title">{data.title}</span>
+				<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(data.title))} />
 
 				<Content />
 			</ProjectCard>
