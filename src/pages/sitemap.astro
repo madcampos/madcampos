@@ -2,6 +2,7 @@
 import Logo from '../components/Logo/index.astro';
 import { BLOG, GLOBALS, TALKS } from '../constants.js';
 import InternalPageLayout from '../layouts/InternalPage.astro';
+import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
 import { listPostsByYearAndMonth } from '../utils/post.js';
 import { listAllTalks } from '../utils/talks.js';
 
@@ -50,7 +51,7 @@ const talkPages: PageMetadata[] = [
 	{ title: 'Talks Home', url: talksUrl, description: "A list of talks that I've presented before." },
 	...(await listAllTalks()).map(({ id, data }) => ({
 		title: data.title,
-		url: new URL(id, talksUrl).toString(),
+		url: new URL(`${id}/`, talksUrl).toString(),
 		description: data.summary
 	}))
 ];
@@ -102,8 +103,18 @@ const blogPages = await listPostsByYearAndMonth();
 		{
 			talkPages.map(({ url, title, description, hidden, wip }) => (
 				<li class:list={{ wip, hidden }}>
-					<span><a href={url}>{title}</a></span>
-					<aside><em><small>{description}</small></em></aside>
+					<span>
+						<a href={url}>
+							<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+						</a>
+					</span>
+					<aside>
+						<em>
+							<small>
+								<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+							</small>
+						</em>
+					</aside>
 				</li>
 			))
 		}
@@ -130,8 +141,18 @@ const blogPages = await listPostsByYearAndMonth();
 												{
 													posts.map(({ url, data: { title, summary } }) => (
 														<li>
-															<span><a href={new URL(url, blogUrl).toString()}>{title}</a></span>
-															<aside><em><small>{summary}</small></em></aside>
+															<span>
+																<a href={new URL(url, blogUrl).toString()}>
+																	<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+																</a>
+															</span>
+															<aside>
+																<em>
+																	<small>
+																		<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(summary))} />
+																	</small>
+																</em>
+															</aside>
 														</li>
 													))
 												}
