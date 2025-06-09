@@ -23,7 +23,23 @@
 		grid-area: name;
 		justify-self: start;
 	}
+
+	.author-card .author-draft-tag {
+		background-color: var(--accent-color);
+		border-radius: var(--border-radius);
+		color: var(--bg-color);
+		display: inline-block;
+		margin: var(--spacing-small);
+		padding: var(--spacing-small) var(--spacing-medium);
+		text-transform: uppercase;
+	}
+
 	.author-card .author-bio { grid-area: bio; }
+
+	.author-card .author-bio img {
+		height: auto;
+		max-width: 100%;
+	}
 
 	@media (max-width: 38.4rem) {
 		.author-card {
