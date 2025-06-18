@@ -215,12 +215,12 @@
 		position: absolute;
 	}
 
-	@media (max-width: 32.5rem) {
+	@media (max-width: 40rem) {
 		[data-theme='cork-board'] #logo-graphics [data-theme='cork-board'] { visibility: hidden; }
 		[data-theme='cork-board'] #logo-graphics [data-theme='cork-board']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 22.5rem) {
+	@media (max-width: 25rem) {
 		[data-theme='cork-board'] #logo-graphics [data-theme='cork-board'] { visibility: hidden; }
 		[data-theme='cork-board'] #logo-graphics [data-theme='cork-board']:where([data-size='micro']) { visibility: visible; }
 	}

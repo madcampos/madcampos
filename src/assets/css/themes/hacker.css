@@ -202,12 +202,12 @@
 		text-decoration: var(--shiki-contrast-text-decoration, none);
 	}
 
-	@media (max-width: 32.5rem) {
+	@media (max-width: 35rem) {
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 22.5rem) {
+	@media (max-width: 25rem) {
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='micro']) { visibility: visible; }
 	}

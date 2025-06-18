@@ -41,7 +41,7 @@
 		max-width: 100%;
 	}
 
-	@media (max-width: 38.4rem) {
+	@media (max-width: 40rem) {
 		.author-card {
 			grid-template-areas:
 				'avatar'

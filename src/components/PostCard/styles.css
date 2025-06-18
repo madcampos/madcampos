@@ -36,8 +36,6 @@
 		display: block;
 		grid-area: picture;
 		height: var(--image-size);
-		object-fit: cover;
-		object-position: center;
 		overflow: clip;
 		place-self: center center;
 		width: var(--image-size);
@@ -45,8 +43,8 @@
 
 	.post-card img {
 		height: 100%;
-		object-fit: cover;
-		object-position: center;
+		object-fit: contain;
+		object-position: top;
 		width: 100%;
 	}
 
@@ -64,7 +62,7 @@
 		text-transform: uppercase;
 	}
 
-	@media (max-width: 25rem) {
+	@media (max-width: 40rem) {
 		.post-card {
 			grid-template-areas:
 				'header'

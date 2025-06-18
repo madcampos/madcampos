@@ -38,7 +38,7 @@
 		padding: var(--spacing-large);
 	}
 
-	@media (max-width: 32.5rem) {
+	@media (max-width: 40rem) {
 		#about {
 			align-items: center;
 			flex-direction: column;

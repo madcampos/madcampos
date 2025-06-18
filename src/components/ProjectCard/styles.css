@@ -93,7 +93,7 @@
 		padding: var(--spacing-small) var(--spacing-medium);
 	}
 
-	@media (max-width: 27.5rem) {
+	@media (max-width: 40rem) {
 		.project-card {
 			grid-template-areas:
 				'header'

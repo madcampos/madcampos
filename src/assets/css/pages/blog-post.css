@@ -125,7 +125,7 @@
 		text-align: center;
 	}
 
-	@media (max-width: 38.4rem) {
+	@media (max-width: 40rem) {
 		#post-header { flex-direction: column; }
 		#post-header header { margin-inline-end: 0; }
 		#post-header #back-to-blog { margin-block-start: var(--spacing-large); }
