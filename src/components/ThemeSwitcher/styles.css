@@ -74,6 +74,7 @@
 		display: flex;
 		flex-grow: 1;
 		flex-wrap: wrap;
+		justify-content: center;
 		overflow: auto;
 		overscroll-behavior: contain;
 	}
@@ -106,10 +107,11 @@
 		height: fit-content;
 		justify-content: start;
 		margin: var(--spacing-medium);
+		max-width: var(--avatar-size);
 		padding: var(--spacing-medium);
 		position: relative;
 		text-align: center;
-		width: var(--avatar-size);
+		width: calc(50% - 1.5rem);
 	}
 
 	#theme-switcher .theme-label svg {
@@ -141,4 +143,6 @@
 		border-color: var(--theme-color);
 		color: var(--theme-color);
 	}
+
+	@media (max-width: 40rem) { #theme-switcher .theme-label { width: 100%; } }
 }
