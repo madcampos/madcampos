@@ -2,54 +2,54 @@
 	.tag-list ul {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-medium);
 		justify-content: start;
-		list-style-type: '';
+		gap: var(--spacing-medium);
 		padding: 0;
+		list-style-type: '';
 	}
 
 	.tag-list .tag {
 		--tag-width: var(--spacing-medium);
 		--tag-height: var(--spacing-medium);
-		color: var(--tag-color);
 		display: inline-block;
-		font-size: var(--small-text);
-		list-style-type: '';
+		position: relative;
 		margin: var(--spacing-small);
-		overflow: visible;
 		padding: var(--spacing-small) var(--spacing-medium);
 		padding-inline-start: calc(var(--tag-width) + var(--spacing-medium));
-		position: relative;
+		overflow: visible;
+		color: var(--tag-color);
+		font-size: var(--small-text);
+		list-style-type: '';
 	}
 
 	.tag-list .tag * {
+		position: relative;
+		outline: none;
 		background-color: transparent;
 		color: inherit;
-		outline: none;
-		position: relative;
 	}
 
 	.tag-list .tag::before {
-		background-color: var(--tag-bg);
-		clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
-		content: '';
-		inset: 0;
-		mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
 		position: absolute;
+		clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
+		mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
+		inset: 0;
+		background-color: var(--tag-bg);
+		content: '';
 	}
 
 	.tag-list .tag:hover::before { background-color: var(--text-color); }
 
 	.tag-list .tag:focus-within {
-		border-radius: var(--border-radius);
-		color: var(--dark-bg-color);
 		outline: var(--theme-color) var(--border-style) var(--border-width);
 		outline-offset: var(--spacing-small);
+		border-radius: var(--border-radius);
+		color: var(--dark-bg-color);
 	}
 
 	.tag-list .tag:hover {
-		color: var(--link-hover-color);
 		outline-color: var(--link-hover-color);
+		color: var(--link-hover-color);
 	}
 
 	@media (prefers-contrast: more) { .tag-list { font-weight: bolder; } }

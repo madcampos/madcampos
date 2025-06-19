@@ -11,12 +11,12 @@
 	summary p { margin: 0; }
 
 	.changelog-draft-tag {
-		background-color: var(--accent-color);
-		border-radius: var(--border-radius);
-		color: var(--bg-color);
 		display: inline-block;
 		margin: var(--spacing-small);
+		border-radius: var(--border-radius);
+		background-color: var(--accent-color);
 		padding: var(--spacing-small) var(--spacing-medium);
+		color: var(--bg-color);
 		text-transform: uppercase;
 	}
 }

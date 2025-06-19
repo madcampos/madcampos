@@ -88,13 +88,13 @@ Now that the font works, we add it to our site CSS using the following snippet:
 
 ```css
 @font-face {
-	font-display: swap;
-	font-family: '<FONT NAME>';
 	font-style: normal;
-	font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
-	font-variant-ligatures: common-ligatures contextual;
 	font-weight: 100 900;
 	src: url('<FONT PATH>') format('woff2-variations');
+	font-family: '<FONT NAME>';
+	font-display: swap;
+	font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
+	font-variant-ligatures: common-ligatures contextual;
 }
 
 :root { --sans-serif-font-family: '<FONT NAME>', 'Arial', system-ui, sans-serif; }

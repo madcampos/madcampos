@@ -1,9 +1,9 @@
 @layer pages {
 	main {
 		margin-inline: auto;
-		max-width: var(--max-width);
 		padding-block-end: var(--spacing-large);
 		width: 100%;
+		max-width: var(--max-width);
 	}
 
 	#contents { margin-inline: min(10vw, var(--min-width)); }

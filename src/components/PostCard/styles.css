@@ -1,30 +1,30 @@
 @layer components {
 	.post-card {
 		--image-size: var(--avatar-size);
-		background-color: var(--bg-color);
-		border: var(--border-style) var(--highlight-border-color) var(--border-width);
-		border-radius: var(--border-radius);
 		display: grid;
-		gap: var(--spacing-large);
+		grid-template-rows: auto 1fr auto auto;
+		grid-template-columns: var(--image-size) 1fr;
 		grid-template-areas:
 			'header header'
 			'picture content'
 			'picture read-more'
 			'footer footer';
-		grid-template-columns: var(--image-size) 1fr;
-		grid-template-rows: auto 1fr auto auto;
+		gap: var(--spacing-large);
 		margin: var(--spacing-large) 0;
+		border: var(--border-style) var(--highlight-border-color) var(--border-width);
+		border-radius: var(--border-radius);
+		background-color: var(--bg-color);
 		padding: var(--spacing-large);
 	}
 
 	.post-card:not(:has(picture)) {
+		grid-template-rows: auto 1fr auto auto;
+		grid-template-columns: 1fr;
 		grid-template-areas:
 			'header'
 			'content'
 			'read-more'
 			'footer';
-		grid-template-columns: 1fr;
-		grid-template-rows: auto 1fr auto auto;
 	}
 
 	.post-card header { grid-area: header; }
@@ -32,20 +32,20 @@
 	.post-card time { font-size: small; }
 
 	.post-card picture {
-		border-radius: var(--border-radius);
 		display: block;
 		grid-area: picture;
+		place-self: center center;
+		border-radius: var(--border-radius);
+		width: var(--image-size);
 		height: var(--image-size);
 		overflow: clip;
-		place-self: center center;
-		width: var(--image-size);
 	}
 
 	.post-card img {
+		width: 100%;
 		height: 100%;
 		object-fit: contain;
 		object-position: top;
-		width: 100%;
 	}
 
 	.post-card .post-card-content { grid-area: content; }
@@ -53,25 +53,25 @@
 	.post-card footer { grid-area: footer; }
 
 	.post-card .post-draft-tag {
-		background-color: var(--accent-color);
-		border-radius: var(--border-radius);
-		color: var(--bg-color);
 		display: inline-block;
 		margin: var(--spacing-small);
+		border-radius: var(--border-radius);
+		background-color: var(--accent-color);
 		padding: var(--spacing-small) var(--spacing-medium);
+		color: var(--bg-color);
 		text-transform: uppercase;
 	}
 
 	@media (max-width: 40rem) {
 		.post-card {
+			grid-template-rows: auto var(--image-size) 1fr auto;
+			grid-template-columns: 1fr;
 			grid-template-areas:
 				'header'
 				'picture'
 				'content'
 				'read-more'
 				'footer';
-			grid-template-columns: 1fr;
-			grid-template-rows: auto var(--image-size) 1fr auto;
 		}
 
 		.post-card picture {

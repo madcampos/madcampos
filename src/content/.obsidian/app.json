@@ -1,14 +1,14 @@
 {
-  "promptDelete": false,
-  "showLineNumber": true,
-  "newFileLocation": "current",
-  "useMarkdownLinks": true,
-  "attachmentFolderPath": "./assets",
-  "alwaysUpdateLinks": true,
-  "newLinkFormat": "relative",
-  "showInlineTitle": true,
-  "readableLineLength": true,
-  "strictLineBreaks": false,
-  "spellcheck": true,
-  "showUnsupportedFiles": false
+	"promptDelete": false,
+	"showLineNumber": true,
+	"newFileLocation": "current",
+	"useMarkdownLinks": true,
+	"attachmentFolderPath": "./assets",
+	"alwaysUpdateLinks": true,
+	"newLinkFormat": "relative",
+	"showInlineTitle": true,
+	"readableLineLength": true,
+	"strictLineBreaks": false,
+	"spellcheck": true,
+	"showUnsupportedFiles": false
 }

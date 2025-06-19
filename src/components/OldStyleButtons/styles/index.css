@@ -59,38 +59,38 @@
 		--button-font-slab: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
 		--button-font-humanist: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 		--button-font-ui: system-ui, sans-serif;
-		background: none;
+		display: inline-flex;
+		position: relative;
+		cursor: pointer;
+		margin: var(--spacing-small);
 		border: var(--old-button-border);
 		border-radius: var(--old-button-border-radius);
-		cursor: pointer;
-		display: inline-flex;
-		height: fit-content;
-		margin: var(--spacing-small);
-		overflow: hidden;
+		background: none;
 		padding: 0;
-		position: relative;
 		width: fit-content;
+		height: fit-content;
+		overflow: hidden;
 	}
 
 	button::after {
+		display: block;
+		position: absolute;
+		mix-blend-mode: var(--old-button-blend-mode);
+		inset: 0;
 		background: var(--old-button-tint);
 		content: '';
-		display: block;
-		inset: 0;
-		mix-blend-mode: var(--old-button-blend-mode);
-		position: absolute;
 	}
 
 	button text {
-		font-family: var(--button-font-humanist);
 		font-size: 8px;
+		font-family: var(--button-font-humanist);
 		text-anchor: middle;
 	}
 
 	button .hidden-text {
 		fill: none;
-		font-size: 1px;
 		pointer-events: none;
+		font-size: 1px;
 		stroke: none;
 		user-select: none;
 	}
@@ -98,9 +98,9 @@
 	button .button-badge-bg { fill: red; }
 	button .button-badge-text {
 		fill: white;
-		font-family: var(--button-font-humanist);
-		font-size: 7px;
 		font-weight: 900;
+		font-size: 7px;
+		font-family: var(--button-font-humanist);
 		text-anchor: start;
 		transform: rotate(-90deg);
 		transform-origin: top left;
@@ -108,10 +108,10 @@
 
 	button .emphasis-text {
 		fill: red;
-		font-family: var(--button-font-hand);
-		font-size: 9px;
-		font-weight: bold;
 		paint-order: stroke;
+		font-weight: bold;
+		font-size: 9px;
+		font-family: var(--button-font-hand);
 		stroke: #d3d3d3;
 	}
 
@@ -132,11 +132,11 @@
 	button :is(#button-border-down, #button-border-right) { fill: black; }
 
 	button:focus-visible {
-		background-color: var(--bg-color);
-		border-radius: var(--border-radius);
-		color: var(--text-color);
 		outline: var(--theme-color) var(--border-style) var(--border-width);
 		outline-offset: var(--spacing-small);
+		border-radius: var(--border-radius);
+		background-color: var(--bg-color);
+		color: var(--text-color);
 	}
 
 	button:hover #button-base { fill: silver; }

@@ -1,17 +1,17 @@
 button #button-base { fill: white; }
 button text {
-	font-size: 8.5px;
 	font-weight: bold;
+	font-size: 8.5px;
 	text-anchor: end;
 }
 
 button #icon-php text:nth-of-type(2) {
 	dominant-baseline: middle;
-	font-family: 'Arial', 'Helvetica', sans-serif;
-	font-size: 18px;
+	paint-order: stroke;
 	font-style: italic;
 	font-weight: bold;
-	paint-order: stroke;
+	font-size: 18px;
+	font-family: 'Arial', 'Helvetica', sans-serif;
 	stroke: white;
 	text-anchor: middle;
 }

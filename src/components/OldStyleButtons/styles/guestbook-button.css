@@ -1,15 +1,15 @@
 button { animation: 3s ease-in-out infinite; }
 button text {
 	fill: black;
-	font-size: 9px;
 	font-weight: bold;
+	font-size: 9px;
 }
 
 button .emphasis-text {
 	fill: dodgerblue;
-	font-size: 10px;
 	transform: rotate(var(--rotate));
 	transform-origin: 50% 50%;
+	font-size: 10px;
 }
 
 button svg { fill: dodgerblue; }

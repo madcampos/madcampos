@@ -2,19 +2,19 @@
 	#page-header {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-large);
 		place-items: center stretch;
+		gap: var(--spacing-large);
 	}
 
 	#page-header h1 {
 		hyphenate-character: '-';
 		hyphenate-limit-chars: 8 3 2;
+		padding: var(--spacing-large);
 		/* stylelint-disable-next-line property-no-vendor-prefix */
 		-webkit-hyphens: auto;
 		hyphens: auto;
 		line-break: loose;
 		overflow-wrap: break-word;
-		padding: var(--spacing-large);
 		text-wrap: balance;
 		word-break: break-word;
 	}
@@ -22,15 +22,15 @@
 	#page-header:has(img) { padding: var(--spacing-large); }
 
 	#page-header img {
+		width: clamp(var(--min-width), 70vmin, var(--medium-width));
 		height: 100%;
 		object-fit: contain;
-		width: clamp(var(--min-width), 70vmin, var(--medium-width));
 	}
 
 	@media (max-width: 25rem) {
 		#page-header img {
-			height: auto;
 			width: calc(100vw - var(--spacing-large) * 2);
+			height: auto;
 		}
 	}
 }

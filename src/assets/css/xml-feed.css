@@ -1,15 +1,15 @@
 #feed-header {
-	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	text-align: center;
 }
 
 #feed-title { flex-grow: 1; }
 
 #metadata {
-	margin-block: var(--spacing-large);
 	margin-inline: auto;
+	margin-block: var(--spacing-large);
 	width: clamp(var(--min-width), 80vw, var(--max-width));
 }
 
@@ -21,49 +21,49 @@ main {
 .item {
 	--image-size: var(--avatar-size);
 	display: grid;
-	gap: var(--spacing-medium);
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: var(--image-size) 1fr;
 	grid-template-areas:
 		'header header'
 		'picture content'
 		'footer footer';
-	grid-template-columns: var(--image-size) 1fr;
-	grid-template-rows: auto 1fr auto;
+	gap: var(--spacing-medium);
 	margin: var(--spacing-large) 0;
 }
 
 .item:not(:has(img)) {
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: 1fr;
 	grid-template-areas:
 		'header header'
 		'content content'
 		'footer footer';
-	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr auto;
 }
 
 .item header { grid-area: header; }
 .item h2 { margin: 0; }
 
 .item .item-metadata {
-	font-size: small;
 	margin-block: var(--spacing-medium);
+	font-size: small;
 }
 
 .item picture {
 	display: block;
 	grid-area: picture;
-	height: var(--image-size);
-	object-fit: cover;
-	object-position: center;
-	overflow: hidden;
 	place-self: center center;
 	width: var(--image-size);
+	height: var(--image-size);
+	overflow: hidden;
+	object-fit: cover;
+	object-position: center;
 }
 
 .item img {
+	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	width: 100%;
 }
 
 .item .item-content { grid-area: content; }
@@ -73,19 +73,19 @@ main {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--spacing-large);
-	list-style: none;
 	margin: var(--spacing-large) 0;
 	padding: 0;
+	list-style: none;
 }
 
 .item .tag {
-	background-color: var(--secondary-color);
-	color: #3c3c3c;
 	display: inline-block;
+	margin: var(--spacing-small);
+	background-color: var(--secondary-color);
+	padding: var(--spacing-small) var(--spacing-medium);
+	color: #3c3c3c;
 	font-size: var(--small-text);
 	list-style: none;
-	margin: var(--spacing-small);
-	padding: var(--spacing-small) var(--spacing-medium);
 }
 
 .item .tag:hover {
@@ -96,12 +96,12 @@ main {
 @media (max-width: 25rem) {
 	.item {
 		--image-size: var(--avatar-small-size);
+		grid-template-rows: auto var(--image-size) 1fr auto;
+		grid-template-columns: 1fr;
 		grid-template-areas:
 			'header'
 			'picture'
 			'content'
 			'footer';
-		grid-template-columns: 1fr;
-		grid-template-rows: auto var(--image-size) 1fr auto;
 	}
 }

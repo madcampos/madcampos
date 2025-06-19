@@ -1,58 +1,58 @@
 @layer components {
 	.post-card {
 		--image-size: var(--avatar-small-size);
-		background: var(--bg-color);
-		border: var(--border-style) var(--highlight-border-color) var(--border-width);
-		border-radius: var(--border-radius);
 		display: grid;
-		gap: var(--spacing-medium);
+		grid-template-rows: auto 1fr;
+		grid-template-columns: var(--image-size) 1fr;
 		grid-template-areas:
 			'picture header'
 			'picture content';
-		grid-template-columns: var(--image-size) 1fr;
-		grid-template-rows: auto 1fr;
-		height: calc(100% - var(--spacing-large) * 3);
+		gap: var(--spacing-medium);
 		margin: var(--spacing-large) 0;
+		border: var(--border-style) var(--highlight-border-color) var(--border-width);
+		border-radius: var(--border-radius);
+		background: var(--bg-color);
 		padding: var(--spacing-medium);
 		width: clamp(var(--min-width), 35cqw, var(--medium-width));
+		height: calc(100% - var(--spacing-large) * 3);
 	}
 
 	.post-card:not(:has(picture)) {
+		grid-template-rows: auto 1fr;
+		grid-template-columns: 1fr;
 		grid-template-areas:
 			'header'
 			'content';
-		grid-template-columns: 1fr;
-		grid-template-rows: auto 1fr;
 	}
 
 	.post-card header { grid-area: header; }
 
 	.post-card h3 {
-		font-size: 1em;
 		margin: 0;
+		font-size: 1em;
 	}
 
 	.post-card picture {
-		border-radius: var(--border-radius);
 		display: block;
 		grid-area: picture;
+		border-radius: var(--border-radius);
+		width: var(--image-size);
 		height: var(--image-size);
+		overflow: clip;
 		object-fit: cover;
 		object-position: center;
-		overflow: clip;
-		width: var(--image-size);
 	}
 
 	.post-card img {
+		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		object-position: center;
-		width: 100%;
 	}
 
 	.post-card .post-card-content {
-		font-size: var(--small-text);
 		grid-area: content;
+		font-size: var(--small-text);
 	}
 
 	@media (max-width: 30rem) { .post-card { --image-size: var(--avatar-mini-size); } }

@@ -65,8 +65,8 @@
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: dark;
-		letter-spacing: 0.07em;
 		line-height: 1.4;
+		letter-spacing: 0.07em;
 	}
 
 	[data-theme='high-contrast'] ::selection {
@@ -96,9 +96,9 @@
 	}
 
 	[data-theme='high-contrast'] code .line.diff {
-		border-block-width: var(--border-width);
-		border-inline-width: 0;
 		border-style: solid;
+		border-inline-width: 0;
+		border-block-width: var(--border-width);
 	}
 
 	[data-theme='high-contrast'] code .line.diff.add { border-color: var(--diff-add-color); }

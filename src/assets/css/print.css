@@ -22,8 +22,8 @@
 		}
 
 		@page {
-			margin-block: 3rem;
 			margin-inline: 1.5rem;
+			margin-block: 3rem;
 		}
 
 		h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
@@ -38,9 +38,9 @@
 		}
 
 		a[rel~='external']::after {
-			background: none;
 			display: inline;
 			vertical-align: baseline;
+			background: none;
 			width: fit-content;
 		}
 

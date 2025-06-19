@@ -1,49 +1,49 @@
 @layer fonts {
 	@font-face {
-		font-display: swap;
-		font-family: 'Cascadia Code';
 		font-style: normal;
-		font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
-		font-variant-ligatures: common-ligatures contextual;
 		font-weight: 100 900;
 		src: url('./fonts/cascadia-code.woff2') format('woff2-variations');
-	}
-
-	@font-face {
-		font-display: swap;
 		font-family: 'Cascadia Code';
-		font-style: italic;
+		font-display: swap;
 		font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
 		font-variant-ligatures: common-ligatures contextual;
+	}
+
+	@font-face {
+		font-style: italic;
 		font-weight: 100 900;
 		src: url('./fonts/cascadia-code-italic.woff2') format('woff2-variations');
+		font-family: 'Cascadia Code';
+		font-display: swap;
+		font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
+		font-variant-ligatures: common-ligatures contextual;
 	}
 
 	@font-face {
-		font-display: swap;
-		font-family: 'Selawik Variable';
 		font-style: normal;
-		font-variant-ligatures: none;
-		font-variant-numeric: diagonal-fractions;
 		font-weight: 100 900;
 		src: url('./fonts/selawik.woff2') format('woff2-variations');
+		font-family: 'Selawik Variable';
+		font-display: swap;
+		font-variant-ligatures: none;
+		font-variant-numeric: diagonal-fractions;
 	}
 
 	@font-face {
-		font-display: optional;
-		font-family: 'Mecano-Light';
 		font-style: normal;
-		font-variant-ligatures: common-ligatures;
 		font-weight: 100;
 		src: url('./fonts/Mecano-Light.woff2') format('woff2');
+		font-family: 'Mecano-Light';
+		font-display: optional;
+		font-variant-ligatures: common-ligatures;
 	}
 
 	@font-face {
-		font-display: optional;
-		font-family: 'Mecano';
 		font-style: normal;
-		font-variant-ligatures: common-ligatures;
 		font-weight: 500;
 		src: url('./fonts/Mecano.woff2') format('woff2');
+		font-family: 'Mecano';
+		font-display: optional;
+		font-variant-ligatures: common-ligatures;
 	}
 }

@@ -1,24 +1,24 @@
 @layer components {
 	#site-nav {
-		background-color: var(--bg-color);
-		border-block-end: var(--border-style) var(--highlight-border-color) var(--border-width);
-		border-end-end-radius: var(--border-radius);
-		border-end-start-radius: var(--border-radius);
 		display: flex;
 		margin-inline: auto;
-		max-width: var(--max-width);
+		border-block-end: var(--border-style) var(--highlight-border-color) var(--border-width);
+		border-end-start-radius: var(--border-radius);
+		border-end-end-radius: var(--border-radius);
+		background-color: var(--bg-color);
 		width: 100%;
+		max-width: var(--max-width);
 	}
 
 	#site-nav ul {
-		align-items: center;
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-large);
 		justify-content: center;
-		list-style-type: '';
+		align-items: center;
+		gap: var(--spacing-large);
 		margin: var(--spacing-large) auto;
 		padding: 0 var(--spacing-large);
 		width: 100%;
+		list-style-type: '';
 	}
 }

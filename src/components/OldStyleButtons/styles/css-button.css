@@ -1,7 +1,7 @@
 button #button-base { fill: url(#button-css-gradient); }
 button text {
-	font-family: var(--button-font-oldstyle);
 	font-style: italic;
+	font-family: var(--button-font-oldstyle);
 }
 
 button:hover #button-css-gradient stop:nth-child(1) { stop-color: white; }

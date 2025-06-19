@@ -1,25 +1,25 @@
 @layer code {
 	pre {
-		background-color: var(--shiki-light-bg, var(--bg-color));
 		border: var(--border-style) var(--border-color) var(--border-width);
 		border-radius: var(--border-radius);
-		font-family: var(--code-font-family);
-		font-size: smaller;
-		overflow: clip;
+		background-color: var(--shiki-light-bg, var(--bg-color));
 		padding: var(--spacing-medium) var(--spacing-small);
+		overflow: clip;
+		font-size: smaller;
+		font-family: var(--code-font-family);
 		tab-size: 2;
 	}
 
 	pre:focus-visible {
-		background-color: var(--shiki-light-bg, var(--bg-color));
 		border-color: transparent;
+		background-color: var(--shiki-light-bg, var(--bg-color));
 	}
 
 	pre span {
 		color: var(--shiki-light, var(--text-color));
-		font-family: var(--code-font-family);
 		font-style: var(--shiki-light-font-style, normal);
 		font-weight: var(--shiki-light-font-weight, normal);
+		font-family: var(--code-font-family);
 		text-decoration: var(--shiki-light-text-decoration, none);
 	}
 
@@ -29,20 +29,20 @@
 		counter-increment: step 0;
 		counter-reset: step;
 		line-height: 1.2;
-		overflow-wrap: break-word;
 		white-space: normal;
 		word-break: break-word;
+		overflow-wrap: break-word;
 	}
 
 	code .line::before {
-		color: var(--border-color);
-		content: counter(step, decimal-leading-zero);
-		counter-increment: step;
 		display: inline-block;
-		margin-left: calc((var(--line-counter-width) + var(--line-counter-margin-right)) * -1);
+		counter-increment: step;
 		margin-right: var(--line-counter-margin-right);
-		text-align: right;
+		margin-left: calc((var(--line-counter-width) + var(--line-counter-margin-right)) * -1);
 		width: var(--line-counter-width);
+		content: counter(step, decimal-leading-zero);
+		color: var(--border-color);
+		text-align: right;
 	}
 
 	code .line {
@@ -55,19 +55,19 @@
 
 	code .line.diff.add { background-color: var(--diff-add-bg); }
 	code .line.diff.add::before {
-		color: var(--diff-add-color);
 		content: '++';
+		color: var(--diff-add-color);
 	}
 
 	code .line.diff.remove { background-color: var(--diff-remove-bg); }
 	code .line.diff.remove::before {
-		color: var(--diff-remove-color);
 		content: '--';
+		color: var(--diff-remove-color);
 	}
 
 	code .line.highlighted {
-		background-color: var(--highlight-default-bg);
 		filter: contrast(0.9) brightness(1.2);
+		background-color: var(--highlight-default-bg);
 	}
 
 	code .line.highlighted.error { background-color: var(--highlight-error-bg); }
@@ -75,9 +75,9 @@
 	code .line.highlighted.warning { background-color: var(--highlight-warning-bg); }
 
 	code .line .highlighted-word {
-		background-color: var(--highlight-default-bg);
 		filter: contrast(0.5) brightness(1.2);
 		outline: var(--border-width) var(--border-style) var(--highlight-color);
+		background-color: var(--highlight-default-bg);
 		padding-inline: var(--spacing-small);
 	}
 
@@ -88,26 +88,26 @@
 	code .line .space::before { content: '·'; }
 
 	pre.has-focused .line {
-		filter: contrast(0.8) brightness(0.8);
 		opacity: 0.8;
+		filter: contrast(0.8) brightness(0.8);
 	}
 
 	pre.has-focused .line.focused {
-		filter: contrast(1.2) brightness(1.2);
 		opacity: 1;
+		filter: contrast(1.2) brightness(1.2);
 	}
 
 	pre.has-focused:focus .line {
-		filter: none;
 		opacity: 1;
+		filter: none;
 	}
 
 	@media screen and (prefers-color-scheme: dark) {
 		pre { background-color: var(--shiki-dark-bg, var(--bg-color)); }
 
 		pre:focus-visible {
-			background-color: var(--shiki-dark-bg, var(--bg-color));
 			border-color: transparent;
+			background-color: var(--shiki-dark-bg, var(--bg-color));
 		}
 
 		pre span {
@@ -129,9 +129,9 @@
 		}
 
 		code .line.diff {
-			border-block-width: var(--border-width);
-			border-inline-width: 0;
 			border-style: solid;
+			border-inline-width: 0;
+			border-block-width: var(--border-width);
 		}
 
 		code .line.diff.add { border-color: var(--diff-add-color); }
@@ -151,10 +151,10 @@
 
 	@media (forced-colors: active) {
 		code .line.diff {
-			background-color: transparent;
-			border-block-width: var(--border-width);
-			border-inline-width: 0;
 			border-style: solid;
+			border-inline-width: 0;
+			border-block-width: var(--border-width);
+			background-color: transparent;
 		}
 
 		code .line.diff span { color: inherit; }
@@ -170,18 +170,18 @@
 		}
 
 		code .line .highlighted-word {
-			background-color: Highlight;
-			color: HighlightText;
 			filter: none;
 			outline: var(--border-width) solid currentColor;
+			background-color: Highlight;
+			color: HighlightText;
 		}
 
 		code .line.highlighted {
-			background-color: Highlight;
+			filter: none;
 			border: var(--border-width) solid currentColor;
 			border-inline-width: 0;
+			background-color: Highlight;
 			color: HighlightText;
-			filter: none;
 		}
 
 		code .line.highlighted span {
@@ -190,14 +190,14 @@
 		}
 
 		code .line.highlighted.error {
-			background-color: Field;
 			border-color: currentColor;
+			background-color: Field;
 			color: GrayText;
 		}
 
 		code .line.highlighted.warning {
-			background-color: Canvas;
 			border-color: LinkText;
+			background-color: Canvas;
 			color: LinkText;
 		}
 
@@ -205,9 +205,9 @@
 		code .line.highlighted:not(:is(.error, .warning)) + .line.highlighted:not(:is(.error, .warning)) { border-block-start-width: 0; }
 
 		pre.has-focused .line {
-			color: LinkText;
-			filter: none;
 			opacity: 0.5;
+			filter: none;
+			color: LinkText;
 		}
 
 		pre.has-focused .line span {
@@ -216,8 +216,8 @@
 		}
 
 		pre.has-focused .line.focused {
-			color: CanvasText;
 			opacity: 1;
+			color: CanvasText;
 		}
 	}
 }

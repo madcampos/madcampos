@@ -1,16 +1,16 @@
 @layer components {
 	#iab-escape[open] {
-		background-color: var(--dark-bg-color);
-		border: var(--border-color) var(--border-style) var(--border-width);
-		border-radius: var(--border-radius);
 		display: flex;
 		flex-direction: column;
-		height: clamp(10rem, 70vh, 35rem);
 		justify-content: center;
-		overscroll-behavior: contain;
+		border: var(--border-color) var(--border-style) var(--border-width);
+		border-radius: var(--border-radius);
+		background-color: var(--dark-bg-color);
 		padding: var(--spacing-large);
-		text-align: center;
 		width: clamp(10rem, 70vw, 35rem);
+		height: clamp(10rem, 70vh, 35rem);
+		overscroll-behavior: contain;
+		text-align: center;
 	}
 
 	#iab-escape::backdrop {

@@ -1,11 +1,11 @@
 @layer pages {
 	#author-list, #contents {
-		align-items: center;
 		display: flex;
 		flex-flow: column wrap;
+		align-items: center;
 		gap: var(--spacing-large);
-		list-style-type: '';
 		margin-block: 0;
 		padding: 0;
+		list-style-type: '';
 	}
 }

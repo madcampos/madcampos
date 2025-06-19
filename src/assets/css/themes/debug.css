@@ -2,19 +2,19 @@
 	[data-theme='debug'] {
 		:is(main, header, footer, aside, form, nav, section, article, h1, h2, h3, h4, h5, h6, img:not([alt]), svg:not(> title)) {
 			--debug-outline-width: 0.1rem;
+			position: relative;
 			outline: var(--debug-outline-width) var(--debug-style, solid) var(--debug-color, black);
 			outline-offset: calc(var(--debug-outline-width) * -1);
-			position: relative;
 
 			&::after {
-				background-color: var(--debug-color, black);
-				color: var(--debug-text-color, white);
-				content: var(--debug-content, 'MISSING CONTENT');
-				font-size: 0.75rem;
+				position: absolute;
 				inset-block-start: 0;
 				inset-inline-end: 0;
+				background-color: var(--debug-color, black);
 				padding: 0.1em;
-				position: absolute;
+				content: var(--debug-content, 'MISSING CONTENT');
+				color: var(--debug-text-color, white);
+				font-size: 0.75rem;
 			}
 		}
 

@@ -6,15 +6,15 @@
 button { animation: 3s steps(2) infinite; }
 button #button-base { fill: tan; }
 button text {
-	font-family: var(--button-font-didone);
-	font-size: 7px;
 	font-weight: bold;
+	font-size: 7px;
+	font-family: var(--button-font-didone);
 }
 
 button tspan:nth-child(1) {
 	fill: brown;
-	font-family: var(--button-font-slab);
 	font-size: 10px;
+	font-family: var(--button-font-slab);
 }
 
 button #button-warning-icon { opacity: var(--opacity); }

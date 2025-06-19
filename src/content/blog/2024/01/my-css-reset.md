@@ -44,11 +44,11 @@ Here is the full reset file, following is a breakdown of each part.
 
 ```css
 :root {
-	accent-color: #0080ff;
 	box-sizing: border-box;
+	accent-color: #0080ff;
 	color-scheme: dark light;
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	font-size: 20px;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: inherit; }
@@ -61,9 +61,9 @@ body { margin: 0; }
 button, input, textarea, select { font: inherit; }
 
 img, picture, svg, canvas, audio, video {
-	block-size: auto;
 	display: block;
 	max-inline-size: 100%;
+	block-size: auto;
 }
 ```
 
@@ -73,8 +73,8 @@ Okay, now for each part and _why_ it is there.
 
 ```css
 :root {
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	font-size: 20px;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 ```
 
@@ -171,9 +171,9 @@ By default, forms use the system font, size and other characteristics. This rule
 
 ```css
 img, picture, svg, canvas, audio, video {
-	block-size: auto;
 	display: block;
 	max-inline-size: 100%;
+	block-size: auto;
 }
 ```
 

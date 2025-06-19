@@ -1,18 +1,18 @@
 @layer components {
 	#pwa-toast {
-		align-items: center;
-		background-color: var(--bg-color);
-		border: var(--border-style) var(--highlight-border-color) var(--border-width);
 		display: none;
+		position: fixed;
+		justify-content: space-between;
+		align-items: center;
 		gap: var(--spacing-medium);
+		z-index: calc(1 * infinity);
+		margin-inline: auto;
 		inset-block-end: var(--spacing-small);
 		inset-inline: 0;
-		justify-content: space-between;
-		margin-inline: auto;
+		border: var(--border-style) var(--highlight-border-color) var(--border-width);
+		background-color: var(--bg-color);
 		padding: var(--spacing-medium) var(--spacing-large);
-		position: fixed;
 		width: clamp(var(--min-width), 100%, var(--medium-width));
-		z-index: calc(1 * infinity);
 	}
 
 	body:not(.js-enabled) #pwa-toast { display: none; }
@@ -20,47 +20,47 @@
 	#pwa-toast:is([data-offline], [data-refresh]) { display: flex; }
 
 	#pwa-toast div {
-		flex-basis: min-content;
 		flex-grow: 1;
+		flex-basis: min-content;
 	}
 
 	#pwa-toast button {
-		background-color: transparent;
+		display: none;
+		place-items: center;
+		cursor: pointer;
 		border: var(--border-width) var(--border-style) var(--border-color);
 		border-radius: 100vmax;
-		color: var(--text-color);
-		cursor: pointer;
-		display: none;
-		height: var(--button-size);
+		background-color: transparent;
 		padding: var(--spacing-small);
-		place-items: center;
 		width: var(--button-size);
+		height: var(--button-size);
+		color: var(--text-color);
 	}
 
 	#pwa-toast button:focus-visible {
-		background-color: var(--theme-color);
 		border-color: var(--text-color);
+		background-color: var(--theme-color);
 		color: var(--text-color);
 	}
 
 	#pwa-toast button:hover {
-		background-color: var(--dark-bg-color);
-		border-color: var(--accent-color);
-		color: var(--accent-color);
 		outline-color: var(--accent-color);
+		border-color: var(--accent-color);
+		background-color: var(--dark-bg-color);
+		color: var(--accent-color);
 	}
 
 	#pwa-toast button:active {
-		background-color: var(--accent-color);
-		border-color: var(--text-color);
-		color: var(--text-color);
 		outline-color: var(--text-color);
+		border-color: var(--text-color);
+		background-color: var(--accent-color);
+		color: var(--text-color);
 	}
 
 	#pwa-toast button svg {
+		width: 100%;
 		height: 100%;
 		pointer-events: none;
-		width: 100%;
 	}
 
 	#pwa-toast[data-offline] #pwa-close { display: grid; }

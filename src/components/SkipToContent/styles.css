@@ -1,14 +1,14 @@
 @layer components {
 	#skip-to-main {
-		background-color: var(--text-color);
-		color: var(--bg-color);
 		display: block;
+		position: absolute;
+		z-index: 9999;
 		inset-block-start: -100%;
 		inset-inline: var(--spacing-medium);
+		background-color: var(--text-color);
 		padding: var(--spacing-medium);
-		position: absolute;
+		color: var(--bg-color);
 		text-align: center;
-		z-index: 9999;
 	}
 
 	#skip-to-main:focus-visible { inset-block-start: var(--spacing-medium); }

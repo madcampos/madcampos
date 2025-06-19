@@ -1,12 +1,12 @@
 button text {
-	font-size: 7px;
 	font-weight: bold;
+	font-size: 7px;
 }
 
 button text tspan:nth-child(2) {
 	fill: darkorchid;
-	font-family: var(--button-font-oldstyle);
 	font-size: 12px;
+	font-family: var(--button-font-oldstyle);
 }
 
 button #button-base { fill: whitesmoke; }

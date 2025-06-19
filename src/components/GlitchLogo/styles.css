@@ -1,19 +1,19 @@
 @layer components {
 	#glitched-logo-svg {
-		height: var(--avatar-size);
 		width: var(--avatar-size);
+		height: var(--avatar-size);
 	}
 
 	#glitched-logo-svg #logo {
 		fill: currentcolor;
-		image-rendering: pixelated;
 		transform: scale(1.4);
 		transform-origin: center;
+		image-rendering: pixelated;
 	}
 
 	#glitched-logo-svg #pixelated-logo {
-		color: var(--bg-color);
 		filter: url('#pixelate-filter');
+		color: var(--bg-color);
 	}
 
 	#glitched-logo-svg #glitch-logo {
@@ -22,14 +22,14 @@
 	}
 
 	#glitched-logo-svg #overlay-logo {
-		color: var(--complementary-color);
-		mix-blend-mode: overlay;
 		opacity: 0.6;
+		mix-blend-mode: overlay;
+		color: var(--complementary-color);
 	}
 
 	#glitched-logo-svg #noise-logo {
-		color: var(--theme-color);
 		filter: url('#noise-filter');
+		color: var(--theme-color);
 	}
 
 	@media (prefers-reduced-motion: no-preference) { #glitched-logo-svg #glitch-logo { filter: url('#animated-glitch-filter'); } }
