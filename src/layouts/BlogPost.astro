@@ -1,20 +1,20 @@
 ---
 import type { RelatedPost } from '../utils/post';
 
-import { BLOG, BLOG_TAGS } from '../constants.js';
-import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
-import { join } from '../utils/path.js';
-
-import '../assets/css/pages/blog-post.css';
-import '../assets/css/code.css';
-
 import AuthorCard from '../components/AuthorCard/index.astro';
+import Card from '../components/Card/index.astro';
+import CardImage from '../components/CardImage/index.astro';
 import OldButtons from '../components/OldStyleButtons/index.astro';
-import PostCardSmall from '../components/PostCardSmall/index.astro';
 import PostHeader from '../components/PostHeader/index.astro';
 import SkipToContent from '../components/SkipToContent/index.astro';
 import TagList from '../components/TagList/index.astro';
+import { BLOG, BLOG_TAGS } from '../constants.js';
+import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import { join } from '../utils/path.js';
 import BaseLayout from './Base.astro';
+
+import '../assets/css/pages/blog-post.css';
+import '../assets/css/code.css';
 
 interface Props {
 	title: string;
@@ -51,6 +51,7 @@ const {
 	draft,
 	relatedPosts
 } = Astro.props;
+
 const postUrl = join([BLOG.url, url]);
 const formatUpdateDate = (date: Date) =>
 	new Intl.DateTimeFormat('en-US', {
@@ -167,15 +168,24 @@ const formatUpdateDate = (date: Date) =>
 								{
 									relatedPosts.map((post) => (
 										<li>
-											<PostCardSmall
+											<Card
 												url={join([BLOG.url, post.url])}
-												image={post.image}
-												imageAlt={post.imageAlt}
+												itemtype="https://schema.org/BlogPosting"
 											>
+												{
+													post.image && (
+														<CardImage
+															slot="image"
+															image={post.image}
+															imageAlt={post.imageAlt ?? ''}
+														/>
+													)
+												}
+
 												<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(post.title))} />
 
 												<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.summary))} />
-											</PostCardSmall>
+											</Card>
 										</li>
 									))
 								}

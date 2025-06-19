@@ -1,0 +1,55 @@
+@layer pages {
+	.card .card-subtitle {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--spacing-medium);
+	}
+
+	.card .project-status {
+		padding: var(--spacing-small) var(--spacing-medium);
+		color: var(--dark-bg-color);
+	}
+
+	.card .project-status[data-status='finished'] { background-color: limegreen; }
+	.card .project-status[data-status='ongoing'] { background-color: orange; }
+
+	.card picture {
+		display: block;
+		mask: url('../../images/squircle.svg');
+		mask-position: center;
+		mask-size: contain;
+		mask-repeat: no-repeat;
+		aspect-ratio: 1 / 1;
+		width: 100%;
+		height: auto;
+		max-height: 100%;
+		overflow: hidden;
+	}
+
+	.card picture img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: top center;
+	}
+
+	.card .technology-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-large);
+		margin: var(--spacing-large) 0;
+		padding: 0;
+		list-style-type: '';
+	}
+
+	.card .tag {
+		display: inline-block;
+		margin: 0;
+		background-color: var(--tag-bg);
+		padding: var(--spacing-small) var(--spacing-medium);
+		color: var(--tag-color);
+		font-size: var(--small-text);
+		list-style-type: '';
+	}
+}

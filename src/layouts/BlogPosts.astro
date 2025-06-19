@@ -1,20 +1,18 @@
 ---
-import type { Post } from '../utils/post';
-
+import blogSocialImage from '../assets/images/social/social-blog.png';
+import Card from '../components/Card/index.astro';
+import CardImage from '../components/CardImage/index.astro';
 import OldButtons from '../components/OldStyleButtons/index.astro';
 import PageHeader from '../components/PageHeader/index.astro';
 import Pagination from '../components/Pagination/index.astro';
-import PostCard from '../components/PostCard/index.astro';
 import SkipToContent from '../components/SkipToContent/index.astro';
-import BaseLayout from './Base.astro';
-
-import { BLOG } from '../constants.js';
-import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
+import TagList from '../components/TagList/index.astro';
+import { BLOG, BLOG_TAGS } from '../constants.js';
+import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
-
+import type { Post } from '../utils/post';
+import BaseLayout from './Base.astro';
 import '../assets/css/pages/blog.css';
-
-import blogSocialImage from '../assets/images/social/social-blog.png';
 
 interface Props {
 	posts: Post[];
@@ -45,6 +43,8 @@ const {
 	total,
 	size
 } = Astro.props;
+
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 ---
 <BaseLayout
 	htmlTitle={[title, ...BLOG.title].filter(Boolean)}
@@ -69,18 +69,45 @@ const {
 	<div id="posts-list">
 		{
 			posts.map((post) => (
-				<PostCard
+				<Card
 					url={join([BLOG.url, post.url])}
-					title={post.data.title}
-					createdAt={post.data.createdAt.toISOString()}
-					image={post.data.image}
-					imageAlt={post.data.imageAlt}
-					tags={post.data.tags}
+					itemtype="https://schema.org/BlogPosting"
 					draft={post.data.draft}
 				>
-					<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(post.data.title))} />
+					{
+						post.data.image && (
+							<CardImage
+								slot="image"
+								image={post.data.image}
+								imageAlt={post.data.imageAlt ?? ''}
+							/>
+						)
+					}
+
+					<h2 slot="title">
+						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.title))} />
+					</h2>
+					<small slot="subtitle" class="post-time">
+						<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
+					</small>
+
 					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.summary))} />
-				</PostCard>
+
+					<a slot="links" class="read-more-link" href={join([BLOG.url, post.url])}>
+						<span>Read more</span>
+						<span class="visually-hidden">about "{inlineMarkdownStrip(escapeHtmlTags(post.data.title))}"</span>
+						<span>...</span>
+					</a>
+					{
+						post.data.tags && post.data.tags.length > 0 && (
+							<TagList
+								slot="footer"
+								tags={Object.fromEntries(post.data.tags.map((tag) => [tag, join([BLOG_TAGS.url, tag])]))}
+								isOpen={false}
+							/>
+						)
+					}
+				</Card>
 			))
 		}
 	</div>

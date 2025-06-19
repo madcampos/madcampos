@@ -101,16 +101,18 @@
 		display: flex;
 		flex-wrap: nowrap;
 		justify-content: start;
+		align-items: start;
 		gap: var(--spacing-large);
 		margin: 0;
 		padding: 0;
-		width: 100%;
+		width: fit-content;
 		scroll-behavior: smooth;
 		scroll-snap-type: x mandatory;
 		list-style-type: '';
 	}
 
 	#related-posts li {
+		width: 10rem;
 		scroll-margin: var(--spacing-large);
 		scroll-snap-align: center;
 		scroll-snap-stop: always;

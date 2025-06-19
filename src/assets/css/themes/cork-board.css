@@ -165,8 +165,8 @@
 
 	[data-theme='cork-board'] #site-nav ul { list-style: none; }
 
-	[data-theme='cork-board'] :is(.post-card, .project-card, .talk-card) { position: relative; }
-	[data-theme='cork-board'] :is(.post-card, .project-card, .talk-card)::after {
+	[data-theme='cork-board'] .card { position: relative; }
+	[data-theme='cork-board'] .card::after {
 		--details-size: 5rem;
 		display: block;
 		position: absolute;
@@ -178,14 +178,14 @@
 		pointer-events: none;
 	}
 
-	[data-theme='cork-board'] :is(.post-card, .project-card, .talk-card):nth-of-type(2n)::after {
+	[data-theme='cork-board'] .card-container:nth-of-type(2n) .card::after {
 		inset-block-start: calc(var(--details-size) * 0.3 * -1);
 		inset-inline-end: calc(var(--details-size) * 0.3 * -1);
 		background-image: url('./uwu/details1.svg');
 		content: '';
 	}
 
-	[data-theme='cork-board'] :is(.post-card, .project-card, .talk-card):nth-of-type(3n)::after {
+	[data-theme='cork-board'] .card-container:nth-of-type(3n) .card::after {
 		inset: auto;
 		inset-block-end: calc(var(--details-size) * 0.4 * -1);
 		inset-inline-start: calc(var(--details-size) * 0.3 * -1);
@@ -193,15 +193,15 @@
 		content: '';
 	}
 
-	[data-theme='cork-board'] .project-icon {
+	[data-theme='cork-board'] .project-card picture {
 		position: relative;
 		mask: none;
 		overflow: visible;
 	}
 
-	[data-theme='cork-board'] .project-icon img { border-radius: 100vmax; }
+	[data-theme='cork-board'] .project-card picture img { border-radius: 100vmax; }
 
-	[data-theme='cork-board'] .project-icon::after {
+	[data-theme='cork-board'] .project-card picture::after {
 		display: block;
 		position: absolute;
 		inset: 0;

@@ -154,8 +154,8 @@
 		content: none;
 	}
 
-	[data-theme='y2k'] :is(.post-card, .talk-card, .project-card) { border: silver ridge var(--border-width); }
-	[data-theme='y2k'] .project-card picture {
+	[data-theme='y2k'] .card { border: silver ridge var(--border-width); }
+	[data-theme='y2k'] .card picture {
 		mask: none;
 		border: silver ridge var(--border-width);
 	}

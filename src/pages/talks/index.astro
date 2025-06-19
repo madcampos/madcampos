@@ -1,17 +1,19 @@
 ---
-import Logo from '../../components/Logo/index.astro';
-import TalkCard from '../../components/TalkCard/index.astro';
-import InternalPageLayout from '../../layouts/InternalPage.astro';
-
-import { TALKS } from '../../constants.js';
-import { join } from '../../utils/path.js';
-
-import { listAllTalks } from '../../utils/talks.js';
-
+import { Icon } from 'astro-icon/components';
 import talksSocialImage from '../../assets/images/social/social-talks.png';
+import Card from '../../components/Card/index.astro';
+import CardImage from '../../components/CardImage/index.astro';
+import Logo from '../../components/Logo/index.astro';
+import { TALKS } from '../../constants.js';
+import InternalPageLayout from '../../layouts/InternalPage.astro';
 import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
+import { join } from '../../utils/path.js';
+import { listAllTalks } from '../../utils/talks.js';
+import '../../assets/css/pages/talks.css';
 
 const talks = await listAllTalks();
+
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 ---
 
 <InternalPageLayout
@@ -35,19 +37,85 @@ const talks = await listAllTalks();
 
 	{
 		talks.map((talk) => (
-			<TalkCard
+			<Card
 				draft={talk.data.draft}
 				url={join([TALKS.url, talk.id])}
-				isOnline={talk.data.isOnline}
-				address={talk.data.address}
-				event={talk.data.event}
-				date={talk.data.date}
-				image={talk.data.image}
-				imageAlt={talk.data.imageAlt}
+				itemtype="https://schema.org/Event"
 			>
-				<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.title))} />
+				<Fragment slot="metadata">
+					<meta
+						itemprop="eventAttendanceMode"
+						content={talk.data.isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'}
+					/>
+					<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
+					<div itemprop="location" itemscope itemtype={talk.data.isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+						<meta itemprop={talk.data.isOnline ? 'url' : 'address'} content={talk.data.isOnline ? join([TALKS.url, talk.id]) : talk.data.address} />
+					</div>
+				</Fragment>
+
+				{
+					talk.data.image && (
+						<CardImage
+							slot="image"
+							image={talk.data.image}
+							imageAlt={talk.data.imageAlt ?? ''}
+						/>
+					)
+				}
+
+				<h2 slot="title">
+					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.title))} />
+				</h2>
+
+				<Fragment slot="subtitle">
+					{
+						talk.data.date && (
+							<span>
+								<Icon name="uil:calendar-alt" title="Event Date" />
+								{
+									talk.data.date ? (
+										<meta itemprop="startDate" content={talk.data.date.toISOString()} />
+										<time datetime={talk.data.date.toISOString()}>{formatter.format(talk.data.date)}</time>
+									) : <span>&mdash;</span>
+								}
+							</span>
+						)
+					}
+					{
+						talk.data.event && (
+							<span itemprop="superEvent">
+								<meta itemprop="startDate" content={talk.data.date ? talk.data.date.toISOString() : '0000-01-01T00:00:00.000Z'} />
+								<meta
+									itemprop="eventAttendanceMode"
+									content={talk.data.isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'}
+								/>
+								<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
+								<div itemprop="location" itemscope itemtype={talk.data.isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+									<meta itemprop={talk.data.isOnline ? 'url' : 'address'} content={talk.data.isOnline ? join([TALKS.url, talk.id]) : talk.data.address} />
+								</div>
+
+								<Icon name="uil:presentation-play" title="Event name" />
+								<span>
+									<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.event))} />
+								</span>
+							</span>
+						)
+					}
+				</Fragment>
+
 				<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.summary))} />
-			</TalkCard>
+
+				<Fragment slot="links">
+					<a href={join([TALKS.url, talk.id])} itemprop="url">
+						<Icon name="uil:presentation-plus" title="" />
+						<span>View Talk Info</span>
+						<span class="visually-hidden">
+							for
+							<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.title))} />
+						</span>
+					</a>
+				</Fragment>
+			</Card>
 		))
 	}
 </InternalPageLayout>

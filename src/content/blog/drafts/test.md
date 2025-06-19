@@ -11,6 +11,10 @@ tags:
   - HTML
 relatedPosts:
   - test
+  - test
+  - test
+  - test
+  - test
 ---
 
 This is a test for markdown syntax.

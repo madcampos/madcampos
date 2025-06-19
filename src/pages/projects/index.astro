@@ -1,14 +1,15 @@
 ---
+import { Icon } from 'astro-icon/components';
+import projectsSocialImage from '../../assets/images/social/social-proj.png';
+import Card from '../../components/Card/index.astro';
+import CardImage from '../../components/CardImage/index.astro';
 import Logo from '../../components/Logo/index.astro';
-import ProjectCard from '../../components/ProjectCard/index.astro';
-import InternalPageLayout from '../../layouts/InternalPage.astro';
-
 import { PROJECTS } from '../../constants.js';
-
+import InternalPageLayout from '../../layouts/InternalPage.astro';
+import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 import { listAllProjects } from '../../utils/projects.js';
 
-import projectsSocialImage from '../../assets/images/social/social-proj.png';
-import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
+import '../../assets/css/pages/projects.css';
 
 const projects = await Promise.all((await listAllProjects()).map(async (project) => {
 	const { Content } = await project.render();
@@ -18,6 +19,8 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 		Content
 	};
 }));
+
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 ---
 <InternalPageLayout
 	htmlTitle={PROJECTS.title}
@@ -40,23 +43,86 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 
 	{
 		projects.map(({ Content, data }) => (
-			<ProjectCard
-				draft={data.draft}
-				status={data.status}
-				createdAt={data.createdAt}
-				updatedAt={data.updatedAt}
-				version={data.version}
+			<Card
+				class="project-card"
 				url={data.url}
-				image={data.image}
-				imageAlt={data.imageAlt}
-				themeImages={data.themeImages}
-				techStack={data.techStack}
-				repository={data.repository}
+				draft={data.draft}
+				itemtype="http://schema.org/WebApplication"
 			>
-				<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(data.title))} />
+				<Fragment slot="meta">
+					<meta itemprop="operatingSystem" content="https://schema.org/AllOperatingSystem" />
+					<meta itemprop="browserRequirements" content="https://schema.org/GenericWebPlatform" />
+					<meta itemprop="applicationCategory" content="BrowserApplication" />
+					<div itemprop="offers" itemscope itemtype="https://schema.org/Offer" hidden>
+						<meta itemprop="availability" content="https://schema.org/InStock" />
+						<meta itemprop="price" content="0" />
+						<meta itemprop="priceCurrency" content="USD" />
+					</div>
+					<meta itemprop="isAccessibleForFree" content="True" />
+				</Fragment>
+
+				{
+					data.image && (
+						<CardImage
+							slot="image"
+							image={data.image}
+							imageAlt={data.imageAlt ?? ''}
+							themeImages={data.themeImages}
+						/>
+					)
+				}
+				<h2 slot="title">
+					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(data.title))} />
+				</h2>
+
+				<Fragment slot="subtitle">
+					<span class="project-status" data-status={data.status}>
+						<Icon name={data.status === 'ongoing' ? 'uil:history' : 'uil:check-circle'} title="Project status" /> {data.status === 'ongoing' ? 'Ongoing' : 'Finished'}
+					</span>
+					<span>
+						<Icon name="uil:calendar-alt" title="Date started" />
+						<time datetime={data.createdAt.toISOString()} itemprop="dateCreated">{formatter.format(data.createdAt)}</time>
+						{data.updatedAt && <span>&mdash; <time datetime={data.updatedAt.toISOString()} itemprop="dateModified">{formatter.format(data.updatedAt)}</time></span>}
+					</span>
+					<span itemprop="softwareVersion">
+						<Icon name="uil:box" title="Current version" /> {data.version}
+					</span>
+				</Fragment>
 
 				<Content />
-			</ProjectCard>
+
+				<Fragment slot="links">
+					{
+						data.url && (
+							<a href={data.url} rel="noopener noreferrer" itemprop="installUrl">
+								<Icon name="uil:link" title="" />
+								View Project
+							</a>
+						)
+					}
+					&nbsp;
+					{
+						data.repository && (
+							<a href={data.repository} rel="noopener noreferrer">
+								<Icon name="uil:github" title="" />
+								View Repository
+							</a>
+						)
+					}
+				</Fragment>
+
+				<details slot="footer">
+					<summary>
+						<span>
+							<Icon name="uil:cog" title="" />
+							Technologies used
+						</span>
+					</summary>
+					<ul class="technology-tags">
+						{data.techStack?.map((tech) => <li class="tag">{tech}</li>)}
+					</ul>
+				</details>
+			</Card>
 		))
 	}
 </InternalPageLayout>

@@ -147,9 +147,9 @@
 		content: none;
 	}
 
-	[data-theme='hacker'] :is(.post-card, .talk-card, .project-card) { border: solid currentColor var(--border-width); }
+	[data-theme='hacker'] .card { border: solid currentColor var(--border-width); }
 
-	[data-theme='hacker'] :is(.post-card, .talk-card) picture { filter: url('#small-pixelate-filter'); }
+	[data-theme='hacker'] .card picture { filter: url('#small-pixelate-filter'); }
 
 	[data-theme='hacker'] .project-card picture {
 		display: grid;
@@ -171,8 +171,8 @@
 		content: '';
 	}
 
-	[data-theme='hacker'] .project-card img { display: none; }
-	[data-theme='hacker'] .project-card img[data-theme-image='hacker'] { display: block; }
+	[data-theme='hacker'] .project-card picture img { display: none; }
+	[data-theme='hacker'] .project-card picture img[data-theme-image='hacker'] { display: block; }
 
 	[data-theme='hacker'] .logo-part { fill: var(--theme-color); }
 
