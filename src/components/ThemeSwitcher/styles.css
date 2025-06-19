@@ -1,6 +1,9 @@
 @layer components {
-	/* INFO: fix for safari */
-	#theme-switcher { display: inline-block; }
+	#theme-switcher {
+		/* INFO: fix for safari */
+		display: inline-block;
+		align-self: center;
+	}
 
 	body:not(.js-enabled) #theme-switcher { display: none; }
 

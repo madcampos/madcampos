@@ -2,14 +2,15 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import Avatar from '../../../components/Avatar/index.astro';
 import Logo from '../../../components/Logo/index.astro';
-import OldButtons from '../../../components/OldStyleButtons/index.astro';
+import OldButtons from '../../../components/OldStyleButtons/OldStyleButtons.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
+import Webrings from '../../../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
 import BaseLayout from '../../../layouts/Base.astro';
 import { listAllAuthors } from '../../../utils/authors.js';
+import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../../../utils/markdown.js';
 import '../../../assets/css/pages/internal-page.css';
 import '../../../assets/css/pages/authors.css';
-import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../../../utils/markdown.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
@@ -63,4 +64,5 @@ const { Content } = await render();
 	</div>
 
 	<OldButtons slot="footer" />
+	<Webrings slot="footer" />
 </BaseLayout>

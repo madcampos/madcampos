@@ -4,10 +4,11 @@ import type { RelatedPost } from '../utils/post';
 import AuthorCard from '../components/AuthorCard/index.astro';
 import Card from '../components/Card/index.astro';
 import CardImage from '../components/CardImage/index.astro';
-import OldButtons from '../components/OldStyleButtons/index.astro';
+import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import PostHeader from '../components/PostHeader/index.astro';
 import SkipToContent from '../components/SkipToContent/index.astro';
 import TagList from '../components/TagList/index.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_TAGS } from '../constants.js';
 import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
@@ -207,4 +208,5 @@ const formatUpdateDate = (date: Date) =>
 	</Fragment>
 
 	<OldButtons slot="footer" />
+	<Webrings slot="footer" />
 </BaseLayout>

@@ -1,0 +1,25 @@
+---
+import { Icon } from 'astro-icon/components';
+import Webring from './Webring.astro';
+import './styles.css';
+---
+<details id="webrings">
+	<summary>
+		<h2 id="webrings-label">
+			<Icon name="uil:globe" title="" role="presentation" />
+			<span>Webrings links</span>
+		</h2>
+	</summary>
+
+	<div id="webrings-list">
+		<Webring
+			id="a11y-webring-club"
+			prevLink="https://a11y-webring.club/prev"
+			nextLink="https://a11y-webring.club/next"
+			randomLink="https://a11y-webring.club/random"
+		>
+			<Fragment slot="title">a11y-webring.club</Fragment>
+			<p>This site is a member of the <a rel="external" href="https://a11y-webring.club/">a11y-webring.club</a>.</p>
+		</Webring>
+	</div>
+</details>

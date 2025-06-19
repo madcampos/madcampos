@@ -196,4 +196,15 @@
 		pointer-events: none;
 		user-select: none;
 	}
+
+	#page-footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		align-items: stretch;
+		gap: var(--spacing-medium);
+		margin-inline: auto;
+		padding: var(--spacing-large);
+		width: clamp(var(--min-width), 80vw, var(--max-width));
+	}
 }

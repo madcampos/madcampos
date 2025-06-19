@@ -1,14 +1,15 @@
 ---
+import '../../../assets/css/pages/internal-page.css';
+import '../../../assets/css/pages/tags.css';
+import blogSocialImage from '../../../assets/images/social/social-blog.png';
 import Logo from '../../../components/Logo/index.astro';
-import OldButtons from '../../../components/OldStyleButtons/index.astro';
+import OldButtons from '../../../components/OldStyleButtons/OldStyleButtons.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
+import Webrings from '../../../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_TAGS } from '../../../constants.js';
 import BaseLayout from '../../../layouts/Base.astro';
 import { join } from '../../../utils/path.js';
 import { listPostsByTag } from '../../../utils/post';
-import '../../../assets/css/pages/internal-page.css';
-import '../../../assets/css/pages/tags.css';
-import blogSocialImage from '../../../assets/images/social/social-blog.png';
 
 const tags = Object.keys(await listPostsByTag());
 ---
@@ -53,4 +54,5 @@ const tags = Object.keys(await listPostsByTag());
 	</div>
 
 	<OldButtons slot="footer" />
+	<Webrings slot="footer" />
 </BaseLayout>

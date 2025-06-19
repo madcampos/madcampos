@@ -30,14 +30,6 @@
 		margin: var(--spacing-medium);
 	}
 
-	footer {
-		display: flex;
-		justify-content: end;
-		align-items: center;
-		gap: var(--spacing-medium);
-		padding: var(--spacing-large);
-	}
-
 	@media (max-width: 50rem) {
 		#about {
 			flex-direction: column;
@@ -48,7 +40,5 @@
 			width: clamp(var(--min-width), 60vw, var(--medium-width));
 			height: clamp(var(--min-width), 60vw, var(--medium-width));
 		}
-
-		footer { flex-direction: column; }
 	}
 }

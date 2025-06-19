@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	id: string;
+	prevLink: string;
+	nextLink: string;
+	randomLink?: string;
+}
+
+const { id, prevLink, nextLink, randomLink } = Astro.props;
+---
+<article {id} class="webring" aria-labelledby={`${id}-header`}>
+	<h3 id={`${id}-header`}>
+		<slot name="title"></slot>
+	</h3>
+
+	<blockquote>
+		<slot></slot>
+	</blockquote>
+
+	<ul>
+		<li class="webring-previous-website">
+			<a rel="external" referrerpolicy="strict-origin" rel="external noopener" href={prevLink}>
+				<Icon name="uil:angle-double-left" title="" role="presentation" />
+				<span>Previous website</span>
+			</a>
+		</li>
+		{
+			randomLink && (
+				<li>
+					<a rel="external" referrerpolicy="strict-origin" rel="external noopener" href={randomLink}>
+						<Icon name="uil:arrow-random" title="" role="presentation" />
+						<span>Random website</span>
+					</a>
+				</li>
+			)
+		}
+		<li class="webring-next-website">
+			<a rel="external" referrerpolicy="strict-origin" rel="external noopener" href={nextLink}>
+				<span>Next website</span>
+				<Icon name="uil:angle-double-right" title="" role="presentation" />
+			</a>
+		</li>
+	</ul>
+</article>

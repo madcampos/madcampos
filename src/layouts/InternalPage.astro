@@ -1,9 +1,10 @@
 ---
 import '../assets/css/pages/internal-page.css';
 
-import OldButtons from '../components/OldStyleButtons/index.astro';
+import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import PageHeader from '../components/PageHeader/index.astro';
 import SkipToContent from '../components/SkipToContent/index.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import BaseLayout from './Base.astro';
 
 interface Props {
@@ -59,4 +60,5 @@ const {
 
 	<slot name="footer" slot="footer"></slot>
 	<OldButtons slot="footer" />
+	<Webrings slot="footer" />
 </BaseLayout>
