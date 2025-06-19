@@ -11,6 +11,7 @@
 
 	#post-draft-tag {
 		display: inline-block;
+		grid-area: draft;
 		margin: var(--spacing-small);
 		border-radius: var(--border-radius);
 		background-color: var(--accent-color);
@@ -26,7 +27,7 @@
 		grid-template-rows: auto 1fr auto auto auto;
 		grid-template-columns: 1fr 1fr;
 		grid-template-areas:
-			'menu hero-image'
+			'draft hero-image'
 			'title hero-image'
 			'summary hero-image'
 			'metadata metadata'
@@ -42,13 +43,14 @@
 	}
 
 	#post-header-wrapper:not(:has(#hero-image)) {
-		grid-template-rows: 1fr auto auto auto;
-		grid-template-columns: auto 1fr;
+		grid-template-rows: auto 1fr auto auto auto;
+		grid-template-columns: 1fr;
 		grid-template-areas:
-			'menu title'
-			'summary summary'
-			'metadata metadata'
-			'share share';
+			'draft'
+			'title'
+			'summary'
+			'metadata'
+			'share';
 	}
 
 	#post-header h1 {
@@ -160,10 +162,11 @@
 
 	@container post-header (max-width: 40rem) {
 		#post-header-wrapper {
-			grid-template-rows: 1fr auto auto auto auto;
+			grid-template-rows: 1fr auto auto auto auto auto;
 			grid-template-columns: 1fr;
 			grid-template-areas:
 				'hero-image'
+				'draft'
 				'title'
 				'summary'
 				'metadata'
