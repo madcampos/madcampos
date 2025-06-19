@@ -194,5 +194,6 @@
 		height: 1px;
 		overflow: hidden;
 		pointer-events: none;
+		user-select: none;
 	}
 }
