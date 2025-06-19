@@ -1,13 +1,11 @@
 import type { ElementContent } from 'hast';
 import type { Root } from 'mdast';
 import type { ContainerDirective, LeafDirective, TextDirective } from 'mdast-util-directive';
-
 import { visit } from 'unist-util-visit';
 import { features } from 'web-features';
-
-import { render as renderBaseline } from '../components/Baseline/index.js';
-import { render as renderCodepen } from '../components/CodepenEmbed/index.js';
-import { render as renderYoutube } from '../components/YoutubeEmbed/index.js';
+import { render as renderBaseline } from '../components/Baseline/Baseline.ts';
+import { render as renderCodepen } from '../components/CodepenEmbed/CodepenEmbed.ts';
+import { render as renderYoutube } from '../components/YoutubeEmbed/YoutubeEmbed.ts';
 
 interface VFile {
 	fail(reason: string, parentNode?: unknown): void;

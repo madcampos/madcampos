@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-
 import cssBase from '../../assets/css/base.css?raw';
 import cssFonts from '../../assets/css/fonts.css?raw';
 import cssVars from '../../assets/css/vars.css?raw';

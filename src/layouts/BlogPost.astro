@@ -1,21 +1,19 @@
 ---
-import type { RelatedPost } from '../utils/post';
-
-import AuthorCard from '../components/AuthorCard/index.astro';
-import Card from '../components/Card/index.astro';
-import CardImage from '../components/CardImage/index.astro';
+import '../assets/css/pages/blog-post.css';
+import '../assets/css/code.css';
+import AuthorCard from '../components/AuthorCard/AuthroCard.astro';
+import Card from '../components/Card/Card.astro';
+import CardImage from '../components/CardImage/CardImage.astro';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
-import PostHeader from '../components/PostHeader/index.astro';
-import SkipToContent from '../components/SkipToContent/index.astro';
-import TagList from '../components/TagList/index.astro';
+import PostHeader from '../components/PostHeader/PostHeader.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import TagList from '../components/TagList/TagList.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_TAGS } from '../constants.js';
 import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
+import type { RelatedPost } from '../utils/post';
 import BaseLayout from './Base.astro';
-
-import '../assets/css/pages/blog-post.css';
-import '../assets/css/code.css';
 
 interface Props {
 	title: string;

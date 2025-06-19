@@ -1,10 +1,9 @@
 ---
+import './styles.css';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
-import SiteNav from '../SiteNav/index.astro';
-
-import './styles.css';
+import SiteNav from '../SiteNav/SiteNav.astro';
 
 interface Props {
 	url: string;

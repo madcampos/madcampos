@@ -1,17 +1,17 @@
 ---
+import '../assets/css/pages/triangle.css';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import SiteNav from '../components/SiteNav/index.astro';
-import SkipToContent from '../components/SkipToContent/index.astro';
-import { GLOBALS } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
-import '../assets/css/pages/triangle.css';
 import customer from '../assets/images/piramid/customer.jpg';
 import eMusk from '../assets/images/piramid/e-musk.jpg';
 import ligMa from '../assets/images/piramid/ligma.jpg';
 import mScott from '../assets/images/piramid/m-scott.jpg';
 import mrCreature from '../assets/images/piramid/mr-creature.jpg';
 import richHero from '../assets/images/piramid/rich1.png';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import { GLOBALS } from '../constants.js';
+import BaseLayout from '../layouts/Base.astro';
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
 const IMAGE_WIDTHS = [128, 256, 512, 768, richHero.width];

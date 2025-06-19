@@ -1,13 +1,13 @@
 ---
+import '../../assets/css/pages/talk.css';
+import '../../assets/css/code.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
-import Logo from '../../components/Logo/index.astro';
+import Logo from '../../components/Logo/Logo.astro';
 import { TALKS } from '../../constants.js';
 import InternalPageLayout from '../../layouts/InternalPage.astro';
 import { join } from '../../utils/path.js';
 import { listAllTalks } from '../../utils/talks.js';
-import '../../assets/css/pages/talk.css';
-import '../../assets/css/code.css';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

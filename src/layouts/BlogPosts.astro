@@ -1,19 +1,19 @@
 ---
+import '../assets/css/pages/blog.css';
 import blogSocialImage from '../assets/images/social/social-blog.png';
-import Card from '../components/Card/index.astro';
-import CardImage from '../components/CardImage/index.astro';
+import Card from '../components/Card/Card.astro';
+import CardImage from '../components/CardImage/CardImage.astro';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
-import PageHeader from '../components/PageHeader/index.astro';
-import Pagination from '../components/Pagination/index.astro';
-import SkipToContent from '../components/SkipToContent/index.astro';
-import TagList from '../components/TagList/index.astro';
+import PageHeader from '../components/PageHeader/PageHeader.astro';
+import Pagination from '../components/Pagination/Pagination.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import TagList from '../components/TagList/TagList.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_TAGS } from '../constants.js';
 import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 import type { Post } from '../utils/post';
 import BaseLayout from './Base.astro';
-import '../assets/css/pages/blog.css';
 
 interface Props {
 	posts: Post[];

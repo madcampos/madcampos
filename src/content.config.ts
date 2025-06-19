@@ -1,6 +1,5 @@
 import { glob } from 'astro/loaders';
 import { defineCollection } from 'astro:content';
-
 import { authorsSchema } from './schemas/authors.ts';
 import { blogSchema } from './schemas/blog.ts';
 import { changelogSchema } from './schemas/changelog.ts';

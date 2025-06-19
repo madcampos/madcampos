@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
-
 import defaultImage from '../assets/images/logo/logo-micro.png';
 import { BLOG } from '../constants.ts';
 import { listAllChangelogs } from '../utils/changelog.ts';

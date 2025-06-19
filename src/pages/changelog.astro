@@ -1,10 +1,10 @@
 ---
-import Logo from '../components/Logo/index.astro';
+import '../assets/css/pages/changelogs.css';
+import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
 import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.ts';
-import '../assets/css/pages/changelogs.css';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 const changelogs = await Promise.all(await listAllChangelogs());

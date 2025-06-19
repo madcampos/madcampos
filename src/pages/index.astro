@@ -1,14 +1,14 @@
 ---
+import '../assets/css/pages/home.css';
 import { Icon } from 'astro-icon/components';
 import avatar from '../assets/images/me.jpg';
-import Avatar from '../components/Avatar/index.astro';
-import Logo from '../components/Logo/index.astro';
+import Avatar from '../components/Avatar/Avatar.astro';
+import Logo from '../components/Logo/Logo.astro';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
-import ThemeSwitcher from '../components/ThemeSwitcher/index.astro';
+import ThemeSwitcher from '../components/ThemeSwitcher/ThemeSwitcher.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { BLOG, GLOBALS, PROJECTS, TALKS } from '../constants.js';
 import BaseLayout from '../layouts/Base.astro';
-import '../assets/css/pages/home.css';
 ---
 <BaseLayout
 	htmlTitle={[...GLOBALS.title, 'Senior Web Developer']}

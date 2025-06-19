@@ -1,14 +1,14 @@
 ---
+import '../../assets/css/pages/projects.css';
 import { Icon } from 'astro-icon/components';
 import projectsSocialImage from '../../assets/images/social/social-proj.png';
-import Card from '../../components/Card/index.astro';
-import CardImage from '../../components/CardImage/index.astro';
-import Logo from '../../components/Logo/index.astro';
+import Card from '../../components/Card/Card.astro';
+import CardImage from '../../components/CardImage/CardImage.astro';
+import Logo from '../../components/Logo/Logo.astro';
 import { PROJECTS } from '../../constants.js';
 import InternalPageLayout from '../../layouts/InternalPage.astro';
 import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 import { listAllProjects } from '../../utils/projects.js';
-import '../../assets/css/pages/projects.css';
 
 const projects = await Promise.all((await listAllProjects()).map(async (project) => {
 	const { Content } = await project.render();

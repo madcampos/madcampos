@@ -1,11 +1,9 @@
 import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
-
+import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
 import { BLOG } from '../../constants.js';
 import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllPosts } from '../../utils/post.js';
-
-import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
 
 // TODO: add pagination
 // Ref: https://stackoverflow.com/questions/1301392/pagination-in-feeds-like-atom-and-rss

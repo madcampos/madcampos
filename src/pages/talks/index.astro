@@ -1,15 +1,15 @@
 ---
+import '../../assets/css/pages/talks.css';
 import { Icon } from 'astro-icon/components';
 import talksSocialImage from '../../assets/images/social/social-talks.png';
-import Card from '../../components/Card/index.astro';
-import CardImage from '../../components/CardImage/index.astro';
-import Logo from '../../components/Logo/index.astro';
+import Card from '../../components/Card/Card.astro';
+import CardImage from '../../components/CardImage/CardImage.astro';
+import Logo from '../../components/Logo/Logo.astro';
 import { TALKS } from '../../constants.js';
 import InternalPageLayout from '../../layouts/InternalPage.astro';
 import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 import { join } from '../../utils/path.js';
 import { listAllTalks } from '../../utils/talks.js';
-import '../../assets/css/pages/talks.css';
 
 const talks = await listAllTalks();
 
