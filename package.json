@@ -13,10 +13,10 @@
 	"scripts": {
 		"prepare": "husky",
 		"postinstall": "astro sync",
-		"start": "astro dev --site=http://localhost:3000/",
+		"start": "astro dev --site=https://localhost:3000/",
 		"build": "astro check && astro build",
 		"prepreview": "npm run build",
-		"preview": "astro preview --site=http://localhost:3000/",
+		"preview": "astro preview --site=https://localhost:3000/",
 		"typecheck": "tsc --noEmit",
 		"format": "dprint fmt --staged",
 		"lint:js": "eslint --fix",

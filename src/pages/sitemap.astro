@@ -1,12 +1,29 @@
 ---
+import '../assets/css/pages/sitemap.css';
 import Logo from '../components/Logo/Logo.astro';
 import { BLOG, GLOBALS, TALKS } from '../constants.js';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
+import { join } from '../utils/path.js';
 import { listPostsByYearAndMonth } from '../utils/post.js';
 import { listAllTalks } from '../utils/talks.js';
 
-const baseUrl = new URL(GLOBALS.url, Astro.site).toString();
+const baseUrl = join([Astro.site?.toString() ?? '', GLOBALS.url]);
+
+const monthMap: Record<string, string> = {
+	'01': 'January',
+	'02': 'February',
+	'03': 'March',
+	'04': 'April',
+	'05': 'May',
+	'06': 'June',
+	'07': 'July',
+	'08': 'August',
+	'09': 'September',
+	'10': 'October',
+	'11': 'November',
+	'12': 'December'
+};
 
 interface PageMetadata {
 	title: string;
@@ -18,45 +35,38 @@ interface PageMetadata {
 
 const aboutPages: PageMetadata[] = [
 	{ title: 'Home', url: baseUrl, description: "The website's home page." },
-	{ title: 'About', url: new URL('/about/', baseUrl).toString(), description: 'More information about me.' },
-	{ title: 'Accessibility Statement', url: new URL('/accessibility/', baseUrl).toString(), description: 'Statement about accessibility on the website.' },
-	{ title: 'AI Statement', url: new URL('/ai/', baseUrl).toString(), description: 'Statement about the use of AI on the webstie and AI derivative work.' },
-	{ title: 'Changelog', url: new URL('/changelog/', baseUrl).toString(), description: 'List of changes for the website.', wip: true },
-	{ title: 'License & Disclaimer', url: new URL('/license/', baseUrl).toString(), description: "Legal jargon for the license of this website's content." },
-	{
-		title: 'Offline Page',
-		url: new URL('/offline/', baseUrl).toString(),
-		description: 'The page that shows when you go offline and the Service Worker is working properly.'
-	},
-	{ title: 'Sitemap', url: new URL('/sitemap/', baseUrl).toString(), description: 'This page.' },
-	{ title: '404', url: new URL('/404/', baseUrl).toString(), description: 'The error page that you get when something is not found.' }
+	{ title: 'About', url: join([baseUrl, 'about']), description: 'More information about me.' },
+	{ title: 'Accessibility Statement', url: join([baseUrl, 'accessibility']), description: 'Statement about accessibility on the website.' },
+	{ title: 'AI Statement', url: join([baseUrl, 'ai']), description: 'Statement about the use of AI on the webstie and AI derivative work.' },
+	{ title: 'Changelog', url: join([baseUrl, 'changelog']), description: 'List of changes for the website.', wip: true },
+	{ title: 'License & Disclaimer', url: join([baseUrl, 'license']), description: "Legal jargon for the license of this website's content." },
+	{ title: 'Offline Page', url: join([baseUrl, 'offline']), description: 'The page that shows when you go offline and the Service Worker is working properly.' },
+	{ title: 'Sitemap', url: join([baseUrl, 'sitemap']), description: 'This page.' },
+	{ title: '404', url: join([baseUrl, '404']), description: 'The error page that you get when something is not found.' }
 ];
 
 const coolPages: PageMetadata[] = [
-	{ title: 'Bookmarks', url: new URL('/bookmarks/', baseUrl).toString(), description: 'A list of bookmars that I send people to.', wip: true },
-	{ title: 'Food', url: new URL('/food/', baseUrl).toString(), description: 'Reference for food orders at different places. 😉' },
-	{ title: 'Now', url: new URL('/now/', baseUrl).toString(), description: "What I'm doing right now.", wip: true },
-	{ title: 'Projects', url: new URL('/projects/', baseUrl).toString(), description: "A list of personal projects I'm working on.", wip: true },
+	{ title: 'Bookmarks', url: join([baseUrl, 'bookmarks']), description: 'A list of bookmars that I send people to.', wip: true },
+	{ title: 'Food', url: join([baseUrl, 'food']), description: 'Reference for food orders at different places. 😉' },
+	{ title: 'Now', url: join([baseUrl, 'now']), description: "What I'm doing right now.", wip: true },
+	{ title: 'Projects', url: join([baseUrl, 'projects']), description: "A list of personal projects I'm working on.", wip: true },
 	{
 		title: 'Styleguide',
-		url: new URL('/styleguide/', baseUrl).toString(),
+		url: join([baseUrl, 'styleguide']),
 		description: "A reference for the website style, all it's components and different parts of the CSS.",
 		wip: true
 	},
-	{ title: 'Pyramid Scheme', url: new URL('/triangle/', baseUrl).toString(), description: 'Join this cool club, you will not regret it!', hidden: true }
+	{ title: 'Pyramid Scheme', url: join([baseUrl, 'triangle']), description: 'Join this cool club, you will not regret it!', hidden: true }
 ];
 
-const talksUrl = new URL(TALKS.url, baseUrl).toString();
-const talkPages: PageMetadata[] = [
-	{ title: 'Talks Home', url: talksUrl, description: "A list of talks that I've presented before." },
-	...(await listAllTalks()).map(({ id, data }) => ({
-		title: data.title,
-		url: new URL(`${id}/`, talksUrl).toString(),
-		description: data.summary
-	}))
-];
+const talksUrl = join([baseUrl, TALKS.url]);
+const talkPages: PageMetadata[] = (await listAllTalks()).map(({ id, data }) => ({
+	title: data.title,
+	url: join([talksUrl, id]),
+	description: data.summary
+}));
 
-const blogUrl = new URL(BLOG.url, baseUrl).toString();
+const blogUrl = join([baseUrl, BLOG.url]);
 const blogPages = await listPostsByYearAndMonth();
 ---
 
@@ -77,94 +87,86 @@ const blogPages = await listPostsByYearAndMonth();
 	<Fragment slot="header">Site Map</Fragment>
 
 	<h2>About Pages</h2>
-	<ul>
+	<dl>
 		{
 			aboutPages.map(({ url, title, description, hidden, wip }) => (
-				<li class:list={{ wip, hidden }}>
-					<span><a href={url}>{title}</a></span>
-					<aside><em><small>{description}</small></em></aside>
-				</li>
+				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+					<a href={url}>
+						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+					</a>
+				</dt>
+				<dd>
+					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+				</dd>
 			))
 		}
-	</ul>
+	</dl>
 	<h2>Cool Pages</h2>
-	<ul>
+	<dl>
 		{
 			coolPages.map(({ url, title, description, hidden, wip }) => (
-				<li class:list={{ wip, hidden }}>
-					<span><a href={url}>{title}</a></span>
-					<aside><em><small>{description}</small></em></aside>
-				</li>
+				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+					<a href={url}>
+						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+					</a>
+				</dt>
+				<dd>
+					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+				</dd>
 			))
 		}
-	</ul>
+	</dl>
 	<h2>Talks Pages</h2>
-	<ul>
+	<dl>
+		<dt><a href={talksUrl}>Talks Home</a></dt>
+		<dd>A list of talks that I've presented before.</dd>
 		{
 			talkPages.map(({ url, title, description, hidden, wip }) => (
-				<li class:list={{ wip, hidden }}>
-					<span>
-						<a href={url}>
-							<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
-						</a>
-					</span>
-					<aside>
-						<em>
-							<small>
-								<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
-							</small>
-						</em>
-					</aside>
-				</li>
+				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+					<a href={url}>
+						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+					</a>
+				</dt>
+				<dd>
+					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+				</dd>
 			))
 		}
-	</ul>
+	</dl>
 	<h2>Blog</h2>
-	<ul>
-		<li>
-			<span><a href={blogUrl}>Blog Home</a></span>
-			<aside><em><small>The blog main page.</small></em></aside>
-		</li>
+	<dl>
+		<dt><a href={blogUrl}>Blog Home</a></dt>
+		<dd>The blog main page.</dd>
 
 		{
 			blogPages.entries().map(([year, months]) => (
-				<li>
-					<details>
-						<summary>{year}</summary>
-						<ul>
-							{
-								months.entries().map(([month, posts]) => (
-									<li>
-										<details>
-											<summary>{month}</summary>
-											<ul>
-												{
-													posts.map(({ url, data: { title, summary } }) => (
-														<li>
-															<span>
-																<a href={new URL(url, blogUrl).toString()}>
-																	<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
-																</a>
-															</span>
-															<aside>
-																<em>
-																	<small>
-																		<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(summary))} />
-																	</small>
-																</em>
-															</aside>
-														</li>
-													))
-												}
-											</ul>
-										</details>
-									</li>
-								))
-							}
-						</ul>
-					</details>
-				</li>
+				<dt><a href={join([blogUrl, year])}>{year}</a></dt>
+				<dd>
+					<dl>
+						{
+							months.entries().map(([month, posts]) => (
+								<dt><a href={join([blogUrl, year, month])}>{monthMap[month]}</a></dt>
+								<dd>
+									<dl>
+										{
+											posts.map(({ url, data: { title, summary, draft } }) => (
+												<dt data-wip={draft || null}>
+													<a href={join([blogUrl, url])}>
+														<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+													</a>
+												</dt>
+												<dd>
+													<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(summary))} />
+												</dd>
+											))
+										}
+									</dl>
+								</dd>
+							))
+						}
+					</dl>
+				</dd>
 			))
 		}
-	</ul>
+	</dl>
 </InternalPageLayout>
