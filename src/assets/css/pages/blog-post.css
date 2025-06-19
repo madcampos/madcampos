@@ -1,8 +1,8 @@
 @layer pages {
 	main, body > footer {
 		margin-inline: auto;
-		max-width: var(--max-width);
 		width: 100%;
+		max-width: var(--max-width);
 	}
 
 	body > footer {
@@ -21,32 +21,32 @@
 	#post-contents p > img:only-child {
 		--image-size: 35vw;
 		display: block;
-		height: auto;
 		margin-inline: auto;
 		width: clamp(var(--min-width), var(--image-size), var(--max-width));
+		height: auto;
 	}
 
 	a[rel~='external']::after {
 		--external-icon-size: 0.65em;
+		display: inline-block;
+		vertical-align: super;
 		background-image: var(--external-link-icon);
 		background-position: center;
-		background-repeat: no-repeat;
 		background-size: contain;
-		content: '';
-		display: inline-block;
-		height: var(--external-icon-size);
-		vertical-align: super;
+		background-repeat: no-repeat;
 		width: var(--external-icon-size);
+		height: var(--external-icon-size);
+		content: '';
 	}
 
 	blockquote {
-		border: var(--border-width) var(--border-style) var(--border-color);
-		border-block-end-color: var(--theme-color);
-		border-inline-end-color: var(--theme-color);
-		border-radius: var(--border-radius);
-		font-style: italic;
 		margin: var(--spacing-medium);
+		border: var(--border-width) var(--border-style) var(--border-color);
+		border-radius: var(--border-radius);
+		border-inline-end-color: var(--theme-color);
+		border-block-end-color: var(--theme-color);
 		padding-inline: var(--spacing-medium);
+		font-style: italic;
 	}
 
 	blockquote > p {
@@ -55,36 +55,36 @@
 	}
 
 	#post-separator {
-		border: none;
-		margin-block: calc(var(--spacing-large) * 2) var(--spacing-large);
-		margin-inline: calc(var(--spacing-large) * 4);
-		overflow: visible;
-		padding-inline-start: calc(var(--button-size) * 0.8);
 		position: relative;
+		margin-inline: calc(var(--spacing-large) * 4);
+		margin-block: calc(var(--spacing-large) * 2) var(--spacing-large);
+		border: none;
+		padding-inline-start: calc(var(--button-size) * 0.8);
 		width: auto;
+		overflow: visible;
 	}
 
 	#post-separator::before {
-		background-image: var(--hr-decoration-icon);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-		color: var(--theme-color);
-		content: '';
 		display: block;
-		height: var(--button-size);
+		position: absolute;
+		transform: scaleY(-1);
 		inset-block-start: calc(var(--button-size) * -0.5);
 		inset-inline-start: 0;
-		position: absolute;
-		text-align: center;
-		transform: scaleY(-1);
+		background-image: var(--hr-decoration-icon);
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
 		width: var(--button-size);
+		height: var(--button-size);
+		content: '';
+		color: var(--theme-color);
+		text-align: center;
 	}
 
 	#post-separator::after {
+		display: block;
 		border-top: var(--border-width) var(--border-style) var(--theme-color);
 		content: '';
-		display: block;
 	}
 
 	#related-posts { margin-block: var(--spacing-large); }
@@ -92,22 +92,22 @@
 	#related-posts #related-posts-wrapper {
 		display: block;
 		margin-inline: auto;
+		width: calc(100cqw - var(--spacing-large) * 4);
 		max-width: var(--max-width);
 		overflow-x: auto;
-		width: calc(100cqw - var(--spacing-large) * 4);
 	}
 
 	#related-posts ul {
 		display: flex;
 		flex-wrap: nowrap;
-		gap: var(--spacing-large);
 		justify-content: start;
-		list-style-type: '';
+		gap: var(--spacing-large);
 		margin: 0;
 		padding: 0;
+		width: 100%;
 		scroll-behavior: smooth;
 		scroll-snap-type: x mandatory;
-		width: 100%;
+		list-style-type: '';
 	}
 
 	#related-posts li {
@@ -117,19 +117,11 @@
 	}
 
 	#post-license {
-		background: var(--bg-color);
-		border-radius: var(--border-radius);
-		font-size: smaller;
 		margin-block-start: var(--spacing-large);
+		border-radius: var(--border-radius);
+		background: var(--bg-color);
 		padding: var(--spacing-large);
+		font-size: smaller;
 		text-align: center;
-	}
-
-	@media (max-width: 40rem) {
-		#post-header { flex-direction: column; }
-		#post-header header { margin-inline-end: 0; }
-		#post-header #back-to-blog { margin-block-start: var(--spacing-large); }
-
-		#post-contents p > img:only-child { --image-size: 70vw; }
 	}
 }
