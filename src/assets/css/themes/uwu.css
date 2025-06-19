@@ -68,21 +68,21 @@
 
 	[data-theme='uwu'] body {
 		animation: 1s steps(5) infinite uwu-cursor-normal;
-		background-color: var(--bg-color);
+		cursor: url('./uwu/cursors/normal/1.svg'), auto;
 		background-image: linear-gradient(
 			to right,
 			mistyrose var(--spacing-small),
 			lavenderblush var(--spacing-small)
 		);
-		background-repeat: repeat;
 		background-size: calc(var(--spacing-small) * 2);
-		cursor: url('./uwu/cursors/normal/1.svg'), auto;
+		background-repeat: repeat;
+		background-color: var(--bg-color);
 	}
 
 	[data-theme='uwu'] .user-avatar::after {
-		background: radial-gradient(circle at bottom, var(--accent-color), var(--bg-color));
-		mix-blend-mode: hard-light;
 		opacity: 1;
+		mix-blend-mode: hard-light;
+		background: radial-gradient(circle at bottom, var(--accent-color), var(--bg-color));
 	}
 
 	[data-theme='uwu'] :is(a, button, input, select) {
@@ -106,8 +106,8 @@
 
 	[data-theme='uwu'] .logo-text {
 		fill: var(--accent-color, darkorchid);
-		font-family: var(--text-font-family);
 		font-weight: 700;
+		font-family: var(--text-font-family);
 	}
 
 	[data-theme='uwu'] #logo-graphics [data-theme] { visibility: hidden; }
@@ -157,10 +157,10 @@
 		--edge-size: 3rem;
 		background: url('/src/assets/css/themes/uwu/border.svg'), linear-gradient(to top, lightpink, lightpink);
 		background-position: center bottom, center top;
-		background-repeat: repeat no-repeat;
 		background-size: auto var(--edge-size), auto calc(100% - var(--edge-size));
-		max-width: 100%;
+		background-repeat: repeat no-repeat;
 		padding-block-end: var(--edge-size);
+		max-width: 100%;
 	}
 
 	[data-theme='uwu'] #site-nav ul { list-style: none; }
@@ -168,59 +168,59 @@
 	[data-theme='uwu'] :is(.post-card, .project-card, .talk-card) { position: relative; }
 	[data-theme='uwu'] :is(.post-card, .project-card, .talk-card)::after {
 		--details-size: 5rem;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
 		display: block;
+		position: absolute;
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
+		width: var(--details-size);
 		height: var(--details-size);
 		pointer-events: none;
-		position: absolute;
-		width: var(--details-size);
 	}
 
 	[data-theme='uwu'] :is(.post-card, .project-card, .talk-card):nth-of-type(2n)::after {
-		background-image: url('./uwu/details1.svg');
-		content: '';
 		inset-block-start: calc(var(--details-size) * 0.3 * -1);
 		inset-inline-end: calc(var(--details-size) * 0.3 * -1);
+		background-image: url('./uwu/details1.svg');
+		content: '';
 	}
 
 	[data-theme='uwu'] :is(.post-card, .project-card, .talk-card):nth-of-type(3n)::after {
-		background-image: url('./uwu/details2.svg');
-		content: '';
 		inset: auto;
 		inset-block-end: calc(var(--details-size) * 0.4 * -1);
 		inset-inline-start: calc(var(--details-size) * 0.3 * -1);
+		background-image: url('./uwu/details2.svg');
+		content: '';
 	}
 
 	[data-theme='uwu'] .project-icon {
+		position: relative;
 		mask: none;
 		overflow: visible;
-		position: relative;
 	}
 
 	[data-theme='uwu'] .project-icon img { border-radius: 100vmax; }
 
 	[data-theme='uwu'] .project-icon::after {
-		background-image: url('./uwu/mask.svg');
-		background-position: top left;
-		background-repeat: no-repeat;
-		background-size: contain;
-		content: '';
 		display: block;
+		position: absolute;
 		inset: 0;
 		inset-block-end: -20%;
 		inset-inline-end: -20%;
+		background-image: url('./uwu/mask.svg');
+		background-position: top left;
+		background-size: contain;
+		background-repeat: no-repeat;
 		pointer-events: none;
-		position: absolute;
+		content: '';
 	}
 
-	@media (max-width: 35rem) {
+	@container logo (max-width: 25rem) {
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 25rem) {
+	@container logo (max-width: 15rem) {
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
 		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='micro']) { visibility: visible; }
 	}

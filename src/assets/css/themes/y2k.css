@@ -67,10 +67,10 @@
 	}
 
 	[data-theme='y2k'] body {
-		background-image: url('./y2k/bg.svg');
-		background-repeat: repeat;
-		background-size: 5rem;
 		cursor: url('./y2k/arrow.svg'), auto;
+		background-image: url('./y2k/bg.svg');
+		background-size: 5rem;
+		background-repeat: repeat;
 	}
 
 	[data-theme='y2k'] a { cursor: url('./y2k/link.svg'), pointer; }
@@ -90,10 +90,10 @@
 	}
 
 	[data-theme='y2k'] input {
-		background-color: var(--theme-color);
+		border-style: inset;
 		border-color: var(--theme-color);
 		border-radius: 0;
-		border-style: inset;
+		background-color: var(--theme-color);
 		color: var(--bg-color);
 	}
 
@@ -102,42 +102,42 @@
 	[data-theme='y2k'] input::placeholder { color: var(--bg-color); }
 
 	[data-theme='y2k'] #site-nav a {
-		background-color: var(--theme-color);
-		border-color: var(--theme-color);
-		border-style: outset;
 		border-width: var(--border-width);
-		color: var(--bg-color);
-		height: var(--button-size);
+		border-style: outset;
+		border-color: var(--theme-color);
+		background-color: var(--theme-color);
 		padding: var(--spacing-small) var(--spacing-medium);
+		height: var(--button-size);
+		color: var(--bg-color);
 	}
 
 	[data-theme='y2k'] button {
-		background-color: var(--theme-color);
+		cursor: url('./y2k/link.svg'), pointer;
+		border-style: outset;
 		border-color: var(--theme-color);
 		border-radius: 0;
-		border-style: outset;
+		background-color: var(--theme-color);
 		color: var(--bg-color);
-		cursor: url('./y2k/link.svg'), pointer;
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):focus-visible {
-		background-color: var(--text-color);
 		border-color: var(--text-color);
+		background-color: var(--text-color);
 		color: var(--bg-color);
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):hover {
-		background-color: var(--accent-color);
-		border-color: var(--accent-color);
-		color: var(--bg-color);
 		outline-color: var(--accent-color);
+		border-color: var(--accent-color);
+		background-color: var(--accent-color);
+		color: var(--bg-color);
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):active {
-		background-color: var(--accent-color);
-		border-color: var(--accent-color);
-		color: var(--theme-color);
 		outline-color: var(--theme- color);
+		border-color: var(--accent-color);
+		background-color: var(--accent-color);
+		color: var(--theme-color);
 	}
 
 	[data-theme='y2k'] .tag {
@@ -150,14 +150,14 @@
 
 	[data-theme='y2k'] .tag::before {
 		clip-path: none;
-		content: none;
 		mask: none;
+		content: none;
 	}
 
 	[data-theme='y2k'] :is(.post-card, .talk-card, .project-card) { border: silver ridge var(--border-width); }
 	[data-theme='y2k'] .project-card picture {
-		border: silver ridge var(--border-width);
 		mask: none;
+		border: silver ridge var(--border-width);
 	}
 
 	[data-theme='y2k'] .project-card img { display: none; }
@@ -178,9 +178,9 @@
 
 	[data-theme='y2k'] .logo-text {
 		fill: cyan;
-		font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-		font-weight: 700;
 		paint-order: stroke;
+		font-weight: 700;
+		font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 		stroke: hotpink;
 		stroke-width: 0.5rem;
 	}
@@ -203,12 +203,12 @@
 	[data-theme='y2k'] a:active [data-theme='y2k'] .logo-text { fill: var(--link-active-color); }
 	[data-theme='y2k'] a:active [data-theme='y2k'] .logo-extras { fill: var(--link-active-color); }
 
-	@media (max-width: 35rem) {
+	@container logo (max-width: 25rem) {
 		[data-theme='y2k'] #logo-graphics [data-theme='y2k'] { visibility: hidden; }
 		[data-theme='y2k'] #logo-graphics [data-theme='y2k']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 25rem) {
+	@container logo (max-width: 15rem) {
 		[data-theme='y2k'] #logo-graphics [data-theme='y2k'] { visibility: hidden; }
 		[data-theme='y2k'] #logo-graphics [data-theme='y2k']:where([data-size='micro']) { visibility: visible; }
 	}

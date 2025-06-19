@@ -71,8 +71,8 @@
 	[data-theme='hacker'] :focus-visible { outline-style: solid; }
 
 	[data-theme='hacker'] .user-avatar {
-		border-radius: 0;
 		filter: url('#small-pixelate-filter');
+		border-radius: 0;
 	}
 
 	[data-theme='hacker'] .user-avatar img {
@@ -81,17 +81,17 @@
 	}
 
 	[data-theme='hacker'] .user-avatar::after {
-		mix-blend-mode: color;
 		opacity: 0.8;
+		mix-blend-mode: color;
 	}
 
 	[data-theme='hacker'] .user-avatar:hover::after { opacity: 0.8; }
 
 	[data-theme='hacker'] input {
-		background-color: var(--secondary-color);
+		border-style: solid;
 		border-color: var(--theme-color);
 		border-radius: 0;
-		border-style: solid;
+		background-color: var(--secondary-color);
 		color: var(--bg-color);
 	}
 
@@ -100,37 +100,37 @@
 	[data-theme='hacker'] input::placeholder { color: var(--bg-color); }
 
 	[data-theme='hacker'] #site-nav a {
-		color: var(--text-color);
-		height: var(--button-size);
 		padding: var(--spacing-small) var(--spacing-medium);
+		height: var(--button-size);
+		color: var(--text-color);
 	}
 
 	[data-theme='hacker'] button {
-		background-color: transparent;
+		border-style: solid;
 		border-color: var(--theme-color);
 		border-radius: 0;
-		border-style: solid;
+		background-color: transparent;
 		color: var(--text-color);
 	}
 
 	[data-theme='hacker'] :is(#site-nav a, button):focus-visible {
-		background-color: var(--text-color);
 		border-color: var(--text-color);
+		background-color: var(--text-color);
 		color: var(--bg-color);
 	}
 
 	[data-theme='hacker'] :is(#site-nav a, button):hover {
-		background-color: var(--accent-color);
-		border-color: var(--accent-color);
-		color: var(--bg-color);
 		outline-color: var(--accent-color);
+		border-color: var(--accent-color);
+		background-color: var(--accent-color);
+		color: var(--bg-color);
 	}
 
 	[data-theme='hacker'] :is(#site-nav a, button):active {
-		background-color: var(--accent-color);
-		border-color: var(--accent-color);
-		color: var(--theme-color);
 		outline-color: var(--theme- color);
+		border-color: var(--accent-color);
+		background-color: var(--accent-color);
+		color: var(--theme-color);
 	}
 
 	[data-theme='hacker'] .tag {
@@ -143,8 +143,8 @@
 
 	[data-theme='hacker'] .tag::before {
 		clip-path: none;
-		content: none;
 		mask: none;
+		content: none;
 	}
 
 	[data-theme='hacker'] :is(.post-card, .talk-card, .project-card) { border: solid currentColor var(--border-width); }
@@ -152,23 +152,23 @@
 	[data-theme='hacker'] :is(.post-card, .talk-card) picture { filter: url('#small-pixelate-filter'); }
 
 	[data-theme='hacker'] .project-card picture {
-		border: solid currentColor var(--border-width);
 		display: grid;
-		mask: none;
-		place-items: center;
 		position: relative;
+		place-items: center;
+		mask: none;
+		border: solid currentColor var(--border-width);
 	}
 
 	[data-theme='hacker'] .project-card picture::after {
-		background: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
-		content: '';
 		display: block;
-		height: 100%;
-		inset: 0;
-		mix-blend-mode: color;
-		opacity: 0.8;
 		position: absolute;
+		opacity: 0.8;
+		mix-blend-mode: color;
+		inset: 0;
+		background: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
 		width: 100%;
+		height: 100%;
+		content: '';
 	}
 
 	[data-theme='hacker'] .project-card img { display: none; }
@@ -178,9 +178,9 @@
 
 	[data-theme='hacker'] .logo-text {
 		fill: var(--accent-color);
-		font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
-		font-size: 6rem;
 		font-weight: normal;
+		font-size: 6rem;
+		font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 	}
 
 	[data-theme='hacker'] #logo-graphics [data-theme] { visibility: hidden; }
@@ -202,12 +202,12 @@
 		text-decoration: var(--shiki-contrast-text-decoration, none);
 	}
 
-	@media (max-width: 35rem) {
+	@container logo (max-width: 25rem) {
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='mini']) { visibility: visible; }
 	}
 
-	@media (max-width: 25rem) {
+	@container logo (max-width: 15rem) {
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='micro']) { visibility: visible; }
 	}
