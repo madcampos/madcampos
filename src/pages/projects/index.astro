@@ -94,7 +94,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 					{
 						data.url && (
 							<a href={data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
-								<Icon name="uil:link" title="" />
+								<Icon name="uil:link" title="" role="presentation" />
 								View Project
 							</a>
 						)
@@ -103,7 +103,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 					{
 						data.repository && (
 							<a href={data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
-								<Icon name="uil:github" title="" />
+								<Icon name="uil:github" title="" role="presentation" />
 								View Repository
 							</a>
 						)
@@ -113,7 +113,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 				<details slot="footer">
 					<summary>
 						<span>
-							<Icon name="uil:cog" title="" />
+							<Icon name="uil:cog" title="" role="presentation" />
 							Technologies used
 						</span>
 					</summary>

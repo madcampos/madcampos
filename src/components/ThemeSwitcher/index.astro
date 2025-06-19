@@ -74,7 +74,7 @@ const themes: SiteTheme[] = [
 	<script src="./index.ts"></script>
 
 	<button type="button" popovertarget="theme-switcher-dialog" aria-label="Theme Switcher">
-		<Icon name="uil:palette" title="" />
+		<Icon name="uil:palette" title="" role="presentation" />
 	</button>
 
 	<dialog id="theme-switcher-dialog" popover>
@@ -146,7 +146,7 @@ const themes: SiteTheme[] = [
 							{
 								!theme.accessible && (
 									<small>
-										<Icon name="uil:exclamation-triangle" title="" />
+										<Icon name="uil:exclamation-triangle" title="" role="presentation" />
 										<strong>Warning: Theme is not fully accessible</strong>
 									</small>
 								)
