@@ -75,6 +75,8 @@
 		flex-grow: 1;
 		flex-wrap: wrap;
 		justify-content: center;
+		container-name: theme-switcher;
+		container-type: size;
 		overflow: auto;
 		overscroll-behavior: contain;
 	}
@@ -144,5 +146,5 @@
 		color: var(--theme-color);
 	}
 
-	@media (max-width: 40rem) { #theme-switcher .theme-label { width: 100%; } }
+	@container (max-width: 25rem) { #theme-switcher .theme-label { width: 100%; } }
 }
