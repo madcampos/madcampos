@@ -1,16 +1,13 @@
 ---
-import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
-import { join } from '../../../utils/path.js';
-
 import AuthorCard from '../../../components/AuthorCard/index.astro';
 import Logo from '../../../components/Logo/index.astro';
 import OldButtons from '../../../components/OldStyleButtons/index.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
+import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
 import BaseLayout from '../../../layouts/Base.astro';
-
+import { join } from '../../../utils/path.js';
 import '../../../assets/css/pages/internal-page.css';
 import '../../../assets/css/pages/authors.css';
-
 import blogSocialImage from '../../../assets/images/social/social-blog.png';
 import { listAllAuthors } from '../../../utils/authors.js';
 

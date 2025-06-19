@@ -1,15 +1,12 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import { listAllAuthors } from '../../../utils/authors.js';
-
-import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
-
 import Avatar from '../../../components/Avatar/index.astro';
 import Logo from '../../../components/Logo/index.astro';
 import OldButtons from '../../../components/OldStyleButtons/index.astro';
 import PageHeader from '../../../components/PageHeader/index.astro';
+import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
 import BaseLayout from '../../../layouts/Base.astro';
-
+import { listAllAuthors } from '../../../utils/authors.js';
 import '../../../assets/css/pages/internal-page.css';
 import '../../../assets/css/pages/authors.css';
 import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../../../utils/markdown.js';

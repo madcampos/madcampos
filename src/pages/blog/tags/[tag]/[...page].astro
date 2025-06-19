@@ -1,12 +1,9 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
-
-import { BLOG, BLOG_TAGS } from '../../../../constants.js';
-import { join } from '../../../../utils/path.js';
-
 import Logo from '../../../../components/Logo/index.astro';
+import { BLOG, BLOG_TAGS } from '../../../../constants.js';
 import BlogPostsLayout from '../../../../layouts/BlogPosts.astro';
-
+import { join } from '../../../../utils/path.js';
 import { listPostsByTag, MAX_POSTS_PER_PAGE } from '../../../../utils/post';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define

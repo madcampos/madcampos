@@ -8,7 +8,6 @@ import { PROJECTS } from '../../constants.js';
 import InternalPageLayout from '../../layouts/InternalPage.astro';
 import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
 import { listAllProjects } from '../../utils/projects.js';
-
 import '../../assets/css/pages/projects.css';
 
 const projects = await Promise.all((await listAllProjects()).map(async (project) => {
