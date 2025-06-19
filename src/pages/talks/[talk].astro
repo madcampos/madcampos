@@ -92,7 +92,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						Event:
 					</strong>
 					<span>
-						{eventUrl ? <a href={eventUrl} rel="noopener noreferrer" itemprop="url">{event}</a> : event}
+						{eventUrl ? <a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">{event}</a> : event}
 					</span>
 				</li>
 			)
@@ -114,7 +114,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<Icon name="uil:clapper-board" title="" />
 						Slides:
 					</strong>
-					<a href={slides} rel="noopener noreferrer">{slides}</a>
+					<a href={slides} rel="noopener noreferrer" referrerpolicy="no-referrer">{slides}</a>
 				</li>
 			)
 		}
@@ -126,7 +126,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<Icon name="uil:video" title="" />
 						Video:
 					</strong>
-					<a href={video} rel="noopener noreferrer">{video}</a>
+					<a href={video} rel="noopener noreferrer" referrerpolicy="no-referrer">{video}</a>
 				</li>
 			)
 		}
@@ -138,7 +138,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<Icon name="uil:brackets-curly" title="" />
 						Code:
 					</strong>
-					<a href={code} rel="noopener noreferrer">{code}</a>
+					<a href={code} rel="noopener noreferrer" referrerpolicy="no-referrer">{code}</a>
 				</li>
 			)
 		}
@@ -155,7 +155,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					{
 						relatedContent?.map(({ url: contentUrl, title: contentTitle }) => (
 							<li>
-								<a href={contentUrl} rel="noopener noreferrer">{contentTitle}</a>
+								<a href={contentUrl} rel="noopener noreferrer" referrerpolicy="no-referrer">{contentTitle}</a>
 							</li>
 						))
 					}

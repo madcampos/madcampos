@@ -93,7 +93,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 				<Fragment slot="links">
 					{
 						data.url && (
-							<a href={data.url} rel="noopener noreferrer" itemprop="installUrl">
+							<a href={data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
 								<Icon name="uil:link" title="" />
 								View Project
 							</a>
@@ -102,7 +102,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 					&nbsp;
 					{
 						data.repository && (
-							<a href={data.repository} rel="noopener noreferrer">
+							<a href={data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
 								<Icon name="uil:github" title="" />
 								View Repository
 							</a>

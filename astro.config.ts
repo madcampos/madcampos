@@ -93,7 +93,7 @@ export default defineConfig({
 			codepenEmbed,
 			baselineInfo
 		],
-		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'] }]]
+		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'], referrerpolicy: 'no-referrer' }]]
 	},
 	integrations: [
 		astroPWA({

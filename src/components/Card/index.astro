@@ -24,7 +24,7 @@ const { itemtype, url, draft, class: cardClass } = Astro.props;
 		<header>
 			<div class="card-title">
 				{draft && <span class="draft-tag">Draft</span>}
-				<a href={url ?? null} rel="noopener noreferrer" itemprop="name">
+				<a href={url ?? null} itemprop="name">
 					<slot name="title"></slot>
 				</a>
 			</div>
