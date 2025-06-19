@@ -1,4 +1,9 @@
 @layer components {
+	.author-card-wrapper {
+		container-name: author-card;
+		container-type: inline-size;
+	}
+
 	.author-card {
 		display: grid;
 		grid-template-rows: 1fr auto;
@@ -41,7 +46,7 @@
 		height: auto;
 	}
 
-	@media (max-width: 40rem) {
+	@container author-card (max-width: 35rem) {
 		.author-card {
 			grid-template-rows: 1fr auto auto;
 			grid-template-columns: 1fr;

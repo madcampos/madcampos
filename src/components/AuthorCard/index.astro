@@ -16,20 +16,22 @@ const { author, url } = Astro.props;
 const { data: { avatar, avatarAlt, name, website, draft }, render } = (await getAuthor(author))!;
 const { Content } = await render();
 ---
-<div class="author-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
-	<a class="author-picture" href={url ?? website}>
-		<Avatar image={avatar} imageAlt={inlineMarkdownStrip(avatarAlt)} />
-	</a>
+<aside class="author-card-wrapper">
+	<div class="author-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
+		<a class="author-picture" href={url ?? website}>
+			<Avatar image={avatar} imageAlt={inlineMarkdownStrip(avatarAlt)} />
+		</a>
 
-	<a class="p-author h-card author-name" rel="author" itemprop="url" href={url}>
-		<h2 itemprop="name">
-			{draft && <span class="author-draft-tag">Draft</span>} <Fragment set:html={inlineMarkdownRender(escapeHtmlTags(name))} />
-		</h2>
-	</a>
+		<a class="p-author h-card author-name" rel="author" itemprop="url" href={url}>
+			<h2 itemprop="name">
+				{draft && <span class="author-draft-tag">Draft</span>} <Fragment set:html={inlineMarkdownRender(escapeHtmlTags(name))} />
+			</h2>
+		</a>
 
-	<div class="author-bio">
-		<small>
-			<Content />
-		</small>
+		<div class="author-bio">
+			<small>
+				<Content />
+			</small>
+		</div>
 	</div>
-</div>
+</aside>
