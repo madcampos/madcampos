@@ -48,6 +48,7 @@ const socialImage = join([baseUrl, image ?? defaultSocialImage.src], { trailingS
 
 	<!-- URLs -->
 	<link rel="canonical" href={fullUrl} />
+	<link rel="author" href={join([baseUrl, 'humans.txt'])} />
 	<link rel="sitemap" href={join([GLOBALS.url, 'sitemap-index.xml'], { trailingSlash: false })} />
 	{hasFeed && <link rel="alternate" type="application/atom+xml" href={join([BLOG.url, 'feed.xml'], { trailingSlash: false })} title={BLOG.titleString} />}
 

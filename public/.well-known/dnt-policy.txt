@@ -1,0 +1,7 @@
+Do Not Track Compliance Policy
+
+Version 1.1
+
+This domain performs no web tracking of any kind. Read more at https://madcampos.dev/privacy.
+
+This file will always be posted via HTTPS at https://madcampos.dev/.well-known/dnt-policy.txt to indicate this fact. The Tracking Preference Expression (DNT) (https://www.w3.org/TR/tracking-dnt/) is served from https://madcampos.dev/.well-known/dnt.

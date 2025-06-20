@@ -1,0 +1,25 @@
+---
+import Logo from '../components/Logo/Logo.astro';
+import { GLOBALS } from '../constants';
+import InternalPageLayout from '../layouts/InternalPage.astro';
+---
+
+<InternalPageLayout
+	htmlTitle={['Privacy', ...GLOBALS.title]}
+	title="Privacy"
+	description="Privacy Statement."
+	url="/privacy/"
+	tags={['privacy', ...GLOBALS.tags]}
+>
+	<Logo
+		subtitle="Privacy"
+		shortSubtitle="Priv."
+		url="/privacy/"
+		urlTitle="Privacy page"
+		slot="logo"
+	/>
+	<Fragment slot="header">Privacy</Fragment>
+
+	<p>This website (<a href="https://madcampos.dev">https://madcampos.dev</a>) does not perform web tracking of any kind.</p>
+	<p>That's it.</p>
+</InternalPageLayout>

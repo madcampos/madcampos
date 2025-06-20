@@ -1,0 +1,3 @@
+Entity: MADCampos,CA
+Privacy-policy: https://madcampos.dev/privacy
+Contact: mailto:me@madcampos.dev

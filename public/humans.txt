@@ -1,0 +1,16 @@
+/* humanstxt.org */
+
+/* TEAM */
+Creator: Marco Campos
+Site: https://madcampos.dev/
+Social media handle: @madcampos
+Location: Toronto, Canada
+Powered by: tea and sweets
+
+/* SITE */
+Started: 2023
+IDE: VSCode
+Hosting: Cloudflare Pages
+Accessibility tools: NVDA, Narrator, TalkBack
+Browsers: Edge, Firefox
+Powered by: Astro
