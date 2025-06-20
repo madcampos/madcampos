@@ -24,8 +24,8 @@
 
 	#post-header-wrapper {
 		display: grid;
-		grid-template-rows: auto 1fr auto auto auto;
-		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto 1fr repeat(3, auto);
+		grid-template-columns: repeat(2, 1fr);
 		grid-template-areas:
 			'draft hero-image'
 			'title hero-image'
@@ -43,14 +43,13 @@
 	}
 
 	#post-header-wrapper:not(:has(#hero-image)) {
-		grid-template-rows: auto 1fr auto auto auto;
-		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr repeat(3, auto);
 		grid-template-areas:
-			'draft'
-			'title'
-			'summary'
-			'metadata'
-			'share';
+			'draft draft'
+			'title draft'
+			'summary summary'
+			'metadata metadata'
+			'share share';
 	}
 
 	#post-header h1 {
@@ -162,15 +161,14 @@
 
 	@container post-header (max-width: 40rem) {
 		#post-header-wrapper {
-			grid-template-rows: 1fr auto auto auto auto auto;
-			grid-template-columns: 1fr;
+			grid-template-rows: 1fr repeat(5, auto);
 			grid-template-areas:
-				'hero-image'
-				'draft'
-				'title'
-				'summary'
-				'metadata'
-				'share';
+				'hero-image hero-image'
+				'draft draft'
+				'title title'
+				'summary summary'
+				'metadata metadata'
+				'share share';
 		}
 	}
 

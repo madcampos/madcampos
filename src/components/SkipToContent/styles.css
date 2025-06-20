@@ -2,7 +2,7 @@
 	#skip-to-main {
 		display: block;
 		position: absolute;
-		z-index: 9999;
+		z-index: calc(1 * infinity);
 		inset-block-start: -100%;
 		inset-inline: var(--spacing-medium);
 		background-color: var(--text-color);
@@ -12,6 +12,16 @@
 	}
 
 	#skip-to-main:focus-visible { inset-block-start: var(--spacing-medium); }
+
+	#skip-to-main:hover {
+		background-color: var(--theme-color);
+		color: var(--bg-color);
+	}
+
+	#skip-to-main:active {
+		background-color: var(--accent-color);
+		color: var(--bg-color);
+	}
 
 	:target {
 		scroll-margin: var(--spacing-large);

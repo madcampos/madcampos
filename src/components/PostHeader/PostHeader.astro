@@ -3,7 +3,6 @@ import './styles.css';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
-import SiteNav from '../SiteNav/SiteNav.astro';
 
 interface Props {
 	url: string;
@@ -38,7 +37,6 @@ const {
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
 ---
-<SiteNav />
 <header id="post-header">
 	<div id="post-header-wrapper">
 		{draft && <span id="post-draft-tag">DRAFT</span>}
