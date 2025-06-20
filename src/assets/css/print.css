@@ -18,6 +18,8 @@
 			--link-visited-color: #4c2c92;
 			--link-hover-color: var(--link-color);
 			--link-active-color: var(--link-color);
+
+			print-color-adjust: economy;
 			color-scheme: light;
 		}
 
@@ -32,10 +34,13 @@
 
 		a { text-decoration: underline; }
 
-		a:not(:has(> :is(img, picture)))[href]::after {
+		/* dprint-ignore */
+		a:not(:has( > :is(img, picture)))[href]::after {
 			content: '\00a0(' attr(href) ')';
 			font-size: smaller;
 		}
+
+		a#logo-container::after { display: none; }
 
 		a[rel~='external']::after {
 			display: inline;
@@ -50,6 +55,8 @@
 		#post-share { display: none; }
 		#site-nav { display: none; }
 		#old-buttons { display: none; }
+		#webrings { display: none; }
+		#theme-switcher { display: none; }
 
 		#related-posts ul { flex-wrap: wrap; }
 
