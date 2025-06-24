@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/madcampos
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://madcampos.dev
+  * I am madcampos (https://keybase.io/madcampos) on keybase.
+  * I have a public key ASAX0Dl-n4_5kmKTBLaU7NMB1JDvGEk1u5TnPydfqTiw0Qo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012017d0397e9f8ff992629304b694ecd301d490ef184935bb94e73f275fa938b0d10a",
+      "host": "keybase.io",
+      "kid": "012017d0397e9f8ff992629304b694ecd301d490ef184935bb94e73f275fa938b0d10a",
+      "uid": "6616c882d3548bbbffa063c415829919",
+      "username": "madcampos"
+    },
+    "merkle_root": {
+      "ctime": 1750796955,
+      "hash": "41b479f7c4aef07677ef75720e28fecb3dcaf526b20ab053cde936e22b240ea6ac40cced6888575f37e7c4847ab4bb16806c8688c8ed826c0809b8b22709400c",
+      "hash_meta": "f5a76eab342bd0d8ead780c344a26b0b12e7fa79ab9ca27b6beaec7fb3a5cd02",
+      "seqno": 26897891
+    },
+    "service": {
+      "entropy": "0o3G3ObxDwVkgG3X4izX3uud",
+      "hostname": "madcampos.dev",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.5.1"
+  },
+  "ctime": 1750797006,
+  "expire_in": 504576000,
+  "prev": "e93364757f02611ae402e9f8100f8220d3ac8bf16b0382819bbe570049e8e2d6",
+  "seqno": 5,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgF9A5fp+P+ZJikwS2lOzTAdSQ7xhJNbuU5z8nX6k4sNEKp3BheWxvYWTESpcCBcQg6TNkdX8CYRrkAun4EA+CINOsi/FrA4KBm75XAEno4tbEIMj8SlNmlpk0sttPzcdPgJAY3UdZgYxy5+PfjMTHy0FLAgHCo3NpZ8RAm959ADz+Hk34Ag2bP1jYOCH/tEPOr+3Ue5YWNBMUqdtq6l4SJgMWjL18A9Q2+HSeJyyFJCJW9TscrPGJa71JA6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIBtXYNlgkRWQrxjflkCK2rM+WTSFMLLaBvXG73tOf890o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/madcampos
+
+==================================================================
