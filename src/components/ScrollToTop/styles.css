@@ -19,7 +19,6 @@
 		gap: var(--spacing-medium);
 		translate: 0 200%;
 		z-index: calc(1 * infinity);
-		transition: 0.4s translate;
 		margin-inline: auto;
 		inset-block-end: var(--spacing-medium);
 		inset-inline: var(--spacing-medium);
@@ -51,4 +50,6 @@
 			translate: 0 0;
 		}
 	}
+
+	@media not (prefers-reduced-motion) { #scroll-to-top-link { transition: 0.4s translate; } }
 }

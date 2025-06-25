@@ -8,7 +8,7 @@ button text {
 	font-family: var(--button-font-papyrus);
 }
 
-@media (prefers-reduced-motion: no-preference) { button { animation-name: rainbow; } }
+@media not (prefers-reduced-motion) { button { animation-name: rainbow; } }
 
 @media (prefers-contrast: more), (forced-colors: active) {
 	button { animation-name: none; }

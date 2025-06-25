@@ -15,7 +15,7 @@ button .button-badge-bg { fill: var(--rainbow-color); }
 button .button-badge-text { fill: var(--rainbow-text-color); }
 button .emphasis-text { fill: var(--rainbow-color); }
 
-@media (prefers-reduced-motion: no-preference) { button { animation-name: rainbow; } }
+@media not (prefers-reduced-motion) { button { animation-name: rainbow; } }
 
 @media (prefers-contrast: more) { button { animation-name: none; } }
 

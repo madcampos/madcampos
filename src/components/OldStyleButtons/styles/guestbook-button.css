@@ -20,7 +20,7 @@ button:hover svg { fill: orangered; }
 button:active .emphasis-text { fill: magenta; }
 button:active svg { fill: magenta; }
 
-@media (prefers-reduced-motion: no-preference) { button { animation-name: swing; } }
+@media not (prefers-reduced-motion) { button { animation-name: swing; } }
 
 @media (prefers-contrast: more), (forced-colors: active) {
 	button { animation-name: none; }

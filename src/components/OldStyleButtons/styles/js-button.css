@@ -25,7 +25,7 @@ button:active #button-base { fill: maroon; }
 button:active text { fill: tan; }
 button:active tspan:nth-child(1) { fill: white; }
 
-@media (prefers-reduced-motion: no-preference) { button { animation-name: js; } }
+@media not (prefers-reduced-motion) { button { animation-name: js; } }
 
 @media (prefers-contrast: more), (forced-colors: active) {
 	button { animation-name: none; }

@@ -212,5 +212,5 @@
 		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='micro']) { visibility: visible; }
 	}
 
-	@media (prefers-reduced-motion: no-preference) { [data-theme='hacker'] :is(#logo-graphics, .user-avatar) { filter: url('#animated-glitch-filter'); } }
+	@media not (prefers-reduced-motion) { [data-theme='hacker'] :is(#logo-graphics, .user-avatar) { filter: url('#animated-glitch-filter'); } }
 }

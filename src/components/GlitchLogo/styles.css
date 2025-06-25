@@ -32,5 +32,5 @@
 		color: var(--theme-color);
 	}
 
-	@media (prefers-reduced-motion: no-preference) { #glitched-logo-svg #glitch-logo { filter: url('#animated-glitch-filter'); } }
+	@media not (prefers-reduced-motion) { #glitched-logo-svg #glitch-logo { filter: url('#animated-glitch-filter'); } }
 }
