@@ -245,9 +245,9 @@ const rules = {
 	'@typescript-eslint/max-params': ['warn', { max: 6 }],
 	'@typescript-eslint/member-ordering': 'off',
 	'@typescript-eslint/method-signature-style': ['error', 'method'],
-	'@typescript-eslint/naming-convention': ['error', {
+	'@typescript-eslint/naming-convention': ['warn', {
 		selector: 'default',
-		format: ['PascalCase', 'camelCase'],
+		format: ['PascalCase', 'camelCase', 'UPPER_CASE'],
 		leadingUnderscore: 'allow',
 		trailingUnderscore: 'forbid',
 		filter: {
