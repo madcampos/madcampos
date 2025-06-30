@@ -1,0 +1,38 @@
+---
+import styles from './styles.css?url';
+
+interface Props {
+	items: string[];
+}
+
+const { items } = Astro.props;
+---
+<wheel-of-fortune>
+	<template shadowrootmode="open">
+		<link rel="stylesheet" href={styles} />
+		<fieldset>
+			<legend>The Wheel of Fork-tune</legend>
+
+			<header>
+				<blockquote>Don't know what to eat? Spin and find out!</blockquote>
+
+				<aside>
+					<button type="button" id="show-list">Show list</button>
+					<button type="button" id="show-wheel">Show wheel</button>
+				</aside>
+			</header>
+
+			<div>
+				<ol id="items-list"></ol>
+				<button type="button">Spin the wheel</button>
+			</div>
+		</fieldset>
+
+		<div hidden>
+			<slot is:inline></slot>
+		</div>
+	</template>
+
+	{items.map((item) => <span>{item}</span>)}
+</wheel-of-fortune>
+<script src="./index.ts"></script>

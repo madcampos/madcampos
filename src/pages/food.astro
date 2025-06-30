@@ -1,5 +1,6 @@
 ---
 import Logo from '../components/Logo/Logo.astro';
+import WheelOfFortune from '../components/WheelOfFortune/WheelOfFortune.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 ---
@@ -19,6 +20,8 @@ import InternalPageLayout from '../layouts/InternalPage.astro';
 		slot="logo"
 	/>
 	<Fragment slot="header">Food Order</Fragment>
+
+	<WheelOfFortune items={['Tim Hortons', 'Subway', 'A&W', 'Pizza', 'Ice Cream']} />
 
 	<details>
 		<summary>Tim Hortons</summary>

@@ -1,0 +1,230 @@
+:host {
+	display: block;
+	margin: var(--spacing-large);
+}
+
+fieldset {
+	border: var(--border-style) var(--border-width) var(--border-color);
+	border-radius: var(--border-radius);
+}
+
+legend {
+	font-weight: bold;
+	font-size: 2em;
+	text-align: center;
+}
+
+blockquote {
+	margin: var(--spacing-medium) auto;
+	width: fit-content;
+	font-style: italic;
+}
+
+aside { text-align: center; }
+
+button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border: var(--border-style) var(--border-width) var(--theme-color);
+	border-radius: 100vmax;
+	background: var(--bg-color);
+	padding: var(--spacing-medium);
+	width: fit-content;
+	height: var(--button-size);
+	color: var(--theme-color);
+}
+
+button:focus-visible {
+	border-color: var(--text-color);
+	background-color: var(--theme-color);
+	color: var(--text-color);
+}
+
+button:hover {
+	outline-color: var(--accent-color);
+	border-color: var(--accent-color);
+	background-color: var(--dark-bg-color);
+	color: var(--accent-color);
+}
+
+button:active {
+	outline-color: var(--text-color);
+	border-color: var(--text-color);
+	background-color: var(--accent-color);
+	color: var(--text-color);
+}
+
+button svg {
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+#items-list {
+	display: grid;
+	place-content: center start;
+	clip-path: inset(0 0 0 0 round 50%);
+	container-type: inline-size;
+	padding: 0;
+	aspect-ratio: 1 / 1;
+	width: 30vmin;
+}
+
+li {
+	display: grid;
+	grid-area: 1 / -1;
+	align-content: center;
+	transform-origin: center right;
+	rotate: calc(360deg / var(--items) * calc(var(--index) - 1));
+	clip-path: polygon(0% -12%, 100% 50%, 0% 112%);
+	box-sizing: border-box;
+	background: var(--bg-color);
+	padding-inline-start: 2ch;
+	width: 50cqi;
+	height: calc(2 * pi * 50cqi / var(--items));
+	color: var(--text-color);
+	font-size: 5cqi;
+	list-style: none;
+}
+
+#items-list:has(li:nth-child(1)) { --items: 1; }
+#items-list:has(li:nth-child(2)) { --items: 2; }
+#items-list:has(li:nth-child(3)) { --items: 3; }
+#items-list:has(li:nth-child(4)) { --items: 4; }
+#items-list:has(li:nth-child(5)) { --items: 5; }
+#items-list:has(li:nth-child(6)) { --items: 6; }
+#items-list:has(li:nth-child(7)) { --items: 7; }
+#items-list:has(li:nth-child(8)) { --items: 8; }
+#items-list:has(li:nth-child(9)) { --items: 9; }
+#items-list:has(li:nth-child(10)) { --items: 10; }
+#items-list:has(li:nth-child(11)) { --items: 11; }
+#items-list:has(li:nth-child(12)) { --items: 12; }
+#items-list:has(li:nth-child(13)) { --items: 13; }
+#items-list:has(li:nth-child(14)) { --items: 14; }
+#items-list:has(li:nth-child(15)) { --items: 15; }
+#items-list:has(li:nth-child(16)) { --items: 16; }
+#items-list:has(li:nth-child(17)) { --items: 17; }
+#items-list:has(li:nth-child(18)) { --items: 18; }
+#items-list:has(li:nth-child(19)) { --items: 19; }
+#items-list:has(li:nth-child(20)) { --items: 20; }
+
+li:nth-child(1) {
+	--index: 1;
+	--bg-color: light-dark(blueviolet, blueviolet);
+	--text-color: black;
+}
+
+li:nth-child(2) {
+	--index: 2;
+	--bg-color: light-dark(coral, coral);
+	--text-color: black;
+}
+
+li:nth-child(3) {
+	--index: 3;
+	--bg-color: light-dark(navy, cornflowerblue);
+	--text-color: black;
+}
+
+li:nth-child(4) {
+	--index: 4;
+	--bg-color: light-dark(crimson, crimson);
+	--text-color: black;
+}
+
+li:nth-child(5) {
+	--index: 5;
+	--bg-color: light-dark(darkslategray, darkseagreen);
+	--text-color: black;
+}
+
+li:nth-child(6) {
+	--index: 6;
+	--bg-color: light-dark(deeppink, deeppink);
+	--text-color: black;
+}
+
+li:nth-child(7) {
+	--index: 7;
+	--bg-color: light-dark(maroon, darkorange);
+	--text-color: black;
+}
+
+li:nth-child(8) {
+	--index: 8;
+	--bg-color: light-dark(dodgerblue, dodgerblue);
+	--text-color: black;
+}
+
+li:nth-child(9) {
+	--index: 9;
+	--bg-color: light-dark(firebrick, firebrick);
+	--text-color: black;
+}
+
+li:nth-child(10) {
+	--index: 10;
+	--bg-color: light-dark(darkgreen, greenyellow);
+	--text-color: black;
+}
+
+li:nth-child(11) {
+	--index: 11;
+	--bg-color: light-dark(darkgoldenrod, goldenrod);
+	--text-color: black;
+}
+
+li:nth-child(12) {
+	--index: 12;
+	--bg-color: light-dark(seagreen, lightseagreen);
+	--text-color: black;
+}
+
+li:nth-child(13) {
+	--index: 13;
+	--bg-color: light-dark(mediumslateblue, mediumslateblue);
+	--text-color: black;
+}
+
+li:nth-child(14) {
+	--index: 14;
+	--bg-color: light-dark(orangered, orangered);
+	--text-color: black;
+}
+
+li:nth-child(15) {
+	--index: 15;
+	--bg-color: light-dark(royalblue, royalblue);
+	--text-color: black;
+}
+
+li:nth-child(16) {
+	--index: 16;
+	--bg-color: light-dark(tomato, tomato);
+	--text-color: black;
+}
+
+li:nth-child(17) {
+	--index: 17;
+	--bg-color: light-dark(steelblue, turquoise);
+	--text-color: black;
+}
+
+li:nth-child(18) {
+	--index: 18;
+	--bg-color: light-dark(olivedrab, yellowgreen);
+	--text-color: black;
+}
+
+li:nth-child(19) {
+	--index: 19;
+	--bg-color: red;
+	--text-color: black;
+}
+
+li:nth-child(20) {
+	--index: 20;
+	--bg-color: red;
+	--text-color: black;
+}
