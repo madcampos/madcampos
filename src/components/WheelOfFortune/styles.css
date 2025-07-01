@@ -6,6 +6,7 @@
 fieldset {
 	border: var(--border-style) var(--border-width) var(--border-color);
 	border-radius: var(--border-radius);
+	padding: var(--spacing-small);
 }
 
 legend {
@@ -22,10 +23,11 @@ blockquote {
 
 aside { text-align: center; }
 
-button {
+:where(button) {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 1;
 	border: var(--border-style) var(--border-width) var(--theme-color);
 	border-radius: 100vmax;
 	background: var(--bg-color);
@@ -61,31 +63,68 @@ button svg {
 	pointer-events: none;
 }
 
-#items-list {
+:host([display='wheel']) #show-wheel { display: none; }
+:host([display='list']) #show-list { display: none; }
+
+#wheel-container {
 	display: grid;
-	place-content: center start;
-	clip-path: inset(0 0 0 0 round 50%);
-	container-type: inline-size;
-	padding: 0;
-	aspect-ratio: 1 / 1;
-	width: 30vmin;
+	place-items: center;
+	margin: 1rem;
 }
 
-li {
-	display: grid;
-	grid-area: 1 / -1;
-	align-content: center;
-	transform-origin: center right;
+:host([display='wheel']) #list-spin { display: none; }
+:host([display='list']) #wheel-spin { display: none; }
+
+:host([display='wheel']) #wheel-container > * { grid-area: 1 / -1; }
+
+:host([display='list']) #wheel-marker { display: none; }
+:host([display='wheel']) #wheel-marker {
+	align-self: start;
+	z-index: 1;
+	clip-path: polygon(0 0, 50% 100%, 100% 0, 50% 25%);
+	margin-block-start: -0.5rem;
+	border: none;
+	background-image: linear-gradient(
+		to right,
+		dimgray 50%,
+		silver 50%
+	);
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+:host([display='wheel']) #items-list {
+	display: block;
+	position: relative;
+	place-items: center;
+	clip-path: inset(0 0 0 0 round 50%);
+	padding: 0;
+	aspect-ratio: 1 / 1;
+	width: clamp(10rem, 50vmin, 25rem);
+}
+
+:host([display='wheel']) li {
+	display: flex;
+	position: absolute;
+	justify-content: start;
+	align-items: center;
 	rotate: calc(360deg / var(--items) * calc(var(--index) - 1));
-	clip-path: polygon(0% -12%, 100% 50%, 0% 112%);
+	mask: conic-gradient(
+		from calc(0.75turn - 0.5turn / var(--items)),
+		black calc(1turn / var(--items)),
+		transparent calc(1turn / var(--items))
+	);
 	box-sizing: border-box;
+	inset: 0;
 	background: var(--bg-color);
-	padding-inline-start: 2ch;
-	width: 50cqi;
-	height: calc(2 * pi * 50cqi / var(--items));
 	color: var(--text-color);
-	font-size: 5cqi;
 	list-style: none;
+}
+
+.item-wrapper {
+	display: block;
+	padding-inline: var(--spacing-large);
+	text-align: start;
 }
 
 #items-list:has(li:nth-child(1)) { --items: 1; }
@@ -100,14 +139,6 @@ li {
 #items-list:has(li:nth-child(10)) { --items: 10; }
 #items-list:has(li:nth-child(11)) { --items: 11; }
 #items-list:has(li:nth-child(12)) { --items: 12; }
-#items-list:has(li:nth-child(13)) { --items: 13; }
-#items-list:has(li:nth-child(14)) { --items: 14; }
-#items-list:has(li:nth-child(15)) { --items: 15; }
-#items-list:has(li:nth-child(16)) { --items: 16; }
-#items-list:has(li:nth-child(17)) { --items: 17; }
-#items-list:has(li:nth-child(18)) { --items: 18; }
-#items-list:has(li:nth-child(19)) { --items: 19; }
-#items-list:has(li:nth-child(20)) { --items: 20; }
 
 li:nth-child(1) {
 	--index: 1;
@@ -117,114 +148,76 @@ li:nth-child(1) {
 
 li:nth-child(2) {
 	--index: 2;
-	--bg-color: light-dark(coral, coral);
+	--bg-color: light-dark(darkgreen, greenyellow);
 	--text-color: black;
 }
 
 li:nth-child(3) {
 	--index: 3;
-	--bg-color: light-dark(navy, cornflowerblue);
+	--bg-color: light-dark(coral, coral);
 	--text-color: black;
 }
 
 li:nth-child(4) {
 	--index: 4;
-	--bg-color: light-dark(crimson, crimson);
+	--bg-color: light-dark(steelblue, turquoise);
 	--text-color: black;
 }
 
 li:nth-child(5) {
 	--index: 5;
-	--bg-color: light-dark(darkslategray, darkseagreen);
+	--bg-color: light-dark(maroon, darkorange);
 	--text-color: black;
 }
 
 li:nth-child(6) {
 	--index: 6;
-	--bg-color: light-dark(deeppink, deeppink);
+	--bg-color: light-dark(seagreen, lightseagreen);
 	--text-color: black;
 }
 
 li:nth-child(7) {
 	--index: 7;
-	--bg-color: light-dark(maroon, darkorange);
+	--bg-color: light-dark(deeppink, deeppink);
 	--text-color: black;
 }
 
 li:nth-child(8) {
 	--index: 8;
-	--bg-color: light-dark(dodgerblue, dodgerblue);
+	--bg-color: light-dark(darkgoldenrod, goldenrod);
 	--text-color: black;
 }
 
 li:nth-child(9) {
 	--index: 9;
-	--bg-color: light-dark(firebrick, firebrick);
+	--bg-color: light-dark(dodgerblue, dodgerblue);
 	--text-color: black;
 }
 
 li:nth-child(10) {
 	--index: 10;
-	--bg-color: light-dark(darkgreen, greenyellow);
+	--bg-color: light-dark(olivedrab, yellowgreen);
 	--text-color: black;
 }
 
 li:nth-child(11) {
 	--index: 11;
-	--bg-color: light-dark(darkgoldenrod, goldenrod);
+	--bg-color: light-dark(navy, cornflowerblue);
 	--text-color: black;
 }
 
 li:nth-child(12) {
 	--index: 12;
-	--bg-color: light-dark(seagreen, lightseagreen);
+	--bg-color: light-dark(firebrick, firebrick);
 	--text-color: black;
 }
 
-li:nth-child(13) {
-	--index: 13;
-	--bg-color: light-dark(mediumslateblue, mediumslateblue);
-	--text-color: black;
-}
-
-li:nth-child(14) {
-	--index: 14;
-	--bg-color: light-dark(orangered, orangered);
-	--text-color: black;
-}
-
-li:nth-child(15) {
-	--index: 15;
-	--bg-color: light-dark(royalblue, royalblue);
-	--text-color: black;
-}
-
-li:nth-child(16) {
-	--index: 16;
-	--bg-color: light-dark(tomato, tomato);
-	--text-color: black;
-}
-
-li:nth-child(17) {
-	--index: 17;
-	--bg-color: light-dark(steelblue, turquoise);
-	--text-color: black;
-}
-
-li:nth-child(18) {
-	--index: 18;
-	--bg-color: light-dark(olivedrab, yellowgreen);
-	--text-color: black;
-}
-
-li:nth-child(19) {
-	--index: 19;
-	--bg-color: red;
-	--text-color: black;
-}
-
-li:nth-child(20) {
-	--index: 20;
-	--bg-color: red;
-	--text-color: black;
+@media (max-width: 40rem) { #wheel-container { margin: var(--spacing-small); } }
+@media (max-width: 25rem) {
+	:host { margin-inline: var(--spacing-small); }
+	legend { font-size: 1.4em; }
+	.item-wrapper {
+		padding-inline-start: var(--spacing-medium);
+		font-size: smaller;
+	}
 }

@@ -22,11 +22,20 @@ const { items } = Astro.props;
 				</aside>
 			</header>
 
-			<div>
+			<div id="wheel-container">
 				<ol id="items-list"></ol>
-				<button type="button">Spin the wheel</button>
+				<hr id="wheel-marker" />
+				<button type="button" id="wheel-spin">Spin the wheel</button>
+				<button type="button" id="list-spin">Select from list</button>
 			</div>
 		</fieldset>
+
+		<dialog>
+			<h2>Results are in!</h2>
+			<form method="dialog">
+				<button>Close</button>
+			</form>
+		</dialog>
 
 		<div hidden>
 			<slot is:inline></slot>
