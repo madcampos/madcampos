@@ -55,6 +55,7 @@ class WheelOffortune extends HTMLElement {
 			this.#animation.cancel();
 		}
 
+		// TODO: figure out math to stop on a specific section
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const wheel = this.#shadow.querySelector<HTMLOListElement>('#items-list')!;
 		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
@@ -85,6 +86,7 @@ class WheelOffortune extends HTMLElement {
 		const sections = wheel.querySelectorAll('li').length;
 		const randomItem = Math.trunc(Math.random() * sections);
 
+		// TODO: highlight section and add aria-selected
 		console.log(randomItem);
 	}
 
