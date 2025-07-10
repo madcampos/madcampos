@@ -2,6 +2,72 @@
 import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
+
+const links = {
+	'Accessibility': {
+		'https://www.w3.org/WAI/ARIA/apg/patterns/': 'ARIA Authoring Practices - Patterns',
+		'https://inclusive-components.design/': 'Inclusive Components',
+		'https://www.erikkroes.nl/blog/accessibility/the-guide-to-accessible-web-components-draft/': 'The Guide to Accessible Web Components',
+		'https://www.w3.org/WAI/tutorials/forms/': 'Forms Tutorial - Web Accessibility Intiative',
+		'https://adrianroselli.com/2020/03/stop-using-drop-down.html': 'Stop Using "Drop-Down"',
+		'https://racheleditullio.com/talks/accessible-forms/': 'Structuring Accessible Forms',
+		'https://html5accessibility.com/stuff/2024/11/23/old-alt-text-advice/': 'Old Alt Text Advice',
+		'https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/': 'The Surprising Truth About Pixels and Accessibility',
+		'https://nolanlawson.com/2022/11/28/shadow-dom-and-accessibility-the-trouble-with-aria/': 'Shadow DOM and accessibility: the trouble with ARIA',
+		'https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/': 'A Complete Guide To Accessible Front-End Components'
+	},
+	'HTML': {
+		'https://heydonworks.com/article/the-blockquote-element/': 'The Blockquote Element',
+		'https://github.com/joshbuchea/HEAD': 'HEAD - A list of tags to put on your html <head>',
+		'https://www.leemunroe.com/building-html-email/': "Things I've Learned About Building & Coding HTML Email Templates",
+		'https://web.dev/articles/custom-elements-best-practices': 'Custom Element Best Practices'
+	},
+	'CSS': {
+		'https://every-layout.dev/layouts/stack/': 'The Stack - Every Layout',
+		'https://css-tricks.com/snippets/css/complete-guide-grid/': 'CSS Grid Layout Guide',
+		'https://www.youtube.com/watch?v=xCSw6bPXZks': 'Please stop using px for font-size (video)',
+		'https://rtlstyling.com/posts/rtl-styling/': 'RTL Styling 101',
+		'https://css-tricks.com/dropdown-menus-with-more-forgiving-mouse-movement-paths/': 'Dropdown Menus with More Forgiving Mouse Movement Paths',
+		'https://svgfilters.com/': 'SVG Filter Builder'
+	},
+	'UX and Design': {
+		'https://lawsofux.com/': 'Laws of UX',
+		'https://uxmyths.com/': 'UX Myths',
+		'https://alistapart.com/article/the-illusion-of-control-in-web-design/': 'The Illusion of Control in Web Design',
+		'https://www.intercom.com/blog/7-things-wish-every-search-did/': '7 things I wish every search box did',
+		'https://uxplanet.org/designing-systematic-colors-b5d2605b15c': 'Designing Systematic Colors',
+		'https://jeremymikkola.com/posts/2019_03_19_rules_for_autocomplete.html': 'Rules for Autocomplete'
+	},
+	'Security': {
+		'https://pages.nist.gov/800-63-4/sp800-63b.html#password': 'NIST Guidelines on passwords',
+		'https://tailscale.com/blog/frequent-reauth-security': "Frequent reauth doesn't make you more secure"
+	},
+	'Git': {
+		'https://www.conventionalcommits.org/en/v1.0.0/': 'Conventional Commits',
+		'https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits': 'Commit Signing - GitHub Guide'
+	},
+	'Software Enginnering and Management': {
+		'https://charity.wtf/2025/06/19/in-praise-of-normal-engineers/': 'In praise of "normal" engineers',
+		'https://newsletter.manager.dev/p/the-13-software-engineering-laws': 'The 13 software engineering laws',
+		'https://monica-at-mozilla.blogspot.com/2013/02/writing-for-98.html': 'Writing for the 98%',
+		'https://medium.com/google-design/google-photos-45b714dfbed1': 'Building the Google Photos Web UI'
+	},
+	'Random very technical stuff': {
+		'https://bjango.com/articles/colourmanagementgamut/': 'Colour management, part 1',
+		'https://behdad.org/text2024/': 'State of Text Rendering 2024',
+		'https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html': 'What Every Computer Scientist Should Know About Floating-Point Arithmetic',
+		'https://www.bigocheatsheet.com/': 'Big-O Cheat Sheet',
+		'https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html': 'We have a problem with promises',
+		'http://devmag.org.za/2013/08/31/geometry-with-hex-coordinates/': 'Geometry with Hex Coordinates',
+		'https://www.b-list.org/weblog/2018/feb/11/usernames/': 'Let’s talk about usernames',
+		'https://css-tricks.com/debouncing-throttling-explained-examples/': 'Debouncing and Throttling Explained Through Examples',
+		'http://devmag.org.za/2009/05/03/poisson-disk-sampling/': 'Poisson Disk Sampling',
+		'http://4eyes.code66.se/?p=3881': 'Making seamlessly tiling water edge overlays',
+		'https://www.fieggen.com/shoelace/': "Ian's Shoelace Site",
+		'https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/': 'Falsehoods programmers believe about names',
+		'https://flightaware.engineering/falsehoods-programmers-believe-about-aviation/': 'Falsehoods Programmers Believe About Aviation'
+	}
+};
 ---
 
 <InternalPageLayout
@@ -19,25 +85,19 @@ import InternalPageLayout from '../layouts/InternalPage.astro';
 		slot="logo"
 	/>
 	<Fragment slot="header">Bookmarks</Fragment>
-	<h2>Accessibility</h2>
-	<ul>
-		<li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA Authoring Practices - Patterns</a></li>
-		<li><a href="https://inclusive-components.design/">Inclusive Components</a></li>
-		<li><a href="https://www.erikkroes.nl/blog/accessibility/the-guide-to-accessible-web-components-draft/">The Guide to Accessible Web Components</a></li>
-		<li><a href="https://www.w3.org/WAI/tutorials/forms/">Forms Tutorial - Web Accessibility Intiative</a></li>
-		<li><a href="https://adrianroselli.com/2020/03/stop-using-drop-down.html">Stop Using "Drop-Down"</a></li>
-		<li><a href="https://racheleditullio.com/talks/accessible-forms/">Structuring Accessible Forms</a></li>
-		<li><a href="https://html5accessibility.com/stuff/2024/11/23/old-alt-text-advice/">Old Alt Text Advice</a></li>
-	</ul>
 
-	<h2>Semantic HTML</h2>
-	<ul>
-		<li><a href="https://heydonworks.com/article/the-blockquote-element/">The Blockquote Element</a></li>
-	</ul>
-
-	<h2>CSS</h2>
-	<ul>
-		<li><a href="https://every-layout.dev/layouts/stack/">The Stack - Every Layout</a></li>
-		<li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS Grid Layout Guide</a></li>
-	</ul>
+	{
+		Object.entries(links).map(([sectionName, bookmarks]) => (
+			<h2>{sectionName}</h2>
+			<ul>
+				{
+					Object.entries(bookmarks).map(([url, title]) => (
+						<li class="h-entry">
+							<a class="u-bookmark-of h-cite" href={url}>{title}</a>
+						</li>
+					))
+				}
+			</ul>
+		))
+	}
 </InternalPageLayout>
