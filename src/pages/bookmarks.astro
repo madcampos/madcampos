@@ -3,71 +3,363 @@ import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 
-const links = {
-	'Accessibility': {
-		'https://www.w3.org/WAI/ARIA/apg/patterns/': 'ARIA Authoring Practices - Patterns',
-		'https://inclusive-components.design/': 'Inclusive Components',
-		'https://www.erikkroes.nl/blog/accessibility/the-guide-to-accessible-web-components-draft/': 'The Guide to Accessible Web Components',
-		'https://www.w3.org/WAI/tutorials/forms/': 'Forms Tutorial - Web Accessibility Intiative',
-		'https://adrianroselli.com/2020/03/stop-using-drop-down.html': 'Stop Using "Drop-Down"',
-		'https://racheleditullio.com/talks/accessible-forms/': 'Structuring Accessible Forms',
-		'https://html5accessibility.com/stuff/2024/11/23/old-alt-text-advice/': 'Old Alt Text Advice',
-		'https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/': 'The Surprising Truth About Pixels and Accessibility',
-		'https://nolanlawson.com/2022/11/28/shadow-dom-and-accessibility-the-trouble-with-aria/': 'Shadow DOM and accessibility: the trouble with ARIA',
-		'https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/': 'A Complete Guide To Accessible Front-End Components'
+interface BookmarkLink {
+	url: string;
+	title: string;
+	description: string;
+	type: 'article' | 'video' | 'podcast' | 'website' | 'tutorial' | 'reference' | 'guidelines';
+}
+
+interface BookmarkSection {
+	title: string;
+	description: string;
+	links: BookmarkLink[];
+}
+
+const links: BookmarkSection[] = [
+	{
+		title: 'Accessibility',
+		description: 'Content related to accessibility, specially web accessibility and ARIA.',
+		links: [
+			{
+				url: 'https://www.w3.org/WAI/ARIA/apg/patterns/',
+				title: 'ARIA Authoring Practices - Patterns',
+				description: '',
+				type: 'guidelines'
+			},
+			{
+				url: 'https://inclusive-components.design/',
+				title: 'Inclusive Components',
+				description: '',
+				type: 'website'
+			},
+			{
+				url: 'https://www.erikkroes.nl/blog/accessibility/the-guide-to-accessible-web-components-draft/',
+				title: 'The Guide to Accessible Web Components',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://www.w3.org/WAI/tutorials/forms/',
+				title: 'Forms Tutorial - Web Accessibility Intiative',
+				description: '',
+				type: 'website'
+			},
+			{
+				url: 'https://adrianroselli.com/2020/03/stop-using-drop-down.html',
+				title: 'Stop Using "Drop-Down"',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://racheleditullio.com/talks/accessible-forms/',
+				title: 'Structuring Accessible Forms',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'https://html5accessibility.com/stuff/2024/11/23/old-alt-text-advice/',
+				title: 'Old Alt Text Advice',
+				description: '',
+				type: 'guidelines'
+			},
+			{
+				url: 'https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/',
+				title: 'The Surprising Truth About Pixels and Accessibility',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://nolanlawson.com/2022/11/28/shadow-dom-and-accessibility-the-trouble-with-aria/',
+				title: 'Shadow DOM and accessibility: the trouble with ARIA',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/',
+				title: 'A Complete Guide To Accessible Front-End Components',
+				description: '',
+				type: 'guidelines'
+			}
+		]
 	},
-	'HTML': {
-		'https://heydonworks.com/article/the-blockquote-element/': 'The Blockquote Element',
-		'https://github.com/joshbuchea/HEAD': 'HEAD - A list of tags to put on your html <head>',
-		'https://www.leemunroe.com/building-html-email/': "Things I've Learned About Building & Coding HTML Email Templates",
-		'https://web.dev/articles/custom-elements-best-practices': 'Custom Element Best Practices'
+	{
+		title: 'HTML',
+		description: 'Semantic content and interesting things about HTML markup.',
+		links: [
+			{
+				url: 'https://heydonworks.com/article/the-blockquote-element/',
+				title: 'The Blockquote Element',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://github.com/joshbuchea/HEAD',
+				title: 'HEAD - A list of tags to put on your html <head>',
+				description: '',
+				type: 'reference'
+			},
+			{
+				url: 'https://www.leemunroe.com/building-html-email/',
+				title: "Things I've Learned About Building & Coding HTML Email Templates",
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://web.dev/articles/custom-elements-best-practices',
+				title: 'Custom Element Best Practices',
+				description: '',
+				type: 'guidelines'
+			}
+		]
 	},
-	'CSS': {
-		'https://every-layout.dev/layouts/stack/': 'The Stack - Every Layout',
-		'https://css-tricks.com/snippets/css/complete-guide-grid/': 'CSS Grid Layout Guide',
-		'https://www.youtube.com/watch?v=xCSw6bPXZks': 'Please stop using px for font-size (video)',
-		'https://rtlstyling.com/posts/rtl-styling/': 'RTL Styling 101',
-		'https://css-tricks.com/dropdown-menus-with-more-forgiving-mouse-movement-paths/': 'Dropdown Menus with More Forgiving Mouse Movement Paths',
-		'https://svgfilters.com/': 'SVG Filter Builder'
+	{
+		title: 'CSS',
+		description: "CSS, layouts, and all it's cool quirks.",
+		links: [
+			{
+				url: 'https://every-layout.dev/layouts/stack/',
+				title: 'The Stack - Every Layout',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'https://css-tricks.com/snippets/css/complete-guide-grid/',
+				title: 'CSS Grid Layout Guide',
+				description: '',
+				type: 'reference'
+			},
+			{
+				url: 'https://www.youtube.com/watch?v=xCSw6bPXZks',
+				title: 'Please stop using px for font-size (video)',
+				description: '',
+				type: 'video'
+			},
+			{
+				url: 'https://rtlstyling.com/posts/rtl-styling/',
+				title: 'RTL Styling 101',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'https://css-tricks.com/dropdown-menus-with-more-forgiving-mouse-movement-paths/',
+				title: 'Dropdown Menus with More Forgiving Mouse Movement Paths',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'https://svgfilters.com/',
+				title: 'SVG Filter Builder',
+				description: '',
+				type: 'website'
+			}
+		]
 	},
-	'UX and Design': {
-		'https://lawsofux.com/': 'Laws of UX',
-		'https://uxmyths.com/': 'UX Myths',
-		'https://alistapart.com/article/the-illusion-of-control-in-web-design/': 'The Illusion of Control in Web Design',
-		'https://www.intercom.com/blog/7-things-wish-every-search-did/': '7 things I wish every search box did',
-		'https://uxplanet.org/designing-systematic-colors-b5d2605b15c': 'Designing Systematic Colors',
-		'https://jeremymikkola.com/posts/2019_03_19_rules_for_autocomplete.html': 'Rules for Autocomplete'
+	{
+		title: 'UX and Design',
+		description: 'Usability, Design, and all things around the user experience.',
+		links: [
+			{
+				url: 'https://lawsofux.com/',
+				title: 'Laws of UX',
+				description: '',
+				type: 'website'
+			},
+			{
+				url: 'https://uxmyths.com/',
+				title: 'UX Myths',
+				description: '',
+				type: 'website'
+			},
+			{
+				url: 'https://alistapart.com/article/the-illusion-of-control-in-web-design/',
+				title: 'The Illusion of Control in Web Design',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://www.intercom.com/blog/7-things-wish-every-search-did/',
+				title: '7 things I wish every search box did',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://uxplanet.org/designing-systematic-colors-b5d2605b15c',
+				title: 'Designing Systematic Colors',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://jeremymikkola.com/posts/2019_03_19_rules_for_autocomplete.html',
+				title: 'Rules for Autocomplete',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://www.dimensions.com/',
+				title: 'Dimensions',
+				description: '',
+				type: 'website'
+			}
+		]
 	},
-	'Security': {
-		'https://pages.nist.gov/800-63-4/sp800-63b.html#password': 'NIST Guidelines on passwords',
-		'https://tailscale.com/blog/frequent-reauth-security': "Frequent reauth doesn't make you more secure"
+	{
+		title: 'Security',
+		description: 'Good practices and advice related to security.',
+		links: [
+			{
+				url: 'https://pages.nist.gov/800-63-4/sp800-63b.html#password',
+				title: 'NIST Guidelines on passwords',
+				description: '',
+				type: 'guidelines'
+			},
+			{
+				url: 'https://tailscale.com/blog/frequent-reauth-security',
+				title: "Frequent reauth doesn't make you more secure",
+				description: '',
+				type: 'article'
+			}
+		]
 	},
-	'Git': {
-		'https://www.conventionalcommits.org/en/v1.0.0/': 'Conventional Commits',
-		'https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits': 'Commit Signing - GitHub Guide'
+	{
+		title: 'Git',
+		description: 'Version control and this bugger called Git.',
+		links: [
+			{
+				url: 'https://www.conventionalcommits.org/en/v1.0.0/',
+				title: 'Conventional Commits',
+				description: '',
+				type: 'reference'
+			},
+			{
+				url: 'https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits',
+				title: 'Commit Signing - GitHub Guide',
+				description: '',
+				type: 'tutorial'
+			}
+		]
 	},
-	'Software Enginnering and Management': {
-		'https://charity.wtf/2025/06/19/in-praise-of-normal-engineers/': 'In praise of "normal" engineers',
-		'https://newsletter.manager.dev/p/the-13-software-engineering-laws': 'The 13 software engineering laws',
-		'https://monica-at-mozilla.blogspot.com/2013/02/writing-for-98.html': 'Writing for the 98%',
-		'https://medium.com/google-design/google-photos-45b714dfbed1': 'Building the Google Photos Web UI'
+	{
+		title: 'Software Engineering and Management',
+		description: 'Thought on how to manage softare engineering teams and softare projects architecture.',
+		links: [
+			{
+				url: 'https://charity.wtf/2025/06/19/in-praise-of-normal-engineers/',
+				title: 'In praise of "normal" engineers',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://newsletter.manager.dev/p/the-13-software-engineering-laws',
+				title: 'The 13 software engineering laws',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://monica-at-mozilla.blogspot.com/2013/02/writing-for-98.html',
+				title: 'Writing for the 98%',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://medium.com/google-design/google-photos-45b714dfbed1',
+				title: 'Building the Google Photos Web UI',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://blog.alexewerlof.com/p/when-a-team-is-too-big',
+				title: 'When a team is too big',
+				description: '',
+				type: 'article'
+			}
+		]
 	},
-	'Random very technical stuff': {
-		'https://bjango.com/articles/colourmanagementgamut/': 'Colour management, part 1',
-		'https://behdad.org/text2024/': 'State of Text Rendering 2024',
-		'https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html': 'What Every Computer Scientist Should Know About Floating-Point Arithmetic',
-		'https://www.bigocheatsheet.com/': 'Big-O Cheat Sheet',
-		'https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html': 'We have a problem with promises',
-		'http://devmag.org.za/2013/08/31/geometry-with-hex-coordinates/': 'Geometry with Hex Coordinates',
-		'https://www.b-list.org/weblog/2018/feb/11/usernames/': 'Let’s talk about usernames',
-		'https://css-tricks.com/debouncing-throttling-explained-examples/': 'Debouncing and Throttling Explained Through Examples',
-		'http://devmag.org.za/2009/05/03/poisson-disk-sampling/': 'Poisson Disk Sampling',
-		'http://4eyes.code66.se/?p=3881': 'Making seamlessly tiling water edge overlays',
-		'https://www.fieggen.com/shoelace/': "Ian's Shoelace Site",
-		'https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/': 'Falsehoods programmers believe about names',
-		'https://flightaware.engineering/falsehoods-programmers-believe-about-aviation/': 'Falsehoods Programmers Believe About Aviation'
+	{
+		title: 'Random Technical Stuff',
+		description: 'Very technical, much interesting, wow!',
+		links: [
+			{
+				url: 'https://bjango.com/articles/colourmanagementgamut/',
+				title: 'Colour management, part 1',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://behdad.org/text2024/',
+				title: 'State of Text Rendering 2024',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html',
+				title: 'What Every Computer Scientist Should Know About Floating-Point Arithmetic',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://www.bigocheatsheet.com/',
+				title: 'Big-O Cheat Sheet',
+				description: '',
+				type: 'reference'
+			},
+			{
+				url: 'https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html',
+				title: 'We have a problem with promises',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'http://devmag.org.za/2013/08/31/geometry-with-hex-coordinates/',
+				title: 'Geometry with Hex Coordinates',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'https://www.b-list.org/weblog/2018/feb/11/usernames/',
+				title: 'Let’s talk about usernames',
+				description: '',
+				type: 'article'
+			},
+			{
+				url: 'https://css-tricks.com/debouncing-throttling-explained-examples/',
+				title: 'Debouncing and Throttling Explained Through Examples',
+				description: '',
+				type: 'reference'
+			},
+			{
+				url: 'http://devmag.org.za/2009/05/03/poisson-disk-sampling/',
+				title: 'Poisson Disk Sampling',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'http://4eyes.code66.se/?p=3881',
+				title: 'Making seamlessly tiling water edge overlays',
+				description: '',
+				type: 'tutorial'
+			},
+			{
+				url: 'https://www.fieggen.com/shoelace/',
+				title: "Ian's Shoelace Site",
+				description: '',
+				type: 'website'
+			},
+			{
+				url: 'https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/',
+				title: 'Falsehoods programmers believe about names',
+				description: 'Classic article to question our assumptions.',
+				type: 'article'
+			},
+			{
+				url: 'https://flightaware.engineering/falsehoods-programmers-believe-about-aviation/',
+				title: 'Falsehoods Programmers Believe About Aviation',
+				description: 'An interesting read in the style of "Falsehoods programmers believe about x".',
+				type: 'article'
+			}
+		]
 	}
-};
+];
 ---
 
 <InternalPageLayout
@@ -87,17 +379,21 @@ const links = {
 	<Fragment slot="header">Bookmarks</Fragment>
 
 	{
-		Object.entries(links).map(([sectionName, bookmarks]) => (
-			<h2>{sectionName}</h2>
-			<ul>
+		links.map((section) => (
+			<h2>{section.title}</h2>
+			<p>{section.description}</p>
+			<dl>
 				{
-					Object.entries(bookmarks).map(([url, title]) => (
-						<li class="h-entry">
-							<a class="u-bookmark-of h-cite" href={url}>{title}</a>
-						</li>
+					section.links.map((bookmark) => (
+						<dt class="h-entry">
+							<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
+						</dt>
+						<dd>
+							{bookmark.description}
+						</dd>
 					))
 				}
-			</ul>
+			</dl>
 		))
 	}
 </InternalPageLayout>
