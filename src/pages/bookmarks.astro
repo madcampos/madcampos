@@ -5,7 +5,7 @@ import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 import { inlineMarkdownRender } from '../utils/markdown.ts';
 
-const ICON_MAP: Record<BookmarkLink['type'], string> = {
+const ICON_MAP = {
 	article: 'uil:edit',
 	guidelines: 'uil:book-open',
 	podcast: 'uil:microphone',
