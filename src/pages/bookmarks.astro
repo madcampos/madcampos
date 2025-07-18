@@ -1,7 +1,20 @@
 ---
+import { Icon } from 'astro-icon/components';
+import type { Icon as IconNames } from 'virtual:astro-icon';
 import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
+import { inlineMarkdownRender } from '../utils/markdown.ts';
+
+const ICON_MAP: Record<BookmarkLink['type'], IconNames> = {
+	article: 'uil:edit',
+	guidelines: 'uil:book-open',
+	podcast: 'uil:microphone',
+	reference: 'uil:books',
+	tutorial: 'uil:notes',
+	video: 'uil:clapper-board',
+	website: 'uil:globe'
+} as const;
 
 interface BookmarkLink {
 	url: string;
@@ -24,61 +37,63 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://www.w3.org/WAI/ARIA/apg/patterns/',
 				title: 'ARIA Authoring Practices - Patterns',
-				description: '',
+				description:
+					'A list of patterns to follow for complex UI interactions like tabs. It describes expected interactions but does not prescribe a specific tool to use.',
 				type: 'guidelines'
 			},
 			{
 				url: 'https://inclusive-components.design/',
 				title: 'Inclusive Components',
-				description: '',
+				description: 'A list of patterns for UI components, it is complementary to the previous one.',
 				type: 'website'
 			},
 			{
 				url: 'https://www.erikkroes.nl/blog/accessibility/the-guide-to-accessible-web-components-draft/',
 				title: 'The Guide to Accessible Web Components',
-				description: '',
+				description: 'General information on how to make accessible web components.',
 				type: 'article'
 			},
 			{
 				url: 'https://www.w3.org/WAI/tutorials/forms/',
 				title: 'Forms Tutorial - Web Accessibility Intiative',
-				description: '',
-				type: 'website'
+				description: 'A comprehensive tutorial on forms and how to best write them for accessibility.',
+				type: 'tutorial'
 			},
 			{
 				url: 'https://adrianroselli.com/2020/03/stop-using-drop-down.html',
 				title: 'Stop Using "Drop-Down"',
-				description: '',
+				description: 'A rant to stop missnaming some UI widgets.',
 				type: 'article'
 			},
 			{
 				url: 'https://racheleditullio.com/talks/accessible-forms/',
 				title: 'Structuring Accessible Forms',
-				description: '',
+				description: 'Amazing tutorial on accessible forms.',
 				type: 'tutorial'
 			},
 			{
 				url: 'https://html5accessibility.com/stuff/2024/11/23/old-alt-text-advice/',
 				title: 'Old Alt Text Advice',
-				description: '',
+				description: 'A very comprehensive guide for writing alt text for images, covering multiple cases and scenarios.',
 				type: 'guidelines'
 			},
 			{
 				url: 'https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/',
 				title: 'The Surprising Truth About Pixels and Accessibility',
-				description: '',
+				description: 'A deep dive into pixels and their relationship with other CSS units. Including some guidance on when to use which unit.',
 				type: 'article'
 			},
 			{
 				url: 'https://nolanlawson.com/2022/11/28/shadow-dom-and-accessibility-the-trouble-with-aria/',
 				title: 'Shadow DOM and accessibility: the trouble with ARIA',
-				description: '',
+				description:
+					'Current (from the time of the article) issues with implementing accessible web components. It covers mainly how to reference elements across shadow and light DOM boundaries.',
 				type: 'article'
 			},
 			{
 				url: 'https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/',
 				title: 'A Complete Guide To Accessible Front-End Components',
-				description: '',
+				description: 'A very comprehensive guide on multiple things to think about and care when creating components, specially interactive ones.',
 				type: 'guidelines'
 			},
 			{
@@ -96,25 +111,25 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://heydonworks.com/article/the-blockquote-element/',
 				title: 'The Blockquote Element',
-				description: '',
+				description: 'An article on the `<blockquote>` element and how to use it.',
 				type: 'article'
 			},
 			{
 				url: 'https://github.com/joshbuchea/HEAD',
 				title: 'HEAD - A list of tags to put on your html <head>',
-				description: '',
+				description: 'A list of tags to put on the `<head>` and links to the references for each tag.',
 				type: 'reference'
 			},
 			{
 				url: 'https://www.leemunroe.com/building-html-email/',
 				title: "Things I've Learned About Building & Coding HTML Email Templates",
-				description: '',
+				description: 'Reflections on building HTML emails.',
 				type: 'article'
 			},
 			{
 				url: 'https://web.dev/articles/custom-elements-best-practices',
 				title: 'Custom Element Best Practices',
-				description: '',
+				description: 'A set of best practices for building web components with explanations as to _why_ to follow them.',
 				type: 'guidelines'
 			}
 		]
@@ -126,37 +141,37 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://every-layout.dev/layouts/stack/',
 				title: 'The Stack - Every Layout',
-				description: '',
+				description: 'An interesting approach to the problem of laying out a stack of things.',
 				type: 'tutorial'
 			},
 			{
 				url: 'https://css-tricks.com/snippets/css/complete-guide-grid/',
 				title: 'CSS Grid Layout Guide',
-				description: '',
+				description: "A guide on the grid layout, with it's properties and examples.",
 				type: 'reference'
 			},
 			{
 				url: 'https://www.youtube.com/watch?v=xCSw6bPXZks',
 				title: 'Please stop using px for font-size (video)',
-				description: '',
+				description: 'Accessibility related, it explains why we should not use pixels for defining the base font size of a page.',
 				type: 'video'
 			},
 			{
 				url: 'https://rtlstyling.com/posts/rtl-styling/',
 				title: 'RTL Styling 101',
-				description: '',
+				description: 'A guide on styling pages for Right to Left content.',
 				type: 'tutorial'
 			},
 			{
 				url: 'https://css-tricks.com/dropdown-menus-with-more-forgiving-mouse-movement-paths/',
 				title: 'Dropdown Menus with More Forgiving Mouse Movement Paths',
-				description: '',
+				description: "A classic tutorial on how to create dropdown menus that don't require precise mouse movements.",
 				type: 'tutorial'
 			},
 			{
 				url: 'https://svgfilters.com/',
 				title: 'SVG Filter Builder',
-				description: '',
+				description: 'Awesome node-based filter builder for SVG.',
 				type: 'website'
 			}
 		]
@@ -170,6 +185,19 @@ const links: BookmarkSection[] = [
 				title: 'Building a Lightweight Reactive State Manager with JavaScript Proxies',
 				description: 'A quick tutorial on how to build a state management tool that uses proxies and is lightweight',
 				type: 'tutorial'
+			},
+			{
+				url: 'https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html',
+				title: 'We have a problem with promises',
+				description: 'Why plain `Promise`s are hard in JavaScript.',
+				type: 'article'
+			},
+			{
+				url: 'https://css-tricks.com/debouncing-throttling-explained-examples/',
+				title: 'Debouncing and Throttling Explained Through Examples',
+				description:
+					'How to debounce and throttle events for when using [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame) is not enough.',
+				type: 'reference'
 			}
 		]
 	},
@@ -180,43 +208,43 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://lawsofux.com/',
 				title: 'Laws of UX',
-				description: '',
+				description: 'A list of principles underlaying _"good design"_.',
 				type: 'website'
 			},
 			{
 				url: 'https://uxmyths.com/',
 				title: 'UX Myths',
-				description: '',
+				description: 'A list of myths regarding UX with articles explaining why they are myths.',
 				type: 'website'
 			},
 			{
 				url: 'https://alistapart.com/article/the-illusion-of-control-in-web-design/',
 				title: 'The Illusion of Control in Web Design',
-				description: '',
+				description: 'Old advice about the web being a hostile medium and that we should embrace it and not fight against it.',
 				type: 'article'
 			},
 			{
 				url: 'https://www.intercom.com/blog/7-things-wish-every-search-did/',
 				title: '7 things I wish every search box did',
-				description: '',
+				description: 'An analysis of things that make a "search box" good.',
 				type: 'article'
 			},
 			{
 				url: 'https://uxplanet.org/designing-systematic-colors-b5d2605b15c',
 				title: 'Designing Systematic Colors',
-				description: '',
+				description: 'An approach to creating color palletes systematically.',
 				type: 'article'
 			},
 			{
 				url: 'https://jeremymikkola.com/posts/2019_03_19_rules_for_autocomplete.html',
 				title: 'Rules for Autocomplete',
-				description: '',
+				description: 'A set of guidelines for creating good auto complete components.',
 				type: 'article'
 			},
 			{
 				url: 'https://www.dimensions.com/',
 				title: 'Dimensions',
-				description: '',
+				description: 'Measuerements for things.',
 				type: 'website'
 			}
 		]
@@ -228,13 +256,13 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://pages.nist.gov/800-63-4/sp800-63b.html#password',
 				title: 'NIST Guidelines on passwords',
-				description: '',
+				description: 'Pedantic set of guidelines to punch people in the face with when they ask for arbitrary password rules.Very effective against managers.',
 				type: 'guidelines'
 			},
 			{
 				url: 'https://tailscale.com/blog/frequent-reauth-security',
 				title: "Frequent reauth doesn't make you more secure",
-				description: '',
+				description: 'An interesting view on asking users to reauthenticate often.',
 				type: 'article'
 			}
 		]
@@ -246,49 +274,61 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://www.conventionalcommits.org/en/v1.0.0/',
 				title: 'Conventional Commits',
-				description: '',
+				description: 'A style of writing commit messages that I like to follow.',
 				type: 'reference'
 			},
 			{
 				url: 'https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits',
 				title: 'Commit Signing - GitHub Guide',
-				description: '',
+				description: 'Important, please do it. Here is a tutorial.',
 				type: 'tutorial'
 			}
 		]
 	},
 	{
-		title: 'Software Engineering and Management',
-		description: 'Thought on how to manage softare engineering teams and softare projects architecture.',
+		title: 'Project Management',
+		description: 'Thought on how to manage softare engineering teams.',
 		links: [
 			{
 				url: 'https://charity.wtf/2025/06/19/in-praise-of-normal-engineers/',
 				title: 'In praise of "normal" engineers',
-				description: '',
-				type: 'article'
-			},
-			{
-				url: 'https://newsletter.manager.dev/p/the-13-software-engineering-laws',
-				title: 'The 13 software engineering laws',
-				description: '',
-				type: 'article'
-			},
-			{
-				url: 'https://monica-at-mozilla.blogspot.com/2013/02/writing-for-98.html',
-				title: 'Writing for the 98%',
-				description: '',
-				type: 'article'
-			},
-			{
-				url: 'https://medium.com/google-design/google-photos-45b714dfbed1',
-				title: 'Building the Google Photos Web UI',
-				description: '',
+				description: 'Why expecting the whole team to be "10x" is faulty.',
 				type: 'article'
 			},
 			{
 				url: 'https://blog.alexewerlof.com/p/when-a-team-is-too-big',
 				title: 'When a team is too big',
-				description: '',
+				description: 'A reflection on team size, experience, and effectiveness.',
+				type: 'article'
+			},
+			{
+				url: 'https://jordivillar.com/blog/becoming-irrelevant',
+				title: 'Am I Becoming Irrelevant?',
+				description: "Imposter Syndrome and it's effects.",
+				type: 'article'
+			}
+		]
+	},
+	{
+		title: 'Software Engineering',
+		description: 'Interesting architecture problems and their solutions.',
+		links: [
+			{
+				url: 'https://newsletter.manager.dev/p/the-13-software-engineering-laws',
+				title: 'The 13 software engineering laws',
+				description: 'A list of "laws" of engineering with explanations on thir importance.',
+				type: 'article'
+			},
+			{
+				url: 'https://monica-at-mozilla.blogspot.com/2013/02/writing-for-98.html',
+				title: 'Writing for the 98%',
+				description: 'An analysis of Firefox preferences page design and the balance between good defaults and user control.',
+				type: 'article'
+			},
+			{
+				url: 'https://medium.com/google-design/google-photos-45b714dfbed1',
+				title: 'Building the Google Photos Web UI',
+				description: 'The challenge of building a UI for displaying photos and a solution to it.',
 				type: 'article'
 			}
 		]
@@ -300,79 +340,73 @@ const links: BookmarkSection[] = [
 			{
 				url: 'https://bjango.com/articles/colourmanagementgamut/',
 				title: 'Colour management, part 1',
-				description: '',
+				description: 'An introduction on how colour works in computers.',
 				type: 'article'
 			},
 			{
 				url: 'https://behdad.org/text2024/',
 				title: 'State of Text Rendering 2024',
-				description: '',
+				description: "An in-depth analysis of test rendering, it's tools, and everything that is needed to write text on the screen. Multi-language style.",
 				type: 'article'
 			},
 			{
 				url: 'https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html',
 				title: 'What Every Computer Scientist Should Know About Floating-Point Arithmetic',
-				description: '',
+				description: 'Classic piece on floating point numbers. A must read.',
 				type: 'article'
 			},
 			{
 				url: 'https://www.bigocheatsheet.com/',
 				title: 'Big-O Cheat Sheet',
-				description: '',
+				description: "Algorithm complexity cheat sheet. That's it.",
 				type: 'reference'
-			},
-			{
-				url: 'https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html',
-				title: 'We have a problem with promises',
-				description: '',
-				type: 'article'
 			},
 			{
 				url: 'http://devmag.org.za/2013/08/31/geometry-with-hex-coordinates/',
 				title: 'Geometry with Hex Coordinates',
-				description: '',
+				description: 'A tutorial for writing hexagonal maps, how to represent them as a matrix, and how to work with coordinates in this space.',
 				type: 'tutorial'
 			},
 			{
 				url: 'https://www.b-list.org/weblog/2018/feb/11/usernames/',
 				title: 'Let’s talk about usernames',
-				description: '',
+				description: 'Usernames are hard, here is an explanation on why.',
 				type: 'article'
-			},
-			{
-				url: 'https://css-tricks.com/debouncing-throttling-explained-examples/',
-				title: 'Debouncing and Throttling Explained Through Examples',
-				description: '',
-				type: 'reference'
 			},
 			{
 				url: 'http://devmag.org.za/2009/05/03/poisson-disk-sampling/',
 				title: 'Poisson Disk Sampling',
-				description: '',
+				description: 'An algorithm to place random things in a nice pattern.',
 				type: 'tutorial'
 			},
 			{
 				url: 'http://4eyes.code66.se/?p=3881',
 				title: 'Making seamlessly tiling water edge overlays',
-				description: '',
+				description: 'How to draw RPG maps in a more seamless way.',
 				type: 'tutorial'
 			},
 			{
 				url: 'https://www.fieggen.com/shoelace/',
 				title: "Ian's Shoelace Site",
-				description: '',
+				description: 'A database of ways to tie shoelaces.',
 				type: 'website'
 			},
 			{
 				url: 'https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/',
 				title: 'Falsehoods programmers believe about names',
-				description: 'Classic article to question our assumptions.',
+				description: "Classic article to question our assumptions on people's names.",
 				type: 'article'
 			},
 			{
 				url: 'https://flightaware.engineering/falsehoods-programmers-believe-about-aviation/',
 				title: 'Falsehoods Programmers Believe About Aviation',
-				description: 'An interesting read in the style of "Falsehoods programmers believe about x".',
+				description: 'An interesting read in the style of "Falsehoods programmers believe about x" about airplanes and aviation.',
+				type: 'article'
+			},
+			{
+				url: 'https://drew.silcock.dev/blog/artisanal-git/',
+				title: 'Artisanal Handcrafted Git Repositories',
+				description: 'How to make a git repo from scratch, vegan and gluten-free.',
 				type: 'article'
 			}
 		]
@@ -404,10 +438,11 @@ const links: BookmarkSection[] = [
 				{
 					section.links.map((bookmark) => (
 						<dt class="h-entry">
+							<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
 							<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
 						</dt>
 						<dd>
-							{bookmark.description}
+							<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
 						</dd>
 					))
 				}
