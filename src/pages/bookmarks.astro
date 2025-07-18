@@ -1,12 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
-import type { Icon as IconNames } from 'virtual:astro-icon';
 import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 import { inlineMarkdownRender } from '../utils/markdown.ts';
 
-const ICON_MAP: Record<BookmarkLink['type'], IconNames> = {
+const ICON_MAP: Record<BookmarkLink['type'], string> = {
 	article: 'uil:edit',
 	guidelines: 'uil:book-open',
 	podcast: 'uil:microphone',
