@@ -2,7 +2,7 @@
 import './styles.css';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
+import { inlineMarkdownRender } from '../../utils/markdown.js';
 
 interface Props {
 	url: string;
@@ -41,7 +41,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	<div id="post-header-wrapper">
 		{draft && <span id="post-draft-tag">DRAFT</span>}
 		<a id="post-title" class="u-uid u-url" href={url}>
-			<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} /></h1>
+			<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(title)} /></h1>
 		</a>
 
 		{
@@ -53,7 +53,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						itemprop="image"
 						loading="eager"
 					/>
-					<figcaption><Fragment set:html={inlineMarkdownRender(escapeHtmlTags(imageRights))} /></figcaption>
+					<figcaption><Fragment set:html={inlineMarkdownRender(imageRights)} /></figcaption>
 				</figure>
 			) : (
 				<Image
@@ -67,7 +67,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		}
 
 		<blockquote id="post-summary" class="p-summary" itemprop="description">
-			<p><Fragment set:html={inlineMarkdownRender(escapeHtmlTags(summary))} /></p>
+			<p><Fragment set:html={inlineMarkdownRender(summary)} /></p>
 		</blockquote>
 
 		<aside id="post-metadata">

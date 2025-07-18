@@ -3,7 +3,7 @@ import '../assets/css/pages/sitemap.css';
 import Logo from '../components/Logo/Logo.astro';
 import { BLOG, GLOBALS, TALKS } from '../constants.js';
 import InternalPageLayout from '../layouts/InternalPage.astro';
-import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
+import { inlineMarkdownRender } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 import { listPostsByYearAndMonth } from '../utils/post.js';
 import { listAllTalks } from '../utils/talks.js';
@@ -92,11 +92,11 @@ const blogPages = await listPostsByYearAndMonth();
 			aboutPages.map(({ url, title, description, hidden, wip }) => (
 				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
 					<a href={url}>
-						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+						<Fragment set:html={inlineMarkdownRender(title)} />
 					</a>
 				</dt>
 				<dd>
-					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+					<Fragment set:html={inlineMarkdownRender(description)} />
 				</dd>
 			))
 		}
@@ -107,11 +107,11 @@ const blogPages = await listPostsByYearAndMonth();
 			coolPages.map(({ url, title, description, hidden, wip }) => (
 				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
 					<a href={url}>
-						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+						<Fragment set:html={inlineMarkdownRender(title)} />
 					</a>
 				</dt>
 				<dd>
-					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+					<Fragment set:html={inlineMarkdownRender(description)} />
 				</dd>
 			))
 		}
@@ -124,11 +124,11 @@ const blogPages = await listPostsByYearAndMonth();
 			talkPages.map(({ url, title, description, hidden, wip }) => (
 				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
 					<a href={url}>
-						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+						<Fragment set:html={inlineMarkdownRender(title)} />
 					</a>
 				</dt>
 				<dd>
-					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(description))} />
+					<Fragment set:html={inlineMarkdownRender(description)} />
 				</dd>
 			))
 		}
@@ -152,11 +152,11 @@ const blogPages = await listPostsByYearAndMonth();
 											posts.map(({ url, data: { title, summary, draft } }) => (
 												<dt data-wip={draft || null}>
 													<a href={join([blogUrl, url])}>
-														<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+														<Fragment set:html={inlineMarkdownRender(title)} />
 													</a>
 												</dt>
 												<dd>
-													<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(summary))} />
+													<Fragment set:html={inlineMarkdownRender(summary)} />
 												</dd>
 											))
 										}

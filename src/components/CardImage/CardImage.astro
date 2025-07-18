@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
+import { inlineMarkdownStrip } from '../../utils/markdown.js';
 
 interface Props {
 	image: ImageMetadata;
@@ -16,7 +16,7 @@ const IMAGE_WIDTHS = [64, 128, 256, 512];
 <Image
 	itemprop="contentUrl"
 	src={image}
-	alt={inlineMarkdownStrip(escapeHtmlTags(imageAlt))}
+	alt={inlineMarkdownStrip(imageAlt)}
 	loading="lazy"
 	widths={IMAGE_WIDTHS}
 	width={256}
@@ -29,7 +29,7 @@ const IMAGE_WIDTHS = [64, 128, 256, 512];
 			itemprop="contentUrl"
 			data-theme-image={theme}
 			src={themeImage}
-			alt={inlineMarkdownStrip(escapeHtmlTags(imageAlt))}
+			alt={inlineMarkdownStrip(imageAlt)}
 			loading="lazy"
 			widths={IMAGE_WIDTHS}
 			width={256}

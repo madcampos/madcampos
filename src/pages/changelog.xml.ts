@@ -19,7 +19,7 @@ export const GET: APIRoute = async (context) => {
 	const items = await Promise.all(allLogs.map(async (changelog) =>
 		`<entry>
 			<id>${new URL(`#${changelog.id}`, changelogUrl).toString()}</id>
-			<title>${inlineMarkdownRender(escapeHtmlTags(changelog.title))}</title>
+			<title>${inlineMarkdownRender(changelog.title)}</title>
 			<updated>${changelog.data.date.toISOString()}</updated>
 			<published>${changelog.data.date.toISOString()}</published>
 			<link rel="alternate" type="text/html" href="${new URL(`#${changelog.id}`, changelogUrl).toString()}" />

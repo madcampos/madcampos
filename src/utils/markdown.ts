@@ -133,8 +133,12 @@ export function baselineInfo() {
 	};
 }
 
+export function escapeHtmlTags(input: string) {
+	return input.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
+}
+
 export function inlineMarkdownRender(input: string) {
-	const results = input
+	const results = escapeHtmlTags(input)
 		// Bold
 		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '<strong>$1$2</strong>')
 		// Italics
@@ -154,7 +158,7 @@ export function inlineMarkdownRender(input: string) {
 }
 
 export function inlineMarkdownStrip(input: string) {
-	const results = input
+	const results = escapeHtmlTags(input)
 		// Bold
 		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '$1$2')
 		// Italics
@@ -171,8 +175,4 @@ export function inlineMarkdownStrip(input: string) {
 		.replaceAll(/\[(.*?)\]\((.*?)\)/igu, '$1');
 
 	return results;
-}
-
-export function escapeHtmlTags(input: string) {
-	return input.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
 }

@@ -34,11 +34,11 @@ export const GET: APIRoute = async (context) => {
 
 		return `<entry>
 			<id>${new URL(post.url, blogUrl).toString()}</id>
-			<title>${inlineMarkdownStrip(escapeHtmlTags(post.data.title))}</title>
+			<title>${inlineMarkdownStrip(post.data.title)}</title>
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
 			<published>${post.data.createdAt}</published>
 			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
-			<summary>${inlineMarkdownStrip(escapeHtmlTags(post.data.summary))}</summary>
+			<summary>${inlineMarkdownStrip(post.data.summary)}</summary>
 			<content type="html">${postContent}</content>
 			${postTags}
 		</entry>`;

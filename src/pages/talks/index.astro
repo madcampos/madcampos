@@ -7,7 +7,7 @@ import CardImage from '../../components/CardImage/CardImage.astro';
 import Logo from '../../components/Logo/Logo.astro';
 import { TALKS } from '../../constants.js';
 import InternalPageLayout from '../../layouts/InternalPage.astro';
-import { escapeHtmlTags, inlineMarkdownRender } from '../../utils/markdown.js';
+import { inlineMarkdownRender } from '../../utils/markdown.js';
 import { join } from '../../utils/path.js';
 import { listAllTalks } from '../../utils/talks.js';
 
@@ -64,7 +64,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				}
 
 				<h2 slot="title">
-					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.title))} />
+					<Fragment set:html={inlineMarkdownRender(talk.data.title)} />
 				</h2>
 
 				<Fragment slot="subtitle">
@@ -96,14 +96,14 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 								<Icon name="uil:presentation-play" title="Event name" />
 								<span>
-									<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.event))} />
+									<Fragment set:html={inlineMarkdownRender(talk.data.event)} />
 								</span>
 							</span>
 						)
 					}
 				</Fragment>
 
-				<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.summary))} />
+				<Fragment set:html={inlineMarkdownRender(talk.data.summary)} />
 
 				<Fragment slot="links">
 					<a href={join([TALKS.url, talk.id])} itemprop="url">
@@ -111,7 +111,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<span>View Talk Info</span>
 						<span class="visually-hidden">
 							for
-							<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(talk.data.title))} />
+							<Fragment set:html={inlineMarkdownRender(talk.data.title)} />
 						</span>
 					</a>
 				</Fragment>

@@ -10,7 +10,7 @@ import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
 import TagList from '../components/TagList/TagList.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_TAGS } from '../constants.js';
-import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 import type { Post } from '../utils/post';
 import BaseLayout from './Base.astro';
@@ -86,17 +86,17 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					}
 
 					<h2 slot="title">
-						<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.title))} />
+						<Fragment set:html={inlineMarkdownRender(post.data.title)} />
 					</h2>
 					<small slot="subtitle" class="post-time">
 						<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
 					</small>
 
-					<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.data.summary))} />
+					<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
 
 					<a slot="links" class="read-more-link" href={join([BLOG.url, post.url])}>
 						<span>Read more</span>
-						<span class="visually-hidden">about "{inlineMarkdownStrip(escapeHtmlTags(post.data.title))}"</span>
+						<span class="visually-hidden">about "{inlineMarkdownStrip(post.data.title)}"</span>
 						<span>...</span>
 					</a>
 					{

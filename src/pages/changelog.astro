@@ -4,7 +4,7 @@ import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
-import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.ts';
+import { inlineMarkdownRender } from '../utils/markdown.ts';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 const changelogs = await Promise.all(await listAllChangelogs());
@@ -42,7 +42,7 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 				<summary>
 					<header>
 						<h2>
-							{draft && <span class="changelog-draft-tag">Draft</span>} <Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(title))} />
+							{draft && <span class="changelog-draft-tag">Draft</span>} <Fragment slot="title" set:html={inlineMarkdownRender(title)} />
 						</h2>
 						<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
 					</header>

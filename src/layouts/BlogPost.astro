@@ -12,7 +12,7 @@ import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
 import TagList from '../components/TagList/TagList.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_TAGS } from '../constants.js';
-import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import { join } from '../utils/path.js';
 import type { RelatedPost } from '../utils/post';
 import BaseLayout from './Base.astro';
@@ -185,9 +185,9 @@ const formatUpdateDate = (date: Date) =>
 													)
 												}
 
-												<Fragment slot="title" set:html={inlineMarkdownRender(escapeHtmlTags(post.title))} />
+												<Fragment slot="title" set:html={inlineMarkdownRender(post.title)} />
 
-												<Fragment set:html={inlineMarkdownRender(escapeHtmlTags(post.summary))} />
+												<Fragment set:html={inlineMarkdownRender(post.summary)} />
 											</Card>
 										</li>
 									))

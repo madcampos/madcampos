@@ -1,7 +1,7 @@
 ---
 import './styles.css';
 import { getAuthor } from '../../utils/authors.js';
-import { escapeHtmlTags, inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
 import Avatar from '../Avatar/Avatar.astro';
 
 interface Props {
@@ -23,7 +23,7 @@ const { Content } = await render();
 
 		<a class="p-author h-card author-name" rel="author" itemprop="url" href={url}>
 			<h2 itemprop="name">
-				{draft && <span class="author-draft-tag">Draft</span>} <Fragment set:html={inlineMarkdownRender(escapeHtmlTags(name))} />
+				{draft && <span class="author-draft-tag">Draft</span>} <Fragment set:html={inlineMarkdownRender(name)} />
 			</h2>
 		</a>
 

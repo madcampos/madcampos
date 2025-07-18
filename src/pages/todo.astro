@@ -3,7 +3,7 @@ import '../assets/css/pages/todo.css';
 import Logo from '../components/Logo/Logo.astro';
 import { GLOBALS } from '../constants';
 import InternalPageLayout from '../layouts/InternalPage.astro';
-import { escapeHtmlTags, inlineMarkdownRender } from '../utils/markdown.js';
+import { inlineMarkdownRender } from '../utils/markdown.js';
 
 interface Task {
 	isDone: boolean;
@@ -33,7 +33,7 @@ function renderTask(task: Task) {
 					aria-labelledby="label-${taskId}"
 					${task.isDone ? 'checked' : ''}
 				/>
-				<span>${inlineMarkdownRender(escapeHtmlTags(task.text))}</span>
+				<span>${inlineMarkdownRender(task.text)}</span>
 			</label>
 			${childTasks}
 		</li>
