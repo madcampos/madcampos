@@ -1,0 +1,27 @@
+@layer pages {
+	@view-transition { navigation: auto; }
+
+	::view-transition-old(root) { animation: old-page-animation 0s ease-in-out both; }
+	::view-transition-new(root) { animation: new-page-animation 0s ease-in-out both; }
+
+	@keyframes new-page-animation {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	@keyframes old-page-animation {
+		from {
+			opacity: 1;
+			filter: sepia(0) blur(0);
+		}
+		to {
+			opacity: 0;
+			filter: sepia(1) blur(1rem);
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		::view-transition-old(root) { animation-duration: 0.3s; }
+		::view-transition-new(root) { animation-duration: 0.2s; }
+	}
+}

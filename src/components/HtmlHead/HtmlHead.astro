@@ -110,15 +110,24 @@ const socialImage = join([baseUrl, image ?? defaultSocialImage.src], { trailingS
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 	<!-- Default CSS layers -->
-	{
-		(
-			<style>
-				@layer fonts, vars, base, pages, components, code, theme, print, contrast;
-			</style>
-		)
-	}
+	<style is:inline>
+		@layer fonts, vars, base, pages, components, code, theme, print, contrast;
+	</style>
+
 	<!-- Print Stylesheet -->
 	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
+
+	<!-- Prefetch speculation rules -->
+	<!-- dprint-ignore -->
+	<script type="speculationrules" is:inline>
+		{
+			"prefetch": [{
+				"where": { "selector_matches": "a", "href_matches": "/*" },
+				"eagerness": "moderate",
+				"requires": ["anonymous-client-ip-when-cross-origin"]
+			}]
+		}
+	</script>
 
 	<script src="./index.ts"></script>
 </head>

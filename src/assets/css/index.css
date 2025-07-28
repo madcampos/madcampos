@@ -1,5 +1,6 @@
 @import './vars.css';
 @import './fonts.css';
 @import './base.css';
+@import './transitions.css';
 @import './themes/index.css';
 @import './accessible.css';
