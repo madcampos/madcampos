@@ -4,7 +4,6 @@ import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
 import Effects from '../components/Effects/Effects.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import IabEscape from '../components/IabEscape/IabEscape.astro';
-import RefreshBanner from '../components/RefreshBanner/RefreshBanner.astro';
 
 interface Props {
 	title: string;
@@ -51,7 +50,6 @@ const {
 	<body class:list={[{ 'h-entry': hasFeed }]}>
 		<IabEscape />
 		<CSSNakedDay />
-		<RefreshBanner />
 		<slot name="header"></slot>
 		<main>
 			<slot></slot>

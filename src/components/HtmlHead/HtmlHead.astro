@@ -1,5 +1,4 @@
 ---
-import { pwaInfo } from 'virtual:pwa-info';
 import printStylesheet from '../../assets/css/print.css?url';
 import defaultSocialImage from '../../assets/images/social/social.png';
 import { BLOG, GLOBALS } from '../../constants.js';
@@ -56,10 +55,8 @@ const socialImage = join([baseUrl, image ?? defaultSocialImage.src], { trailingS
 	<link rel="icon" href={join([GLOBALS.url, '/assets/icons/icon.svg'], { trailingSlash: false })} sizes="any" type="image/svg+xml" />
 	<link rel="icon" href={join([GLOBALS.url, 'favicon.ico'], { trailingSlash: false })} sizes="48x48" type="image/x-icon" />
 	<meta name="theme-color" content="#0080ff" />
+	<link rel="manifest" href="/manifest.json" />
 	<link rel="license" href={join([GLOBALS.url, 'license'])} />
-
-	{/* eslint-disable-next-line astro/no-set-html-directive */}
-	{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 
 	<!-- Social metadata -->
 	<meta property="og:title" name="twitter:title" itemprop="name" content={title} />

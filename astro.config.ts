@@ -1,5 +1,3 @@
-import { readFileSync } from 'node:fs';
-
 import sitemap from '@astrojs/sitemap';
 import {
 	transformerMetaHighlight,
@@ -12,7 +10,6 @@ import {
 	transformerRenderWhitespace
 } from '@shikijs/transformers';
 import { transformerTwoslash } from '@shikijs/twoslash';
-import astroPWA, { type PwaOptions } from '@vite-pwa/astro';
 import astroIcon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
@@ -22,12 +19,9 @@ import remarkDirective from 'remark-directive';
 import remarkHighlight from 'remark-flexible-markers';
 import remarkIns from 'remark-ins';
 
-import { assetsCache, externalResourcesCache, pagesCache, scriptsCache } from './src/sw-caching.js';
 import { baselineInfo, codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
 
 import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
-
-const manifest: PwaOptions['manifest'] = JSON.parse(readFileSync('./src/manifest.json', { encoding: 'utf8' }));
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
 // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
@@ -96,36 +90,6 @@ export default defineConfig({
 		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'], referrerpolicy: 'no-referrer' }]]
 	},
 	integrations: [
-		astroPWA({
-			registerType: 'prompt',
-			experimental: { directoryAndTrailingSlashHandler: true },
-			minify: true,
-			showMaximumFileSizeToCacheInBytesWarning: true,
-			includeAssets: ['/icons/icon.svg', '/offline/index.html'],
-			manifest,
-			workbox: {
-				// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-				maximumFileSizeToCacheInBytes: 1024 * 256,
-				cleanupOutdatedCaches: true,
-				clientsClaim: true,
-				skipWaiting: true,
-				globIgnores: ['**/blog/**/**'],
-				navigateFallback: '/offline/index.html',
-				navigateFallbackDenylist: [/\.(?:png|gif|jpg|jpeg|webp|svg|ico)$/iu, /\/blog\//iu],
-				directoryIndex: 'index.html',
-				runtimeCaching: [
-					externalResourcesCache,
-					assetsCache,
-					scriptsCache,
-					pagesCache
-				],
-				disableDevLogs: false
-			},
-			devOptions: {
-				enabled: false
-			},
-			selfDestroying: true
-		}),
 		sitemap({
 			changefreq: 'weekly',
 			priority: 0.7,
