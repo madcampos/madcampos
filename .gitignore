@@ -31,5 +31,8 @@ certs
 *.crt
 *.key
 
+# Generated env file
+env.d.ts
+
 # Typescript build info
 *.tsbuildinfo
