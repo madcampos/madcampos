@@ -1,0 +1,26 @@
+diff --git [source]/node_modules/@lit-labs/ssr-client/package.json [dest]/node_modules/@lit-labs/ssr-client/package.json
+index efa31a7d..4dbe8191 100644
+--- [source]/node_modules/@lit-labs/ssr-client/package.json
++++ [dest]/node_modules/@lit-labs/ssr-client/package.json
+@@ -19,6 +19,10 @@
+   "exports": {
+     ".": {
+       "types": "./development/index.d.ts",
++      "workerd": {
++        "development": "./node/development/index.js",
++        "default": "./node/index.js"
++      },
+       "browser": {
+         "development": "./development/index.js",
+         "default": "./index.js"
+@@ -32,6 +36,10 @@
+     },
+     "./lit-element-hydrate-support.js": {
+       "types": "./development/lit-element-hydrate-support.d.ts",
++      "workerd": {
++        "development": "./node/development/lit-element-hydrate-support.js",
++        "default": "./node/lit-element-hydrate-support.js"
++      },
+       "browser": {
+         "development": "./development/lit-element-hydrate-support.js",
+         "default": "./lit-element-hydrate-support.js"
