@@ -1,7 +1,5 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import astroParser from 'astro-eslint-parser';
-import astroPlugin from 'eslint-plugin-astro';
 import globals from 'globals';
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
@@ -444,22 +442,7 @@ const rules = {
 	'@typescript-eslint/triple-slash-reference': 'off',
 	'@typescript-eslint/typedef': 'off',
 	'@typescript-eslint/unbound-method': ['off', { ignoreStatic: true }],
-	'@typescript-eslint/unified-signatures': 'error',
-
-	// Astro
-	'astro/no-conflict-set-directives': 'error',
-	'astro/no-deprecated-astro-canonicalurl': 'error',
-	'astro/no-deprecated-astro-fetchcontent': 'error',
-	'astro/no-deprecated-astro-resolve': 'error',
-	'astro/no-deprecated-getentrybyslug': 'error',
-	'astro/no-set-html-directive': 'error',
-	'astro/no-set-text-directive': 'error',
-	'astro/no-unused-css-selector': 'warn',
-	'astro/no-unused-define-vars-in-style': 'error',
-	'astro/prefer-class-list-directive': 'warn',
-	'astro/prefer-object-class-list': 'warn',
-	'astro/prefer-split-class-list': 'warn',
-	'astro/valid-compile': 'error'
+	'@typescript-eslint/unified-signatures': 'error'
 };
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.LanguageOptions} */
@@ -480,34 +463,11 @@ const languageOptions = {
 	}
 };
 
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.LanguageOptions} */
-const astroLanguageOptions = {
-	globals: {
-		...globals.browser,
-		...globals.es2020,
-		...globals.worker,
-		...globals['shared-node-browser'],
-		...globals.node,
-		...astroPlugin.environments.astro.globals
-	},
-	parser: astroParser,
-	ecmaVersion: 'latest',
-	sourceType: 'module',
-	parserOptions: {
-		parser: tsParser,
-		ecmaFeatures: { impliedStrict: true },
-		project: true,
-		tsconfigRootDir: import.meta.dirname,
-		extraFileExtensions: ['.astro']
-	}
-};
-
 const ignores = ['node_modules/**/*', 'dist/**/*', 'public/**/*', 'dev-dist/**/*', 'src/content/**/*'];
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Plugins} */
 const plugins = {
-	'@typescript-eslint': tsPlugin,
-	'astro': astroPlugin
+	'@typescript-eslint': tsPlugin
 };
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigFile} */
@@ -520,30 +480,4 @@ export default [
 		plugins,
 		rules
 	}
-	// TODO: reenable astro linting
-	// {
-	// 	name: 'Astro files',
-	// 	files: ['src/**/*.astro'],
-	// 	ignores,
-	// 	languageOptions: astroLanguageOptions,
-	// 	plugins,
-	// 	rules,
-	// 	processor: 'astro/client-side-ts'
-	// },
-	// {
-	// 	name: 'Astro JS files',
-	// 	files: ['**/*.astro/*.js', '*.astro/*.js'],
-	// 	ignores,
-	// 	languageOptions,
-	// 	plugins,
-	// 	rules
-	// },
-	// {
-	// 	name: 'Astro TS files',
-	// 	files: ['**/*.astro/*.ts', '*.astro/*.ts'],
-	// 	ignores,
-	// 	languageOptions,
-	// 	plugins,
-	// 	rules
-	// }
 ];
