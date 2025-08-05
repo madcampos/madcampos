@@ -1,6 +1,12 @@
 {
-	"include": ["astro.config.ts", "src/**/*", ".astro/**/*"],
-	"exclude": ["node_modules/**/*", "dist/**/*", "src/content/.obsidian/**/*"],
+	"include": [
+		"build/**/*",
+		"lib/**/*",
+		"public/**/*",
+		"server/**/*",
+		"src/**/*"
+	],
+	"exclude": ["node_modules/**/*", "dist/**/*", "data/.obsidian/**/*"],
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"allowJs": true,
@@ -41,6 +47,7 @@
 		"tsBuildInfoFile": "dist/.tsbuildinfo",
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
-		"verbatimModuleSyntax": true
+		"verbatimModuleSyntax": true,
+		"types": ["./server/env.d.ts"]
 	}
 }
