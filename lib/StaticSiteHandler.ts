@@ -14,12 +14,12 @@ interface FileSystemModule {
 	cp(src: string, dest: string, options?: { force?: boolean, recursive?: boolean }): Promise<void>;
 }
 
-interface MarkdownEntry<T> {
+export interface MarkdownEntry<T> {
 	metadata: T;
 	render(): Promise<string> | string;
 }
 
-interface DataCollection {
+export interface DataCollection {
 	list: <T>() => Promise<MarkdownEntry<T>[]> | MarkdownEntry<T>[];
 	get: <T>(key: string) => Promise<MarkdownEntry<T>> | MarkdownEntry<T>;
 }
@@ -30,17 +30,17 @@ interface ResolvedRoute {
 	data?: unknown;
 }
 
-interface ResolveRouteParams {
+export interface ResolveRouteParams {
 	url: URLPattern;
 	collections: Record<string, DataCollection>;
 }
 
-interface RenderParams extends ResolvedRoute {
+export interface RenderParams extends ResolvedRoute {
 	html: HTMLRenderingFunction;
 	collections: Record<string, DataCollection>;
 }
 
-interface RouteView {
+export interface RouteView {
 	resolveParams?: (params: ResolveRouteParams) => Promise<ResolvedRoute[]> | ResolvedRoute[];
 	render: (params: RenderParams) => Promise<Response> | Response;
 }
@@ -54,11 +54,10 @@ interface StaticSiteHandlerOptions {
 	fetchHandler?: ExportedHandlerFetchHandler;
 }
 
-const RESTRICTED_CHARS_IN_FILES = /[\\<>:"|?*]/giu;
-
 export class StaticSiteHandler {
-	#pathWithExtensionRegex = /\/([^\/.]+?)\.[a-z0-9]+?$/iu;
-	#trailingSlashRegex = /\/$/;
+	#PATH_WITH_EXT_REGEX = /\/([^\/.]+?)\.[a-z0-9]+?$/iu;
+	#TRAILING_SLASHES_REGEX = /\/$/;
+	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
 
 	#baseUrl: string;
 	#collections: Record<string, DataCollection> = {};
@@ -82,18 +81,18 @@ export class StaticSiteHandler {
 
 			switch (trailingSlash) {
 				case 'always':
-					resolvedPath = path.replace(new RegExp(this.#trailingSlashRegex), '');
-					resolvedPath = resolvedPath.replace(new RegExp(this.#pathWithExtensionRegex), '/$1');
+					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX), '');
+					resolvedPath = resolvedPath.replace(new RegExp(this.#PATH_WITH_EXT_REGEX), '/$1');
 					resolvedPath = `${resolvedPath}/`;
 					break;
 				case 'never':
-					resolvedPath = path.replace(new RegExp(this.#trailingSlashRegex), '');
+					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX), '');
 					break;
 				case 'ignore':
 				default:
-					const pathWithoutTrailingSlash = path.replace(new RegExp(this.#trailingSlashRegex), '');
+					const pathWithoutTrailingSlash = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX), '');
 
-					if (!new RegExp(this.#pathWithExtensionRegex).test(pathWithoutTrailingSlash)) {
+					if (!new RegExp(this.#PATH_WITH_EXT_REGEX).test(pathWithoutTrailingSlash)) {
 						resolvedPath = `${pathWithoutTrailingSlash}{/}?`;
 					}
 					break;
@@ -181,7 +180,7 @@ export class StaticSiteHandler {
 					path: pattern.pathname
 						.replace(/\{\/\}\?$/iu, '')
 						.replaceAll(
-							new RegExp(RESTRICTED_CHARS_IN_FILES),
+							new RegExp(this.#FORBIDDEN_CHARS_IN_FILES_REGEX),
 							(char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`
 						)
 				});
@@ -202,7 +201,7 @@ export class StaticSiteHandler {
 						filePath += 'index.html';
 					}
 
-					if (!new RegExp(this.#pathWithExtensionRegex).test(filePath)) {
+					if (!new RegExp(this.#PATH_WITH_EXT_REGEX).test(filePath)) {
 						filePath += '.html';
 					}
 
