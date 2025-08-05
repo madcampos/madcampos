@@ -57,6 +57,9 @@ interface StaticSiteHandlerOptions {
 const RESTRICTED_CHARS_IN_FILES = /[\\<>:"|?*]/giu;
 
 export class StaticSiteHandler {
+	#pathWithExtensionRegex = /\/([^\/.]+?)\.[a-z0-9]+?$/iu;
+	#trailingSlashRegex = /\/$/;
+
 	#baseUrl: string;
 	#collections: Record<string, DataCollection> = {};
 	#routes: [URLPattern, RouteView][] = [];
@@ -79,14 +82,20 @@ export class StaticSiteHandler {
 
 			switch (trailingSlash) {
 				case 'always':
-					resolvedPath = `${path.replace(/\/$/, '')}/`;
+					resolvedPath = path.replace(new RegExp(this.#trailingSlashRegex), '');
+					resolvedPath = resolvedPath.replace(new RegExp(this.#pathWithExtensionRegex), '/$1');
+					resolvedPath = `${resolvedPath}/`;
 					break;
 				case 'never':
-					resolvedPath = path.replace(/\/$/, '');
+					resolvedPath = path.replace(new RegExp(this.#trailingSlashRegex), '');
 					break;
 				case 'ignore':
 				default:
-					resolvedPath = `${path.replace(/\/$/, '')}{/}?`;
+					const pathWithoutTrailingSlash = path.replace(new RegExp(this.#trailingSlashRegex), '');
+
+					if (!new RegExp(this.#pathWithExtensionRegex).test(pathWithoutTrailingSlash)) {
+						resolvedPath = `${pathWithoutTrailingSlash}{/}?`;
+					}
 					break;
 			}
 
@@ -193,7 +202,7 @@ export class StaticSiteHandler {
 						filePath += 'index.html';
 					}
 
-					if (!/\/[^\/]+?\.[a-z0-9]+?$/iu.test(filePath)) {
+					if (!new RegExp(this.#pathWithExtensionRegex).test(filePath)) {
 						filePath += '.html';
 					}
 
