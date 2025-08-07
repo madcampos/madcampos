@@ -15,7 +15,7 @@
 		width: clamp(var(--min-width), 80vw, var(--max-width));
 	}
 
-	#about picture {
+	#about m-avatar {
 		width: clamp(var(--min-width), 30vw, var(--medium-width));
 		height: clamp(var(--min-width), 30vw, var(--medium-width));
 	}
@@ -36,7 +36,7 @@
 			align-items: center;
 		}
 
-		#about picture {
+		#about m-avatar {
 			width: clamp(var(--min-width), 60vw, var(--medium-width));
 			height: clamp(var(--min-width), 60vw, var(--medium-width));
 		}

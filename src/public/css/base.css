@@ -30,22 +30,6 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 
-	*:not([hidden]):has(> svg) {
-		display: inline-flex;
-		align-items: center;
-		vertical-align: bottom;
-		gap: 0.3em;
-		line-height: 1.5;
-		word-break: break-word;
-		overflow-wrap: break-word;
-	}
-
-	*:has(> svg) svg {
-		align-self: center;
-		min-width: 1em;
-		min-height: 1em;
-	}
-
 	::selection {
 		background-color: var(--theme-color);
 		color: var(--bg-color);

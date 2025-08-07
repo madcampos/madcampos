@@ -1,6 +1,7 @@
 // Ref: https://frontendmasters.com/blog/the-pitfalls-of-in-app-browsers/
+// TODO: statically link to it
 import InAppSpy, { SFSVCExperimental } from 'inapp-spy';
-import { SiteSettings } from '../../assets/js/settings.ts';
+import { SiteSettings } from './settings.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	if (!document.body.classList.contains('js-enabled')) {
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 		window.location.replace(link);
 
-		const iabAlert = document.querySelector<HTMLDialogElement>('#iab-escape');
+		const iabAlert = document.querySelector('iab-escape')?.shadowRoot?.querySelector('dialog');
 
 		iabAlert?.querySelector('a')?.setAttribute('href', link);
 		iabAlert?.showModal();

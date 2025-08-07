@@ -1,4 +1,5 @@
 import { html } from '@lit-labs/ssr';
+import { map } from 'lit/directives/map.js';
 import { when } from 'lit/directives/when.js';
 import { BLOG, GLOBALS } from '../../utils/constants.ts';
 import { join } from '../../utils/path.ts';
@@ -15,6 +16,7 @@ interface Props {
 	createdAt?: Date;
 	updatedAt?: Date;
 	hasFeed?: boolean;
+	styles?: string[];
 }
 
 export function htmlHead({
@@ -33,7 +35,9 @@ export function htmlHead({
 	tags,
 
 	createdAt,
-	updatedAt
+	updatedAt,
+
+	styles = []
 }: Props) {
 	const fullUrl = join([new URL(url, baseUrl).toString()], { trailingSlash: true });
 
@@ -121,8 +125,11 @@ export function htmlHead({
 			<meta name="apple-mobile-web-app-capable" content="yes" />
 			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-			<!-- Page css -->
+			<!-- Main css -->
 			<link rel="stylesheet" href="/css/index.css" />
+
+			<!-- Page CSS -->
+			${map(styles, (style) => html`<link rel="stylesheet" href="${style}" />`)}
 
 			<!-- Print Stylesheet -->
 			<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
