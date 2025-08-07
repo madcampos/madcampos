@@ -375,7 +375,7 @@ const rules = {
 	'@typescript-eslint/no-shadow': ['warn', {
 		builtinGlobals: true,
 		hoist: 'all',
-		allow: ['name', 'status', 'event', 'prompt', 'alert', 'top', 'origin', 'self', 'length', 'close', 'open', 'stop', 'focus', 'blur', 'Image'],
+		allow: ['name', 'status', 'event', 'prompt', 'alert', 'top', 'origin', 'self', 'length', 'close', 'open', 'stop', 'focus', 'blur', 'Image', 'when'],
 		ignoreTypeValueShadow: true,
 		ignoreFunctionTypeParameterNameValueShadow: false
 	}],
@@ -463,7 +463,7 @@ const languageOptions = {
 	}
 };
 
-const ignores = ['node_modules/**/*', 'dist/**/*', 'public/**/*', 'dev-dist/**/*', 'src/content/**/*'];
+const ignores = ['node_modules/**/*', 'dist/**/*', 'dev-dist/**/*', 'src/content/**/*'];
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Plugins} */
 const plugins = {
