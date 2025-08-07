@@ -2,8 +2,6 @@
 	"include": [
 		"build/**/*",
 		"lib/**/*",
-		"public/**/*",
-		"server/**/*",
 		"src/**/*"
 	],
 	"exclude": ["node_modules/**/*", "dist/**/*", "data/.obsidian/**/*"],
@@ -48,6 +46,6 @@
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
 		"verbatimModuleSyntax": true,
-		"types": ["./server/env.d.ts"]
+		"types": ["./src/env.d.ts", "@types/node"]
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "madcampos-site",
-	"main": "server/dev-server.ts",
+	"main": "src/dev-server.ts",
 	"compatibility_date": "2025-07-26",
 	"compatibility_flags": ["nodejs_compat"],
 	"keep_vars": false,
@@ -18,7 +18,7 @@
 		"upstream_protocol": "https"
 	},
 	"assets": {
-		"directory": "./public/",
+		"directory": "./src/public/",
 		"binding": "Assets",
 		"run_worker_first": false,
 		"html_handling": "none",
@@ -27,7 +27,7 @@
 	"vars": { "NODE_ENV": "local" },
 	"env": {
 		"production": {
-			"main": "server/index.ts",
+			"main": "src/index.ts",
 			"assets": {
 				"directory": "./dist/",
 				"binding": "Assets",
