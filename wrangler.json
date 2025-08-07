@@ -3,6 +3,7 @@
 	"name": "madcampos-site",
 	"main": "server/dev-server.ts",
 	"compatibility_date": "2025-07-26",
+	"compatibility_flags": ["nodejs_compat"],
 	"keep_vars": false,
 	"send_metrics": false,
 	"preserve_file_names": true,
