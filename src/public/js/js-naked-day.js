@@ -1,4 +1,4 @@
-import { SiteSettings } from '../../assets/js/settings.ts';
+import { SiteSettings } from './settings.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (SiteSettings.js === 'disabled') {

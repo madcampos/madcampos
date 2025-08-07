@@ -1,4 +1,4 @@
-import { join } from './utils/path.js';
+import { join } from './path.ts';
 
 interface ConstantsMap {
 	url: string;

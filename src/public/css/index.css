@@ -1,3 +1,5 @@
+@layer fonts, vars, base, pages, components, code, theme, print, contrast;
+
 @import './vars.css';
 @import './fonts.css';
 @import './base.css';

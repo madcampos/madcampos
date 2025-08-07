@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	document.addEventListener('change', (evt) => {
-		const target = evt.target as HTMLInputElement;
+		const target = /** @type {HTMLInputElement} */ (evt.target);
 
 		if (target.matches('input[type="checkbox"]')) {
 			if (target.hasAttribute('checked')) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			localStorage.setItem(target.id, target.checked.toString());
 
-			const childrenInputs = [...target.closest('label')?.nextElementSibling?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]') ?? []];
+			const childrenInputs = /** @type {HTMLInputElement[]} */ ([...target.closest('label')?.nextElementSibling?.querySelectorAll('input[type="checkbox"]') ?? []]);
 
 			childrenInputs.forEach((childInput) => {
 				if (!childInput.ariaDisabled) {
@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				target.indeterminate = false;
 			}
 
-			const parentInput = document.querySelector<HTMLInputElement>(`label:has( + ul #${target.id}) input`);
+			const parentInput = /** @type {HTMLInputElement} */ (document.querySelector(`label:has( + ul #${target.id}) input`));
 
 			if (parentInput) {
-				const siblingInputs = [...target.closest('ul')?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]') ?? []];
+				const siblingInputs = /** @type {HTMLInputElement[]} */ ([...target.closest('ul')?.querySelectorAll('input[type="checkbox"]') ?? []]);
 				const checkedInputs = siblingInputs.filter(({ checked }) => checked).length;
 
 				parentInput.checked = checkedInputs === siblingInputs.length;
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach((input) => {
+	(/** @type {NodeListOf<HTMLInputElement>} */ (document.querySelectorAll('input[type="checkbox"]'))).forEach((input) => {
 		const isCurrentlyChecked = localStorage.getItem(input.id) === 'true';
 		let newChecked = false;
 
@@ -69,10 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		localStorage.setItem(input.id, newChecked.toString());
 	});
 
-	document.querySelectorAll('label:has( + ul)').forEach((label) => {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const input = label.querySelector<HTMLInputElement>('input[type="checkbox"]')!;
-		const childInputs = [...label.nextElementSibling?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]') ?? []];
+	(/** @type {NodeListOf<HTMLLabelElement>} */ (document.querySelectorAll('label:has( + ul)'))).forEach((label) => {
+		const input = /** @type {HTMLInputElement} */ (label.querySelector('input[type="checkbox"]'));
+		const childInputs = /** @type {HTMLInputElement[]} */ ([...label.nextElementSibling?.querySelectorAll('input[type="checkbox"]') ?? []]);
 		const checkedInputs = childInputs.filter(({ checked }) => checked).length;
 
 		if (checkedInputs === childInputs.length) {

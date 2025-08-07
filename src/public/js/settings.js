@@ -1,9 +1,10 @@
 export class SiteSettings {
 	static get #settingsAvailable() {
-		return ['debug', 'css', 'js', 'enableIab', 'theme', 'pwa'] as const;
+		return /** @type {const} */ (['debug', 'css', 'js', 'enableIab', 'theme', 'pwa']);
 	}
 
-	static #searchParams?: URLSearchParams;
+	/** @type {URLSearchParams} */
+	static #searchParams;
 
 	static #initializeSettings() {
 		if (SiteSettings.#searchParams) {
@@ -17,13 +18,20 @@ export class SiteSettings {
 		}
 	}
 
-	static #getSetting(setting: string) {
+	/**
+	 * @param {string} setting
+	 */
+	static #getSetting(setting) {
 		SiteSettings.#initializeSettings();
 
 		return SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined;
 	}
 
-	static #updateSetting(setting: string, value: string | undefined) {
+	/**
+	 * @param {string} setting
+	 * @param {string | undefined} value
+	 */
+	static #updateSetting(setting, value) {
 		SiteSettings.#initializeSettings();
 
 		if (value) {
@@ -31,7 +39,6 @@ export class SiteSettings {
 			SiteSettings.#searchParams?.set(setting, value);
 			localStorage.setItem(setting, value);
 		} else {
-			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete document.documentElement.dataset[setting];
 			SiteSettings.#searchParams?.delete(setting);
 			localStorage.removeItem(setting);
@@ -52,7 +59,7 @@ export class SiteSettings {
 		return SiteSettings.#getSetting('shareSettings') === 'true';
 	}
 
-	static set shouldShareSettings(value: boolean) {
+	static set shouldShareSettings(value) {
 		SiteSettings.#updateSetting('shareSettings', value ? 'true' : 'false');
 	}
 
@@ -60,7 +67,7 @@ export class SiteSettings {
 		return SiteSettings.#getSetting('debug') === 'true';
 	}
 
-	static set debug(value: boolean) {
+	static set debug(value) {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
 	}
 
@@ -68,17 +75,15 @@ export class SiteSettings {
 		return SiteSettings.#getSetting('css');
 	}
 
-	static set css(value: string | undefined) {
+	static set css(value) {
 		SiteSettings.#updateSetting('css', value);
 	}
 
-	// eslint-disable-next-line id-length
 	static get js() {
 		return SiteSettings.#getSetting('js');
 	}
 
-	// eslint-disable-next-line id-length
-	static set js(value: string | undefined) {
+	static set js(value) {
 		SiteSettings.#updateSetting('js', value);
 	}
 
@@ -86,7 +91,7 @@ export class SiteSettings {
 		return SiteSettings.#getSetting('enableIab') === 'true';
 	}
 
-	static set enableIab(value: boolean | undefined) {
+	static set enableIab(value) {
 		SiteSettings.#updateSetting('enableIab', value ? 'true' : 'false');
 	}
 
@@ -94,7 +99,7 @@ export class SiteSettings {
 		return SiteSettings.#getSetting('theme');
 	}
 
-	static set theme(value: string | undefined) {
+	static set theme(value) {
 		SiteSettings.#updateSetting('theme', value);
 	}
 
@@ -102,7 +107,7 @@ export class SiteSettings {
 		return SiteSettings.#getSetting('pwa');
 	}
 
-	static set pwa(value: string | undefined) {
+	static set pwa(value) {
 		SiteSettings.#updateSetting('pwa', value);
 	}
 }
