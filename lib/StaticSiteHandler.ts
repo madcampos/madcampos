@@ -4,10 +4,6 @@ if (!('URLPattern' in globalThis)) {
 	await import('urlpattern-polyfill');
 }
 
-import { html } from 'lit';
-
-type HTMLRenderingFunction = typeof html;
-
 interface FileSystemModule {
 	writeFile(path: string, data: string | Uint8Array): Promise<void>;
 	mkdir(path: string, options?: { recursive?: boolean }): Promise<void | string>;
@@ -36,7 +32,6 @@ export interface ResolveRouteParams {
 }
 
 export interface RenderParams extends ResolvedRoute {
-	html: HTMLRenderingFunction;
 	collections: Record<string, DataCollection>;
 }
 
@@ -146,7 +141,6 @@ export class StaticSiteHandler {
 				try {
 					return route.render({
 						collections: this.#collections,
-						html,
 						...resolvedRoute
 					});
 				} catch (err) {
@@ -158,7 +152,6 @@ export class StaticSiteHandler {
 
 		return route.render({
 			collections: this.#collections,
-			html,
 			path: resolvedUrl.pathname
 		});
 	}
@@ -190,7 +183,6 @@ export class StaticSiteHandler {
 				try {
 					const response = await route.render({
 						collections: this.#collections,
-						html,
 						...resolvedRoute
 					});
 
@@ -235,8 +227,7 @@ export class StaticSiteHandler {
 
 		return this.#fallbackRoute.render({
 			collections: this.#collections,
-			path: new URL(request.url).pathname,
-			html
+			path: new URL(request.url).pathname
 		});
 	}
 }
