@@ -1,0 +1,16 @@
+@layer components {
+	#old-buttons-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3em;
+		margin: 0;
+		width: 100%;
+	}
+
+	#old-buttons div {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+	}
+}

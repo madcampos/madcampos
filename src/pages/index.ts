@@ -105,7 +105,7 @@ export default {
 					</div>
 				`,
 				footer: html`
-					<old-style-buttons slot="footer"></old-style-buttons>
+					${oldStyleButtons}
 				`
 			}))),
 			{ status: 200, headers: { 'Content-Type': 'text/html' } }

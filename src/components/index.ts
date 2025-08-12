@@ -7,7 +7,7 @@ import './OldStyleButtons/buttons/AstroButton.ts';
 import './OldStyleButtons/buttons/CCButton.ts';
 import './OldStyleButtons/buttons/CSSButton.ts';
 import './OldStyleButtons/buttons/CodeButton.ts';
-import './OldStyleButtons/buttons/Feedbutton.ts';
+import './OldStyleButtons/buttons/FeedButton.ts';
 import './OldStyleButtons/buttons/GraphicDesignButton.ts';
 import './OldStyleButtons/buttons/GuestbookButton.ts';
 import './OldStyleButtons/buttons/HtmlButton.ts';

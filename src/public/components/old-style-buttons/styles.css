@@ -1,4 +1,4 @@
-@layer {
+@layer components {
 	@property --rotate {
 		inherits: true;
 		initial-value: 0deg;
