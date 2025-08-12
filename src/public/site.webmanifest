@@ -1,4 +1,5 @@
 {
+	"$schema": "https://www.schemastore.org/web-manifest-combined.json",
 	"id": "/?id=a51d10e1-ffc3-4214-b4bd-b33691d1cdb1",
 	"scope": "/?utm_source=pwa&utm_medium=install&utm_campaign=web_app_manifest",
 	"start_url": "/?utm_source=pwa&utm_medium=start_url&utm_campaign=web_app_manifest",
