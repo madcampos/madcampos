@@ -16,4 +16,4 @@ import './OldStyleButtons/buttons/JsButton.ts';
 import './OldStyleButtons/buttons/PoweredButton.ts';
 import './OldStyleButtons/buttons/PrideButtons.ts';
 import './OldStyleButtons/buttons/WritterButton.ts';
-import './OldStyleButtons/OldStyleButtons.ts';
+import './Webrings/Webring.ts';

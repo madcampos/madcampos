@@ -1,0 +1,9 @@
+@layer components {
+	#webrings-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3em;
+		margin: 0;
+		width: 100%;
+	}
+}

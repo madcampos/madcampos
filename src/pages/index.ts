@@ -2,6 +2,8 @@ import { html, render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import type { RouteView } from '../../lib/StaticSiteHandler.ts';
 import { baseLayout } from '../components/Baselayout/BaseLayout.ts';
+import { oldStyleButtons } from '../components/OldStyleButtons/OldStyleButtons.ts';
+import { webrings } from '../components/Webrings/Webrings.ts';
 import { BLOG, GLOBALS, PROJECTS, TALKS } from '../utils/constants.ts';
 
 export default {
@@ -58,43 +60,43 @@ export default {
 									<ul>
 										<li>
 											<a href="${BLOG.url}">
-												<m-icon icon="file-edit"></m-icon>
+												<m-icon icon="uil:file-edit"></m-icon>
 												My Blog
 											</a>
 										</li>
 										<li>
 											<a href="${PROJECTS.url}">
-												<m-icon icon="flask"></m-icon>
+												<m-icon icon="uil:flask"></m-icon>
 												Project Highlights
 											</a>
 										</li>
 										<li>
 											<a href="${TALKS.url}">
-												<m-icon icon="presentation-check"></m-icon>
+												<m-icon icon="uil:presentation-check"></m-icon>
 												Talks I've given
 											</a>
 										</li>
 										<li>
 											<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
-												<m-icon icon="github-alt"></m-icon>
+												<m-icon icon="uil:github-alt"></m-icon>
 												GitHub
 											</a>
 										</li>
 										<li>
 											<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
-												<m-icon icon="codepen"></m-icon>
+												<m-icon icon="brandico:codepen"></m-icon>
 												CodePen
 											</a>
 										</li>
 										<li>
 											<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
-												<m-icon icon="linkedin-alt"></m-icon>
+												<m-icon icon="uil:linkedin-alt"></m-icon>
 												LinkedIn
 											</a>
 										</li>
 										<li>
 											<a href="mailto:me@madcampos.dev" rel="me">
-												<m-icon icon="envelope"></m-icon>
+												<m-icon icon="uil:envelope"></m-icon>
 												<span class="u-email email" itemprop="email">me@madcampos.dev</span>
 											</a>
 										</li>
@@ -106,6 +108,7 @@ export default {
 				`,
 				footer: html`
 					${oldStyleButtons}
+					${webrings}
 				`
 			}))),
 			{ status: 200, headers: { 'Content-Type': 'text/html' } }
