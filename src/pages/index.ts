@@ -103,7 +103,10 @@ export default {
 							</div>
 						</article>
 					</div>
-			`
+				`,
+				footer: html`
+					<old-style-buttons slot="footer"></old-style-buttons>
+				`
 			}))),
 			{ status: 200, headers: { 'Content-Type': 'text/html' } }
 		)

@@ -1,0 +1,74 @@
+import { css, html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
+
+@customElement('old-button-writter')
+export class WritterButton extends LitElement {
+	static override styles = css`
+		button #button-base { fill: white; }
+		button text {
+			dominant-baseline: hanging;
+			font-family: var(--button-font-ui);
+			text-anchor: start;
+		}
+
+		button:hover #button-base { fill: dimgray; }
+		button:hover text { fill: white; }
+
+		button:active #button-base { fill: black; }
+		button:active text { fill: white; }
+	`;
+
+	protected override render() {
+		return html`
+			<link rel="stylesheet" href="/components/old-style-buttons/styles.css" />
+
+			<button type="button">
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<g id="button-written-footer">
+						<path fill="#f3632e" d="M2 27h21v2H2z" />
+						<path fill="#fac705" d="M23 27h21v2H23z" />
+						<path fill="#66c557" d="M44 27h21v2H44z" />
+						<path fill="#3d87cf" d="M65 27h21v2H65z" />
+					</g>
+
+					<g id="icon-office">
+						<path
+							fill="#3d87cf"
+							d="m81.594 4.728-10.206-.002v2.729c-.784 1.174-2.75-1.819-3.921.241-.099.243-.539 1.289-.516 2.106.025.91.467 1.601.467 1.962 2.058 1.959 3.97-1.616 3.97.832v1.519h2.791c.614-.341.453-.647-.061-1.754-.821-1.773.923-2.557 2.446-2.758 2.383.241 3.316 1.325 2.048 3.615-.195.352-.095.505.098.849h2.886l-.002-9.339"
+						/>
+						<path
+							fill="#f3632e"
+							d="M61.995 4.693v10.206l2.731-.002c1.169.786-1.826 2.747.238 3.921.246.096 1.291.536 2.109.513.909-.025 1.599-.465 1.959-.465 1.962-2.058-1.616-3.969.834-3.969h1.52v-2.792c-.344-.612-.65-.45-1.757.063-1.773.82-2.556-.92-2.757-2.445.241-2.381 1.324-3.316 3.615-2.048.352.195.505.094.848-.096V4.693h-9.34"
+						/>
+						<path
+							fill="#66c557"
+							d="m81.539 24.296-.002-10.206c-.775.004-1.712.004-2.728.004-1.174-.788 1.819-2.752-.241-3.923-.246-.098-1.289-.537-2.109-.516-.909.028-1.599.466-1.959.466-1.962 2.06 1.618 3.971-.832 3.971h-1.522v2.792c.344.614.65.45 1.757-.061 1.773-.822 2.556.918 2.76 2.443-.246 2.383-1.325 3.316-3.62 2.048-.354-.195-.507-.094-.848.096v2.886h9.342"
+						/>
+						<path
+							fill="#fac705"
+							d="M61.989 24.263h10.206l-.002-2.729c.787-1.172 2.751 1.821 3.925-.239.096-.245.536-1.289.513-2.108-.025-.91-.465-1.599-.465-1.96-2.058-1.961-3.969 1.618-3.971-.832v-1.521h-2.792c-.612.343-.45.649.063 1.756.819 1.773-.92 2.557-2.444 2.758-2.385-.241-3.317-1.325-2.049-3.615.197-.354.092-.507-.097-.849h-2.887v9.339"
+						/>
+						<path
+							fill="none"
+							stroke="black"
+							d="M81.581 4.707H61.976l.002 19.6h19.603v-19.6Z M71.409 14.8v-2.259c-.023-1.771-1.645-.161-2.188-.132-1.587.088-2.268-1.194-2.238-2.705-.03-1.509.622-2.897 2.267-2.595.537.097 2.136 1.528 2.159-.243V4.707m.664 10.171h-2.261c-1.771.025-.231 1.656-.13 2.188.302 1.645-1.197 2.265-2.708 2.238-1.509.027-3.007-.593-2.705-2.238.098-.537 1.638-2.163-.132-2.188h-2.159m10.177-.669v2.262c.023 1.771 1.651.23 2.188.132 1.645-.302 2.265 1.194 2.238 2.705.027 1.509-.593 3.008-2.238 2.708-.535-.099-2.165-1.641-2.188.13v2.158m-.667-10.17h2.264c1.771-.025.228-1.654.128-2.188-.3-1.645 1.198-2.267 2.707-2.238 1.511-.029 3.01.593 2.708 2.238-.099.534-1.641 2.163.132 2.188h2.158"
+						/>
+					</g>
+
+					<text y="9">
+						<tspan x="5" font-size="5" font-weight="200">Written on</tspan>
+						<tspan x="5" dy="9" font-size="12" font-weight="900">Obsidian</tspan>
+						<tspan x="24" dy="6" font-size="7" font-weight="400">Markdown</tspan>
+					</text>
+				</svg>
+			</button>
+		`;
+	}
+}

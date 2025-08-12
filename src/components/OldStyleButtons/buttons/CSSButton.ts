@@ -1,0 +1,57 @@
+import { css, html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
+
+@customElement('old-button-css')
+export class CssButton extends LitElement {
+	static override styles = css`
+		button #button-base { fill: url(#button-css-gradient); }
+		button text {
+			font-style: italic;
+			font-family: var(--button-font-oldstyle);
+		}
+
+		button:hover #button-css-gradient stop:nth-child(1) { stop-color: white; }
+		button:hover #button-css-gradient stop:nth-child(2) { stop-color: dodgerblue; }
+
+		button:active #button-css-gradient stop:nth-child(1) { stop-color: dodgerblue; }
+		button:active #button-css-gradient stop:nth-child(2) { stop-color: deepskyblue; }
+
+		@media (prefers-contrast: more), (forced-colors: active) {
+			button #button-base { fill: var(--bg-color); }
+			button #adobe-logo { fill: var(--theme-color); }
+		}
+	`;
+
+	protected override render() {
+		return html`
+			<link rel="stylesheet" href="/components/old-style-buttons/styles.css" />
+
+			<button type="button">
+				<svg viewBox="0 0 88 31">
+					<linearGradient id="button-css-gradient" x1="0" x2="1" y1="0" y2="0" gradientTransform="matrix(84 0 0 84 2 15.5)" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="white" />
+						<stop offset="1" stop-color="deepskyblue" />
+					</linearGradient>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<path
+						id="adobe-logo"
+						fill="#fa0f00"
+						d="m17.256 12.419 6.243 14.811h-4.092l-1.867-4.717h-4.569l4.285-10.094ZM30.507 3.77v23.457l-9.8-23.457h9.8Zm-16.703 0L4 27.227V3.77h9.804Z"
+					/>
+
+					<text y="12">
+						<tspan x="58">Powered by</tspan>
+						<tspan x="58" dy="1em" font-size="1.3em">SVG & CSS</tspan>
+					</text>
+				</svg>
+			</button>
+		`;
+	}
+}

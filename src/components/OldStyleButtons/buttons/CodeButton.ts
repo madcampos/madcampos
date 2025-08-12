@@ -1,0 +1,70 @@
+import { css, html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
+
+@customElement('old-button-code')
+export class AstroButton extends LitElement {
+	static override styles = css`
+		button #button-base { fill: dodgerblue; }
+		button #button-vscode-bg { fill: mediumblue; }
+		button text {
+			dominant-baseline: hanging;
+			fill: white;
+			font-family: var(--button-font-ui);
+			text-anchor: start;
+		}
+
+		button:hover #button-base { fill: mediumblue; }
+		button:hover #button-vscode-bg { fill: dodgerblue; }
+
+		button:active #button-base { fill: royalblue; }
+		button:active #button-vscode-bg { fill: royalblue; }
+
+		@media (prefers-contrast: more), (forced-colors: active) {
+			button #button-base { fill: var(--bg-color); }
+			button #button-vscode-bg { fill: var(--dark-bg-color); }
+			button text { fill: var(--text-color); }
+
+			button:hover #button-base { fill: var(--dark-bg-color); }
+			button:hover #button-vscode-bg { fill: var(--bg-color); }
+
+			button:active #button-base { fill: var(--dark-bg-color); }
+			button:active #button-vscode-bg { fill: var(--dark-bg-color); }
+		}
+	`;
+
+	protected override render() {
+		return html`
+			<link rel="stylesheet" href="/components/old-style-buttons/styles.css" />
+
+			<button type="button">
+				<svg viewBox="0 0 88 31">
+					<pattern id="dotted-pattern" viewBox="0 0 2 2" width="2" height="2" patternUnits="userSpaceOnUse">
+						<circle cx="1" cy="1" r=".5" opacity="0.1" />
+					</pattern>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<path id="button-vscode-bg" d="M2 2h42v27H2zm62.117 4.939 7.879 3.889-11.541 11.035L66.339 28l11.54-11.237 4.394 8.08L85 3 64.117 6.939Z" />
+					<rect x="2" y="2" width="84" height="27" fill="url(#dotted-pattern)" />
+
+					<path
+						fill="white"
+						id="frontpage-icon"
+						d="M28 3v25H3V3h25Zm-12.566 8.048c-1.157-.824-2.481-1.236-3.971-1.236-1.918-.008-3.558.674-4.93 2.037-1.363 1.371-2.045 3.012-2.037 4.93-.008 1.91.674 3.551 2.037 4.906 1.372 1.355 3.012 2.037 4.93 2.045 1.593-.008 2.996-.475 4.209-1.419 1.545 1.562 2.679 2.751 3.384 3.551.579.666 1.395.872 2.449.61 1.118-.269 2.045-.959 2.782-2.068-.626-.753-1.712-1.91-3.273-3.472.451-.911 1.934-2.806 4.462-5.699.737-.848 1.11-1.656 1.118-2.441.008-.65-.238-1.236-.737-1.759-1.712-1.792-3.916-3.987-6.611-6.587-.99-.19-1.846-.095-2.568.294-.879.444-1.672 1.339-2.377 2.679.642.657 1.387 1.45 2.251 2.377l-1.118 1.252Zm1.672-5.318c.603-.357 1.158-.436 1.673-.238a94.402 94.402 0 0 1 5.35 5.311c-1.07.198-2.021.935-2.846 2.203-2.686-2.845-4.517-4.708-5.476-5.588.229-.753.657-1.315 1.299-1.688Zm3.052 19.553c-.404-.404-.317-1.498.277-3.273l2.339 2.425c-1.245 1.07-2.117 1.348-2.616.848Zm-1.744-8.504c-.008-1.879-.658-3.495-1.965-4.851l1.014-1.205 3.931 4.082a37.884 37.884 0 0 1 2.093-2.378c.253-.277.523-.436.816-.467a.868.868 0 0 1 .69.206c.19.158.293.372.317.642.031.301-.056.594-.254.887-.499.706-1.324 1.728-2.473 3.084-1.014 1.196-1.823 2.258-2.425 3.194-.975 1.514-1.419 2.861-1.348 4.042l-2.282-2.481c1.252-1.331 1.878-2.916 1.886-4.755Zm-3.757-2.425-2.472 1.22 3.622 3.464-1.847 1.926-3.622-3.527-1.379 2.536-.856-6.856 6.554 1.237Z"
+					/>
+
+					<text y="11">
+						<tspan x="30" font-size="5" font-weight="200">Created with</tspan>
+						<tspan x="30" dy="7" font-size="8" font-weight="900">Visual Studio</tspan>
+						<tspan x="68" dy="5" font-size="6" font-weight="400">Code</tspan>
+					</text>
+				</svg>
+			</button>
+		`;
+	}
+}
