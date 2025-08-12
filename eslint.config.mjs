@@ -33,7 +33,7 @@ const rules = {
 		min: 3,
 		max: 50,
 		properties: 'never',
-		exceptions: ['i', 'j', 'n', 'w', 'x', 'y', 'z', 'id', 'fs', 'up', '_', 't']
+		exceptions: ['i', 'j', 'n', 'w', 'x', 'y', 'z', 'id', 'fs', 'up', '_', 't', 'js']
 	}],
 	'id-match': 'off',
 	'init-declarations': 'off',
@@ -94,7 +94,7 @@ const rules = {
 	'no-implicit-globals': 'warn',
 	'no-implied-eval': 'off',
 	'no-import-assign': 'error',
-	'no-inline-comments': ['warn', { ignorePattern: '(?:@vite-ignore|@ts-expect-error).+' }],
+	'no-inline-comments': ['warn', { ignorePattern: '(?:@vite-ignore|@ts-expect-error|@type).+' }],
 	'no-inner-declarations': ['error', 'both'],
 	'no-invalid-regexp': 'error',
 	'no-invalid-this': 'off',
