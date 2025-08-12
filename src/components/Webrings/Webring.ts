@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 export class Webring extends LitElement {
 	@property({ type: String })
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-	override id = (Math.random() * 1000).toString(16);
+	override id = Math.trunc(Math.random() * 1000).toString(16);
 
 	@property({ type: String, attribute: 'prev-link' })
 	prevLink = '';

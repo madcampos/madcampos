@@ -109,6 +109,7 @@ export default {
 				footer: html`
 					${oldStyleButtons}
 					${webrings}
+					<theme-switcher></theme-switcher>
 				`
 			}))),
 			{ status: 200, headers: { 'Content-Type': 'text/html' } }

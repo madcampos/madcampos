@@ -17,3 +17,5 @@ import './OldStyleButtons/buttons/PoweredButton.ts';
 import './OldStyleButtons/buttons/PrideButtons.ts';
 import './OldStyleButtons/buttons/WritterButton.ts';
 import './Webrings/Webring.ts';
+import './ThemeSwitcher/CustomTheme.ts';
+import './ThemeSwitcher/ThemeSwitcher.ts';
