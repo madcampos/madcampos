@@ -6,25 +6,15 @@ export class SiteSettings {
 	/** @type {URLSearchParams} */
 	static #searchParams;
 
-	static #initializeSettings() {
-		if (SiteSettings.#searchParams) {
-			return;
-		}
-
-		SiteSettings.#searchParams = new URLSearchParams(document.location.search);
-
-		for (const setting of SiteSettings.#settingsAvailable) {
-			SiteSettings.#updateSetting(setting, SiteSettings[setting]?.toString());
-		}
-	}
-
 	/**
 	 * @param {string} setting
 	 */
 	static #getSetting(setting) {
-		SiteSettings.#initializeSettings();
+		const urlValue = SiteSettings.#searchParams?.get(setting);
+		const localStorageValue = localStorage.getItem(setting);
+		const bodyValue = document.documentElement.dataset[setting];
 
-		return SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined;
+		return urlValue ?? localStorageValue ?? bodyValue ?? undefined;
 	}
 
 	/**
@@ -32,13 +22,12 @@ export class SiteSettings {
 	 * @param {string | undefined} value
 	 */
 	static #updateSetting(setting, value) {
-		SiteSettings.#initializeSettings();
-
 		if (value) {
 			document.documentElement.dataset[setting] = value;
 			SiteSettings.#searchParams?.set(setting, value);
 			localStorage.setItem(setting, value);
 		} else {
+			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete document.documentElement.dataset[setting];
 			SiteSettings.#searchParams?.delete(setting);
 			localStorage.removeItem(setting);
@@ -80,7 +69,7 @@ export class SiteSettings {
 	}
 
 	static get js() {
-		return SiteSettings.#getSetting('js');
+		return SiteSettings.#getSetting('js') ?? 'enabled';
 	}
 
 	static set js(value) {
@@ -109,5 +98,17 @@ export class SiteSettings {
 
 	static set pwa(value) {
 		SiteSettings.#updateSetting('pwa', value);
+	}
+
+	static initializeSettings() {
+		if (SiteSettings.#searchParams) {
+			return;
+		}
+
+		SiteSettings.#searchParams = new URLSearchParams(document.location.search);
+
+		for (const setting of SiteSettings.#settingsAvailable) {
+			SiteSettings.#updateSetting(setting, SiteSettings.#getSetting(setting));
+		}
 	}
 }

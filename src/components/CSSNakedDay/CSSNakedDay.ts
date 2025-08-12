@@ -14,7 +14,7 @@ export class CssNakedDay extends LitElement {
 				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
 				<hr />
 			</div>
-			<script src="/js/css-naked-day.js" type="module"></script>
+			<script src="/components/css-naked-day/script.mjs" type="module"></script>
 		`;
 	}
 }

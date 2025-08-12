@@ -39,7 +39,7 @@ export class IabEscape extends LitElement {
 				</div>
 				<a href="#" target="_blank">Escape this trap</a>
 			</dialog>
-			<script src="/js/iab-escape.js" type="module"></script>
+			<script src="/components/iab-escape/script.mjs" type="module"></script>
 		`;
 	}
 }

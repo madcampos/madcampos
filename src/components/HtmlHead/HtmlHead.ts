@@ -144,6 +144,7 @@ export function htmlHead({
 					}]
 				}
 			</script>
+			<script src="/js/index.mjs" type="module"></script>
 		</head>
 	`;
 }
