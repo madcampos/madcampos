@@ -138,7 +138,7 @@ export function htmlHead({
 			<script type="speculationrules">
 				{
 					"prefetch": [{
-						"where": { "selector_matches": "a", "href_matches": "/*" },
+						"where": { "and": [{ "selector_matches": "a" }, {"href_matches": "/*" }] },
 						"eagerness": "moderate",
 						"requires": ["anonymous-client-ip-when-cross-origin"]
 					}]
