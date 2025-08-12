@@ -2,7 +2,7 @@
 	"id": "/?id=a51d10e1-ffc3-4214-b4bd-b33691d1cdb1",
 	"scope": "/?utm_source=pwa&utm_medium=install&utm_campaign=web_app_manifest",
 	"start_url": "/?utm_source=pwa&utm_medium=start_url&utm_campaign=web_app_manifest",
-	"scope_extensions": [{ "origin": "https://madcampos.dev/" }],
+	"scope_extensions": [{ "type": "origin", "origin": "https://madcampos.dev/" }],
 	"name": "Marco Campos",
 	"short_name": "MADCampos",
 	"lang": "en-US",
