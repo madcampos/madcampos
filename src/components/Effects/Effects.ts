@@ -1,27 +1,7 @@
-import { html } from 'lit/static-html.js';
+import { html } from '@lit-labs/ssr';
 
 export const svgEffects = html`
-	<style>
-		@layers components {
-			#svg-effects {
-				border: 0;
-				clip: rect(0, 0, 0, 0);
-				position: absolute;
-				top: -1px;
-				left: -1px;
-				opacity: 0;
-				z-index: -1;
-				margin: 0;
-				padding: 0;
-				width: 1px;
-				height: 1px;
-				overflow: hidden;
-				pointer-events: none;
-				user-select: none;
-			}
-		}
-	</style>
-	<div id="svg-effects" aria-hidden="true">
+	<svg-effects aria-hidden="true" role="none">
 		<svg viewBox="0 0 10 10" width="1" height="1" aria-hidden="true" role="none">
 			<defs>
 				<filter id="small-pixelate-filter">
@@ -41,12 +21,14 @@ export const svgEffects = html`
 						yChannelSelector="G"
 					/>
 				</filter>
+
 				<filter id="glitch-filter">
 					<feTurbulence baseFrequency="0 1.01" numOctaves="32" seed="2" />
 					<feMorphology operator="dilate" radius="8" result="glitch-lines" />
 					<feDisplacementMap in="SourceGraphic" in2="glitch-lines" scale="32" xChannelSelector="R" yChannelSelector="R" />
 					<feOffset dy="-2" />
 				</filter>
+
 				<filter id="animated-glitch-filter">
 					<feTurbulence baseFrequency="0 2" numOctaves="32">
 						<animate attributeName="numOctaves" dur="16s" repeatCount="indefinite" values="8;2;16;2;8;32;8;2;8;16;32;4;2;8;16;64" />
@@ -64,6 +46,7 @@ export const svgEffects = html`
 					<feMorphology operator="dilate" radius="8" result="glitch-lines" />
 					<feDisplacementMap in="SourceGraphic" in2="glitch-lines" scale="32" xChannelSelector="R" yChannelSelector="R" />
 				</filter>
+
 				<filter id="pixelate-filter">
 					<feGaussianBlur result="blurred-image" stdDeviation="8" />
 					<feImage
@@ -93,5 +76,5 @@ export const svgEffects = html`
 				</filter>
 			</defs>
 		</svg>
-	</div>
+	</svg-effects>
 `;

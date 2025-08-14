@@ -1,4 +1,4 @@
-import { SiteSettings } from '../../js/settings.mjs';
+import { SiteSettings } from '../settings.mjs';
 
 if (SiteSettings.js === 'enabled') {
 	if (SiteSettings.css !== 'enabled') {

@@ -3,6 +3,7 @@ import type { TemplateResult } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { svgEffects } from '../Effects/Effects.ts';
 import { htmlHead } from '../HtmlHead/HtmlHead.ts';
+import { iabEscape } from '../IabEscape/IabEscape.ts';
 
 interface Props {
 	title: string;
@@ -59,7 +60,7 @@ export function baseLayout({
 				${header}
 				<main>
 					${body}
-					<iab-escape></iab-escape>
+					${iabEscape}
 				</main>
 
 				<footer id="page-footer">

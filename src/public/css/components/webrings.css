@@ -6,4 +6,18 @@
 		margin: 0;
 		width: 100%;
 	}
+
+	m-webring blockquote {
+		margin: 0;
+		font-style: italic;
+		text-align: center;
+	}
+
+	m-webring ul {
+		display: flex;
+		justify-content: center;
+		gap: var(--spacing-large);
+		padding: 0;
+		list-style: none;
+	}
 }

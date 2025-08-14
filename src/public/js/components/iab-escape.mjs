@@ -1,7 +1,7 @@
 // Ref: https://frontendmasters.com/blog/the-pitfalls-of-in-app-browsers/
 // TODO: statically link to it
 import InAppSpy, { SFSVCExperimental } from 'inapp-spy';
-import { SiteSettings } from '../../js/settings.mjs';
+import { SiteSettings } from '../settings.mjs';
 
 // eslint-disable-next-line new-cap
 const { isInApp } = InAppSpy();
@@ -19,7 +19,7 @@ if (isInApp || isSFSVC || SiteSettings.enableIab) {
 
 	window.location.replace(link);
 
-	const iabAlert = document.querySelector('iab-escape')?.shadowRoot?.querySelector('dialog');
+	const iabAlert = document.querySelector('iab-escape dialog');
 
 	iabAlert?.querySelector('a')?.setAttribute('href', link);
 	iabAlert?.showModal();

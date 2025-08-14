@@ -1,0 +1,20 @@
+@layer components {
+	iab-escape dialog[open] {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		border: var(--border-color) var(--border-style) var(--border-width);
+		border-radius: var(--border-radius);
+		background-color: var(--dark-bg-color);
+		padding: var(--spacing-large);
+		width: clamp(10rem, 70vw, 35rem);
+		height: clamp(10rem, 70vh, 35rem);
+		overscroll-behavior: contain;
+		text-align: center;
+	}
+
+	iab-escape dialog::backdrop {
+		backdrop-filter: blur(1rem);
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+}

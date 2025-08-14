@@ -24,6 +24,6 @@ export const oldStyleButtons = html`
 			<old-button-graphic-design></old-button-graphic-design>
 			<old-button-guestbook></old-button-guestbook>
 		</div>
-		<script src="/components/old-style-buttons/script.mjs" type="module"></script>
+		<script src="/js/components/old-style-buttons.mjs" type="module"></script>
 	</details>
 `;

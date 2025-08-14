@@ -1,4 +1,4 @@
-import { SiteSettings } from '../../js/settings.mjs';
+import { SiteSettings } from '../settings.mjs';
 
 if (!customElements.get('theme-switcher')) {
 	customElements.define(
@@ -34,57 +34,6 @@ if (!customElements.get('theme-switcher')) {
 				if (SiteSettings.js === 'enabled') {
 					shadow.querySelector('aside')?.removeAttribute('hidden');
 				}
-			}
-		}
-	);
-}
-
-if (!customElements.get('custom-theme')) {
-	customElements.define(
-		'custom-theme',
-		class extends HTMLElement {
-			static formAssociated = true;
-
-			constructor() {
-				super();
-
-				const supportsDeclarative = Object.hasOwn(HTMLElement.prototype, 'attachInternals');
-				this.internals = supportsDeclarative ? this.attachInternals() : undefined;
-				this.shadow = this.internals?.shadowRoot ?? this.attachShadow({ mode: 'open' });
-			}
-
-			get value() {
-				return this.id;
-			}
-
-			set value(newValue) {
-				this.id = newValue;
-			}
-
-			get form() {
-				return this.internals?.form;
-			}
-
-			name = 'theme';
-
-			get type() {
-				return this.localName;
-			}
-			get validity() {
-				return this.internals?.validity;
-			}
-			get validationMessage() {
-				return this.internals?.validationMessage;
-			}
-			get willValidate() {
-				return this.internals?.willValidate;
-			}
-
-			checkValidity() {
-				return this.internals?.checkValidity();
-			}
-			reportValidity() {
-				return this.internals?.reportValidity();
 			}
 		}
 	);

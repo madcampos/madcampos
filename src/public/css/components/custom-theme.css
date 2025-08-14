@@ -1,0 +1,71 @@
+@layer components {
+	custom-theme[is-accessible] .accessible-theme { display: block; }
+	custom-theme[dual-theme] .dual-theme { display: block; }
+
+	custom-theme .theme-preview { display: block; }
+
+	custom-theme .theme-preview-border {
+		paint-order: stroke;
+		stroke: var(--border-color);
+		stroke-width: 2px;
+	}
+	custom-theme .theme-preview-bg { fill: var(--bg-color); }
+	custom-theme .theme-preview-dark-bg { fill: var(--dark-bg-color); }
+	custom-theme .theme-preview-theme-color { fill: var(--theme-color); }
+	custom-theme .theme-preview-accent-color { fill: var(--accent-color); }
+	custom-theme .theme-preview-secondary-color { fill: var(--secondary-color); }
+	custom-theme .theme-preview-complementary-color { fill: var(--complementary-color); }
+	custom-theme .theme-preview-text-text { font-family: var(--text-font-family); }
+	custom-theme .theme-preview-header-text { font-family: var(--headers-font-family); }
+	custom-theme .theme-preview-text {
+		fill: var(--text-color);
+		font-size: 28px;
+	}
+
+	custom-theme .theme-label {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		justify-content: start;
+		align-items: center;
+		margin: var(--spacing-medium);
+		border: transparent var(--border-width) var(--border-style);
+		padding: var(--spacing-medium);
+		width: calc(50% - 1.5rem);
+		max-width: var(--avatar-size);
+		height: fit-content;
+		text-align: center;
+	}
+
+	custom-theme .theme-label svg {
+		width: 100%;
+		height: auto;
+	}
+
+	custom-theme .theme-label small {
+		display: block;
+		font-size: 0.7em;
+	}
+	custom-theme .theme-label small svg { width: 1em; }
+
+	custom-theme .theme-label input[type='radio'] {
+		position: absolute;
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	custom-theme .theme-label:is(:hover, :focus-within) {
+		border-color: var(--accent-color);
+		background-color: var(--text-color);
+		color: var(--bg-color);
+	}
+
+	custom-theme .theme-label:has(input[type='radio']:checked) {
+		border-color: var(--theme-color);
+		background-color: var(--bg-color);
+		color: var(--theme-color);
+	}
+
+	@container (max-width: 25rem) { custom-theme .theme-label { width: 100%; } }
+}

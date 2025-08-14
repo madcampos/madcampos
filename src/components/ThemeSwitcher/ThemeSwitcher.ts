@@ -1,5 +1,4 @@
-import { css, html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { html } from '@lit-labs/ssr';
 
 interface SiteTheme {
 	id: string;
@@ -68,138 +67,102 @@ const themes: SiteTheme[] = [
 	}
 ];
 
-@customElement('theme-switcher')
-export class ThemeSwitcher extends LitElement {
-	static override styles = css`
-		@layer components {
-			aside:not([hidden]) {
-				/* INFO: fix for safari */
-				display: inline-block;
-				align-self: center;
-			}
+const themeMap = themes.map(
+	({ description, id, name, accessible, dual }) =>
+		html`
+			<custom-theme
+				id="${id}"
+				?is-accessible="${accessible}"
+				?dual-theme="${dual}"
+			>
+				<label
+					for="${`theme-input-${id}`}"
+					id="${`theme-label-${id}`}"
+					class="theme-label"
+				>
+					<input
+						type="radio"
+						name="theme"
+						value="${id}"
+						id="${`theme-input-${id}`}"
+						required
+					/>
 
-			/* TODO: fix */
-			body:not(.js-enabled) aside { display: none; }
-
-			aside button {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				border: var(--border-style) var(--border-width) var(--theme-color);
-				border-radius: 100vmax;
-				background: var(--bg-color);
-				padding: var(--spacing-medium);
-				width: var(--button-size);
-				height: var(--button-size);
-				color: var(--theme-color);
-			}
-
-			aside button:focus-visible {
-				border-color: var(--text-color);
-				background-color: var(--theme-color);
-				color: var(--text-color);
-			}
-
-			#theme-switcher button:hover {
-				outline-color: var(--accent-color);
-				border-color: var(--accent-color);
-				background-color: var(--dark-bg-color);
-				color: var(--accent-color);
-			}
-
-			aside button:active {
-				outline-color: var(--text-color);
-				border-color: var(--text-color);
-				background-color: var(--accent-color);
-				color: var(--text-color);
-			}
-
-			aside button m-icon {
-				width: 100%;
-				height: 100%;
-				pointer-events: none;
-			}
-
-			dialog {
-				box-sizing: border-box;
-				border: var(--border-color) var(--border-style) var(--border-width);
-				border-radius: var(--border-radius);
-				background-color: var(--dark-bg-color);
-				width: clamp(10rem, 70vw, 35rem);
-				height: clamp(10rem, 70vh, 35rem);
-				overscroll-behavior: contain;
-			}
-
-			dialog::backdrop {
-				backdrop-filter: blur(1rem);
-				background-color: rgba(0, 0, 0, 0.5);
-			}
-
-			dialog form {
-				box-sizing: border-box;
-				display: flex;
-				flex-direction: column;
-				padding: var(--spacing-medium);
-				width: 100%;
-				height: 100%;
-			}
-
-			dialog button {
-				width: fit-content;
-				height: fit-content;
-			}
-
-			#theme-list {
-				display: flex;
-				flex-grow: 1;
-				flex-wrap: wrap;
-				justify-content: center;
-				container-name: theme-switcher;
-				container-type: size;
-				overflow: auto;
-				overscroll-behavior: contain;
-			}
-		}
-	`;
-
-	protected override render() {
-		const themeMap = themes.map(
-			({ description, id, name, accessible, dual }) =>
-				html`
-					<custom-theme
-						id="${id}"
-						?is-accessible="${accessible}"
-						?dual-theme="${dual}"
+					<svg
+						viewBox="0 0 100 70"
+						class="theme-preview"
+						data-theme="${dual ? 'light' : id}"
+						role="presentation"
+						width="100"
+						height="70"
+						display="none"
 					>
-						<span slot="name">${name}</span>
-						<span>${description}</span>
-					</custom-theme>
-				`
-		);
+						<g>
+							<rect class="theme-preview-bg" x="0" y="0" width="100" height="70" />
 
-		return html`
-			<aside id="theme-switcher" hidden>
-				<script src="/components/themes/script.mjs" type="module"></script>
+							<text class="theme-preview-text theme-preview-header-text" x="5" y="30" role="presentation">Aa</text>
+							<text class="theme-preview-text theme-preview-text-text" x="5" y="60" role="presentation">Aa</text>
 
-				<button type="button" popovertarget="theme-switcher-dialog" aria-label="Theme Switcher">
-					<m-icon icon="uil:palette"></m-icon>
-				</button>
+							<rect class="theme-preview-border theme-preview-dark-bg" x="60" y="20" width="25" height="35" />
+							<circle class="theme-preview-border theme-preview-theme-color" cx="60" cy="20" r="10" />
+							<circle class="theme-preview-border theme-preview-accent-color" cx="60" cy="55" r="10" />
+							<circle class="theme-preview-border theme-preview-complementary-color" cx="85" cy="20" r="10" />
+							<circle class="theme-preview-border theme-preview-secondary-color" cx="85" cy="55" r="10" />
+						</g>
 
-				<dialog id="theme-switcher-dialog" popover>
-					<form action="./" method="get">
-						<header>
-							<h2>Choose a theme</h2>
-						</header>
-						<div id="theme-list">
-							${themeMap}
-						</div>
+						<g class="dual-theme" hidden>
+							<clipPath id="theme-preview-system-mask">
+								<polygon points="0,70 100,0 100,70" />
+							</clipPath>
+							<g data-theme="dark" clip-path="url(#theme-preview-system-mask)">
+								<rect class="theme-preview-bg" x="0" y="0" width="100" height="70" />
 
-						<footer>
-							<button type="submit" popovertarget="theme-switcher-dialog" popovertargetaction="hide">Apply theme</button>
-						</footer>
-					</form>
-				</dialog>
-			</aside>
-		`;
-	}
-}
+								<text class="theme-preview-text theme-preview-header-text" x="5" y="30" role="presentation">Aa</text>
+								<text class="theme-preview-text theme-preview-text-text" x="5" y="60" role="presentation">Aa</text>
+
+								<rect class="theme-preview-border theme-preview-dark-bg" x="60" y="20" width="25" height="35" />
+								<circle class="theme-preview-border theme-preview-theme-color" cx="60" cy="20" r="10" />
+								<circle class="theme-preview-border theme-preview-accent-color" cx="60" cy="55" r="10" />
+								<circle class="theme-preview-border theme-preview-complementary-color" cx="85" cy="20" r="10" />
+								<circle class="theme-preview-border theme-preview-secondary-color" cx="85" cy="55" r="10" />
+							</g>
+						</g>
+					</svg>
+
+					<strong>${name}</strong>
+					<small><em>${description}</em></small>
+					<small class="accessible-theme" hidden>
+						<m-icon icon="uil:exclamation-triangle"></m-icon>
+						<strong>Warning: Theme is not fully accessible</strong>
+					</small>
+				</label>
+			</custom-theme>
+		`
+);
+
+export const themeSwitcher = html`
+	<theme-switcher>
+		<aside id="theme-switcher" hidden>
+			<button type="button" popovertarget="theme-switcher-dialog" aria-label="Theme Switcher">
+				<m-icon icon="uil:palette"></m-icon>
+			</button>
+
+			<dialog id="theme-switcher-dialog" popover>
+				<form action="./" method="get">
+					<header>
+						<h2>Choose a theme</h2>
+					</header>
+					<div id="theme-list">
+						${themeMap}
+					</div>
+
+					<footer>
+						<button type="submit" popovertarget="theme-switcher-dialog" popovertargetaction="hide">Apply theme</button>
+					</footer>
+				</form>
+			</dialog>
+		</aside>
+
+		<script src="/js/components/theme-switcher.mjs" type="module"></script>
+	</theme-switcher>
+`;

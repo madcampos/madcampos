@@ -108,7 +108,7 @@ export class Icon extends LitElement {
 		const icon = (this.icon || 'default') as keyof typeof ICONS;
 
 		return html`
-			<link rel="stylesheet" href="/components/icon/styles.css" />
+			<link rel="stylesheet" href="/css/components/icon.css" />
 
 			${ICONS[icon]}
 		`;

@@ -1,0 +1,88 @@
+@layer components {
+	theme-switcher aside:not([hidden]) {
+		/* INFO: fix for safari */
+		display: inline-block;
+		align-self: center;
+	}
+
+	body:not(.js-enabled) theme-switcher aside { display: none; }
+
+	theme-switcher aside button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: var(--border-style) var(--border-width) var(--theme-color);
+		border-radius: 100vmax;
+		background: var(--bg-color);
+		padding: var(--spacing-medium);
+		width: var(--button-size);
+		height: var(--button-size);
+		color: var(--theme-color);
+	}
+
+	theme-switcher aside button:focus-visible {
+		border-color: var(--text-color);
+		background-color: var(--theme-color);
+		color: var(--text-color);
+	}
+
+	theme-switcher #theme-switcher button:hover {
+		outline-color: var(--accent-color);
+		border-color: var(--accent-color);
+		background-color: var(--dark-bg-color);
+		color: var(--accent-color);
+	}
+
+	theme-switcher aside button:active {
+		outline-color: var(--text-color);
+		border-color: var(--text-color);
+		background-color: var(--accent-color);
+		color: var(--text-color);
+	}
+
+	theme-switcher aside button m-icon {
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	theme-switcher dialog {
+		box-sizing: border-box;
+		border: var(--border-color) var(--border-style) var(--border-width);
+		border-radius: var(--border-radius);
+		background-color: var(--dark-bg-color);
+		width: clamp(10rem, 70vw, 35rem);
+		height: clamp(10rem, 70vh, 35rem);
+		overscroll-behavior: contain;
+	}
+
+	theme-switcher dialog::backdrop {
+		backdrop-filter: blur(1rem);
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	theme-switcher dialog form {
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		padding: var(--spacing-medium);
+		width: 100%;
+		height: 100%;
+	}
+
+	theme-switcher dialog button {
+		width: fit-content;
+		height: fit-content;
+	}
+
+	theme-switcher #theme-list {
+		display: flex;
+		flex-grow: 1;
+		flex-wrap: wrap;
+		justify-content: center;
+		container-name: theme-switcher;
+		container-type: size;
+		overflow: auto;
+		overscroll-behavior: contain;
+	}
+}

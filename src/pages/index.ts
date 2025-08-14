@@ -1,10 +1,19 @@
 import { html, render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import type { RouteView } from '../../lib/StaticSiteHandler.ts';
+import { avatar } from '../components/Avatar/Avatar.ts';
 import { baseLayout } from '../components/Baselayout/BaseLayout.ts';
+import { logo } from '../components/Logo/Logo.ts';
 import { oldStyleButtons } from '../components/OldStyleButtons/OldStyleButtons.ts';
+import { themeSwitcher } from '../components/ThemeSwitcher/ThemeSwitcher.ts';
 import { webrings } from '../components/Webrings/Webrings.ts';
 import { BLOG, GLOBALS, PROJECTS, TALKS } from '../utils/constants.ts';
+
+const userAvatar = avatar({
+	src: '/assets/images/me.jpg',
+	alt: "A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf.",
+	loading: 'eager'
+});
 
 export default {
 	render: async () =>
@@ -21,20 +30,11 @@ export default {
 				body: html`
 					<div class="h-card vcard">
 						<h1>
-							<m-logo
-								subtitle=""
-								shortSubtitle=""
-								url="/"
-								urlTitle="Home page"
-							></m-logo>
+							${logo({ subtitle: '', shortSubtitle: '', url: '/', urlTitle: 'Home page' })}
 						</h1>
 						<article id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
 							<aside>
-								<m-avatar
-									src="/assets/images/me.jpg"
-									alt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
-									loading="eager"
-								></m-avatar>
+								${userAvatar}
 							</aside>
 							<div>
 								<div class="p-note note" itemprop="description">
@@ -109,7 +109,7 @@ export default {
 				footer: html`
 					${oldStyleButtons}
 					${webrings}
-					<theme-switcher></theme-switcher>
+					${themeSwitcher}
 				`
 			}))),
 			{ status: 200, headers: { 'Content-Type': 'text/html' } }
