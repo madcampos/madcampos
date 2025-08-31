@@ -1,7 +1,9 @@
-@import './custom-theme.css';
-@import './iab-escape.css';
-@import './logo.css';
-@import './old-style-buttons.css';
-@import './theme-switcher.css';
-@import './webrings.css';
-@import './svg-effects.css';
+@import url('./author-card.css');
+@import url('./custom-theme.css');
+@import url('./draft-tag.css');
+@import url('./iab-escape.css');
+@import url('./logo.css');
+@import url('./old-style-buttons.css');
+@import url('./svg-effects.css');
+@import url('./theme-switcher.css');
+@import url('./webrings.css');

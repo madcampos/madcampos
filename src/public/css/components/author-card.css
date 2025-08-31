@@ -1,0 +1,53 @@
+@layer components {
+	author-card {
+		container-name: author-card;
+		container-type: inline-size;
+
+		aside {
+			display: grid;
+			grid-template-rows: 1fr auto;
+			grid-template-columns: 1fr auto;
+			grid-template-areas:
+				'avatar name'
+				'avatar bio';
+			place-items: center;
+			gap: var(--spacing-large);
+			margin: var(--spacing-large) 0;
+			padding-inline: var(--spacing-large);
+
+			@container author-card (max-width: 35rem) {
+				grid-template-rows: 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'avatar'
+					'name'
+					'bio';
+			}
+		}
+
+		.author-picture {
+			grid-area: avatar;
+			align-self: start;
+
+			@container author-card (max-width: 35rem) { place-self: center center; }
+		}
+
+		.author-name {
+			grid-area: name;
+			justify-self: start;
+
+			& > * { margin: 0; }
+
+			@container author-card (max-width: 35rem) { justify-self: center; }
+		}
+
+		.author-bio {
+			grid-area: bio;
+
+			.author-bio img {
+				max-width: 100%;
+				height: auto;
+			}
+		}
+	}
+}

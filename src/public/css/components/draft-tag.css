@@ -1,0 +1,11 @@
+@layer components {
+	draft-tag {
+		display: inline-block;
+		margin: var(--spacing-small);
+		border-radius: var(--border-radius);
+		background-color: var(--accent-color);
+		padding: var(--spacing-small) var(--spacing-medium);
+		color: var(--bg-color);
+		text-transform: uppercase;
+	}
+}

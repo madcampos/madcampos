@@ -1,0 +1,102 @@
+@layer components {
+	m-card {
+		container-name: card;
+		container-type: inline-size;
+
+		article {
+			--image-size: var(--avatar-size);
+
+			display: grid;
+			grid-template-rows: auto 1fr auto auto;
+			grid-template-columns: var(--image-size) 1fr;
+			grid-template-areas:
+				'header header'
+				'picture content'
+				'picture links'
+				'footer footer';
+			gap: var(--spacing-large);
+			margin: var(--spacing-large) 0;
+			border: var(--border-style) var(--highlight-border-color) var(--border-width);
+			border-radius: var(--border-radius);
+			background-color: var(--bg-color);
+			padding: var(--spacing-large);
+
+			@container card (max-width: 25rem) {
+				grid-template-rows: auto var(--image-size) 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'header'
+					'picture'
+					'content'
+					'links'
+					'footer';
+			}
+
+			@container card (max-width: 15rem) { grid-template-rows: auto 1fr auto auto auto; }
+
+			&:not(:has(slot[name='picture']::slotted(*))) {
+				grid-template-rows: auto 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'header'
+					'content'
+					'links'
+					'footer';
+
+				picture { display: none; }
+			}
+
+			header { grid-area: header; }
+
+			.card-title {
+				display: flex;
+				align-items: center;
+				gap: var(--spacing-medium);
+
+				:is(h2, h3, h4, h5, h6) { margin-block: 0; }
+			}
+
+			.card-subtitle {
+				margin-block-start: var(--spacing-medium);
+				font-style: italic;
+				font-size: 0.8rem;
+			}
+
+			picture {
+				display: block;
+				grid-area: picture;
+				place-self: start center;
+				border-radius: var(--border-radius);
+				width: var(--image-size);
+				height: var(--image-size);
+				overflow: clip;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+					object-position: center;
+				}
+
+				@container card (max-width: 25rem) {
+					align-self: center center;
+					width: calc(100% - var(--spacing-small));
+					height: calc(100% - var(--spacing-small));
+				}
+			}
+
+			.card-content {
+				grid-area: content;
+
+				& > *:first-child { margin-block-start: 0; }
+				& > *:last-child { margin-block-end: 0; }
+			}
+
+			.card-links { grid-area: links; }
+			&:not(:has(slot[name='links']::slotted(*))) .card-links { display: none; }
+
+			footer { grid-area: footer; }
+			&:not(:has(slot[name='footer']::slotted(*))) footer { display: none; }
+		}
+	}
+}

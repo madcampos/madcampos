@@ -7,4 +7,6 @@ interface HTMLElementTagNameMap {
 	'custom-theme': HTMLElement;
 	'theme-switcher': HTMLElement;
 	'svg-effects': HTMLElement;
+	'author-card': HTMLElement;
+	'draft-tag': HTMLElement;
 }
