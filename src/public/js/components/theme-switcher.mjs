@@ -7,14 +7,10 @@ if (!customElements.get('theme-switcher')) {
 			constructor() {
 				super();
 
-				const supportsDeclarative = Object.hasOwn(HTMLElement.prototype, 'attachInternals');
-				const internals = supportsDeclarative ? this.attachInternals() : undefined;
-				const shadow = internals?.shadowRoot ?? this.attachShadow({ mode: 'open' });
-
-				shadow.querySelector('form')?.addEventListener('submit', (evt) => {
+				this.querySelector('form')?.addEventListener('submit', (evt) => {
 					evt.preventDefault();
 					evt.stopPropagation();
-					shadow.querySelector('dialog')?.hidePopover();
+					this.querySelector('dialog')?.hidePopover();
 
 					// eslint-disable-next-line @typescript-eslint/prefer-destructuring
 					const target = /** @type {HTMLFormElement} */ (evt.target);
@@ -24,7 +20,7 @@ if (!customElements.get('theme-switcher')) {
 				});
 
 				if (SiteSettings.theme) {
-					const themeInput = /** @type {HTMLInputElement} */ (shadow.querySelector(`input[type="radio"][value="${SiteSettings.theme}"]`));
+					const themeInput = /** @type {HTMLInputElement} */ (this.querySelector(`input[type="radio"][value="${SiteSettings.theme}"]`));
 
 					if (themeInput) {
 						themeInput.checked = true;
@@ -32,7 +28,7 @@ if (!customElements.get('theme-switcher')) {
 				}
 
 				if (SiteSettings.js === 'enabled') {
-					shadow.querySelector('aside')?.removeAttribute('hidden');
+					this.querySelector('aside')?.removeAttribute('hidden');
 				}
 			}
 		}

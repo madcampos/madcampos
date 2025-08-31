@@ -141,27 +141,26 @@ const themeMap = themes.map(
 );
 
 export const themeSwitcher = html`
-	<theme-switcher>
-		<aside id="theme-switcher" hidden>
-			<button type="button" popovertarget="theme-switcher-dialog" aria-label="Theme Switcher">
-				<m-icon icon="uil:palette"></m-icon>
-			</button>
+	<theme-switcher hidden>
+		<button type="button" popovertarget="theme-switcher-dialog">
+			<sr-only>Theme Switcher</sr-only>
+			<m-icon icon="uil:palette"></m-icon>
+		</button>
 
-			<dialog id="theme-switcher-dialog" popover>
-				<form action="./" method="get">
-					<header>
-						<h2>Choose a theme</h2>
-					</header>
-					<div id="theme-list">
-						${themeMap}
-					</div>
+		<dialog id="theme-switcher-dialog" popover>
+			<form action="#" method="get">
+				<header>
+					<h2>Choose a theme</h2>
+				</header>
+				<div id="theme-list">
+					${themeMap}
+				</div>
 
-					<footer>
-						<button type="submit" popovertarget="theme-switcher-dialog" popovertargetaction="hide">Apply theme</button>
-					</footer>
-				</form>
-			</dialog>
-		</aside>
+				<footer>
+					<button type="submit" popovertarget="theme-switcher-dialog" popovertargetaction="hide">Apply theme</button>
+				</footer>
+			</form>
+		</dialog>
 
 		<script src="/js/components/theme-switcher.mjs" type="module"></script>
 	</theme-switcher>
