@@ -1,9 +1,11 @@
+@import url('./avatar.css');
 @import url('./author-card.css');
 @import url('./custom-theme.css');
 @import url('./draft-tag.css');
 @import url('./iab-escape.css');
 @import url('./logo.css');
 @import url('./old-style-buttons.css');
+@import url('./page-header.css');
 @import url('./svg-effects.css');
 @import url('./theme-switcher.css');
 @import url('./webrings.css');

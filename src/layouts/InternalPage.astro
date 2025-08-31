@@ -1,7 +1,6 @@
 ---
 import '../assets/css/pages/internal-page.css';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
-import PageHeader from '../components/PageHeader/PageHeader.astro';
 import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import BaseLayout from './Base.astro';
@@ -47,11 +46,16 @@ const {
 	{hasFeed}
 	{pageSchema}
 >
-	<SkipToContent slot="header" />
-	<PageHeader slot="header">
-		<slot name="logo" slot="logo"></slot>
-		<slot name="header"></slot>
-	</PageHeader>
+	<header>
+		<SkipToContent />
+		<SiteNav />
+		<page-header>
+			<slot name="logo"></slot>
+			<h1>
+				<slot name="header"></slot>
+			</h1>
+		</page-header>
+	</header>
 
 	<div id="contents">
 		<slot></slot>

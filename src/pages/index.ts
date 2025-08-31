@@ -1,19 +1,12 @@
 import { html, render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import type { RouteView } from '../../lib/StaticSiteHandler.ts';
-import { avatar } from '../components/Avatar/Avatar.ts';
 import { baseLayout } from '../components/Baselayout/BaseLayout.ts';
 import { logo } from '../components/Logo/Logo.ts';
 import { oldStyleButtons } from '../components/OldStyleButtons/OldStyleButtons.ts';
 import { themeSwitcher } from '../components/ThemeSwitcher/ThemeSwitcher.ts';
 import { webrings } from '../components/Webrings/Webrings.ts';
 import { BLOG, GLOBALS, PROJECTS, TALKS } from '../utils/constants.ts';
-
-const userAvatar = avatar({
-	src: '/assets/images/me.jpg',
-	alt: "A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf.",
-	loading: 'eager'
-});
 
 export default {
 	render: async () =>
@@ -34,7 +27,26 @@ export default {
 						</h1>
 						<article id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
 							<aside>
-								${userAvatar}
+								<m-avatar
+									itemprop="image"
+									itemscope
+									itemtype="https://schema.org/ImageObject"
+								>
+									<!-- TODO: generate sources for images -->
+									<!-- Sizes: 128, 256, 512, 768, 1024 -->
+									<img
+										class="u-photo photo"
+										itemprop="contentUrl"
+										src="/assets/images/me.jpg"
+										alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
+										loading="eager"
+										decoding="async"
+										srcset=""
+										width="128"
+										height="128"
+										sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+									/>
+								</m-avatar>
 							</aside>
 							<div>
 								<div class="p-note note" itemprop="description">

@@ -2,10 +2,8 @@
 import '../../../assets/css/pages/internal-page.css';
 import '../../../assets/css/pages/authors.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import Avatar from '../../../components/Avatar/Avatar.astro';
 import Logo from '../../../components/Logo/Logo.astro';
 import OldButtons from '../../../components/OldStyleButtons/OldStyleButtons.astro';
-import PageHeader from '../../../components/PageHeader/PageHeader.astro';
 import Webrings from '../../../components/Webrings/Webrings.astro';
 import { BLOG, BLOG_AUTHOR } from '../../../constants.js';
 import BaseLayout from '../../../layouts/Base.astro';
@@ -41,21 +39,43 @@ const { Content } = await render();
 	image={avatar.src}
 	imageAlt={avatarAlt}
 >
-	<PageHeader slot="header">
-		<Logo
-			subtitle="Blog"
-			shortSubtitle="Blog"
-			url={BLOG.url}
-			urlTitle="Blog"
-			slot="logo"
-		/>
-		<Fragment set:html={inlineMarkdownRender(name)} />
-	</PageHeader>
-
+	<header>
+		<SiteNav />
+		<page-header>
+			<Logo
+				subtitle="Blog"
+				shortSubtitle="Blog"
+				url={BLOG.url}
+				urlTitle="Blog"
+			/>
+			<h1>
+				<Fragment set:html={inlineMarkdownRender(name)} />
+			</h1>
+		</page-header>
+	</header>
 	<div id="contents" itemprop="about mainEntity" itemscope itemtype="https://schema.org/Person">
 		<meta itemprop="name" content={name} />
 		<a id="author-picture" class="p-author h-card author-name" rel="author" itemprop="url" href={Astro.url}>
-			<Avatar image={avatar} imageAlt={inlineMarkdownStrip(avatarAlt)} />
+			<m-avatar
+				itemprop="image"
+				itemscope
+				itemtype="https://schema.org/ImageObject"
+			>
+				<!-- TODO: generate sources for images -->
+				<!-- Sizes: 128, 256, 512, 768, 1024 -->
+				<img
+					class="u-photo photo"
+					itemprop="contentUrl"
+					src={avatar}
+					alt={inlineMarkdownStrip(avatarAlt)}
+					loading="lazy"
+					decoding="async"
+					srcset=""
+					width="128"
+					height="128"
+					sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+				/>
+			</m-avatar>
 		</a>
 
 		<article id="author-bio">

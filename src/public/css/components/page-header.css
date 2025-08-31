@@ -1,0 +1,23 @@
+@layer components {
+	page-header {
+		header {
+			display: flex;
+			flex-direction: column;
+			place-items: center stretch;
+			gap: var(--spacing-large);
+		}
+
+		h1 {
+			hyphenate-character: '-';
+			hyphenate-limit-chars: 8 3 2;
+			padding: var(--spacing-large);
+			/* stylelint-disable-next-line property-no-vendor-prefix */
+			-webkit-hyphens: auto;
+			hyphens: auto;
+			line-break: loose;
+			overflow-wrap: break-word;
+			text-wrap: balance;
+			word-break: break-word;
+		}
+	}
+}

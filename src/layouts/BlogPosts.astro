@@ -4,7 +4,6 @@ import blogSocialImage from '../assets/images/social/social-blog.png';
 import Card from '../components/Card/Card.astro';
 import CardImage from '../components/CardImage/CardImage.astro';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
-import PageHeader from '../components/PageHeader/PageHeader.astro';
 import Pagination from '../components/Pagination/Pagination.astro';
 import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
 import TagList from '../components/TagList/TagList.astro';
@@ -62,10 +61,16 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		slot="header"
 		target="posts-list"
 	/>
-	<PageHeader slot="header">
-		<slot name="logo" slot="logo"></slot>
-		<slot name="header"></slot>
-	</PageHeader>
+
+	<header>
+		<SiteNav />
+		<page-header>
+			<slot name="logo"></slot>
+			<h1>
+				<slot name="header"></slot>
+			</h1>
+		</page-header>
+	</header>
 
 	<div id="posts-list">
 		{
