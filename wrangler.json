@@ -12,7 +12,7 @@
 	"preview_urls": false,
 	"route": { "pattern": "madcampos.dev", "custom_domain": true },
 	"dev": {
-		"ip": "0.0.0.0",
+		"ip": "localhost",
 		"port": 4242,
 		"local_protocol": "https",
 		"upstream_protocol": "https"
