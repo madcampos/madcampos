@@ -1,6 +1,7 @@
 interface HTMLElementTagNameMap {
 	'm-icon': HTMLElement;
 	'm-logo': HTMLElement;
+	'm-pagination': HTMLElement;
 	'm-webring': HTMLElement;
 	'iab-escape': HTMLElement;
 	'm-avatar': HTMLElement;
