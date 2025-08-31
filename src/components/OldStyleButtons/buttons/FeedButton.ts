@@ -38,7 +38,7 @@ export class FeedButton extends LitElement {
 
 	protected override render() {
 		return html`
-			<link rel="stylesheet" href="/components/old-style-buttons/styles.css" />
+			<link rel="stylesheet" href="/css/components/old-style-button.css" />
 
 			<button type="button">
 				<svg viewBox="0 0 88 31">
