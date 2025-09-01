@@ -2,7 +2,8 @@
 	"include": [
 		"build/**/*",
 		"lib/**/*",
-		"src/**/*"
+		"src/**/*",
+		"srver/**/*"
 	],
 	"exclude": ["node_modules/**/*", "dist/**/*", "data/.obsidian/**/*"],
 	"compilerOptions": {
@@ -46,6 +47,6 @@
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
 		"verbatimModuleSyntax": true,
-		"types": ["./src/env.d.ts", "@types/node", "typed-query-selector/strict"]
+		"types": ["./env.d.ts", "@types/node", "typed-query-selector/strict"]
 	}
 }

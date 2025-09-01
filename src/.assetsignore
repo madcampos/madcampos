@@ -1,0 +1,5 @@
+# MacOS annoying files
+.DS_Store
+
+# Internal templates
+templates/
