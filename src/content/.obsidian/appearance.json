@@ -1,14 +1,14 @@
 {
-	"accentColor": "#0080ff",
-	"theme": "system",
-	"monospaceFontFamily": "Cascadia Code PL,Monaco",
-	"baseFontSizeAction": false,
-	"translucency": true,
-	"cssTheme": "",
-	"interfaceFontFamily": "",
-	"textFontFamily": "Selawik,Skia",
-	"showViewHeader": true,
-	"nativeMenus": true,
-	"baseFontSize": 18,
-	"showRibbon": true
+  "accentColor": "#0080ff",
+  "theme": "system",
+  "monospaceFontFamily": "Cascadia Code PL,Monaco",
+  "baseFontSizeAction": false,
+  "translucency": true,
+  "cssTheme": "",
+  "interfaceFontFamily": "",
+  "textFontFamily": "Selawik,Skia",
+  "showViewHeader": true,
+  "nativeMenus": true,
+  "baseFontSize": 18,
+  "showRibbon": true
 }
