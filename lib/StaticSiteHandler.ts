@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 /// <reference types="urlpattern-polyfill" />
 
 if (!('URLPattern' in globalThis)) {
@@ -5,8 +6,9 @@ if (!('URLPattern' in globalThis)) {
 }
 
 interface FileSystemModule {
-	writeFile(path: string, data: string | Uint8Array): Promise<void>;
-	mkdir(path: string, options?: { recursive?: boolean }): Promise<void | string>;
+	writeFile(path: string, data: Uint8Array | string): Promise<void>;
+	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+	mkdir(path: string, options?: { recursive?: boolean }): Promise<string | void>;
 	cp(src: string, dest: string, options?: { force?: boolean, recursive?: boolean }): Promise<void>;
 }
 
@@ -16,8 +18,8 @@ export interface MarkdownEntry<T> {
 }
 
 export interface DataCollection {
-	list: <T>() => Promise<MarkdownEntry<T>[]> | MarkdownEntry<T>[];
-	get: <T>(key: string) => Promise<MarkdownEntry<T>> | MarkdownEntry<T>;
+	list<T>(): MarkdownEntry<T>[] | Promise<MarkdownEntry<T>[]>;
+	get<T>(key: string): MarkdownEntry<T> | Promise<MarkdownEntry<T>>;
 }
 
 interface ResolvedRoute {
@@ -36,8 +38,8 @@ export interface RenderParams extends ResolvedRoute {
 }
 
 export interface RouteView {
-	resolveParams?: (params: ResolveRouteParams) => Promise<ResolvedRoute[]> | ResolvedRoute[];
-	render: (params: RenderParams) => Promise<Response> | Response;
+	resolveParams?(assets: Env['Assets'], params: ResolveRouteParams): Promise<ResolvedRoute[]> | ResolvedRoute[];
+	render(assets: Env['Assets'], params: RenderParams): Promise<Response> | Response;
 }
 
 interface StaticSiteHandlerOptions {
@@ -45,13 +47,13 @@ interface StaticSiteHandlerOptions {
 	routes: Record<string, RouteView>;
 	fallbackRoute?: RouteView;
 	collections?: Record<string, DataCollection>;
-	trailingSlash?: 'ignore' | 'always' | 'never';
+	trailingSlash?: 'always' | 'ignore' | 'never';
 	fetchHandler?: ExportedHandlerFetchHandler;
 }
 
 export class StaticSiteHandler {
-	#PATH_WITH_EXT_REGEX = /\/([^\/.]+?)\.[a-z0-9]+?$/iu;
-	#TRAILING_SLASHES_REGEX = /\/$/;
+	#PATH_WITH_EXT_REGEX = /\/([^/.]+?)\.[a-z0-9]+?$/iu;
+	#TRAILING_SLASHES_REGEX = /\/$/iu;
 	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
 
 	#baseUrl: string;
@@ -76,21 +78,23 @@ export class StaticSiteHandler {
 
 			switch (trailingSlash) {
 				case 'always':
-					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX), '');
-					resolvedPath = resolvedPath.replace(new RegExp(this.#PATH_WITH_EXT_REGEX), '/$1');
+					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX, 'ui'), '');
+					resolvedPath = resolvedPath.replace(new RegExp(this.#PATH_WITH_EXT_REGEX, 'ui'), '/$1');
 					resolvedPath = `${resolvedPath}/`;
 					break;
 				case 'never':
-					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX), '');
+					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX, 'ui'), '');
 					break;
 				case 'ignore':
-				default:
-					const pathWithoutTrailingSlash = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX), '');
+				case undefined:
+				default: {
+					const pathWithoutTrailingSlash = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX, 'ui'), '');
 
-					if (!new RegExp(this.#PATH_WITH_EXT_REGEX).test(pathWithoutTrailingSlash)) {
+					if (!new RegExp(this.#PATH_WITH_EXT_REGEX, 'ui').test(pathWithoutTrailingSlash)) {
 						resolvedPath = `${pathWithoutTrailingSlash}{/}?`;
 					}
 					break;
+				}
 			}
 
 			this.#routes.push([new URLPattern(resolvedPath, this.#baseUrl), route]);
@@ -113,9 +117,9 @@ export class StaticSiteHandler {
 		}, false);
 	}
 
-	async #resolveRoute(url: string) {
+	async #resolveRoute(assets: Env['Assets'], url: string) {
 		const resolvedUrl = new URL(url, this.#baseUrl);
-		const [pattern, route] = this.#routes.find(([pattern]) => pattern.test(resolvedUrl.pathname, this.#baseUrl)) ?? [];
+		const [pattern, route] = this.#routes.find(([curPattern]) => curPattern.test(resolvedUrl.pathname, this.#baseUrl)) ?? [];
 
 		if (!pattern || !route) {
 			return;
@@ -130,7 +134,7 @@ export class StaticSiteHandler {
 			let resolvedRoutes = this.#resolvedRoutes.get(pattern);
 
 			if (!resolvedRoutes) {
-				resolvedRoutes = await route.resolveParams({ url: pattern, collections: this.#collections });
+				resolvedRoutes = await route.resolveParams(assets, { url: pattern, collections: this.#collections });
 
 				this.#resolvedRoutes.set(pattern, resolvedRoutes);
 			}
@@ -139,10 +143,13 @@ export class StaticSiteHandler {
 
 			if (resolvedRoute) {
 				try {
-					return route.render({
-						collections: this.#collections,
-						...resolvedRoute
-					});
+					return await route.render(
+						assets,
+						{
+							collections: this.#collections,
+							...resolvedRoute
+						}
+					);
 				} catch (err) {
 					console.error(`Error rendering route: ${url}.`);
 					console.error(err);
@@ -150,13 +157,16 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return route.render({
-			collections: this.#collections,
-			path: resolvedUrl.pathname
-		});
+		return route.render(
+			assets,
+			{
+				collections: this.#collections,
+				path: resolvedUrl.pathname
+			}
+		);
 	}
 
-	async build(fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
+	async build(assets: Env['Assets'], fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
 		await fileSystemModule.cp(publicDir, outputPath, { force: true, recursive: true });
 
 		await fileSystemModule.mkdir(outputPath, { recursive: true });
@@ -165,7 +175,12 @@ export class StaticSiteHandler {
 			const resolvedRoutes: ResolvedRoute[] = [];
 
 			if (route.resolveParams) {
-				resolvedRoutes.push(...await route.resolveParams({ url: pattern, collections: this.#collections }));
+				resolvedRoutes.push(
+					...await route.resolveParams(
+						assets,
+						{ url: pattern, collections: this.#collections }
+					)
+				);
 			} else if (pattern.pathname === '/*') {
 				resolvedRoutes.push({ path: '/404.html' });
 			} else {
@@ -173,7 +188,7 @@ export class StaticSiteHandler {
 					path: pattern.pathname
 						.replace(/\{\/\}\?$/iu, '')
 						.replaceAll(
-							new RegExp(this.#FORBIDDEN_CHARS_IN_FILES_REGEX),
+							new RegExp(this.#FORBIDDEN_CHARS_IN_FILES_REGEX, 'uig'),
 							(char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`
 						)
 				});
@@ -181,10 +196,13 @@ export class StaticSiteHandler {
 
 			for (const resolvedRoute of resolvedRoutes) {
 				try {
-					const response = await route.render({
-						collections: this.#collections,
-						...resolvedRoute
-					});
+					const response = await route.render(
+						assets,
+						{
+							collections: this.#collections,
+							...resolvedRoute
+						}
+					);
 
 					const file = await (await response.blob()).bytes();
 					let filePath = resolvedRoute.path;
@@ -193,7 +211,7 @@ export class StaticSiteHandler {
 						filePath += 'index.html';
 					}
 
-					if (!new RegExp(this.#PATH_WITH_EXT_REGEX).test(filePath)) {
+					if (!new RegExp(this.#PATH_WITH_EXT_REGEX, 'ui').test(filePath)) {
 						filePath += '.html';
 					}
 
@@ -211,7 +229,7 @@ export class StaticSiteHandler {
 	}
 
 	async fetch<CfHostMetadata = unknown>(request: Request<CfHostMetadata, IncomingRequestCfProperties<CfHostMetadata>>, env: Env, context: ExecutionContext) {
-		const resolvedResponse = await this.#resolveRoute(request.url);
+		const resolvedResponse = await this.#resolveRoute(env.Assets, request.url);
 
 		if (resolvedResponse) {
 			return resolvedResponse;
@@ -225,9 +243,12 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return this.#fallbackRoute.render({
-			collections: this.#collections,
-			path: new URL(request.url).pathname
-		});
+		return this.#fallbackRoute.render(
+			env.Assets,
+			{
+				collections: this.#collections,
+				path: new URL(request.url).pathname
+			}
+		);
 	}
 }
