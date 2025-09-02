@@ -18,7 +18,7 @@
 		"upstream_protocol": "https"
 	},
 	"assets": {
-		"directory": "src/",
+		"directory": "./src/",
 		"binding": "Assets",
 		"run_worker_first": [
 			"/templates/*"

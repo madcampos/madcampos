@@ -474,7 +474,11 @@ const plugins = {
 export default [
 	{
 		name: 'Default TS config',
-		files: ['src/**/*.{js,mjs,cjs,ts,cts,mts}'],
+		files: [
+			'src/**/*.{js,mjs,cjs,ts,cts,mts}',
+			'lib/**/*.{js,mjs,cjs,ts,cts,mts}',
+			'server/**/*.{js,mjs,cjs,ts,cts,mts}'
+		],
 		ignores,
 		languageOptions,
 		plugins,

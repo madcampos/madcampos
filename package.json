@@ -14,7 +14,7 @@
 		"postinstall": "git apply patches/lit-html.patch && git apply patches/reactive-element.patch && git apply patches/ssr-client.patch",
 		"start": "wrangler dev --https-cert-path certs/server.crt --https-key-path certs/server.key",
 		"build": "node build/index.ts",
-		"generate:types": "wrangler types src/env.d.ts",
+		"generate:types": "wrangler types env.d.ts",
 		"deploy": "wrangler deploy --minify --env production",
 		"typecheck": "tsc --noEmit",
 		"format": "dprint fmt --staged",
