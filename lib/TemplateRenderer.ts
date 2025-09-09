@@ -6,15 +6,18 @@ interface InitParameters {
 	components: Record<string, string>;
 }
 
+type ComponentFunction = <T>(data: T) => Promise<string> | string;
+
 export class TemplateRendered {
 	#IF_ATTRIBUTE = '@if';
 	#LOOP_ATTRIBUTE = '@for';
+	#SKIP_PROCESSING_ATTRIBUTE = '@no-process';
 	#LOOP_OPERATOR = 'in';
 	#OPEN_DELIMITER = '\\{\\{';
 	#CLOSE_DELIMITER = '\\}\\}';
 
-	#componentCache: Record<string, string> = {};
-	#componentPaths: Record<string, string>;
+	#componentCache: Record<string, ComponentFunction | string> = {};
+	#componentPaths: Record<string, ComponentFunction | string>;
 
 	#assets: Env['Assets'];
 
@@ -69,25 +72,43 @@ export class TemplateRendered {
 	}
 
 	async #getComponentText(elementTag: string) {
-		if (this.#componentCache[elementTag] && this.#componentPaths[elementTag]) {
-			const templatePath = this.#componentPaths[elementTag];
-			const response = await this.#assets.fetch(`https://assets.local/templates/${templatePath}`);
-			const text = await response.text();
+		if (!this.#componentPaths[elementTag]) {
+			return;
+		}
 
-			this.#componentCache[elementTag] = text;
+		if (!this.#componentCache[elementTag]) {
+			if (typeof this.#componentPaths[elementTag] === 'string') {
+				const templatePath = this.#componentPaths[elementTag];
+				const response = await this.#assets.fetch(`https://assets.local/templates/${templatePath}`);
+				const text = await response.text();
+
+				this.#componentCache[elementTag] = text;
+			} else {
+				this.#componentCache[elementTag] = this.#componentPaths[elementTag];
+			}
 		}
 
 		return this.#componentCache[elementTag];
 	}
 
 	async #processComponent(element: HTMLElement) {
-		const componentText = await this.#getComponentText(element.tagName);
+		const componentTextOrFunction = await this.#getComponentText(element.tagName.toLowerCase());
 
-		// TODO: add custom element support
-		// 1. Process component based on attribute "@process"
-		// 2. Set attributes as properties that can be referenced along with data.
-		// 3.1. Simple copy of contents inside template with declarative shadowdom.
-		// 3.2. List slots and find out where to put child elements in slots.
+		if (!componentTextOrFunction) {
+			return;
+		}
+
+		let componentText = componentTextOrFunction;
+
+		if (typeof componentText === 'function') {
+			componentText = await componentText(element.attributes);
+		}
+
+		element.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentText}</template>`);
+
+		if (!element.hasAttribute(this.#SKIP_PROCESSING_ATTRIBUTE)) {
+			await this.#processTree(element, element.attributes);
+		}
 	}
 
 	async #processTree<T>(element: HTMLElement, data?: T) {
