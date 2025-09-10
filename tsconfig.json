@@ -47,6 +47,6 @@
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
 		"verbatimModuleSyntax": true,
-		"types": ["./env.d.ts", "@types/node", "typed-query-selector/strict"]
+		"types": ["./env.d.ts", "@types/node"]
 	}
 }
