@@ -1,16 +1,21 @@
 import { StaticSiteHandler } from '../lib/StaticSiteHandler.ts';
+import { TemplateRenderer } from '../lib/TemplateRenderer.ts';
 import server from './index.ts';
 
 const BASE_URL = 'https://madcampos.dev/';
 
+const templateRenderer = new TemplateRenderer();
+
 const app = new StaticSiteHandler({
 	baseUrl: 'http://localhost:4242/',
 	routes: {
-		'/': StaticSiteHandler.renderHtmlTemplate('index.liquid', {
-			title: 'Marco Campos | Senior Web Developer',
-			url: BASE_URL,
-			styles: ['/css/pages/home.css']
-		})
+		'/': {
+			render: async (assets) => {
+				const body = await templateRenderer.renderTemplate(assets, 'index.html', {});
+
+				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
+			}
+		}
 	},
 	fetchHandler: server.fetch
 });

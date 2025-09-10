@@ -1,32 +1,35 @@
 // eslint-disable-next-line @typescript-eslint/no-shadow
 import { type HTMLElement, NodeType, parse } from 'node-html-parser';
 
+type ComponentFunction = <T>(data: T) => Promise<string> | string;
+export type ComponentReferenceList = Record<string, ComponentFunction | string>;
+
 interface InitParameters {
-	assets: Env['Assets'];
-	components: Record<string, string>;
+	components?: ComponentReferenceList;
 }
 
-type ComponentFunction = <T>(data: T) => Promise<string> | string;
-
-export class TemplateRendered {
+export class TemplateRenderer {
+	#TEMPLATES_FOLDER = 'templates';
 	#IF_ATTRIBUTE = '@if';
 	#LOOP_ATTRIBUTE = '@for';
 	#SKIP_PROCESSING_ATTRIBUTE = '@no-process';
+	#SKIP_SHADOWDOM_ATTRIBUTE = '@no-shadowdom';
 	#LOOP_OPERATOR = 'in';
 	#OPEN_DELIMITER = '\\{\\{';
 	#CLOSE_DELIMITER = '\\}\\}';
 
-	#componentCache: Record<string, ComponentFunction | string> = {};
-	#componentPaths: Record<string, ComponentFunction | string>;
+	#componentCache: ComponentReferenceList = {};
+	#componentPaths: ComponentReferenceList;
 
-	#assets: Env['Assets'];
-
-	constructor({ assets, components }: InitParameters) {
-		this.#assets = assets;
-		this.#componentPaths = components;
+	constructor({ components }: InitParameters = {}) {
+		this.#componentPaths = components ?? {};
 	}
 
-	#getValue<T>(data: T, path: string) {
+	#getValue<T>(path: string, data?: T) {
+		if (!data) {
+			return undefined;
+		}
+
 		const [firstPart, ...pathParts] = path.trim().split('.');
 
 		if (!firstPart) {
@@ -42,7 +45,7 @@ export class TemplateRendered {
 				return result;
 			},
 			// @ts-expect-error
-			data[firstPart]
+			data?.[firstPart]
 		);
 	}
 
@@ -51,7 +54,7 @@ export class TemplateRendered {
 			return '';
 		}
 
-		if (['string', 'number', 'boolean', 'bigint', 'symbol'].includes(typeof value)) {
+		if (['string', 'number', 'boolean', 'bigint'].includes(typeof value)) {
 			// eslint-disable-next-line @typescript-eslint/no-base-to-string
 			return value.toString();
 		}
@@ -71,7 +74,7 @@ export class TemplateRendered {
 		return '';
 	}
 
-	async #getComponentText(elementTag: string) {
+	async #getComponentText(assets: Env['Assets'], elementTag: string) {
 		if (!this.#componentPaths[elementTag]) {
 			return;
 		}
@@ -79,7 +82,7 @@ export class TemplateRendered {
 		if (!this.#componentCache[elementTag]) {
 			if (typeof this.#componentPaths[elementTag] === 'string') {
 				const templatePath = this.#componentPaths[elementTag];
-				const response = await this.#assets.fetch(`https://assets.local/templates/${templatePath}`);
+				const response = await assets.fetch(`https://assets.local/${this.#TEMPLATES_FOLDER}/${templatePath}`);
 				const text = await response.text();
 
 				this.#componentCache[elementTag] = text;
@@ -91,29 +94,34 @@ export class TemplateRendered {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent(element: HTMLElement) {
-		const componentTextOrFunction = await this.#getComponentText(element.tagName.toLowerCase());
+	async #processComponent(assets: Env['Assets'], element: HTMLElement) {
+		let componentTextOrFunction = await this.#getComponentText(assets, element.tagName.toLowerCase());
 
 		if (!componentTextOrFunction) {
 			return;
 		}
 
-		let componentText = componentTextOrFunction;
-
-		if (typeof componentText === 'function') {
-			componentText = await componentText(element.attributes);
+		if (typeof componentTextOrFunction === 'function') {
+			componentTextOrFunction = await componentTextOrFunction(element.attributes);
 		}
 
-		element.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentText}</template>`);
+		if (element.hasAttribute(this.#SKIP_SHADOWDOM_ATTRIBUTE)) {
+			element.insertAdjacentHTML('afterbegin', componentTextOrFunction);
+			element.removeAttribute(this.#SKIP_SHADOWDOM_ATTRIBUTE);
+		} else {
+			element.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentTextOrFunction}</template>`);
+		}
 
 		if (!element.hasAttribute(this.#SKIP_PROCESSING_ATTRIBUTE)) {
-			await this.#processTree(element, element.attributes);
+			await this.#processTree(assets, element, element.attributes);
+		} else {
+			element.removeAttribute(this.#SKIP_PROCESSING_ATTRIBUTE);
 		}
 	}
 
-	async #processTree<T>(element: HTMLElement, data?: T) {
+	async #processTree<T>(assets: Env['Assets'], element: HTMLElement, data?: T) {
 		if (element.hasAttribute(this.#IF_ATTRIBUTE)) {
-			const value = this.#getValue(data, element.getAttribute(this.#IF_ATTRIBUTE) ?? '');
+			const value = this.#getValue(element.getAttribute(this.#IF_ATTRIBUTE) ?? '', data);
 
 			element.removeAttribute(this.#IF_ATTRIBUTE);
 
@@ -125,10 +133,10 @@ export class TemplateRendered {
 
 		if (element?.tagName?.toLowerCase() === 'link' && element.getAttribute('rel') === 'import') {
 			const filePath = element.getAttribute('href');
-			const importData = this.#getValue(data, element.getAttribute('data') ?? '');
+			const importData = this.#getValue(element.getAttribute('data') ?? '', data);
 
 			if (filePath) {
-				const importedTemplate = await this.#renderTemplate(filePath, importData);
+				const importedTemplate = await this.renderTemplate(assets, filePath, importData);
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();
@@ -138,14 +146,14 @@ export class TemplateRendered {
 		if (element.hasAttribute(this.#LOOP_ATTRIBUTE)) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const [itemName, listPath] = element.getAttribute(this.#LOOP_ATTRIBUTE)!.split(this.#LOOP_OPERATOR);
-			const list = this.#getValue(data, listPath?.trim() ?? '');
+			const list = this.#getValue(listPath?.trim() ?? '', data);
 
 			element.removeAttribute(this.#LOOP_ATTRIBUTE);
 
 			const results = await Promise.all(list.map(async (itemValue: unknown) => {
 				const clonedElement = element.clone() as HTMLElement;
 
-				await this.#processTree(clonedElement, {
+				await this.#processTree(assets, clonedElement, {
 					...(data ?? {}),
 					[itemName?.trim() ?? '']: itemValue
 				});
@@ -157,14 +165,14 @@ export class TemplateRendered {
 			element.remove();
 		} else {
 			await Promise.all(element.children.map(async (childElement) => {
-				await this.#processTree(childElement, data);
+				await this.#processTree(assets, childElement, data);
 			}));
 		}
 
 		Object.entries(element.attributes).forEach(([attr, value]) => {
 			const resolvedValue = value.replaceAll(
 				new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
-				(_, matchValue) => this.#formatValue(this.#getValue(data, matchValue))
+				(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
 			);
 
 			element.setAttribute(attr, resolvedValue);
@@ -188,21 +196,21 @@ export class TemplateRendered {
 				.trim()
 				.replaceAll(
 					new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
-					(_, matchValue) => this.#formatValue(this.#getValue(data, matchValue))
+					(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
 				);
 		});
 
 		if (element.tagName.toLowerCase().includes('-')) {
-			await this.#processComponent(element);
+			await this.#processComponent(assets, element);
 		}
 	}
 
-	async #renderTemplate<T>(templatePath: string, data?: T) {
-		const response = await this.#assets.fetch(`https://assets.local/templates/${templatePath}`);
+	async renderTemplate<T>(assets: Env['Assets'], templatePath: string, data?: T) {
+		const response = await assets.fetch(`https://assets.local/${this.#TEMPLATES_FOLDER}/${templatePath}`);
 		const text = await response.text();
 		const parsedDocument = parse(text);
 
-		await this.#processTree(parsedDocument, data);
+		await this.#processTree(assets, parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}

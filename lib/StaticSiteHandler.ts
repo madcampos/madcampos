@@ -18,8 +18,8 @@ export interface MarkdownEntry<T> {
 }
 
 export interface DataCollection {
-	list<T>(): MarkdownEntry<T>[] | Promise<MarkdownEntry<T>[]>;
-	get<T>(key: string): MarkdownEntry<T> | Promise<MarkdownEntry<T>>;
+	list<T>(assets: Env['Assets']): MarkdownEntry<T>[] | Promise<MarkdownEntry<T>[]>;
+	get<T>(assets: Env['Assets'], key: string): MarkdownEntry<T> | Promise<MarkdownEntry<T>>;
 }
 
 interface ResolvedRoute {
@@ -28,18 +28,15 @@ interface ResolvedRoute {
 	data?: unknown;
 }
 
-export interface ResolveRouteParams {
-	url: URLPattern;
-	collections: Record<string, DataCollection>;
-}
-
-export interface RenderParams extends ResolvedRoute {
-	collections: Record<string, DataCollection>;
-}
-
 export interface RouteView {
-	resolveParams?(assets: Env['Assets'], params: ResolveRouteParams): Promise<ResolvedRoute[]> | ResolvedRoute[];
-	render(assets: Env['Assets'], params: RenderParams): Promise<Response> | Response;
+	resolveParams?(assets: Env['Assets'], params: {
+		url: URLPattern,
+		collections: Record<string, DataCollection>
+	}): Promise<ResolvedRoute[]> | ResolvedRoute[];
+	render(
+		assets: Env['Assets'],
+		params: ResolvedRoute & { collections: Record<string, DataCollection> }
+	): Promise<Response> | Response;
 }
 
 interface StaticSiteHandlerOptions {
@@ -167,9 +164,10 @@ export class StaticSiteHandler {
 	}
 
 	async build(assets: Env['Assets'], fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
-		await fileSystemModule.cp(publicDir, outputPath, { force: true, recursive: true });
-
 		await fileSystemModule.mkdir(outputPath, { recursive: true });
+
+		// TODO: list files and ignore template folder
+		await fileSystemModule.cp(publicDir, outputPath, { force: true, recursive: true });
 
 		for (const [pattern, route] of this.#routes) {
 			const resolvedRoutes: ResolvedRoute[] = [];
