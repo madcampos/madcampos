@@ -22,11 +22,16 @@ export class TemplateRenderer {
 	#componentPaths: ComponentReferenceList;
 
 	constructor({ components }: InitParameters = {}) {
-		this.#componentPaths = components ?? {};
+		this.#componentPaths = Object.fromEntries(Object.entries(components ?? {}).map(([key, value]) => [key.toLowerCase(), value]));
 	}
 
 	#getValue<T>(path: string, data?: T) {
+		if (!path) {
+			throw new Error('Missing property path!');
+		}
+
 		if (!data) {
+			console.warn(`Missing data for property "${path}"`);
 			return undefined;
 		}
 
@@ -36,17 +41,33 @@ export class TemplateRenderer {
 			return undefined;
 		}
 
-		return pathParts.reduce(
-			(result, pathPart) => {
-				if (result?.[pathPart]) {
-					return result[pathPart];
-				}
+		// @ts-expect-error
+		let result = data?.[firstPart];
+		let pathPartIndex = 0;
 
-				return result;
-			},
-			// @ts-expect-error
-			data?.[firstPart]
-		);
+		if (result === null || result === undefined) {
+			console.warn(`Missing data for property "${firstPart}"`);
+			return undefined;
+		}
+
+		if (pathParts.length === 0) {
+			return result;
+		}
+
+		while (result) {
+			const pathPart = pathParts[pathPartIndex];
+
+			if (result?.[pathPart]) {
+				result = result[pathPart];
+			} else {
+				console.warn(`Missing data for property "${firstPart}.${pathParts.slice(0, pathPartIndex + 1).join('.')}"`);
+				result = undefined;
+			}
+
+			pathPartIndex += 1;
+		}
+
+		return result;
 	}
 
 	#formatValue(value?: unknown) {
@@ -76,13 +97,20 @@ export class TemplateRenderer {
 
 	async #getComponentText(assets: Env['Assets'], elementTag: string) {
 		if (!this.#componentPaths[elementTag]) {
-			return;
+			throw new Error(`Missing template for component "${elementTag}"`);
 		}
 
 		if (!this.#componentCache[elementTag]) {
 			if (typeof this.#componentPaths[elementTag] === 'string') {
 				const templatePath = this.#componentPaths[elementTag];
 				const response = await assets.fetch(`https://assets.local/${this.#TEMPLATES_FOLDER}/${templatePath}`);
+
+				if (!response.ok) {
+					this.#componentCache[elementTag] = '';
+
+					throw new Error(`Failed to fetch component "${elementTag}" template at: ${templatePath}`);
+				}
+
 				const text = await response.text();
 
 				this.#componentCache[elementTag] = text;
@@ -94,53 +122,103 @@ export class TemplateRenderer {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent(assets: Env['Assets'], element: HTMLElement) {
-		let componentTextOrFunction = await this.#getComponentText(assets, element.tagName.toLowerCase());
-
-		if (!componentTextOrFunction) {
+	async #processComponent(assets: Env['Assets'], element?: HTMLElement) {
+		if (!element) {
 			return;
 		}
 
-		if (typeof componentTextOrFunction === 'function') {
-			componentTextOrFunction = await componentTextOrFunction(element.attributes);
-		}
+		for (const childElement of element.children) {
+			try {
+				if (childElement?.tagName?.toLowerCase().includes('-')) {
+					let componentTextOrFunction = await this.#getComponentText(assets, childElement.tagName.toLowerCase());
 
-		if (element.hasAttribute(this.#SKIP_SHADOWDOM_ATTRIBUTE)) {
-			element.insertAdjacentHTML('afterbegin', componentTextOrFunction);
-			element.removeAttribute(this.#SKIP_SHADOWDOM_ATTRIBUTE);
-		} else {
-			element.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentTextOrFunction}</template>`);
-		}
+					if (!componentTextOrFunction) {
+						console.warn(`Template for component "${childElement.tagName.toLowerCase()}" is empty`);
+						return;
+					}
 
-		if (!element.hasAttribute(this.#SKIP_PROCESSING_ATTRIBUTE)) {
-			await this.#processTree(assets, element, element.attributes);
-		} else {
-			element.removeAttribute(this.#SKIP_PROCESSING_ATTRIBUTE);
+					if (typeof componentTextOrFunction === 'function') {
+						componentTextOrFunction = await componentTextOrFunction(childElement.attributes);
+					}
+
+					if (childElement.hasAttribute(this.#SKIP_SHADOWDOM_ATTRIBUTE)) {
+						childElement.insertAdjacentHTML('afterbegin', componentTextOrFunction);
+						childElement.removeAttribute(this.#SKIP_SHADOWDOM_ATTRIBUTE);
+					} else {
+						childElement.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentTextOrFunction}</template>`);
+					}
+
+					if (!childElement.hasAttribute(this.#SKIP_PROCESSING_ATTRIBUTE)) {
+						await this.#processElement(assets, childElement, childElement.attributes);
+					} else {
+						childElement.removeAttribute(this.#SKIP_PROCESSING_ATTRIBUTE);
+					}
+				}
+			} catch (err) {
+				console.error(err);
+			}
 		}
 	}
 
-	async #processTree<T>(assets: Env['Assets'], element: HTMLElement, data?: T) {
+	async #processIfAttribute<T>(element?: HTMLElement, data?: T) {
+		if (!element) {
+			return Promise.resolve();
+		}
+
 		if (element.hasAttribute(this.#IF_ATTRIBUTE)) {
 			const value = this.#getValue(element.getAttribute(this.#IF_ATTRIBUTE) ?? '', data);
 
 			element.removeAttribute(this.#IF_ATTRIBUTE);
 
-			if (!value) {
+			const falsyValues = ['', false, null, undefined] as const;
+			if (falsyValues.includes(value) || Number.isNaN(value)) {
 				element.remove();
-				return;
 			}
 		}
+	}
 
-		if (element?.tagName?.toLowerCase() === 'link' && element.getAttribute('rel') === 'import') {
+	async #processImport<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+		if (!element) {
+			return;
+		}
+
+		if (element.tagName?.toLowerCase() === 'link' && element.getAttribute('rel') === 'import') {
 			const filePath = element.getAttribute('href');
-			const importData = this.#getValue(element.getAttribute('data') ?? '', data);
 
-			if (filePath) {
+			if (!filePath) {
+				console.warn('Missing import file!');
+			} else {
+				let importData;
+
+				if (element.hasAttribute('data')) {
+					importData = this.#getValue(element.getAttribute('data') ?? '', data);
+				}
+
 				const importedTemplate = await this.renderTemplate(assets, filePath, importData);
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();
 			}
+		}
+	}
+
+	async #processChildElements<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+		if (!element) {
+			return;
+		}
+
+		for (const childElement of element.children) {
+			try {
+				await this.#processElement(assets, childElement, data);
+			} catch (err) {
+				console.error(err);
+			}
+		}
+	}
+
+	async #processLoop<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+		if (!element) {
+			return;
 		}
 
 		if (element.hasAttribute(this.#LOOP_ATTRIBUTE)) {
@@ -150,33 +228,52 @@ export class TemplateRenderer {
 
 			element.removeAttribute(this.#LOOP_ATTRIBUTE);
 
-			const results = await Promise.all(list.map(async (itemValue: unknown) => {
-				const clonedElement = element.clone() as HTMLElement;
+			if (!list) {
+				throw new Error(`Missing list "${(listPath ?? '').trim()}" for loop on element "${element.tagName?.toLowerCase()}"`);
+			} else if (!itemName) {
+				throw new Error(`Missing list item name for loop on element "${element.tagName.toLowerCase()}"`);
+			} else {
+				for (const itemValue of list) {
+					try {
+						const clonedElement = element.clone() as HTMLElement;
 
-				await this.#processTree(assets, clonedElement, {
-					...(data ?? {}),
-					[itemName?.trim() ?? '']: itemValue
-				});
+						await this.#processElement(assets, clonedElement, {
+							...(data ?? {}),
+							[itemName?.trim() ?? '']: itemValue
+						});
 
-				return clonedElement;
-			}));
+						element.after(clonedElement);
+					} catch (err) {
+						console.error(err);
+					}
+				}
+			}
 
-			element.after(...results);
 			element.remove();
-		} else {
-			await Promise.all(element.children.map(async (childElement) => {
-				await this.#processTree(assets, childElement, data);
-			}));
+		}
+	}
+
+	async #processAttributes<T>(element?: HTMLElement, data?: T) {
+		if (!element) {
+			return Promise.resolve();
 		}
 
-		Object.entries(element.attributes).forEach(([attr, value]) => {
-			const resolvedValue = value.replaceAll(
-				new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
-				(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
-			);
+		Object.entries(element.attributes)
+			.filter(([, value]) => new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu').test(value))
+			.forEach(([attr, value]) => {
+				const resolvedValue = value.replaceAll(
+					new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
+					(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
+				);
 
-			element.setAttribute(attr, resolvedValue);
-		});
+				element.setAttribute(attr, resolvedValue);
+			});
+	}
+
+	async #processTextNodes<T>(element?: HTMLElement, data?: T) {
+		if (!element) {
+			return Promise.resolve();
+		}
 
 		element.childNodes.forEach((node) => {
 			if (node.nodeType !== NodeType.TEXT_NODE) {
@@ -199,18 +296,35 @@ export class TemplateRenderer {
 					(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
 				);
 		});
+	}
 
-		if (element.tagName.toLowerCase().includes('-')) {
-			await this.#processComponent(assets, element);
-		}
+	async #processElement<T>(assets: Env['Assets'], element: HTMLElement, data?: T) {
+		await this.#processIfAttribute(element, data);
+		await this.#processImport(assets, element, data);
+		await this.#processLoop(assets, element, data);
+		await this.#processChildElements(assets, element, data);
+		await this.#processAttributes(element, data);
+		await this.#processTextNodes(element, data);
+		await this.#processComponent(assets, element);
 	}
 
 	async renderTemplate<T>(assets: Env['Assets'], templatePath: string, data?: T) {
 		const response = await assets.fetch(`https://assets.local/${this.#TEMPLATES_FOLDER}/${templatePath}`);
 		const text = await response.text();
-		const parsedDocument = parse(text);
+		const parsedDocument = parse(text, {
+			comment: true,
+			parseNoneClosedTags: true,
+			fixNestedATags: true,
+			voidTag: { closingSlash: true },
+			blockTextElements: {
+				script: true,
+				noscript: true,
+				style: true,
+				pre: true
+			}
+		});
 
-		await this.#processTree(assets, parsedDocument, data);
+		await this.#processElement(assets, parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}
