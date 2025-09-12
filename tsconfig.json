@@ -47,6 +47,6 @@
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
 		"verbatimModuleSyntax": true,
-		"types": ["./env.d.ts", "@types/node"]
+		"types": ["./env.d.ts"]
 	}
 }
