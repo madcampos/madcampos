@@ -205,6 +205,11 @@ export class TemplateRenderer {
 
 		for (const childElement of element.children) {
 			try {
+				const elementsToSkip = ['script', 'style'];
+				if (elementsToSkip.includes(childElement?.tagName?.toLowerCase() ?? '')) {
+					continue;
+				}
+
 				await this.#processElement(assets, childElement, data);
 			} catch (err) {
 				console.error(err);
@@ -220,11 +225,17 @@ export class TemplateRenderer {
 		if (element.hasAttribute(this.#LOOP_ATTRIBUTE)) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const [itemName, listPath] = element.getAttribute(this.#LOOP_ATTRIBUTE)!.split(this.#LOOP_OPERATOR);
-			const list = this.#getValue(listPath?.trim() ?? '', data);
+			let list = this.#getValue(listPath?.trim() ?? '', data);
+
+			if (typeof list === 'string') {
+				list = [...list];
+			}
 
 			if (!list) {
+				element.remove();
 				throw new Error(`Missing list "${(listPath ?? '').trim()}" for loop on element "${element.tagName?.toLowerCase()}"`);
 			} else if (!itemName) {
+				element.remove();
 				throw new Error(`Missing list item name for loop on element "${element.tagName.toLowerCase()}"`);
 			} else {
 				for (const itemValue of list) {
@@ -238,7 +249,7 @@ export class TemplateRenderer {
 							[itemName?.trim() ?? '']: itemValue
 						});
 
-						element.after(clonedElement);
+						element.before(clonedElement);
 					} catch (err) {
 						console.error(err);
 					}

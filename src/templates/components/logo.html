@@ -1,19 +1,132 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
+<a href="{{url}}" class="u-url url" id="logo-container" aria-labelledby="logo-label">
+	<sr-only id="logo-label">
+		<span>Marco Campos' Logo</span>
+		<span @if="title">, to {{title}}</span>
+	</sr-only>
 
-import { html, svg, type TemplateResult } from 'lit';
-import { map } from 'lit/directives/map.js';
-import { range } from 'lit/directives/range.js';
+	<svg
+		color-interpolation-filters="sRGB"
+		preserveAspectRatio="xMinYMin slice"
+		id="logo-graphics"
+		class="u-logo"
+		width="100%"
+		height="100%"
+		role="none"
+		shape-rendering="geometricPrecision"
+	>
+		<!-- Effects -->
+		<defs>
+			<linearGradient id="sunset" x1="0" x2="0" y1="0" y2="100%">
+				<stop offset="5%" stop-color="royalblue" />
+				<stop offset="45%" stop-color="lightskyblue" />
+				<stop offset="50%" stop-color="white" />
+				<stop offset="50%" stop-color="purple" />
+				<stop offset="80%" stop-color="hotpink" />
+				<stop offset="95%" stop-color="white" />
+			</linearGradient>
 
-interface ThemeDefs {
-	shapes?: TemplateResult<2>;
-	micro: TemplateResult<2>;
-	mini: TemplateResult<2>;
-	full: TemplateResult<2>;
-}
+			<linearGradient id="rainbow" x1="0" x2="100%" y1="0" y2="100%">
+				<stop offset="0%" stop-color="firebrick" />
+				<stop offset="15%" stop-color="orangered" />
+				<stop offset="30%" stop-color="yellow" />
+				<stop offset="45%" stop-color="seagreen" />
+				<stop offset="60%" stop-color="dodgerblue" />
+				<stop offset="75%" stop-color="magenta" />
+				<stop offset="100%" stop-color="pink" />
+			</linearGradient>
+		</defs>
 
-const themeDefs: Record<string, ThemeDefs> = {
-	system: {
-		shapes: svg`
+		<!-- Text -->
+		<defs>
+			<text
+				id="logo-text-micro"
+				x="95%"
+				y="85%"
+				alignment-baseline="middle"
+				dominant-baseline="middle"
+				text-anchor="end"
+				fill-rule="nonzero"
+				text-rendering="optimizeLegibility"
+			>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+
+				<tspan @for="char in short-subtitle" class="logo-text-content">{{char}}</tspan>
+
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+			</text>
+			<text
+				id="logo-text-mini"
+				x="95%"
+				y="85%"
+				alignment-baseline="middle"
+				dominant-baseline="middle"
+				text-anchor="end"
+				fill-rule="nonzero"
+				text-rendering="optimizeLegibility"
+			>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+
+				<tspan @for="char in short-subtitle" class="logo-text-content">{{char}}</tspan>
+
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+			</text>
+			<text
+				id="logo-text-full"
+				x="95%"
+				y="85%"
+				alignment-baseline="middle"
+				dominant-baseline="middle"
+				text-anchor="end"
+				fill-rule="nonzero"
+				text-rendering="optimizeLegibility"
+			>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+				<tspan class="logo-text-padding-start">-</tspan>
+
+				<tspan @for="char in subtitle" class="logo-text-content">{{char}}</tspan>
+
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+				<tspan class="logo-text-padding-end">-</tspan>
+			</text>
+		</defs>
+
+		<!-- Logo shapes -->
+		<defs>
+			<!-- #region System Definition -->
 			<path
 				id="logo-bracket"
 				d="M288.669,513.368c-0,-27.363 -7.934,-48.486 -23.336,-63.368c15.402,-13.922 23.336,-35.045 23.336,-62.888l-0,-101.773c-0,-15.842 3.267,-26.884 9.801,-34.085c6.534,-6.721 17.268,-10.081 32.669,-10.081c0,0 9.565,0 17.87,0c3.183,0 6.235,-1.264 8.485,-3.515c2.251,-2.25 3.515,-5.302 3.515,-8.485l0,-14.405c0,-3.182 -1.264,-6.235 -3.515,-8.485c-2.25,-2.251 -5.302,-3.515 -8.485,-3.515l-17.87,0c-25.669,0 -45.737,7.201 -59.272,21.123c-13.535,14.402 -20.535,35.044 -20.535,61.448l-0,101.773c-0,15.362 -3.267,26.403 -9.801,33.124c-7.001,7.201 -13.068,10.562 -28.47,10.562l-1.067,-0c-3.183,-0 -6.235,1.264 -8.486,3.514c-2.25,2.251 -3.515,5.303 -3.515,8.486l0,14.404c0,3.183 1.265,6.235 3.515,8.486c2.251,2.25 5.303,3.514 8.486,3.514c0.664,0 1.067,0 1.067,0c15.402,0 21.469,3.361 28.47,10.082c6.534,7.201 9.801,18.242 9.801,34.084l-0,101.293c-0,26.404 7,47.046 20.535,61.448c13.535,13.922 33.603,21.123 59.272,21.123l17.87,-0c3.183,-0 6.235,-1.264 8.485,-3.515c2.251,-2.25 3.515,-5.303 3.515,-8.485l0,-14.405c0,-3.183 -1.264,-6.235 -3.515,-8.485c-2.25,-2.251 -5.302,-3.515 -8.485,-3.515c-8.305,-0 -17.87,-0 -17.87,-0c-15.401,-0 -26.135,-3.36 -32.669,-10.081c-6.534,-7.201 -9.801,-18.243 -9.801,-34.085l-0,-101.293Z"
@@ -48,54 +161,9 @@ const themeDefs: Record<string, ThemeDefs> = {
 				id="logo-s"
 				d="M3086.25,400.19c3.4,0 6.639,-1.441 8.915,-3.966c2.275,-2.526 3.373,-5.897 3.021,-9.278c-2.026,-20.128 -8.747,-36.213 -19.927,-47.713c-13.533,-13.919 -33.599,-20.639 -59.264,-20.639l-57.864,0c-23.799,0 -42.931,6.24 -57.397,19.199c-14.466,12.96 -21.466,31.199 -21.466,54.238c0,23.039 7,40.798 20.999,52.797c13.533,12 33.132,18.239 58.797,18.239l58.797,0c14,0 24.733,3.36 32.199,10.56c7,7.199 10.733,17.279 10.733,29.758c-0,24.479 -14.466,36.479 -42.932,36.479l-58.797,-0c-15.399,-0 -26.132,-3.36 -32.665,-10.56c-4.973,-5.115 -8.053,-12.734 -9.241,-23.067c-0.741,-6.006 -5.843,-10.517 -11.895,-10.517c-4.249,-0.014 -9.102,-0.014 -13.454,-0.014c-3.399,-0 -6.639,1.441 -8.915,3.966c-2.275,2.526 -3.373,5.897 -3.021,9.278c2.027,20.128 8.748,36.213 19.928,47.713c13.532,13.919 33.598,21.119 59.263,21.119l58.797,-0c24.733,-0 44.332,-6.72 58.798,-19.679c14.466,-12.96 21.465,-31.679 21.465,-55.198c0,-24.478 -6.999,-43.678 -21.465,-57.597c-14.466,-13.439 -34.065,-20.159 -58.798,-20.159l-58.797,0c-28.465,0 -42.464,-11.039 -42.464,-33.118c-0,-23.519 13.999,-35.519 41.531,-35.519l57.864,0c15.399,0 26.132,3.36 32.665,10.08c4.973,5.115 8.053,12.734 9.241,23.067c0.741,6.006 5.844,10.517 11.895,10.517c4.25,0.014 9.102,0.014 13.454,0.014Z"
 			/>
-		`,
-		mini: svg`
-			<svg viewBox="0 0 2000 900" data-theme="system" data-size="mini" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" />
-					<use href="#logo-a" />
-					<use href="#logo-d" />
-					<use href="#logo-c" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
+			<!-- #endregion -->
 
-				<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
-			</svg>
-		`,
-		micro: svg`
-			<svg viewBox="0 0 1100 900" data-theme="system" data-size="micro" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
-			</svg>
-		`,
-		full: svg`
-			<svg viewBox="0 0 3500 900" data-theme="system" data-size="full">
-				<g class="logo-part">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" x="20" />
-					<use href="#logo-a" />
-					<use href="#logo-d" />
-					<use href="#logo-c" />
-					<use href="#logo-a" x="830" />
-					<use href="#logo-m" x="1540" />
-					<use href="#logo-p" />
-					<use href="#logo-o" />
-					<use href="#logo-s" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-full" font-size="8rem" />
-			</svg>
-		`
-	},
-	uwu: {
-		shapes: svg`
+			<!-- #region UwU Definition -->
 			<path
 				id="logo-uwu-bracket"
 				d="M371.73 707.12c-2.7 12.79-24.87 57.59-33.68 87.18 0 0-8.04 10.83-18.87 2.8-11.07-7.2-39.8-27.07-43.21-29.39-2.87-2.62-10.47-6.12-9.13-18.85 0 0 26.25-75.27 33.5-91.3 0 0 11.25-12.64 18.84-9.14 7.6 3.5 36.24 33.3 41.38 37.46 7.73 6.25 13.18 10.96 11.17 21.24Zm-110.7-48.02c-1.92-5.97-9.33-46.92-13.76-53.6-4.74-7.22-21.04-2.33-21.04-2.33-14.43 9.48-133.6 93.73-133.6 93.73-8.63 9.76-3.9 16.98-2.63 20.5.73 3.82 14.08 36.52 19.07 49.22 4.7 12.18 17.4 7.18 17.4 7.18 23.9-19 123.43-81.7 132.9-91.22 8.7-8.39 4.5-15.9 1.66-23.48Zm-1.54-170.35c-17.69-1.39-97.2.09-97.2.09-12.53 2.78-12.68 11.32-14.16 14.97-1.49 3.65-9.82 37.9-13.06 50.99-3.79 13.39 9.3 16.64 9.3 16.64 30.46-2.24 80 3.18 93.67 1.17 10.92-1.88 12.75-9.95 15.42-17.78 2.19-6.16 20.84-43.37 21.3-51.37.15-8.54-15.27-14.71-15.27-14.71Z"
@@ -146,143 +214,9 @@ const themeDefs: Record<string, ThemeDefs> = {
 				<path d="m2526.7 166.42-1.8-6.8a161.69 161.69 0 0 0-4.97-15.98 5.1 5.1 0 0 1 3.95-6.97c5.2-.83 9.22-1.35 12.05-1.55 1.85-.08 2.92.42 3.2 1.5.18.67.13 1.62-.15 2.85-.5 2.1.27 7.07 2.34 14.91l2.02 7.65 17.85-4.71a837.24 837.24 0 0 0 29.64-8.81c1.08-.29 1.83.35 2.24 1.9.51 1.74.95 3.3 1.3 4.66.64 2.4 1.16 4.64 1.55 6.71.33 1.99-.12 3.09-1.32 3.3-15.19 3.51-25.2 5.9-30.07 7.19l-17.07 4.5 7.88 29.28 6.94 25.14c1.86 7.03.32 12.77-4.62 17.2-4.59 4.45-10.35 7.68-17.28 9.72-1.52.4-2.94-.31-4.28-2.13a36.63 36.63 0 0 0-7.02-6.81 3.24 3.24 0 0 1 .91-5.7c5.79-1.8 9.85-3.43 12.19-4.93 1.96-1.57 2.5-4 1.64-7.25l-13.21-50.07-22.8 6.02a312.9 312.9 0 0 0-24.81 7.61c-1.28.34-2.17-.46-2.68-2.4-1.4-4.31-2.47-7.72-3.23-10.24a3.3 3.3 0 0 1 2.55-4.16c7.68-1.5 15.68-3.34 23.97-5.53l23.09-6.1Zm-27.14 39.3a3.5 3.5 0 0 1 3.81-3.54 57.2 57.2 0 0 1 12.8 2.4c1.72.6 2.7 1.33 2.92 2.18.19.7-.15 1.63-1 2.77-1.01 1.37-1.78 3.32-2.33 5.84-2.19 11.03-5.41 20.54-9.66 28.53-.79 1.42-1.58 2.24-2.39 2.45a4.7 4.7 0 0 1-2.49-.25 61.91 61.91 0 0 0-8.79-2.35 3.55 3.55 0 0 1-2.65-5.13c4.14-8.2 7.06-16.18 8.76-23.93a34.6 34.6 0 0 0 1.02-8.97Zm71.63-9.87a3.5 3.5 0 0 1-.82-5.2 1484.92 1484.92 0 0 1 6.4-7.6 3.17 3.17 0 0 1 1.63-1.26c.76-.2 1.6.05 2.55.76 7.93 3.82 17.18 10.84 27.76 21.08a4.5 4.5 0 0 1 1.34 1.92c.2.75-.09 1.66-.87 2.73-1.58 2.59-4.18 5.87-7.77 9.85-.72.75-1.26 1.17-1.64 1.27-.52.14-1.13-.18-1.84-.95-8.49-9.11-17.4-16.64-26.74-22.6Zm.9-83.3c4.68-1.24 9-.56 12.96 2.03a15.47 15.47 0 0 1 6.8 9.42c1.23 4.62.52 8.93-2.12 12.9a15.62 15.62 0 0 1-9.43 6.74 15.5 15.5 0 0 1-12.96-2.04 15.37 15.37 0 0 1-6.78-9.34c-1.27-4.82-.59-9.19 2.06-13.12a15.96 15.96 0 0 1 9.47-6.6Zm1.83 6.94a8.54 8.54 0 0 0-5.71 4.46 8.87 8.87 0 0 0-.57 6.44 8.6 8.6 0 0 0 10.83 6.3 8.54 8.54 0 0 0 5.71-4.46c1-1.98 1.2-4.1.6-6.36a8.62 8.62 0 0 0-10.86-6.38Z" />
 				<path d="M2791.05 159.9a365.8 365.8 0 0 1 32.21 44.74c.59.94.8 1.71.66 2.33-.14.62-.64 1.26-1.5 1.91a80 80 0 0 1-12.1 7.7c-.75.44-1.4.58-1.98.45-.57-.13-1.17-.68-1.8-1.62a272.26 272.26 0 0 0-29.5-45.09c-18.98 12.38-38.34 21.43-58.07 27.15-1.94.36-3.14.48-3.62.36a3.26 3.26 0 0 1-2.2-1.86c-1.48-3.1-3.82-6.28-7.01-9.53a2.35 2.35 0 0 1 1.1-3.92c11.43-2.99 21.56-6.42 30.4-10.32a193.4 193.4 0 0 0 25.58-13.9 193.35 193.35 0 0 0 36-30.26l-37.69-8.63a304.3 304.3 0 0 0-23.32-4.46c-.98-.13-1.43-1.11-1.35-2.95 0-3.14.5-7.13 1.49-11.98a3.28 3.28 0 0 1 4.15-2.5c5.1 1.43 12.15 3.2 21.17 5.31l40.15 9.36c5.1 1.19 8.55 1.52 10.38 1 .61-.27 1.2-.33 1.77-.2.48.11 1.22.69 2.23 1.73 2.57 3.2 4.93 7.36 7.1 12.48.28.92.38 1.6.28 2.02-.24 1-1.1 1.82-2.61 2.48a28.8 28.8 0 0 0-6.86 5.24 259.9 259.9 0 0 1-25.06 22.96Z" />
 			</g>
-		`,
-		micro: svg`
-			<svg viewBox="0 0 1100 900" data-theme="uwu" data-size="micro" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-uwu-bracket" transform="translate(-30, -50)" />
-					<use href="#logo-uwu-m" transform="translate(50, 100)" />
-					<use href="#logo-uwu-bracket" transform="rotate(190) translate(30, 80)" transform-origin="center" />
-				</g>
+			<!-- #endregion -->
 
-				<use class="logo-extras" href="#logo-uwu-ma" transform="translate(-220, -210) scale(0.72) rotate(-7)" />
-
-				<use class="logo-text" href="#logo-text-micro" transform="rotate(-4.7)" font-size="8rem" />
-			</svg>
-		`,
-		mini: svg`
-			<svg viewBox="0 0 2000 900" data-theme="uwu" data-size="mini" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-uwu-bracket" />
-					<use href="#logo-uwu-m" />
-					<use href="#logo-uwu-a" />
-					<use href="#logo-uwu-d" />
-					<use href="#logo-uwu-c" />
-					<use href="#logo-uwu-bracket" transform="rotate(190) translate(90, 150)" transform-origin="center" />
-				</g>
-
-				<g class="logo-extras">
-					<use href="#logo-uwu-ma" />
-					<use href="#logo-uwu-dc" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-mini" transform="translate(0, 100) rotate(-4.7)" font-size="8rem" />
-			</svg>
-		`,
-		full: svg`
-			<svg viewBox="0 0 3500 900" data-theme="uwu" data-size="full" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-uwu-bracket" transform="translate(-20, -40) scale(1.12)" />
-					<use href="#logo-uwu-m" transform="translate(-20, -35) scale(1.12)" />
-					<use href="#logo-uwu-a" transform="translate(-20, -35) scale(1.12)" />
-					<use href="#logo-uwu-d" transform="translate(-60, -20) scale(1.12)" />
-					<use href="#logo-uwu-c" transform="translate(-50, -20) scale(1.12)" />
-					<use href="#logo-uwu-a" transform="scale(0.8) translate(1590, 220)" />
-					<use href="#logo-uwu-m" transform="scale(0.8) translate(2220, 170)" />
-					<use href="#logo-uwu-p" />
-					<use href="#logo-uwu-o" />
-					<use href="#logo-uwu-s" />
-					<use href="#logo-uwu-bracket" transform="rotate(190) translate(250, 230) scale(1.12)" transform-origin="center" />
-				</g>
-
-				<g class="logo-extras">
-					<use href="#logo-uwu-ma" transform="translate(-20, -30) scale(1.12)" />
-					<use href="#logo-uwu-dc" transform="translate(-120, -20) scale(1.12)" />
-					<use href="#logo-uwu-am" />
-					<use href="#logo-uwu-pos" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-full" transform="translate(0, 200) rotate(-4.7)" font-size="8rem" />
-			</svg>
-		`
-	},
-	y2k: {
-		micro: svg`
-			<svg viewBox="0 0 1100 900" data-theme="y2k" data-size="micro" visibility="hidden">
-				<g class="logo-extras">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<g class="logo-part">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
-			</svg>
-		`,
-		mini: svg`
-			<svg viewBox="0 0 2000 900" data-theme="y2k" data-size="mini" visibility="hidden">
-				<g class="logo-extras">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" />
-					<use href="#logo-a" />
-					<use href="#logo-d" />
-					<use href="#logo-c" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<g class="logo-part">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" />
-					<use href="#logo-a" />
-					<use href="#logo-d" />
-					<use href="#logo-c" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
-			</svg>
-		`,
-		full: svg`
-			<svg viewBox="0 0 3500 900" data-theme="y2k" data-size="full" visibility="hidden">
-				<g class="logo-extras">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" x="20" />
-					<use href="#logo-a" />
-					<use href="#logo-d" />
-					<use href="#logo-c" />
-					<use href="#logo-a" x="830" />
-					<use href="#logo-m" x="1540" />
-					<use href="#logo-p" />
-					<use href="#logo-o" />
-					<use href="#logo-s" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<g class="logo-part">
-					<use href="#logo-bracket" />
-					<use href="#logo-m" x="20" />
-					<use href="#logo-a" />
-					<use href="#logo-d" />
-					<use href="#logo-c" />
-					<use href="#logo-a" x="830" />
-					<use href="#logo-m" x="1540" />
-					<use href="#logo-p" />
-					<use href="#logo-o" />
-					<use href="#logo-s" />
-					<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
-
-				<use class="logo-text" href="#logo-text-full" font-size="8rem" />
-			</svg>
-		`
-	},
-	hacker: {
-		shapes: svg`
+			<!-- #region Hacker Definition -->
 			<path
 				id="logo-hacker-bracket"
 				d="M271.885,157.602l-102.551,-0l-0,-4.395l102.551,0l-0,4.395Zm-0,489.6l-81.457,-0l-0,-4.395l81.457,0l-0,4.395Zm-114.557,-478.983c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.622,-0.626 -0.932,-1.378 -0.932,-2.256c-0,-0.893 0.31,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.65,0.31 2.27,0.93c0.62,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.309,1.632 -0.929,2.259c-0.62,0.627 -1.376,0.941 -2.27,0.941Zm126.563,-0c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.932,-1.378 -0.932,-2.256c0,-0.893 0.311,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.269,0.93c0.62,0.619 0.93,1.376 0.93,2.269c-0,0.879 -0.31,1.632 -0.93,2.259c-0.619,0.627 -1.376,0.941 -2.269,0.941Zm-149.977,45.897l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm107.789,-5.097c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.622,-0.626 -0.932,-1.378 -0.932,-2.256c-0,-0.893 0.31,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.65,0.31 2.27,0.93c0.62,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.309,1.632 -0.929,2.259c-0.62,0.627 -1.376,0.941 -2.27,0.941Zm18.967,-14.063l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Zm-126.756,59.96l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm105.469,0l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm-105.469,40.8l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm105.469,0l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm-133.383,38.691l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm114.609,-2.988c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.621,-0.626 -0.932,-1.378 -0.932,-2.256c0,-0.893 0.311,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.651,0.31 2.27,0.93c0.62,0.619 0.93,1.376 0.93,2.269c-0,0.879 -0.31,1.632 -0.93,2.259c-0.619,0.627 -1.376,0.941 -2.27,0.941Zm18.967,-14.063l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Zm-154.67,57.851l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm105.469,0l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm-92.021,40.8l-13.624,-31.641l4.834,0l13.624,31.641l-4.834,0Zm105.468,0l-13.623,-31.641l4.834,0l13.623,31.641l-4.834,0Zm-84.375,40.8l-13.623,-31.641l4.834,0l13.623,31.641l-4.834,0Zm99.967,-25.277l-3.639,-6.68l5.045,0l3.287,6.68l-4.693,-0Zm22.289,22.289c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.622,-0.626 -0.932,-1.378 -0.932,-2.256c-0,-0.893 0.31,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.65,0.31 2.27,0.93c0.62,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.309,1.632 -0.929,2.259c-0.62,0.627 -1.376,0.941 -2.27,0.941Zm-107.789,45.897l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm105.469,0l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm-105.469,40.8l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm105.469,0l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm-105.469,40.8l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm105.469,0l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm-105.276,21.64l-0.65,-11.25l5.555,0l-0.651,11.25l-4.254,0Zm105.469,0l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Zm23.221,14.063c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.931,-1.378 -0.931,-2.256c-0,-0.893 0.31,-1.65 0.931,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.27,0.93c0.619,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.31,1.632 -0.929,2.259c-0.62,0.627 -1.377,0.941 -2.27,0.941Zm-106.664,18.511l-3.639,-6.68l5.045,0l3.287,6.68l-4.693,-0Zm20.162,8.226l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Zm105.469,0l-0.651,-11.25l5.555,0l-0.65,11.25l-4.254,0Z"
@@ -315,174 +249,216 @@ const themeDefs: Record<string, ThemeDefs> = {
 				id="logo-hacker-s"
 				d="M3101.66,416.904l0,-4.237l17.578,0l0,4.237l-17.578,-0Zm-33.398,36.915c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.932,-1.378 -0.932,-2.256c0,-0.893 0.311,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.269,0.93c0.62,0.619 0.93,1.376 0.93,2.269c-0,0.879 -0.31,1.632 -0.93,2.259c-0.619,0.627 -1.376,0.941 -2.269,0.941Zm18.966,-14.063l-0.65,-11.25l5.555,0l-0.651,11.25l-4.254,0Zm41.995,19.16l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm-82.055,35.703c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.931,-1.378 -0.931,-2.256c-0,-0.893 0.31,-1.65 0.931,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.27,0.93c0.619,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.31,1.632 -0.929,2.259c-0.62,0.627 -1.377,0.941 -2.27,0.941Zm82.055,5.097l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm35.367,-2.109l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm-159.61,37.812c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.621,-0.626 -0.932,-1.378 -0.932,-2.256c0,-0.893 0.311,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.651,0.31 2.27,0.93c0.62,0.619 0.93,1.376 0.93,2.269c-0,0.879 -0.31,1.632 -0.93,2.259c-0.619,0.627 -1.376,0.941 -2.27,0.941Zm18.967,-14.063l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Zm23.221,14.063c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.931,-1.378 -0.931,-2.256c-0,-0.893 0.31,-1.65 0.931,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.27,0.93c0.619,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.31,1.632 -0.929,2.259c-0.62,0.627 -1.377,0.941 -2.27,0.941Zm18.967,-14.063l-0.651,-11.25l5.555,0l-0.65,11.25l-4.254,0Zm20.9,19.16l0,-35.859l4.641,0l-0,35.859l-4.641,0Zm42.188,0l-0,-35.859l4.64,0l0,35.859l-4.64,0Zm17.789,-2.109l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm15.504,0l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm-199.723,37.812c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.931,-1.378 -0.931,-2.256c-0,-0.893 0.31,-1.65 0.931,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.27,0.93c0.619,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.31,1.632 -0.929,2.259c-0.62,0.627 -1.377,0.941 -2.27,0.941Zm18.967,-14.063l-0.651,-11.25l5.555,0l-0.65,11.25l-4.254,0Zm23.22,14.063c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.621,-0.626 -0.932,-1.378 -0.932,-2.256c0,-0.893 0.311,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.651,0.31 2.27,0.93c0.62,0.619 0.93,1.376 0.93,2.269c-0,0.879 -0.31,1.632 -0.93,2.259c-0.619,0.627 -1.376,0.941 -2.27,0.941Zm18.967,-14.063l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Zm30.604,3.446l-0,-4.395l19.336,0l-0,4.395l-19.336,-0Zm-8.438,0.984c-0.89,-0 -1.646,-0.313 -2.267,-0.939c-0.621,-0.627 -0.932,-1.379 -0.932,-2.257c-0,-0.893 0.311,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.65,0.31 2.27,0.93c0.62,0.62 0.929,1.376 0.929,2.269c0,0.88 -0.309,1.633 -0.929,2.26c-0.62,0.626 -1.376,0.94 -2.27,0.94Zm41.115,-4.43l-0.65,-11.25l5.555,0l-0.651,11.25l-4.254,0Zm56.268,17.051l13.623,-31.641l4.834,0l-13.623,31.641l-4.834,0Zm-180.703,37.812c-0.891,-0 -1.647,-0.313 -2.268,-0.94c-0.621,-0.626 -0.931,-1.378 -0.931,-2.256c-0,-0.893 0.31,-1.65 0.931,-2.271c0.621,-0.621 1.377,-0.932 2.268,-0.932c0.893,0 1.65,0.31 2.27,0.93c0.619,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.31,1.632 -0.929,2.259c-0.62,0.627 -1.377,0.941 -2.27,0.941Zm18.967,-14.063l-0.651,-11.25l5.555,0l-0.65,11.25l-4.254,0Zm90.808,17.051l-13.623,-31.641l4.834,0l13.623,31.641l-4.834,0Zm7.998,0.897l0,-4.237l17.578,0l0,4.237l-17.578,-0Zm29.883,-3.885c-0.89,-0 -1.646,-0.313 -2.267,-0.94c-0.622,-0.626 -0.932,-1.378 -0.932,-2.256c-0,-0.893 0.31,-1.65 0.932,-2.271c0.621,-0.621 1.377,-0.932 2.267,-0.932c0.894,0 1.65,0.31 2.27,0.93c0.62,0.619 0.929,1.376 0.929,2.269c0,0.879 -0.309,1.632 -0.929,2.259c-0.62,0.627 -1.376,0.941 -2.27,0.941Zm18.967,-14.063l-0.65,-11.25l5.554,0l-0.65,11.25l-4.254,0Z"
 			/>
-		`,
-		micro: svg`
-			<svg viewBox="0 0 1100 900" data-theme="hacker" data-size="micro" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-hacker-bracket" />
-					<use href="#logo-hacker-m" x="70" />
-					<use href="#logo-hacker-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
+			<!-- #endregion -->
+		</defs>
 
-				<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
-			</svg>
-		`,
-		mini: svg`
-			<svg viewBox="0 0 2000 900" data-theme="hacker" data-size="mini" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-hacker-bracket" />
-					<use href="#logo-hacker-m" x="50" />
-					<use href="#logo-hacker-a" x="50" />
-					<use href="#logo-hacker-d" x="50" />
-					<use href="#logo-hacker-c" x="50" />
-					<use href="#logo-hacker-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
+		<!-- Logos -->
 
-				<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
-			</svg>
-		`,
-		full: svg`
-			<svg viewBox="0 0 3500 900" data-theme="hacker" data-size="full" visibility="hidden">
-				<g class="logo-part">
-					<use href="#logo-hacker-bracket" />
-					<use href="#logo-hacker-m" />
-					<use href="#logo-hacker-a" />
-					<use href="#logo-hacker-d" />
-					<use href="#logo-hacker-c" />
-					<use href="#logo-hacker-a" x="949" />
-					<use href="#logo-hacker-m" x="1560" />
-					<use href="#logo-hacker-p" />
-					<use href="#logo-hacker-o" />
-					<use href="#logo-hacker-s" />
-					<use href="#logo-hacker-bracket" transform="scale(-1, 1)" transform-origin="center" />
-				</g>
+		<!-- #region System Logo -->
+		<svg viewBox="0 0 1100 900" data-theme="system" data-size="micro" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
 
-				<use class="logo-text" href="#logo-text-full" font-size="8rem" />
-			</svg>
-		`
-	}
-};
+			<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 2000 900" data-theme="system" data-size="mini" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" />
+				<use href="#logo-a" />
+				<use href="#logo-d" />
+				<use href="#logo-c" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
 
-const themeShapes = Object.values(themeDefs).map(({ shapes }) => shapes).filter((shapes) => shapes !== undefined);
-const themeLogos = Object.values(themeDefs).map(({ micro, mini, full }) =>
-	svg`
-	${micro}
-	${mini}
-	${full}
-`
-);
+			<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 3500 900" data-theme="system" data-size="full">
+			<g class="logo-part">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" x="20" />
+				<use href="#logo-a" />
+				<use href="#logo-d" />
+				<use href="#logo-c" />
+				<use href="#logo-a" x="830" />
+				<use href="#logo-m" x="1540" />
+				<use href="#logo-p" />
+				<use href="#logo-o" />
+				<use href="#logo-s" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
 
-function generateSubtitle(paddingStart: number, paddingEnd: number, subtitle: string) {
-	return svg`
-		${map(range(paddingStart), () => svg`<tspan class="logo-text-padding-start">-</tspan>`)}
-		${map([...subtitle], (char) => svg`<tspan class="logo-text-content">${char}</tspan>`)}
-		${map(range(paddingEnd), () => svg`<tspan class="logo-text-padding-end">-</tspan>`)}
-	`;
-}
+			<use class="logo-text" href="#logo-text-full" font-size="8rem" />
+		</svg>
+		<!-- #endregion -->
 
-interface Props {
-	url: string;
-	urlTitle: string;
-	subtitle: string;
-	shortSubtitle: string;
-}
+		<!-- #region UwU Logo -->
+		<svg viewBox="0 0 1100 900" data-theme="uwu" data-size="micro" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-uwu-bracket" transform="translate(-30, -50)" />
+				<use href="#logo-uwu-m" transform="translate(50, 100)" />
+				<use href="#logo-uwu-bracket" transform="rotate(190) translate(30, 80)" transform-origin="center" />
+			</g>
 
-export function logo({ url, urlTitle, subtitle, shortSubtitle }: Props) {
-	const text = [
-		svg`
-			<text
-				id="logo-text-micro"
-				x="95%"
-				y="85%"
-				alignment-baseline="middle"
-				dominant-baseline="middle"
-				text-anchor="end"
-				fill-rule="nonzero"
-				text-rendering="optimizeLegibility"
-			>
-				${generateSubtitle(7, 2, shortSubtitle)}
-			</text>
-		`,
-		svg`
-			<text
-				id="logo-text-mini"
-				x="95%"
-				y="85%"
-				alignment-baseline="middle"
-				dominant-baseline="middle"
-				text-anchor="end"
-				fill-rule="nonzero"
-				text-rendering="optimizeLegibility"
-			>
-				${generateSubtitle(8, 4, shortSubtitle)}
-			</text>
-		`,
-		svg`
-			<text
-				id="logo-text-full"
-				x="95%"
-				y="85%"
-				alignment-baseline="middle"
-				dominant-baseline="middle"
-				text-anchor="end"
-				fill-rule="nonzero"
-				text-rendering="optimizeLegibility"
-			>
-				${generateSubtitle(17, 4, subtitle)}
-			</text>
-		`
-	];
+			<use class="logo-extras" href="#logo-uwu-ma" transform="translate(-220, -210) scale(0.72) rotate(-7)" />
 
-	return html`
-		<m-logo>
-			<a
-				href="${url}"
-				class="u-url url"
-				id="logo-container"
-				aria-label="Marco Campos' Logo${url ? `, to ${urlTitle}` : ''}"
-			>
-				<svg
-					color-interpolation-filters="sRGB"
-					preserveAspectRatio="xMinYMin slice"
-					id="logo-graphics"
-					class="u-logo"
-					width="100%"
-					height="100%"
-					role="none"
-					shape-rendering="geometricPrecision"
-				>
-					<!-- Effects -->
-					<defs>
-						<linearGradient id="sunset" x1="0" x2="0" y1="0" y2="100%">
-							<stop offset="5%" stop-color="royalblue" />
-							<stop offset="45%" stop-color="lightskyblue" />
-							<stop offset="50%" stop-color="white" />
-							<stop offset="50%" stop-color="purple" />
-							<stop offset="80%" stop-color="hotpink" />
-							<stop offset="95%" stop-color="white" />
-						</linearGradient>
+			<use class="logo-text" href="#logo-text-micro" transform="rotate(-4.7)" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 2000 900" data-theme="uwu" data-size="mini" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-uwu-bracket" />
+				<use href="#logo-uwu-m" />
+				<use href="#logo-uwu-a" />
+				<use href="#logo-uwu-d" />
+				<use href="#logo-uwu-c" />
+				<use href="#logo-uwu-bracket" transform="rotate(190) translate(90, 150)" transform-origin="center" />
+			</g>
 
-						<linearGradient id="rainbow" x1="0" x2="100%" y1="0" y2="100%">
-							<stop offset="0%" stop-color="firebrick" />
-							<stop offset="15%" stop-color="orangered" />
-							<stop offset="30%" stop-color="yellow" />
-							<stop offset="45%" stop-color="seagreen" />
-							<stop offset="60%" stop-color="dodgerblue" />
-							<stop offset="75%" stop-color="magenta" />
-							<stop offset="100%" stop-color="pink" />
-						</linearGradient>
-					</defs>
+			<g class="logo-extras">
+				<use href="#logo-uwu-ma" />
+				<use href="#logo-uwu-dc" />
+			</g>
 
-					<!-- Text -->
-					<defs>${text}</defs>
+			<use class="logo-text" href="#logo-text-mini" transform="translate(0, 100) rotate(-4.7)" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 3500 900" data-theme="uwu" data-size="full" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-uwu-bracket" transform="translate(-20, -40) scale(1.12)" />
+				<use href="#logo-uwu-m" transform="translate(-20, -35) scale(1.12)" />
+				<use href="#logo-uwu-a" transform="translate(-20, -35) scale(1.12)" />
+				<use href="#logo-uwu-d" transform="translate(-60, -20) scale(1.12)" />
+				<use href="#logo-uwu-c" transform="translate(-50, -20) scale(1.12)" />
+				<use href="#logo-uwu-a" transform="scale(0.8) translate(1590, 220)" />
+				<use href="#logo-uwu-m" transform="scale(0.8) translate(2220, 170)" />
+				<use href="#logo-uwu-p" />
+				<use href="#logo-uwu-o" />
+				<use href="#logo-uwu-s" />
+				<use href="#logo-uwu-bracket" transform="rotate(190) translate(250, 230) scale(1.12)" transform-origin="center" />
+			</g>
 
-					<!-- Logo shapes -->
-					<defs>${themeShapes}</defs>
+			<g class="logo-extras">
+				<use href="#logo-uwu-ma" transform="translate(-20, -30) scale(1.12)" />
+				<use href="#logo-uwu-dc" transform="translate(-120, -20) scale(1.12)" />
+				<use href="#logo-uwu-am" />
+				<use href="#logo-uwu-pos" />
+			</g>
 
-					<!-- Logos -->
-					${themeLogos}
-				</svg>
-			</a>
-		</m-logo>
-	`;
-}
+			<use class="logo-text" href="#logo-text-full" transform="translate(0, 200) rotate(-4.7)" font-size="8rem" />
+		</svg>
+		<!-- #endregion -->
+
+		<!-- #region y2k Logo -->
+		<svg viewBox="0 0 1100 900" data-theme="y2k" data-size="micro" visibility="hidden">
+			<g class="logo-extras">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<g class="logo-part">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 2000 900" data-theme="y2k" data-size="mini" visibility="hidden">
+			<g class="logo-extras">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" />
+				<use href="#logo-a" />
+				<use href="#logo-d" />
+				<use href="#logo-c" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<g class="logo-part">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" />
+				<use href="#logo-a" />
+				<use href="#logo-d" />
+				<use href="#logo-c" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 3500 900" data-theme="y2k" data-size="full" visibility="hidden">
+			<g class="logo-extras">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" x="20" />
+				<use href="#logo-a" />
+				<use href="#logo-d" />
+				<use href="#logo-c" />
+				<use href="#logo-a" x="830" />
+				<use href="#logo-m" x="1540" />
+				<use href="#logo-p" />
+				<use href="#logo-o" />
+				<use href="#logo-s" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<g class="logo-part">
+				<use href="#logo-bracket" />
+				<use href="#logo-m" x="20" />
+				<use href="#logo-a" />
+				<use href="#logo-d" />
+				<use href="#logo-c" />
+				<use href="#logo-a" x="830" />
+				<use href="#logo-m" x="1540" />
+				<use href="#logo-p" />
+				<use href="#logo-o" />
+				<use href="#logo-s" />
+				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<use class="logo-text" href="#logo-text-full" font-size="8rem" />
+		</svg>
+		<!-- #endregion -->
+
+		<!-- #region Hacker Logo -->
+		<svg viewBox="0 0 1100 900" data-theme="hacker" data-size="micro" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-hacker-bracket" />
+				<use href="#logo-hacker-m" x="70" />
+				<use href="#logo-hacker-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 2000 900" data-theme="hacker" data-size="mini" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-hacker-bracket" />
+				<use href="#logo-hacker-m" x="50" />
+				<use href="#logo-hacker-a" x="50" />
+				<use href="#logo-hacker-d" x="50" />
+				<use href="#logo-hacker-c" x="50" />
+				<use href="#logo-hacker-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
+		</svg>
+		<svg viewBox="0 0 3500 900" data-theme="hacker" data-size="full" visibility="hidden">
+			<g class="logo-part">
+				<use href="#logo-hacker-bracket" />
+				<use href="#logo-hacker-m" />
+				<use href="#logo-hacker-a" />
+				<use href="#logo-hacker-d" />
+				<use href="#logo-hacker-c" />
+				<use href="#logo-hacker-a" x="949" />
+				<use href="#logo-hacker-m" x="1560" />
+				<use href="#logo-hacker-p" />
+				<use href="#logo-hacker-o" />
+				<use href="#logo-hacker-s" />
+				<use href="#logo-hacker-bracket" transform="scale(-1, 1)" transform-origin="center" />
+			</g>
+
+			<use class="logo-text" href="#logo-text-full" font-size="8rem" />
+		</svg>
+		<!-- #endregion -->
+	</svg>
+</a>

@@ -111,7 +111,7 @@
 		"styleIndent": true,
 		"closingBracketSameLine": false,
 		"closingTagLineBreakForEmpty": "fit",
-		"maxAttrsPerLine": 5,
+		"maxAttrsPerLine": null,
 		"preferAttrsSingleLine": false,
 		"singleAttrSameLine": true,
 		"html.normal.selfClosing": false,

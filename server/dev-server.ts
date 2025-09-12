@@ -1,6 +1,6 @@
 import { StaticSiteHandler } from '../lib/StaticSiteHandler.ts';
 import { TemplateRenderer } from '../lib/TemplateRenderer.ts';
-import { icon } from '../src/templates/components/Icon/Icon.ts';
+import { icon } from '../src/templates/components/Icon.ts';
 import server from './index.ts';
 
 const BASE_URL = 'https://madcampos.dev/';
@@ -24,7 +24,9 @@ const templateRenderer = new TemplateRenderer({
 		'css-naked-day': 'components/css-naked-day.html',
 		'iab-escape': 'components/iab-escape.html',
 		'svg-effects': 'components/svg-effects.html',
-		'm-icon': icon
+		'm-icon': icon,
+		'm-logo': 'components/logo.html',
+		'old-style-buttons': 'components/old-style-buttons.html'
 	}
 });
 

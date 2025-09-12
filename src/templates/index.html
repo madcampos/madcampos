@@ -9,7 +9,7 @@
 		<main>
 			<div class="h-card vcard">
 				<h1>
-					<!-- ${logo({ subtitle: '', shortSubtitle: '', url: '/', urlTitle: 'Home page' })} -->
+					<m-logo @no-shadowdom subtitle="" short-subtitle="" url="/" title="Home Page"></m-logo>
 				</h1>
 				<article id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
 					<aside>
@@ -38,7 +38,10 @@
 								<em class="p-nickname nickname" itemprop="alternateName">madcampos</em> on most social networks and my pronouns are he/him!
 								<br />
 								I'm a <span class="p-category category p-job-title" itemprop="jobTitle">Senior Web Developer</span> based in <span
-									class="p-adr adr" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"
+									class="p-adr adr"
+									itemprop="address"
+									itemscope
+									itemtype="https://schema.org/PostalAddress"
 								><span class="p-locality locality" itemprop="addressLocality">Toronto</span>, <span class="p-country-name country-name" itemprop="addressCountry"
 									>Canada</span></span>.
 							</p>
@@ -50,19 +53,19 @@
 						<nav>
 							<ul>
 								<li>
-									<a href="${BLOG.url}">
+									<a href="/blog/">
 										<m-icon icon="uil:file-edit"></m-icon>
 										My Blog
 									</a>
 								</li>
 								<li>
-									<a href="${PROJECTS.url}">
+									<a href="/projects/">
 										<m-icon icon="uil:flask"></m-icon>
 										Project Highlights
 									</a>
 								</li>
 								<li>
-									<a href="${TALKS.url}">
+									<a href="/talks/">
 										<m-icon icon="uil:presentation-check"></m-icon>
 										Talks I've given
 									</a>
@@ -98,7 +101,10 @@
 			</div>
 		</main>
 
-		<footer id="page-footer"></footer>
+		<footer id="page-footer">
+			<old-style-buttons @no-shadowdom></old-style-buttons>
+			<m-webrings @no-shadowdom></m-webrings>
+		</footer>
 
 		<iab-escape></iab-escape>
 		<svg-effects @no-shadowdom></svg-effects>
