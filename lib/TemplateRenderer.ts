@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-shadow
 import { type HTMLElement, NodeType, parse } from 'node-html-parser';
 
-type ComponentFunction = <T>(data: T) => Promise<string> | string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ComponentFunction = (data: any) => Promise<string> | string;
 export type ComponentReferenceList = Record<string, ComponentFunction | string>;
 
 interface InitParameters {
@@ -50,11 +51,7 @@ export class TemplateRenderer {
 			return undefined;
 		}
 
-		if (pathParts.length === 0) {
-			return result;
-		}
-
-		while (result) {
+		while (pathPartIndex < pathParts.length && result) {
 			const pathPart = pathParts[pathPartIndex];
 
 			if (result?.[pathPart]) {
@@ -97,7 +94,7 @@ export class TemplateRenderer {
 
 	async #getComponentText(assets: Env['Assets'], elementTag: string) {
 		if (!this.#componentPaths[elementTag]) {
-			throw new Error(`Missing template for component "${elementTag}"`);
+			return;
 		}
 
 		if (!this.#componentCache[elementTag]) {
@@ -133,7 +130,6 @@ export class TemplateRenderer {
 					let componentTextOrFunction = await this.#getComponentText(assets, childElement.tagName.toLowerCase());
 
 					if (!componentTextOrFunction) {
-						console.warn(`Template for component "${childElement.tagName.toLowerCase()}" is empty`);
 						return;
 					}
 
@@ -168,11 +164,11 @@ export class TemplateRenderer {
 		if (element.hasAttribute(this.#IF_ATTRIBUTE)) {
 			const value = this.#getValue(element.getAttribute(this.#IF_ATTRIBUTE) ?? '', data);
 
-			element.removeAttribute(this.#IF_ATTRIBUTE);
-
 			const falsyValues = ['', false, null, undefined] as const;
 			if (falsyValues.includes(value) || Number.isNaN(value)) {
 				element.remove();
+			} else {
+				element.removeAttribute(this.#IF_ATTRIBUTE);
 			}
 		}
 	}
@@ -226,8 +222,6 @@ export class TemplateRenderer {
 			const [itemName, listPath] = element.getAttribute(this.#LOOP_ATTRIBUTE)!.split(this.#LOOP_OPERATOR);
 			const list = this.#getValue(listPath?.trim() ?? '', data);
 
-			element.removeAttribute(this.#LOOP_ATTRIBUTE);
-
 			if (!list) {
 				throw new Error(`Missing list "${(listPath ?? '').trim()}" for loop on element "${element.tagName?.toLowerCase()}"`);
 			} else if (!itemName) {
@@ -236,6 +230,8 @@ export class TemplateRenderer {
 				for (const itemValue of list) {
 					try {
 						const clonedElement = element.clone() as HTMLElement;
+
+						clonedElement.removeAttribute(this.#LOOP_ATTRIBUTE);
 
 						await this.#processElement(assets, clonedElement, {
 							...(data ?? {}),
@@ -258,6 +254,10 @@ export class TemplateRenderer {
 			return Promise.resolve();
 		}
 
+		if (element.hasAttribute(this.#IF_ATTRIBUTE) || element.hasAttribute(this.#LOOP_ATTRIBUTE)) {
+			return Promise.resolve();
+		}
+
 		Object.entries(element.attributes)
 			.filter(([, value]) => new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu').test(value))
 			.forEach(([attr, value]) => {
@@ -272,6 +272,10 @@ export class TemplateRenderer {
 
 	async #processTextNodes<T>(element?: HTMLElement, data?: T) {
 		if (!element) {
+			return Promise.resolve();
+		}
+
+		if (element.hasAttribute(this.#IF_ATTRIBUTE) || element.hasAttribute(this.#LOOP_ATTRIBUTE)) {
 			return Promise.resolve();
 		}
 

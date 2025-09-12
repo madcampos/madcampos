@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 /// <reference types="urlpattern-polyfill" />
 
 if (!('URLPattern' in globalThis)) {
@@ -49,6 +48,7 @@ interface StaticSiteHandlerOptions {
 }
 
 export class StaticSiteHandler {
+	#TEMPLATES_FOLDER = 'templates';
 	#PATH_WITH_EXT_REGEX = /\/([^/.]+?)\.[a-z0-9]+?$/iu;
 	#TRAILING_SLASHES_REGEX = /\/$/iu;
 	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
@@ -69,6 +69,8 @@ export class StaticSiteHandler {
 
 		this.#baseUrl = baseUrl;
 		this.#fetchHandler = fetchHandler;
+
+		this.#routes.push([new URLPattern(`./${this.#TEMPLATES_FOLDER}`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
 
 		Object.entries(routes).forEach(([path, route]) => {
 			let resolvedPath = path;
@@ -96,7 +98,6 @@ export class StaticSiteHandler {
 
 			this.#routes.push([new URLPattern(resolvedPath, this.#baseUrl), route]);
 		});
-
 		this.#routes.push([new URLPattern('*', this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
 	}
 
