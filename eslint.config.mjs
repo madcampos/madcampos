@@ -51,7 +51,7 @@ const rules = {
 	'no-alert': 'error',
 	'no-array-constructor': 'off',
 	'no-async-promise-executor': 'error',
-	'no-await-in-loop': 'error',
+	'no-await-in-loop': 'off',
 	'no-bitwise': 'error',
 	'no-caller': 'error',
 	'no-case-declarations': 'error',
