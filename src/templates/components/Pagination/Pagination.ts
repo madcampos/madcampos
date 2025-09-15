@@ -1,3 +1,5 @@
+// TODO: merge with blog posts template
+
 import { html } from '@lit-labs/ssr';
 import { when } from 'lit/directives/when.js';
 import { join } from '../../utils/path.ts';
