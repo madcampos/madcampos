@@ -18,7 +18,8 @@
 <!-- Social metadata -->
 <meta property="og:title" name="twitter:title" itemprop="name" content="{{title}}" />
 
-<meta property="og:type" content="{{pageType}}" />
+<meta @if="pageType" property="og:type" content="{{pageType}}" />
+<meta @if-not="pageType" property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <meta property="og:locale" itemprop="inLanguage" content="en_US" />
@@ -27,8 +28,11 @@
 <meta property="og:description" name="description" itemprop="abstract" content="{{description}}" />
 <meta name="twitter:description" content="{{description}}" />
 
-<meta property="og:image" name="twitter:image" itemprop="image" content="{{socialImage}}" />
-<meta property="og:image:alt" name="twitter:image:alt" content="{{socialImageAlt}}" />
+<meta @if="socialImage" property="og:image" name="twitter:image" itemprop="image" content="{{socialImage}}" />
+<meta @if-not="socialImage" property="og:image" name="twitter:image" itemprop="image" content="https://madcampos.dev/assets/images/social/social.png" />
+
+<meta @if="socialImageAlt" property="og:image:alt" name="twitter:image:alt" content="{{socialImageAlt}}" />
+<meta @if-not="socialImageAlt" property="og:image:alt" name="twitter:image:alt" content="The letter &quot;m&quot; on a monospaced font, in blue, between curly braces." />
 
 <meta property="article:author" name="author" content="Marco Campos" />
 <meta name="twitter:creator" content="@madcampos" />
@@ -39,6 +43,7 @@
 <meta name="twitter:widgets:theme" content="dark" />
 
 <meta @if="tags" name="keywords" itemprop="keywords" property="article:tag" content="{{tags}}" />
+<meta @if-not="tags" name="keywords" itemprop="keywords" property="article:tag" content="Senior web developer, web developer, vue.js, vue, node.js, javascript, typescript, webdev" />
 
 <meta @if="createdAt" property="article:published_time" content="{{createdAt}}" />
 <meta @if="createdAt" name="publish_date" property="og:publish_date" content="{{createdAt}}" />

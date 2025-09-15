@@ -83,7 +83,7 @@
 		text-align: center;
 	}
 
-	#why svg {
+	#why m-icon {
 		width: 7rem;
 		height: 7rem;
 		color: var(--accent-color);
@@ -189,12 +189,13 @@
 
 	:is(#hero, #cta) form input {
 		display: block;
-		margin: var(--spacing-medium);
+		margin: var(--spacing-medium) auto;
 		border: var(--border-style) var(--theme-color) var(--border-width);
 		border-radius: var(--spacing-large);
 		background-color: var(--dark-bg-color);
 		padding: var(--spacing-small) var(--spacing-medium);
 		width: calc(100% - var(--spacing-large) * 2);
+		max-width: 40ch;
 		color: var(--text-color);
 		font-size: inherit;
 	}

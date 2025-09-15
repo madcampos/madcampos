@@ -256,16 +256,23 @@
 
 		<!-- #region System Logo -->
 		<svg viewBox="0 0 1100 900" data-theme="system" data-size="micro" visibility="hidden">
-			<g class="logo-part">
+			<use href="#logo-system-micro-parts" class="pixelated-logo" />
+
+			<g class="logo-part" id="logo-system-micro-parts">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" />
 				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
 			</g>
 
 			<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
+
+			<use href="#logo-system-micro-parts" class="overlay-logo" />
+			<use href="#logo-system-micro-parts" class="noise-logo" />
 		</svg>
 		<svg viewBox="0 0 2000 900" data-theme="system" data-size="mini" visibility="hidden">
-			<g class="logo-part">
+			<use href="#logo-system-mini-parts" class="pixelated-logo" />
+
+			<g class="logo-part" id="logo-system-mini-parts">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" />
 				<use href="#logo-a" />
@@ -275,9 +282,14 @@
 			</g>
 
 			<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
+
+			<use href="#logo-system-mini-parts" class="overlay-logo" />
+			<use href="#logo-system-mini-parts" class="noise-logo" />
 		</svg>
 		<svg viewBox="0 0 3500 900" data-theme="system" data-size="full">
-			<g class="logo-part">
+			<use href="#logo-system-full-parts" class="pixelated-logo" />
+
+			<g class="logo-part" id="logo-system-full-parts">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" x="20" />
 				<use href="#logo-a" />
@@ -292,12 +304,17 @@
 			</g>
 
 			<use class="logo-text" href="#logo-text-full" font-size="8rem" />
+
+			<use href="#logo-system-full-parts" class="overlay-logo" />
+			<use href="#logo-system-full-parts" class="noise-logo" />
 		</svg>
 		<!-- #endregion -->
 
 		<!-- #region UwU Logo -->
 		<svg viewBox="0 0 1100 900" data-theme="uwu" data-size="micro" visibility="hidden">
-			<g class="logo-part">
+			<use href="#logo-uwu-micro-parts" class="pixelated-logo" />
+
+			<g class="logo-part" id="logo-uwu-micro-parts">
 				<use href="#logo-uwu-bracket" transform="translate(-30, -50)" />
 				<use href="#logo-uwu-m" transform="translate(50, 100)" />
 				<use href="#logo-uwu-bracket" transform="rotate(190) translate(30, 80)" transform-origin="center" />
@@ -306,9 +323,14 @@
 			<use class="logo-extras" href="#logo-uwu-ma" transform="translate(-220, -210) scale(0.72) rotate(-7)" />
 
 			<use class="logo-text" href="#logo-text-micro" transform="rotate(-4.7)" font-size="8rem" />
+
+			<use href="#logo-uwu-micro-parts" class="overlay-logo" />
+			<use href="#logo-uwu-micro-parts" class="noise-logo" />
 		</svg>
 		<svg viewBox="0 0 2000 900" data-theme="uwu" data-size="mini" visibility="hidden">
-			<g class="logo-part">
+			<use href="#logo-uwu-mini-parts" class="pixelated-logo" />
+
+			<g class="logo-part" id="logo-uwu-mini-parts">
 				<use href="#logo-uwu-bracket" />
 				<use href="#logo-uwu-m" />
 				<use href="#logo-uwu-a" />
@@ -323,9 +345,14 @@
 			</g>
 
 			<use class="logo-text" href="#logo-text-mini" transform="translate(0, 100) rotate(-4.7)" font-size="8rem" />
+
+			<use href="#logo-uwu-mini-parts" class="overlay-logo" />
+			<use href="#logo-uwu-mini-parts" class="noise-logo" />
 		</svg>
 		<svg viewBox="0 0 3500 900" data-theme="uwu" data-size="full" visibility="hidden">
-			<g class="logo-part">
+			<use href="#logo-uwu-full-parts" class="pixelated-logo" />
+
+			<g class="logo-part" id="logo-uwu-full-parts">
 				<use href="#logo-uwu-bracket" transform="translate(-20, -40) scale(1.12)" />
 				<use href="#logo-uwu-m" transform="translate(-20, -35) scale(1.12)" />
 				<use href="#logo-uwu-a" transform="translate(-20, -35) scale(1.12)" />
@@ -347,26 +374,36 @@
 			</g>
 
 			<use class="logo-text" href="#logo-text-full" transform="translate(0, 200) rotate(-4.7)" font-size="8rem" />
+
+			<use href="#logo-uwu-full-parts" class="overlay-logo" />
+			<use href="#logo-uwu-full-parts" class="noise-logo" />
 		</svg>
 		<!-- #endregion -->
 
 		<!-- #region y2k Logo -->
 		<svg viewBox="0 0 1100 900" data-theme="y2k" data-size="micro" visibility="hidden">
+			<use href="#logo-y2k-micro-parts" class="pixelated-logo" />
+
 			<g class="logo-extras">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" />
 				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
 			</g>
 
-			<g class="logo-part">
+			<g class="logo-part" id="logo-y2k-micro-parts">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" />
 				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
 			</g>
 
 			<use class="logo-text" href="#logo-text-micro" font-size="8rem" />
+
+			<use href="#logo-y2k-micro-parts" class="overlay-logo" />
+			<use href="#logo-y2k-micro-parts" class="noise-logo" />
 		</svg>
 		<svg viewBox="0 0 2000 900" data-theme="y2k" data-size="mini" visibility="hidden">
+			<use href="#logo-y2k-mini-parts" class="pixelated-logo" />
+
 			<g class="logo-extras">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" />
@@ -376,7 +413,7 @@
 				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
 			</g>
 
-			<g class="logo-part">
+			<g class="logo-part" id="logo-y2k-mini-parts">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" />
 				<use href="#logo-a" />
@@ -386,8 +423,13 @@
 			</g>
 
 			<use class="logo-text" href="#logo-text-mini" font-size="8rem" />
+
+			<use href="#logo-y2k-mini-parts" class="overlay-logo" />
+			<use href="#logo-y2k-mini-parts" class="noise-logo" />
 		</svg>
 		<svg viewBox="0 0 3500 900" data-theme="y2k" data-size="full" visibility="hidden">
+			<use href="#logo-y2k-full-parts" class="pixelated-logo" />
+
 			<g class="logo-extras">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" x="20" />
@@ -402,7 +444,7 @@
 				<use href="#logo-bracket" transform="scale(-1, 1)" transform-origin="center" />
 			</g>
 
-			<g class="logo-part">
+			<g class="logo-part" id="logo-y2k-full-parts">
 				<use href="#logo-bracket" />
 				<use href="#logo-m" x="20" />
 				<use href="#logo-a" />
@@ -417,6 +459,9 @@
 			</g>
 
 			<use class="logo-text" href="#logo-text-full" font-size="8rem" />
+
+			<use href="#logo-y2k-full-parts" class="overlay-logo" />
+			<use href="#logo-y2k-full-parts" class="noise-logo" />
 		</svg>
 		<!-- #endregion -->
 

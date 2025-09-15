@@ -2,6 +2,7 @@
 	:host {
 		display: inline-block;
 		vertical-align: -0.125em;
+		margin: 0 0.2em;
 		width: 1em;
 		height: 1em;
 	}

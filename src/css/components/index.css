@@ -7,6 +7,8 @@
 @import url('./old-style-buttons.css');
 @import url('./page-header.css');
 @import url('./pagination.css');
+@import url('./site-nav.css');
+@import url('./skip-to-main.css');
 @import url('./sr-only.css');
 @import url('./svg-effects.css');
 @import url('./theme-switcher.css');

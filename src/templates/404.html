@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/{{metadata.pageSchema}}">
+	<head>
+		<link rel="import" href="components/html-head.html" data="metadata" />
+	</head>
+	<body>
+		<css-naked-day hidden></css-naked-day>
+
+		<main>
+			<header>
+				<site-nav @no-shadowdom></site-nav>
+				<div>
+					<m-logo
+						@no-shadowdom
+						subtitle="Page Not Found"
+						short-subtitle="404"
+						url="/"
+						title="Home Page"
+						micro
+						glitch
+					></m-logo>
+				</div>
+				<h1>404 - Not found</h1>
+			</header>
+
+			<div id="contents">
+				<p>Looks like you hit a dead end.</p>
+				<p>
+					<a href="/">Go back home</a>
+				</p>
+			</div>
+		</main>
+
+		<iab-escape></iab-escape>
+		<svg-effects @no-shadowdom></svg-effects>
+	</body>
+</html>

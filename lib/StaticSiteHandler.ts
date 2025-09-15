@@ -70,7 +70,7 @@ export class StaticSiteHandler {
 		this.#baseUrl = baseUrl;
 		this.#fetchHandler = fetchHandler;
 
-		this.#routes.push([new URLPattern(`./${this.#TEMPLATES_FOLDER}`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
+		this.#routes.push([new URLPattern(`./${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
 
 		Object.entries(routes).forEach(([path, route]) => {
 			let resolvedPath = path;
@@ -195,6 +195,7 @@ export class StaticSiteHandler {
 
 			for (const resolvedRoute of resolvedRoutes) {
 				try {
+					// TODO: cache files
 					const response = await route.render(
 						assets,
 						{

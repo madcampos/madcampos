@@ -53,7 +53,7 @@
 		a[data-footnote-backref] { display: none; }
 		iframe { display: none; }
 		#post-share { display: none; }
-		#site-nav { display: none; }
+		site-nav { display: none; }
 		#old-buttons { display: none; }
 		#webrings { display: none; }
 		#theme-switcher { display: none; }

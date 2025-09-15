@@ -1,13 +1,13 @@
 @layer components {
-	theme-switcher aside:not([hidden]) {
+	theme-switcher:not([hidden]) {
 		/* INFO: fix for safari */
 		display: inline-block;
 		align-self: center;
 	}
 
-	body:not(.js-enabled) theme-switcher aside { display: none; }
+	body:not(.js-enabled) theme-switcher { display: none; }
 
-	theme-switcher aside button {
+	theme-switcher button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -20,7 +20,7 @@
 		color: var(--theme-color);
 	}
 
-	theme-switcher aside button:focus-visible {
+	theme-switcher button:focus-visible {
 		border-color: var(--text-color);
 		background-color: var(--theme-color);
 		color: var(--text-color);
@@ -33,14 +33,14 @@
 		color: var(--accent-color);
 	}
 
-	theme-switcher aside button:active {
+	theme-switcher button:active {
 		outline-color: var(--text-color);
 		border-color: var(--text-color);
 		background-color: var(--accent-color);
 		color: var(--text-color);
 	}
 
-	theme-switcher aside button m-icon {
+	theme-switcher button m-icon {
 		width: 100%;
 		height: 100%;
 		pointer-events: none;

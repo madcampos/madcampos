@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/{{metadata.pageSchema}}">
+	<head>
+		<link rel="import" href="components/html-head.html" data="metadata" />
+		<link rel="stylesheet" href="/css/pages/internal-page.css" />
+	</head>
+	<body>
+		<css-naked-day hidden></css-naked-day>
+
+		<main>
+			<header>
+				<site-nav @no-shadowdom></site-nav>
+				<div>
+					<m-logo
+						@no-shadowdom
+						subtitle="Page Not Found"
+						short-subtitle="404"
+						url="/"
+						title="Home Page"
+						micro
+						glitch
+					></m-logo>
+				</div>
+				<h1>404 - Not found</h1>
+			</header>
+
+			<div id="contents">
+				<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
+
+				<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
+				<p>If you are completely offline, you won't be able to see or use:</p>
+				<ul>
+					<li>Images from pages not visited before.</li>
+					<li>Some dynamic content, like adding comments.</li>
+				</ul>
+
+				<p>
+					<a href="/">Go back home</a>
+				</p>
+			</div>
+		</main>
+
+		<iab-escape></iab-escape>
+		<svg-effects @no-shadowdom></svg-effects>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/{{metadata.pageSchema}}">
+	<head>
+		<link rel="import" href="components/html-head.html" data="metadata" />
+		<link rel="stylesheet" href="/css/pages/internal-page.css" />
+	</head>
+	<body>
+		<css-naked-day hidden></css-naked-day>
+
+		<header>
+			<a id="skip-to-main" href="#contents">Skip to main content</a>
+			<site-nav @no-shadowdom></site-nav>
+
+			<page-header>
+				<m-logo
+					@no-shadowdom
+					subtitle="About"
+					short-subtitle="me"
+					url="/about/"
+					title="About Page"
+				></m-logo>
+
+				<h1>About me</h1>
+			</page-header>
+		</header>
+
+		<main id="main">
+			<div id="contents">
+				<p>
+					Hey! Name is <strong>Marco</strong>, best known online by the moniker &ldquo;<em>madcampos</em>&rdquo;.
+				</p>
+				<p>I work as a programmer and like to build things, be it digitally with websites or physically with Legos, crochet, or cardboard.</p>
+				<p>
+					I like challanges and interesting stuff to just create and have fun. To me some of the best ideas come from moments when we say
+					<q>what if we did this...</q> or <q>wouldn't it be interesting to do that...?</q>
+				</p>
+				<p>
+					Ah, yes, I do enjoy geeking about web standards as well, like reading proposals and talking about them. <em>don't</em> say the magic words <q>web components</q>
+					near me or I'll talk non stop for hours.
+				</p>
+				<p>Lastly, here is a picture of me:</p>
+
+				<figure>
+					<img
+						src="/assets/images/me-old-avatar.jpg"
+						alt="A close shot of myself. A white man with short black hair, wearing thick framed glases and a dark green shirt. I'm making a face with my brows frowned and my tongue sticking out to the side."
+						width="512"
+						height="512"
+						loading="lazy"
+						decoding="async"
+						srcset=""
+						width="128"
+						height="128"
+						sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+					/>
+					<figcaption>Me making a face</figcaption>
+				</figure>
+			</div>
+		</main>
+
+		<footer id="page-footer">
+			<old-style-buttons @no-shadowdom></old-style-buttons>
+			<m-webrings @no-shadowdom></m-webrings>
+		</footer>
+
+		<iab-escape></iab-escape>
+		<svg-effects @no-shadowdom></svg-effects>
+	</body>
+</html>

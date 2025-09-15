@@ -12,6 +12,7 @@ interface InitParameters {
 export class TemplateRenderer {
 	#TEMPLATES_FOLDER = 'templates';
 	#IF_ATTRIBUTE = '@if';
+	#IF_NOT_ATTRIBUTE = '@if-not';
 	#LOOP_ATTRIBUTE = '@for';
 	#SKIP_PROCESSING_ATTRIBUTE = '@no-process';
 	#SKIP_SHADOWDOM_ATTRIBUTE = '@no-shadowdom';
@@ -171,6 +172,17 @@ export class TemplateRenderer {
 				element.removeAttribute(this.#IF_ATTRIBUTE);
 			}
 		}
+
+		if (element.hasAttribute(this.#IF_NOT_ATTRIBUTE)) {
+			const value = this.#getValue(element.getAttribute(this.#IF_NOT_ATTRIBUTE) ?? '', data);
+
+			const falsyValues = ['', false, null, undefined] as const;
+			if (falsyValues.includes(value) || Number.isNaN(value)) {
+				element.removeAttribute(this.#IF_NOT_ATTRIBUTE);
+			} else {
+				element.remove();
+			}
+		}
 	}
 
 	async #processImport<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
@@ -304,8 +316,7 @@ export class TemplateRenderer {
 			}
 
 			node.textContent = node.textContent
-				.replaceAll('\n', ' ')
-				.trim()
+				.replaceAll(/\s+/iug, ' ')
 				.replaceAll(
 					new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
 					(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))

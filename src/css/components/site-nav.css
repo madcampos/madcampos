@@ -1,5 +1,5 @@
 @layer components {
-	#site-nav {
+	site-nav {
 		display: flex;
 		margin-inline: auto;
 		border-block-end: var(--border-style) var(--highlight-border-color) var(--border-width);
@@ -8,17 +8,19 @@
 		background-color: var(--bg-color);
 		width: 100%;
 		max-width: var(--max-width);
-	}
 
-	#site-nav ul {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		gap: var(--spacing-large);
-		margin: var(--spacing-large) auto;
-		padding: 0 var(--spacing-large);
-		width: 100%;
-		list-style-type: '';
+		nav { width: 100%; }
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: var(--spacing-large);
+			margin: var(--spacing-large) auto;
+			padding: 0 var(--spacing-large);
+			width: 100%;
+			list-style-type: '';
+		}
 	}
 }
