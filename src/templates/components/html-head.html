@@ -62,15 +62,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<!-- Main css -->
-<link rel="stylesheet" href="/css/index.css" />
-
-<!-- Page CSS -->
-<link @if="styles" @for="style in styles" rel="stylesheet" href="{{style}}" />
-
-<!-- Print Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
-
 <!-- Prefetch speculation rules -->
 <script type="speculationrules">
 	{
@@ -81,4 +72,10 @@
 		}]
 	}
 </script>
-<script src="/js/index.mjs" type="module"></script>
+
+<!-- Main css -->
+<link rel="stylesheet" href="/css/index.css" />
+
+<!-- Print Stylesheet -->
+<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+<script src="/js/index.mjs" type="module" async></script>

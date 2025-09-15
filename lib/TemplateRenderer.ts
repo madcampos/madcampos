@@ -16,6 +16,7 @@ export class TemplateRenderer {
 	#LOOP_ATTRIBUTE = '@for';
 	#SKIP_PROCESSING_ATTRIBUTE = '@no-process';
 	#SKIP_SHADOWDOM_ATTRIBUTE = '@no-shadowdom';
+	#IMPORT_DATA_ATTRIBUTE = '@data';
 	#LOOP_OPERATOR = 'in';
 	#OPEN_DELIMITER = '\\{\\{';
 	#CLOSE_DELIMITER = '\\}\\}';
@@ -198,12 +199,13 @@ export class TemplateRenderer {
 			} else {
 				let importData;
 
-				if (element.hasAttribute('data')) {
-					importData = this.#getValue(element.getAttribute('data') ?? '', data);
+				if (element.hasAttribute(this.#IMPORT_DATA_ATTRIBUTE)) {
+					importData = this.#getValue(element.getAttribute(this.#IMPORT_DATA_ATTRIBUTE) ?? '', data);
+
+					element.removeAttribute(this.#IMPORT_DATA_ATTRIBUTE);
 				}
 
-				// TODO: merge with attributes to enable extending the data available
-				const importedTemplate = await this.renderTemplate(assets, filePath, importData);
+				const importedTemplate = await this.renderTemplate(assets, filePath, { ...element.attributes, ...(importData ?? {}) });
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();

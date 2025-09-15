@@ -11,38 +11,15 @@ interface FileSystemModule {
 	cp(src: string, dest: string, options?: { force?: boolean, recursive?: boolean }): Promise<void>;
 }
 
-export interface MarkdownEntry<T> {
-	metadata: T;
-	render(): Promise<string> | string;
-}
-
-export interface DataCollection {
-	list<T>(assets: Env['Assets']): MarkdownEntry<T>[] | Promise<MarkdownEntry<T>[]>;
-	get<T>(assets: Env['Assets'], key: string): MarkdownEntry<T> | Promise<MarkdownEntry<T>>;
-}
-
-interface ResolvedRoute {
-	path: string;
-	params?: URLPatternResult;
-	data?: unknown;
-}
-
 export interface RouteView {
-	resolveParams?(assets: Env['Assets'], params: {
-		url: URLPattern,
-		collections: Record<string, DataCollection>
-	}): Promise<ResolvedRoute[]> | ResolvedRoute[];
-	render(
-		assets: Env['Assets'],
-		params: ResolvedRoute & { collections: Record<string, DataCollection> }
-	): Promise<Response> | Response;
+	resolveParams?(assets: Env['Assets'], params: { url: URLPattern }): Promise<string[]> | string[];
+	render(assets: Env['Assets'], params: { path: string, url: string, params?: URLPatternResult, data?: unknown }): Promise<Response> | Response;
 }
 
 interface StaticSiteHandlerOptions {
 	baseUrl: string;
 	routes: Record<string, RouteView>;
 	fallbackRoute?: RouteView;
-	collections?: Record<string, DataCollection>;
 	trailingSlash?: 'always' | 'ignore' | 'never';
 	fetchHandler?: ExportedHandlerFetchHandler;
 }
@@ -54,19 +31,14 @@ export class StaticSiteHandler {
 	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
 
 	#baseUrl: string;
-	#collections: Record<string, DataCollection> = {};
 	#routes: [URLPattern, RouteView][] = [];
-	#resolvedRoutes = new Map<URLPattern, ResolvedRoute[]>();
+	#resolvedRoutes = new Map<URLPattern, string[]>();
 	#fallbackRoute: RouteView = {
 		render: () => new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } })
 	};
 	#fetchHandler?: ExportedHandlerFetchHandler;
 
-	constructor({ collections, routes, baseUrl, fallbackRoute, trailingSlash, fetchHandler }: StaticSiteHandlerOptions) {
-		if (collections) {
-			this.#collections = collections;
-		}
-
+	constructor({ routes, baseUrl, fallbackRoute, trailingSlash, fetchHandler }: StaticSiteHandlerOptions) {
 		this.#baseUrl = baseUrl;
 		this.#fetchHandler = fetchHandler;
 
@@ -132,22 +104,16 @@ export class StaticSiteHandler {
 			let resolvedRoutes = this.#resolvedRoutes.get(pattern);
 
 			if (!resolvedRoutes) {
-				resolvedRoutes = await route.resolveParams(assets, { url: pattern, collections: this.#collections });
+				resolvedRoutes = await route.resolveParams(assets, { url: pattern });
 
 				this.#resolvedRoutes.set(pattern, resolvedRoutes);
 			}
 
-			const resolvedRoute = resolvedRoutes.find(({ path }) => path === resolvedUrl.pathname);
+			const resolvedPath = resolvedRoutes.find((path) => path === resolvedUrl.pathname);
 
-			if (resolvedRoute) {
+			if (resolvedPath) {
 				try {
-					return await route.render(
-						assets,
-						{
-							collections: this.#collections,
-							...resolvedRoute
-						}
-					);
+					return await route.render(assets, { path: resolvedPath, url });
 				} catch (err) {
 					console.error(`Error rendering route: ${url}.`);
 					console.error(err);
@@ -155,13 +121,7 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return route.render(
-			assets,
-			{
-				collections: this.#collections,
-				path: resolvedUrl.pathname
-			}
-		);
+		return route.render(assets, { path: resolvedUrl.pathname, url });
 	}
 
 	async build(assets: Env['Assets'], fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
@@ -171,41 +131,32 @@ export class StaticSiteHandler {
 		await fileSystemModule.cp(publicDir, outputPath, { force: true, recursive: true });
 
 		for (const [pattern, route] of this.#routes) {
-			const resolvedRoutes: ResolvedRoute[] = [];
+			const resolvedRoutes: string[] = [];
 
 			if (route.resolveParams) {
 				resolvedRoutes.push(
-					...await route.resolveParams(
-						assets,
-						{ url: pattern, collections: this.#collections }
-					)
+					...await route.resolveParams(assets, { url: pattern })
 				);
 			} else if (pattern.pathname === '/*') {
-				resolvedRoutes.push({ path: '/404.html' });
+				resolvedRoutes.push('/404.html');
 			} else {
-				resolvedRoutes.push({
-					path: pattern.pathname
+				resolvedRoutes.push(
+					pattern.pathname
 						.replace(/\{\/\}\?$/iu, '')
 						.replaceAll(
 							new RegExp(this.#FORBIDDEN_CHARS_IN_FILES_REGEX, 'uig'),
 							(char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`
 						)
-				});
+				);
 			}
 
-			for (const resolvedRoute of resolvedRoutes) {
+			for (const resolvedPath of resolvedRoutes) {
 				try {
 					// TODO: cache files
-					const response = await route.render(
-						assets,
-						{
-							collections: this.#collections,
-							...resolvedRoute
-						}
-					);
+					const response = await route.render(assets, { path: resolvedPath, url: `${this.#baseUrl}${resolvedPath}` });
 
 					const file = await (await response.blob()).bytes();
-					let filePath = resolvedRoute.path;
+					let filePath = resolvedPath;
 
 					if (filePath.endsWith('/')) {
 						filePath += 'index.html';
@@ -215,13 +166,13 @@ export class StaticSiteHandler {
 						filePath += '.html';
 					}
 
-					const resolvedPath = `${outputPath}${filePath}`.replace(/\/+/giu, '/');
-					const resolvedFolder = resolvedPath.split('/').slice(0, -1).join('/');
+					const resolvedFilePath = `${outputPath}${filePath}`.replace(/\/+/giu, '/');
+					const resolvedFolder = resolvedFilePath.split('/').slice(0, -1).join('/');
 
 					await fileSystemModule.mkdir(resolvedFolder, { recursive: true });
-					await fileSystemModule.writeFile(resolvedPath, file);
+					await fileSystemModule.writeFile(resolvedFilePath, file);
 				} catch (err) {
-					console.error(`Error writing file for route: ${resolvedRoute.path}.`);
+					console.error(`Error writing file for route: ${resolvedPath}.`);
 					console.error(err);
 				}
 			}
@@ -243,12 +194,6 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return this.#fallbackRoute.render(
-			env.Assets,
-			{
-				collections: this.#collections,
-				path: new URL(request.url).pathname
-			}
-		);
+		return this.#fallbackRoute.render(env.Assets, { path: new URL(request.url).pathname, url: request.url });
 	}
 }
