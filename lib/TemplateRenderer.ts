@@ -202,6 +202,7 @@ export class TemplateRenderer {
 					importData = this.#getValue(element.getAttribute('data') ?? '', data);
 				}
 
+				// TODO: merge with attributes to enable extending the data available
 				const importedTemplate = await this.renderTemplate(assets, filePath, importData);
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
