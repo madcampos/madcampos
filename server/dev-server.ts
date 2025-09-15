@@ -47,6 +47,7 @@ const app = new StaticSiteHandler({
 	baseUrl: 'http://localhost:4242/',
 	routes: {
 		'/': renderHtml('index.html', {
+			// TODO: how can this static content be added directly to the html?
 			title: 'Marco Campos — Senior Web Developer',
 			description: 'Tech Stack: Vue.js, Node.js, TypeScript, JavaScript',
 			pageSchema: 'ProfilePage',
