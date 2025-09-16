@@ -5,6 +5,7 @@ interface FileSystemModule {
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 	mkdir(path: string, options?: { recursive?: boolean }): Promise<string | void>;
 	cp(src: string, dest: string, options?: { force?: boolean, recursive?: boolean }): Promise<void>;
+	glob(pattern: string): AsyncIterable<string>;
 }
 
 export interface RouteView {
@@ -18,11 +19,14 @@ interface StaticSiteHandlerOptions {
 	fallbackRoute?: RouteView;
 	trailingSlash?: 'always' | 'ignore' | 'never';
 	fetchHandler?: ExportedHandlerFetchHandler;
+	collectionAssetsHandler?(assets: Env['Assets'], assetPath: string): Promise<Response>;
 }
 
 export class StaticSiteHandler {
-	#TEMPLATES_FOLDER = 'templates';
-	#PATH_WITH_EXT_REGEX = /\/([^/.]+?)\.[a-z0-9]+?$/iu;
+	#TEMPLATES_FOLDER = '_templates';
+	#COLLECTIONS_FOLDER = '_data';
+	#COLLECTION_ASSETS_FOLDER = '_assets';
+	#PATH_WITH_EXT_REGEX = /\/([^/]+?)\.[a-z0-9]+?$/iu;
 	#TRAILING_SLASHES_REGEX = /\/$/iu;
 	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
 
@@ -34,11 +38,18 @@ export class StaticSiteHandler {
 	};
 	#fetchHandler?: ExportedHandlerFetchHandler;
 
-	constructor({ routes, baseUrl, fallbackRoute, trailingSlash, fetchHandler }: StaticSiteHandlerOptions) {
+	constructor({ routes, baseUrl, fallbackRoute, trailingSlash, fetchHandler, collectionAssetsHandler }: StaticSiteHandlerOptions) {
 		this.#baseUrl = baseUrl;
 		this.#fetchHandler = fetchHandler;
 
 		this.#routes.push([new URLPattern(`/${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
+		this.#routes.push([new URLPattern(`/${this.#COLLECTIONS_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
+
+		if (collectionAssetsHandler) {
+			this.#routes.push([new URLPattern(`/${this.#COLLECTION_ASSETS_FOLDER}{/}?*`, this.#baseUrl), {
+				render: async (assets, { path }) => collectionAssetsHandler(assets, path)
+			}]);
+		}
 
 		Object.entries(routes).forEach(([path, route]) => {
 			let resolvedPath = path;
@@ -122,8 +133,13 @@ export class StaticSiteHandler {
 	async build(assets: Env['Assets'], fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
 		await fileSystemModule.mkdir(outputPath, { recursive: true });
 
-		// TODO: list files and ignore template folder
-		await fileSystemModule.cp(publicDir, outputPath, { force: true, recursive: true });
+		for await (const entry of fileSystemModule.glob(`${publicDir}/**/*`)) {
+			if (entry.startsWith(`${publicDir}/${this.#TEMPLATES_FOLDER}`) || entry.startsWith(`${publicDir}/${this.#COLLECTIONS_FOLDER}`)) {
+				continue;
+			}
+
+			await fileSystemModule.cp(publicDir, outputPath, { force: true, recursive: true });
+		}
 
 		for (const [pattern, route] of this.#routes) {
 			const resolvedRoutes: string[] = [];
@@ -147,7 +163,6 @@ export class StaticSiteHandler {
 
 			for (const resolvedPath of resolvedRoutes) {
 				try {
-					// TODO: cache files
 					const response = await route.render(assets, { path: resolvedPath, url: `${this.#baseUrl}${resolvedPath}` });
 
 					const file = await (await response.blob()).bytes();
