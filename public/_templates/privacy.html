@@ -4,8 +4,12 @@
 		<link
 			rel="import"
 			href="components/html-head.html"
-			@data="metadata"
+			title="Privacy | Marco Campos"
+			description="Privacy Statement."
+			url="{{url}}privacy/"
 		/>
+
+		<!-- Page CSS -->
 		<link rel="stylesheet" href="/css/pages/internal-page.css" />
 	</head>
 	<body>
@@ -18,18 +22,21 @@
 			<page-header>
 				<m-logo
 					@no-shadowdom
-					subtitle=""
-					short-subtitle=""
-					url="/"
-					title="Home Page"
+					subtitle="Privacy"
+					short-subtitle="Priv."
+					url="/privacy/"
+					title="Privacy Page"
 				></m-logo>
 
-				<h1></h1>
+				<h1>Privacy</h1>
 			</page-header>
 		</header>
 
 		<main id="main">
-			<div id="contents"></div>
+			<div id="contents">
+				<p>This website (<a href="https://madcampos.dev">https://madcampos.dev</a>) does not perform web tracking.</p>
+				<p>That's it.</p>
+			</div>
 		</main>
 
 		<footer id="page-footer">

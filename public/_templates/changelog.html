@@ -4,9 +4,14 @@
 		<link
 			rel="import"
 			href="components/html-head.html"
-			@data="metadata"
+			title="Changelog | Marco Campos"
+			description="List of changes in diferent versions of the website."
+			url="{{url}}changelog/"
 		/>
+
+		<!-- Page CSS -->
 		<link rel="stylesheet" href="/css/pages/internal-page.css" />
+		<link rel="stylesheet" href="/css/pages/changelogs.css" />
 	</head>
 	<body>
 		<css-naked-day hidden></css-naked-day>
@@ -18,18 +23,33 @@
 			<page-header>
 				<m-logo
 					@no-shadowdom
-					subtitle=""
-					short-subtitle=""
-					url="/"
-					title="Home Page"
+					subtitle="Changelog"
+					short-subtitle="Log"
+					url="/changelog/"
+					title="Changelog page"
 				></m-logo>
 
-				<h1></h1>
+				<h1>Changelog</h1>
 			</page-header>
 		</header>
 
 		<main id="main">
-			<div id="contents"></div>
+			<div id="contents">
+				<details @for="changelog in changelogs">
+					<summary>
+						<header>
+							<h2>
+								<span @if="changelog.metadata.draft" class="changelog-draft-tag">Draft</span>
+								{{{changelog.metadata.title}}}
+							</h2>
+							<p><time datetime="{{changelog.metadata.date}}">{{changelog.metadata.formattedDate}}</time></p>
+						</header>
+					</summary>
+					<article>
+						{{{changelog.contents}}}
+					</article>
+				</details>
+			</div>
 		</main>
 
 		<footer id="page-footer">

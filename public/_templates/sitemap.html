@@ -4,9 +4,14 @@
 		<link
 			rel="import"
 			href="components/html-head.html"
-			@data="metadata"
+			title="Site Map | Marco Campos"
+			description="A list of all pages on the website."
+			url="{{url}}sitemap/"
 		/>
+
+		<!-- Page CSS -->
 		<link rel="stylesheet" href="/css/pages/internal-page.css" />
+		<link rel="stylesheet" href="/css/pages/sitemap.css" />
 	</head>
 	<body>
 		<css-naked-day hidden></css-naked-day>
@@ -18,18 +23,85 @@
 			<page-header>
 				<m-logo
 					@no-shadowdom
-					subtitle=""
-					short-subtitle=""
-					url="/"
-					title="Home Page"
+					short-subtitle="Map"
+					subtitle="Site Map"
+					url="/sitemap/"
+					title="Site Map Page"
 				></m-logo>
 
-				<h1></h1>
+				<h1>Site Map</h1>
 			</page-header>
 		</header>
 
 		<main id="main">
-			<div id="contents"></div>
+			<div id="contents">
+				<h2>About Pages</h2>
+				<dl>
+					<dt><a href="/">Home</a></dt>
+					<dd>The website's home page.</dd>
+
+					<dt><a href="/about/">About</a></dt>
+					<dd>More information about me.</dd>
+
+					<dt><a href="/accessibility/">Accessibility Statement</a></dt>
+					<dd>Statement about accessibility on the website.</dd>
+
+					<dt><a href="/ai/">AI Statement</a></dt>
+					<dd>Statement about the use of AI on the webstie and AI derivative work.</dd>
+
+					<dt data-wip><a href="/changelog/">Changelog</a></dt>
+					<dd>List of changes for the website.</dd>
+
+					<dt><a href="/license/">License &amp; Disclaimer</a></dt>
+					<dd>Legal jargon for the license of this website's content.</dd>
+
+					<dt><a href="/offline/">Offline Page</a></dt>
+					<dd>The page that shows when you go offline and the Service Worker is working properly.</dd>
+
+					<dt><a href="/sitemap/">Sitemap</a></dt>
+					<dd>This page.</dd>
+
+					<dt><a href="/404/">404</a></dt>
+					<dd>The error page that you get when something is not found.</dd>
+				</dl>
+
+				<h2>Cool Pages</h2>
+				<dl>
+					<dt data-wip><a href="/bookmarks/">Bookmarks</a></dt>
+					<dd>A list of bookmars that I send people to.</dd>
+
+					<dt><a href="/food/">Food</a></dt>
+					<dd>Reference for food orders at different places. 😉</dd>
+
+					<dt data-wip><a href="/now/">Now</a></dt>
+					<dd>What I'm doing right now.</dd>
+
+					<dt data-wip><a href="/projects/">Projects</a></dt>
+					<dd>A list of personal projects I'm working on.</dd>
+
+					<dt data-wip><a href="/styleguide/">Styleguide</a></dt>
+					<dd>A reference for the website style, all it's components and different parts of the CSS.</dd>
+
+					<dt data-hidden><a href="/triangle/">Pyramid Scheme</a></dt>
+					<dd>Join this cool club, you will not regret it!</dd>
+				</dl>
+
+				<h2>Talks Pages</h2>
+				<dl>
+					<dt><a href="/talks/">Talks Home</a></dt>
+					<dd>A list of talks that I've presented before.</dd>
+
+					<!-- TODO -->
+				</dl>
+
+				<h2>Blog</h2>
+				<dl>
+					<dt><a href="/blog/">Blog Home</a></dt>
+					<dd>The main blog page.</dd>
+
+					<!-- TODO -->
+				</dl>
+			</div>
 		</main>
 
 		<footer id="page-footer">

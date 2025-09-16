@@ -3,7 +3,7 @@
 		"build/**/*",
 		"lib/**/*",
 		"src/**/*",
-		"server/**/*"
+		"public/**/*"
 	],
 	"exclude": ["node_modules/**/*", "dist/**/*", "data/.obsidian/**/*"],
 	"compilerOptions": {
