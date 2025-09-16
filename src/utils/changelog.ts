@@ -1,24 +1,37 @@
-import type { MarkdownInstance } from 'astro';
-import { getCollection, render } from 'astro:content';
+import type { Collections, MarkdownEntry } from '../../lib/CollectionsProcessing.ts';
+import { inlineMarkdownRender } from './markdown.ts';
 
-export async function listAllChangelogs() {
-	const collectionEntries = await getCollection('changelog');
-	const collectionFiles = import.meta.glob<MarkdownInstance<{}>>('../content/changelog/**/*.md', { eager: true });
+interface ChangelogMetadata {
+	date: string;
+	versionName: string;
+	draft?: boolean;
+}
 
-	const entries = collectionEntries
-		.filter((entry) => entry.data)
-		.filter(({ data: { draft } }) => !draft || import.meta.env.DEV)
-		.sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateA.getTime() - dateB.getTime())
-		.map((entry) => {
-			const [, entryMarkdown] = Object.entries(collectionFiles).find(([filePath]) => filePath.includes(entry.id)) ?? [];
+interface TransformedChangelogMetadata {
+	title: string;
+	date: string;
+	formattedDate: string;
+	draft: boolean;
+}
 
-			return {
-				...entry,
-				title: entry.data.versionName ? `${entry.id} - ${entry.data.versionName}` : entry.id,
-				render: async () => render(entry),
-				renderString: async () => entryMarkdown?.compiledContent() ?? ''
-			};
-		});
+export async function listAllChangelogs(assets: Env['Assets'], collections: Collections, isDevMode?: boolean) {
+	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+
+	const collectionEntries = await collections.list<ChangelogMetadata>(assets, 'changelog');
+
+	const existingEntries = Object.entries(collectionEntries).filter(([, { metadata }]) => metadata) as [string, Required<MarkdownEntry<ChangelogMetadata>>][];
+	const nonDraftEntries = existingEntries.filter(([, { metadata }]) => !metadata.draft || isDevMode);
+	const sortedEntries = nonDraftEntries.sort(([, { metadata: { date: dateA } }], [, { metadata: { date: dateB } }]) => new Date(dateA).getTime() - new Date(dateB).getTime());
+	const entries = sortedEntries.map(([, { id, metadata, contents }]) => ({
+		id,
+		metadata: {
+			title: inlineMarkdownRender(metadata.versionName ? `${id} - ${metadata.versionName}` : id),
+			draft: metadata.draft ?? false,
+			date: new Date(metadata.date).toISOString(),
+			formattedDate: formatter.format(new Date(metadata.date))
+		},
+		contents
+	} satisfies MarkdownEntry<TransformedChangelogMetadata>));
 
 	return entries;
 }

@@ -1,3 +1,5 @@
+// TODO: reenable directives
+/*
 import type { ElementContent } from 'hast';
 import type { Root } from 'mdast';
 import type { ContainerDirective, LeafDirective, TextDirective } from 'mdast-util-directive';
@@ -132,6 +134,7 @@ export function baselineInfo() {
 		});
 	};
 }
+*/
 
 export function escapeHtmlTags(input: string) {
 	return input.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
