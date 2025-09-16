@@ -10,7 +10,7 @@ interface InitParameters {
 }
 
 export class TemplateRenderer {
-	#TEMPLATES_FOLDER = 'templates';
+	#TEMPLATES_FOLDER = '_templates';
 	#IF_ATTRIBUTE = '@if';
 	#IF_NOT_ATTRIBUTE = '@if-not';
 	#LOOP_ATTRIBUTE = '@for';

@@ -7,7 +7,7 @@ export interface MarkdownEntry<T> {
 }
 
 export class Collections {
-	#COLLECTIONS_FOLDER = 'data';
+	#COLLECTIONS_FOLDER = '_data';
 	#collections: Record<string, string[]> = {};
 
 	#marked: Marked;

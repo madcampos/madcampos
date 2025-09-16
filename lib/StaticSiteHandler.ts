@@ -1,9 +1,5 @@
 /// <reference types="urlpattern-polyfill" />
 
-if (!('URLPattern' in globalThis)) {
-	await import('urlpattern-polyfill');
-}
-
 interface FileSystemModule {
 	writeFile(path: string, data: Uint8Array | string): Promise<void>;
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -42,7 +38,7 @@ export class StaticSiteHandler {
 		this.#baseUrl = baseUrl;
 		this.#fetchHandler = fetchHandler;
 
-		this.#routes.push([new URLPattern(`./${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
+		this.#routes.push([new URLPattern(`/${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
 
 		Object.entries(routes).forEach(([path, route]) => {
 			let resolvedPath = path;
@@ -70,7 +66,6 @@ export class StaticSiteHandler {
 
 			this.#routes.push([new URLPattern(resolvedPath, this.#baseUrl), route]);
 		});
-		this.#routes.push([new URLPattern('*', this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
 	}
 
 	#isPatternDynamic(pattern: URLPattern, url: string) {
@@ -189,7 +184,8 @@ export class StaticSiteHandler {
 		if (this.#fetchHandler) {
 			const handlerResponse = await this.#fetchHandler(request, env, context);
 
-			if (handlerResponse) {
+			// eslint-disable-next-line @typescript-eslint/no-magic-numbers
+			if (handlerResponse.status !== 404) {
 				return handlerResponse;
 			}
 		}
