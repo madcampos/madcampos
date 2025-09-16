@@ -5,7 +5,7 @@ import { type HTMLElement, NodeType, parse } from 'node-html-parser';
 type ComponentFunction = (data: any) => Promise<string> | string;
 export type ComponentReferenceList = Record<string, ComponentFunction | string>;
 
-interface InitParameters {
+interface TemplateRenderedOptions {
 	components?: ComponentReferenceList;
 }
 
@@ -20,11 +20,13 @@ export class TemplateRenderer {
 	#LOOP_OPERATOR = 'in';
 	#OPEN_DELIMITER = '\\{\\{';
 	#CLOSE_DELIMITER = '\\}\\}';
+	#UNESCAPED_OPEN_DELIMITER = '\\{\\{\\{';
+	#UNESCAPED_CLOSE_DELIMITER = '\\}\\}\\}';
 
 	#componentCache: ComponentReferenceList = {};
 	#componentPaths: ComponentReferenceList;
 
-	constructor({ components }: InitParameters = {}) {
+	constructor({ components }: TemplateRenderedOptions = {}) {
 		this.#componentPaths = Object.fromEntries(Object.entries(components ?? {}).map(([key, value]) => [key.toLowerCase(), value]));
 	}
 
@@ -318,12 +320,21 @@ export class TemplateRenderer {
 				return;
 			}
 
-			node.textContent = node.textContent
-				.replaceAll(/\s+/iug, ' ')
-				.replaceAll(
-					new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
-					(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
-				);
+			if (new RegExp(`${this.#UNESCAPED_OPEN_DELIMITER}(.+?)${this.#UNESCAPED_CLOSE_DELIMITER}`, 'igu').test(node.rawText)) {
+				node.rawText = node.rawText
+					.replaceAll(/\s+/iug, ' ')
+					.replaceAll(
+						new RegExp(`${this.#UNESCAPED_OPEN_DELIMITER}(.+?)${this.#UNESCAPED_CLOSE_DELIMITER}`, 'igu'),
+						(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
+					);
+			} else {
+				node.textContent = node.textContent
+					.replaceAll(/\s+/iug, ' ')
+					.replaceAll(
+						new RegExp(`${this.#OPEN_DELIMITER}(.+?)${this.#CLOSE_DELIMITER}`, 'igu'),
+						(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
+					);
+			}
 		});
 	}
 
