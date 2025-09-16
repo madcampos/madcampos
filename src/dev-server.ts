@@ -1,7 +1,9 @@
+import { Collections } from '../lib/CollectionsProcessing.ts';
 import { type RouteView, StaticSiteHandler } from '../lib/StaticSiteHandler.ts';
 import { TemplateRenderer } from '../lib/TemplateRenderer.ts';
-import { icon } from '../src/templates/components/Icon.ts';
+import { icon } from '../public/_templates/components/Icon.ts';
 import server from './index.ts';
+import { listAllChangelogs } from './utils/changelog.ts';
 
 interface PageMetadata {
 	title?: string;
@@ -26,6 +28,8 @@ const templateRenderer = new TemplateRenderer({
 	}
 });
 
+const collections = new Collections();
+
 function renderHtml(template: string, metadata?: PageMetadata) {
 	return {
 		render: async (assets, { url }) => {
@@ -40,12 +44,29 @@ const app = new StaticSiteHandler({
 	baseUrl: 'http://localhost:4242/',
 	routes: {
 		'/': renderHtml('index.html'),
+		'/404': renderHtml('404.html'),
 		'/410': renderHtml('410.html'),
 		'/about': renderHtml('about.html'),
 		'/accessibility': renderHtml('accessibility.html'),
+		'/bookmarks': renderHtml('bookmarks.html'),
+		'/changelog': {
+			render: async (assets, { url }) => {
+				const changelogs = await listAllChangelogs(assets, collections, true);
+
+				const body = await templateRenderer.renderTemplate(assets, 'changelog.html', { changelogs: Object.values(changelogs), url });
+
+				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
+			}
+		},
 		'/ai': renderHtml('ai.html'),
 		'/food': renderHtml('food.html'),
+		'/license': renderHtml('license.html'),
+		'/now': renderHtml('now.html'),
 		'/offline': renderHtml('offline.html'),
+		'/privacy': renderHtml('privacy.html'),
+		'/sitemap': renderHtml('sitemap.html'),
+		'/styleguide': renderHtml('styleguide.html'),
+		'/todo': renderHtml('todo.html'),
 		'/triangle': renderHtml('triangle.html')
 	},
 	fallbackRoute: {
