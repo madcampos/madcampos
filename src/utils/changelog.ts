@@ -25,11 +25,13 @@ export async function listAllChangelogs(assets: Env['Assets'], collections: Coll
 	const entries = sortedEntries.map(([, { id, metadata, contents }]) => ({
 		id,
 		metadata: {
+			// TODO: update inline rendered to use marked
 			title: inlineMarkdownRender(metadata.versionName ? `${id} - ${metadata.versionName}` : id),
 			draft: metadata.draft ?? false,
 			date: new Date(metadata.date).toISOString(),
 			formattedDate: formatter.format(new Date(metadata.date))
 		},
+		// TODO: postprocess markdown
 		contents
 	} satisfies MarkdownEntry<TransformedChangelogMetadata>));
 

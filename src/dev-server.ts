@@ -76,7 +76,8 @@ const app = new StaticSiteHandler({
 			return new Response(body, { status: 404, headers: { 'Content-Type': 'text/html' } });
 		}
 	},
-	fetchHandler: server.fetch
+	fetchHandler: server.fetch,
+	collectionAssetsHandler: collections.getAsset
 });
 
 export default app satisfies ExportedHandler<Env>;
