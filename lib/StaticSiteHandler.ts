@@ -8,10 +8,22 @@ interface FileSystemModule {
 	glob(pattern: string): AsyncIterable<string>;
 }
 
-export interface RouteView {
+interface BaseRouteView {
 	resolveParams?(assets: Env['Assets'], params: { url: URLPattern }): Promise<string[]> | string[];
-	render(assets: Env['Assets'], params: { path: string, url: string, params?: URLPatternResult, data?: unknown }): Promise<Response> | Response;
 }
+
+interface GenericRenderRouteView extends BaseRouteView {
+	render(assets: Env['Assets'], params: { path: string, url: string, params?: URLPatternResult, data?: unknown }): Promise<Response> | Response;
+	renderHtml?: never;
+}
+
+interface HtmlRenderRouteView extends BaseRouteView {
+	render?: never;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	renderHtml: { template: string, data: any };
+}
+
+export type RouteView = GenericRenderRouteView | HtmlRenderRouteView;
 
 interface StaticSiteHandlerOptions {
 	baseUrl: string;
@@ -31,9 +43,9 @@ export class StaticSiteHandler {
 	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
 
 	#baseUrl: string;
-	#routes: [URLPattern, RouteView][] = [];
+	#routes: [URLPattern, GenericRenderRouteView][] = [];
 	#resolvedRoutes = new Map<URLPattern, string[]>();
-	#fallbackRoute: RouteView = {
+	#fallbackRoute: GenericRenderRouteView = {
 		render: () => new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } })
 	};
 	#fetchHandler?: ExportedHandlerFetchHandler;
@@ -42,8 +54,21 @@ export class StaticSiteHandler {
 		this.#baseUrl = baseUrl;
 		this.#fetchHandler = fetchHandler;
 
-		this.#routes.push([new URLPattern(`/${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
-		this.#routes.push([new URLPattern(`/${this.#COLLECTIONS_FOLDER}{/}?*`, this.#baseUrl), fallbackRoute ?? this.#fallbackRoute]);
+		const normalizedFallbackRoute: GenericRenderRouteView = {
+			resolveParams: fallbackRoute?.resolveParams,
+			render: fallbackRoute?.render ?? this.#fallbackRoute.render
+		};
+
+		if (fallbackRoute?.renderHtml) {
+			normalizedFallbackRoute.render = async (assets, { url }) => {
+				const body = await templateRenderer.renderTemplate(assets, fallbackRoute.renderHtml.template, { ...(fallbackRoute.renderHtml.data ?? {}), url });
+
+				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
+			};
+		}
+
+		this.#routes.push([new URLPattern(`/${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), normalizedFallbackRoute]);
+		this.#routes.push([new URLPattern(`/${this.#COLLECTIONS_FOLDER}{/}?*`, this.#baseUrl), normalizedFallbackRoute]);
 
 		if (collectionAssetsHandler) {
 			this.#routes.push([new URLPattern(`/${this.#COLLECTION_ASSETS_FOLDER}{/}?*`, this.#baseUrl), {
@@ -75,7 +100,14 @@ export class StaticSiteHandler {
 				}
 			}
 
-			this.#routes.push([new URLPattern(resolvedPath, this.#baseUrl), route]);
+			this.#routes.push([new URLPattern(resolvedPath, this.#baseUrl), {
+				resolveParams: route.resolveParams,
+				render: route.render ?? (async (assets, { url }) => {
+					const body = await templateRenderer.renderTemplate(assets, route.renderHtml.template, { ...(route.renderHtml.data ?? {}), url });
+
+					return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
+				})
+			}]);
 		});
 	}
 

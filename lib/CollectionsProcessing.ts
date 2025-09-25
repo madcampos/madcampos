@@ -11,57 +11,93 @@ export interface MarkdownEntry<T> {
 }
 
 export interface CollectionsOptions {
+	/**
+	 * The folder where collections will be stored.
+	 * @default '_data'
+	 */
 	collectionsFolder?: string;
+
+	/**
+	 * The JSON file, inside the collections folder containing the collections listing.
+	 *
+	 * It should be an object where each key is the collection name.
+	 * The values are arrays of strings, where each item is the path to an entry in that collection.
+	 *
+	 * The entry paths is relative to the collections folder.
+	 * @default 'index.json'
+	 */
 	collectionsIndexFile?: string;
+
+	/**
+	 * The name of the property to look in the Front Matter metadata for an image.
+	 * @default 'image'
+	 */
 	metadataImageProperty?: string;
-	relativeAssetsPath?: string;
+
+	/**
+	 * The base path for public assets. This is where all collection assets will be saved.
+	 * @default '_assets'
+	 */
 	publicAssetsPath?: string;
+
+	/**
+	 * An array of sizes to optimize images for, it will be used to generate a `srcset` for the image.
+	 * @default [128, 256, 512]
+	 */
 	imageSizes?: number[];
+
+	/**
+	 * A function to handle image transformations.
+	 * @see {@link ImageHandlingFunction}
+	 */
 	imageHandling?: ImageHandlingFunction;
+
+	/**
+	 * The quality to use for image processing.
+	 * @default 75
+	 */
 	imageQuality?: number;
 }
 
 export class Collections {
-	#collectionsFolder = '_data';
-	#collectionsIndexFile = 'index.json';
+	#COLLECTIONS_URL: URL;
+	#COLLECTIONS_INDEX_URL: URL;
+	#PUBLIC_ASSETS_URL: URL;
 	#metadataImageProperty = 'image';
-	#relativeAssetsPath = './assets';
-	#publicAssetsPath = '_assets';
 	#collections!: Record<string, string[]>;
 	#collectionsCache: Record<string, MarkdownEntry<any>> = {};
 	#assetPathMap: Record<string, string> = {};
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	#imageSizes = [128, 256, 512];
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-	#defaultImageQuality = 75;
+	#imageQuality = 75;
 	#imageHandling?: ImageHandlingFunction;
 
 	constructor({
 		collectionsFolder,
 		collectionsIndexFile,
 		metadataImageProperty,
-		relativeAssetsPath,
 		publicAssetsPath,
 		imageSizes,
 		imageHandling,
 		imageQuality
 	}: CollectionsOptions = {}) {
-		this.#collectionsFolder = collectionsFolder ?? this.#collectionsFolder;
-		this.#collectionsIndexFile = collectionsIndexFile ?? this.#collectionsIndexFile;
-		this.#metadataImageProperty = metadataImageProperty ?? this.#metadataImageProperty;
-		this.#relativeAssetsPath = relativeAssetsPath ?? this.#relativeAssetsPath;
-		this.#publicAssetsPath = publicAssetsPath ?? this.#publicAssetsPath;
-		this.#imageSizes = imageSizes ?? this.#imageSizes;
 		this.#imageHandling = imageHandling;
-		this.#defaultImageQuality = imageQuality ?? this.#defaultImageQuality;
+		this.#imageSizes = imageSizes ?? this.#imageSizes;
+		this.#imageQuality = imageQuality ?? this.#imageQuality;
+		this.#metadataImageProperty = metadataImageProperty ?? this.#metadataImageProperty;
+
+		this.#COLLECTIONS_URL = new URL(collectionsFolder ?? '_data', 'https://assets.local/');
+		this.#COLLECTIONS_INDEX_URL = new URL(collectionsIndexFile ?? 'index.json', this.#COLLECTIONS_URL);
+		this.#PUBLIC_ASSETS_URL = new URL(publicAssetsPath ?? '_assets', this.#COLLECTIONS_URL);
 	}
 
 	async #initCollections(assets: Env['Assets']) {
 		if (!this.#collections) {
-			const response = await assets.fetch(`https://assets.local/${this.#collectionsFolder}/${this.#collectionsIndexFile}`);
+			const response = await assets.fetch(this.#COLLECTIONS_INDEX_URL);
 
 			if (!response.ok) {
-				throw new Error(`Failed to fetch collection index file at: ${this.#collectionsFolder}/${this.#collectionsIndexFile}`);
+				throw new Error(`Failed to fetch collection index file at: ${this.#COLLECTIONS_INDEX_URL.pathname}`);
 			}
 
 			const collections = await response.json<Record<string, string[]>>();
@@ -80,8 +116,9 @@ export class Collections {
 			return publicPath;
 		}
 
+		// TODO: skip random part?
 		const [extension] = /\.[a-z0-9]+?$/iu.exec(assetPath) ?? ['.bin'];
-		const newPublicPath = `${this.#publicAssetsPath}/${crypto.randomUUID()}${extension}`;
+		const newPublicPath = new URL(`${crypto.randomUUID()}${extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
 		this.#assetPathMap[newPublicPath] = assetPath;
 
@@ -89,14 +126,14 @@ export class Collections {
 	}
 
 	#resolveImagePath(filePath: string, imagePath: string) {
-		if (imagePath?.startsWith(this.#relativeAssetsPath)) {
-			const entryFolder = filePath.replace(/\/(?:.+?)$/iu, '');
-			const imagePrivatePath = `${entryFolder}/${imagePath.replace('./', '')}`;
+		const entryUrl = new URL(filePath, this.#COLLECTIONS_URL);
+		const imagePrivateUrl = new URL(imagePath, entryUrl);
 
-			return this.#getAssetPublicPath(imagePrivatePath);
+		if (entryUrl.host === imagePrivateUrl.host) {
+			return this.#getAssetPublicPath(imagePrivateUrl.pathname);
 		}
 
-		return imagePath;
+		return imagePrivateUrl.href;
 	}
 
 	async #renderMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
@@ -157,7 +194,7 @@ export class Collections {
 					type: 'src',
 					src: imagePath,
 					dest: imagePath,
-					quality: this.#defaultImageQuality,
+					quality: this.#imageQuality,
 					density: 1
 				})) ?? imagePath;
 
@@ -211,14 +248,15 @@ export class Collections {
 		}
 
 		if (!this.#collectionsCache[entry]) {
-			const response = await assets.fetch(`https://assets.local/${this.#collectionsFolder}/${entry}`);
+			const entryUrl = new URL(entry, this.#COLLECTIONS_URL);
+			const response = await assets.fetch(entryUrl);
 
 			if (!response.ok) {
-				throw new Error(`Failed to fetch entry at: "${this.#collectionsFolder}/${entry}"`);
+				throw new Error(`Failed to fetch entry at: "${entryUrl.pathname}"`);
 			}
 
 			const text = await response.text();
-			const markdownEntry = await this.#renderMarkdown<T>(assets, `${this.#collectionsFolder}/${entry}`, text);
+			const markdownEntry = await this.#renderMarkdown<T>(assets, entryUrl.pathname, text);
 
 			this.#collectionsCache[entry] = markdownEntry;
 		}
@@ -227,16 +265,12 @@ export class Collections {
 	}
 
 	async getAsset(assets: Env['Assets'], assetPath: string) {
-		if (!assetPath.startsWith(this.#publicAssetsPath)) {
-			throw new Error(`Asset path is not on public images folder: "${assetPath}"`);
-		}
-
 		const assetPrivatePath = this.#assetPathMap[assetPath];
 
 		if (!assetPrivatePath) {
-			throw new Error(`Asset does not exist: "${assetPath}"`);
+			return new Response(`Asset does not exist: "${assetPath}"`, { status: 404 });
 		}
 
-		return await assets.fetch(`https://assets.local/${assetPrivatePath}`);
+		return assets.fetch(new URL(assetPrivatePath, 'https://assets.local/'));
 	}
 }
