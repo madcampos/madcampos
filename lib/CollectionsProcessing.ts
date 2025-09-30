@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { type Token, type Tokens, Marked } from 'marked';
-import { parse as parseYaml } from 'yaml';
-import type { ImageHandlingFunction } from './TemplateRenderer.ts';
+import { type Node as YamlNode, parse as parseYaml } from 'yaml';
+import { ImageOptimizer } from './ImageOptimizer.ts';
+import type { TemplateRenderer } from './TemplateRenderer.ts';
 
 export interface MarkdownEntry<T> {
 	id: string;
@@ -10,7 +11,17 @@ export interface MarkdownEntry<T> {
 	contents: string;
 }
 
+export interface EntryTransformerParameters<T> {
+	assets: Env['Assets'];
+	imageOptimizer: ImageOptimizer;
+	templateRenderer: TemplateRenderer;
+	markdownParser: Marked;
+	entry: MarkdownEntry<T>;
+}
+
 export interface CollectionsOptions {
+	// TODO: add transformer functions to transform entries (similar to how utils are setup)
+
 	/**
 	 * The folder where collections will be stored.
 	 * @default '_data'
@@ -29,67 +40,48 @@ export interface CollectionsOptions {
 	collectionsIndexFile?: string;
 
 	/**
-	 * The name of the property to look in the Front Matter metadata for an image.
-	 * @default 'image'
-	 */
-	metadataImageProperty?: string;
-
-	/**
-	 * The base path for public assets. This is where all collection assets will be saved.
-	 * @default '_assets'
-	 */
-	publicAssetsPath?: string;
-
-	/**
 	 * An array of sizes to optimize images for, it will be used to generate a `srcset` for the image.
 	 * @default [128, 256, 512]
 	 */
 	imageSizes?: number[];
 
 	/**
-	 * A function to handle image transformations.
-	 * @see {@link ImageHandlingFunction}
-	 */
-	imageHandling?: ImageHandlingFunction;
-
-	/**
 	 * The quality to use for image processing.
 	 * @default 75
 	 */
 	imageQuality?: number;
+
+	/**
+	 * An instance of {@link ImageOptimizer}.
+	 * If it is not provided, a new instance is created.
+	 */
+	imageOptimizer?: ImageOptimizer;
 }
 
 export class Collections {
 	#COLLECTIONS_URL: URL;
 	#COLLECTIONS_INDEX_URL: URL;
-	#PUBLIC_ASSETS_URL: URL;
-	#metadataImageProperty = 'image';
 	#collections!: Record<string, string[]>;
 	#collectionsCache: Record<string, MarkdownEntry<any>> = {};
-	#assetPathMap: Record<string, string> = {};
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	#imageSizes = [128, 256, 512];
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	#imageQuality = 75;
-	#imageHandling?: ImageHandlingFunction;
+
+	#imageOptimizer: ImageOptimizer;
 
 	constructor({
 		collectionsFolder,
 		collectionsIndexFile,
-		metadataImageProperty,
-		publicAssetsPath,
 		imageSizes,
-		imageHandling,
-		imageQuality
+		imageQuality,
+		imageOptimizer
 	}: CollectionsOptions = {}) {
-		this.#imageHandling = imageHandling;
 		this.#imageSizes = imageSizes ?? this.#imageSizes;
 		this.#imageQuality = imageQuality ?? this.#imageQuality;
-		this.#metadataImageProperty = metadataImageProperty ?? this.#metadataImageProperty;
-
 		this.#COLLECTIONS_URL = new URL(collectionsFolder ?? '_data', 'https://assets.local/');
 		this.#COLLECTIONS_INDEX_URL = new URL(collectionsIndexFile ?? 'index.json', this.#COLLECTIONS_URL);
-		this.#PUBLIC_ASSETS_URL = new URL(publicAssetsPath ?? '_assets', this.#COLLECTIONS_URL);
+		this.#imageOptimizer = imageOptimizer ?? new ImageOptimizer();
 	}
 
 	async #initCollections(assets: Env['Assets']) {
@@ -109,47 +101,29 @@ export class Collections {
 		}
 	}
 
-	#getAssetPublicPath(assetPath: string) {
-		const [publicPath] = Object.entries(this.#assetPathMap).find(([, privatePath]) => privatePath === assetPath) ?? [];
-
-		if (publicPath) {
-			return publicPath;
-		}
-
-		// TODO: skip random part?
-		const [extension] = /\.[a-z0-9]+?$/iu.exec(assetPath) ?? ['.bin'];
-		const newPublicPath = new URL(`${crypto.randomUUID()}${extension}`, this.#PUBLIC_ASSETS_URL).pathname;
-
-		this.#assetPathMap[newPublicPath] = assetPath;
-
-		return newPublicPath;
-	}
-
-	#resolveImagePath(filePath: string, imagePath: string) {
+	#processImage(filePath: string, imagePath: string, altText: string) {
 		const entryUrl = new URL(filePath, this.#COLLECTIONS_URL);
 		const imagePrivateUrl = new URL(imagePath, entryUrl);
+		let imageSrc = imagePrivateUrl.href;
 
 		if (entryUrl.host === imagePrivateUrl.host) {
-			return this.#getAssetPublicPath(imagePrivateUrl.pathname);
+			imageSrc = this.#imageOptimizer.addImageToCache({
+				src: imagePrivateUrl.pathname,
+				quality: this.#imageQuality,
+				sizes: this.#imageSizes
+			});
 		}
 
-		return imagePrivateUrl.href;
+		return this.#imageOptimizer.getImageHtml(imageSrc, { altText, loading: 'lazy', decoding: 'async' });
 	}
 
 	async #renderMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
 		const { groups: { frontmatter, markdown } = {} } = /(?:^---\n(?<frontmatter>.*?)\n---\n)?(?<markdown>.*$)/isu.exec(text) ?? {};
-		let metadata: T | undefined;
+		let metadata: Record<string, any> | undefined;
 		const { groups: { id } = {} } = /\/(?<id>[^/]+?)\.[a-z0-9]+?$/isu.exec(entryPath) ?? {};
 
 		if (frontmatter) {
-			metadata = parseYaml(frontmatter) as T;
-
-			// @ts-expect-error
-			const imageProperty: string | undefined = metadata?.[this.#metadataImageProperty];
-			if (imageProperty) {
-				// @ts-expect-error
-				metadata[this.#metadataImageProperty] = this.#resolveImagePath(entryPath, imageProperty);
-			}
+			metadata = parseYaml(frontmatter) as YamlNode<T>;
 		}
 
 		const marked = new Marked({
@@ -183,23 +157,12 @@ export class Collections {
 			}],
 			async: true,
 			// @ts-expect-error
-			walkTokens: async (token: Token & { html: string, href: string, text: string }) => {
+			walkTokens: (token: Token & { html: string, href: string, text: string }) => {
 				if (token.type !== 'imageOptimization') {
 					return;
 				}
 
-				// TODO: change path for optimized image?
-				const imagePath = this.#resolveImagePath(entryPath, token.href ?? '');
-				const newSrc = (await this.#imageHandling?.(assets, {
-					type: 'src',
-					src: imagePath,
-					dest: imagePath,
-					quality: this.#imageQuality,
-					density: 1
-				})) ?? imagePath;
-
-				// TODO: add image sizes
-				token.html = `<img src="${imagePath}" alt="${token.text ?? ''}" loading="lazy" decoding="async" />`;
+				token.html = this.#processImage(entryPath, token.href ?? '', token.text);
 			}
 		});
 
@@ -262,15 +225,5 @@ export class Collections {
 		}
 
 		return this.#collectionsCache[entry] as MarkdownEntry<T>;
-	}
-
-	async getAsset(assets: Env['Assets'], assetPath: string) {
-		const assetPrivatePath = this.#assetPathMap[assetPath];
-
-		if (!assetPrivatePath) {
-			return new Response(`Asset does not exist: "${assetPath}"`, { status: 404 });
-		}
-
-		return assets.fetch(new URL(assetPrivatePath, 'https://assets.local/'));
 	}
 }
