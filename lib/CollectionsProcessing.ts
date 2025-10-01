@@ -15,8 +15,8 @@ import markedFootnote from 'marked-footnote';
 import markedShiki from 'marked-shiki';
 import { createHighlighter } from 'shiki';
 import { parse as parseYaml } from 'yaml';
-import { ImageOptimizer } from './ImageOptimizer.ts';
-import { TemplateRenderer } from './TemplateRenderer.ts';
+import type { ImageOptimizer } from './ImageOptimizer.ts';
+import type { TemplateRenderer } from './TemplateRenderer.ts';
 
 export interface MarkdownEntry<T> {
 	id: string;
@@ -32,6 +32,29 @@ export interface EntryTransformerParameters<T> {
 }
 
 type TransformerFunction<T> = (options: EntryTransformerParameters<T>) => MarkdownEntry<T> | Promise<MarkdownEntry<T>>;
+
+interface GetEntryParams {
+	assets: Env['Assets'];
+	imageOptimizer: ImageOptimizer;
+	templateRenderer: TemplateRenderer;
+	collectionName: string;
+	entry: string;
+}
+
+interface ListEntriesParams {
+	assets: Env['Assets'];
+	imageOptimizer: ImageOptimizer;
+	templateRenderer: TemplateRenderer;
+	collectionName: string;
+}
+
+interface ProcessImageParams {
+	assets: Env['Assets'];
+	imageOptimizer: ImageOptimizer;
+	filePath: string;
+	imagePath: string;
+	altText: string;
+}
 
 export interface CollectionsOptions {
 	/**
@@ -58,29 +81,11 @@ export interface CollectionsOptions {
 	imageSizes?: number[];
 
 	/**
-	 * The quality to use for image processing.
-	 * @default 75
-	 */
-	imageQuality?: number;
-
-	/**
-	 * An instance of {@link ImageOptimizer}.
-	 * If it is not provided, a new instance is created.
-	 */
-	imageOptimizer?: ImageOptimizer;
-
-	/**
 	 * A list of transformer functions to process collection entries.
 	 * The key is the collection name, and the value is the transformer function.
 	 * If the function exists, it will be called every time an entry is fetched.
 	 */
 	transformers?: Record<string, TransformerFunction<any>>;
-
-	/**
-	 * An instance of {@link TemplateRenderer}.
-	 * It it is not provided, a new one will be created.
-	 */
-	templateRenderer?: TemplateRenderer;
 }
 
 export class Collections {
@@ -90,29 +95,22 @@ export class Collections {
 	#collectionsCache: Record<string, MarkdownEntry<any>> = {};
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	#imageSizes = [128, 256, 512];
-	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-	#imageQuality = 75;
-
-	#imageOptimizer: ImageOptimizer;
-	#templateRenderer: TemplateRenderer;
 	#transformers: Record<string, TransformerFunction<any>>;
 
 	constructor({
 		collectionsFolder,
 		collectionsIndexFile,
 		imageSizes,
-		imageQuality,
-		imageOptimizer,
-		transformers,
-		templateRenderer
+		transformers
 	}: CollectionsOptions = {}) {
 		this.#imageSizes = imageSizes ?? this.#imageSizes;
-		this.#imageQuality = imageQuality ?? this.#imageQuality;
 		this.#COLLECTIONS_URL = new URL(collectionsFolder ?? '_data', 'https://assets.local/');
 		this.#COLLECTIONS_INDEX_URL = new URL(collectionsIndexFile ?? 'index.json', this.#COLLECTIONS_URL);
-		this.#imageOptimizer = imageOptimizer ?? new ImageOptimizer();
-		this.#templateRenderer = templateRenderer ?? new TemplateRenderer();
 		this.#transformers = { ...(transformers ?? {}) };
+	}
+
+	get collectionsPath() {
+		return this.#COLLECTIONS_URL.pathname;
 	}
 
 	async #initCollections(assets: Env['Assets']) {
@@ -132,23 +130,22 @@ export class Collections {
 		}
 	}
 
-	#processImage(filePath: string, imagePath: string, altText: string) {
+	async #processImage({ assets, imageOptimizer, filePath, imagePath, altText }: ProcessImageParams) {
 		const entryUrl = new URL(filePath, this.#COLLECTIONS_URL);
 		const imagePrivateUrl = new URL(imagePath, entryUrl);
 		let imageSrc = imagePrivateUrl.href;
 
 		if (entryUrl.host === imagePrivateUrl.host) {
-			imageSrc = this.#imageOptimizer.addImageToCache({
+			imageSrc = await imageOptimizer.addImageToCache(assets, {
 				src: imagePrivateUrl.pathname,
-				quality: this.#imageQuality,
-				sizes: this.#imageSizes
+				widths: this.#imageSizes
 			});
 		}
 
-		return this.#imageOptimizer.getImageHtml(imageSrc, { altText, loading: 'lazy', decoding: 'async' });
+		return imageOptimizer.getImageHtml(imageSrc, { altText, loading: 'lazy', decoding: 'async' });
 	}
 
-	async #newMarkdownParser(entryPath: string) {
+	async #newMarkdownParser(assets: Env['Assets'], imageOptimizer: ImageOptimizer, entryPath: string) {
 		const marked = new Marked({
 			async: true,
 			breaks: true,
@@ -165,18 +162,19 @@ export class Collections {
 			highlight(code, lang, props) {
 				return highlighter.codeToHtml(code, {
 					lang,
+					// TODO: configure themes and custom themes.
 					themes: {
 						light: 'light-plus',
-						dark: 'dark-plus',
-						contrast: hcShikiTheme
+						dark: 'dark-plus'
+						// contrast: hcShikiTheme
 					},
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					meta: { __raw: props.join(' ') },
 					transformers: [
-						transformerTwoslash({
-							explicitTrigger: true,
-							rendererRich: { errorRendering: 'hover' }
-						}),
+						// transformerTwoslash({
+						// 	explicitTrigger: true,
+						// 	rendererRich: { errorRendering: 'hover' }
+						// }),
 						transformerNotationDiff({ matchAlgorithm: 'v3' }),
 						transformerNotationHighlight({ matchAlgorithm: 'v3' }),
 						transformerNotationWordHighlight({ matchAlgorithm: 'v3' }),
@@ -221,19 +219,25 @@ export class Collections {
 			}],
 			async: true,
 			// @ts-expect-error
-			walkTokens: (token: Token & { html: string, href: string, text: string }) => {
+			walkTokens: async (token: Token & { html: string, href: string, text: string }) => {
 				if (token.type !== 'imageOptimization') {
 					return;
 				}
 
-				token.html = this.#processImage(entryPath, token.href ?? '', token.text);
+				token.html = await this.#processImage({
+					assets,
+					imageOptimizer,
+					filePath: entryPath,
+					imagePath: token.href ?? '',
+					altText: token.text
+				});
 			}
 		});
 
 		return marked;
 	}
 
-	async #parseMarkdown(entryPath: string, text: string) {
+	async #parseMarkdown(assets: Env['Assets'], imageOptimizer: ImageOptimizer, entryPath: string, text: string) {
 		const { groups: { frontmatter, markdown } = {} } = /(?:^---\n(?<frontmatter>.*?)\n---\n)?(?<markdown>.*$)/isu.exec(text) ?? {};
 		let metadata: Record<string, any> | undefined;
 
@@ -241,7 +245,7 @@ export class Collections {
 			metadata = parseYaml(frontmatter);
 		}
 
-		const marked = await this.#newMarkdownParser(entryPath);
+		const marked = await this.#newMarkdownParser(assets, imageOptimizer, entryPath);
 
 		return {
 			metadata,
@@ -249,15 +253,15 @@ export class Collections {
 		};
 	}
 
-	async renderInlineMarkdown(text: string) {
-		const marked = await this.#newMarkdownParser('');
+	async renderInlineMarkdown(assets: Env['Assets'], imageOptimizer: ImageOptimizer, text: string) {
+		const marked = await this.#newMarkdownParser(assets, imageOptimizer, '');
 
 		return marked.parseInline(text);
 	}
 
-	async renderMarkdown<T>(entryPath: string, text: string) {
+	async renderMarkdown<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, entryPath: string, text: string) {
 		const [id] = (new URL(entryPath, this.#COLLECTIONS_URL).pathname.split('/').pop() ?? '').split('.');
-		const { contents, metadata } = await this.#parseMarkdown(entryPath, text);
+		const { contents, metadata } = await this.#parseMarkdown(assets, imageOptimizer, entryPath, text);
 
 		// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 		return {
@@ -267,7 +271,7 @@ export class Collections {
 		} as MarkdownEntry<T>;
 	}
 
-	async list<T>(assets: Env['Assets'], collectionName: string) {
+	async list<T>({ assets, templateRenderer, imageOptimizer, collectionName }: ListEntriesParams) {
 		await this.#initCollections(assets);
 
 		const collection = this.#collections[collectionName];
@@ -279,13 +283,19 @@ export class Collections {
 		const results: Record<string, MarkdownEntry<T>> = {};
 
 		for (const file of collection) {
-			results[file] = await this.get<T>(assets, collectionName, file);
+			results[file] = await this.get<T>({
+				assets,
+				templateRenderer,
+				imageOptimizer,
+				collectionName,
+				entry: file
+			});
 		}
 
 		return results;
 	}
 
-	async get<T>(assets: Env['Assets'], collectionName: string, entry: string) {
+	async get<T>({ assets, templateRenderer, imageOptimizer, collectionName, entry }: GetEntryParams) {
 		await this.#initCollections(assets);
 
 		if (!this.#collections[collectionName]?.find((filePath) => entry === filePath)) {
@@ -301,16 +311,20 @@ export class Collections {
 			}
 
 			const text = await response.text();
-			let markdownEntry = await this.renderMarkdown<T>(entryUrl.pathname, text);
+			let markdownEntry = await this.renderMarkdown<T>(assets, imageOptimizer, entryUrl.pathname, text);
 
-			markdownEntry.contents = await this.#templateRenderer.renderString(assets, markdownEntry.contents);
+			markdownEntry.contents = await templateRenderer.renderString({
+				assets,
+				imageOptimizer,
+				text: markdownEntry.contents
+			});
 
 			if (this.#transformers[collectionName]) {
 				markdownEntry = await this.#transformers[collectionName]({
 					assets,
 					entry: markdownEntry,
-					markdownParser: await this.#newMarkdownParser(entry),
-					imageOptimizer: this.#imageOptimizer
+					markdownParser: await this.#newMarkdownParser(assets, imageOptimizer, entry),
+					imageOptimizer
 				});
 			}
 

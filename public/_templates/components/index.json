@@ -1,0 +1,10 @@
+{
+	"css-naked-day": "components/css-naked-day.html",
+	"iab-escape": "components/iab-escape.html",
+	"svg-effects": "components/svg-effects.html",
+	"m-logo": "components/logo.html",
+	"old-style-buttons": "components/old-style-buttons.html",
+	"m-webrings": "components/m-webrings.html",
+	"theme-switcher": "components/theme-switcher.html",
+	"site-nav": "components/site-nav.html"
+}

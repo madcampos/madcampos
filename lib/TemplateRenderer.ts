@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 // eslint-disable-next-line @typescript-eslint/no-shadow
 import { type HTMLElement, NodeType, parse } from 'node-html-parser';
+import type { ImageOptimizer } from './ImageOptimizer.ts';
 
 /**
  * A function to render the component, if receives the processed attributes for the component as it's data.
@@ -18,6 +19,20 @@ import { type HTMLElement, NodeType, parse } from 'node-html-parser';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ComponentFunction = (data: any) => Promise<string> | string;
 type ComponentReferenceList = Record<string, ComponentFunction | string>;
+
+interface RenderTemplateParams<T> {
+	assets: Env['Assets'];
+	imageOptimizer: ImageOptimizer;
+	template: string;
+	data?: T;
+}
+
+interface RenderStringParams<T> {
+	assets: Env['Assets'];
+	imageOptimizer: ImageOptimizer;
+	text: string;
+	data?: T;
+}
 
 /**
  * The special attributes to do if checks, loops, etc.
@@ -115,26 +130,7 @@ interface TemplateRenderingAttributes {
 	unescapedCloseDelimiter: string;
 }
 
-/**
- * Handles image transformation, includding fetching and saving external images.
- *
- * This function should return a string representing either the `src` or _**individual**_ `srcset` for the image.
- *
- * E.g.:
- *
- * - `src`: ({ src: '/test.jpg' }) => '/transformed.jpg'
- * - `srcset`: ({ src: '/test.jpg', width: 100 }) => '/transformed.jpg 100w'
- */
-export type ImageHandlingFunction = (assets: Env['Assets'], imageData: {
-	type: 'src' | 'srcset',
-	src: string,
-	dest: string,
-	quality: number,
-	width?: number,
-	density?: number
-}) => Promise<string> | string;
-
-interface TemplateRendererOptions {
+export interface TemplateRendererOptions {
 	/**
 	 * A list of components where the key is the component tag name and the value either the path for the component file or a rendering function.
 	 *
@@ -151,10 +147,17 @@ interface TemplateRendererOptions {
 	components?: ComponentReferenceList;
 
 	/**
-	 * The image handling function.
-	 * @see {@link ImageHandlingFunction}
+	 * A JSON file listing components to look for.
+	 * If the file exists, the components listed will be merged with the component list.
+	 *
+	 * It should be an object where each key is the component name.
+	 * The values are strings pointing to a component template html file.
+	 *
+	 * The entry paths is relative to the templates folder.
+	 * @default 'components/index.json'
 	 */
-	imageHandling?: ImageHandlingFunction;
+	componentIndex?: string;
+
 	/**
 	 * The folder inside the assets folder where templates will live.
 	 *
@@ -167,16 +170,11 @@ interface TemplateRendererOptions {
 	 * The special attributes to do if checks, loops, etc.
 	 */
 	attributes?: Partial<TemplateRenderingAttributes>;
-
-	/**
-	 * The default quality for image optimizations.
-	 */
-	defaultImageQuality?: number;
 }
 
 export class TemplateRenderer {
-	#templateFolder = '_templates';
-	#defaultImageQuality = '75';
+	#TEMPLATES_URL: URL;
+	#TEMPLATES_INDEX_URL: URL;
 	#attributes: TemplateRenderingAttributes = {
 		if: '@if',
 		ifNot: '@if-not',
@@ -192,25 +190,46 @@ export class TemplateRenderer {
 		unescapedCloseDelimiter: '\\}\\}\\}'
 	};
 	#componentCache: ComponentReferenceList = {};
+	#isIndexFetched = false;
 	#componentPaths: ComponentReferenceList;
-	#imageHandling?: ImageHandlingFunction;
 
-	constructor({ components, imageHandling, templatesFolder, attributes, defaultImageQuality }: TemplateRendererOptions = {}) {
+	constructor({ components, componentIndex, templatesFolder, attributes }: TemplateRendererOptions = {}) {
 		this.#componentPaths = Object.fromEntries(Object.entries(components ?? {}).map(([key, value]) => [key.toLowerCase(), value]));
-		this.#imageHandling = imageHandling;
 
-		if (templatesFolder) {
-			this.#templateFolder = templatesFolder;
-		}
-
-		if (typeof defaultImageQuality === 'number') {
-			this.#defaultImageQuality = defaultImageQuality.toString();
-		}
+		this.#TEMPLATES_URL = new URL(templatesFolder ?? '_templates', 'https://assets.local/');
+		this.#TEMPLATES_INDEX_URL = new URL(componentIndex ?? 'index.json', this.#TEMPLATES_URL);
 
 		this.#attributes = {
 			...this.#attributes,
 			...(attributes ?? {})
 		};
+	}
+
+	get templatesPath() {
+		return this.#TEMPLATES_URL.pathname;
+	}
+
+	async #initTemplates(assets: Env['Assets']) {
+		if (!this.#isIndexFetched) {
+			try {
+				const response = await assets.fetch(this.#TEMPLATES_INDEX_URL);
+
+				if (!response.ok) {
+					throw new Error(`Failed to fetch collection index file at: ${this.#TEMPLATES_INDEX_URL.pathname}`);
+				}
+
+				const componentsJson = Object.fromEntries(Object.entries(await response.json() satisfies Record<string, string>).map(([key, value]) => [key.toLowerCase(), value]));
+
+				this.#componentPaths = {
+					...componentsJson,
+					...this.#componentPaths
+				};
+
+				this.#isIndexFetched = true;
+			} catch (err) {
+				console.error(err);
+			}
+		}
 	}
 
 	#getValue<T>(path: string, data?: T) {
@@ -287,7 +306,7 @@ export class TemplateRenderer {
 		if (!this.#componentCache[elementTag]) {
 			if (typeof this.#componentPaths[elementTag] === 'string') {
 				const templatePath = this.#componentPaths[elementTag];
-				const response = await assets.fetch(`https://assets.local/${this.#templateFolder}/${templatePath}`);
+				const response = await assets.fetch(new URL(templatePath, this.#TEMPLATES_URL));
 
 				if (!response.ok) {
 					this.#componentCache[elementTag] = '';
@@ -306,7 +325,7 @@ export class TemplateRenderer {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent(assets: Env['Assets'], element?: HTMLElement) {
+	async #processComponent(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement) {
 		if (!element) {
 			return;
 		}
@@ -332,7 +351,7 @@ export class TemplateRenderer {
 					}
 
 					if (!childElement.hasAttribute(this.#attributes.skipProcessing)) {
-						await this.#processElement(assets, childElement, childElement.attributes);
+						await this.#processElement(assets, imageOptimizer, childElement, childElement.attributes);
 					} else {
 						childElement.removeAttribute(this.#attributes.skipProcessing);
 					}
@@ -371,7 +390,7 @@ export class TemplateRenderer {
 		}
 	}
 
-	async #processImport<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+	async #processImport<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -390,7 +409,12 @@ export class TemplateRenderer {
 					element.removeAttribute(this.#attributes.importData);
 				}
 
-				const importedTemplate = await this.renderTemplate(assets, filePath, { ...element.attributes, ...(importData ?? {}) });
+				const importedTemplate = await this.renderTemplate({
+					assets,
+					imageOptimizer,
+					template: filePath,
+					data: { ...element.attributes, ...(importData ?? {}) }
+				});
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();
@@ -398,7 +422,7 @@ export class TemplateRenderer {
 		}
 	}
 
-	async #processChildElements<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+	async #processChildElements<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -410,14 +434,14 @@ export class TemplateRenderer {
 					continue;
 				}
 
-				await this.#processElement(assets, childElement, data);
+				await this.#processElement(assets, imageOptimizer, childElement, data);
 			} catch (err) {
 				console.error(err);
 			}
 		}
 	}
 
-	async #processLoop<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+	async #processLoop<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -444,7 +468,7 @@ export class TemplateRenderer {
 
 						clonedElement.removeAttribute(this.#attributes.loop);
 
-						await this.#processElement(assets, clonedElement, {
+						await this.#processElement(assets, imageOptimizer, clonedElement, {
 							...(data ?? {}),
 							[itemName?.trim() ?? '']: itemValue
 						});
@@ -525,7 +549,7 @@ export class TemplateRenderer {
 		});
 	}
 
-	async #processResponsiveImages(assets: Env['Assets'], element: HTMLElement) {
+	async #processResponsiveImages(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element: HTMLElement) {
 		if (element.tagName?.toLowerCase() !== 'img') {
 			return;
 		}
@@ -533,52 +557,32 @@ export class TemplateRenderer {
 		if (element.getAttribute('src')) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const src = element.getAttribute('src')!;
-			const newSrc = (await this.#imageHandling?.(assets, {
-				type: 'src',
+			const quality = element.getAttribute(this.#attributes.imageQuality);
+			const width = element.getAttribute('width');
+			const height = element.getAttribute('height');
+
+			const newSrc = (await imageOptimizer.addImageToCache(assets, {
 				src,
-				dest: src,
-				quality: Number.parseInt(element.getAttribute(this.#attributes.imageQuality) ?? this.#defaultImageQuality),
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				width: element.hasAttribute('width') ? Number.parseInt(element.getAttribute('width')!) : undefined,
-				density: 1
+				quality: quality ? Number.parseInt(quality) : undefined,
+				width: width ? Number.parseInt(width) : undefined,
+				height: height ? Number.parseInt(height) : undefined
 			})) ?? src;
 
 			element.setAttribute('src', newSrc);
 		}
 
-		if (element.getAttribute('srcset')) {
-			const newSrcset = await Promise.all(
-				(element.getAttribute('srcset') ?? '')
-					.split(',')
-					.map(async (srcString) => {
-						const [src = '', size = ''] = srcString.split(' ');
-						const parsedSize = size.endsWith('w') ? Number.parseInt(size.replace('w', '')) : undefined;
-						const parsedDensity = size.endsWith('x') ? Number.parseInt(size.replace('x', '')) : undefined;
-
-						return (await this.#imageHandling?.(assets, {
-							type: 'srcset',
-							src: element.getAttribute('src') ?? '',
-							dest: src.trim(),
-							quality: Number.parseInt(element.getAttribute(this.#attributes.imageQuality) ?? this.#defaultImageQuality),
-							width: parsedSize,
-							density: parsedDensity
-						})) ?? srcString;
-					})
-			);
-
-			element.setAttribute('srcset', newSrcset.join(', '));
-		}
+		// TODO: handle srcset and multiple images
 	}
 
-	async #processElement<T>(assets: Env['Assets'], element: HTMLElement, data?: T) {
+	async #processElement<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element: HTMLElement, data?: T) {
 		await this.#processIfAttribute(element, data);
-		await this.#processImport(assets, element, data);
-		await this.#processLoop(assets, element, data);
-		await this.#processChildElements(assets, element, data);
+		await this.#processImport(assets, imageOptimizer, element, data);
+		await this.#processLoop(assets, imageOptimizer, element, data);
+		await this.#processChildElements(assets, imageOptimizer, element, data);
 		await this.#processAttributes(element, data);
-		await this.#processResponsiveImages(assets, element);
+		await this.#processResponsiveImages(assets, imageOptimizer, element);
 		await this.#processTextNodes(element, data);
-		await this.#processComponent(assets, element);
+		await this.#processComponent(assets, imageOptimizer, element);
 	}
 
 	/**
@@ -586,8 +590,10 @@ export class TemplateRenderer {
 	 *
 	 * It returns a string of the rendered HTML.
 	 */
-	async renderTemplate<T>(assets: Env['Assets'], templatePath: string, data?: T) {
-		const response = await assets.fetch(`https://assets.local/${this.#templateFolder}/${templatePath}`);
+	async renderTemplate<T>({ assets, template, imageOptimizer, data }: RenderTemplateParams<T>) {
+		await this.#initTemplates(assets);
+
+		const response = await assets.fetch(new URL(template, this.#TEMPLATES_URL));
 		const text = await response.text();
 		const parsedDocument = parse(text, {
 			comment: true,
@@ -602,12 +608,14 @@ export class TemplateRenderer {
 			}
 		});
 
-		await this.#processElement(assets, parsedDocument, data);
+		await this.#processElement(assets, imageOptimizer, parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}
 
-	async renderString<T>(assets: Env['Assets'], text: string, data?: T) {
+	async renderString<T>({ assets, text, imageOptimizer, data }: RenderStringParams<T>) {
+		await this.#initTemplates(assets);
+
 		const parsedDocument = parse(text, {
 			comment: true,
 			parseNoneClosedTags: true,
@@ -621,7 +629,7 @@ export class TemplateRenderer {
 			}
 		});
 
-		await this.#processElement(assets, parsedDocument, data);
+		await this.#processElement(assets, imageOptimizer, parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}

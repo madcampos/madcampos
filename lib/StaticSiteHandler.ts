@@ -1,5 +1,9 @@
 /// <reference types="urlpattern-polyfill" />
 
+import { type CollectionsOptions, Collections } from './CollectionsProcessing.ts';
+import { type ImageOptimizerOptions, ImageOptimizer } from './ImageOptimizer.ts';
+import { type TemplateRendererOptions, TemplateRenderer } from './TemplateRenderer.ts';
+
 interface FileSystemModule {
 	writeFile(path: string, data: Uint8Array | string): Promise<void>;
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -8,73 +12,100 @@ interface FileSystemModule {
 	glob(pattern: string): AsyncIterable<string>;
 }
 
+interface RouterViewResolverParams {
+	assets: Env['Assets'];
+	collections: Collections;
+	templateRenderer: TemplateRenderer;
+	imageOpttimizer: ImageOptimizer;
+	url: URLPattern;
+}
+
 interface BaseRouteView {
-	resolveParams?(assets: Env['Assets'], params: { url: URLPattern }): Promise<string[]> | string[];
+	resolveParams?(params: RouterViewResolverParams): Promise<string[]> | string[];
+}
+
+interface RouterViewParams {
+	assets: Env['Assets'];
+	collections: Collections;
+	templateRenderer: TemplateRenderer;
+	imageOptimizer: ImageOptimizer;
+	path: string;
+	url: string;
+	params?: URLPatternResult;
+	data?: unknown;
 }
 
 interface GenericRenderRouteView extends BaseRouteView {
-	render(assets: Env['Assets'], params: { path: string, url: string, params?: URLPatternResult, data?: unknown }): Promise<Response> | Response;
+	render(params: RouterViewParams): Promise<Response> | Response;
 	renderHtml?: never;
 }
 
 interface HtmlRenderRouteView extends BaseRouteView {
 	render?: never;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	renderHtml: { template: string, data: any };
+	renderHtml: { template: string, data?: any };
 }
 
 export type RouteView = GenericRenderRouteView | HtmlRenderRouteView;
 
 interface StaticSiteHandlerOptions {
-	baseUrl: string;
+	baseUrl: URL | string;
 	routes: Record<string, RouteView>;
 	fallbackRoute?: RouteView;
 	trailingSlash?: 'always' | 'ignore' | 'never';
 	fetchHandler?: ExportedHandlerFetchHandler;
-	collectionAssetsHandler?(assets: Env['Assets'], assetPath: string): Promise<Response>;
+	imageOptimizer?: ImageOptimizerOptions;
+	collections?: CollectionsOptions;
+	templateRenderer?: TemplateRendererOptions;
 }
 
 export class StaticSiteHandler {
-	#TEMPLATES_FOLDER = '_templates';
-	#COLLECTIONS_FOLDER = '_data';
-	#COLLECTION_ASSETS_FOLDER = '_assets';
+	#BASE_URL: URL;
 	#PATH_WITH_EXT_REGEX = /\/([^/]+?)\.[a-z0-9]+?$/iu;
 	#TRAILING_SLASHES_REGEX = /\/$/iu;
 	#FORBIDDEN_CHARS_IN_FILES_REGEX = /[\\<>:"|?*]/giu;
-
-	#baseUrl: string;
 	#routes: [URLPattern, GenericRenderRouteView][] = [];
 	#resolvedRoutes = new Map<URLPattern, string[]>();
-	#fallbackRoute: GenericRenderRouteView = {
-		render: () => new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } })
-	};
+	#fallbackRoute: GenericRenderRouteView;
 	#fetchHandler?: ExportedHandlerFetchHandler;
+	#templateRenderer: TemplateRenderer;
+	#imageOptimizer: ImageOptimizer;
+	#collections: Collections;
 
-	constructor({ routes, baseUrl, fallbackRoute, trailingSlash, fetchHandler, collectionAssetsHandler }: StaticSiteHandlerOptions) {
-		this.#baseUrl = baseUrl;
+	constructor({ routes, baseUrl, fallbackRoute, trailingSlash, fetchHandler, templateRenderer, collections, imageOptimizer }: StaticSiteHandlerOptions) {
+		this.#BASE_URL = new URL(baseUrl);
+
 		this.#fetchHandler = fetchHandler;
+		this.#templateRenderer = new TemplateRenderer(templateRenderer);
+		this.#collections = new Collections(collections);
+		this.#imageOptimizer = new ImageOptimizer(imageOptimizer);
 
 		const normalizedFallbackRoute: GenericRenderRouteView = {
 			resolveParams: fallbackRoute?.resolveParams,
-			render: fallbackRoute?.render ?? this.#fallbackRoute.render
+			render: fallbackRoute?.render ?? (() => new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }))
 		};
 
 		if (fallbackRoute?.renderHtml) {
-			normalizedFallbackRoute.render = async (assets, { url }) => {
-				const body = await templateRenderer.renderTemplate(assets, fallbackRoute.renderHtml.template, { ...(fallbackRoute.renderHtml.data ?? {}), url });
+			normalizedFallbackRoute.render = async ({ assets, url }) => {
+				const body = await this.#templateRenderer.renderTemplate({
+					assets,
+					imageOptimizer: this.#imageOptimizer,
+					template: fallbackRoute.renderHtml.template,
+					data: { ...(fallbackRoute.renderHtml.data ?? {}), url }
+				});
 
 				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
 			};
 		}
 
-		this.#routes.push([new URLPattern(`/${this.#TEMPLATES_FOLDER}{/}?*`, this.#baseUrl), normalizedFallbackRoute]);
-		this.#routes.push([new URLPattern(`/${this.#COLLECTIONS_FOLDER}{/}?*`, this.#baseUrl), normalizedFallbackRoute]);
+		this.#fallbackRoute = normalizedFallbackRoute;
 
-		if (collectionAssetsHandler) {
-			this.#routes.push([new URLPattern(`/${this.#COLLECTION_ASSETS_FOLDER}{/}?*`, this.#baseUrl), {
-				render: async (assets, { path }) => collectionAssetsHandler(assets, path)
-			}]);
-		}
+		this.#routes.push([new URLPattern(`${this.#templateRenderer.templatesPath}{/}?*`, this.#BASE_URL.href), normalizedFallbackRoute]);
+		this.#routes.push([new URLPattern(`/${this.#collections.collectionsPath}{/}?*`, this.#BASE_URL.href), normalizedFallbackRoute]);
+
+		this.#routes.push([new URLPattern(`/${this.#imageOptimizer.publicAssetsPath}{/}?*`, this.#BASE_URL.href), {
+			render: async ({ assets, path }) => this.#imageOptimizer.fetchImage(assets, path)
+		}]);
 
 		Object.entries(routes).forEach(([path, route]) => {
 			let resolvedPath = path;
@@ -100,10 +131,15 @@ export class StaticSiteHandler {
 				}
 			}
 
-			this.#routes.push([new URLPattern(resolvedPath, this.#baseUrl), {
+			this.#routes.push([new URLPattern(resolvedPath, this.#BASE_URL.href), {
 				resolveParams: route.resolveParams,
-				render: route.render ?? (async (assets, { url }) => {
-					const body = await templateRenderer.renderTemplate(assets, route.renderHtml.template, { ...(route.renderHtml.data ?? {}), url });
+				render: route.render ?? (async ({ assets, url }) => {
+					const body = await this.#templateRenderer.renderTemplate({
+						assets,
+						imageOptimizer: this.#imageOptimizer,
+						template: route.renderHtml.template,
+						data: { ...(route.renderHtml.data ?? {}), url }
+					});
 
 					return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
 				})
@@ -126,8 +162,8 @@ export class StaticSiteHandler {
 	}
 
 	async #resolveRoute(assets: Env['Assets'], url: string) {
-		const resolvedUrl = new URL(url, this.#baseUrl);
-		const [pattern, route] = this.#routes.find(([curPattern]) => curPattern.test(resolvedUrl.pathname, this.#baseUrl)) ?? [];
+		const resolvedUrl = new URL(url, this.#BASE_URL);
+		const [pattern, route] = this.#routes.find(([curPattern]) => curPattern.test(resolvedUrl.pathname, this.#BASE_URL.href)) ?? [];
 
 		if (!pattern || !route) {
 			return;
@@ -142,7 +178,13 @@ export class StaticSiteHandler {
 			let resolvedRoutes = this.#resolvedRoutes.get(pattern);
 
 			if (!resolvedRoutes) {
-				resolvedRoutes = await route.resolveParams(assets, { url: pattern });
+				resolvedRoutes = await route.resolveParams({
+					assets,
+					collections: this.#collections,
+					imageOpttimizer: this.#imageOptimizer,
+					templateRenderer: this.#templateRenderer,
+					url: pattern
+				});
 
 				this.#resolvedRoutes.set(pattern, resolvedRoutes);
 			}
@@ -151,7 +193,14 @@ export class StaticSiteHandler {
 
 			if (resolvedPath) {
 				try {
-					return await route.render(assets, { path: resolvedPath, url });
+					return await route.render({
+						assets,
+						collections: this.#collections,
+						imageOptimizer: this.#imageOptimizer,
+						templateRenderer: this.#templateRenderer,
+						path: resolvedPath,
+						url
+					});
 				} catch (err) {
 					console.error(`Error rendering route: ${url}.`);
 					console.error(err);
@@ -159,14 +208,21 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return route.render(assets, { path: resolvedUrl.pathname, url });
+		return route.render({
+			assets,
+			collections: this.#collections,
+			imageOptimizer: this.#imageOptimizer,
+			templateRenderer: this.#templateRenderer,
+			path: resolvedUrl.pathname,
+			url
+		});
 	}
 
 	async build(assets: Env['Assets'], fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
 		await fileSystemModule.mkdir(outputPath, { recursive: true });
 
 		for await (const entry of fileSystemModule.glob(`${publicDir}/**/*`)) {
-			if (entry.startsWith(`${publicDir}/${this.#TEMPLATES_FOLDER}`) || entry.startsWith(`${publicDir}/${this.#COLLECTIONS_FOLDER}`)) {
+			if (entry.startsWith(`${publicDir}${this.#templateRenderer.templatesPath}`) || entry.startsWith(`${publicDir}${this.#collections.collectionsPath}`)) {
 				continue;
 			}
 
@@ -178,7 +234,13 @@ export class StaticSiteHandler {
 
 			if (route.resolveParams) {
 				resolvedRoutes.push(
-					...await route.resolveParams(assets, { url: pattern })
+					...await route.resolveParams({
+						assets,
+						collections: this.#collections,
+						imageOpttimizer: this.#imageOptimizer,
+						templateRenderer: this.#templateRenderer,
+						url: pattern
+					})
 				);
 			} else if (pattern.pathname === '/*') {
 				resolvedRoutes.push('/404.html');
@@ -195,7 +257,14 @@ export class StaticSiteHandler {
 
 			for (const resolvedPath of resolvedRoutes) {
 				try {
-					const response = await route.render(assets, { path: resolvedPath, url: `${this.#baseUrl}${resolvedPath}` });
+					const response = await route.render({
+						assets,
+						collections: this.#collections,
+						imageOptimizer: this.#imageOptimizer,
+						templateRenderer: this.#templateRenderer,
+						path: resolvedPath,
+						url: new URL(resolvedPath, this.#BASE_URL).href
+					});
 
 					const file = await (await response.blob()).bytes();
 					let filePath = resolvedPath;
@@ -237,6 +306,13 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return this.#fallbackRoute.render(env.Assets, { path: new URL(request.url).pathname, url: request.url });
+		return this.#fallbackRoute.render({
+			assets: env.Assets,
+			collections: this.#collections,
+			imageOptimizer: this.#imageOptimizer,
+			templateRenderer: this.#templateRenderer,
+			path: new URL(request.url).pathname,
+			url: request.url
+		});
 	}
 }

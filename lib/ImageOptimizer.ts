@@ -1,3 +1,10 @@
+import { createJimp } from '@jimp/core';
+import jpeg from '@jimp/wasm-jpeg';
+import png from '@jimp/wasm-png';
+import webp from '@jimp/wasm-webp';
+import { defaultPlugins, ResizeStrategy } from 'jimp';
+import sharp from 'sharp';
+
 type ImageExtension = 'gif' | 'jpeg' | 'jpg' | 'png' | 'webp';
 
 interface ImageMetadata {
@@ -7,17 +14,25 @@ interface ImageMetadata {
 	src: string;
 
 	/**
+	 * The image density.
+	 */
+	density?: number;
+
+	/**
 	 * The image intrinsic width.
 	 */
 	width: number;
+
 	/**
 	 * The image intrinsic height.
 	 */
 	height: number;
+
 	/**
 	 * The image extension.
 	 */
 	extension: ImageExtension;
+
 	/**
 	 * The image quality.
 	 */
@@ -55,7 +70,12 @@ interface ImageCacheOptions {
 	/**
 	 * A list of widths to use for this image.
 	 */
-	sizes?: number[];
+	widths?: number[];
+
+	/**
+	 * A list of densities to use for this image.
+	 */
+	densities?: number[];
 
 	/**
 	 * If the name of the image should be kept when optimizing.
@@ -69,17 +89,39 @@ interface ImageHtmlOptions {
 	 * The image alt text
 	 */
 	altText: string;
+
 	/**
 	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#loading|loading attribute}.
 	 */
 	loading?: 'eager' | 'lazy';
+
 	/**
 	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#decoding|decoding attribute}.
 	 */
 	decoding?: 'async' | 'auto' | 'sync';
+
+	/**
+	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#sizes|sizes attribute}
+	 */
+	sizes?: string;
+
+	/**
+	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#referrerpolicy|referrerpolicy attribute}
+	 */
+	referrerPolicy?: string;
+
+	/**
+	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#fetchpriority|fetchpriority attribute}
+	 */
+	fetchPriority?: string;
+
+	/**
+	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin|crossorigin attribute}
+	 */
+	crossOrigin?: string;
 }
 
-interface ImageOptimizerOptions {
+export interface ImageOptimizerOptions {
 	/**
 	 * The path where public assets will be saved
 	 * @default '_assets'
@@ -118,38 +160,75 @@ export class ImageOptimizer {
 		return this.#PUBLIC_ASSETS_URL.pathname;
 	}
 
-	addImageToCache(image: ImageCacheOptions) {
+	async #loadImage(assets: Env['Assets'], src: string) {
+		const imageResponse = await assets.fetch(new URL(src, 'https://assets.local/'));
+
+		if (!imageResponse.ok) {
+			throw new Error(`Image file does not exist: "${src}"`);
+		}
+
+		const Jimp = createJimp({
+			formats: [jpeg, png, webp],
+			plugins: defaultPlugins
+		});
+
+		const imageBuffer = await imageResponse.arrayBuffer();
+
+		const sharpImage = sharp(imageBuffer);
+
+		console.log(sharpImage);
+
+		return Jimp.fromBuffer(imageBuffer);
+	}
+
+	async addImageToCache(assets: Env['Assets'], imageOptions: ImageCacheOptions) {
+		const image = await this.#loadImage(assets, imageOptions.src);
+
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const [imageName, extension] = image.src.split('/').pop()!.split('.') as [string, ImageExtension];
-		const newName = image.keepName ? imageName : crypto.randomUUID();
-		const publicPath = new URL(`${newName}.${image.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+		const [imageName, extension] = imageOptions.src.split('/').pop()!.split('.') as [string, ImageExtension];
+		const newName = imageOptions.keepName ? imageName : crypto.randomUUID();
+		const publicPath = new URL(`${newName}.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
 		this.#imageCache.set(publicPath, {
-			src: image.src,
-			extension: image.extension ?? extension ?? this.#defaultExtension,
-			quality: image.quality ?? this.#defaultImageQuality,
-			// TODO: figure out the image intrinsic width and height?
-			width: 0,
-			height: 0
+			src: imageOptions.src,
+			extension: imageOptions.extension ?? extension ?? this.#defaultExtension,
+			quality: imageOptions.quality ?? this.#defaultImageQuality,
+			width: image.width,
+			height: image.height
 		});
 
 		const publicPaths = [publicPath];
 
-		image.sizes?.forEach((size) => {
-			const sizePublicPath = new URL(`${newName}-${size}.${image.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+		imageOptions.widths?.forEach((width) => {
+			const sizePublicPath = new URL(`${newName}-${width}w.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+
 			this.#imageCache.set(sizePublicPath, {
-				src: image.src,
-				extension: image.extension ?? extension ?? this.#defaultExtension,
-				quality: image.quality ?? this.#defaultImageQuality,
-				// TODO: figure out the image intrinsic width and height?
-				width: size,
-				height: size
+				src: imageOptions.src,
+				extension: imageOptions.extension ?? extension ?? this.#defaultExtension,
+				quality: imageOptions.quality ?? this.#defaultImageQuality,
+				width,
+				height: (image.height / image.width) * width
 			});
 
 			publicPaths.push(sizePublicPath);
 		});
 
-		this.#privateToPublicPathMap.set(image.src, publicPaths);
+		imageOptions.densities?.forEach((density) => {
+			const sizePublicPath = new URL(`${newName}-${density}x.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+
+			this.#imageCache.set(sizePublicPath, {
+				src: imageOptions.src,
+				extension: imageOptions.extension ?? extension ?? this.#defaultExtension,
+				quality: imageOptions.quality ?? this.#defaultImageQuality,
+				width: image.width * density,
+				height: image.height * density,
+				density
+			});
+
+			publicPaths.push(sizePublicPath);
+		});
+
+		this.#privateToPublicPathMap.set(imageOptions.src, publicPaths);
 
 		return publicPath;
 	}
@@ -175,14 +254,50 @@ export class ImageOptimizer {
 		];
 	}
 
-	getImageHtml(src: string, { altText, loading, decoding }: ImageHtmlOptions) {
+	getImageHtml(src: string, { altText, loading, decoding, crossOrigin, fetchPriority, referrerPolicy, sizes }: ImageHtmlOptions) {
 		const imageMetadata = this.#imageCache.get(src);
 
+		let srcSet: string | undefined;
 		if (imageMetadata) {
-			// TODO: process image metadata and add sizes and srcset
+			const publicMetadata = (this.#privateToPublicPathMap.get(imageMetadata.src) ?? [])
+				.reduce<[string, ImageMetadata][]>((results, publicPath) => {
+					if (this.#imageCache.has(publicPath)) {
+						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+						results.push([publicPath, this.#imageCache.get(publicPath)!]);
+					}
+
+					return results;
+				}, [])
+				.sort(([, { width: widthA }], [, { width: widthB }]) => widthA - widthB);
+
+			if (publicMetadata.length) {
+				srcSet = publicMetadata.map(([publicPath, { width, density }]) => {
+					let descriptor = '';
+
+					if (width) {
+						descriptor = `${width.toString()}w`;
+					}
+
+					if (density) {
+						descriptor = `${density.toString()}x`;
+					}
+
+					return `${publicPath} ${descriptor}`;
+				}).join(', ');
+			}
 		}
 
-		return `<img src="${src}" alt="${altText}" loading="${loading ?? 'lazy'}" decoding="${decoding ?? 'auto'}" />`;
+		return `<img
+			src="${src}"
+			alt="${altText}"
+			loading="${loading ?? 'lazy'}"
+			decoding="${decoding ?? 'auto'}"
+			fetchpriority="${fetchPriority ?? 'auto'}"
+			referrerpolicy="${referrerPolicy ?? 'no-referrer'}"
+			${crossOrigin ? `crossorigin="${crossOrigin}"` : ''}
+			${srcSet ? `srcset="${srcSet}"` : ''}
+			${sizes ? `sizes="${sizes}"` : ''}
+		/>`;
 	}
 
 	async fetchImage(assets: Env['Assets'], imagePath: string) {
@@ -196,7 +311,31 @@ export class ImageOptimizer {
 			return existingAssetResponse;
 		}
 
-		// TODO: optimize image and save results
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const imageMetadata = this.#imageCache.get(imagePath)!;
+
+		const image = await this.#loadImage(assets, imageMetadata.src);
+
+		if (image.width !== imageMetadata.width || image.height !== imageMetadata.height) {
+			image.resize({
+				h: imageMetadata.height,
+				w: imageMetadata.width,
+				mode: ResizeStrategy.HERMITE
+			});
+		}
+
+		image.quantize({
+			colorDistanceFormula: 'euclidean-bt709',
+			imageQuantization: 'floyd-steinberg',
+			paletteQuantization: 'wuquant'
+		});
+
+		const imageBuffer = (await image.getBuffer('image/webp', {})).buffer as ArrayBuffer;
+
+		return new Response(imageBuffer, {
+			status: 200,
+			headers: { 'Content-Tyoe': image.mime ?? 'image/webp' }
+		});
 	}
 
 	generateManifest() {
