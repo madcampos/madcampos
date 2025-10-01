@@ -1,9 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import {
+	transformerMetaHighlight,
+	transformerMetaWordHighlight,
+	transformerNotationDiff,
+	transformerNotationErrorLevel,
+	transformerNotationFocus,
+	transformerNotationHighlight,
+	transformerNotationWordHighlight,
+	transformerRenderWhitespace
+} from '@shikijs/transformers';
 import { type Token, type Tokens, Marked } from 'marked';
-import { type Node as YamlNode, parse as parseYaml } from 'yaml';
+import markedFootnote from 'marked-footnote';
+import markedShiki from 'marked-shiki';
+import { createHighlighter } from 'shiki';
+import { parse as parseYaml } from 'yaml';
 import { ImageOptimizer } from './ImageOptimizer.ts';
-import type { TemplateRenderer } from './TemplateRenderer.ts';
+import { TemplateRenderer } from './TemplateRenderer.ts';
 
 export interface MarkdownEntry<T> {
 	id: string;
@@ -14,14 +27,13 @@ export interface MarkdownEntry<T> {
 export interface EntryTransformerParameters<T> {
 	assets: Env['Assets'];
 	imageOptimizer: ImageOptimizer;
-	templateRenderer: TemplateRenderer;
 	markdownParser: Marked;
 	entry: MarkdownEntry<T>;
 }
 
-export interface CollectionsOptions {
-	// TODO: add transformer functions to transform entries (similar to how utils are setup)
+type TransformerFunction<T> = (options: EntryTransformerParameters<T>) => MarkdownEntry<T> | Promise<MarkdownEntry<T>>;
 
+export interface CollectionsOptions {
 	/**
 	 * The folder where collections will be stored.
 	 * @default '_data'
@@ -56,6 +68,19 @@ export interface CollectionsOptions {
 	 * If it is not provided, a new instance is created.
 	 */
 	imageOptimizer?: ImageOptimizer;
+
+	/**
+	 * A list of transformer functions to process collection entries.
+	 * The key is the collection name, and the value is the transformer function.
+	 * If the function exists, it will be called every time an entry is fetched.
+	 */
+	transformers?: Record<string, TransformerFunction<any>>;
+
+	/**
+	 * An instance of {@link TemplateRenderer}.
+	 * It it is not provided, a new one will be created.
+	 */
+	templateRenderer?: TemplateRenderer;
 }
 
 export class Collections {
@@ -69,19 +94,25 @@ export class Collections {
 	#imageQuality = 75;
 
 	#imageOptimizer: ImageOptimizer;
+	#templateRenderer: TemplateRenderer;
+	#transformers: Record<string, TransformerFunction<any>>;
 
 	constructor({
 		collectionsFolder,
 		collectionsIndexFile,
 		imageSizes,
 		imageQuality,
-		imageOptimizer
+		imageOptimizer,
+		transformers,
+		templateRenderer
 	}: CollectionsOptions = {}) {
 		this.#imageSizes = imageSizes ?? this.#imageSizes;
 		this.#imageQuality = imageQuality ?? this.#imageQuality;
 		this.#COLLECTIONS_URL = new URL(collectionsFolder ?? '_data', 'https://assets.local/');
 		this.#COLLECTIONS_INDEX_URL = new URL(collectionsIndexFile ?? 'index.json', this.#COLLECTIONS_URL);
 		this.#imageOptimizer = imageOptimizer ?? new ImageOptimizer();
+		this.#templateRenderer = templateRenderer ?? new TemplateRenderer();
+		this.#transformers = { ...(transformers ?? {}) };
 	}
 
 	async #initCollections(assets: Env['Assets']) {
@@ -117,20 +148,53 @@ export class Collections {
 		return this.#imageOptimizer.getImageHtml(imageSrc, { altText, loading: 'lazy', decoding: 'async' });
 	}
 
-	async #renderMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
-		const { groups: { frontmatter, markdown } = {} } = /(?:^---\n(?<frontmatter>.*?)\n---\n)?(?<markdown>.*$)/isu.exec(text) ?? {};
-		let metadata: Record<string, any> | undefined;
-		const { groups: { id } = {} } = /\/(?<id>[^/]+?)\.[a-z0-9]+?$/isu.exec(entryPath) ?? {};
-
-		if (frontmatter) {
-			metadata = parseYaml(frontmatter) as YamlNode<T>;
-		}
-
+	async #newMarkdownParser(entryPath: string) {
 		const marked = new Marked({
 			async: true,
 			breaks: true,
 			gfm: true
 		});
+
+		const highlighter = await createHighlighter({
+			langs: ['md', 'js', 'html', 'css', 'typescript', 'powershell', 'shell', 'fish', 'jsx'],
+			themes: []
+		});
+
+		marked.use(markedFootnote());
+		marked.use(markedShiki({
+			highlight(code, lang, props) {
+				return highlighter.codeToHtml(code, {
+					lang,
+					themes: {
+						light: 'light-plus',
+						dark: 'dark-plus',
+						contrast: hcShikiTheme
+					},
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					meta: { __raw: props.join(' ') },
+					transformers: [
+						transformerTwoslash({
+							explicitTrigger: true,
+							rendererRich: { errorRendering: 'hover' }
+						}),
+						transformerNotationDiff({ matchAlgorithm: 'v3' }),
+						transformerNotationHighlight({ matchAlgorithm: 'v3' }),
+						transformerNotationWordHighlight({ matchAlgorithm: 'v3' }),
+						transformerNotationFocus({ matchAlgorithm: 'v3' }),
+						transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
+						transformerRenderWhitespace({ position: 'boundary' }),
+						transformerMetaHighlight(),
+						transformerMetaWordHighlight()
+					]
+				});
+			}
+		}));
+
+		// TODO: add definition lists
+		// TODO: add support for subscript
+		// TODO: add support for superscript
+		// TODO: add support for highlighting
+		// TODO: add support for underline
 
 		marked.use({
 			extensions: [{
@@ -166,16 +230,34 @@ export class Collections {
 			}
 		});
 
-		// TODO: add shiki plugin
-		// TODO: add definition lists
-		// TODO: add support for subscript
-		// TODO: add support for superscript
-		// TODO: add support for footnotes
-		// TODO: add support for highlighting
-		// TODO: add support for underline
-		// TODO: convert embedded content to custom elements
+		return marked;
+	}
 
-		const contents = await marked.parse(markdown ?? '');
+	async #parseMarkdown(entryPath: string, text: string) {
+		const { groups: { frontmatter, markdown } = {} } = /(?:^---\n(?<frontmatter>.*?)\n---\n)?(?<markdown>.*$)/isu.exec(text) ?? {};
+		let metadata: Record<string, any> | undefined;
+
+		if (frontmatter) {
+			metadata = parseYaml(frontmatter);
+		}
+
+		const marked = await this.#newMarkdownParser(entryPath);
+
+		return {
+			metadata,
+			contents: await marked.parse(markdown ?? '')
+		};
+	}
+
+	async renderInlineMarkdown(text: string) {
+		const marked = await this.#newMarkdownParser('');
+
+		return marked.parseInline(text);
+	}
+
+	async renderMarkdown<T>(entryPath: string, text: string) {
+		const [id] = (new URL(entryPath, this.#COLLECTIONS_URL).pathname.split('/').pop() ?? '').split('.');
+		const { contents, metadata } = await this.#parseMarkdown(entryPath, text);
 
 		// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 		return {
@@ -219,7 +301,18 @@ export class Collections {
 			}
 
 			const text = await response.text();
-			const markdownEntry = await this.#renderMarkdown<T>(assets, entryUrl.pathname, text);
+			let markdownEntry = await this.renderMarkdown<T>(entryUrl.pathname, text);
+
+			markdownEntry.contents = await this.#templateRenderer.renderString(assets, markdownEntry.contents);
+
+			if (this.#transformers[collectionName]) {
+				markdownEntry = await this.#transformers[collectionName]({
+					assets,
+					entry: markdownEntry,
+					markdownParser: await this.#newMarkdownParser(entry),
+					imageOptimizer: this.#imageOptimizer
+				});
+			}
 
 			this.#collectionsCache[entry] = markdownEntry;
 		}

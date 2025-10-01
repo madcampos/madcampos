@@ -606,4 +606,23 @@ export class TemplateRenderer {
 
 		return parsedDocument.outerHTML;
 	}
+
+	async renderString<T>(assets: Env['Assets'], text: string, data?: T) {
+		const parsedDocument = parse(text, {
+			comment: true,
+			parseNoneClosedTags: true,
+			fixNestedATags: true,
+			voidTag: { closingSlash: true },
+			blockTextElements: {
+				script: true,
+				noscript: true,
+				style: true,
+				pre: true
+			}
+		});
+
+		await this.#processElement(assets, parsedDocument, data);
+
+		return parsedDocument.outerHTML;
+	}
 }

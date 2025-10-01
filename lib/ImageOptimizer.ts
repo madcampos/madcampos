@@ -1,26 +1,81 @@
 type ImageExtension = 'gif' | 'jpeg' | 'jpg' | 'png' | 'webp';
 
 interface ImageMetadata {
+	/**
+	 * The image original path, before any transformations.
+	 */
 	src: string;
+
+	/**
+	 * The image intrinsic width.
+	 */
 	width: number;
+	/**
+	 * The image intrinsic height.
+	 */
 	height: number;
+	/**
+	 * The image extension.
+	 */
 	extension: ImageExtension;
+	/**
+	 * The image quality.
+	 */
 	quality: number;
 }
 
 interface ImageCacheOptions {
+	/**
+	 * The image source, it is the image's path before any optimizations have ran.
+	 */
 	src: string;
+
+	/**
+	 * The image desired width, in pixels.
+	 */
 	width?: number;
+
+	/**
+	 * The image desired height, in pixels.
+	 */
 	height?: number;
+
+	/**
+	 * The image desired extension, without the dot.
+	 * @default 'webp'
+	 */
 	extension?: ImageExtension;
+
+	/**
+	 * The image quality to use by the optimizer.
+	 * @default 75
+	 */
 	quality?: number;
+
+	/**
+	 * A list of widths to use for this image.
+	 */
 	sizes?: number[];
-	keepName?: true;
+
+	/**
+	 * If the name of the image should be kept when optimizing.
+	 * If this option is not set, the image name will use a randomly generated UUID instead.
+	 */
+	keepName?: boolean;
 }
 
 interface ImageHtmlOptions {
+	/**
+	 * The image alt text
+	 */
 	altText: string;
+	/**
+	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#loading|loading attribute}.
+	 */
 	loading?: 'eager' | 'lazy';
+	/**
+	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#decoding|decoding attribute}.
+	 */
 	decoding?: 'async' | 'auto' | 'sync';
 }
 
@@ -142,5 +197,9 @@ export class ImageOptimizer {
 		}
 
 		// TODO: optimize image and save results
+	}
+
+	generateManifest() {
+		// TODO: generate a manifest of optimized information, this will be loaded and used as references.
 	}
 }
