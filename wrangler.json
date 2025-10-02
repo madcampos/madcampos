@@ -22,7 +22,8 @@
 		"binding": "Assets",
 		"run_worker_first": [
 			"/_templates/*",
-			"/_data/*"
+			"/_data/*",
+			"/_assets/*"
 		],
 		"html_handling": "none",
 		"not_found_handling": "none"

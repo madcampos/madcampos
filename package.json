@@ -40,7 +40,6 @@
 		"marked-footnote": "1.4.0",
 		"marked-shiki": "1.2.1",
 		"node-html-parser": "7.0.1",
-		"sharp": "^0.34.4",
 		"shiki": "3.8.1",
 		"typescript": "^5.9.2",
 		"urlpattern-polyfill": "10.1.0",

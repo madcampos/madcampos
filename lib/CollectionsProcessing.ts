@@ -104,7 +104,7 @@ export class Collections {
 		transformers
 	}: CollectionsOptions = {}) {
 		this.#imageSizes = imageSizes ?? this.#imageSizes;
-		this.#COLLECTIONS_URL = new URL(collectionsFolder ?? '_data', 'https://assets.local/');
+		this.#COLLECTIONS_URL = new URL(collectionsFolder ?? '_data/', 'https://assets.local/');
 		this.#COLLECTIONS_INDEX_URL = new URL(collectionsIndexFile ?? 'index.json', this.#COLLECTIONS_URL);
 		this.#transformers = { ...(transformers ?? {}) };
 	}

@@ -100,38 +100,33 @@ export class StaticSiteHandler {
 
 		this.#fallbackRoute = normalizedFallbackRoute;
 
-		this.#routes.push([new URLPattern(`${this.#templateRenderer.templatesPath}{/}?*`, this.#BASE_URL.href), normalizedFallbackRoute]);
-		this.#routes.push([new URLPattern(`/${this.#collections.collectionsPath}{/}?*`, this.#BASE_URL.href), normalizedFallbackRoute]);
+		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#templateRenderer.templatesPath}*` }), normalizedFallbackRoute]);
+		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#collections.collectionsPath}*` }), normalizedFallbackRoute]);
 
-		this.#routes.push([new URLPattern(`/${this.#imageOptimizer.publicAssetsPath}{/}?*`, this.#BASE_URL.href), {
+		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#imageOptimizer.publicAssetsPath}*` }), {
 			render: async ({ assets, path }) => this.#imageOptimizer.fetchImage(assets, path)
 		}]);
 
 		Object.entries(routes).forEach(([path, route]) => {
-			let resolvedPath = path;
+			const resolvedUrl = new URL(path, this.#BASE_URL);
+			let resolvedPath = resolvedUrl.pathname;
 
 			switch (trailingSlash) {
 				case 'always':
-					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX, 'ui'), '');
-					resolvedPath = resolvedPath.replace(new RegExp(this.#PATH_WITH_EXT_REGEX, 'ui'), '/$1');
-					resolvedPath = `${resolvedPath}/`;
+					resolvedPath = `${resolvedPath.replace(/\/$/iu, '')}/`;
 					break;
 				case 'never':
-					resolvedPath = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX, 'ui'), '');
+					resolvedPath = resolvedPath.replace(/\/$/iu, '');
 					break;
 				case 'ignore':
 				case undefined:
 				default: {
-					const pathWithoutTrailingSlash = path.replace(new RegExp(this.#TRAILING_SLASHES_REGEX, 'ui'), '');
-
-					if (!new RegExp(this.#PATH_WITH_EXT_REGEX, 'ui').test(pathWithoutTrailingSlash)) {
-						resolvedPath = `${pathWithoutTrailingSlash}{/}?`;
-					}
+					resolvedPath = `${resolvedPath.replace(/\/$/iu, '')}{/}?`;
 					break;
 				}
 			}
 
-			this.#routes.push([new URLPattern(resolvedPath, this.#BASE_URL.href), {
+			this.#routes.push([new URLPattern({ ...resolvedUrl, pathname: resolvedPath }), {
 				resolveParams: route.resolveParams,
 				render: route.render ?? (async ({ assets, url }) => {
 					const body = await this.#templateRenderer.renderTemplate({
@@ -147,29 +142,27 @@ export class StaticSiteHandler {
 		});
 	}
 
-	#isPatternDynamic(pattern: URLPattern, url: string) {
-		if (pattern?.hasRegExpGroups) {
+	#isPatternDynamic(pattern: URLPattern) {
+		if (pattern.pathname.endsWith('{/}?')) {
+			return false;
+		}
+
+		if (pattern.hasRegExpGroups) {
 			return true;
 		}
 
-		return Object.entries(pattern.exec(url) ?? {}).reduce((hasGroups, [key, value]) => {
-			if (key !== 'inputs') {
-				return Object.keys((value as URLPatternComponentResult).groups).length !== 0;
-			}
-
-			return hasGroups;
-		}, false);
+		return false;
 	}
 
 	async #resolveRoute(assets: Env['Assets'], url: string) {
 		const resolvedUrl = new URL(url, this.#BASE_URL);
-		const [pattern, route] = this.#routes.find(([curPattern]) => curPattern.test(resolvedUrl.pathname, this.#BASE_URL.href)) ?? [];
+		const [pattern, route] = this.#routes.find(([curPattern]) => curPattern.test(resolvedUrl.href)) ?? [];
 
 		if (!pattern || !route) {
 			return;
 		}
 
-		if (this.#isPatternDynamic(pattern, url) && !route.resolveParams) {
+		if (this.#isPatternDynamic(pattern) && !route.resolveParams) {
 			console.error(`Dynamic route for url "${url}" does not provide "resolveParams" function.`);
 			return;
 		}
@@ -291,8 +284,12 @@ export class StaticSiteHandler {
 	}
 
 	async fetch<CfHostMetadata = unknown>(request: Request<CfHostMetadata, IncomingRequestCfProperties<CfHostMetadata>>, env: Env, context: ExecutionContext) {
+		console.log(request.url);
+
 		const resolvedResponse = await this.#resolveRoute(env.Assets, request.url);
 
+		console.log('resolved response');
+		console.log(resolvedResponse);
 		if (resolvedResponse) {
 			return resolvedResponse;
 		}

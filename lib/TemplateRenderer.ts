@@ -174,7 +174,7 @@ export interface TemplateRendererOptions {
 
 export class TemplateRenderer {
 	#TEMPLATES_URL: URL;
-	#TEMPLATES_INDEX_URL: URL;
+	#COMPONENTS_INDEX_URL: URL;
 	#attributes: TemplateRenderingAttributes = {
 		if: '@if',
 		ifNot: '@if-not',
@@ -196,8 +196,8 @@ export class TemplateRenderer {
 	constructor({ components, componentIndex, templatesFolder, attributes }: TemplateRendererOptions = {}) {
 		this.#componentPaths = Object.fromEntries(Object.entries(components ?? {}).map(([key, value]) => [key.toLowerCase(), value]));
 
-		this.#TEMPLATES_URL = new URL(templatesFolder ?? '_templates', 'https://assets.local/');
-		this.#TEMPLATES_INDEX_URL = new URL(componentIndex ?? 'index.json', this.#TEMPLATES_URL);
+		this.#TEMPLATES_URL = new URL(templatesFolder ?? '_templates/', 'https://assets.local/');
+		this.#COMPONENTS_INDEX_URL = new URL(componentIndex ?? 'components/index.json', this.#TEMPLATES_URL);
 
 		this.#attributes = {
 			...this.#attributes,
@@ -212,10 +212,10 @@ export class TemplateRenderer {
 	async #initTemplates(assets: Env['Assets']) {
 		if (!this.#isIndexFetched) {
 			try {
-				const response = await assets.fetch(this.#TEMPLATES_INDEX_URL);
+				const response = await assets.fetch(this.#COMPONENTS_INDEX_URL);
 
 				if (!response.ok) {
-					throw new Error(`Failed to fetch collection index file at: ${this.#TEMPLATES_INDEX_URL.pathname}`);
+					throw new Error(`Failed to fetch templates index file at: ${this.#COMPONENTS_INDEX_URL.pathname}`);
 				}
 
 				const componentsJson = Object.fromEntries(Object.entries(await response.json() satisfies Record<string, string>).map(([key, value]) => [key.toLowerCase(), value]));

@@ -2,8 +2,7 @@ import { createJimp } from '@jimp/core';
 import jpeg from '@jimp/wasm-jpeg';
 import png from '@jimp/wasm-png';
 import webp from '@jimp/wasm-webp';
-import { defaultPlugins, ResizeStrategy } from 'jimp';
-import sharp from 'sharp';
+import { defaultFormats, defaultPlugins, ResizeStrategy } from 'jimp';
 
 type ImageExtension = 'gif' | 'jpeg' | 'jpg' | 'png' | 'webp';
 
@@ -150,7 +149,7 @@ export class ImageOptimizer {
 	#defaultExtension: ImageExtension;
 
 	constructor({ publicAssetsPath, defaultImageQuality, defaultExtension }: ImageOptimizerOptions = {}) {
-		this.#PUBLIC_ASSETS_URL = new URL(publicAssetsPath ?? '_assets', 'https://assets.local/');
+		this.#PUBLIC_ASSETS_URL = new URL(publicAssetsPath ?? '_assets/', 'https://assets.local/');
 		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 		this.#defaultImageQuality = defaultImageQuality ?? 75;
 		this.#defaultExtension = defaultExtension ?? 'webp';
@@ -168,15 +167,11 @@ export class ImageOptimizer {
 		}
 
 		const Jimp = createJimp({
-			formats: [jpeg, png, webp],
+			formats: [...defaultFormats, webp],
 			plugins: defaultPlugins
 		});
 
 		const imageBuffer = await imageResponse.arrayBuffer();
-
-		const sharpImage = sharp(imageBuffer);
-
-		console.log(sharpImage);
 
 		return Jimp.fromBuffer(imageBuffer);
 	}
@@ -334,7 +329,7 @@ export class ImageOptimizer {
 
 		return new Response(imageBuffer, {
 			status: 200,
-			headers: { 'Content-Tyoe': image.mime ?? 'image/webp' }
+			headers: { 'Content-Type': 'image/webp' }
 		});
 	}
 
