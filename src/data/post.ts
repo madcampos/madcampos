@@ -1,7 +1,7 @@
 import type { MarkdownInstance } from 'astro';
 import { getImage } from 'astro:assets';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import { join } from './path.js';
+import { join } from './path.ts';
 
 export type PostSorting = 'ascending' | 'descending';
 
