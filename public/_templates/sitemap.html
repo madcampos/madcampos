@@ -92,6 +92,20 @@
 					<dd>A list of talks that I've presented before.</dd>
 
 					<!-- TODO -->
+					<!--
+						{
+							talkPages.map(({ url, title, description, hidden, wip }) => (
+								<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+									<a href={url}>
+										<Fragment set:html={inlineMarkdownRender(title)} />
+									</a>
+								</dt>
+								<dd>
+									<Fragment set:html={inlineMarkdownRender(description)} />
+								</dd>
+							))
+						}
+					-->
 				</dl>
 
 				<h2>Blog</h2>
@@ -100,6 +114,38 @@
 					<dd>The main blog page.</dd>
 
 					<!-- TODO -->
+					<!--
+						{
+							blogPages.entries().map(([year, months]) => (
+								<dt><a href={join([blogUrl, year])}>{year}</a></dt>
+								<dd>
+									<dl>
+										{
+											months.entries().map(([month, posts]) => (
+												<dt><a href={join([blogUrl, year, month])}>{monthMap[month]}</a></dt>
+												<dd>
+													<dl>
+														{
+															posts.map(({ url, data: { title, summary, draft } }) => (
+																<dt data-wip={draft || null}>
+																	<a href={join([blogUrl, url])}>
+																		<Fragment set:html={inlineMarkdownRender(title)} />
+																	</a>
+																</dt>
+																<dd>
+																	<Fragment set:html={inlineMarkdownRender(summary)} />
+																</dd>
+															))
+														}
+													</dl>
+												</dd>
+											))
+										}
+									</dl>
+								</dd>
+							))
+						}
+					-->
 				</dl>
 			</div>
 		</main>

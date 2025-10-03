@@ -4,7 +4,9 @@
 		<link
 			rel="import"
 			href="components/html-head.html"
-			@data="metadata"
+			title="To-Do"
+			description="To-Do and work in progress items for Marco Campos website."
+			url="{{url}}todo/"
 		/>
 
 		<!-- Page CSS -->
@@ -20,18 +22,947 @@
 			<page-header>
 				<m-logo
 					@no-shadowdom
-					subtitle=""
-					short-subtitle=""
-					url="/"
-					title="Home Page"
+					subtitle="TODO"
+					short-subtitle="TODO"
+					url="/todo/"
+					title="TODO Page"
 				></m-logo>
 
-				<h1></h1>
+				<h1>To Do</h1>
 			</page-header>
 		</header>
 
 		<main id="main">
-			<div id="contents"></div>
+			<div id="contents">
+				<p>
+					Based on <a href="https://jamesg.blog/2024/02/19/personal-website-ideas/">this post</a> and <a
+						href="https://shellsharks.com/notes/2023/08/15/website-component-checklist"
+					>this checklist</a>.
+				</p>
+
+				<ul id="todo-list">
+					<li>
+						<label id="label-e87cacdc-39f0-4cc5-a007-88dbe88e3424" for="e87cacdc-39f0-4cc5-a007-88dbe88e3424">
+							<input
+								type="checkbox"
+								id="e87cacdc-39f0-4cc5-a007-88dbe88e3424"
+								name="e87cacdc-39f0-4cc5-a007-88dbe88e3424"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Make logos an svg component so it can be styled with CSS</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-7a26bf8f-5ceb-41c5-8887-5ff2ec88a0ec" for="7a26bf8f-5ceb-41c5-8887-5ff2ec88a0ec">
+							<input
+								type="checkbox"
+								id="7a26bf8f-5ceb-41c5-8887-5ff2ec88a0ec"
+								name="7a26bf8f-5ceb-41c5-8887-5ff2ec88a0ec"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add vintage buttons with SVG for better text fitting/styling</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-1abe8b31-2620-4859-80de-52b6cf20a599" for="1abe8b31-2620-4859-80de-52b6cf20a599">
+							<input
+								type="checkbox"
+								id="1abe8b31-2620-4859-80de-52b6cf20a599"
+								name="1abe8b31-2620-4859-80de-52b6cf20a599"
+							/>
+							<span>Add <a href="https://webmention.io/docs/badges">webmention badges</a></span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-90051dfa-6d55-4a02-9095-de8cccca332c" for="90051dfa-6d55-4a02-9095-de8cccca332c">
+							<input
+								type="checkbox"
+								id="90051dfa-6d55-4a02-9095-de8cccca332c"
+								name="90051dfa-6d55-4a02-9095-de8cccca332c"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Improve <a href="https://voussoir.net/writing/css&lt;em&gt;for&lt;/em&gt;printing">print style</a></span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-97a091e1-9513-4ac7-bf54-92f0aa5e1ac9" for="97a091e1-9513-4ac7-bf54-92f0aa5e1ac9">
+							<input
+								type="checkbox"
+								id="97a091e1-9513-4ac7-bf54-92f0aa5e1ac9"
+								name="97a091e1-9513-4ac7-bf54-92f0aa5e1ac9"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Improve <a href="https://blogs.windows.com/msedgedev/2020/09/17/styling-for-windows-high-contrast-with-new-standards-for-forced-colors/"
+								>high contrast mode</a> (fix things that are in the wrong colors)</span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-ecec7755-4a1b-417b-944d-eea91f6d0428" for="ecec7755-4a1b-417b-944d-eea91f6d0428">
+									<input
+										type="checkbox"
+										id="ecec7755-4a1b-417b-944d-eea91f6d0428"
+										name="ecec7755-4a1b-417b-944d-eea91f6d0428"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Keep orange but make it brighter (add white)</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-7144821f-0845-4430-833c-7fa245c0ef8e" for="7144821f-0845-4430-833c-7fa245c0ef8e">
+									<input
+										type="checkbox"
+										id="7144821f-0845-4430-833c-7fa245c0ef8e"
+										name="7144821f-0845-4430-833c-7fa245c0ef8e"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Small text should not be so small</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-aa6f738c-196f-465c-bbc6-7d46f06a02b9" for="aa6f738c-196f-465c-bbc6-7d46f06a02b9">
+									<input
+										type="checkbox"
+										id="aa6f738c-196f-465c-bbc6-7d46f06a02b9"
+										name="aa6f738c-196f-465c-bbc6-7d46f06a02b9"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Medium dark grey background should be darker (add black). (Maybe add a border instead)</span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-8d8b1c06-5717-4d63-8fd2-5f59993fe2e5" for="8d8b1c06-5717-4d63-8fd2-5f59993fe2e5">
+							<input
+								type="checkbox"
+								id="8d8b1c06-5717-4d63-8fd2-5f59993fe2e5"
+								name="8d8b1c06-5717-4d63-8fd2-5f59993fe2e5"
+							/>
+							<span>Implement themes + theme selector</span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-995740c9-9395-4f5a-9ac5-7f8b514e419d" for="995740c9-9395-4f5a-9ac5-7f8b514e419d">
+									<input
+										type="checkbox"
+										id="995740c9-9395-4f5a-9ac5-7f8b514e419d"
+										name="995740c9-9395-4f5a-9ac5-7f8b514e419d"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Dark mode (AAA contrast)</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-a54d067f-5034-4725-9598-f039352aff63" for="a54d067f-5034-4725-9598-f039352aff63">
+									<input
+										type="checkbox"
+										id="a54d067f-5034-4725-9598-f039352aff63"
+										name="a54d067f-5034-4725-9598-f039352aff63"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Light mode (AAA contrast)</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-27b7a362-9cda-4814-b7e8-7adb367e6b8c" for="27b7a362-9cda-4814-b7e8-7adb367e6b8c">
+									<input
+										type="checkbox"
+										id="27b7a362-9cda-4814-b7e8-7adb367e6b8c"
+										name="27b7a362-9cda-4814-b7e8-7adb367e6b8c"
+										checked
+										aria-disabled="true"
+									/>
+									<span>High contrast yellow on black (AAA contrast)</span>
+								</label>
+
+								<ul>
+									<li>
+										<label id="label-7c7b2156-cb0b-4732-87a7-40835d6638f4" for="7c7b2156-cb0b-4732-87a7-40835d6638f4">
+											<input
+												type="checkbox"
+												id="7c7b2156-cb0b-4732-87a7-40835d6638f4"
+												name="7c7b2156-cb0b-4732-87a7-40835d6638f4"
+												checked
+												aria-disabled="true"
+											/>
+											<span>Make underline solid</span>
+										</label>
+									</li>
+
+									<li>
+										<label id="label-2f3d2e52-9316-44d4-8eb8-f20be99b4ed6" for="2f3d2e52-9316-44d4-8eb8-f20be99b4ed6">
+											<input
+												type="checkbox"
+												id="2f3d2e52-9316-44d4-8eb8-f20be99b4ed6"
+												name="2f3d2e52-9316-44d4-8eb8-f20be99b4ed6"
+												checked
+												aria-disabled="true"
+											/>
+											<span>Make underline distance from text larger</span>
+										</label>
+									</li>
+
+									<li>
+										<label id="label-ab936979-4088-473f-9fc7-7bc9b2ecb05c" for="ab936979-4088-473f-9fc7-7bc9b2ecb05c">
+											<input
+												type="checkbox"
+												id="ab936979-4088-473f-9fc7-7bc9b2ecb05c"
+												name="ab936979-4088-473f-9fc7-7bc9b2ecb05c"
+												checked
+												aria-disabled="true"
+											/>
+											<span>Make tags text bold</span>
+										</label>
+									</li>
+
+									<li>
+										<label id="label-7062dc34-3282-4379-87f4-ba58da1a861d" for="7062dc34-3282-4379-87f4-ba58da1a861d">
+											<input
+												type="checkbox"
+												id="7062dc34-3282-4379-87f4-ba58da1a861d"
+												name="7062dc34-3282-4379-87f4-ba58da1a861d"
+												checked
+												aria-disabled="true"
+											/>
+											<span>Special "code theme" for high contrast</span>
+										</label>
+									</li>
+
+									<li>
+										<label id="label-c4a64478-3e9c-4db4-9c7f-47ae3fe23dc1" for="c4a64478-3e9c-4db4-9c7f-47ae3fe23dc1">
+											<input
+												type="checkbox"
+												id="c4a64478-3e9c-4db4-9c7f-47ae3fe23dc1"
+												name="c4a64478-3e9c-4db4-9c7f-47ae3fe23dc1"
+												checked
+												aria-disabled="true"
+											/>
+											<span>Increase line height and letter spacing</span>
+										</label>
+									</li>
+								</ul>
+							</li>
+
+							<li>
+								<label id="label-559db6f0-9dbf-4d42-b5d8-85cabb0ae8cd" for="559db6f0-9dbf-4d42-b5d8-85cabb0ae8cd">
+									<input
+										type="checkbox"
+										id="559db6f0-9dbf-4d42-b5d8-85cabb0ae8cd"
+										name="559db6f0-9dbf-4d42-b5d8-85cabb0ae8cd"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Forced colors (AAA contrast)</span>
+								</label>
+
+								<ul>
+									<li>
+										<label id="label-fbc05d3d-8a07-4f24-88fd-b81c90523c50" for="fbc05d3d-8a07-4f24-88fd-b81c90523c50">
+											<input
+												type="checkbox"
+												id="fbc05d3d-8a07-4f24-88fd-b81c90523c50"
+												name="fbc05d3d-8a07-4f24-88fd-b81c90523c50"
+												checked
+												aria-disabled="true"
+											/>
+											<span>Fix tags and grayscale filter for avatars</span>
+										</label>
+									</li>
+
+									<li>
+										<label id="label-1748592c-8c19-4f0d-affa-8806ba20553a" for="1748592c-8c19-4f0d-affa-8806ba20553a">
+											<input
+												type="checkbox"
+												id="1748592c-8c19-4f0d-affa-8806ba20553a"
+												name="1748592c-8c19-4f0d-affa-8806ba20553a"
+												checked
+												aria-disabled="true"
+											/>
+											<span>SVGs added by css need to change color</span>
+										</label>
+									</li>
+								</ul>
+							</li>
+
+							<li>
+								<label id="label-e7bcce75-7394-4bac-b8b7-143b3a68ad90" for="e7bcce75-7394-4bac-b8b7-143b3a68ad90">
+									<input
+										type="checkbox"
+										id="e7bcce75-7394-4bac-b8b7-143b3a68ad90"
+										name="e7bcce75-7394-4bac-b8b7-143b3a68ad90"
+										checked
+										aria-disabled="true"
+									/>
+									<span>UwU theme</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-65656c7d-df86-4b26-86ea-ec400c607b47" for="65656c7d-df86-4b26-86ea-ec400c607b47">
+									<input
+										type="checkbox"
+										id="65656c7d-df86-4b26-86ea-ec400c607b47"
+										name="65656c7d-df86-4b26-86ea-ec400c607b47"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Old interwebs</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-5519dc30-2617-41e6-9e26-619133f84102" for="5519dc30-2617-41e6-9e26-619133f84102">
+									<input
+										type="checkbox"
+										id="5519dc30-2617-41e6-9e26-619133f84102"
+										name="5519dc30-2617-41e6-9e26-619133f84102"
+									/>
+									<span>Skeuomorphic cork board</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-59e2a198-225c-4448-b647-02fd45dd3ca9" for="59e2a198-225c-4448-b647-02fd45dd3ca9">
+									<input
+										type="checkbox"
+										id="59e2a198-225c-4448-b647-02fd45dd3ca9"
+										name="59e2a198-225c-4448-b647-02fd45dd3ca9"
+									/>
+									<span>"Zen"</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-081c1263-f9e2-4b4e-b7ab-5f4ee5f9bfd8" for="081c1263-f9e2-4b4e-b7ab-5f4ee5f9bfd8">
+									<input
+										type="checkbox"
+										id="081c1263-f9e2-4b4e-b7ab-5f4ee5f9bfd8"
+										name="081c1263-f9e2-4b4e-b7ab-5f4ee5f9bfd8"
+										checked
+										aria-disabled="true"
+									/>
+									<span>"Hacker" (green on black)</span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-86d6e0b5-0b2c-49bc-97b5-9546ba8d70ea" for="86d6e0b5-0b2c-49bc-97b5-9546ba8d70ea">
+							<input
+								type="checkbox"
+								id="86d6e0b5-0b2c-49bc-97b5-9546ba8d70ea"
+								name="86d6e0b5-0b2c-49bc-97b5-9546ba8d70ea"
+							/>
+							<span>Finish integrating web mentions</span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-5ec1f141-f5c4-4691-8546-f92b25c76704" for="5ec1f141-f5c4-4691-8546-f92b25c76704">
+									<input
+										type="checkbox"
+										id="5ec1f141-f5c4-4691-8546-f92b25c76704"
+										name="5ec1f141-f5c4-4691-8546-f92b25c76704"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Move to cloudflare</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-eaf49aa3-f192-4ec6-9f70-d661f5c0453b" for="eaf49aa3-f192-4ec6-9f70-d661f5c0453b">
+									<input
+										type="checkbox"
+										id="eaf49aa3-f192-4ec6-9f70-d661f5c0453b"
+										name="eaf49aa3-f192-4ec6-9f70-d661f5c0453b"
+									/>
+									<span>Add cloudflare function to handle sending webmentions</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-a535ad75-0596-43ff-9a55-3d9ddc74d16b" for="a535ad75-0596-43ff-9a55-3d9ddc74d16b">
+									<input
+										type="checkbox"
+										id="a535ad75-0596-43ff-9a55-3d9ddc74d16b"
+										name="a535ad75-0596-43ff-9a55-3d9ddc74d16b"
+									/>
+									<span>Add cloudflare function to handle receiving webmentions</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-58908838-1a52-4f06-a3e9-779a0d20c0bf" for="58908838-1a52-4f06-a3e9-779a0d20c0bf">
+									<input
+										type="checkbox"
+										id="58908838-1a52-4f06-a3e9-779a0d20c0bf"
+										name="58908838-1a52-4f06-a3e9-779a0d20c0bf"
+									/>
+									<span>Add webmention to posts as a comment system</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-81fba1f5-d3f7-4d8a-a7ba-9e698c13bf32" for="81fba1f5-d3f7-4d8a-a7ba-9e698c13bf32">
+									<input
+										type="checkbox"
+										id="81fba1f5-d3f7-4d8a-a7ba-9e698c13bf32"
+										name="81fba1f5-d3f7-4d8a-a7ba-9e698c13bf32"
+									/>
+									<span>Add form to send webmention as comment from the blog</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-fb9e2e86-6290-42c6-afcc-69fcb1b20fad" for="fb9e2e86-6290-42c6-afcc-69fcb1b20fad">
+									<input
+										type="checkbox"
+										id="fb9e2e86-6290-42c6-afcc-69fcb1b20fad"
+										name="fb9e2e86-6290-42c6-afcc-69fcb1b20fad"
+									/>
+									<span>Add guestbook as webmentions</span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-525a4081-b97a-4012-b27c-c2877aab09fe" for="525a4081-b97a-4012-b27c-c2877aab09fe">
+							<input
+								type="checkbox"
+								id="525a4081-b97a-4012-b27c-c2877aab09fe"
+								name="525a4081-b97a-4012-b27c-c2877aab09fe"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add "about" page (based on <a href="https://slashpages.net/">slash pages</a>)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-b0637636-4828-4057-9a49-31a05e6ba7cf" for="b0637636-4828-4057-9a49-31a05e6ba7cf">
+							<input
+								type="checkbox"
+								id="b0637636-4828-4057-9a49-31a05e6ba7cf"
+								name="b0637636-4828-4057-9a49-31a05e6ba7cf"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add "ai" page (based on <a href="https://slashpages.net/">slash pages</a>)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-3b241501-740d-4752-92e1-ab3e4c1f72fb" for="3b241501-740d-4752-92e1-ab3e4c1f72fb">
+							<input
+								type="checkbox"
+								id="3b241501-740d-4752-92e1-ab3e4c1f72fb"
+								name="3b241501-740d-4752-92e1-ab3e4c1f72fb"
+							/>
+							<span>Add "blogroll" page (based on <a href="https://slashpages.net/">slash pages</a>)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-e75eec07-113c-4a47-bfde-5e67c5324dac" for="e75eec07-113c-4a47-bfde-5e67c5324dac">
+							<input
+								type="checkbox"
+								id="e75eec07-113c-4a47-bfde-5e67c5324dac"
+								name="e75eec07-113c-4a47-bfde-5e67c5324dac"
+							/>
+							<span>Add "carry" page (based on <a href="https://slashpages.net/">slash pages</a>)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-686f7ae1-3fcd-4c53-89f6-0b50999c72fa" for="686f7ae1-3fcd-4c53-89f6-0b50999c72fa">
+							<input
+								type="checkbox"
+								id="686f7ae1-3fcd-4c53-89f6-0b50999c72fa"
+								name="686f7ae1-3fcd-4c53-89f6-0b50999c72fa"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add "changelog" page (based on <a href="https://slashpages.net/">slash pages</a>)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-0f5e1065-a672-4e2f-b841-99d83a3515cd" for="0f5e1065-a672-4e2f-b841-99d83a3515cd">
+							<input
+								type="checkbox"
+								id="0f5e1065-a672-4e2f-b841-99d83a3515cd"
+								name="0f5e1065-a672-4e2f-b841-99d83a3515cd"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add noop "change password" page</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-7f98054a-a349-44c9-b565-ce3c4a7c11fb" for="7f98054a-a349-44c9-b565-ce3c4a7c11fb">
+							<input
+								type="checkbox"
+								id="7f98054a-a349-44c9-b565-ce3c4a7c11fb"
+								name="7f98054a-a349-44c9-b565-ce3c4a7c11fb"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add <code>dnt</code> and <code>dnt-policy</code></span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-a626d7aa-682a-4e05-b3f4-76bdcb8e1f52" for="a626d7aa-682a-4e05-b3f4-76bdcb8e1f52">
+							<input
+								type="checkbox"
+								id="a626d7aa-682a-4e05-b3f4-76bdcb8e1f52"
+								name="a626d7aa-682a-4e05-b3f4-76bdcb8e1f52"
+							/>
+							<span>Add ko-fi donation page</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-aad33853-09f7-4a8c-a0d2-5a5ec55f5e4e" for="aad33853-09f7-4a8c-a0d2-5a5ec55f5e4e">
+							<input
+								type="checkbox"
+								id="aad33853-09f7-4a8c-a0d2-5a5ec55f5e4e"
+								name="aad33853-09f7-4a8c-a0d2-5a5ec55f5e4e"
+							/>
+							<span>Add feeds page listing all available feeds</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-fbee240f-862d-43b1-b090-b0c73252b035" for="fbee240f-862d-43b1-b090-b0c73252b035">
+							<input
+								type="checkbox"
+								id="fbee240f-862d-43b1-b090-b0c73252b035"
+								name="fbee240f-862d-43b1-b090-b0c73252b035"
+							/>
+							<span>Make projects and talks available as feeds</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-44e96085-8daf-4e30-987b-4fe7a3f3d194" for="44e96085-8daf-4e30-987b-4fe7a3f3d194">
+							<input
+								type="checkbox"
+								id="44e96085-8daf-4e30-987b-4fe7a3f3d194"
+								name="44e96085-8daf-4e30-987b-4fe7a3f3d194"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Improve rss styles</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-4dd43833-84b8-4868-aa2f-76fd9103a282" for="4dd43833-84b8-4868-aa2f-76fd9103a282">
+							<input
+								type="checkbox"
+								id="4dd43833-84b8-4868-aa2f-76fd9103a282"
+								name="4dd43833-84b8-4868-aa2f-76fd9103a282"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add humans.txt</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-2b1c840f-2f03-4f68-a9f7-d6fa675177ff" for="2b1c840f-2f03-4f68-a9f7-d6fa675177ff">
+							<input
+								type="checkbox"
+								id="2b1c840f-2f03-4f68-a9f7-d6fa675177ff"
+								name="2b1c840f-2f03-4f68-a9f7-d6fa675177ff"
+							/>
+							<span>Add indieweb.txt</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-2cc2ee4b-d57a-421b-9490-c1dbbc0f27c6" for="2cc2ee4b-d57a-421b-9490-c1dbbc0f27c6">
+							<input
+								type="checkbox"
+								id="2cc2ee4b-d57a-421b-9490-c1dbbc0f27c6"
+								name="2cc2ee4b-d57a-421b-9490-c1dbbc0f27c6"
+							/>
+							<span>Add pgp key?</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-ebb609f6-2a6e-4e43-8b31-23c03a6a7b4b" for="ebb609f6-2a6e-4e43-8b31-23c03a6a7b4b">
+							<input
+								type="checkbox"
+								id="ebb609f6-2a6e-4e43-8b31-23c03a6a7b4b"
+								name="ebb609f6-2a6e-4e43-8b31-23c03a6a7b4b"
+							/>
+							<span>Add Resume</span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-29c06ede-39f7-40c0-9287-ee5894ed35d5" for="29c06ede-39f7-40c0-9287-ee5894ed35d5">
+									<input
+										type="checkbox"
+										id="29c06ede-39f7-40c0-9287-ee5894ed35d5"
+										name="29c06ede-39f7-40c0-9287-ee5894ed35d5"
+									/>
+									<span><a href="https://jsonresume.org/schema/">JSON resume format</a></span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-8c7df85f-0595-4cf2-b703-f02c509a0dc5" for="8c7df85f-0595-4cf2-b703-f02c509a0dc5">
+									<input
+										type="checkbox"
+										id="8c7df85f-0595-4cf2-b703-f02c509a0dc5"
+										name="8c7df85f-0595-4cf2-b703-f02c509a0dc5"
+									/>
+									<span>HTML format</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-edcd055d-51f0-4f37-81ae-1b72ef2f8a38" for="edcd055d-51f0-4f37-81ae-1b72ef2f8a38">
+									<input
+										type="checkbox"
+										id="edcd055d-51f0-4f37-81ae-1b72ef2f8a38"
+										name="edcd055d-51f0-4f37-81ae-1b72ef2f8a38"
+									/>
+									<span>PDF Format</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-de3df912-aed6-4c69-aa98-d95d3640c05c" for="de3df912-aed6-4c69-aa98-d95d3640c05c">
+									<input
+										type="checkbox"
+										id="de3df912-aed6-4c69-aa98-d95d3640c05c"
+										name="de3df912-aed6-4c69-aa98-d95d3640c05c"
+									/>
+									<span><a href="https://www.npmjs.com/package/docx">DOCX</a> <a href="https://www.npmjs.com/package/docxtemplater">format</a></span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-3c9eaf79-81fe-41b3-9d33-453f33d7337b" for="3c9eaf79-81fe-41b3-9d33-453f33d7337b">
+							<input
+								type="checkbox"
+								id="3c9eaf79-81fe-41b3-9d33-453f33d7337b"
+								name="3c9eaf79-81fe-41b3-9d33-453f33d7337b"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add Roadmap page</span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-aa5126b5-caeb-4fbb-9d99-1870641a71e7" for="aa5126b5-caeb-4fbb-9d99-1870641a71e7">
+									<input
+										type="checkbox"
+										id="aa5126b5-caeb-4fbb-9d99-1870641a71e7"
+										name="aa5126b5-caeb-4fbb-9d99-1870641a71e7"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Make items tooglable</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-fde88ffc-0368-4a78-bbd4-0f23837aa13c" for="fde88ffc-0368-4a78-bbd4-0f23837aa13c">
+									<input
+										type="checkbox"
+										id="fde88ffc-0368-4a78-bbd4-0f23837aa13c"
+										name="fde88ffc-0368-4a78-bbd4-0f23837aa13c"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Save to local storage</span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-d45cb0da-2e33-4e4c-a725-9a12ff691ca5" for="d45cb0da-2e33-4e4c-a725-9a12ff691ca5">
+							<input
+								type="checkbox"
+								id="d45cb0da-2e33-4e4c-a725-9a12ff691ca5"
+								name="d45cb0da-2e33-4e4c-a725-9a12ff691ca5"
+							/>
+							<span>Add <a href="https://pagefind.app/docs/">search functionality</a></span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-64f968bb-6d5d-4ac4-affc-35ebb8e6d4df" for="64f968bb-6d5d-4ac4-affc-35ebb8e6d4df">
+							<input
+								type="checkbox"
+								id="64f968bb-6d5d-4ac4-affc-35ebb8e6d4df"
+								name="64f968bb-6d5d-4ac4-affc-35ebb8e6d4df"
+							/>
+							<span>Add security.txt</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-1bf51666-a8e3-4c5f-8d13-deec034cffda" for="1bf51666-a8e3-4c5f-8d13-deec034cffda">
+							<input
+								type="checkbox"
+								id="1bf51666-a8e3-4c5f-8d13-deec034cffda"
+								name="1bf51666-a8e3-4c5f-8d13-deec034cffda"
+							/>
+							<span>Add stats board</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-171173f1-5853-402d-926a-d02d55aef0c4" for="171173f1-5853-402d-926a-d02d55aef0c4">
+							<input
+								type="checkbox"
+								id="171173f1-5853-402d-926a-d02d55aef0c4"
+								name="171173f1-5853-402d-926a-d02d55aef0c4"
+							/>
+							<span>Add styleguide page</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-6bdaaf5a-cf25-4925-8ac7-5c06cccec01e" for="6bdaaf5a-cf25-4925-8ac7-5c06cccec01e">
+							<input
+								type="checkbox"
+								id="6bdaaf5a-cf25-4925-8ac7-5c06cccec01e"
+								name="6bdaaf5a-cf25-4925-8ac7-5c06cccec01e"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add debug mode</span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-35fe2728-ae3f-4443-8f83-f9aa4c3d3698" for="35fe2728-ae3f-4443-8f83-f9aa4c3d3698">
+									<input
+										type="checkbox"
+										id="35fe2728-ae3f-4443-8f83-f9aa4c3d3698"
+										name="35fe2728-ae3f-4443-8f83-f9aa4c3d3698"
+										checked
+										aria-disabled="true"
+									/>
+									<span>Make debug css togglable</span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-5c8d3a6b-a031-46ce-a2f6-c6431473b387" for="5c8d3a6b-a031-46ce-a2f6-c6431473b387">
+									<input
+										type="checkbox"
+										id="5c8d3a6b-a031-46ce-a2f6-c6431473b387"
+										name="5c8d3a6b-a031-46ce-a2f6-c6431473b387"
+									/>
+									<span>Add JS report for issues (?)</span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-b66216d1-6ad9-4e92-9975-09fb34489bbd" for="b66216d1-6ad9-4e92-9975-09fb34489bbd">
+							<input
+								type="checkbox"
+								id="b66216d1-6ad9-4e92-9975-09fb34489bbd"
+								name="b66216d1-6ad9-4e92-9975-09fb34489bbd"
+							/>
+							<span>Add <a href="https://webauthn.io/">webauthn</a> (?)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-a877b6ba-4de9-4e5e-a854-6427af2971af" for="a877b6ba-4de9-4e5e-a854-6427af2971af">
+							<input
+								type="checkbox"
+								id="a877b6ba-4de9-4e5e-a854-6427af2971af"
+								name="a877b6ba-4de9-4e5e-a854-6427af2971af"
+							/>
+							<span>Add <a href="https://webmonetization.org/docs/">web monetization</a> (?)</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-53e0c5e9-b9fb-41f6-a2bb-05a52adc2706" for="53e0c5e9-b9fb-41f6-a2bb-05a52adc2706">
+							<input
+								type="checkbox"
+								id="53e0c5e9-b9fb-41f6-a2bb-05a52adc2706"
+								name="53e0c5e9-b9fb-41f6-a2bb-05a52adc2706"
+							/>
+							<span>Add a "uses" page</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-bce2dd58-a1cc-4f29-862c-314c065ba298" for="bce2dd58-a1cc-4f29-862c-314c065ba298">
+							<input
+								type="checkbox"
+								id="bce2dd58-a1cc-4f29-862c-314c065ba298"
+								name="bce2dd58-a1cc-4f29-862c-314c065ba298"
+							/>
+							<span>Add webfinger endpoint</span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-84a7261e-8a85-4080-983b-805a87d1f35d" for="84a7261e-8a85-4080-983b-805a87d1f35d">
+							<input
+								type="checkbox"
+								id="84a7261e-8a85-4080-983b-805a87d1f35d"
+								name="84a7261e-8a85-4080-983b-805a87d1f35d"
+							/>
+							<span>Add <a href="https://brisray.com/web/webring-list.htm">webrings</a></span>
+						</label>
+
+						<ul>
+							<li>
+								<label id="label-ed7945f0-8505-474c-8692-cf933e697524" for="ed7945f0-8505-474c-8692-cf933e697524">
+									<input
+										type="checkbox"
+										id="ed7945f0-8505-474c-8692-cf933e697524"
+										name="ed7945f0-8505-474c-8692-cf933e697524"
+									/>
+									<span><a href="https://isaacfish.neocities.org/webring/">Queer Coded</a></span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-f90e287f-84ef-47d4-b092-aa7adcf3b22a" for="f90e287f-84ef-47d4-b092-aa7adcf3b22a">
+									<input
+										type="checkbox"
+										id="f90e287f-84ef-47d4-b092-aa7adcf3b22a"
+										name="f90e287f-84ef-47d4-b092-aa7adcf3b22a"
+									/>
+									<span><a href="https://cs.sjoy.lol/">CSS Joy</a></span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-58196ea9-047d-4cd3-90ab-777e292cb70e" for="58196ea9-047d-4cd3-90ab-777e292cb70e">
+									<input
+										type="checkbox"
+										id="58196ea9-047d-4cd3-90ab-777e292cb70e"
+										name="58196ea9-047d-4cd3-90ab-777e292cb70e"
+									/>
+									<span><a href="https://webring.bucketfish.me/">Bucketfish</a></span>
+								</label>
+							</li>
+
+							<li>
+								<label id="label-4e0d43f1-cdae-4d5c-9f70-a7d1d7b57f9a" for="4e0d43f1-cdae-4d5c-9f70-a7d1d7b57f9a">
+									<input
+										type="checkbox"
+										id="4e0d43f1-cdae-4d5c-9f70-a7d1d7b57f9a"
+										name="4e0d43f1-cdae-4d5c-9f70-a7d1d7b57f9a"
+									/>
+									<span><a href="https://indieweb.org/webring">Indieweb</a></span>
+								</label>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<label id="label-b02ee8c4-f537-476f-8461-cfbd4f383e1e" for="b02ee8c4-f537-476f-8461-cfbd4f383e1e">
+							<input
+								type="checkbox"
+								id="b02ee8c4-f537-476f-8461-cfbd4f383e1e"
+								name="b02ee8c4-f537-476f-8461-cfbd4f383e1e"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add a <a href="https://css-naked-day.github.io/">CSS Naked day</a></span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-0f1a03be-9279-45ba-acc6-bc03775acee5" for="0f1a03be-9279-45ba-acc6-bc03775acee5">
+							<input
+								type="checkbox"
+								id="0f1a03be-9279-45ba-acc6-bc03775acee5"
+								name="0f1a03be-9279-45ba-acc6-bc03775acee5"
+								checked
+								aria-disabled="true"
+							/>
+							<span>Add a <a href="https://meiert.com/en/blog/april-24-is-js-naked-day/">JS Naked day</a></span>
+						</label>
+					</li>
+
+					<li>
+						<label id="label-2387226b-6444-48a5-b0ad-1034d231e2fb" for="2387226b-6444-48a5-b0ad-1034d231e2fb">
+							<input
+								type="checkbox"
+								id="2387226b-6444-48a5-b0ad-1034d231e2fb"
+								name="2387226b-6444-48a5-b0ad-1034d231e2fb"
+							/>
+							<span>Have a <a href="https://uxdesign.cc/why-you-should-have-a-brag-document-eb6cc82ec80a">brag document</a></span>
+						</label>
+					</li>
+				</ul>
+
+				<h2>Webmention references</h2>
+
+				<ul>
+					<li>
+						<a href="https://indiewebify.me">https://indiewebify.me</a>
+					</li>
+					<li>
+						<a href="https://webmention.io/dashboard">https://webmention.io/dashboard</a>
+					</li>
+					<li>
+						<a href="https://telegraph.p3k.io/dashboard">https://telegraph.p3k.io/dashboard</a>
+					</li>
+					<li>
+						<a href="https://webmention.rocks/">https://webmention.rocks/</a>
+					</li>
+					<li>
+						<a href="https://indieweb.org/posts#Types_of_Posts">https://indieweb.org/posts#Types_of_Posts</a>
+					</li>
+					<li>
+						<a href="https://kld.dev/adding-webmentions/">https://kld.dev/adding-webmentions/</a>
+					</li>
+					<li>
+						<a href="https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/">https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/</a>
+					</li>
+				</ul>
+				<script src="/js/pages/todo.js" type="module" async></script>
+			</div>
 		</main>
 
 		<footer id="page-footer">
