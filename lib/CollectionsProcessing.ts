@@ -1,39 +1,30 @@
-/* eslint-disable max-lines, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-	transformerMetaHighlight,
-	transformerMetaWordHighlight,
-	transformerNotationDiff,
-	transformerNotationErrorLevel,
-	transformerNotationFocus,
-	transformerNotationHighlight,
-	transformerNotationWordHighlight,
-	transformerRenderWhitespace
-} from '@shikijs/transformers';
-import { type Tokens, Marked } from 'marked';
+import { Marked } from 'marked';
 import markedFootnote from 'marked-footnote';
-import markedShiki from 'marked-shiki';
-import {
-	type BundledLanguage,
-	type BundledTheme,
-	type LanguageInput,
-	type SpecialLanguage,
-	type SpecialTheme,
-	type ThemeInput,
-	type ThemeRegistration,
-	createHighlighter,
-	createJavaScriptRegexEngine
+import type {
+	BundledLanguage,
+	BundledTheme,
+	LanguageInput,
+	SpecialLanguage,
+	SpecialTheme,
+	ThemeInput
 } from 'shiki';
 import { parse as parseYaml } from 'yaml';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
+import { init as initShiki } from './markdown/code.ts';
+import { extension as markedHighlight } from './markdown/highlight.ts';
+import { init as initImages } from './markdown/image.ts';
+import { extension as markedInsertion } from './markdown/insertion.ts';
+import { extension as markedSubscript } from './markdown/subscript.ts';
+import { extension as markedSuperscript } from './markdown/superscript.ts';
 import { basename } from './path.ts';
 import type { Mode } from './StaticSiteHandler.ts';
 import type { TemplateRenderer } from './TemplateRenderer.ts';
 
-const jsRegexEngine = createJavaScriptRegexEngine();
-
 export interface MarkdownEntry<T> {
 	id: string;
+	path: string;
 	metadata?: T;
 	contents: string;
 }
@@ -42,6 +33,8 @@ export interface EntryTransformerParameters<T> {
 	imageOptimizer: ImageOptimizer;
 	templateRenderer: TemplateRenderer;
 	markdownParser: Marked;
+	// eslint-disable-next-line @typescript-eslint/no-use-before-define
+	collections: Collections;
 	entry: MarkdownEntry<T>;
 	mode: Mode;
 }
@@ -50,7 +43,7 @@ export type TransformerFunction<T, R> = (assets: Env['Assets'], options: EntryTr
 
 export type SortingFunction<T> = (entryA: [string, MarkdownEntry<T>], entryB: [string, MarkdownEntry<T>]) => number;
 
-interface ShikiOptions {
+export interface ShikiOptions {
 	langs?: (BundledLanguage | LanguageInput | SpecialLanguage)[];
 	themes?: Record<string, (BundledTheme | SpecialTheme | ThemeInput)>;
 }
@@ -207,240 +200,20 @@ export class Collections {
 			gfm: true
 		});
 
-		const highlighter = await createHighlighter({
-			langs: this.#shikiOptions.langs,
-			themes: Object.values(this.#shikiOptions.themes),
-			engine: jsRegexEngine
-		});
-
 		marked.use(markedFootnote());
-		marked.use(markedShiki({
-			highlight: (code, lang, props) =>
-				highlighter.codeToHtml(code, {
-					lang,
-					themes: Object.fromEntries(
-						Object.entries(this.#shikiOptions.themes)
-							.map(([themeName, theme]) => [themeName, ((theme as ThemeRegistration)?.name ?? theme) as string])
-					),
-					defaultColor: false,
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					meta: { __raw: props.join(' ') },
-					transformers: [
-						transformerNotationDiff(),
-						transformerNotationHighlight(),
-						transformerNotationWordHighlight(),
-						transformerNotationFocus(),
-						transformerNotationErrorLevel(),
-						transformerRenderWhitespace({ position: 'boundary' }),
-						transformerMetaHighlight(),
-						transformerMetaWordHighlight()
-					]
-				})
-		}));
-
-		interface SuperscriptToken extends Tokens.Generic {
-			type: 'superscript';
-			html: string;
-			text: string;
-		}
-
-		marked.use({
-			extensions: [{
-				name: 'superscript',
-				level: 'inline',
-				start: (src) => src.indexOf('~'),
-				tokenizer: (src) => {
-					const rule = /\^(?!\^)(?<text>[^^]*?)\^(?!\^)/iu;
-					const match = rule.exec(src);
-
-					if (!match) {
-						return;
-					}
-
-					return {
-						type: 'superscript',
-						raw: match[0],
-						text: match.groups?.['text'],
-						html: ''
-					};
-				},
-				renderer: (token: Tokens.Generic & { html?: string }) => token.html
-			}],
-			async: true,
-			// @ts-expect-error
-			walkTokens: (token: SuperscriptToken) => {
-				if (token.type !== 'superscript') {
-					return;
-				}
-
-				token.html = `<sup>${token.text}</sup>`;
-			}
-		});
-
-		interface SubscriptToken extends Tokens.Generic {
-			type: 'subscript';
-			html: string;
-			text: string;
-		}
-
-		marked.use({
-			extensions: [{
-				name: 'subscript',
-				level: 'inline',
-				start: (src) => src.indexOf('~'),
-				tokenizer: (src) => {
-					const rule = /~(?!~)(?<text>[^~]*?)~(?!~)/iu;
-					const match = rule.exec(src);
-
-					if (!match) {
-						return;
-					}
-
-					return {
-						type: 'subscript',
-						raw: match[0],
-						text: match.groups?.['text'],
-						html: ''
-					};
-				},
-				renderer: (token: Tokens.Generic & { html?: string }) => token.html
-			}],
-			async: true,
-			// @ts-expect-error
-			walkTokens: (token: SubscriptToken) => {
-				if (token.type !== 'subscript') {
-					return;
-				}
-
-				token.html = `<sub>${token.text}</sub>`;
-			}
-		});
-
-		interface InsertionToken extends Tokens.Generic {
-			type: 'insertion';
-			html: string;
-			text: string;
-		}
-
-		marked.use({
-			extensions: [{
-				name: 'insertion',
-				level: 'inline',
-				start: (src) => src.indexOf('++'),
-				tokenizer: (src) => {
-					const rule = /\+\+(?<text>[^+]*?)\+\+/iu;
-					const match = rule.exec(src);
-
-					if (!match) {
-						return;
-					}
-
-					return {
-						type: 'insertion',
-						raw: match[0],
-						text: match.groups?.['text'],
-						html: ''
-					};
-				},
-				renderer: (token: Tokens.Generic & { html?: string }) => token.html
-			}],
-			async: true,
-			// @ts-expect-error
-			walkTokens: (token: InsertionToken) => {
-				if (token.type !== 'insertion') {
-					return;
-				}
-
-				token.html = `<ins>${token.text}</ins>`;
-			}
-		});
-
-		interface HighlightToken extends Tokens.Generic {
-			type: 'highlight';
-			html: string;
-			text: string;
-		}
-
-		marked.use({
-			extensions: [{
-				name: 'highlight',
-				level: 'inline',
-				start: (src) => src.indexOf('=='),
-				tokenizer: (src) => {
-					const rule = /[=]=(?<text>[^=]*?)==/iu;
-					const match = rule.exec(src);
-
-					if (!match) {
-						return;
-					}
-
-					return {
-						type: 'highlight',
-						raw: match[0],
-						text: match.groups?.['text'],
-						html: ''
-					};
-				},
-				renderer: (token: Tokens.Generic & { html?: string }) => token.html
-			}],
-			async: true,
-			// @ts-expect-error
-			walkTokens: (token: HighlightToken) => {
-				if (token.type !== 'highlight') {
-					return;
-				}
-
-				token.html = `<mark>${token.text}</mark>`;
-			}
-		});
-
-		interface ImageToken extends Tokens.Generic {
-			type: 'imageOptimization';
-			html: string;
-			text: string;
-			href: string;
-		}
-
-		marked.use({
-			extensions: [{
-				name: 'imageOptimization',
-				level: 'block',
-				start: (src) => src.indexOf('!['),
-				tokenizer: (src) => {
-					const rule = /!\[(?<alt>.+?)\]\((?<href>.+?)\)/iu;
-					const match = rule.exec(src);
-
-					if (!match) {
-						return;
-					}
-
-					return {
-						type: 'imageOptimization',
-						raw: match[0],
-						href: match.groups?.['href'] ?? '',
-						text: match.groups?.['alt'] ?? '',
-						html: ''
-					} satisfies ImageToken;
-				},
-				renderer: (token: Tokens.Generic & { html?: string }) => token.html
-			}],
-			async: true,
-			// @ts-expect-error
-			walkTokens: async (token: ImageToken) => {
-				if (token.type !== 'imageOptimization') {
-					return;
-				}
-
-				token.html = await this.#processImage(assets, entryPath, token.href ?? '', token.text);
-			}
-		});
+		marked.use(await initShiki(this.#shikiOptions));
+		marked.use(markedSuperscript);
+		marked.use(markedSubscript);
+		marked.use(markedHighlight);
+		marked.use(markedInsertion);
+		marked.use(initImages(assets, this.#processImage, entryPath));
 
 		return marked;
 	}
 
-	async #parseMarkdown(assets: Env['Assets'], entryPath: string, text: string) {
+	async #parseMarkdown<T extends Record<string, any>>(assets: Env['Assets'], entryPath: string, text: string) {
 		const { groups: { frontmatter, markdown } = {} } = /(?:^---\n(?<frontmatter>.*?)\n---\n)?(?<markdown>.*$)/isu.exec(text) ?? {};
-		let metadata: Record<string, any> | undefined;
+		let metadata: T | undefined;
 
 		if (frontmatter) {
 			metadata = parseYaml(frontmatter);
@@ -454,25 +227,54 @@ export class Collections {
 		};
 	}
 
+	resolveImagePath(imagePath: string, entryPath: string) {
+		const entryUrl = new URL(entryPath, this.#COLLECTIONS_URL);
+		const imagePrivateUrl = new URL(imagePath, entryUrl);
+
+		return imagePrivateUrl.pathname;
+	}
+
+	stripInlineMarkdown(text: string) {
+		// TODO: use marked for this?
+
+		return text
+			// Escape HTML entities
+			.replaceAll('&', '&amp;').replaceAll('<', '&lt;')
+			// Bold
+			.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '$1$2')
+			// Italics
+			.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '$1$2')
+			// Striketrough (deleted text)
+			.replaceAll(/~~(.+?)~~/igu, '$1')
+			// Underline (inserted text)
+			.replaceAll(/\+\+(.+?)\+\+/igu, '$1')
+			// Highlight
+			.replaceAll(/[=]=(.+?)==/igu, '$1')
+			// Inline code
+			.replaceAll(/`(.+?)`/igu, '$1')
+			// Links
+			.replaceAll(/\[(.*?)\]\((.*?)\)/igu, '$1');
+	}
+
 	async renderInlineMarkdown(assets: Env['Assets'], text: string) {
 		const marked = await this.#newMarkdownParser(assets, '');
 
 		return marked.parseInline(text);
 	}
 
-	async renderMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
+	async renderMarkdown<T extends Record<string, any>>(assets: Env['Assets'], entryPath: string, text: string) {
 		const id = basename(new URL(entryPath, this.#COLLECTIONS_URL).pathname, '.md');
-		const { contents, metadata } = await this.#parseMarkdown(assets, entryPath, text);
+		const { contents, metadata } = await this.#parseMarkdown<T>(assets, entryPath, text);
 
-		// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 		return {
 			id,
+			path: entryPath,
 			metadata,
 			contents
-		} as MarkdownEntry<T>;
+		} satisfies MarkdownEntry<T>;
 	}
 
-	async list<T>(assets: Env['Assets'], collectionName: string) {
+	async list<T extends Record<string, any>>(assets: Env['Assets'], collectionName: string) {
 		await this.#initCollections(assets);
 
 		const collection = this.#collections[collectionName];
@@ -502,7 +304,7 @@ export class Collections {
 		return Object.fromEntries((this.#collectionsCache.get(collectionName) as Map<string, MarkdownEntry<T>>).entries());
 	}
 
-	async get<T>(assets: Env['Assets'], collectionName: string, entry: string) {
+	async get<T extends Record<string, any>>(assets: Env['Assets'], collectionName: string, entry: string) {
 		await this.#initCollections(assets);
 
 		if (!this.#collections[collectionName]?.find((filePath) => entry === filePath)) {
@@ -531,6 +333,7 @@ export class Collections {
 				markdownParser: await this.#newMarkdownParser(assets, entry),
 				imageOptimizer: this.#imageOptimizer,
 				templateRenderer: this.#templateRenderer,
+				collections: this,
 				mode: this.mode
 			});
 		}
