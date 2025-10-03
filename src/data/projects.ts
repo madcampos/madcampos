@@ -1,6 +1,6 @@
 import type { SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
-interface ProjectMetadata {
+export interface ProjectMetadata {
 	title: string;
 	status: string;
 	version: string;

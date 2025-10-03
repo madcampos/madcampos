@@ -1,11 +1,15 @@
 import { StaticSiteHandler } from '../lib/StaticSiteHandler.ts';
-import { icon } from '../public/_templates/components/Icon.ts';
+
 import { sort as sortAuthors, transform as transformAuthors } from './data/authors.ts';
 import { sort as sortChangelogs, transform as transformChangelog } from './data/changelog.ts';
 import { sort as sortProjects, transform as transformProjects } from './data/projects.ts';
-import server from './index.ts';
-
 import hcShikiTheme from './hc-shiki-theme.json' with { type: 'json' };
+
+import { icon } from '../public/_templates/components/Icon.ts';
+
+import { render as renderChangelogsXml } from '../public/_templates/changelog.xml.ts';
+
+import server from './index.ts';
 
 const app = new StaticSiteHandler({
 	baseUrl: 'http://localhost:4242/',
@@ -54,6 +58,7 @@ const app = new StaticSiteHandler({
 				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
 			}
 		},
+		'/changelog.xml': { render: renderChangelogsXml },
 		'/ai': { renderHtml: { template: 'ai.html' } },
 		'/food': { renderHtml: { template: 'food.html' } },
 		'/license': { renderHtml: { template: 'license.html' } },

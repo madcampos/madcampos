@@ -25,7 +25,7 @@ import type { TemplateRenderer } from './TemplateRenderer.ts';
 export interface MarkdownEntry<T> {
 	id: string;
 	path: string;
-	metadata?: T;
+	metadata: T;
 	contents: string;
 }
 
@@ -269,7 +269,8 @@ export class Collections {
 		return {
 			id,
 			path: entryPath,
-			metadata,
+			// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+			metadata: metadata ?? ({} as T),
 			contents
 		} satisfies MarkdownEntry<T>;
 	}

@@ -1,19 +1,19 @@
 import type { SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
-interface ChangelogMetadata {
+interface OriginalChangelogMetadata {
 	date: string;
 	versionName: string;
 	draft?: boolean;
 }
 
-interface TransformedChangelogMetadata {
+export interface ChangelogMetadata {
 	title: string;
 	date: string;
 	formattedDate: string;
 	draft: boolean;
 }
 
-export const sort: SortingFunction<ChangelogMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
+export const sort: SortingFunction<OriginalChangelogMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
 	if (!metaA || !metaB) {
 		return 0;
 	}
@@ -21,7 +21,7 @@ export const sort: SortingFunction<ChangelogMetadata> = ([, { metadata: metaA }]
 	return new Date(metaA.date).getTime() - new Date(metaB.date).getTime();
 };
 
-export const transform: TransformerFunction<ChangelogMetadata, TransformedChangelogMetadata> = async (_, {
+export const transform: TransformerFunction<OriginalChangelogMetadata, ChangelogMetadata> = async (_, {
 	entry: { id, path, metadata, contents },
 	markdownParser,
 	mode

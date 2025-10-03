@@ -1,6 +1,6 @@
 import type { SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
-interface AuthorMetadata {
+export interface AuthorMetadata {
 	name: string;
 	draft?: boolean;
 	avatar: string;

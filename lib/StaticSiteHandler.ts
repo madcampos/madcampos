@@ -7,7 +7,7 @@ import { type TemplateRendererOptions, TemplateRenderer } from './TemplateRender
 
 export type Mode = 'development' | 'production';
 
-interface FileSystemModule {
+export interface FileSystemModule {
 	writeFile(path: string, data: Uint8Array | string): Promise<void>;
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 	mkdir(path: string, options?: { recursive?: boolean }): Promise<string | void>;
@@ -15,29 +15,50 @@ interface FileSystemModule {
 	glob(pattern: string): AsyncIterable<string>;
 }
 
-interface RouterViewResolverParams {
+export interface RouterViewResolverParams {
 	collections: Collections;
 	templateRenderer: TemplateRenderer;
 	imageOpttimizer: ImageOptimizer;
 	url: URLPattern;
 }
 
+export type ResolveParamsFunction = (assets: Env['Assets'], params: RouterViewResolverParams) => Promise<string[]> | string[];
+
 interface BaseRouteView {
-	resolveParams?(assets: Env['Assets'], params: RouterViewResolverParams): Promise<string[]> | string[];
+	resolveParams?: ResolveParamsFunction;
 }
 
-interface RouterViewParams {
+export interface RouterViewParams {
+	/**
+	 * An instance of {@link Collections}.
+	 */
 	collections: Collections;
+
+	/**
+	 * An instance of {@link TemplateRenderer}.
+	 */
 	templateRenderer: TemplateRenderer;
+
+	/**
+	 * An instance of {@link ImageOptimizer}.
+	 */
 	imageOptimizer: ImageOptimizer;
-	path: string;
-	url: string;
+
+	/**
+	 * The full URL for the route.
+	 */
+	url: URL;
+
+	/**
+	 * If this is a dynamic URL, the resolved `URLPatternResults`.
+	 */
 	params?: URLPatternResult;
-	data?: unknown;
 }
+
+export type RenderFunction = (assets: Env['Assets'], params: RouterViewParams) => Promise<Response> | Response;
 
 interface GenericRenderRouteView extends BaseRouteView {
-	render(assets: Env['Assets'], params: RouterViewParams): Promise<Response> | Response;
+	render: RenderFunction;
 	renderHtml?: never;
 }
 
@@ -112,7 +133,7 @@ export class StaticSiteHandler {
 		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#collections.collectionsPath}*` }), normalizedFallbackRoute]);
 
 		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#imageOptimizer.publicAssetsPath}*` }), {
-			render: async (assets, { path }) => this.#imageOptimizer.fetchImage(assets, path)
+			render: async (assets, { url }) => this.#imageOptimizer.fetchImage(assets, url.pathname)
 		}]);
 
 		Object.entries(routes).forEach(([path, route]) => {
@@ -196,8 +217,8 @@ export class StaticSiteHandler {
 						collections: this.#collections,
 						imageOptimizer: this.#imageOptimizer,
 						templateRenderer: this.#templateRenderer,
-						path: resolvedPath,
-						url
+						params: pattern.exec(resolvedUrl) ?? undefined,
+						url: resolvedUrl
 					});
 				} catch (err) {
 					console.error(`Error rendering route: ${url}.`);
@@ -210,8 +231,7 @@ export class StaticSiteHandler {
 			collections: this.#collections,
 			imageOptimizer: this.#imageOptimizer,
 			templateRenderer: this.#templateRenderer,
-			path: resolvedUrl.pathname,
-			url
+			url: resolvedUrl
 		});
 	}
 
@@ -259,8 +279,7 @@ export class StaticSiteHandler {
 						collections: this.#collections,
 						imageOptimizer: this.#imageOptimizer,
 						templateRenderer: this.#templateRenderer,
-						path: resolvedPath,
-						url: new URL(resolvedPath, this.#BASE_URL).href
+						url: new URL(resolvedPath, this.#BASE_URL)
 					});
 
 					const file = await (await response.blob()).bytes();
@@ -319,8 +338,7 @@ export class StaticSiteHandler {
 			collections: this.#collections,
 			imageOptimizer: this.#imageOptimizer,
 			templateRenderer: this.#templateRenderer,
-			path: new URL(request.url).pathname,
-			url: request.url
+			url: new URL(request.url)
 		});
 	}
 }
