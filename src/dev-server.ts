@@ -1,16 +1,26 @@
-import { Collections } from '../lib/CollectionsProcessing.ts';
 import { StaticSiteHandler } from '../lib/StaticSiteHandler.ts';
 import { icon } from '../public/_templates/components/Icon.ts';
 import server from './index.ts';
-import { listAllChangelogs } from './utils/changelog.ts';
+import { sort as sortChangelogs, transform as transformChangelog } from './utils/changelog.ts';
 
-const collections = new Collections();
+import hcShikiTheme from './hc-shiki-theme.json' with { type: 'json' };
 
 const app = new StaticSiteHandler({
 	baseUrl: 'http://localhost:4242/',
 	collections: {
 		transformers: {
-			// TODO: add transformers
+			changelog: transformChangelog
+		},
+		sorters: {
+			changelog: sortChangelogs
+		},
+		shiki: {
+			langs: ['md', 'js', 'html', 'css', 'typescript', 'powershell', 'shell', 'fish', 'jsx'],
+			themes: {
+				light: 'light-plus',
+				dark: 'dark-plus',
+				contrast: hcShikiTheme
+			}
 		}
 	},
 	templateRenderer: {
@@ -26,15 +36,14 @@ const app = new StaticSiteHandler({
 		'/accessibility': { renderHtml: { template: 'accessibility.html' } },
 		'/bookmarks': { renderHtml: { template: 'bookmarks.html' } },
 		'/changelog': {
-			render: async ({ assets, imageOptimizer, templateRenderer, url }) => {
-				const changelogs = await listAllChangelogs(assets, collections, true);
+			render: async (assets, { templateRenderer, url, collections }) => {
+				const changelogs = await collections.list(assets, 'changelog');
 
-				const body = await templateRenderer.renderTemplate({
+				const body = await templateRenderer.renderTemplate(
 					assets,
-					imageOptimizer,
-					template: 'changelog.html',
-					data: { changelogs: Object.values(changelogs), url }
-				});
+					'changelog.html',
+					{ changelogs: Object.values(changelogs), url }
+				);
 
 				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
 			}
@@ -51,12 +60,8 @@ const app = new StaticSiteHandler({
 		'/triangle': { renderHtml: { template: 'triangle.html' } }
 	},
 	fallbackRoute: {
-		render: async ({ assets, imageOptimizer, templateRenderer }) => {
-			const body = await templateRenderer.renderTemplate({
-				assets,
-				imageOptimizer,
-				template: '404.html'
-			});
+		render: async (assets, { templateRenderer }) => {
+			const body = await templateRenderer.renderTemplate(assets, '404.html');
 
 			return new Response(body, { status: 404, headers: { 'Content-Type': 'text/html' } });
 		}

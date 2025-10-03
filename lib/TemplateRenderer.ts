@@ -20,20 +20,6 @@ import type { ImageOptimizer } from './ImageOptimizer.ts';
 type ComponentFunction = (data: any) => Promise<string> | string;
 type ComponentReferenceList = Record<string, ComponentFunction | string>;
 
-interface RenderTemplateParams<T> {
-	assets: Env['Assets'];
-	imageOptimizer: ImageOptimizer;
-	template: string;
-	data?: T;
-}
-
-interface RenderStringParams<T> {
-	assets: Env['Assets'];
-	imageOptimizer: ImageOptimizer;
-	text: string;
-	data?: T;
-}
-
 /**
  * The special attributes to do if checks, loops, etc.
  */
@@ -100,10 +86,30 @@ interface TemplateRenderingAttributes {
 
 	/**
 	 * The attribute for setting the image quality for processing the images.
-	 * If not predent, the default quality will be used.
+	 * If not present, the default quality will be used.
 	 * @default '@quality'
 	 */
 	imageQuality: string;
+
+	/**
+	 * The attribute for setting the image widths for generating a `srcset`.
+	 * If not present, the default quality will be used.
+	 * @default '@widths'
+	 */
+	imageWidths: string;
+
+	/**
+	 * The attribute for setting the image densities for generating a `srcset`.
+	 * If not present, the default quality will be used.
+	 * @default '@densities'
+	 */
+	imageDensities: string;
+
+	/**
+	 * The attribute for skipping image optimization.
+	 * @default '@no-optimize'
+	 */
+	skipImageOptimization: string;
 
 	/**
 	 * The open delimiter for interpolating data.
@@ -131,6 +137,11 @@ interface TemplateRenderingAttributes {
 }
 
 export interface TemplateRendererOptions {
+	/**
+	 * An instance of {@link ImageOptimizer}.
+	 */
+	imageOptimizer: ImageOptimizer;
+
 	/**
 	 * A list of components where the key is the component tag name and the value either the path for the component file or a rendering function.
 	 *
@@ -184,6 +195,9 @@ export class TemplateRenderer {
 		skipShadowDom: '@no-shadowdom',
 		importData: '@data',
 		imageQuality: '@quality',
+		imageWidths: '@widths',
+		imageDensities: '@densities',
+		skipImageOptimization: '@no-optimize',
 		openDelimiter: '\\{\\{',
 		closeDelimiter: '\\}\\}',
 		unescapedOpenDelimiter: '\\{\\{\\{',
@@ -192,8 +206,11 @@ export class TemplateRenderer {
 	#componentCache: ComponentReferenceList = {};
 	#isIndexFetched = false;
 	#componentPaths: ComponentReferenceList;
+	#imageOptimizer: ImageOptimizer;
 
-	constructor({ components, componentIndex, templatesFolder, attributes }: TemplateRendererOptions = {}) {
+	constructor({ imageOptimizer, components, componentIndex, templatesFolder, attributes }: TemplateRendererOptions) {
+		this.#imageOptimizer = imageOptimizer;
+
 		this.#componentPaths = Object.fromEntries(Object.entries(components ?? {}).map(([key, value]) => [key.toLowerCase(), value]));
 
 		this.#TEMPLATES_URL = new URL(templatesFolder ?? '_templates/', 'https://assets.local/');
@@ -325,7 +342,7 @@ export class TemplateRenderer {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement) {
+	async #processComponent(assets: Env['Assets'], element?: HTMLElement) {
 		if (!element) {
 			return;
 		}
@@ -351,7 +368,7 @@ export class TemplateRenderer {
 					}
 
 					if (!childElement.hasAttribute(this.#attributes.skipProcessing)) {
-						await this.#processElement(assets, imageOptimizer, childElement, childElement.attributes);
+						await this.#processElement(assets, childElement, childElement.attributes);
 					} else {
 						childElement.removeAttribute(this.#attributes.skipProcessing);
 					}
@@ -390,7 +407,7 @@ export class TemplateRenderer {
 		}
 	}
 
-	async #processImport<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement, data?: T) {
+	async #processImport<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -409,12 +426,7 @@ export class TemplateRenderer {
 					element.removeAttribute(this.#attributes.importData);
 				}
 
-				const importedTemplate = await this.renderTemplate({
-					assets,
-					imageOptimizer,
-					template: filePath,
-					data: { ...element.attributes, ...(importData ?? {}) }
-				});
+				const importedTemplate = await this.renderTemplate(assets, filePath, { ...element.attributes, ...(importData ?? {}) });
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();
@@ -422,7 +434,7 @@ export class TemplateRenderer {
 		}
 	}
 
-	async #processChildElements<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement, data?: T) {
+	async #processChildElements<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -434,14 +446,14 @@ export class TemplateRenderer {
 					continue;
 				}
 
-				await this.#processElement(assets, imageOptimizer, childElement, data);
+				await this.#processElement(assets, childElement, data);
 			} catch (err) {
 				console.error(err);
 			}
 		}
 	}
 
-	async #processLoop<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element?: HTMLElement, data?: T) {
+	async #processLoop<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -468,7 +480,7 @@ export class TemplateRenderer {
 
 						clonedElement.removeAttribute(this.#attributes.loop);
 
-						await this.#processElement(assets, imageOptimizer, clonedElement, {
+						await this.#processElement(assets, clonedElement, {
 							...(data ?? {}),
 							[itemName?.trim() ?? '']: itemValue
 						});
@@ -549,40 +561,53 @@ export class TemplateRenderer {
 		});
 	}
 
-	async #processResponsiveImages(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element: HTMLElement) {
+	async #processResponsiveImages(assets: Env['Assets'], element: HTMLElement) {
 		if (element.tagName?.toLowerCase() !== 'img') {
 			return;
 		}
 
-		if (element.getAttribute('src')) {
+		if (!element.hasAttribute(this.#attributes.skipImageOptimization) && element.getAttribute('src')) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const src = element.getAttribute('src')!;
 			const quality = element.getAttribute(this.#attributes.imageQuality);
 			const width = element.getAttribute('width');
 			const height = element.getAttribute('height');
+			const widths = element.getAttribute(this.#attributes.imageWidths)?.split(',').map((w) => Number.parseInt(w.trim()));
+			const densities = element.getAttribute(this.#attributes.imageDensities)?.split(',').map((w) => Number.parseInt(w.trim()));
 
-			const newSrc = (await imageOptimizer.addImageToCache(assets, {
+			const newSrc = (await this.#imageOptimizer.addImageToCache(assets, {
 				src,
 				quality: quality ? Number.parseInt(quality) : undefined,
 				width: width ? Number.parseInt(width) : undefined,
-				height: height ? Number.parseInt(height) : undefined
+				height: height ? Number.parseInt(height) : undefined,
+				widths,
+				densities
 			})) ?? src;
 
 			element.setAttribute('src', newSrc);
+
+			if (element.hasAttribute(this.#attributes.imageWidths)) {
+				const srcSet = this.#imageOptimizer.getImageSourceSet(newSrc);
+
+				element.setAttribute('srcset', srcSet);
+			}
 		}
 
-		// TODO: handle srcset and multiple images
+		element.removeAttribute(this.#attributes.skipImageOptimization);
+		element.removeAttribute(this.#attributes.imageQuality);
+		element.removeAttribute(this.#attributes.imageDensities);
+		element.removeAttribute(this.#attributes.imageWidths);
 	}
 
-	async #processElement<T>(assets: Env['Assets'], imageOptimizer: ImageOptimizer, element: HTMLElement, data?: T) {
+	async #processElement<T>(assets: Env['Assets'], element: HTMLElement, data?: T) {
 		await this.#processIfAttribute(element, data);
-		await this.#processImport(assets, imageOptimizer, element, data);
-		await this.#processLoop(assets, imageOptimizer, element, data);
-		await this.#processChildElements(assets, imageOptimizer, element, data);
+		await this.#processImport(assets, element, data);
+		await this.#processLoop(assets, element, data);
+		await this.#processChildElements(assets, element, data);
 		await this.#processAttributes(element, data);
-		await this.#processResponsiveImages(assets, imageOptimizer, element);
+		await this.#processResponsiveImages(assets, element);
 		await this.#processTextNodes(element, data);
-		await this.#processComponent(assets, imageOptimizer, element);
+		await this.#processComponent(assets, element);
 	}
 
 	/**
@@ -590,7 +615,7 @@ export class TemplateRenderer {
 	 *
 	 * It returns a string of the rendered HTML.
 	 */
-	async renderTemplate<T>({ assets, template, imageOptimizer, data }: RenderTemplateParams<T>) {
+	async renderTemplate<T>(assets: Env['Assets'], template: string, data?: T) {
 		await this.#initTemplates(assets);
 
 		const response = await assets.fetch(new URL(template, this.#TEMPLATES_URL));
@@ -608,12 +633,12 @@ export class TemplateRenderer {
 			}
 		});
 
-		await this.#processElement(assets, imageOptimizer, parsedDocument, data);
+		await this.#processElement(assets, parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}
 
-	async renderString<T>({ assets, text, imageOptimizer, data }: RenderStringParams<T>) {
+	async renderString<T>(assets: Env['Assets'], text: string, data?: T) {
 		await this.#initTemplates(assets);
 
 		const parsedDocument = parse(text, {
@@ -629,7 +654,7 @@ export class TemplateRenderer {
 			}
 		});
 
-		await this.#processElement(assets, imageOptimizer, parsedDocument, data);
+		await this.#processElement(assets, parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}

@@ -1,8 +1,9 @@
 import { createJimp } from '@jimp/core';
-import jpeg from '@jimp/wasm-jpeg';
-import png from '@jimp/wasm-png';
-import webp from '@jimp/wasm-webp';
-import { defaultFormats, defaultPlugins, ResizeStrategy } from 'jimp';
+import { defaultPlugins, ResizeStrategy } from 'jimp';
+import jpeg from './optimizer-codecs/jpeg.ts';
+import png from './optimizer-codecs/png.ts';
+import webp from './optimizer-codecs/webp.ts';
+import { basename, extname } from './path.ts';
 
 type ImageExtension = 'gif' | 'jpeg' | 'jpg' | 'png' | 'webp';
 
@@ -83,49 +84,23 @@ interface ImageCacheOptions {
 	keepName?: boolean;
 }
 
-interface ImageHtmlOptions {
-	/**
-	 * The image alt text
-	 */
-	altText: string;
-
-	/**
-	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#loading|loading attribute}.
-	 */
-	loading?: 'eager' | 'lazy';
-
-	/**
-	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#decoding|decoding attribute}.
-	 */
-	decoding?: 'async' | 'auto' | 'sync';
-
-	/**
-	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#sizes|sizes attribute}
-	 */
-	sizes?: string;
-
-	/**
-	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#referrerpolicy|referrerpolicy attribute}
-	 */
-	referrerPolicy?: string;
-
-	/**
-	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#fetchpriority|fetchpriority attribute}
-	 */
-	fetchPriority?: string;
-
-	/**
-	 * The image {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin|crossorigin attribute}
-	 */
-	crossOrigin?: string;
-}
-
 export interface ImageOptimizerOptions {
 	/**
 	 * The path where public assets will be saved
 	 * @default '_assets'
 	 */
 	publicAssetsPath?: string;
+
+	/**
+	 * The JSON file, inside the assets folder containing a mapping from the assets original path to the transformed name.
+	 *
+	 * It should be an object where each key is the original path.
+	 * The values are strings with the transformed name for the asset.
+	 *
+	 * The entry paths is relative to the assets folder.
+	 * @default 'index.json'
+	 */
+	assetsManifestFile?: string;
 
 	/**
 	 * The default image quality to use.
@@ -141,15 +116,20 @@ export interface ImageOptimizerOptions {
 }
 
 export class ImageOptimizer {
+	#ASSETS_MANIFEST_URL: URL;
 	#PUBLIC_ASSETS_URL: URL;
 
-	#imageCache = new Map<string, ImageMetadata>();
+	#imageMetadataCache = new Map<string, ImageMetadata>();
+	#imageResponseCache = new Map<string, Response>();
 	#privateToPublicPathMap = new Map<string, string[]>();
 	#defaultImageQuality: number;
 	#defaultExtension: ImageExtension;
+	#assetsManifest!: Map<string, string>;
 
-	constructor({ publicAssetsPath, defaultImageQuality, defaultExtension }: ImageOptimizerOptions = {}) {
+	constructor({ publicAssetsPath, assetsManifestFile, defaultImageQuality, defaultExtension }: ImageOptimizerOptions = {}) {
 		this.#PUBLIC_ASSETS_URL = new URL(publicAssetsPath ?? '_assets/', 'https://assets.local/');
+		this.#ASSETS_MANIFEST_URL = new URL(assetsManifestFile ?? 'index.json', this.#PUBLIC_ASSETS_URL);
+
 		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 		this.#defaultImageQuality = defaultImageQuality ?? 75;
 		this.#defaultExtension = defaultExtension ?? 'webp';
@@ -157,6 +137,22 @@ export class ImageOptimizer {
 
 	get publicAssetsPath() {
 		return this.#PUBLIC_ASSETS_URL.pathname;
+	}
+
+	get assetsManifestPath() {
+		return this.#ASSETS_MANIFEST_URL.pathname;
+	}
+
+	async #initAssetsManifest(assets: Env['Assets']) {
+		if (!this.#assetsManifest) {
+			const response = await assets.fetch(this.#ASSETS_MANIFEST_URL);
+
+			if (!response.ok) {
+				console.error(`Failed to fetch assets manifest file at: ${this.#ASSETS_MANIFEST_URL.pathname}`);
+			} else {
+				this.#assetsManifest = new Map(Object.entries(await response.json<Record<string, string>>()));
+			}
+		}
 	}
 
 	async #loadImage(assets: Env['Assets'], src: string) {
@@ -167,7 +163,7 @@ export class ImageOptimizer {
 		}
 
 		const Jimp = createJimp({
-			formats: [...defaultFormats, webp],
+			formats: [jpeg, png, webp],
 			plugins: defaultPlugins
 		});
 
@@ -177,14 +173,33 @@ export class ImageOptimizer {
 	}
 
 	async addImageToCache(assets: Env['Assets'], imageOptions: ImageCacheOptions) {
+		await this.#initAssetsManifest(assets);
+
+		// TODO: add support for gifs and svgs
+		if (imageOptions.src.endsWith('.gif') || imageOptions.src.endsWith('.svg')) {
+			return imageOptions.src;
+		}
+
 		const image = await this.#loadImage(assets, imageOptions.src);
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const [imageName, extension] = imageOptions.src.split('/').pop()!.split('.') as [string, ImageExtension];
-		const newName = imageOptions.keepName ? imageName : crypto.randomUUID();
+		const imageName = basename(imageOptions.src);
+		const extension = extname(imageName) as ImageExtension;
+		let newName = imageName;
+
+		if (!imageOptions.keepName) {
+			newName = crypto.randomUUID();
+		}
+
+		if (this.#assetsManifest.has(imageOptions.src)) {
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			newName = this.#assetsManifest.get(imageOptions.src)!;
+		} else {
+			this.#assetsManifest.set(imageOptions.src, newName);
+		}
+
 		const publicPath = new URL(`${newName}.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
-		this.#imageCache.set(publicPath, {
+		this.#imageMetadataCache.set(publicPath, {
 			src: imageOptions.src,
 			extension: imageOptions.extension ?? extension ?? this.#defaultExtension,
 			quality: imageOptions.quality ?? this.#defaultImageQuality,
@@ -197,7 +212,7 @@ export class ImageOptimizer {
 		imageOptions.widths?.forEach((width) => {
 			const sizePublicPath = new URL(`${newName}-${width}w.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
-			this.#imageCache.set(sizePublicPath, {
+			this.#imageMetadataCache.set(sizePublicPath, {
 				src: imageOptions.src,
 				extension: imageOptions.extension ?? extension ?? this.#defaultExtension,
 				quality: imageOptions.quality ?? this.#defaultImageQuality,
@@ -211,7 +226,7 @@ export class ImageOptimizer {
 		imageOptions.densities?.forEach((density) => {
 			const sizePublicPath = new URL(`${newName}-${density}x.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
-			this.#imageCache.set(sizePublicPath, {
+			this.#imageMetadataCache.set(sizePublicPath, {
 				src: imageOptions.src,
 				extension: imageOptions.extension ?? extension ?? this.#defaultExtension,
 				quality: imageOptions.quality ?? this.#defaultImageQuality,
@@ -229,75 +244,54 @@ export class ImageOptimizer {
 	}
 
 	getImageMetadata(publicPath: string) {
-		return this.#imageCache.get(publicPath);
+		return this.#imageMetadataCache.get(publicPath);
 	}
 
-	getImageSizes(publicPath: string) {
-		const baseImageMetadata = this.#imageCache.get(publicPath);
+	getImageSourceSet(publicPath: string) {
+		const imageMetadata = this.#imageMetadataCache.get(publicPath);
 
-		if (!baseImageMetadata) {
-			return [];
+		if (!imageMetadata) {
+			return '';
 		}
 
-		const publicPaths = this.#privateToPublicPathMap.get(baseImageMetadata.src) ?? [];
+		const publicMetadata = (this.#privateToPublicPathMap.get(imageMetadata.src) ?? [])
+			.reduce<[string, ImageMetadata][]>((results, path) => {
+				if (this.#imageMetadataCache.has(path)) {
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					results.push([path, this.#imageMetadataCache.get(path)!]);
+				}
 
-		return [
-			baseImageMetadata,
-			...publicPaths
-				.map((path) => this.#imageCache.get(path))
-				.filter((metadata) => metadata !== undefined)
-		];
-	}
+				return results;
+			}, [])
+			.sort(([, { width: widthA }], [, { width: widthB }]) => widthA - widthB);
 
-	getImageHtml(src: string, { altText, loading, decoding, crossOrigin, fetchPriority, referrerPolicy, sizes }: ImageHtmlOptions) {
-		const imageMetadata = this.#imageCache.get(src);
+		if (!publicMetadata.length) {
+			return '';
+		}
 
-		let srcSet: string | undefined;
-		if (imageMetadata) {
-			const publicMetadata = (this.#privateToPublicPathMap.get(imageMetadata.src) ?? [])
-				.reduce<[string, ImageMetadata][]>((results, publicPath) => {
-					if (this.#imageCache.has(publicPath)) {
-						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-						results.push([publicPath, this.#imageCache.get(publicPath)!]);
-					}
+		return publicMetadata.map(([path, { width, density }]) => {
+			let descriptor = '';
 
-					return results;
-				}, [])
-				.sort(([, { width: widthA }], [, { width: widthB }]) => widthA - widthB);
-
-			if (publicMetadata.length) {
-				srcSet = publicMetadata.map(([publicPath, { width, density }]) => {
-					let descriptor = '';
-
-					if (width) {
-						descriptor = `${width.toString()}w`;
-					}
-
-					if (density) {
-						descriptor = `${density.toString()}x`;
-					}
-
-					return `${publicPath} ${descriptor}`;
-				}).join(', ');
+			if (width) {
+				descriptor = `${width.toString()}w`;
 			}
-		}
 
-		return `<img
-			src="${src}"
-			alt="${altText}"
-			loading="${loading ?? 'lazy'}"
-			decoding="${decoding ?? 'auto'}"
-			fetchpriority="${fetchPriority ?? 'auto'}"
-			referrerpolicy="${referrerPolicy ?? 'no-referrer'}"
-			${crossOrigin ? `crossorigin="${crossOrigin}"` : ''}
-			${srcSet ? `srcset="${srcSet}"` : ''}
-			${sizes ? `sizes="${sizes}"` : ''}
-		/>`;
+			if (density) {
+				descriptor = `${density.toString()}x`;
+			}
+
+			return `${path} ${descriptor}`;
+		}).join(', ');
 	}
 
 	async fetchImage(assets: Env['Assets'], imagePath: string) {
-		if (!this.#imageCache.has(imagePath)) {
+		if (!this.#imageMetadataCache.has(imagePath)) {
 			return new Response(`Image does not exist: "${imagePath}"`, { status: 404 });
+		}
+
+		if (this.#imageResponseCache.has(imagePath)) {
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			return this.#imageResponseCache.get(imagePath)!;
 		}
 
 		const existingAssetResponse = await assets.fetch(new URL(imagePath, this.#PUBLIC_ASSETS_URL));
@@ -307,7 +301,7 @@ export class ImageOptimizer {
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const imageMetadata = this.#imageCache.get(imagePath)!;
+		const imageMetadata = this.#imageMetadataCache.get(imagePath)!;
 
 		const image = await this.#loadImage(assets, imageMetadata.src);
 
@@ -326,14 +320,21 @@ export class ImageOptimizer {
 		});
 
 		const imageBuffer = (await image.getBuffer('image/webp', {})).buffer as ArrayBuffer;
-
-		return new Response(imageBuffer, {
+		const response = new Response(imageBuffer, {
 			status: 200,
 			headers: { 'Content-Type': 'image/webp' }
 		});
+
+		this.#imageResponseCache.set(imagePath, response);
+
+		return response.clone();
+	}
+
+	getImageResponse(imagePath: string) {
+		return this.#imageResponseCache.get(imagePath);
 	}
 
 	generateManifest() {
-		// TODO: generate a manifest of optimized information, this will be loaded and used as references.
+		return Object.fromEntries(this.#assetsManifest.entries());
 	}
 }

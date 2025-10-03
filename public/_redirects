@@ -3,12 +3,12 @@
 /sdrlog/ https://sdrlog.madcampos.dev 308
 
 # Retired
-/tojs-styleguide /410 410
-/tojs-styleguide/ /410 410
+# /tojs-styleguide /410 410
+# /tojs-styleguide/ /410 410
 
 # Wrong url, never existed
-/blog/2023/06/07/tabs-web-component /410 410
-/blog/2023/06/07/tabs-web-component/ /410 410
+# /blog/2023/06/07/tabs-web-component /410 410
+# /blog/2023/06/07/tabs-web-component/ /410 410
 
 # Permanent redirects
 /accessibility /accessibility/ 308

@@ -1,5 +1,4 @@
-import type { Collections, MarkdownEntry } from '../../lib/CollectionsProcessing.ts';
-import { inlineMarkdownRender } from './markdown.ts';
+import type { SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
 interface ChangelogMetadata {
 	date: string;
@@ -14,26 +13,31 @@ interface TransformedChangelogMetadata {
 	draft: boolean;
 }
 
-export async function listAllChangelogs(assets: Env['Assets'], collections: Collections, isDevMode?: boolean) {
+export const sort: SortingFunction<ChangelogMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
+	if (!metaA || !metaB) {
+		return 0;
+	}
+
+	return new Date(metaA.date).getTime() - new Date(metaB.date).getTime();
+};
+
+export const transform: TransformerFunction<ChangelogMetadata, TransformedChangelogMetadata> = async (_, { entry: { id, metadata, contents }, markdownParser, mode }) => {
 	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 
-	const collectionEntries = await collections.list<ChangelogMetadata>(assets, 'changelog');
+	if (mode === 'production' && metadata?.draft) {
+		return;
+	}
 
-	const existingEntries = Object.entries(collectionEntries).filter(([, { metadata }]) => metadata) as [string, Required<MarkdownEntry<ChangelogMetadata>>][];
-	const nonDraftEntries = existingEntries.filter(([, { metadata }]) => !metadata.draft || isDevMode);
-	const sortedEntries = nonDraftEntries.sort(([, { metadata: { date: dateA } }], [, { metadata: { date: dateB } }]) => new Date(dateA).getTime() - new Date(dateB).getTime());
-	const entries = sortedEntries.map(([, { id, metadata, contents }]) => ({
+	const date = metadata?.date ? new Date(metadata.date) : new Date();
+
+	return {
 		id,
+		contents,
 		metadata: {
-			// TODO: update inline rendered to use marked
-			title: inlineMarkdownRender(metadata.versionName ? `${id} - ${metadata.versionName}` : id),
-			draft: metadata.draft ?? false,
-			date: new Date(metadata.date).toISOString(),
-			formattedDate: formatter.format(new Date(metadata.date))
-		},
-		// TODO: postprocess markdown
-		contents
-	} satisfies MarkdownEntry<TransformedChangelogMetadata>));
-
-	return entries;
-}
+			title: await markdownParser.parseInline(metadata?.versionName ? `${id} - ${metadata.versionName}` : id),
+			draft: metadata?.draft ?? false,
+			date: date.toISOString(),
+			formattedDate: formatter.format(date)
+		}
+	};
+};
