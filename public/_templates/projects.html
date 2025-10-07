@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<head>
+		<link
+			rel="import"
+			href="components/html-head.html"
+			title="Projects | Marco Campos"
+			description="A list of projects I've worked on, or am currently working on. Mostly web development"
+			url="{{url}}projects/"
+		/>
+
+		<!-- Page CSS -->
+		<link rel="stylesheet" href="/css/pages/internal-page.css" />
+	</head>
+	<body>
+		<css-naked-day hidden></css-naked-day>
+
+		<header>
+			<a id="skip-to-main" href="#contents">Skip to main content</a>
+			<site-nav @no-shadowdom></site-nav>
+
+			<page-header>
+				<m-logo
+					@no-shadowdom
+					subtitle="Projects"
+					short-subtitle="Proj."
+					url="/projects/"
+					title="Projects Page"
+				></m-logo>
+
+				<h1>Projects</h1>
+			</page-header>
+		</header>
+
+		<main id="main">
+			<div id="contents">
+				<m-card
+					@for="project in projects"
+					url="{{project.url}}"
+					draft="{{project.draft}}"
+					itemtype="http://schema.org/WebApplication"
+				>
+					<div slot="meta">
+						<meta itemprop="operatingSystem" content="https://schema.org/AllOperatingSystem" />
+						<meta itemprop="browserRequirements" content="https://schema.org/GenericWebPlatform" />
+						<meta itemprop="applicationCategory" content="BrowserApplication" />
+						<div itemprop="offers" itemscope itemtype="https://schema.org/Offer" hidden>
+							<meta itemprop="availability" content="https://schema.org/InStock" />
+							<meta itemprop="price" content="0" />
+							<meta itemprop="priceCurrency" content="USD" />
+						</div>
+						<meta itemprop="isAccessibleForFree" content="True" />
+					</div>
+
+					<!-- TODO: pass array down -->
+					<card-image @no-shadowdom src="{{project.image}}" alt="{{project.imageAlt}}" .themes="project.themeImages" slot="image"></card-image>
+
+					<h2 slot="title">{{{project.title}}}</h2>
+
+					<span slot="subtitle" class="project-status" data-status="{{project.status}}">
+						<m-icon icon="uil:history">Project status</m-icon>
+						{{project.status}}
+					</span>
+					<span slot="subtitle">
+						<m-icon icon="uil:calendar-alt">Date started</m-icon>
+						<time datetime="{{project.createdAt}}" itemprop="dateCreated">{{project.formattedCreatedAt}}</time>
+						<span @if="project.updatedAt">
+							&mdash;
+							<time datetime="{{project.updatedAt}}" itemprop="dateModified">{{project.formattedUpdatedAt}}</time>
+						</span>
+					</span>
+					<span slot="subtitle" itemprop="softwareVersion">
+						<m-icon icon="uil:box">Current version</m-icon>
+						{{project.version}}
+					</span>
+
+					{{{project.contents}}}
+
+					<a
+						@if="project.url"
+						slot="links"
+						href="{{project.url}}"
+						rel="noopener noreferrer"
+						referrerpolicy="no-referrer"
+						itemprop="installUrl"
+					>
+						<m-icon icon="uil:link"></m-icon>
+						View Project
+					</a>
+					<a
+						@if="project.repository"
+						slot="links"
+						href="{{project.repository}}"
+						rel="noopener noreferrer"
+						referrerpolicy="no-referrer"
+					>
+						<m-icon icon="uil:github"></m-icon>
+						View Repository
+					</a>
+
+					<details slot="footer">
+						<summary>
+							<span>
+								<m-icon icon="uil:cog"></m-icon>
+								Technologies used
+							</span>
+						</summary>
+						<ul class="technology-tags">
+							<li @for="technology in project.techStack">
+								<m-tag>{{technology}}</m-tag>
+							</li>
+						</ul>
+					</details>
+				</m-card>
+			</div>
+		</main>
+
+		<footer id="page-footer">
+			<old-style-buttons @no-shadowdom></old-style-buttons>
+			<m-webrings @no-shadowdom></m-webrings>
+		</footer>
+
+		<iab-escape></iab-escape>
+		<svg-effects @no-shadowdom></svg-effects>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<img
+	itemprop="contentUrl"
+	src="{{src}}"
+	alt="{{alt}}"
+	loading="lazy"
+	@widths="64, 128, 256, 512"
+	width="256"
+	height="256"
+	sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+	@quality="75"
+/>
+<img
+	@if="themes"
+	@for="theme in themes"
+	itemprop="contentUrl"
+	data-theme-image="{{theme.name}}"
+	src="{{theme.src}}"
+	alt="{{alt}}"
+	loading="lazy"
+	@widths="64, 128, 256, 512"
+	width="256"
+	height="256"
+	sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+	@quality="75"
+	hidden
+/>
