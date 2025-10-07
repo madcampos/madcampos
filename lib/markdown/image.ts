@@ -11,10 +11,10 @@ export function init(processImage: (filePath: string, imagePath: string, altText
 	return {
 		extensions: [{
 			name: 'imageOptimization',
-			level: 'block',
+			level: 'inline',
 			start: (src: string) => src.indexOf('!['),
 			tokenizer: (src: string) => {
-				const rule = /!\[(?<alt>.+?)\]\((?<href>.+?)\)/iu;
+				const rule = /^!\[(?<alt>.+?)\]\((?<href>.+?)\)/iu;
 				const match = rule.exec(src);
 
 				if (!match) {

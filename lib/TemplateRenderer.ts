@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 
 import { env } from 'cloudflare:workers';
-import { type HTMLElement, NodeType, parse } from 'node-html-parser';
+// eslint-disable-next-line @typescript-eslint/no-shadow
+import type { HTMLElement } from 'node-html-parser';
+import { NodeType, parse } from 'node-html-parser';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
 
 /**
@@ -250,12 +252,12 @@ export class TemplateRenderer {
 		}
 	}
 
-	#getValue<T>(path: string, data?: T) {
+	#getValue<T>(path: string, data?: T, shouldReport = true) {
 		if (!path) {
 			throw new Error('Missing property path!');
 		}
 
-		if (!data) {
+		if (!data && shouldReport) {
 			console.warn(`Missing data for property "${path}"`);
 			return undefined;
 		}
@@ -270,7 +272,7 @@ export class TemplateRenderer {
 		let result = data?.[firstPart];
 		let pathPartIndex = 0;
 
-		if (result === null || result === undefined) {
+		if ((result === null || result === undefined) && shouldReport) {
 			console.warn(`Missing data for property "${firstPart}"`);
 			return undefined;
 		}
@@ -281,7 +283,10 @@ export class TemplateRenderer {
 			if (result?.[pathPart]) {
 				result = result[pathPart];
 			} else {
-				console.warn(`Missing data for property "${firstPart}.${pathParts.slice(0, pathPartIndex + 1).join('.')}"`);
+				if (shouldReport) {
+					console.warn(`Missing data for property "${firstPart}.${pathParts.slice(0, pathPartIndex + 1).join('.')}"`);
+				}
+
 				result = undefined;
 			}
 
@@ -386,7 +391,7 @@ export class TemplateRenderer {
 		}
 
 		if (element.hasAttribute(this.#attributes.if)) {
-			const value = this.#getValue(element.getAttribute(this.#attributes.if) ?? '', data);
+			const value = this.#getValue(element.getAttribute(this.#attributes.if) ?? '', data, false);
 
 			const falsyValues = ['', false, null, undefined] as const;
 			if (falsyValues.includes(value) || Number.isNaN(value)) {
@@ -397,7 +402,7 @@ export class TemplateRenderer {
 		}
 
 		if (element.hasAttribute(this.#attributes.ifNot)) {
-			const value = this.#getValue(element.getAttribute(this.#attributes.ifNot) ?? '', data);
+			const value = this.#getValue(element.getAttribute(this.#attributes.ifNot) ?? '', data, false);
 
 			const falsyValues = ['', false, null, undefined] as const;
 			if (falsyValues.includes(value) || Number.isNaN(value)) {
@@ -529,7 +534,7 @@ export class TemplateRenderer {
 			return Promise.resolve();
 		}
 
-		Object.values(element.childNodes ?? {}).forEach((node) => {
+		Object.values(element.childNodes ?? {}).forEach((node, index) => {
 			if (node.nodeType !== NodeType.TEXT_NODE) {
 				return;
 			}
@@ -549,13 +554,28 @@ export class TemplateRenderer {
 			const { openDelimiter, closeDelimiter, unescapedOpenDelimiter, unescapedCloseDelimiter } = this.#attributes;
 
 			if (new RegExp(`${unescapedOpenDelimiter}(.+?)${unescapedCloseDelimiter}`, 'igu').test(node.rawText)) {
-				node.rawText = node.rawText
+				const htmlText = node.rawText
 					.replaceAll(/\s+/iug, ' ')
 					.replaceAll(
 						new RegExp(`${unescapedOpenDelimiter}(.+?)${unescapedCloseDelimiter}`, 'igu'),
 						(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
 					);
-			} else {
+
+				const parsedElement = parse(htmlText, {
+					comment: true,
+					parseNoneClosedTags: true,
+					fixNestedATags: true,
+					voidTag: { closingSlash: true },
+					blockTextElements: {
+						script: true,
+						noscript: true,
+						style: true,
+						pre: true
+					}
+				});
+
+				element.childNodes[index] = parsedElement;
+			} else if (new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu').test(node.textContent)) {
 				node.textContent = node.textContent
 					.replaceAll(/\s+/iug, ' ')
 					.replaceAll(

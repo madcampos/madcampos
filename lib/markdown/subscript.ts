@@ -6,26 +6,32 @@ interface SubscriptToken extends Tokens.Generic {
 	text: string;
 }
 
+function tokenizer(src: string) {
+	const rule = /^~(?!~)(?<text>[^~]*?)~(?!~)/iu;
+	const match = rule.exec(src);
+
+	if (!match) {
+		return;
+	}
+
+	return {
+		type: 'subscript',
+		raw: match[0],
+		text: match.groups?.['text'],
+		html: ''
+	};
+}
+
+function start(src: string) {
+	return src.indexOf('~');
+}
+
 export const extension: MarkedExtension = {
 	extensions: [{
 		name: 'subscript',
 		level: 'inline',
-		start: (src) => src.indexOf('~'),
-		tokenizer: (src) => {
-			const rule = /~(?!~)(?<text>[^~]*?)~(?!~)/iu;
-			const match = rule.exec(src);
-
-			if (!match) {
-				return;
-			}
-
-			return {
-				type: 'subscript',
-				raw: match[0],
-				text: match.groups?.['text'],
-				html: ''
-			};
-		},
+		start,
+		tokenizer,
 		renderer: (token: Tokens.Generic & { html?: string }) => token.html
 	}],
 	async: true,
@@ -37,4 +43,15 @@ export const extension: MarkedExtension = {
 
 		token.html = `<sub>${token.text}</sub>`;
 	}
+};
+
+export const stripExtension: MarkedExtension = {
+	extensions: [{
+		name: 'strip-subscript',
+		level: 'inline',
+		start,
+		tokenizer,
+		// @ts-expect-error
+		renderer: (token: SubscriptToken) => token.text
+	}]
 };

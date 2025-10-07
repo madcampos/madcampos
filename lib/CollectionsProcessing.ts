@@ -15,11 +15,12 @@ import type {
 } from 'shiki';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
 import { init as initShiki } from './markdown/code.ts';
-import { extension as markedHighlight } from './markdown/highlight.ts';
+import { extension as markedHighlight, stripExtension as markedStripHighlight } from './markdown/highlight.ts';
 import { init as initImages } from './markdown/image.ts';
-import { extension as markedInsertion } from './markdown/insertion.ts';
-import { extension as markedSubscript } from './markdown/subscript.ts';
-import { extension as markedSuperscript } from './markdown/superscript.ts';
+import { extension as markedInsertion, stripExtension as markedStripInsertion } from './markdown/insertion.ts';
+import { extension as markedStripBase } from './markdown/strip.ts';
+import { extension as markedSubscript, stripExtension as markedStripSubscript } from './markdown/subscript.ts';
+import { extension as markedSuperscript, stripExtension as markedStripSuperscript } from './markdown/superscript.ts';
 import type { Mode } from './StaticSiteHandler.ts';
 import type { TemplateRenderer } from './TemplateRenderer.ts';
 
@@ -190,8 +191,24 @@ export class Collections {
 			fetchpriority="low"
 			referrerpolicy="no-referrer"
 			srcset="${srcSet}"
-			size=""
+			sizes=""
 		/>`;
+	}
+
+	#newStripMarkdownParser() {
+		const marked = new Marked({
+			async: true,
+			breaks: true,
+			gfm: true
+		});
+
+		marked.use(markedStripBase);
+		marked.use(markedStripHighlight);
+		marked.use(markedStripInsertion);
+		marked.use(markedStripSubscript);
+		marked.use(markedStripSuperscript);
+
+		return marked;
 	}
 
 	async #newMarkdownParser(entryPath: string) {
@@ -203,10 +220,10 @@ export class Collections {
 
 		marked.use(markedFootnote());
 		marked.use(await initShiki(this.#shikiOptions));
-		marked.use(markedSuperscript);
-		marked.use(markedSubscript);
 		marked.use(markedHighlight);
 		marked.use(markedInsertion);
+		marked.use(markedSubscript);
+		marked.use(markedSuperscript);
 		marked.use(initImages(
 			async (filePath, imagePath, altText) => this.#processImage(filePath, imagePath, altText),
 			entryPath
@@ -232,26 +249,10 @@ export class Collections {
 		return imagePrivateUrl.pathname;
 	}
 
-	stripInlineMarkdown(text: string) {
-		// TODO: use marked for this?
+	async stripInlineMarkdown(text: string) {
+		const marked = this.#newStripMarkdownParser();
 
-		return text
-			// Escape HTML entities
-			.replaceAll('&', '&amp;').replaceAll('<', '&lt;')
-			// Bold
-			.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '$1$2')
-			// Italics
-			.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '$1$2')
-			// Striketrough (deleted text)
-			.replaceAll(/~~(.+?)~~/igu, '$1')
-			// Underline (inserted text)
-			.replaceAll(/\+\+(.+?)\+\+/igu, '$1')
-			// Highlight
-			.replaceAll(/[=]=(.+?)==/igu, '$1')
-			// Inline code
-			.replaceAll(/`(.+?)`/igu, '$1')
-			// Links
-			.replaceAll(/\[(.*?)\]\((.*?)\)/igu, '$1');
+		return marked.parseInline(text);
 	}
 
 	async renderInlineMarkdown(text: string) {
