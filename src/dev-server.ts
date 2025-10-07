@@ -2,7 +2,9 @@ import { StaticSiteHandler } from '../lib/StaticSiteHandler.ts';
 
 import { sort as sortAuthors, transform as transformAuthors } from './data/authors.ts';
 import { sort as sortChangelogs, transform as transformChangelog } from './data/changelog.ts';
+import { sort as sortPosts, transform as transformPosts } from './data/post.ts';
 import { sort as sortProjects, transform as transformProjects } from './data/projects.ts';
+import { sort as sortTalks, transform as transformTalks } from './data/talks.ts';
 import hcShikiTheme from './hc-shiki-theme.json' with { type: 'json' };
 
 import { icon } from '../public/_templates/components/Icon.ts';
@@ -17,12 +19,16 @@ const app = new StaticSiteHandler({
 		transformers: {
 			authors: transformAuthors,
 			changelog: transformChangelog,
-			projects: transformProjects
+			projects: transformProjects,
+			talks: transformTalks,
+			blog: transformPosts
 		},
 		sorters: {
 			authors: sortAuthors,
 			changelog: sortChangelogs,
-			projects: sortProjects
+			projects: sortProjects,
+			talks: sortTalks,
+			blog: sortPosts
 		},
 		shiki: {
 			langs: ['md', 'js', 'html', 'css', 'typescript', 'powershell', 'shell', 'fish', 'jsx'],

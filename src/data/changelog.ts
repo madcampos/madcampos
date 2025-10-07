@@ -1,7 +1,7 @@
 import type { SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
 interface OriginalChangelogMetadata {
-	date: string;
+	date: Date;
 	versionName: string;
 	draft?: boolean;
 }
@@ -10,10 +10,9 @@ export interface ChangelogMetadata {
 	title: string;
 	date: string;
 	formattedDate: string;
-	draft: boolean;
 }
 
-export const sort: SortingFunction<OriginalChangelogMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
+export const sort: SortingFunction<ChangelogMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
 	if (!metaA || !metaB) {
 		return 0;
 	}
@@ -31,7 +30,7 @@ export const transform: TransformerFunction<OriginalChangelogMetadata, Changelog
 	}
 
 	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
-	const date = metadata?.date ? new Date(metadata.date) : new Date();
+	const date = metadata?.date ?? new Date();
 
 	return {
 		id,
@@ -39,7 +38,6 @@ export const transform: TransformerFunction<OriginalChangelogMetadata, Changelog
 		contents,
 		metadata: {
 			title: await markdownParser.parseInline(metadata?.versionName ? `${id} - ${metadata.versionName}` : id),
-			draft: metadata?.draft ?? false,
 			date: date.toISOString(),
 			formattedDate: formatter.format(date)
 		}

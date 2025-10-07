@@ -1,37 +1,67 @@
-import type { MarkdownInstance } from 'astro';
-import { getImage } from 'astro:assets';
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import { join } from './path.ts';
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
+import { basename, join } from '@std/path/posix';
+import type { MarkdownEntry, SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
 export type PostSorting = 'ascending' | 'descending';
 
 export const MAX_POSTS_PER_PAGE = 10;
 
-export interface RelatedPost {
-	id: string;
-	url: string;
-	title: string;
-	summary: string;
-	image?: ImageMetadata;
-	imageAlt?: string;
-	createdAt: Date;
+interface OriginalPostUpdate {
+	date: Date;
+	changes: string;
 }
 
-export interface Post extends Omit<CollectionEntry<'blog'>, 'id' | 'relatedPosts'> {
+export interface PostUpdate extends Omit<OriginalPostUpdate, 'date'> {
+	date: string;
+	formattedDate: string;
+	changes: string;
+}
+
+export interface RelatedPostMetadata {
 	id: string;
+	title: string;
+	summary: string;
+	createdAt: string;
+	formattedCreatedAt: string;
+	image?: string;
+	imageAlt?: string;
+}
+
+interface OriginalPostMetadata {
+	title: string;
+	summary: string;
+	createdAt: Date;
+	updatedAt?: Date;
+	draft?: boolean;
+	tags?: string[];
+	image?: string;
+	imageAlt?: string;
+	updates?: OriginalPostUpdate[];
+	relatedPosts?: string[];
+}
+
+export interface PostMetadata extends Omit<OriginalPostMetadata, 'createdAt' | 'relatedPosts' | 'updatedAt' | 'updates'> {
+	createdAt: string;
+	formattedCreatedAt: string;
+	updatedAt?: string;
+	formattedUpdatedAt?: string;
 	year: string;
 	month: string;
 	day: string;
-	url: string;
-	relatedPosts: RelatedPost[];
+	tags: string[];
+	updates: PostUpdate[];
+	relatedPosts: RelatedPostMetadata[];
 	readingTime: number;
 	wordCount: number;
 	letterCount: number;
 }
 
-function sortPostsByDate(first: Post, second: Post, sorting: PostSorting) {
-	const firstDate = new Date(first.data.createdAt);
-	const secondDate = new Date(second.data.createdAt);
+type Posts = Record<string, MarkdownEntry<PostMetadata>>;
+
+function sortPostsByDate(first: MarkdownEntry<PostMetadata>, second: MarkdownEntry<PostMetadata>, sorting: PostSorting = 'descending') {
+	const firstDate = new Date(first.metadata.createdAt);
+	const secondDate = new Date(second.metadata.createdAt);
 
 	if (sorting === 'descending') {
 		return secondDate.getTime() - firstDate.getTime();
@@ -40,59 +70,7 @@ function sortPostsByDate(first: Post, second: Post, sorting: PostSorting) {
 	return firstDate.getTime() - secondDate.getTime();
 }
 
-function getPostDate(post: CollectionEntry<'blog'>) {
-	const postDate = new Date(post.data.createdAt);
-	const year = postDate.getFullYear().toString();
-	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-	const month = (postDate.getMonth() + 1).toString().padStart(2, '0');
-	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-	const day = postDate.getDate().toString().padStart(2, '0');
-
-	return {
-		date: postDate,
-		year,
-		month,
-		day
-	};
-}
-
-function formatPostId(post: CollectionEntry<'blog'>) {
-	const id = post.id.split('/').pop() ?? '';
-
-	return id;
-}
-
-function getPostUrl(post: CollectionEntry<'blog'>) {
-	const id = formatPostId(post);
-	const { year, month } = getPostDate(post);
-
-	return join([year, month, id]);
-}
-
-async function getRelatedPosts(post: CollectionEntry<'blog'>) {
-	const blogEntries = await getCollection('blog');
-	const posts = blogEntries.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
-
-	const relatedPosts: RelatedPost[] = [];
-
-	for (const relatedPost of post.data.relatedPosts ?? []) {
-		const otherPost = posts.find((entry) => formatPostId(entry) === relatedPost);
-
-		if (otherPost) {
-			relatedPosts.push({
-				id: formatPostId(otherPost),
-				url: getPostUrl(otherPost),
-				title: otherPost.data.title,
-				summary: otherPost.data.summary,
-				image: otherPost.data.image,
-				imageAlt: otherPost.data.imageAlt,
-				createdAt: otherPost.data.createdAt
-			});
-		}
-	}
-
-	return relatedPosts;
-}
+export const sort: SortingFunction<PostMetadata> = ([, postA], [, postB]) => sortPostsByDate(postA, postB);
 
 function countWords(text: string) {
 	const words = (text?.split(/\s+/giu) ?? [])
@@ -106,120 +84,142 @@ function countWords(text: string) {
 	return words.length;
 }
 
-const WORDS_PER_MINUTE = 200;
-
-function calculateReadingTime(text: string) {
-	const words = countWords(text);
-	const minutes = words / WORDS_PER_MINUTE;
-
-	return Math.ceil(minutes);
-}
-
 function countLetters(text: string) {
 	const letters = (text?.split('') ?? []).filter((letter) => (/[a-z]/iu).exec(letter));
 
 	return letters.length;
 }
 
-async function formatPostMetadata(post: CollectionEntry<'blog'>) {
-	const id = formatPostId(post);
-	const { year, month, day } = getPostDate(post);
+const WORDS_PER_MINUTE = 200;
 
-	return {
-		...post,
-		id,
-		year,
-		month,
-		day,
-		url: getPostUrl(post),
-		relatedPosts: await getRelatedPosts(post),
-		readingTime: calculateReadingTime(post.body ?? ''),
-		wordCount: countWords(post.body ?? ''),
-		letterCount: countLetters(post.body ?? '')
-	};
+function calculateReadingTime(words: number) {
+	const minutes = words / WORDS_PER_MINUTE;
+
+	return Math.ceil(minutes);
 }
 
-export async function listAllPosts(sorting: PostSorting = 'descending') {
-	const posts = await getCollection('blog');
-	const postFiles = import.meta.glob<MarkdownInstance<{}>>('../content/blog/**/*.md', { eager: true });
-
-	const filteredPosts = posts.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
-	const formattedPosts = await Promise.all(filteredPosts.map(async (post) => {
-		const formattedPost = await formatPostMetadata(post);
-		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(formattedPost.url)) ?? [];
-
-		return {
-			...formattedPost,
-			render: async () => render(formattedPost),
-			renderString: async () => postMarkdown?.compiledContent() ?? '',
-			getImage: async () => formattedPost.data.image ? getImage({ src: formattedPost.data.image, format: 'png' }) : undefined
-		};
-	}));
-	const sortedPosts = formattedPosts.sort((postA, postB) => sortPostsByDate(postA, postB, sorting));
-
-	return sortedPosts;
-}
-
-export async function listPostPagesByYear(sorting: PostSorting = 'descending') {
-	const posts = await listAllPosts(sorting);
-
-	const years = new Map<string, Post[]>();
-
-	for (const post of posts) {
-		const year = post.year.toString();
-
-		if (!years.has(year)) {
-			years.set(year, []);
-		}
-
-		years.get(year)?.push(post as Post);
+export const transform: TransformerFunction<OriginalPostMetadata, PostMetadata> = async (
+	assets,
+	{
+		entry: { metadata, id, path, contents },
+		collections,
+		imageOptimizer,
+		mode
+	}
+) => {
+	if (mode === 'production' && metadata?.draft) {
+		return;
 	}
 
-	return years;
-}
+	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+	const postDate = new Date(metadata.createdAt);
+	const year = postDate.getFullYear().toString();
+	const month = (postDate.getMonth() + 1).toString().padStart(2, '0');
+	const day = postDate.getDate().toString().padStart(2, '0');
+	const wordCount = countWords(contents);
+	const relatedPosts: RelatedPostMetadata[] = [];
 
-export async function listPostsByYearAndMonth(sorting: PostSorting = 'descending') {
-	const postsByYear = await listPostPagesByYear(sorting);
-	const postsByYearAndMonth = new Map<string, Map<string, Post[]>>();
+	let image: string | undefined;
 
-	for (const [year, posts] of postsByYear.entries()) {
-		if (!postsByYearAndMonth.has(year)) {
-			postsByYearAndMonth.set(year, new Map());
-		}
+	if (metadata?.image) {
+		image = await imageOptimizer.addImageToCache(assets, {
+			src: collections.resolveImagePath(metadata.image, path)
+		});
+	}
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const postsByMonth = postsByYearAndMonth.get(year)!;
+	if (metadata.relatedPosts) {
+		const posts = Object.entries(await collections.list<OriginalPostMetadata | PostMetadata>(assets, 'blog')).filter(([postId]) =>
+			metadata.relatedPosts?.find((relatedId) => relatedId.endsWith(postId))
+		);
 
-		for (const post of posts) {
-			const month = post.month.toString();
+		for (const [relatedId, { metadata: relatedMetadata }] of posts) {
+			const relatedDate = new Date(relatedMetadata.createdAt);
+			const relatedYear = relatedDate.getFullYear().toString();
+			const relatedMonth = (relatedDate.getMonth() + 1).toString().padStart(2, '0');
 
-			if (!postsByMonth.has(month)) {
-				postsByMonth.set(month, []);
+			let relatedImage: string | undefined;
+
+			if (relatedMetadata?.image) {
+				relatedImage = await imageOptimizer.addImageToCache(assets, {
+					src: collections.resolveImagePath(relatedMetadata.image, relatedId)
+				});
 			}
 
-			postsByMonth.get(month)?.push(post);
+			relatedPosts.push({
+				id: join(relatedYear, relatedMonth, basename(relatedId)),
+				title: await collections.renderInlineMarkdown(assets, relatedMetadata.title),
+				summary: await collections.renderInlineMarkdown(assets, relatedMetadata.summary),
+				createdAt: relatedDate.toISOString(),
+				formattedCreatedAt: formatter.format(relatedDate),
+				image: relatedImage,
+				imageAlt: relatedMetadata.imageAlt
+			});
 		}
 	}
 
-	return postsByYearAndMonth;
+	return {
+		id: join(year, month, basename(id)),
+		path,
+		contents,
+		metadata: {
+			title: await collections.renderInlineMarkdown(assets, metadata.title),
+			summary: await collections.renderInlineMarkdown(assets, metadata.summary),
+			draft: metadata.draft,
+			createdAt: postDate.toISOString(),
+			formattedCreatedAt: formatter.format(postDate),
+			updatedAt: metadata.updatedAt ? metadata.updatedAt.toISOString() : undefined,
+			formattedUpdatedAt: metadata.updatedAt ? formatter.format(metadata.updatedAt) : undefined,
+			image,
+			imageAlt: metadata.imageAlt,
+			year,
+			month,
+			day,
+			wordCount,
+			letterCount: countLetters(contents),
+			readingTime: calculateReadingTime(wordCount),
+			tags: metadata.tags ?? [],
+			updates: (metadata.updates ?? []).map((update) => ({
+				...update,
+				date: update.date.toISOString(),
+				formattedDate: formatter.format(update.date)
+			})),
+			relatedPosts
+		}
+	};
+};
+
+export function listAllYears(posts: Posts) {
+	return [...new Set(Object.values(posts).map(({ metadata: { year } }) => year))];
 }
 
-export async function listPostsByTag(sorting: PostSorting = 'descending') {
-	const posts = await listAllPosts(sorting);
+export function getPostsForYear(posts: Posts, year: string, sorting: PostSorting = 'descending') {
+	return Object.fromEntries(
+		Object.entries(posts)
+			.filter(([, { metadata: { year: postYear } }]) => postYear === year)
+			.sort(([, postA], [, postB]) => sortPostsByDate(postA, postB, sorting))
+	);
+}
 
-	const tags: Record<string, Post[]> = {};
+export function listAllMonthsForYear(posts: Posts, year: string) {
+	return [...new Set(Object.values(posts).filter(({ metadata: { year: postYear } }) => postYear === year).map(({ metadata: { month } }) => month))];
+}
 
-	for (const post of posts) {
-		for (const tag of post.data.tags ?? []) {
-			tags[tag] ??= [];
+export function getPostsForMonth(posts: Posts, year: string, month: string, sorting: PostSorting = 'descending') {
+	return Object.fromEntries(
+		Object.entries(posts)
+			.filter(([, { metadata: { year: postYear, month: postMonth } }]) => postYear === year && postMonth === month)
+			.sort(([, postA], [, postB]) => sortPostsByDate(postA, postB, sorting))
+	);
+}
 
-			tags[tag]?.push(post as Post);
-		}
-	}
+export function listAllTags(posts: Posts) {
+	return [...new Set(Object.values(posts).flatMap(({ metadata: { tags } }) => tags))];
+}
 
-	for (const tag of Object.keys(tags)) {
-		tags[tag]?.sort((postA, postB) => sortPostsByDate(postA, postB, sorting));
-	}
-
-	return tags;
+export function getAllPostsForTag(posts: Posts, tag: string, sorting: PostSorting = 'descending') {
+	return Object.fromEntries(
+		Object.entries(posts)
+			.filter(([, { metadata: { tags } }]) => tags.includes(tag))
+			.sort(([, postA], [, postB]) => sortPostsByDate(postA, postB, sorting))
+	);
 }
