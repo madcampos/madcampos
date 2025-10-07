@@ -32,6 +32,8 @@
 		"@jsquash/png": "3.1.1",
 		"@jsquash/webp": "1.5.0",
 		"@shikijs/transformers": "3.8.1",
+		"@std/front-matter": "npm:@jsr/std__front-matter@1.0.9",
+		"@std/path": "npm:@jsr/std__path@1.1.2",
 		"@typescript-eslint/eslint-plugin": "^8.43.0",
 		"@typescript-eslint/parser": "^8.43.0",
 		"dprint": "0.50.1",
@@ -49,7 +51,6 @@
 		"urlpattern-polyfill": "10.1.0",
 		"web-features": "^2.48.0",
 		"wrangler": "^4.35.0",
-		"yaml": "^2.8.1",
 		"zod": "4.0.13"
 	},
 	"overrides": {},

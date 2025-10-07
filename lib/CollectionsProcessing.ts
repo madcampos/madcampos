@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { extract } from '@std/front-matter/yaml';
+import { basename } from '@std/path/posix';
 import { Marked } from 'marked';
 import markedFootnote from 'marked-footnote';
 import type {
@@ -10,7 +12,6 @@ import type {
 	SpecialTheme,
 	ThemeInput
 } from 'shiki';
-import { parse as parseYaml } from 'yaml';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
 import { init as initShiki } from './markdown/code.ts';
 import { extension as markedHighlight } from './markdown/highlight.ts';
@@ -18,7 +19,6 @@ import { init as initImages } from './markdown/image.ts';
 import { extension as markedInsertion } from './markdown/insertion.ts';
 import { extension as markedSubscript } from './markdown/subscript.ts';
 import { extension as markedSuperscript } from './markdown/superscript.ts';
-import { basename } from './path.ts';
 import type { Mode } from './StaticSiteHandler.ts';
 import type { TemplateRenderer } from './TemplateRenderer.ts';
 
@@ -211,19 +211,13 @@ export class Collections {
 		return marked;
 	}
 
-	async #parseMarkdown<T extends Record<string, any>>(assets: Env['Assets'], entryPath: string, text: string) {
-		const { groups: { frontmatter, markdown } = {} } = /(?:^---\n(?<frontmatter>.*?)\n---\n)?(?<markdown>.*$)/isu.exec(text) ?? {};
-		let metadata: T | undefined;
-
-		if (frontmatter) {
-			metadata = parseYaml(frontmatter);
-		}
-
+	async #parseMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
 		const marked = await this.#newMarkdownParser(assets, entryPath);
+		const { body, attrs } = extract<T>(text);
 
 		return {
-			metadata,
-			contents: await marked.parse(markdown ?? '')
+			metadata: attrs,
+			contents: await marked.parse(body)
 		};
 	}
 
@@ -262,7 +256,7 @@ export class Collections {
 		return marked.parseInline(text);
 	}
 
-	async renderMarkdown<T extends Record<string, any>>(assets: Env['Assets'], entryPath: string, text: string) {
+	async renderMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
 		const id = basename(new URL(entryPath, this.#COLLECTIONS_URL).pathname, '.md');
 		const { contents, metadata } = await this.#parseMarkdown<T>(assets, entryPath, text);
 
@@ -275,7 +269,7 @@ export class Collections {
 		} satisfies MarkdownEntry<T>;
 	}
 
-	async list<T extends Record<string, any>>(assets: Env['Assets'], collectionName: string) {
+	async list<T>(assets: Env['Assets'], collectionName: string) {
 		await this.#initCollections(assets);
 
 		const collection = this.#collections[collectionName];
@@ -285,27 +279,45 @@ export class Collections {
 		}
 
 		if (!this.#collectionsCache.has(collectionName)) {
-			let results: [string, MarkdownEntry<T>][] = [];
+			this.#collectionsCache.set(collectionName, new Map());
+
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			const results = this.#collectionsCache.get(collectionName)!;
 
 			for (const file of collection) {
 				const markdownEntry = await this.get<T>(assets, collectionName, file);
 
-				if (markdownEntry) {
-					results.push([file, markdownEntry]);
+				results.set(file, markdownEntry);
+			}
+
+			if (this.#transformers[collectionName]) {
+				for (const [id, entry] of results.entries()) {
+					const markdownEntry = await this.#transformers[collectionName](assets, {
+						entry,
+						markdownParser: await this.#newMarkdownParser(assets, id),
+						imageOptimizer: this.#imageOptimizer,
+						templateRenderer: this.#templateRenderer,
+						collections: this,
+						mode: this.mode
+					}) as MarkdownEntry<T> | undefined;
+
+					if (markdownEntry) {
+						results.set(id, markdownEntry);
+					} else {
+						results.delete(id);
+					}
 				}
 			}
 
 			if (this.#sorters[collectionName]) {
-				results = results.sort(this.#sorters[collectionName]);
+				this.#collectionsCache.set(collectionName, new Map([...results.entries()].sort(this.#sorters[collectionName])));
 			}
-
-			this.#collectionsCache.set(collectionName, new Map(results));
 		}
 
 		return Object.fromEntries((this.#collectionsCache.get(collectionName) as Map<string, MarkdownEntry<T>>).entries());
 	}
 
-	async get<T extends Record<string, any>>(assets: Env['Assets'], collectionName: string, entry: string) {
+	async get<T>(assets: Env['Assets'], collectionName: string, entry: string) {
 		await this.#initCollections(assets);
 
 		if (!this.#collections[collectionName]?.find((filePath) => entry === filePath)) {
@@ -324,20 +336,9 @@ export class Collections {
 		}
 
 		const text = await response.text();
-		let markdownEntry: MarkdownEntry<T> | undefined = await this.renderMarkdown<T>(assets, entryUrl.pathname, text);
+		const markdownEntry: MarkdownEntry<T> | undefined = await this.renderMarkdown<T>(assets, entryUrl.pathname, text);
 
 		markdownEntry.contents = await this.#templateRenderer.renderString(assets, markdownEntry.contents);
-
-		if (this.#transformers[collectionName]) {
-			markdownEntry = await this.#transformers[collectionName](assets, {
-				entry: markdownEntry,
-				markdownParser: await this.#newMarkdownParser(assets, entry),
-				imageOptimizer: this.#imageOptimizer,
-				templateRenderer: this.#templateRenderer,
-				collections: this,
-				mode: this.mode
-			});
-		}
 
 		return markdownEntry;
 	}

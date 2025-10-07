@@ -1,9 +1,9 @@
 import { createJimp } from '@jimp/core';
+import { basename, extname } from '@std/path/posix';
 import { defaultPlugins, ResizeStrategy } from 'jimp';
 import jpeg from './optimizer-codecs/jpeg.ts';
 import png from './optimizer-codecs/png.ts';
 import webp from './optimizer-codecs/webp.ts';
-import { basename, extname } from './path.ts';
 
 type ImageExtension = 'gif' | 'jpeg' | 'jpg' | 'png' | 'webp';
 

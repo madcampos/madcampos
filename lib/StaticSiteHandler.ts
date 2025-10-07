@@ -1,8 +1,8 @@
 /// <reference types="urlpattern-polyfill" />
 
+import { dirname, extname, join } from '@std/path/posix';
 import { type CollectionsOptions, Collections } from './CollectionsProcessing.ts';
 import { type ImageOptimizerOptions, ImageOptimizer } from './ImageOptimizer.ts';
-import { dirname, extname, join } from './path.ts';
 import { type TemplateRendererOptions, TemplateRenderer } from './TemplateRenderer.ts';
 
 export type Mode = 'development' | 'production';
