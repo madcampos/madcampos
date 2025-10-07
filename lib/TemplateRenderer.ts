@@ -137,6 +137,12 @@ interface TemplateRenderingAttributes {
 	 * @default '\\}\\}\\}'
 	 */
 	unescapedCloseDelimiter: string;
+
+	/**
+	 * The marker to use before an attribute to bind it to a variable, instead of a string.
+	 * @default '.'
+	 */
+	attributeBinding: string;
 }
 
 export interface TemplateRendererOptions {
@@ -204,7 +210,8 @@ export class TemplateRenderer {
 		openDelimiter: '\\{\\{',
 		closeDelimiter: '\\}\\}',
 		unescapedOpenDelimiter: '\\{\\{\\{',
-		unescapedCloseDelimiter: '\\}\\}\\}'
+		unescapedCloseDelimiter: '\\}\\}\\}',
+		attributeBinding: '.'
 	};
 	#componentCache: ComponentReferenceList = {};
 	#isIndexFetched = false;
@@ -348,7 +355,7 @@ export class TemplateRenderer {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent(element?: HTMLElement) {
+	async #processComponent<T>(element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -362,8 +369,18 @@ export class TemplateRenderer {
 						return;
 					}
 
+					const componentData: Record<string, unknown> = {};
+
+					Object.entries(childElement.attributes).forEach(([key, value]) => {
+						if (key.startsWith(this.#attributes.attributeBinding)) {
+							componentData[key.replace(this.#attributes.attributeBinding, '')] = this.#getValue(value, data);
+						} else {
+							componentData[key] = value;
+						}
+					});
+
 					if (typeof componentTextOrFunction === 'function') {
-						componentTextOrFunction = await componentTextOrFunction(childElement.attributes);
+						componentTextOrFunction = await componentTextOrFunction(componentData);
 					}
 
 					if (childElement.hasAttribute(this.#attributes.skipShadowDom)) {
@@ -374,7 +391,7 @@ export class TemplateRenderer {
 					}
 
 					if (!childElement.hasAttribute(this.#attributes.skipProcessing)) {
-						await this.#processElement(childElement, childElement.attributes);
+						await this.#processElement(childElement, componentData);
 					} else {
 						childElement.removeAttribute(this.#attributes.skipProcessing);
 					}
@@ -424,7 +441,19 @@ export class TemplateRenderer {
 			if (!filePath) {
 				console.warn('Missing import file!');
 			} else {
-				let importData;
+				let importData: Record<string, unknown> = {};
+
+				Object.entries(element.attributes).forEach(([key, value]) => {
+					if (key === this.#attributes.importData) {
+						return;
+					}
+
+					if (key.startsWith(this.#attributes.attributeBinding)) {
+						importData[key.replace(this.#attributes.attributeBinding, '')] = this.#getValue(value, data);
+					} else {
+						importData[key] = value;
+					}
+				});
 
 				if (element.hasAttribute(this.#attributes.importData)) {
 					importData = this.#getValue(element.getAttribute(this.#attributes.importData) ?? '', data);
@@ -432,7 +461,7 @@ export class TemplateRenderer {
 					element.removeAttribute(this.#attributes.importData);
 				}
 
-				const importedTemplate = await this.renderTemplate(filePath, { ...element.attributes, ...(importData ?? {}) });
+				const importedTemplate = await this.renderTemplate(filePath, importData);
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();
