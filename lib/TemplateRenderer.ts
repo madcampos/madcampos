@@ -140,7 +140,7 @@ interface TemplateRenderingAttributes {
 
 	/**
 	 * The marker to use before an attribute to bind it to a variable, instead of a string.
-	 * @default '.'
+	 * @default ':'
 	 */
 	attributeBinding: string;
 }
@@ -211,7 +211,7 @@ export class TemplateRenderer {
 		closeDelimiter: '\\}\\}',
 		unescapedOpenDelimiter: '\\{\\{\\{',
 		unescapedCloseDelimiter: '\\}\\}\\}',
-		attributeBinding: '.'
+		attributeBinding: ':'
 	};
 	#componentCache: ComponentReferenceList = {};
 	#isIndexFetched = false;
@@ -456,7 +456,10 @@ export class TemplateRenderer {
 				});
 
 				if (element.hasAttribute(this.#attributes.importData)) {
-					importData = this.#getValue(element.getAttribute(this.#attributes.importData) ?? '', data);
+					importData = {
+						...importData,
+						...this.#getValue(element.getAttribute(this.#attributes.importData) ?? '', data)
+					};
 
 					element.removeAttribute(this.#attributes.importData);
 				}
