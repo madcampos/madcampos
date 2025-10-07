@@ -45,7 +45,7 @@ const app = new StaticSiteHandler({
 		}
 	},
 	routes: {
-		'/': { renderHtml: { template: 'test.html' } },
+		'/': { renderHtml: { template: 'index.html' } },
 		'/404': { renderHtml: { template: '404.html' } },
 		'/410': { renderHtml: { template: '410.html' } },
 		'/about': { renderHtml: { template: 'about.html' } },

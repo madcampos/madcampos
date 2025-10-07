@@ -79,7 +79,7 @@ export const transform: TransformerFunction<OriginalProjectMetadata, ProjectMeta
 			updatedAt: updatedDate.toISOString(),
 			formattedUpdatedAt: formatter.format(updatedDate),
 			image,
-			imageAlt: collections.stripInlineMarkdown(metadata?.imageAlt ?? ''),
+			imageAlt: await collections.stripInlineMarkdown(metadata?.imageAlt ?? ''),
 			themeImages
 		}
 	};

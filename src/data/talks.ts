@@ -77,7 +77,7 @@ export const transform: TransformerFunction<OriginalTalkMetadata, TalkMetadata> 
 			summary: await markdownParser.parseInline(metadata?.summary ?? ''),
 			event: metadata.event ? await markdownParser.parseInline(metadata?.event ?? '') : undefined,
 			image,
-			avatarAlt: collections.stripInlineMarkdown(metadata?.imageAlt ?? ''),
+			avatarAlt: await collections.stripInlineMarkdown(metadata?.imageAlt ?? ''),
 			date: date.toISOString(),
 			formattedDate: formatter.format(date)
 		}

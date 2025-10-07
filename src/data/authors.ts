@@ -39,7 +39,7 @@ export const transform: TransformerFunction<AuthorMetadata, AuthorMetadata> = as
 			...metadata,
 			name: await markdownParser.parseInline(metadata?.name ?? ''),
 			avatar,
-			avatarAlt: collections.stripInlineMarkdown(metadata?.avatarAlt ?? '')
+			avatarAlt: await collections.stripInlineMarkdown(metadata?.avatarAlt ?? '')
 		}
 	};
 };
