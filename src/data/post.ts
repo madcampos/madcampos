@@ -12,6 +12,22 @@ interface OriginalPostUpdate {
 	changes: string;
 }
 
+interface OriginalPostMetadata {
+	title: string;
+	summary: string;
+	createdAt: Date;
+	updatedAt?: Date;
+	draft?: boolean;
+
+	image?: string;
+	imageAlt?: string;
+
+	tags?: string[];
+	relatedPosts?: string[];
+
+	updates?: OriginalPostUpdate[];
+}
+
 export interface PostUpdate extends Omit<OriginalPostUpdate, 'date'> {
 	date: string;
 	formattedDate: string;
@@ -26,19 +42,6 @@ export interface RelatedPostMetadata {
 	formattedCreatedAt: string;
 	image?: string;
 	imageAlt?: string;
-}
-
-interface OriginalPostMetadata {
-	title: string;
-	summary: string;
-	createdAt: Date;
-	updatedAt?: Date;
-	draft?: boolean;
-	tags?: string[];
-	image?: string;
-	imageAlt?: string;
-	updates?: OriginalPostUpdate[];
-	relatedPosts?: string[];
 }
 
 export interface PostMetadata extends Omit<OriginalPostMetadata, 'createdAt' | 'relatedPosts' | 'updatedAt' | 'updates'> {
@@ -99,7 +102,6 @@ function calculateReadingTime(words: number) {
 }
 
 export const transform: TransformerFunction<OriginalPostMetadata, PostMetadata> = async (
-	assets,
 	{
 		entry: { metadata, id, path, contents },
 		collections,
@@ -122,13 +124,13 @@ export const transform: TransformerFunction<OriginalPostMetadata, PostMetadata> 
 	let image: string | undefined;
 
 	if (metadata?.image) {
-		image = await imageOptimizer.addImageToCache(assets, {
+		image = await imageOptimizer.addImageToCache({
 			src: collections.resolveImagePath(metadata.image, path)
 		});
 	}
 
 	if (metadata.relatedPosts) {
-		const posts = Object.entries(await collections.list<OriginalPostMetadata | PostMetadata>(assets, 'blog')).filter(([postId]) =>
+		const posts = Object.entries(await collections.list<OriginalPostMetadata | PostMetadata>('blog')).filter(([postId]) =>
 			metadata.relatedPosts?.find((relatedId) => relatedId.endsWith(postId))
 		);
 
@@ -140,15 +142,15 @@ export const transform: TransformerFunction<OriginalPostMetadata, PostMetadata> 
 			let relatedImage: string | undefined;
 
 			if (relatedMetadata?.image) {
-				relatedImage = await imageOptimizer.addImageToCache(assets, {
+				relatedImage = await imageOptimizer.addImageToCache({
 					src: collections.resolveImagePath(relatedMetadata.image, relatedId)
 				});
 			}
 
 			relatedPosts.push({
 				id: join(relatedYear, relatedMonth, basename(relatedId)),
-				title: await collections.renderInlineMarkdown(assets, relatedMetadata.title),
-				summary: await collections.renderInlineMarkdown(assets, relatedMetadata.summary),
+				title: await collections.renderInlineMarkdown(relatedMetadata.title),
+				summary: await collections.renderInlineMarkdown(relatedMetadata.summary),
 				createdAt: relatedDate.toISOString(),
 				formattedCreatedAt: formatter.format(relatedDate),
 				image: relatedImage,
@@ -162,8 +164,8 @@ export const transform: TransformerFunction<OriginalPostMetadata, PostMetadata> 
 		path,
 		contents,
 		metadata: {
-			title: await collections.renderInlineMarkdown(assets, metadata.title),
-			summary: await collections.renderInlineMarkdown(assets, metadata.summary),
+			title: await collections.renderInlineMarkdown(metadata.title),
+			summary: await collections.renderInlineMarkdown(metadata.summary),
 			draft: metadata.draft,
 			createdAt: postDate.toISOString(),
 			formattedCreatedAt: formatter.format(postDate),

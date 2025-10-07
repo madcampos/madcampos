@@ -7,8 +7,7 @@ interface ImageToken extends Tokens.Generic {
 	href: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-shadow
-export function init(assets: Env['Assets'], processImage: (assets: Env['Assets'], filePath: string, imagePath: string, altText: string) => Promise<string>, entryPath: string) {
+export function init(processImage: (filePath: string, imagePath: string, altText: string) => Promise<string>, entryPath: string) {
 	return {
 		extensions: [{
 			name: 'imageOptimization',
@@ -38,7 +37,7 @@ export function init(assets: Env['Assets'], processImage: (assets: Env['Assets']
 				return;
 			}
 
-			token.html = await processImage(assets, entryPath, token.href ?? '', token.text);
+			token.html = await processImage(entryPath, token.href ?? '', token.text);
 		}
 	} as unknown as MarkedExtension;
 }

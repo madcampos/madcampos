@@ -1,19 +1,34 @@
 import type { SortingFunction, TransformerFunction } from '../../lib/CollectionsProcessing.ts';
 
-export interface ProjectMetadata {
+interface OriginalProjectMetadata {
 	title: string;
-	status: string;
+	status: 'finished' | 'ongoing';
+	createdAt?: Date;
+	updatedAt?: Date;
 	version: string;
+	url?: string;
 	draft?: boolean;
-	repository?: string;
+
 	image?: string;
 	imageAlt?: string;
 	themeImages?: Record<string, string>;
+
 	techStack?: string[];
+	repository?: string;
 }
 
-export const transform: TransformerFunction<ProjectMetadata, ProjectMetadata> = async (
-	assets,
+export interface ProjectMetadata extends Omit<OriginalProjectMetadata, 'createdAt' | 'themeImages' | 'updatedAt'> {
+	createdAt: string;
+	formattedCreatedAt: string;
+	updatedAt?: string;
+	formattedUpdatedAt?: string;
+	themeImages: {
+		theme: string,
+		src: string
+	}[];
+}
+
+export const transform: TransformerFunction<OriginalProjectMetadata, ProjectMetadata> = async (
 	{
 		entry: { id, path, metadata, contents },
 		imageOptimizer,
@@ -26,27 +41,28 @@ export const transform: TransformerFunction<ProjectMetadata, ProjectMetadata> = 
 		return;
 	}
 
+	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+	const date = metadata?.createdAt ?? new Date();
+	const updatedDate = metadata.updatedAt ?? date;
 	let image = '';
 
 	if (metadata?.image) {
-		image = await imageOptimizer.addImageToCache(assets, {
+		image = await imageOptimizer.addImageToCache({
 			src: collections.resolveImagePath(metadata.image, path)
 		}) ?? '';
 	}
 
-	let themeImages: Record<string, string> | undefined;
+	let themeImages: { theme: string, src: string }[] = [];
 
 	if (metadata?.themeImages) {
 		const promises = Object.entries(metadata.themeImages)
-			.map(async ([name, imagePath]) => [
-				name,
-				await imageOptimizer.addImageToCache(assets, {
+			.map(async ([name, imagePath]) => ({
+				theme: name,
+				src: await imageOptimizer.addImageToCache({
 					src: collections.resolveImagePath(imagePath, path)
 				})
-			]);
-		const imageEntries = await Promise.all(promises);
-
-		themeImages = Object.fromEntries(imageEntries);
+			}));
+		themeImages = await Promise.all(promises);
 	}
 
 	return {
@@ -58,6 +74,10 @@ export const transform: TransformerFunction<ProjectMetadata, ProjectMetadata> = 
 			title: await markdownParser.parseInline(metadata?.title ?? ''),
 			version: metadata?.version ?? '0.0.0',
 			status: metadata?.status ?? 'prototype',
+			createdAt: date.toISOString(),
+			formattedCreatedAt: formatter.format(date),
+			updatedAt: updatedDate.toISOString(),
+			formattedUpdatedAt: formatter.format(updatedDate),
 			image,
 			imageAlt: collections.stripInlineMarkdown(metadata?.imageAlt ?? ''),
 			themeImages
@@ -65,7 +85,7 @@ export const transform: TransformerFunction<ProjectMetadata, ProjectMetadata> = 
 	};
 };
 
-export const sort: SortingFunction<ProjectMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
+export const sort: SortingFunction<OriginalProjectMetadata> = ([, { metadata: metaA }], [, { metadata: metaB }]) => {
 	if (!metaA || !metaB) {
 		return 0;
 	}

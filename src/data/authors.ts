@@ -11,7 +11,6 @@ export interface AuthorMetadata {
 }
 
 export const transform: TransformerFunction<AuthorMetadata, AuthorMetadata> = async (
-	assets,
 	{
 		entry: { id, path, metadata, contents },
 		imageOptimizer,
@@ -27,7 +26,7 @@ export const transform: TransformerFunction<AuthorMetadata, AuthorMetadata> = as
 	let avatar = '';
 
 	if (metadata?.avatar) {
-		avatar = await imageOptimizer.addImageToCache(assets, {
+		avatar = await imageOptimizer.addImageToCache({
 			src: collections.resolveImagePath(metadata.avatar, path)
 		}) ?? '';
 	}

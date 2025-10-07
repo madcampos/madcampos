@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { env } from 'cloudflare:workers';
 
 import { extract } from '@std/front-matter/yaml';
 import { basename } from '@std/path/posix';
@@ -39,7 +40,7 @@ export interface EntryTransformerParameters<T> {
 	mode: Mode;
 }
 
-export type TransformerFunction<T, R> = (assets: Env['Assets'], options: EntryTransformerParameters<T>) => MarkdownEntry<R> | Promise<MarkdownEntry<R> | undefined> | undefined;
+export type TransformerFunction<T, R> = (options: EntryTransformerParameters<T>) => MarkdownEntry<R> | Promise<MarkdownEntry<R> | undefined> | undefined;
 
 export type SortingFunction<T> = (entryA: [string, MarkdownEntry<T>], entryB: [string, MarkdownEntry<T>]) => number;
 
@@ -149,9 +150,9 @@ export class Collections {
 
 	mode: Mode = 'production';
 
-	async #initCollections(assets: Env['Assets']) {
+	async #initCollections() {
 		if (!this.#collections) {
-			const response = await assets.fetch(this.#COLLECTIONS_INDEX_URL.href);
+			const response = await env.Assets.fetch(this.#COLLECTIONS_INDEX_URL.href);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch collection index file at: ${this.#COLLECTIONS_INDEX_URL.pathname}`);
@@ -166,14 +167,14 @@ export class Collections {
 		}
 	}
 
-	async #processImage(assets: Env['Assets'], filePath: string, imagePath: string, altText: string) {
+	async #processImage(filePath: string, imagePath: string, altText: string) {
 		const entryUrl = new URL(filePath, this.#COLLECTIONS_URL);
 		const imagePrivateUrl = new URL(imagePath, entryUrl);
 		let newSrc = imagePrivateUrl.href;
 		let srcSet = '';
 
 		if (entryUrl.host === imagePrivateUrl.host) {
-			newSrc = await this.#imageOptimizer.addImageToCache(assets, {
+			newSrc = await this.#imageOptimizer.addImageToCache({
 				src: imagePrivateUrl.pathname,
 				widths: this.#imageSizes
 			});
@@ -193,7 +194,7 @@ export class Collections {
 		/>`;
 	}
 
-	async #newMarkdownParser(assets: Env['Assets'], entryPath: string) {
+	async #newMarkdownParser(entryPath: string) {
 		const marked = new Marked({
 			async: true,
 			breaks: true,
@@ -206,13 +207,16 @@ export class Collections {
 		marked.use(markedSubscript);
 		marked.use(markedHighlight);
 		marked.use(markedInsertion);
-		marked.use(initImages(assets, this.#processImage, entryPath));
+		marked.use(initImages(
+			async (filePath, imagePath, altText) => this.#processImage(filePath, imagePath, altText),
+			entryPath
+		));
 
 		return marked;
 	}
 
-	async #parseMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
-		const marked = await this.#newMarkdownParser(assets, entryPath);
+	async #parseMarkdown<T>(entryPath: string, text: string) {
+		const marked = await this.#newMarkdownParser(entryPath);
 		const { body, attrs } = extract<T>(text);
 
 		return {
@@ -250,15 +254,15 @@ export class Collections {
 			.replaceAll(/\[(.*?)\]\((.*?)\)/igu, '$1');
 	}
 
-	async renderInlineMarkdown(assets: Env['Assets'], text: string) {
-		const marked = await this.#newMarkdownParser(assets, '');
+	async renderInlineMarkdown(text: string) {
+		const marked = await this.#newMarkdownParser('');
 
 		return marked.parseInline(text);
 	}
 
-	async renderMarkdown<T>(assets: Env['Assets'], entryPath: string, text: string) {
+	async renderMarkdown<T>(entryPath: string, text: string) {
 		const id = basename(new URL(entryPath, this.#COLLECTIONS_URL).pathname, '.md');
-		const { contents, metadata } = await this.#parseMarkdown<T>(assets, entryPath, text);
+		const { contents, metadata } = await this.#parseMarkdown<T>(entryPath, text);
 
 		return {
 			id,
@@ -269,8 +273,8 @@ export class Collections {
 		} satisfies MarkdownEntry<T>;
 	}
 
-	async list<T>(assets: Env['Assets'], collectionName: string) {
-		await this.#initCollections(assets);
+	async list<T>(collectionName: string) {
+		await this.#initCollections();
 
 		const collection = this.#collections[collectionName];
 
@@ -285,16 +289,16 @@ export class Collections {
 			const results = this.#collectionsCache.get(collectionName)!;
 
 			for (const file of collection) {
-				const markdownEntry = await this.get<T>(assets, collectionName, file);
+				const markdownEntry = await this.get<T>(collectionName, file);
 
 				results.set(file, markdownEntry);
 			}
 
 			if (this.#transformers[collectionName]) {
 				for (const [id, entry] of results.entries()) {
-					const markdownEntry = await this.#transformers[collectionName](assets, {
+					const markdownEntry = await this.#transformers[collectionName]({
 						entry,
-						markdownParser: await this.#newMarkdownParser(assets, id),
+						markdownParser: await this.#newMarkdownParser(id),
 						imageOptimizer: this.#imageOptimizer,
 						templateRenderer: this.#templateRenderer,
 						collections: this,
@@ -317,8 +321,8 @@ export class Collections {
 		return Object.fromEntries((this.#collectionsCache.get(collectionName) as Map<string, MarkdownEntry<T>>).entries());
 	}
 
-	async get<T>(assets: Env['Assets'], collectionName: string, entry: string) {
-		await this.#initCollections(assets);
+	async get<T>(collectionName: string, entry: string) {
+		await this.#initCollections();
 
 		if (!this.#collections[collectionName]?.find((filePath) => entry === filePath)) {
 			throw new Error(`Invalid entry "${entry}" on collection "${collectionName}"`);
@@ -329,16 +333,16 @@ export class Collections {
 		}
 
 		const entryUrl = new URL(entry, this.#COLLECTIONS_URL);
-		const response = await assets.fetch(entryUrl);
+		const response = await env.Assets.fetch(entryUrl);
 
 		if (!response.ok) {
 			throw new Error(`Failed to fetch entry at: "${entryUrl.pathname}"`);
 		}
 
 		const text = await response.text();
-		const markdownEntry: MarkdownEntry<T> | undefined = await this.renderMarkdown<T>(assets, entryUrl.pathname, text);
+		const markdownEntry: MarkdownEntry<T> | undefined = await this.renderMarkdown<T>(entryUrl.pathname, text);
 
-		markdownEntry.contents = await this.#templateRenderer.renderString(assets, markdownEntry.contents);
+		markdownEntry.contents = await this.#templateRenderer.renderString(markdownEntry.contents);
 
 		return markdownEntry;
 	}

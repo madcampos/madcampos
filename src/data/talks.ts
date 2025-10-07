@@ -3,17 +3,28 @@ import type { SortingFunction, TransformerFunction } from '../../lib/Collections
 interface OriginalTalkMetadata {
 	title: string;
 	summary: string;
-	isOnline: boolean;
-	draft?: boolean;
-	image?: string;
-	imageAlt?: string;
+
 	event?: string;
 	eventUrl?: string;
+	isOnline: boolean;
 	date?: Date;
+	address?: string;
+
+	draft?: boolean;
+
+	image?: string;
+	imageAlt?: string;
+
 	slides?: string;
 	video?: string;
 	code?: string;
+	demo?: string;
 	techStack: string[];
+
+	relatedContent?: {
+		title: string,
+		url: string
+	}[];
 }
 
 export interface TalkMetadata extends Omit<OriginalTalkMetadata, 'date'> {
@@ -33,7 +44,6 @@ export const sort: SortingFunction<TalkMetadata> = ([, { metadata: metaA }], [, 
 };
 
 export const transform: TransformerFunction<OriginalTalkMetadata, TalkMetadata> = async (
-	assets,
 	{
 		entry: { metadata, path, id, contents },
 		imageOptimizer,
@@ -52,7 +62,7 @@ export const transform: TransformerFunction<OriginalTalkMetadata, TalkMetadata> 
 	let image = '';
 
 	if (metadata?.image) {
-		image = await imageOptimizer.addImageToCache(assets, {
+		image = await imageOptimizer.addImageToCache({
 			src: collections.resolveImagePath(metadata.image, path)
 		}) ?? '';
 	}

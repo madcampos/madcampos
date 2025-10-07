@@ -1,5 +1,6 @@
 import { createJimp } from '@jimp/core';
 import { basename, extname } from '@std/path/posix';
+import { env } from 'cloudflare:workers';
 import { defaultPlugins, ResizeStrategy } from 'jimp';
 import jpeg from './optimizer-codecs/jpeg.ts';
 import png from './optimizer-codecs/png.ts';
@@ -143,9 +144,9 @@ export class ImageOptimizer {
 		return this.#ASSETS_MANIFEST_URL.pathname;
 	}
 
-	async #initAssetsManifest(assets: Env['Assets']) {
+	async #initAssetsManifest() {
 		if (!this.#assetsManifest) {
-			const response = await assets.fetch(this.#ASSETS_MANIFEST_URL);
+			const response = await env.Assets.fetch(this.#ASSETS_MANIFEST_URL);
 
 			if (!response.ok) {
 				console.error(`Failed to fetch assets manifest file at: ${this.#ASSETS_MANIFEST_URL.pathname}`);
@@ -155,8 +156,8 @@ export class ImageOptimizer {
 		}
 	}
 
-	async #loadImage(assets: Env['Assets'], src: string) {
-		const imageResponse = await assets.fetch(new URL(src, 'https://assets.local/'));
+	async #loadImage(src: string) {
+		const imageResponse = await env.Assets.fetch(new URL(src, 'https://assets.local/'));
 
 		if (!imageResponse.ok) {
 			throw new Error(`Image file does not exist: "${src}"`);
@@ -172,15 +173,15 @@ export class ImageOptimizer {
 		return Jimp.fromBuffer(imageBuffer);
 	}
 
-	async addImageToCache(assets: Env['Assets'], imageOptions: ImageCacheOptions) {
-		await this.#initAssetsManifest(assets);
+	async addImageToCache(imageOptions: ImageCacheOptions) {
+		await this.#initAssetsManifest();
 
 		// TODO: add support for gifs and svgs
 		if (imageOptions.src.endsWith('.gif') || imageOptions.src.endsWith('.svg')) {
 			return imageOptions.src;
 		}
 
-		const image = await this.#loadImage(assets, imageOptions.src);
+		const image = await this.#loadImage(imageOptions.src);
 
 		const imageName = basename(imageOptions.src);
 		const extension = extname(imageName) as ImageExtension;
@@ -197,7 +198,7 @@ export class ImageOptimizer {
 			this.#assetsManifest.set(imageOptions.src, newName);
 		}
 
-		const publicPath = new URL(`${newName}.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+		const publicPath = new URL(`${newName}${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
 		this.#imageMetadataCache.set(publicPath, {
 			src: imageOptions.src,
@@ -210,7 +211,7 @@ export class ImageOptimizer {
 		const publicPaths = [publicPath];
 
 		imageOptions.widths?.forEach((width) => {
-			const sizePublicPath = new URL(`${newName}-${width}w.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+			const sizePublicPath = new URL(`${newName}-${width}w${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
 			this.#imageMetadataCache.set(sizePublicPath, {
 				src: imageOptions.src,
@@ -224,7 +225,7 @@ export class ImageOptimizer {
 		});
 
 		imageOptions.densities?.forEach((density) => {
-			const sizePublicPath = new URL(`${newName}-${density}x.${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
+			const sizePublicPath = new URL(`${newName}-${density}x${imageOptions.extension ?? extension}`, this.#PUBLIC_ASSETS_URL).pathname;
 
 			this.#imageMetadataCache.set(sizePublicPath, {
 				src: imageOptions.src,
@@ -284,7 +285,7 @@ export class ImageOptimizer {
 		}).join(', ');
 	}
 
-	async fetchImage(assets: Env['Assets'], imagePath: string) {
+	async fetchImage(imagePath: string) {
 		if (!this.#imageMetadataCache.has(imagePath)) {
 			return new Response(`Image does not exist: "${imagePath}"`, { status: 404 });
 		}
@@ -294,7 +295,7 @@ export class ImageOptimizer {
 			return this.#imageResponseCache.get(imagePath)!;
 		}
 
-		const existingAssetResponse = await assets.fetch(new URL(imagePath, this.#PUBLIC_ASSETS_URL));
+		const existingAssetResponse = await env.Assets.fetch(new URL(imagePath, this.#PUBLIC_ASSETS_URL));
 
 		if (existingAssetResponse.ok) {
 			return existingAssetResponse;
@@ -303,7 +304,7 @@ export class ImageOptimizer {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const imageMetadata = this.#imageMetadataCache.get(imagePath)!;
 
-		const image = await this.#loadImage(assets, imageMetadata.src);
+		const image = await this.#loadImage(imageMetadata.src);
 
 		if (image.width !== imageMetadata.width || image.height !== imageMetadata.height) {
 			image.resize({

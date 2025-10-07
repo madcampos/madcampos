@@ -25,22 +25,6 @@ export const GLOBALS: ConstantsMap = {
 	]
 };
 
-export const ERROR: ConstantsMap = {
-	url: '/404',
-	title: ['404', ...GLOBALS.title],
-	titleString: '404 — Not Found',
-	description: '404 — Not Found',
-	tags: GLOBALS.tags
-};
-
-export const OFFLINE: ConstantsMap = {
-	url: '/offline/',
-	title: ['Offline Page', ...GLOBALS.title],
-	titleString: 'Offline Page',
-	description: 'Marco Campos — Offline Page',
-	tags: GLOBALS.tags
-};
-
 export const BLOG: ConstantsMap = {
 	url: '/blog/',
 	title: ['Blog', ...GLOBALS.title],

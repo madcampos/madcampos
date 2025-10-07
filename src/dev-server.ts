@@ -45,18 +45,17 @@ const app = new StaticSiteHandler({
 		}
 	},
 	routes: {
-		'/': { renderHtml: { template: 'index.html' } },
+		'/': { renderHtml: { template: 'test.html' } },
 		'/404': { renderHtml: { template: '404.html' } },
 		'/410': { renderHtml: { template: '410.html' } },
 		'/about': { renderHtml: { template: 'about.html' } },
 		'/accessibility': { renderHtml: { template: 'accessibility.html' } },
 		'/bookmarks': { renderHtml: { template: 'bookmarks.html' } },
 		'/changelog': {
-			render: async (assets, { templateRenderer, url, collections }) => {
-				const changelogs = await collections.list(assets, 'changelog');
+			render: async ({ templateRenderer, url, collections }) => {
+				const changelogs = await collections.list('changelog');
 
 				const body = await templateRenderer.renderTemplate(
-					assets,
 					'changelog.html',
 					{ changelogs: Object.values(changelogs), url }
 				);
@@ -74,11 +73,29 @@ const app = new StaticSiteHandler({
 		'/sitemap': { renderHtml: { template: 'sitemap.html' } },
 		'/styleguide': { renderHtml: { template: 'styleguide.html' } },
 		'/todo': { renderHtml: { template: 'todo.html' } },
-		'/triangle': { renderHtml: { template: 'triangle.html' } }
+		'/triangle': { renderHtml: { template: 'triangle.html' } },
+		'/projects': {
+			render: async ({ templateRenderer, url, collections }) => {
+				const projects = await collections.list('projects');
+
+				const body = await templateRenderer.renderTemplate(
+					'projects.html',
+					{
+						projects: Object.values(projects).map(({ metadata, contents }) => ({
+							...(metadata ?? {}),
+							contents
+						})),
+						url
+					}
+				);
+
+				return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
+			}
+		}
 	},
 	fallbackRoute: {
-		render: async (assets, { templateRenderer }) => {
-			const body = await templateRenderer.renderTemplate(assets, '404.html');
+		render: async ({ templateRenderer }) => {
+			const body = await templateRenderer.renderTemplate('404.html');
 
 			return new Response(body, { status: 404, headers: { 'Content-Type': 'text/html' } });
 		}

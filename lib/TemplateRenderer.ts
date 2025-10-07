@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-// eslint-disable-next-line @typescript-eslint/no-shadow
+
+import { env } from 'cloudflare:workers';
 import { type HTMLElement, NodeType, parse } from 'node-html-parser';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
 
@@ -226,10 +227,10 @@ export class TemplateRenderer {
 		return this.#TEMPLATES_URL.pathname;
 	}
 
-	async #initTemplates(assets: Env['Assets']) {
+	async #initTemplates() {
 		if (!this.#isIndexFetched) {
 			try {
-				const response = await assets.fetch(this.#COMPONENTS_INDEX_URL);
+				const response = await env.Assets.fetch(this.#COMPONENTS_INDEX_URL);
 
 				if (!response.ok) {
 					throw new Error(`Failed to fetch templates index file at: ${this.#COMPONENTS_INDEX_URL.pathname}`);
@@ -315,7 +316,7 @@ export class TemplateRenderer {
 		return '';
 	}
 
-	async #getComponentText(assets: Env['Assets'], elementTag: string) {
+	async #getComponentText(elementTag: string) {
 		if (!this.#componentPaths[elementTag]) {
 			return;
 		}
@@ -323,7 +324,7 @@ export class TemplateRenderer {
 		if (!this.#componentCache[elementTag]) {
 			if (typeof this.#componentPaths[elementTag] === 'string') {
 				const templatePath = this.#componentPaths[elementTag];
-				const response = await assets.fetch(new URL(templatePath, this.#TEMPLATES_URL));
+				const response = await env.Assets.fetch(new URL(templatePath, this.#TEMPLATES_URL));
 
 				if (!response.ok) {
 					this.#componentCache[elementTag] = '';
@@ -342,15 +343,15 @@ export class TemplateRenderer {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent(assets: Env['Assets'], element?: HTMLElement) {
+	async #processComponent(element?: HTMLElement) {
 		if (!element) {
 			return;
 		}
 
-		for (const childElement of element.children) {
+		for (const childElement of element?.children ?? []) {
 			try {
 				if (childElement?.tagName?.toLowerCase().includes('-')) {
-					let componentTextOrFunction = await this.#getComponentText(assets, childElement.tagName.toLowerCase());
+					let componentTextOrFunction = await this.#getComponentText(childElement.tagName.toLowerCase());
 
 					if (!componentTextOrFunction) {
 						return;
@@ -368,7 +369,7 @@ export class TemplateRenderer {
 					}
 
 					if (!childElement.hasAttribute(this.#attributes.skipProcessing)) {
-						await this.#processElement(assets, childElement, childElement.attributes);
+						await this.#processElement(childElement, childElement.attributes);
 					} else {
 						childElement.removeAttribute(this.#attributes.skipProcessing);
 					}
@@ -407,7 +408,7 @@ export class TemplateRenderer {
 		}
 	}
 
-	async #processImport<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+	async #processImport<T>(element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -426,7 +427,7 @@ export class TemplateRenderer {
 					element.removeAttribute(this.#attributes.importData);
 				}
 
-				const importedTemplate = await this.renderTemplate(assets, filePath, { ...element.attributes, ...(importData ?? {}) });
+				const importedTemplate = await this.renderTemplate(filePath, { ...element.attributes, ...(importData ?? {}) });
 
 				element.insertAdjacentHTML('afterend', importedTemplate);
 				element.remove();
@@ -434,26 +435,26 @@ export class TemplateRenderer {
 		}
 	}
 
-	async #processChildElements<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+	async #processChildElements<T>(element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
 
-		for (const childElement of element.children) {
+		for (const childElement of element?.children ?? []) {
 			try {
 				const elementsToSkip = ['script', 'style'];
 				if (elementsToSkip.includes(childElement?.tagName?.toLowerCase() ?? '')) {
 					continue;
 				}
 
-				await this.#processElement(assets, childElement, data);
+				await this.#processElement(childElement, data);
 			} catch (err) {
 				console.error(err);
 			}
 		}
 	}
 
-	async #processLoop<T>(assets: Env['Assets'], element?: HTMLElement, data?: T) {
+	async #processLoop<T>(element?: HTMLElement, data?: T) {
 		if (!element) {
 			return;
 		}
@@ -480,7 +481,7 @@ export class TemplateRenderer {
 
 						clonedElement.removeAttribute(this.#attributes.loop);
 
-						await this.#processElement(assets, clonedElement, {
+						await this.#processElement(clonedElement, {
 							...(data ?? {}),
 							[itemName?.trim() ?? '']: itemValue
 						});
@@ -528,8 +529,12 @@ export class TemplateRenderer {
 			return Promise.resolve();
 		}
 
-		element.childNodes.forEach((node) => {
+		Object.values(element.childNodes ?? {}).forEach((node) => {
 			if (node.nodeType !== NodeType.TEXT_NODE) {
+				return;
+			}
+
+			if (!node.textContent) {
 				return;
 			}
 
@@ -561,7 +566,7 @@ export class TemplateRenderer {
 		});
 	}
 
-	async #processResponsiveImages(assets: Env['Assets'], element: HTMLElement) {
+	async #processResponsiveImages(element: HTMLElement) {
 		if (element.tagName?.toLowerCase() !== 'img') {
 			return;
 		}
@@ -575,7 +580,7 @@ export class TemplateRenderer {
 			const widths = element.getAttribute(this.#attributes.imageWidths)?.split(',').map((w) => Number.parseInt(w.trim()));
 			const densities = element.getAttribute(this.#attributes.imageDensities)?.split(',').map((w) => Number.parseInt(w.trim()));
 
-			const newSrc = (await this.#imageOptimizer.addImageToCache(assets, {
+			const newSrc = (await this.#imageOptimizer.addImageToCache({
 				src,
 				quality: quality ? Number.parseInt(quality) : undefined,
 				width: width ? Number.parseInt(width) : undefined,
@@ -599,15 +604,15 @@ export class TemplateRenderer {
 		element.removeAttribute(this.#attributes.imageWidths);
 	}
 
-	async #processElement<T>(assets: Env['Assets'], element: HTMLElement, data?: T) {
+	async #processElement<T>(element: HTMLElement, data?: T) {
 		await this.#processIfAttribute(element, data);
-		await this.#processImport(assets, element, data);
-		await this.#processLoop(assets, element, data);
-		await this.#processChildElements(assets, element, data);
+		await this.#processImport(element, data);
+		await this.#processLoop(element, data);
+		await this.#processChildElements(element, data);
 		await this.#processAttributes(element, data);
-		await this.#processResponsiveImages(assets, element);
+		await this.#processResponsiveImages(element);
 		await this.#processTextNodes(element, data);
-		await this.#processComponent(assets, element);
+		await this.#processComponent(element);
 	}
 
 	/**
@@ -615,10 +620,10 @@ export class TemplateRenderer {
 	 *
 	 * It returns a string of the rendered HTML.
 	 */
-	async renderTemplate<T>(assets: Env['Assets'], template: string, data?: T) {
-		await this.#initTemplates(assets);
+	async renderTemplate<T>(template: string, data?: T) {
+		await this.#initTemplates();
 
-		const response = await assets.fetch(new URL(template, this.#TEMPLATES_URL));
+		const response = await env.Assets.fetch(new URL(template, this.#TEMPLATES_URL));
 		const text = await response.text();
 		const parsedDocument = parse(text, {
 			comment: true,
@@ -633,13 +638,13 @@ export class TemplateRenderer {
 			}
 		});
 
-		await this.#processElement(assets, parsedDocument, data);
+		await this.#processElement(parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}
 
-	async renderString<T>(assets: Env['Assets'], text: string, data?: T) {
-		await this.#initTemplates(assets);
+	async renderString<T>(text: string, data?: T) {
+		await this.#initTemplates();
 
 		const parsedDocument = parse(text, {
 			comment: true,
@@ -654,7 +659,7 @@ export class TemplateRenderer {
 			}
 		});
 
-		await this.#processElement(assets, parsedDocument, data);
+		await this.#processElement(parsedDocument, data);
 
 		return parsedDocument.outerHTML;
 	}

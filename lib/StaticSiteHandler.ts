@@ -22,7 +22,7 @@ export interface RouterViewResolverParams {
 	url: URLPattern;
 }
 
-export type ResolveParamsFunction = (assets: Env['Assets'], params: RouterViewResolverParams) => Promise<string[]> | string[];
+export type ResolveParamsFunction = (params: RouterViewResolverParams) => Promise<string[]> | string[];
 
 interface BaseRouteView {
 	resolveParams?: ResolveParamsFunction;
@@ -55,7 +55,7 @@ export interface RouterViewParams {
 	params?: URLPatternResult;
 }
 
-export type RenderFunction = (assets: Env['Assets'], params: RouterViewParams) => Promise<Response> | Response;
+export type RenderFunction = (params: RouterViewParams) => Promise<Response> | Response;
 
 interface GenericRenderRouteView extends BaseRouteView {
 	render: RenderFunction;
@@ -116,9 +116,8 @@ export class StaticSiteHandler {
 		};
 
 		if (fallbackRoute?.renderHtml) {
-			normalizedFallbackRoute.render = async (assets, { url }) => {
+			normalizedFallbackRoute.render = async ({ url }) => {
 				const body = await this.#templateRenderer.renderTemplate(
-					assets,
 					fallbackRoute.renderHtml.template,
 					{ ...(fallbackRoute.renderHtml.data ?? {}), url }
 				);
@@ -133,7 +132,7 @@ export class StaticSiteHandler {
 		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#collections.collectionsPath}*` }), normalizedFallbackRoute]);
 
 		this.#routes.push([new URLPattern({ ...this.#BASE_URL, pathname: `${this.#imageOptimizer.publicAssetsPath}*` }), {
-			render: async (assets, { url }) => this.#imageOptimizer.fetchImage(assets, url.pathname)
+			render: async ({ url }) => this.#imageOptimizer.fetchImage(url.pathname)
 		}]);
 
 		Object.entries(routes).forEach(([path, route]) => {
@@ -157,9 +156,8 @@ export class StaticSiteHandler {
 
 			this.#routes.push([new URLPattern({ ...resolvedUrl, pathname: resolvedPath }), {
 				resolveParams: route.resolveParams,
-				render: route.render ?? (async (assets, { url }) => {
+				render: route.render ?? (async ({ url }) => {
 					const body = await this.#templateRenderer.renderTemplate(
-						assets,
 						route.renderHtml.template,
 						{ ...(route.renderHtml.data ?? {}), url }
 					);
@@ -182,7 +180,7 @@ export class StaticSiteHandler {
 		return false;
 	}
 
-	async #resolveRoute(assets: Env['Assets'], url: string) {
+	async #resolveRoute(url: string) {
 		const resolvedUrl = new URL(url, this.#BASE_URL);
 		const [pattern, route] = this.#routes.find(([curPattern]) => curPattern.test(resolvedUrl.href)) ?? [];
 
@@ -199,7 +197,7 @@ export class StaticSiteHandler {
 			let resolvedRoutes = this.#resolvedRoutes.get(pattern);
 
 			if (!resolvedRoutes) {
-				resolvedRoutes = await route.resolveParams(assets, {
+				resolvedRoutes = await route.resolveParams({
 					collections: this.#collections,
 					imageOpttimizer: this.#imageOptimizer,
 					templateRenderer: this.#templateRenderer,
@@ -213,7 +211,7 @@ export class StaticSiteHandler {
 
 			if (resolvedPath) {
 				try {
-					return await route.render(assets, {
+					return await route.render({
 						collections: this.#collections,
 						imageOptimizer: this.#imageOptimizer,
 						templateRenderer: this.#templateRenderer,
@@ -227,7 +225,7 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return route.render(assets, {
+		return route.render({
 			collections: this.#collections,
 			imageOptimizer: this.#imageOptimizer,
 			templateRenderer: this.#templateRenderer,
@@ -235,7 +233,7 @@ export class StaticSiteHandler {
 		});
 	}
 
-	async build(assets: Env['Assets'], fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
+	async build(fileSystemModule: FileSystemModule, outputPath: string, publicDir: string) {
 		this.#collections.mode = 'production';
 
 		await fileSystemModule.mkdir(outputPath, { recursive: true });
@@ -253,7 +251,7 @@ export class StaticSiteHandler {
 
 			if (route.resolveParams) {
 				resolvedRoutes.push(
-					...await route.resolveParams(assets, {
+					...await route.resolveParams({
 						collections: this.#collections,
 						imageOpttimizer: this.#imageOptimizer,
 						templateRenderer: this.#templateRenderer,
@@ -275,7 +273,7 @@ export class StaticSiteHandler {
 
 			for (const resolvedPath of resolvedRoutes) {
 				try {
-					const response = await route.render(assets, {
+					const response = await route.render({
 						collections: this.#collections,
 						imageOptimizer: this.#imageOptimizer,
 						templateRenderer: this.#templateRenderer,
@@ -319,7 +317,7 @@ export class StaticSiteHandler {
 	}
 
 	async fetch<CfHostMetadata = unknown>(request: Request<CfHostMetadata, IncomingRequestCfProperties<CfHostMetadata>>, env: Env, context: ExecutionContext) {
-		const resolvedResponse = await this.#resolveRoute(env.Assets, request.url);
+		const resolvedResponse = await this.#resolveRoute(request.url);
 
 		if (resolvedResponse) {
 			return resolvedResponse;
@@ -334,7 +332,7 @@ export class StaticSiteHandler {
 			}
 		}
 
-		return this.#fallbackRoute.render(env.Assets, {
+		return this.#fallbackRoute.render({
 			collections: this.#collections,
 			imageOptimizer: this.#imageOptimizer,
 			templateRenderer: this.#templateRenderer,

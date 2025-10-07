@@ -20,7 +20,7 @@ export const sort: SortingFunction<ChangelogMetadata> = ([, { metadata: metaA }]
 	return new Date(metaA.date).getTime() - new Date(metaB.date).getTime();
 };
 
-export const transform: TransformerFunction<OriginalChangelogMetadata, ChangelogMetadata> = async (_, {
+export const transform: TransformerFunction<OriginalChangelogMetadata, ChangelogMetadata> = async ({
 	entry: { id, path, metadata, contents },
 	markdownParser,
 	mode
