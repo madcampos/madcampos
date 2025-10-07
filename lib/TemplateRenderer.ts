@@ -6,6 +6,10 @@ import type { HTMLElement } from 'node-html-parser';
 import { NodeType, parse } from 'node-html-parser';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
 
+interface HTMLElementWithProps extends HTMLElement {
+	props?: Record<string, unknown>;
+}
+
 /**
  * A function to render the component, if receives the processed attributes for the component as it's data.
  *
@@ -22,6 +26,23 @@ import type { ImageOptimizer } from './ImageOptimizer.ts';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ComponentFunction = (data: any) => Promise<string> | string;
 type ComponentReferenceList = Record<string, ComponentFunction | string>;
+
+/**
+ * A function to apply a transformation filter to a value.
+ * This will transform the value referenced by a data variable.
+ * E.g.: With the following HTML:
+ * ```html
+ * <div>
+ * 	{{data.dateValue | formatDate en-US, long-date, long-time}}
+ * </div>
+ * ```
+ *
+ * This will call the the following filter function with the following parameters:
+ * ```typescript
+ * formatDate(data.dateValue, 'en-US', 'long-date', 'long-time');
+ * ```
+ */
+type FilterFunction = <T, R>(data: T, ...params: string[]) => Promise<R> | R;
 
 /**
  * The special attributes to do if checks, loops, etc.
@@ -143,6 +164,12 @@ interface TemplateRenderingAttributes {
 	 * @default ':'
 	 */
 	attributeBinding: string;
+
+	/**
+	 * Character to use for separating filters from values.
+	 * @default '|'
+	 */
+	filterSeparator: string;
 }
 
 export interface TemplateRendererOptions {
@@ -190,6 +217,11 @@ export interface TemplateRendererOptions {
 	 * The special attributes to do if checks, loops, etc.
 	 */
 	attributes?: Partial<TemplateRenderingAttributes>;
+
+	/**
+	 * List of filter functions to provide. This list will be added on top of existing filters.
+	 */
+	filters?: Record<string, FilterFunction>;
 }
 
 export class TemplateRenderer {
@@ -211,14 +243,16 @@ export class TemplateRenderer {
 		closeDelimiter: '\\}\\}',
 		unescapedOpenDelimiter: '\\{\\{\\{',
 		unescapedCloseDelimiter: '\\}\\}\\}',
-		attributeBinding: ':'
+		attributeBinding: ':',
+		filterSeparator: '|'
 	};
 	#componentCache: ComponentReferenceList = {};
 	#isIndexFetched = false;
 	#componentPaths: ComponentReferenceList;
 	#imageOptimizer: ImageOptimizer;
+	#filters: Record<string, FilterFunction>;
 
-	constructor({ imageOptimizer, components, componentIndex, templatesFolder, attributes }: TemplateRendererOptions) {
+	constructor({ imageOptimizer, components, componentIndex, templatesFolder, attributes, filters }: TemplateRendererOptions) {
 		this.#imageOptimizer = imageOptimizer;
 
 		this.#componentPaths = Object.fromEntries(Object.entries(components ?? {}).map(([key, value]) => [key.toLowerCase(), value]));
@@ -229,6 +263,10 @@ export class TemplateRenderer {
 		this.#attributes = {
 			...this.#attributes,
 			...(attributes ?? {})
+		};
+
+		this.#filters = {
+			...(filters ?? {})
 		};
 	}
 
@@ -373,6 +411,7 @@ export class TemplateRenderer {
 
 					Object.entries(childElement.attributes).forEach(([key, value]) => {
 						if (key.startsWith(this.#attributes.attributeBinding)) {
+							// TODO: process filter
 							componentData[key.replace(this.#attributes.attributeBinding, '')] = this.#getValue(value, data);
 						} else {
 							componentData[key] = value;
@@ -448,6 +487,7 @@ export class TemplateRenderer {
 						return;
 					}
 
+					// TODO: process filter
 					if (key.startsWith(this.#attributes.attributeBinding)) {
 						importData[key.replace(this.#attributes.attributeBinding, '')] = this.#getValue(value, data);
 					} else {
@@ -543,18 +583,34 @@ export class TemplateRenderer {
 			return Promise.resolve();
 		}
 
-		const { openDelimiter, closeDelimiter } = this.#attributes;
+		const { openDelimiter, closeDelimiter, filterSeparator } = this.#attributes;
 
-		Object.entries(element.attributes)
-			.filter(([, value]) => new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu').test(value))
-			.forEach(([attr, value]) => {
-				const resolvedValue = value.replaceAll(
-					new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu'),
-					(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
-				);
+		for (const [attr, value] of Object.entries(element.attributes)) {
+			// TODO: skip binding attributes
+			const matches = [...value.matchAll(new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu'))];
 
-				element.setAttribute(attr, resolvedValue);
-			});
+			for (const [, propString] of matches) {
+				const [prop, filter] = propString?.split(filterSeparator) ?? [];
+				const resolvedValue = this.#getValue(prop ?? '', data);
+
+				if (filter) {
+					const [filterName = '', ...filterArgs] = filter.trim().split(' ');
+					const filterfunction = this.#filters[filterName];
+
+					if (!filterfunction) {
+						console.warn(`Missing filter function: ${filterName}`);
+						continue;
+					}
+
+					(element as HTMLElementWithProps).props ??= {};
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					(element as HTMLElementWithProps).props![attr] = filterfunction(resolvedValue, ...filterArgs);
+				} else {
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					element.setAttribute(attr, value.replace(propString!, this.#formatValue(resolvedValue)));
+				}
+			}
+		}
 	}
 
 	async #processTextNodes<T>(element?: HTMLElement, data?: T) {
@@ -665,6 +721,7 @@ export class TemplateRenderer {
 		await this.#processResponsiveImages(element);
 		await this.#processTextNodes(element, data);
 		await this.#processComponent(element);
+		// TODO: cleanup bound attributes, any unresolved props and stuff
 	}
 
 	/**
