@@ -160,7 +160,8 @@ export class ImageOptimizer {
 		const imageResponse = await env.Assets.fetch(new URL(src, 'https://assets.local/'));
 
 		if (!imageResponse.ok) {
-			throw new Error(`Image file does not exist: "${src}"`);
+			console.error(`Image file does not exist: "${src}"`);
+			return;
 		}
 
 		const Jimp = createJimp({
@@ -182,6 +183,10 @@ export class ImageOptimizer {
 		}
 
 		const image = await this.#loadImage(imageOptions.src);
+
+		if (!image) {
+			return '';
+		}
 
 		const imageName = basename(imageOptions.src);
 		const extension = extname(imageName) as ImageExtension;
@@ -305,6 +310,10 @@ export class ImageOptimizer {
 		const imageMetadata = this.#imageMetadataCache.get(imagePath)!;
 
 		const image = await this.#loadImage(imageMetadata.src);
+
+		if (!image) {
+			return new Response(`Image does not exist: "${imagePath}"`, { status: 404 });
+		}
 
 		if (image.width !== imageMetadata.width || image.height !== imageMetadata.height) {
 			image.resize({

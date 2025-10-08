@@ -1,14 +1,9 @@
-/* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/no-shadow, max-lines */
 
 import { env } from 'cloudflare:workers';
-// eslint-disable-next-line @typescript-eslint/no-shadow
-import type { HTMLElement } from 'node-html-parser';
-import { NodeType, parse } from 'node-html-parser';
+import { type Node, HTMLElement, TextNode } from 'node-html-parser';
+import { parse } from 'node-html-parser';
 import type { ImageOptimizer } from './ImageOptimizer.ts';
-
-interface HTMLElementWithProps extends HTMLElement {
-	props?: Record<string, unknown>;
-}
 
 /**
  * A function to render the component, if receives the processed attributes for the component as it's data.
@@ -24,8 +19,8 @@ interface HTMLElementWithProps extends HTMLElement {
  * ```
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ComponentFunction = (data: any) => Promise<string> | string;
-type ComponentReferenceList = Record<string, ComponentFunction | string>;
+export type ComponentFunction = (data: any) => Promise<string> | string;
+export type ComponentReferenceList = Record<string, ComponentFunction | string>;
 
 /**
  * A function to apply a transformation filter to a value.
@@ -42,12 +37,12 @@ type ComponentReferenceList = Record<string, ComponentFunction | string>;
  * formatDate(data.dateValue, 'en-US', 'long-date', 'long-time');
  * ```
  */
-type FilterFunction = <T, R>(data: T, ...params: string[]) => Promise<R> | R;
+export type FilterFunction = <T, R>(data: T, ...params: string[]) => Promise<R> | R;
 
 /**
  * The special attributes to do if checks, loops, etc.
  */
-interface TemplateRenderingAttributes {
+export interface TemplateRenderingAttributes {
 	/**
 	 * The attribute used for if checks.
 	 * @default '@if'
@@ -274,6 +269,21 @@ export class TemplateRenderer {
 		return this.#TEMPLATES_URL.pathname;
 	}
 
+	#parse(text: string) {
+		return parse(text, {
+			comment: true,
+			parseNoneClosedTags: true,
+			fixNestedATags: true,
+			voidTag: { closingSlash: true },
+			blockTextElements: {
+				script: true,
+				noscript: true,
+				style: true,
+				pre: true
+			}
+		});
+	}
+
 	async #initTemplates() {
 		if (!this.#isIndexFetched) {
 			try {
@@ -393,67 +403,57 @@ export class TemplateRenderer {
 		return this.#componentCache[elementTag];
 	}
 
-	async #processComponent<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
-			return;
+	async #processComponent<T>(element: HTMLElement, data?: T) {
+		let componentTextOrFunction = await this.#getComponentText(element.tagName.toLowerCase());
+
+		if (!componentTextOrFunction) {
+			return element as Node;
 		}
 
-		for (const childElement of element?.children ?? []) {
-			try {
-				if (childElement?.tagName?.toLowerCase().includes('-')) {
-					let componentTextOrFunction = await this.#getComponentText(childElement.tagName.toLowerCase());
+		const processedComponent = element.clone() as HTMLElement;
 
-					if (!componentTextOrFunction) {
-						return;
-					}
+		processedComponent.removeAttribute(this.#attributes.skipProcessing);
+		processedComponent.removeAttribute(this.#attributes.skipShadowDom);
 
-					const componentData: Record<string, unknown> = {};
+		const componentData: Record<string, unknown> = {};
 
-					Object.entries(childElement.attributes).forEach(([key, value]) => {
-						if (key.startsWith(this.#attributes.attributeBinding)) {
-							// TODO: process filter
-							componentData[key.replace(this.#attributes.attributeBinding, '')] = this.#getValue(value, data);
-						} else {
-							componentData[key] = value;
-						}
-					});
+		Object.entries(processedComponent.attributes).forEach(([key, value]) => {
+			if (key.startsWith(this.#attributes.attributeBinding)) {
+				componentData[key.replace(this.#attributes.attributeBinding, '')] = this.#processInterpolation(value, data);
 
-					if (typeof componentTextOrFunction === 'function') {
-						componentTextOrFunction = await componentTextOrFunction(componentData);
-					}
-
-					if (childElement.hasAttribute(this.#attributes.skipShadowDom)) {
-						childElement.insertAdjacentHTML('afterbegin', componentTextOrFunction);
-						childElement.removeAttribute(this.#attributes.skipShadowDom);
-					} else {
-						childElement.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentTextOrFunction}</template>`);
-					}
-
-					if (!childElement.hasAttribute(this.#attributes.skipProcessing)) {
-						await this.#processElement(childElement, componentData);
-					} else {
-						childElement.removeAttribute(this.#attributes.skipProcessing);
-					}
-				}
-			} catch (err) {
-				console.error(err);
+				element.removeAttribute(key);
+			} else {
+				componentData[key] = value;
 			}
+		});
+
+		if (typeof componentTextOrFunction === 'function') {
+			componentTextOrFunction = await componentTextOrFunction(componentData);
 		}
+
+		if (element.hasAttribute(this.#attributes.skipShadowDom)) {
+			processedComponent.insertAdjacentHTML('afterbegin', componentTextOrFunction);
+		} else {
+			processedComponent.insertAdjacentHTML('afterbegin', `<template shadowrootmode="open">${componentTextOrFunction}</template>`);
+		}
+
+		if (element.hasAttribute(this.#attributes.skipProcessing)) {
+			return processedComponent as Node;
+		}
+
+		return this.#processNodes([processedComponent], {
+			...data,
+			...componentData
+		});
 	}
 
-	async #processIfAttribute<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
-			return Promise.resolve();
-		}
-
+	#checkConditionalAttribute<T>(element: HTMLElement, data: T) {
 		if (element.hasAttribute(this.#attributes.if)) {
 			const value = this.#getValue(element.getAttribute(this.#attributes.if) ?? '', data, false);
 
 			const falsyValues = ['', false, null, undefined] as const;
 			if (falsyValues.includes(value) || Number.isNaN(value)) {
-				element.remove();
-			} else {
-				element.removeAttribute(this.#attributes.if);
+				return false;
 			}
 		}
 
@@ -461,267 +461,260 @@ export class TemplateRenderer {
 			const value = this.#getValue(element.getAttribute(this.#attributes.ifNot) ?? '', data, false);
 
 			const falsyValues = ['', false, null, undefined] as const;
-			if (falsyValues.includes(value) || Number.isNaN(value)) {
-				element.removeAttribute(this.#attributes.ifNot);
-			} else {
-				element.remove();
+			if (!falsyValues.includes(value) && !Number.isNaN(value)) {
+				return false;
 			}
 		}
+
+		return true;
 	}
 
-	async #processImport<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
+	async #processImport<T>(element: HTMLElement, data: T) {
+		const filePath = element.getAttribute('href');
+
+		if (!filePath) {
+			console.warn('Missing import file!');
 			return;
 		}
 
-		if (element.tagName?.toLowerCase() === 'link' && element.getAttribute('rel') === 'import') {
-			const filePath = element.getAttribute('href');
+		let importData: Record<string, unknown> = {};
 
-			if (!filePath) {
-				console.warn('Missing import file!');
-			} else {
-				let importData: Record<string, unknown> = {};
-
-				Object.entries(element.attributes).forEach(([key, value]) => {
-					if (key === this.#attributes.importData) {
-						return;
-					}
-
-					// TODO: process filter
-					if (key.startsWith(this.#attributes.attributeBinding)) {
-						importData[key.replace(this.#attributes.attributeBinding, '')] = this.#getValue(value, data);
-					} else {
-						importData[key] = value;
-					}
-				});
-
-				if (element.hasAttribute(this.#attributes.importData)) {
-					importData = {
-						...importData,
-						...this.#getValue(element.getAttribute(this.#attributes.importData) ?? '', data)
-					};
-
-					element.removeAttribute(this.#attributes.importData);
-				}
-
-				const importedTemplate = await this.renderTemplate(filePath, importData);
-
-				element.insertAdjacentHTML('afterend', importedTemplate);
-				element.remove();
+		Object.entries(element.attributes).forEach(([key, value]) => {
+			if (key === this.#attributes.importData) {
+				return;
 			}
+
+			if (key.startsWith(this.#attributes.attributeBinding)) {
+				importData[key.replace(this.#attributes.attributeBinding, '')] = this.#processInterpolation(value, data);
+
+				element.removeAttribute(key);
+			} else {
+				importData[key] = value;
+			}
+		});
+
+		if (element.hasAttribute(this.#attributes.importData)) {
+			importData = {
+				...importData,
+				...this.#getValue(element.getAttribute(this.#attributes.importData) ?? '', data)
+			};
 		}
+
+		const response = await env.Assets.fetch(new URL(filePath, this.#TEMPLATES_URL));
+		const text = await response.text();
+
+		return this.#parse(text);
 	}
 
-	async #processChildElements<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
-			return;
+	async #processLoop<T>(element: HTMLElement, data: T) {
+		const loopResults: Node[][] = [];
+		const [itemName, listPath] = element.getAttribute(this.#attributes.loop)?.split(this.#attributes.loopOperator) ?? [];
+		let list = this.#getValue(listPath?.trim() ?? '', data);
+
+		if (typeof list === 'string') {
+			list = [...list];
 		}
 
-		for (const childElement of element?.children ?? []) {
-			try {
-				const elementsToSkip = ['script', 'style'];
-				if (elementsToSkip.includes(childElement?.tagName?.toLowerCase() ?? '')) {
+		if (!list) {
+			console.error(`Missing list "${(listPath ?? '').trim()}" for loop on element "${element.tagName?.toLowerCase()}"`);
+		} else if (!itemName) {
+			console.error(`Missing list item name for loop on element "${element.tagName.toLowerCase()}"`);
+		} else {
+			element.removeAttribute(this.#attributes.loop);
+
+			for (const itemValue of list) {
+				const itemData = {
+					...(data ?? {}),
+					[itemName?.trim() ?? '']: itemValue
+				};
+				const clonedElements = await this.#processNodes([element.clone() as HTMLElement], itemData);
+
+				loopResults.push(clonedElements);
+			}
+		}
+
+		return loopResults.flat();
+	}
+
+	#processInterpolation<R, T>(propString: string, data?: T) {
+		const [prop, ...filters] = propString?.split(this.#attributes.filterSeparator) ?? [];
+		let resolvedValue = this.#getValue(prop ?? '', data) as R;
+
+		if (filters.length) {
+			for (const filter of filters) {
+				const [filterName = '', ...filterArgs] = filter.trim().split(' ');
+				const filterfunction = this.#filters[filterName];
+
+				if (!filterfunction) {
+					console.warn(`Missing filter function: ${filterName}`);
 					continue;
 				}
 
-				await this.#processElement(childElement, data);
-			} catch (err) {
-				console.error(err);
+				resolvedValue = filterfunction(resolvedValue, ...filterArgs) as R;
 			}
 		}
+
+		return resolvedValue;
 	}
 
-	async #processLoop<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
-			return;
-		}
+	#processAttributes<T>(attributes?: Record<string, string>, data?: T) {
+		const normalizedAttributes = attributes ?? {};
 
-		if (element.hasAttribute(this.#attributes.loop)) {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			const [itemName, listPath] = element.getAttribute(this.#attributes.loop)!.split(this.#attributes.loopOperator);
-			let list = this.#getValue(listPath?.trim() ?? '', data);
+		const { openDelimiter, closeDelimiter } = this.#attributes;
 
-			if (typeof list === 'string') {
-				list = [...list];
+		for (const [attr, value] of Object.entries(normalizedAttributes)) {
+			if (attr === this.#attributes.loop) {
+				continue;
 			}
 
-			if (!list) {
-				element.remove();
-				throw new Error(`Missing list "${(listPath ?? '').trim()}" for loop on element "${element.tagName?.toLowerCase()}"`);
-			} else if (!itemName) {
-				element.remove();
-				throw new Error(`Missing list item name for loop on element "${element.tagName.toLowerCase()}"`);
-			} else {
-				for (const itemValue of list) {
-					try {
-						const clonedElement = element.clone() as HTMLElement;
-
-						clonedElement.removeAttribute(this.#attributes.loop);
-
-						await this.#processElement(clonedElement, {
-							...(data ?? {}),
-							[itemName?.trim() ?? '']: itemValue
-						});
-
-						element.before(clonedElement);
-					} catch (err) {
-						console.error(err);
-					}
-				}
+			if (attr.startsWith(this.#attributes.attributeBinding)) {
+				continue;
 			}
 
-			element.remove();
+			normalizedAttributes[attr] = value.replaceAll(
+				new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu'),
+				(_, matchValue) => this.#formatValue(this.#processInterpolation(matchValue, data))
+			);
 		}
+
+		return normalizedAttributes;
 	}
 
-	async #processAttributes<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
-			return Promise.resolve();
+	async #processResponsiveImages(sourceImage: HTMLElement) {
+		if (sourceImage.hasAttribute(this.#attributes.skipImageOptimization) || !sourceImage.getAttribute('src')) {
+			return sourceImage;
 		}
 
-		if (element.hasAttribute(this.#attributes.if) || element.hasAttribute(this.#attributes.ifNot) || element.hasAttribute(this.#attributes.loop)) {
-			return Promise.resolve();
+		const normalizedImage = sourceImage.clone() as HTMLElement;
+
+		normalizedImage.removeAttribute(this.#attributes.skipImageOptimization);
+		normalizedImage.removeAttribute(this.#attributes.imageQuality);
+		normalizedImage.removeAttribute(this.#attributes.imageDensities);
+		normalizedImage.removeAttribute(this.#attributes.imageWidths);
+
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const src = normalizedImage.getAttribute('src')!;
+		const quality = sourceImage.getAttribute(this.#attributes.imageQuality);
+		const width = normalizedImage.getAttribute('width');
+		const height = normalizedImage.getAttribute('height');
+		const widths = sourceImage.getAttribute(this.#attributes.imageWidths)?.split(',').map((w) => Number.parseInt(w.trim()));
+		const densities = sourceImage.getAttribute(this.#attributes.imageDensities)?.split(',').map((w) => Number.parseInt(w.trim()));
+
+		const newSrc = (await this.#imageOptimizer.addImageToCache({
+			src,
+			quality: quality ? Number.parseInt(quality) : undefined,
+			width: width ? Number.parseInt(width) : undefined,
+			height: height ? Number.parseInt(height) : undefined,
+			widths,
+			densities
+		})) ?? src;
+
+		normalizedImage.setAttribute('src', newSrc);
+
+		if (sourceImage.hasAttribute(this.#attributes.imageWidths)) {
+			const srcSet = this.#imageOptimizer.getImageSourceSet(newSrc);
+
+			normalizedImage.setAttribute('srcset', srcSet);
 		}
 
-		const { openDelimiter, closeDelimiter, filterSeparator } = this.#attributes;
+		return normalizedImage;
+	}
 
-		for (const [attr, value] of Object.entries(element.attributes)) {
-			// TODO: skip binding attributes
-			const matches = [...value.matchAll(new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu'))];
+	// eslint-disable-next-line complexity
+	async #processNodes<T>(nodes: Node[], data: T) {
+		type MaybeNode = Node | undefined;
+		const processedNodes: (MaybeNode | MaybeNode[])[] = [...nodes];
 
-			for (const [, propString] of matches) {
-				const [prop, filter] = propString?.split(filterSeparator) ?? [];
-				const resolvedValue = this.#getValue(prop ?? '', data);
+		for (const [index, node] of nodes.entries()) {
+			if (node instanceof HTMLElement) {
+				if (node.hasAttribute(this.#attributes.if)) {
+					const shouldKeepElement = this.#checkConditionalAttribute(node, data);
 
-				if (filter) {
-					const [filterName = '', ...filterArgs] = filter.trim().split(' ');
-					const filterfunction = this.#filters[filterName];
+					node.removeAttribute(this.#attributes.if);
+					node.removeAttribute(this.#attributes.ifNot);
 
-					if (!filterfunction) {
-						console.warn(`Missing filter function: ${filterName}`);
+					if (!shouldKeepElement) {
+						processedNodes[index] = undefined;
 						continue;
 					}
+				}
 
-					(element as HTMLElementWithProps).props ??= {};
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					(element as HTMLElementWithProps).props![attr] = filterfunction(resolvedValue, ...filterArgs);
-				} else {
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					element.setAttribute(attr, value.replace(propString!, this.#formatValue(resolvedValue)));
+				if (node.hasAttribute(this.#attributes.loop)) {
+					processedNodes[index] = await this.#processLoop(node, data);
+					continue;
+				}
+
+				const elementsToSkip = ['script', 'style'];
+				if (elementsToSkip.includes(node.tagName.toLowerCase() ?? '')) {
+					continue;
+				}
+
+				// TODO: attributes
+
+				if (node.tagName?.toLowerCase() === 'link' && node.getAttribute('rel') === 'import') {
+					processedNodes[index] = await this.#processImport(node, data);
+					continue;
+				}
+
+				if (node.tagName?.toLowerCase() === 'img') {
+					processedNodes[index] = await this.#processResponsiveImages(node);
+					continue;
+				}
+
+				if (node.tagName?.includes('-')) {
+					processedNodes[index] = await this.#processComponent(node, data);
+					continue;
+				}
+
+				if (node.childNodes.length > 0) {
+					node.childNodes = await this.#processNodes(node.childNodes, data);
+				}
+
+				continue;
+			}
+
+			if (node instanceof TextNode) {
+				if (!node.textContent) {
+					continue;
+				}
+
+				if (node.textContent.trim().length === 0) {
+					continue;
+				}
+
+				if (node.textContent.toUpperCase().includes('<!DOCTYPE')) {
+					continue;
+				}
+
+				const { openDelimiter, closeDelimiter, unescapedOpenDelimiter, unescapedCloseDelimiter } = this.#attributes;
+
+				if (new RegExp(`${unescapedOpenDelimiter}(.+?)${unescapedCloseDelimiter}`, 'igu').test(node.rawText)) {
+					const htmlText = node.rawText
+						.replaceAll(/\s+/iug, ' ')
+						.replaceAll(
+							new RegExp(`${unescapedOpenDelimiter}(.+?)${unescapedCloseDelimiter}`, 'igu'),
+							(_, matchValue) => this.#formatValue(this.#processInterpolation(matchValue, data))
+						);
+
+					const parsedElement = this.#parse(htmlText);
+
+					processedNodes[index] = parsedElement;
+				} else if (new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu').test(node.textContent)) {
+					node.textContent = node.textContent
+						.replaceAll(/\s+/iug, ' ')
+						.replaceAll(
+							new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu'),
+							(_, matchValue) => this.#formatValue(this.#processInterpolation(matchValue, data))
+						);
 				}
 			}
-		}
-	}
 
-	async #processTextNodes<T>(element?: HTMLElement, data?: T) {
-		if (!element) {
-			return Promise.resolve();
-		}
-
-		if (element.hasAttribute(this.#attributes.if) || element.hasAttribute(this.#attributes.ifNot) || element.hasAttribute(this.#attributes.loop)) {
-			return Promise.resolve();
-		}
-
-		Object.values(element.childNodes ?? {}).forEach((node, index) => {
-			if (node.nodeType !== NodeType.TEXT_NODE) {
-				return;
-			}
-
-			if (!node.textContent) {
-				return;
-			}
-
-			if (node.textContent.trim().length === 0) {
-				return;
-			}
-
-			if (node.textContent.toUpperCase().includes('<!DOCTYPE')) {
-				return;
-			}
-
-			const { openDelimiter, closeDelimiter, unescapedOpenDelimiter, unescapedCloseDelimiter } = this.#attributes;
-
-			if (new RegExp(`${unescapedOpenDelimiter}(.+?)${unescapedCloseDelimiter}`, 'igu').test(node.rawText)) {
-				const htmlText = node.rawText
-					.replaceAll(/\s+/iug, ' ')
-					.replaceAll(
-						new RegExp(`${unescapedOpenDelimiter}(.+?)${unescapedCloseDelimiter}`, 'igu'),
-						(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
-					);
-
-				const parsedElement = parse(htmlText, {
-					comment: true,
-					parseNoneClosedTags: true,
-					fixNestedATags: true,
-					voidTag: { closingSlash: true },
-					blockTextElements: {
-						script: true,
-						noscript: true,
-						style: true,
-						pre: true
-					}
-				});
-
-				element.childNodes[index] = parsedElement;
-			} else if (new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu').test(node.textContent)) {
-				node.textContent = node.textContent
-					.replaceAll(/\s+/iug, ' ')
-					.replaceAll(
-						new RegExp(`${openDelimiter}(.+?)${closeDelimiter}`, 'igu'),
-						(_, matchValue) => this.#formatValue(this.#getValue(matchValue, data))
-					);
-			}
-		});
-	}
-
-	async #processResponsiveImages(element: HTMLElement) {
-		if (element.tagName?.toLowerCase() !== 'img') {
-			return;
-		}
-
-		if (!element.hasAttribute(this.#attributes.skipImageOptimization) && element.getAttribute('src')) {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			const src = element.getAttribute('src')!;
-			const quality = element.getAttribute(this.#attributes.imageQuality);
-			const width = element.getAttribute('width');
-			const height = element.getAttribute('height');
-			const widths = element.getAttribute(this.#attributes.imageWidths)?.split(',').map((w) => Number.parseInt(w.trim()));
-			const densities = element.getAttribute(this.#attributes.imageDensities)?.split(',').map((w) => Number.parseInt(w.trim()));
-
-			const newSrc = (await this.#imageOptimizer.addImageToCache({
-				src,
-				quality: quality ? Number.parseInt(quality) : undefined,
-				width: width ? Number.parseInt(width) : undefined,
-				height: height ? Number.parseInt(height) : undefined,
-				widths,
-				densities
-			})) ?? src;
-
-			element.setAttribute('src', newSrc);
-
-			if (element.hasAttribute(this.#attributes.imageWidths)) {
-				const srcSet = this.#imageOptimizer.getImageSourceSet(newSrc);
-
-				element.setAttribute('srcset', srcSet);
+			if (Array.isArray(node)) {
+				processedNodes[index] = await this.#processNodes(node, data);
 			}
 		}
 
-		element.removeAttribute(this.#attributes.skipImageOptimization);
-		element.removeAttribute(this.#attributes.imageQuality);
-		element.removeAttribute(this.#attributes.imageDensities);
-		element.removeAttribute(this.#attributes.imageWidths);
-	}
-
-	async #processElement<T>(element: HTMLElement, data?: T) {
-		await this.#processIfAttribute(element, data);
-		await this.#processImport(element, data);
-		await this.#processLoop(element, data);
-		await this.#processChildElements(element, data);
-		await this.#processAttributes(element, data);
-		await this.#processResponsiveImages(element);
-		await this.#processTextNodes(element, data);
-		await this.#processComponent(element);
-		// TODO: cleanup bound attributes, any unresolved props and stuff
+		return processedNodes.flat().filter((node) => node !== undefined);
 	}
 
 	/**
@@ -734,20 +727,9 @@ export class TemplateRenderer {
 
 		const response = await env.Assets.fetch(new URL(template, this.#TEMPLATES_URL));
 		const text = await response.text();
-		const parsedDocument = parse(text, {
-			comment: true,
-			parseNoneClosedTags: true,
-			fixNestedATags: true,
-			voidTag: { closingSlash: true },
-			blockTextElements: {
-				script: true,
-				noscript: true,
-				style: true,
-				pre: true
-			}
-		});
+		const parsedDocument = this.#parse(text);
 
-		await this.#processElement(parsedDocument, data);
+		parsedDocument.childNodes = await this.#processNodes(parsedDocument.childNodes, data);
 
 		return parsedDocument.outerHTML;
 	}
@@ -755,20 +737,9 @@ export class TemplateRenderer {
 	async renderString<T>(text: string, data?: T) {
 		await this.#initTemplates();
 
-		const parsedDocument = parse(text, {
-			comment: true,
-			parseNoneClosedTags: true,
-			fixNestedATags: true,
-			voidTag: { closingSlash: true },
-			blockTextElements: {
-				script: true,
-				noscript: true,
-				style: true,
-				pre: true
-			}
-		});
+		const parsedDocument = this.#parse(text);
 
-		await this.#processElement(parsedDocument, data);
+		parsedDocument.childNodes = await this.#processNodes(parsedDocument.childNodes, data);
 
 		return parsedDocument.outerHTML;
 	}
