@@ -52,8 +52,7 @@
 						<meta itemprop="isAccessibleForFree" content="True" />
 					</div>
 
-					<!-- TODO: pass array down -->
-					<card-image @no-shadowdom src="{{project.image}}" alt="{{project.imageAlt}}" .themes="project.themeImages" slot="image"></card-image>
+					<card-image @no-shadowdom src="{{project.image}}" alt="{{project.imageAlt}}" :themes="project.themeImages" slot="image"></card-image>
 
 					<h2 slot="title">{{{project.title}}}</h2>
 

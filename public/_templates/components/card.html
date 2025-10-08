@@ -12,7 +12,7 @@
 
 	<header>
 		<hgroup class="card-title">
-			<draft-tag @if="draft">Draft</draft-tag>
+			<draft-tag @if="{{draft}}">Draft</draft-tag>
 			<a @if="url" href="{{url}}" itemprop="name"><slot name="title"></slot></a>
 			<span @if-not="url" itemprop="name"><slot name="title"></slot></span>
 
