@@ -1,8 +1,30 @@
-import type { FilterFunction } from '../TemplateRenderer.ts';
+/**
+ * A function to apply a transformation filter to a value.
+ * This will transform the value referenced by a data variable.
+ * E.g.: With the following HTML:
+ * ```html
+ * <div>
+ * 	{{data.dateValue | formatDate en-US, long-date, long-time}}
+ * </div>
+ * ```
+ *
+ * This will call the the following filter function with the following parameters:
+ * ```typescript
+ * formatDate(data.dateValue, 'en-US', 'long-date', 'long-time');
+ * ```
+ */
+export type FilterFunction = <T, R>(data: T, ...params: string[]) => Promise<R> | R;
 
 export class ValueHandler {
+	/**
+	 * List of filter functions to provide. This list will be added on top of existing filters.
+	 */
 	static filters: Record<string, FilterFunction> = {};
 
+	/**
+	 * Character to use for separating filters from values.
+	 * @default '|'
+	 */
 	static filterSeparator = '|';
 
 	static getValue<T>(path: string, data?: T, shouldReport = true) {

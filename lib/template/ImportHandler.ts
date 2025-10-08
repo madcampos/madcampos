@@ -1,12 +1,34 @@
 import { env } from 'cloudflare:workers';
-import type { TemplateRenderingAttributes } from '../TemplateRenderer.ts';
+import type { BaseElementHandler } from './BaseHandler.ts';
 import { ValueHandler } from './ValueHandler.ts';
 
-export class ImportHandler implements HTMLRewriterElementContentHandlers {
-	#attributes: TemplateRenderingAttributes;
+export class ImportHandler<T> implements HTMLRewriterElementContentHandlers, BaseElementHandler {
+	/**
+	 * The folder inside the assets folder where templates will live.
+	 *
+	 * Both components and page template paths are appended to this path when requesting the HTML files.
+	 */
+	static TEMPLATES_URL = new URL('_templates/', 'https://assets.local/');
 
-	constructor(attributes: TemplateRenderingAttributes) {
-		this.#attributes = attributes;
+	/**
+	 * The attribute for specifying an extra object when doing an HTML import.
+	 * When a `<meta rel="import" />` tag is found it will use the element's attributes as the data passed to the template to import.
+	 *
+	 * This attribute adds the property referenced as an extra property bag passed down to the template as data when rendering it.
+	 */
+	static importDataAttribute = '@data';
+
+	/**
+	 * The marker to use before an attribute to bind it to a variable, instead of a string.
+	 */
+	static bindingAttribute = ':';
+
+	static readonly selector = `meta[rel="import"]`;
+
+	#data: T;
+
+	constructor(data: T) {
+		this.#data = data;
 	}
 
 	async element(element: Element) {
@@ -19,30 +41,31 @@ export class ImportHandler implements HTMLRewriterElementContentHandlers {
 
 		let importData: Record<string, unknown> = {};
 
-		[...element.attributes].forEach((attr) => {
-			if (attr.name === this.#attributes.importData) {
+		([...element.attributes] as [string, string][]).forEach(([name, value]) => {
+			if (name === ImportHandler.importDataAttribute) {
 				return;
 			}
 
-			if (attr.name.startsWith(this.#attributes.attributeBinding)) {
-				importData[attr.name.replace(this.#attributes.attributeBinding, '')] = ValueHandler.processInterpolation(attr.value, data);
+			if (name.startsWith(ImportHandler.bindingAttribute)) {
+				importData[name.replace(ImportHandler.bindingAttribute, '')] = ValueHandler.processInterpolation(value, this.#data);
 
-				element.removeAttribute(attr.name);
+				element.removeAttribute(name);
 			} else {
-				importData[attr.name] = attr.value;
+				importData[name] = value;
 			}
 		});
 
-		if (element.hasAttribute(this.#attributes.importData)) {
+		if (element.hasAttribute(ImportHandler.importDataAttribute)) {
 			importData = {
 				...importData,
-				...ValueHandler.getValue(element.getAttribute(this.#attributes.importData) ?? '', data)
+				...ValueHandler.getValue(element.getAttribute(ImportHandler.importDataAttribute) ?? '', this.#data)
 			};
 		}
 
-		const response = await env.Assets.fetch(new URL(filePath, this.#TEMPLATES_URL));
+		const response = await env.Assets.fetch(new URL(filePath, ImportHandler.TEMPLATES_URL));
 		const text = await response.text();
 
-		element.innerHTML = text;
+		// TODO: parse html?
+		element.replace(text, { html: true });
 	}
 }

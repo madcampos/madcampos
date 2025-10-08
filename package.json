@@ -34,6 +34,7 @@
 		"@shikijs/transformers": "3.8.1",
 		"@std/front-matter": "npm:@jsr/std__front-matter@1.0.9",
 		"@std/path": "npm:@jsr/std__path@1.1.2",
+		"@types/node": "^24.7.0",
 		"@typescript-eslint/eslint-plugin": "^8.43.0",
 		"@typescript-eslint/parser": "^8.43.0",
 		"dprint": "0.50.1",
@@ -45,10 +46,8 @@
 		"marked": "^16.3.0",
 		"marked-footnote": "1.4.0",
 		"marked-shiki": "1.2.1",
-		"node-html-parser": "7.0.1",
 		"shiki": "3.8.1",
 		"typescript": "^5.9.2",
-		"urlpattern-polyfill": "10.1.0",
 		"web-features": "^2.48.0",
 		"wrangler": "^4.35.0",
 		"zod": "4.0.13"
