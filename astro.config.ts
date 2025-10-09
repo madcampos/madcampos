@@ -22,13 +22,12 @@ import remarkIns from 'remark-ins';
 import { baselineInfo, codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
 
 import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
-import wranglerConfig from './wrangler.json' with { type: 'json' };
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
 
 export default defineConfig({
 	output: 'static',
-	site: new URL(`https://${wranglerConfig.route.pattern}`).href,
+	site: 'https://madcampos.dev/',
 	base: '/',
 	trailingSlash: 'ignore',
 	devToolbar: { enabled: false },

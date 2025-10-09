@@ -17,7 +17,7 @@
 		"bootstrap": "npm run bootstrap:types && npm run bootstrap:astro",
 
 		"prestart:api": "bootstrap:types",
-		"start:api": "wrangler dev --https-cert-path certs/server.crt --https-key-path certs/server.key",
+		"start:api": "wrangler dev --env=local --https-cert-path certs/server.crt --https-key-path certs/server.key",
 
 		"prestart": "npm run bootstrap:astro",
 		"start": "astro dev --site=https://localhost:3000/",
@@ -28,7 +28,8 @@
 		"prepreview": "npm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
 
-		"deploy": "wrangler deploy --minify --env=production",
+		"predeploy": "npm run build",
+		"deploy": "wrangler deploy --minify --env=\"\"",
 
 		"format": "dprint fmt --staged",
 

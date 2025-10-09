@@ -18,23 +18,29 @@
 		"upstream_protocol": "https"
 	},
 	"assets": {
-		"directory": "./src",
+		"directory": "./dist",
 		"binding": "Assets",
-		"run_worker_first": true,
+		"run_worker_first": [
+			"/api/*",
+			"/tojs-styleguide",
+			"/tojs-styleguide/",
+			"/blog/2023/06/07/tabs-web-component",
+			"/blog/2023/06/07/tabs-web-component/"
+		],
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page"
 	},
-	"vars": { "NODE_ENV": "local" },
+	"vars": { "NODE_ENV": "production" },
 	"env": {
-		"production": {
+		"local": {
 			"assets": {
-				"directory": "./dist",
+				"directory": "./src",
 				"binding": "Assets",
-				"run_worker_first": false,
+				"run_worker_first": ["/api/*"],
 				"html_handling": "auto-trailing-slash",
 				"not_found_handling": "404-page"
 			},
-			"vars": { "NODE_ENV": "production" }
+			"vars": { "NODE_ENV": "local" }
 		}
 	}
 }
