@@ -1,5 +1,5 @@
 {
-	"include": ["astro.config.ts", "src/**/*", ".astro/**/*"],
+	"include": ["astro.config.ts", "src/**/*", ".astro/**/*", "server/index.ts"],
 	"exclude": ["node_modules/**/*", "dist/**/*", "src/content/.obsidian/**/*"],
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
@@ -17,7 +17,7 @@
 		"incremental": true,
 		"isolatedModules": true,
 		"isolatedDeclarations": false,
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"lib": ["ESNext"],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"newLine": "LF",
@@ -41,6 +41,7 @@
 		"tsBuildInfoFile": "dist/.tsbuildinfo",
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
-		"verbatimModuleSyntax": true
+		"verbatimModuleSyntax": true,
+		"types": []
 	}
 }
