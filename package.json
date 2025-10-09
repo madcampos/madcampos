@@ -28,7 +28,7 @@
 		"prepreview": "npm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
 
-		"deploy": "wrangler deploy --minify --env production",
+		"deploy": "wrangler deploy --minify --env=production",
 
 		"format": "dprint fmt --staged",
 
