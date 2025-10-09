@@ -1,8 +1,6 @@
 ---
 title: "Back to basics: What's in your head?"
 summary: The content for the page headers for the "Back to Basics" project.
-image:
-imageAlt:
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
@@ -159,9 +157,7 @@ Following that the text is wrapped in an `<hgroup>` element to add semantics tha
 One of the properties used here is the `backdrop-filter`, it allows for some image processing filters to apply to whatever is behind the element, in contrast with the `filter` property that applies the filter to the element _itself_.
 
 ```css
-hgroup {
-	backdrop-filter: blur(0.1rem);
-}
+hgroup { backdrop-filter: blur(0.1rem); }
 ```
 
 And again, it is _that_ simple.

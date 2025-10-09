@@ -1,8 +1,6 @@
 ---
 title: "Back to basics: HTML structure"
-summary: How the HTML is structured for the "Back to Basics" ptoject.
-image:
-imageAlt:
+summary: How the HTML is structured for the "Back to Basics" project.
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
@@ -11,6 +9,7 @@ tags:
   - html
   - web
 ---
+
 First things first... As for this project there will not have any magic way to combine snippets of HTML into a full page and avoid repetition I would need to copy and paste a lot of code. Every HTML file is a full page, with all it needs to be ran by the browser. There is no magic templating engine or components here.
 
 So as an strategy to keep myself sane and avoid editing the same things over and over again _(foreshadowing)_, I decided to work on the pages as kind of a [matryoshka doll](https://en.wikipedia.org/wiki/Matryoshka_doll) doing things in layers.
@@ -19,13 +18,14 @@ So as an strategy to keep myself sane and avoid editing the same things over and
 
 From my previous "research"[^1] usually restaurant websites have a very similar and bland structure. It is familiar, so easy to understand and use.
 The structure, from the top of the page to the bottom is:
+
 1. Navigation menu
 2. Hero image/video for the page
 3. Big main content section
 4. Footer with 3 parts
-	1. Address information
-	2. Reservation call to action
-	3. Mini site map with all the site links
+   1. Address information
+   2. Reservation call to action
+   3. Mini site map with all the site links
 
 ## Skeleton of a page
 
@@ -75,6 +75,7 @@ If you already know about the basic HTML structure, like the `html`, `head`, and
 ### The `html` element
 
 Due to legacy reasons, we need the first line:
+
 ```html
 <!DOCTYPE html>
 ```
@@ -84,8 +85,9 @@ At least it is now short and doesn't need the [weird shenanigans of yore](https:
 Then of course, the `<html>` element itself with a `lang` tag to identify the language of the document. Not having this attribute is an [accessibility failure](https://www.w3.org/WAI/WCAG21/Understanding/language-of-page), besides, it gets added automatically by the [emmet shortcut in VSCode](https://code.visualstudio.com/docs/languages/emmet) for a basic HTML structure. Neat!
 
 **#ProTip**:
+
 > Learn and understand your tools kids, they will make you move fast in a correct way.
-> 
+>
 > Different from vibe coding which will make you move fast but more like a drunken intern with no self-awareness, so very rarely will go in the right direction.
 
 ### The `head` element
@@ -95,15 +97,17 @@ Onwards to the `<head>` element we have just a few things, the first `<meta>` ta
 It [**has to be**](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta#:~:text=%3Cmeta%3E%20elements%20which%20declare%20a%20character%20encoding%20must%20be%20located%20entirely%20within%20the%20first%201024%20bytes%20of%20the%20document.) the first thing after opening the head element as it ensures the page will be interpreted as UTF8 and not produce gibberish or corrupt our beautiful text. This will trigger the HTML parser to reinterpret what it already have as UTF8 and continue interpreting everything else as UTF8 as well, so having it as the first thing avoids errors.
 
 **Side note**:
+
 > This tag exists mostly for, say it with me: ✨ LEGACY REASONS ✨. In the times of yore, browsers would interpret your HTML using whatever character encoding the computer would use.
 >
 > For example: a computer in the Russia talking to a computer in Japan would only say gibberish because the two would not have the same character encoding.
 >
 > To solve this issue, the HTML specification before version 5 allowed the developer to specify the encoding used. On version 5 however everyone is required to use UTF8, improving compatibility and simplifying parsers.
-> 
+>
 > A bonus to all of this: we can _mostly_ ignore entity encodings now. [^2]
 
 The second `<meta>` tag however tells browsers to render correctly on mobile. This contents are the bare minimum value for it to work well and not cause issues:
+
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
@@ -115,26 +119,30 @@ The problem at the time was that regular HTML pages were made for desktop enviro
 To solve this disconnect between the iPhone and desktop pages, Safari on iOS introduced this meta tag. It told the browser to render the page in a "mobile first" way. The Android and Windows Phone browsers adopted the tag and that's why we have it today.
 
 **Fun fact**:
+
 > If you select the "view in desktop mode" option in your phone's browser, that is sorta "disabling" that tag.
 
 **Fun-er fact**:
+
 > You can do a couple more things with this tag. Most of the options today are ignored by browsers but the ones still supported can do some [quite interesting things](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport#interactive-widget).
 
 Last thing on the `<head>` is the `<title>` tag. This is the text that shows on the browser tab. That's it. 🤷‍♂️
 
 **Fun fact**:
+
 > Browsers are really helpful and try to interpret your page the best they can, like, they are 10/10 GOAT no cap.
-> 
+>
 > That means they will really, I mean _really_ put in the effort to interpret your broken HTML. One of the very cool ways to do it is to magically add the `<head>` and `<body>` tags for you if they are missing.
-> 
+>
 > They do it by looking for the `<title>` tag, so if you write a page like:
+>
 > ```html
 > <title>This is awful</title>
 > <p>But works!</p>
 > ```
-> 
+>
 > The browser will correctly interpret that, everything before the `<title>` will be added to the auto-generated `<head>`, and everything after will be added to the auto generated `<body>`.
-> 
+>
 > Neat!
 
 As a final note for this section: for now those are the only things added to the `<head>`. Another time we will revisit the information here to add things for SEO, social media previews and more metadata. But this is enough for now to make the website work nicely on both desktop and mobile.

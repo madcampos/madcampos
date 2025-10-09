@@ -1,8 +1,6 @@
 ---
 title: "Back to basics: It's all about the content"
 summary: The main content for the "Back to Basics" project.
-image:
-imageAlt:
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:

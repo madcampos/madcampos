@@ -1,8 +1,6 @@
 ---
 title: "Back to basics: Intro"
 summary: An introduction to the "back to basics" post series.
-image:
-imageAlt:
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
@@ -13,6 +11,7 @@ tags:
   - JavaScript
   - web
 ---
+
 I was invited to give a talk called "Battle of Frameworks", although I _use_ tools like react and angular for work, I am not personally _found_ of those tools. So I decided to build a demo for my part with pure vanilla, gluten-free, non GMO, vegan, organic, home grown HTML, CSS, and javascript.
 
 Don't get me wrong, those frameworks and tools get the work done, help pay the bills and usually I have no problems with them. Besides, trying to build applications with the complexity I work day to day[^1] _without_ the help of those tools would be an herculean task that I'm not willing to take, nor are my employers willing to pay for.
@@ -52,6 +51,7 @@ I wanted to move away from the stereotypical red, white, and green. So I did som
 _Image from here: https://ca.pinterest.com/pin/298433912777986912/_
 
 So that was my choice for colour palette:
+
 - Royal blue as the primary colour.
 - Dark golden yellow for the secondary colour.
 - Beige for the main background.
@@ -71,6 +71,7 @@ I think AI generates images have a _stale_ and _plastic_ feel to them. As fantas
 ### The pages
 
 After some research[^2] I decided to go with the following general list of pages:
+
 - Home page
 - About page
 - Reservation page (with a form)
@@ -82,6 +83,7 @@ After some research[^2] I decided to go with the following general list of pages
 To make the demo more interesting I also wanted to add some features to make the website nicer. Call it _progressive enhancement_... The website works totally fine without those features, but having them makes the experience nicer.
 
 The features are:
+
 - Form validation for the reservation page
 - The website needs to be fast and snappy.
 - Some SEO to make it show up on Google and social media nicely.
