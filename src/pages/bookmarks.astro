@@ -1,8 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.ts';
 
 const ICON_MAP = {
@@ -106,6 +112,12 @@ const links: BookmarkSection[] = [
 				title: 'WCAG in Plain English',
 				description: 'The WCAG but in plain english.',
 				type: 'reference'
+			},
+			{
+				url: 'https://cdpn.io/pen/debug/ByoMebv',
+				title: 'Screen Reader HTML Support – Lookup',
+				description: 'A reference of how screen readers support each HTML element and some common attribute presence/combos.',
+				type: 'reference'
 			}
 		]
 	},
@@ -136,6 +148,30 @@ const links: BookmarkSection[] = [
 				title: 'Custom Element Best Practices',
 				description: 'A set of best practices for building web components with explanations as to _why_ to follow them.',
 				type: 'guidelines'
+			},
+			{
+				url: 'https://height.app/blog/guide-to-build-context-menus',
+				title: "Building like it's 1984: A comprehensive guide to creating intuitive context menus",
+				description: 'A guide on the considerations and how to build context menus.',
+				type: 'reference'
+			},
+			{
+				url: 'https://height.app/blog/scrollbars-in-web-applications',
+				title: "Building like it's 1984: Scrollbars in web applications",
+				description: 'A guide on the considerations and how to build custom scrollbars.',
+				type: 'reference'
+			},
+			{
+				url: 'https://reasonunderpressure.com/blog/posts/your-images-are-probably-oversized',
+				title: 'Your Images Are (Probably) Oversized',
+				description: 'An article on image optimization and how to make images better sized.',
+				type: 'article'
+			},
+			{
+				url: 'https://justinfagnani.com/2025/06/30/what-should-a-dom-templating-api-look-like',
+				title: 'What should a native DOM templating API look like?',
+				description: 'An opinion piece on how HTML templating should be implemented natively.',
+				type: 'article'
 			}
 		]
 	},
@@ -347,6 +383,12 @@ const links: BookmarkSection[] = [
 				title: "'Make invalid states unrepresentable' considered harmful",
 				description: 'Why we should make our systems flexible and design thinking about rules that will be broken.',
 				type: 'article'
+			},
+			{
+				url: 'https://emschwartz.me/subtleties-of-sqlite-indexes/',
+				title: 'Subtleties of SQLite Indexes',
+				description: 'Details about SQL indexes and how to optimize them for the best outcome.',
+				type: 'article'
 			}
 		]
 	},
@@ -427,43 +469,109 @@ const links: BookmarkSection[] = [
 				type: 'article'
 			}
 		]
+	},
+	{
+		title: 'Lego',
+		description: 'Websites with instructions, databases on sets and parts, and other related things.',
+		links: [
+			{
+				url: 'https://www.lego.com/en-us/service/building-instructions',
+				title: 'Lego Building Instructions',
+				description: 'Official website for building instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.bricklink.com/',
+				title: 'Bricklink',
+				description: 'Database and marketplace for Lego parts.',
+				type: 'website'
+			},
+			{
+				url: 'https://rebrickable.com/',
+				title: 'Rebrickable',
+				description: 'Database of MoCs, instructions, and sets.',
+				type: 'website'
+			},
+			{
+				url: 'https://brickset.com/',
+				title: 'Brickset',
+				description: 'Database of sets, specially useful for older sets.',
+				type: 'website'
+			},
+			{
+				url: 'https://letsbuilditagain.com/index.php',
+				title: "Let's Build it Again",
+				description: 'Database of old instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://instructabrick.com/',
+				title: 'Instruct-a-brick',
+				description: 'Database of old instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://brickinstructions.com/',
+				title: 'Brick Instructions',
+				description: 'Database of old instructions.',
+				type: 'website'
+			}
+		]
 	}
 ];
 ---
-
-<InternalPageLayout
-	htmlTitle={['Bookmarks', ...GLOBALS.title]}
-	title="Bookmarks"
-	description="List of resources I reference often."
-	url="/bookmarks/"
-	tags={['bookmarks', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Bookmarks"
-		shortSubtitle="BM."
-		url="/bookmarks/"
-		urlTitle="Bookmark page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Bookmarks | Marco Campos"
+		description="List of resources I reference often."
+		url={Astro.url.href}
 	/>
-	<Fragment slot="header">Bookmarks</Fragment>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Bookmarks"
+						shortSubtitle="BM."
+						url="/bookmarks/"
+						title="Bookmark page"
+					/>
+					<h1>Bookmarks</h1>
+				</div>
+			</header>
 
-	{
-		links.map((section) => (
-			<h2>{section.title}</h2>
-			<p>{section.description}</p>
-			<dl>
-				{
-					section.links.map((bookmark) => (
-						<dt class="h-entry">
-							<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
-							<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
-						</dt>
-						<dd>
-							<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
-						</dd>
-					))
-				}
-			</dl>
-		))
-	}
-</InternalPageLayout>
+			{
+				links.map((section) => (
+					<hgroup>
+						<h2>{section.title}</h2>
+						<p>{section.description}</p>
+					</hgroup>
+					<dl>
+						{
+							section.links.map((bookmark) => (
+								<dt class="h-entry">
+									<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
+									<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
+								</dt>
+								<dd>
+									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
+								</dd>
+							))
+						}
+					</dl>
+				))
+			}
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

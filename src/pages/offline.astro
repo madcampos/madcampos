@@ -1,39 +1,60 @@
 ---
 import '../assets/css/pages/404.css';
-import GlitchLogo from '../components/GlitchLogo/GlitchLogo.astro';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
+import Logo from '../components/Logo/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import { OFFLINE } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 ---
-<BaseLayout
-	htmlTitle={OFFLINE.title}
-	title={OFFLINE.titleString}
-	url={OFFLINE.url}
-	description={OFFLINE.description}
-	tags={OFFLINE.tags}
->
-	<SkipToContent slot="header" />
-	<header slot="header">
-		<SiteNav />
-		<div>
-			<GlitchLogo />
-		</div>
-		<h1>404 - Not found</h1>
-	</header>
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Offline | Marco Campos"
+		description="Offline Page"
+		url={Astro.url.href}
+	/>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Offline"
+						shortSubtitle="Off."
+						url="/"
+						title="Home Page"
+						micro
+						glitch
+					/>
+					<h1>Dead (or offline) end</h1>
+				</div>
+			</header>
 
-	<div id="contents">
-		<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
+			<div id="contents">
+				<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
 
-		<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
-		<p>If you are completely offline, you won't be able to see or use:</p>
-		<ul>
-			<li>Images from pages not visited before.</li>
-			<li>Some dynamic content, like adding comments.</li>
-		</ul>
+				<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
+				<p>If you are completely offline, you won't be able to see or use:</p>
+				<ul>
+					<li>Images from pages not visited before.</li>
+					<li>Some dynamic content, like adding comments.</li>
+				</ul>
 
-		<p>
-			<a href="/">Go back home</a>
-		</p>
-	</div>
-</BaseLayout>
+				<p>
+					<a href="/">Go back home</a>
+				</p>
+			</div>
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

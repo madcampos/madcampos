@@ -1,9 +1,6 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
-import Logo from '../../../../components/Logo/Logo.astro';
-import { BLOG } from '../../../../constants.js';
-import BlogPostsLayout from '../../../../layouts/BlogPosts.astro';
-import { join } from '../../../../utils/path.js';
+import BlogPosts from '../../../../components/BlogPosts.astro';
 import { listPostsByYearAndMonth, MAX_POSTS_PER_PAGE } from '../../../../utils/post.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -27,7 +24,6 @@ export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction
 
 const {
 	data: posts,
-	url,
 	currentPage,
 	lastPage,
 	start,
@@ -38,28 +34,14 @@ const {
 const { year, month } = Astro.params;
 const formatter = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' });
 ---
-<BlogPostsLayout
+<BlogPosts
+	title={`Posts from: "${formatter.format(new Date(`${year}-${month}-01T00:00:00`))}"`}
+	baseUrl={`/blog/${year}/${month}/`}
 	{posts}
-	title={`Posts from ${formatter.format(new Date(`${year}-${month}-01T00:00:00`))}`}
-	currentUrl={url.current}
 	{currentPage}
 	{lastPage}
-	prevUrl={url.prev}
-	nextUrl={url.next}
-	baseUrl={join([BLOG.url, year, month])}
 	{start}
 	{end}
 	{total}
 	{size}
->
-	<Logo
-		subtitle="blog"
-		shortSubtitle="Blog"
-		url={BLOG.url}
-		urlTitle="Blog"
-		slot="logo"
-	/>
-	<Fragment slot="header">
-		{`Posts from ${formatter.format(new Date(`${year}-${month}-01T00:00:00`))}`}
-	</Fragment>
-</BlogPostsLayout>
+/>

@@ -1,4 +1,5 @@
 @layer components {
+	/* TODO: move to web component */
 	.author-card-wrapper {
 		container-name: author-card;
 		container-type: inline-size;

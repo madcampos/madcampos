@@ -1,14 +1,17 @@
 ---
 import '../assets/css/pages/sitemap.css';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
-import { BLOG, GLOBALS, TALKS } from '../constants.js';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.js';
-import { join } from '../utils/path.js';
 import { listPostsByYearAndMonth } from '../utils/post.js';
 import { listAllTalks } from '../utils/talks.js';
-
-const baseUrl = join([Astro.site?.toString() ?? '', GLOBALS.url]);
 
 const monthMap: Record<string, string> = {
 	'01': 'January',
@@ -34,139 +37,153 @@ interface PageMetadata {
 }
 
 const aboutPages: PageMetadata[] = [
-	{ title: 'Home', url: baseUrl, description: "The website's home page." },
-	{ title: 'About', url: join([baseUrl, 'about']), description: 'More information about me.' },
-	{ title: 'Accessibility Statement', url: join([baseUrl, 'accessibility']), description: 'Statement about accessibility on the website.' },
-	{ title: 'AI Statement', url: join([baseUrl, 'ai']), description: 'Statement about the use of AI on the webstie and AI derivative work.' },
-	{ title: 'Changelog', url: join([baseUrl, 'changelog']), description: 'List of changes for the website.', wip: true },
-	{ title: 'License & Disclaimer', url: join([baseUrl, 'license']), description: "Legal jargon for the license of this website's content." },
-	{ title: 'Offline Page', url: join([baseUrl, 'offline']), description: 'The page that shows when you go offline and the Service Worker is working properly.' },
-	{ title: 'Sitemap', url: join([baseUrl, 'sitemap']), description: 'This page.' },
-	{ title: '404', url: join([baseUrl, '404']), description: 'The error page that you get when something is not found.' }
+	{ title: 'Home', url: '/', description: "The website's home page." },
+	{ title: 'About', url: '/about/', description: 'More information about me.' },
+	{ title: 'Accessibility Statement', url: '/accessibility/', description: 'Statement about accessibility on the website.' },
+	{ title: 'AI Statement', url: '/ai/', description: 'Statement about the use of AI on the webstie and AI derivative work.' },
+	{ title: 'Changelog', url: '/changelog/', description: 'List of changes for the website.', wip: true },
+	{ title: 'License & Disclaimer', url: '/license/', description: "Legal jargon for the license of this website's content." },
+	{ title: 'Offline Page', url: '/offline/', description: 'The page that shows when you go offline and the Service Worker is working properly.' },
+	{ title: 'Sitemap', url: '/sitemap/', description: 'This page.' },
+	{ title: '404', url: '/404/', description: 'The error page that you get when something is not found.' }
 ];
 
 const coolPages: PageMetadata[] = [
-	{ title: 'Bookmarks', url: join([baseUrl, 'bookmarks']), description: 'A list of bookmars that I send people to.', wip: true },
-	{ title: 'Food', url: join([baseUrl, 'food']), description: 'Reference for food orders at different places. 😉' },
-	{ title: 'Now', url: join([baseUrl, 'now']), description: "What I'm doing right now.", wip: true },
-	{ title: 'Projects', url: join([baseUrl, 'projects']), description: "A list of personal projects I'm working on.", wip: true },
+	{ title: 'Bookmarks', url: '/bookmarks/', description: 'A list of bookmars that I send people to.', wip: true },
+	{ title: 'Food', url: '/food/', description: 'Reference for food orders at different places. 😉' },
+	{ title: 'Now', url: '/now/', description: "What I'm doing right now.", wip: true },
+	{ title: 'Projects', url: '/projects/', description: "A list of personal projects I'm working on.", wip: true },
 	{
 		title: 'Styleguide',
-		url: join([baseUrl, 'styleguide']),
+		url: '/styleguide/',
 		description: "A reference for the website style, all it's components and different parts of the CSS.",
 		wip: true
 	},
-	{ title: 'Pyramid Scheme', url: join([baseUrl, 'triangle']), description: 'Join this cool club, you will not regret it!', hidden: true }
+	{ title: 'Pyramid Scheme', url: '/triangle/', description: 'Join this cool club, you will not regret it!', hidden: true }
 ];
 
-const talksUrl = join([baseUrl, TALKS.url]);
 const talkPages: PageMetadata[] = (await listAllTalks()).map(({ id, data }) => ({
 	title: data.title,
-	url: join([talksUrl, id]),
+	url: `/talks/${id}/`,
 	description: data.summary
 }));
 
-const blogUrl = join([baseUrl, BLOG.url]);
 const blogPages = await listPostsByYearAndMonth();
 ---
-
-<InternalPageLayout
-	htmlTitle={['Site Map', ...GLOBALS.title]}
-	title="Site Map"
-	description="A list of all pages on the website."
-	url="/sitemap/"
-	tags={['site map', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Site Map"
-		shortSubtitle="Map"
-		url="/sitemap/"
-		urlTitle="Site Map Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Site Map | Marco Campos"
+		description="A list of all pages on the website."
+		url={Astro.url.href}
 	/>
-	<Fragment slot="header">Site Map</Fragment>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Site Map"
+						shortSubtitle="Map"
+						url="/sitemap/"
+						title="Site Map Page"
+					/>
+					<h1>Site Map</h1>
+				</div>
+			</header>
+		</main>
 
-	<h2>About Pages</h2>
-	<dl>
-		{
-			aboutPages.map(({ url, title, description, hidden, wip }) => (
-				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
-					<a href={url}>
-						<Fragment set:html={inlineMarkdownRender(title)} />
-					</a>
-				</dt>
-				<dd>
-					<Fragment set:html={inlineMarkdownRender(description)} />
-				</dd>
-			))
-		}
-	</dl>
-	<h2>Cool Pages</h2>
-	<dl>
-		{
-			coolPages.map(({ url, title, description, hidden, wip }) => (
-				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
-					<a href={url}>
-						<Fragment set:html={inlineMarkdownRender(title)} />
-					</a>
-				</dt>
-				<dd>
-					<Fragment set:html={inlineMarkdownRender(description)} />
-				</dd>
-			))
-		}
-	</dl>
-	<h2>Talks Pages</h2>
-	<dl>
-		<dt><a href={talksUrl}>Talks Home</a></dt>
-		<dd>A list of talks that I've presented before.</dd>
-		{
-			talkPages.map(({ url, title, description, hidden, wip }) => (
-				<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
-					<a href={url}>
-						<Fragment set:html={inlineMarkdownRender(title)} />
-					</a>
-				</dt>
-				<dd>
-					<Fragment set:html={inlineMarkdownRender(description)} />
-				</dd>
-			))
-		}
-	</dl>
-	<h2>Blog</h2>
-	<dl>
-		<dt><a href={blogUrl}>Blog Home</a></dt>
-		<dd>The blog main page.</dd>
+		<h2>About Pages</h2>
+		<dl>
+			{
+				aboutPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={inlineMarkdownRender(title)} />
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={inlineMarkdownRender(description)} />
+					</dd>
+				))
+			}
+		</dl>
+		<h2>Cool Pages</h2>
+		<dl>
+			{
+				coolPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={inlineMarkdownRender(title)} />
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={inlineMarkdownRender(description)} />
+					</dd>
+				))
+			}
+		</dl>
+		<h2>Talks Pages</h2>
+		<dl>
+			<dt><a href="/talks/">Talks Home</a></dt>
+			<dd>A list of talks that I've presented before.</dd>
+			{
+				talkPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={inlineMarkdownRender(title)} />
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={inlineMarkdownRender(description)} />
+					</dd>
+				))
+			}
+		</dl>
+		<h2>Blog</h2>
+		<dl>
+			<dt><a href="/blog/">Blog Home</a></dt>
+			<dd>The blog main page.</dd>
 
-		{
-			blogPages.entries().map(([year, months]) => (
-				<dt><a href={join([blogUrl, year])}>{year}</a></dt>
-				<dd>
-					<dl>
-						{
-							months.entries().map(([month, posts]) => (
-								<dt><a href={join([blogUrl, year, month])}>{monthMap[month]}</a></dt>
-								<dd>
-									<dl>
-										{
-											posts.map(({ url, data: { title, summary, draft } }) => (
-												<dt data-wip={draft || null}>
-													<a href={join([blogUrl, url])}>
-														<Fragment set:html={inlineMarkdownRender(title)} />
-													</a>
-												</dt>
-												<dd>
-													<Fragment set:html={inlineMarkdownRender(summary)} />
-												</dd>
-											))
-										}
-									</dl>
-								</dd>
-							))
-						}
-					</dl>
-				</dd>
-			))
-		}
-	</dl>
-</InternalPageLayout>
+			{
+				blogPages.entries().map(([year, months]) => (
+					<dt><a href={`/blog/${year}/`}>{year}</a></dt>
+					<dd>
+						<dl>
+							{
+								months.entries().map(([month, posts]) => (
+									<dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>
+									<dd>
+										<dl>
+											{
+												posts.map(({ url, data: { title, summary, draft } }) => (
+													<dt data-wip={draft || null}>
+														<a href={`/blog/${url}/`}>
+															<Fragment set:html={inlineMarkdownRender(title)} />
+														</a>
+													</dt>
+													<dd>
+														<Fragment set:html={inlineMarkdownRender(summary)} />
+													</dd>
+												))
+											}
+										</dl>
+									</dd>
+								))
+							}
+						</dl>
+					</dd>
+				))
+			}
+		</dl>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

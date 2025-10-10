@@ -1,9 +1,6 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
-import Logo from '../../../../components/Logo/Logo.astro';
-import { BLOG, BLOG_TAGS } from '../../../../constants.js';
-import BlogPostsLayout from '../../../../layouts/BlogPosts.astro';
-import { join } from '../../../../utils/path.js';
+import BlogPosts from '../../../../components/BlogPosts.astro';
 import { listPostsByTag, MAX_POSTS_PER_PAGE } from '../../../../utils/post';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -22,7 +19,6 @@ export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction
 
 const {
 	data: posts,
-	url,
 	currentPage,
 	lastPage,
 	start,
@@ -32,28 +28,14 @@ const {
 } = Astro.props.page;
 const { tag } = Astro.params;
 ---
-<BlogPostsLayout
+<BlogPosts
+	title={`Posts tagged with: "${tag}"`}
+	baseUrl={`/blog/tags/${tag}/`}
 	{posts}
-	title={`Posts tagged with: "${tag ?? ''}"`}
-	currentUrl={url.current}
 	{currentPage}
 	{lastPage}
-	prevUrl={url.prev}
-	nextUrl={url.next}
-	baseUrl={join([BLOG_TAGS.url, tag ?? ''])}
 	{start}
 	{end}
 	{total}
 	{size}
->
-	<Logo
-		subtitle="Blog"
-		shortSubtitle="Blog"
-		url={BLOG.url}
-		urlTitle="Blog"
-		slot="logo"
-	/>
-	<Fragment slot="header">
-		{`Posts tagged with: "${tag ?? ''}"`}
-	</Fragment>
-</BlogPostsLayout>
+/>

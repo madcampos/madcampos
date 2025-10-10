@@ -1,6 +1,5 @@
 import { glob } from 'astro/loaders';
 import { defineCollection } from 'astro:content';
-import { authorsSchema } from './schemas/authors.ts';
 import { blogSchema } from './schemas/blog.ts';
 import { changelogSchema } from './schemas/changelog.ts';
 import { projectsSchema } from './schemas/projects.ts';
@@ -30,15 +29,9 @@ const talksCollection = defineCollection({
 	schema: talksSchema
 });
 
-const authorsCollection = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/authors' }),
-	schema: authorsSchema
-});
-
 export const collections = {
 	blog: blogCollection,
 	changelog: changelogCollection,
 	projects: projectsCollection,
-	talks: talksCollection,
-	authors: authorsCollection
+	talks: talksCollection
 };

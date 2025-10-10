@@ -1,7 +1,6 @@
 ---
 import './styles.css';
 import { Icon } from 'astro-icon/components';
-import { join } from '../../utils/path.js';
 
 interface Props {
 	baseUrl: string;
@@ -33,11 +32,11 @@ const lastPageInNav = Math.min(lastPage, currentPage + TRIM_PAGE_NUMBER);
 
 const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i) => {
 	const currentPageNumber = firstPageInNav + i;
-	const href = currentPageNumber === 1 ? '' : currentPageNumber.toString();
+	const href = currentPageNumber === 1 ? '' : `${currentPageNumber.toString()}/`;
 
 	return {
 		label: currentPageNumber.toString(),
-		url: join([baseUrl, href]),
+		url: `${baseUrl}${href}`,
 		isCurrentPage: currentPageNumber === currentPage
 	};
 });
@@ -45,27 +44,27 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 <nav aria-label="Pagination">
 	<div id="pagination">
 		<a
-			href={join([baseUrl])}
+			href={baseUrl}
 			id="first-page"
 		>
 			<Icon name="uil:angle-double-left" title="" role="presentation" />
-			<span class="pagination-link-text">First<span class="visually-hidden"> page</span></span>
+			<span class="pagination-link-text">First<sr-only> page</sr-only></span>
 		</a>
 
 		<a
-			href={prevUrl ? join([prevUrl]) : null}
+			href={prevUrl ? prevUrl : null}
 			aria-disabled={!prevUrl ? 'true' : null}
 			id="prev-page"
 		>
 			<Icon name="uil:angle-left" title="" role="presentation" />
-			<span class="pagination-link-text">Previous<span class="visually-hidden"> page</span></span>
+			<span class="pagination-link-text">Previous<sr-only> page</sr-only></span>
 		</a>
 
 		<ol>
 			{
 				firstPageInNav > 1 && (
 					<>
-						<li><a href={join([baseUrl, '/'])}><span class="visually-hidden">Page </span>1</a></li>
+						<li><a href={baseUrl}><sr-only>Page </sr-only>1</a></li>
 						<li><span>…</span></li>
 					</>
 				)
@@ -77,7 +76,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 						<a
 							href={`${url}${isCurrentPage ? '#' : ''}`}
 							aria-current={isCurrentPage ? 'page' : null}
-						><span class="visually-hidden">Page </span>{label}</a>
+						><sr-only>Page </span>{label}</a>
 					</li>
 				))
 			}
@@ -86,26 +85,26 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 				lastPageInNav < lastPage && (
 					<>
 						<li><span>…</span></li>
-						<li><a href={join([baseUrl, lastPage.toString()])}><span class="visually-hidden">Page </span>{lastPage}</a></li>
+						<li><a href={`${baseUrl}${lastPage}/`}><sr-only>Page </sr-only>{lastPage}</a></li>
 					</>
 				)
 			}
 		</ol>
 
 		<a
-			href={nextUrl ? join([nextUrl]) : null}
+			href={nextUrl ? nextUrl : null}
 			aria-disabled={!nextUrl ? 'true' : null}
 			id="next-page"
 		>
-			<span class="pagination-link-text">Next<span class="visually-hidden"> page</span></span>
+			<span class="pagination-link-text">Next<sr-only> page</sr-only></span>
 			<Icon name="uil:angle-right" title="" role="presentation" />
 		</a>
 
 		<a
-			href={join([baseUrl, lastPage.toString()])}
+			href={`${baseUrl}${lastPage}/`}
 			id="last-page"
 		>
-			<span class="pagination-link-text">Last<span class="visually-hidden"> page</span></span>
+			<span class="pagination-link-text">Last<sr-only> page</sr-only></span>
 			<Icon name="uil:angle-double-right" title="" role="presentation" />
 		</a>
 	</div>

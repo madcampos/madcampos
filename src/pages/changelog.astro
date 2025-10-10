@@ -1,10 +1,15 @@
 ---
 import '../assets/css/pages/changelogs.css';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
-import { inlineMarkdownRender } from '../utils/markdown.ts';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 const changelogs = await Promise.all(await listAllChangelogs());
@@ -19,38 +24,55 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 	};
 }));
 ---
-
-<InternalPageLayout
-	htmlTitle={['Changelog', ...GLOBALS.title]}
-	title="Changelog"
-	description="List of changes in diferent versions of the website."
-	url="/changelog/"
-	tags={['changelog', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Changelog"
-		shortSubtitle="Log"
-		url="/changelog/"
-		urlTitle="Changelog page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Changelog | Marco Campos"
+		description="List of changes in diferent versions of the website."
+		url={Astro.url.href}
 	/>
-	<Fragment slot="header">Changelog</Fragment>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Changelog"
+						shortSubtitle="Log"
+						url="/changelog/"
+						title="Changelog page"
+					/>
+					<h1>Changelog</h1>
+				</div>
+			</header>
 
-	{
-		renderedChangelogs.map(({ date, title, draft, Content }) => (
-			<details>
-				<summary>
-					<header>
-						<h2>
-							{draft && <span class="changelog-draft-tag">Draft</span>} <Fragment slot="title" set:html={inlineMarkdownRender(title)} />
-						</h2>
-						<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
-					</header>
-				</summary>
-				<article>
-					<Content />
-				</article>
-			</details>
-		))
-	}
-</InternalPageLayout>
+			{
+				renderedChangelogs.map(({ date, title, draft, Content }) => (
+					<details>
+						<summary>
+							<header>
+								<h2>
+									{draft && <draft-tag>Draft</draft-tag>}
+									<Fragment set:html={title} />
+								</h2>
+								<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
+							</header>
+						</summary>
+						<article>
+							<Content />
+						</article>
+					</details>
+				))
+			}
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

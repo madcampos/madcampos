@@ -1,121 +1,127 @@
 ---
 import '../../assets/css/pages/talks.css';
 import { Icon } from 'astro-icon/components';
-import talksSocialImage from '../../assets/images/social/social-talks.png';
 import Card from '../../components/Card/Card.astro';
-import CardImage from '../../components/CardImage/CardImage.astro';
+import CSSNakedDay from '../../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../../components/Effects/Effects.astro';
+import HtmlHead from '../../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../../components/IabEscape/IabEscape.astro';
 import Logo from '../../components/Logo/Logo.astro';
-import { TALKS } from '../../constants.js';
-import InternalPageLayout from '../../layouts/InternalPage.astro';
-import { inlineMarkdownRender } from '../../utils/markdown.js';
-import { join } from '../../utils/path.js';
+import OldStyleButtons from '../../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../../components/Webrings/Webrings.astro';
 import { listAllTalks } from '../../utils/talks.js';
 
 const talks = await listAllTalks();
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
 ---
-
-<InternalPageLayout
-	htmlTitle={TALKS.title}
-	title={TALKS.titleString}
-	description={TALKS.description}
-	url={TALKS.url}
-	image={talksSocialImage.src}
-	imageAlt="The letter &quot;m&quot; on a monospaced font, in blue, between curly braces.Below it, a subtext of &quot;Talks&quot; in orange on the lower right corner."
->
-	<Logo
-		subtitle="Talks"
-		shortSubtitle="Talks"
-		url={TALKS.url}
-		urlTitle="Talks Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Talks | Marco Campos"
+		description="A list of talks I've given on meetups, conferences, or other events."
+		url={Astro.url.href}
 	/>
-	<Fragment slot="header">
-		{TALKS.titleString}
-	</Fragment>
-
-	{
-		talks.map((talk) => (
-			<Card
-				draft={talk.data.draft}
-				url={join([TALKS.url, talk.id])}
-				itemtype="https://schema.org/Event"
-			>
-				<Fragment slot="metadata">
-					<meta
-						itemprop="eventAttendanceMode"
-						content={talk.data.isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'}
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Talks"
+						shortSubtitle="Talks"
+						url="/talks/"
+						title="Talks Page"
 					/>
-					<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
-					<div itemprop="location" itemscope itemtype={talk.data.isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
-						<meta itemprop={talk.data.isOnline ? 'url' : 'address'} content={talk.data.isOnline ? join([TALKS.url, talk.id]) : talk.data.address} />
-					</div>
-				</Fragment>
+					<h1>Talks, Presentations & Workshops</h1>
+				</div>
+			</header>
 
-				{
-					talk.data.image && (
-						<CardImage
-							slot="image"
-							image={talk.data.image}
-							imageAlt={talk.data.imageAlt ?? ''}
-						/>
-					)
-				}
+			{
+				talks.map((talk) => (
+					<Card
+						draft={talk.data.draft}
+						url={`/talks/${talk.id}/`}
+						itemtype="https://schema.org/Event"
+						image={talk.data.image}
+						imageAlt={talk.data.imageAlt ?? ''}
+					>
+						<Fragment slot="metadata">
+							<meta
+								itemprop="eventAttendanceMode"
+								content={talk.data.isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'}
+							/>
+							<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
+							<div itemprop="location" itemscope itemtype={talk.data.isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+								<meta itemprop={talk.data.isOnline ? 'url' : 'address'} content={talk.data.isOnline ? `/talks/${talk.id}/` : talk.data.address} />
+							</div>
+						</Fragment>
+						<h2 slot="title">
+							<Fragment set:html={talk.data.title} />
+						</h2>
 
-				<h2 slot="title">
-					<Fragment set:html={inlineMarkdownRender(talk.data.title)} />
-				</h2>
+						<Fragment slot="subtitle">
+							{
+								talk.data.date && (
+									<span>
+										<Icon name="uil:calendar-alt" title="Event Date" />
+										{
+											talk.data.date ? (
+												<meta itemprop="startDate" content={talk.data.date.toISOString()} />
+												<time datetime={talk.data.date.toISOString()}>{formatter.format(talk.data.date)}</time>
+											) : <span>&mdash;</span>
+										}
+									</span>
+								)
+							}
+							{
+								talk.data.event && (
+									<span itemprop="superEvent">
+										<meta itemprop="startDate" content={talk.data.date ? talk.data.date.toISOString() : '0000-01-01T00:00:00.000Z'} />
+										<meta
+											itemprop="eventAttendanceMode"
+											content={talk.data.isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'}
+										/>
+										<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
+										<div itemprop="location" itemscope itemtype={talk.data.isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+											<meta itemprop={talk.data.isOnline ? 'url' : 'address'} content={talk.data.isOnline ? `/talks/${talk.id}/` : talk.data.address} />
+										</div>
 
-				<Fragment slot="subtitle">
-					{
-						talk.data.date && (
-							<span>
-								<Icon name="uil:calendar-alt" title="Event Date" />
-								{
-									talk.data.date ? (
-										<meta itemprop="startDate" content={talk.data.date.toISOString()} />
-										<time datetime={talk.data.date.toISOString()}>{formatter.format(talk.data.date)}</time>
-									) : <span>&mdash;</span>
-								}
-							</span>
-						)
-					}
-					{
-						talk.data.event && (
-							<span itemprop="superEvent">
-								<meta itemprop="startDate" content={talk.data.date ? talk.data.date.toISOString() : '0000-01-01T00:00:00.000Z'} />
-								<meta
-									itemprop="eventAttendanceMode"
-									content={talk.data.isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'}
-								/>
-								<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
-								<div itemprop="location" itemscope itemtype={talk.data.isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
-									<meta itemprop={talk.data.isOnline ? 'url' : 'address'} content={talk.data.isOnline ? join([TALKS.url, talk.id]) : talk.data.address} />
-								</div>
+										<Icon name="uil:presentation-play" title="Event name" />
+										<span>
+											<Fragment set:html={talk.data.event} />
+										</span>
+									</span>
+								)
+							}
+						</Fragment>
 
-								<Icon name="uil:presentation-play" title="Event name" />
-								<span>
-									<Fragment set:html={inlineMarkdownRender(talk.data.event)} />
-								</span>
-							</span>
-						)
-					}
-				</Fragment>
+						<Fragment set:html={talk.data.summary} />
 
-				<Fragment set:html={inlineMarkdownRender(talk.data.summary)} />
+						<Fragment slot="links">
+							<a href={`/talks/${talk.id}/`} itemprop="url">
+								<Icon name="uil:presentation-plus" title="" role="presentation" />
+								<span>View Talk Info</span>
+								<sr-only>
+									for
+									<Fragment set:html={talk.data.title} />
+								</sr-only>
+							</a>
+						</Fragment>
+					</Card>
+				))
+			}
+		</main>
 
-				<Fragment slot="links">
-					<a href={join([TALKS.url, talk.id])} itemprop="url">
-						<Icon name="uil:presentation-plus" title="" role="presentation" />
-						<span>View Talk Info</span>
-						<span class="visually-hidden">
-							for
-							<Fragment set:html={inlineMarkdownRender(talk.data.title)} />
-						</span>
-					</a>
-				</Fragment>
-			</Card>
-		))
-	}
-</InternalPageLayout>
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

@@ -8,216 +8,230 @@ import ligMa from '../assets/images/piramid/ligma.jpg';
 import mScott from '../assets/images/piramid/m-scott.jpg';
 import mrCreature from '../assets/images/piramid/mr-creature.jpg';
 import richHero from '../assets/images/piramid/rich1.png';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import { GLOBALS } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
 
-// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-const IMAGE_WIDTHS = [128, 256, 512, 768, richHero.width];
+const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px';
 ---
-<BaseLayout
-	htmlTitle={['QuickRichClub', ...GLOBALS.title]}
-	title="QuickRichClub"
-	description="Welcome to QuickRichClub!"
-	url="/triangle"
-	tags={['easter egg', 'joke', ...GLOBALS.tags]}
->
-	<SkipToContent slot="header" />
-	<SiteNav slot="header" />
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="QuickRichClub"
+		description="Welcome to QuickRichClub!"
+		url={Astro.url.href}
+		tags={['easter egg', 'joke']}
+	/>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<h1>Welcome to QuickRichClub!</h1>
+				</div>
+			</header>
 
-	<h1>Welcome to QuickRichClub!</h1>
+			<section id="hero">
+				<Image
+					src={richHero}
+					alt="A man with a happy face and his mouth open, holding a fist in front of his body. He is confident, he is strong, he is making money baby!"
+					loading="lazy"
+					widths={[128, 256, 512, 768, richHero.width]}
+					sizes={`${imageSizes} ${richHero.width}px`}
+					quality={75}
+				/>
 
-	<section id="hero">
-		<Image
-			src={richHero}
-			alt="A man with a happy face and his mouth open, holding a fist in front of his body. He is confident, he is strong, he is making money baby!"
-			loading="lazy"
-			widths={IMAGE_WIDTHS}
-			sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${richHero.width}px`}
-			quality={75}
-		/>
+				<p>
+					Ready to swim in cash? Join QuickRichClub, where everyone can &ldquo;get rich quick&rdquo;! 💸
+					<small class="tiny-text">(terms and conditions apply, mainly to everyone except you)</small>
+				</p>
 
-		<p>
-			Ready to swim in cash? Join QuickRichClub, where everyone can &ldquo;get rich quick&rdquo;! 💸
-			<small class="tiny-text">(terms and conditions apply, mainly to everyone except you)</small>
-		</p>
-
-		<form method="get" action="#">
-			<input
-				id="email"
-				name="email"
-				type="email"
-				placeholder="Enter your email here"
-				aria-label="Enter your email here"
-				required
-			/>
-			<button type="submit">Join now!</button>
-		</form>
-	</section>
-
-	<section id="why">
-		<h2>Why Choose QuickRichClub?</h2>
-		<ul>
-			<li>
-				<article>
-					<picture>
-						<Icon name="uil:bitcoin-circle" title="An icon of the bitcoin symbol" />
-					</picture>
-					<header>
-						<h3>Unbelievable Returns</h3>
-					</header>
-					<p>No, seriously, you'd better not believe them.</p>
-				</article>
-			</li>
-			<li>
-				<article>
-					<picture>
-						<Icon name="uil:brain" title="An icon of a brain" />
-					</picture>
-					<header>
-						<h3>Team-Building Extravaganza</h3>
-					</header>
-					<p>
-						Convince your loved ones to join in and put the <span class="fun-text">"fun"</span>
-						<span class="fun-text">"generational debt"</span>!
-					</p>
-				</article>
-			</li>
-			<li>
-				<article>
-					<picture>
-						<Icon name="uil:fire" title="An icon of a flame" />
-					</picture>
-					<header>
-						<h3>Risk-Free!</h3>
-					</header>
-					<p>For us, anyway. For you, well, that's another story.</p>
-				</article>
-			</li>
-		</ul>
-	</section>
-
-	<section id="steps">
-		<h2>How It "Works"?</h2>
-
-		<p>You will be done in only 3 easy steps!</p>
-
-		<ol>
-			<li>
-				<h3>Join</h3>
-				<p>Hand over your hard-earned cash because why not?</p>
-				<p><small class="tiny-text">(This is not a threat)</small></p>
-			</li>
-			<li>
-				<h3>Recruit</h3>
-				<p>Annoy your friends and family until they give in.</p>
-				<p>Remember, the more they invest, the more... well, that's it.</p>
-			</li>
-			<li>
-				<h3>Profit?!?</h3>
-				<p>Watch as your money magically does absolutely nothing.</p>
-				<p>It's like a miracle, but not the good kind.</p>
-			</li>
-		</ol>
-	</section>
-
-	<section id="testimonials">
-		<h2>Testimonials</h2>
-
-		<ul>
-			<li>
-				<blockquote>
-					<Image
-						src={customer}
-						alt=""
-						loading="lazy"
-						widths={[128, 256, 512, 768, customer.width]}
-						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${customer.width}px`}
-						quality={75}
+				<form method="get" action="#">
+					<input
+						id="email"
+						name="email"
+						type="email"
+						placeholder="Enter your email here"
+						aria-label="Enter your email here"
+						required
 					/>
-					<p>QuickRichClub changed my life! Now I have plenty of free time because everyone I know avoids me!</p>
-					<small>A Truly "Satisfied" Member</small>
-				</blockquote>
-			</li>
-			<li>
-				<blockquote>
-					<Image
-						src={ligMa}
-						alt=""
-						loading="lazy"
-						widths={[128, 256, 512, 768, ligMa.width]}
-						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${ligMa.width}px`}
-						quality={75}
-					/>
-					<p>I was skeptical, but now I'm a full believer... in never falling for these schemes again!</p>
-					<small>Lig Ma B.</small>
-				</blockquote>
-			</li>
-			<li>
-				<blockquote>
-					<Image
-						src={eMusk}
-						alt=""
-						loading="lazy"
-						widths={[128, 256, 512, 768, eMusk.width]}
-						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${eMusk.width}px`}
-						quality={75}
-					/>
-					<p>I've never had so many people call me about investment opportunities... mainly to tell me to stop calling them.</p>
-					<small>E. Musk</small>
-				</blockquote>
-			</li>
-			<li>
-				<blockquote>
-					<Image
-						src={mScott}
-						alt=""
-						loading="lazy"
-						widths={[128, 256, 512, 768, mScott.width]}
-						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${mScott.width}px`}
-						quality={75}
-					/>
-					<p>This is totally <em>not</em> a pyramid scheme!</p>
-					<small>M. Scott</small>
-				</blockquote>
-			</li>
-			<li>
-				<blockquote>
-					<Image
-						src={mrCreature}
-						alt=""
-						loading="lazy"
-						widths={[128, 256, 512, 768, mrCreature.width]}
-						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${mrCreature.width}px`}
-						quality={75}
-					/>
-					<p>Thanks to QuickRichClub, I learned a valuable lesson in financial caution. Also, my friends learned how to block numbers.</p>
-					<small>Mr. Creature</small>
-				</blockquote>
-			</li>
-		</ul>
-	</section>
+					<button type="submit">Join now!</button>
+				</form>
+			</section>
 
-	<section id="cta">
-		<h2>Act Now!</h2>
+			<section id="why">
+				<h2>Why Choose QuickRichClub?</h2>
+				<ul>
+					<li>
+						<article>
+							<picture>
+								<Icon name="uil:bitcoin-circle" title="An icon of the bitcoin symbol" />
+							</picture>
+							<header>
+								<h3>Unbelievable Returns</h3>
+							</header>
+							<p>No, seriously, you'd better not believe them.</p>
+						</article>
+					</li>
+					<li>
+						<article>
+							<picture>
+								<Icon name="uil:brain" title="An icon of a brain" />
+							</picture>
+							<header>
+								<h3>Team-Building Extravaganza</h3>
+							</header>
+							<p>
+								Convince your loved ones to join in and put the <span class="fun-text">"fun"</span>
+								<span class="fun-text">"generational debt"</span>!
+							</p>
+						</article>
+					</li>
+					<li>
+						<article>
+							<picture>
+								<Icon name="uil:fire" title="An icon of a flame" />
+							</picture>
+							<header>
+								<h3>Risk-Free!</h3>
+							</header>
+							<p>For us, anyway. For you, well, that's another story.</p>
+						</article>
+					</li>
+				</ul>
+			</section>
 
-		<p>Sign up today and experience the thrill of watching your money disappear! Join QuickRichClub &mdash; the not-a-pyramid scheme that might make someone rich!</p>
-		<p><small class="tiny-text">(spoiler: it's not you)</small></p>
+			<section id="steps">
+				<h2>How It "Works"?</h2>
 
-		<form method="get" action="#">
-			<input
-				id="email"
-				name="email"
-				type="email"
-				placeholder="Enter your email here"
-				aria-label="Your email"
-				required
-			/>
-			<button type="submit">Access now!</button>
-		</form>
-	</section>
+				<p>You will be done in only 3 easy steps!</p>
 
-	<p slot="footer" id="small-print">By providing your email you subscribe to a lifetime suply of Sildenafil, also known as "Magic Blue Pills" or "Daddy Little Helpers".</p>
-	<script src="../assets/js/pages/triangle.ts"></script>
-</BaseLayout>
+				<ol>
+					<li>
+						<h3>Join</h3>
+						<p>Hand over your hard-earned cash because why not?</p>
+						<p><small class="tiny-text">(This is not a threat)</small></p>
+					</li>
+					<li>
+						<h3>Recruit</h3>
+						<p>Annoy your friends and family until they give in.</p>
+						<p>Remember, the more they invest, the more... well, that's it.</p>
+					</li>
+					<li>
+						<h3>Profit?!?</h3>
+						<p>Watch as your money magically does absolutely nothing.</p>
+						<p>It's like a miracle, but not the good kind.</p>
+					</li>
+				</ol>
+			</section>
+
+			<section id="testimonials">
+				<h2>Testimonials</h2>
+
+				<ul>
+					<li>
+						<blockquote>
+							<Image
+								src={customer}
+								alt=""
+								loading="lazy"
+								widths={[128, 256, 512, 768, customer.width]}
+								sizes={`${imageSizes} ${customer.width}px`}
+								quality={75}
+							/>
+							<p>QuickRichClub changed my life! Now I have plenty of free time because everyone I know avoids me!</p>
+							<small>A Truly "Satisfied" Member</small>
+						</blockquote>
+					</li>
+					<li>
+						<blockquote>
+							<Image
+								src={ligMa}
+								alt=""
+								loading="lazy"
+								widths={[128, 256, 512, 768, ligMa.width]}
+								sizes={`${imageSizes} ${ligMa.width}px`}
+								quality={75}
+							/>
+							<p>I was skeptical, but now I'm a full believer... in never falling for these schemes again!</p>
+							<small>Lig Ma B.</small>
+						</blockquote>
+					</li>
+					<li>
+						<blockquote>
+							<Image
+								src={eMusk}
+								alt=""
+								loading="lazy"
+								widths={[128, 256, 512, 768, eMusk.width]}
+								sizes={`${imageSizes} ${eMusk.width}px`}
+								quality={75}
+							/>
+							<p>I've never had so many people call me about investment opportunities... mainly to tell me to stop calling them.</p>
+							<small>E. Musk</small>
+						</blockquote>
+					</li>
+					<li>
+						<blockquote>
+							<Image
+								src={mScott}
+								alt=""
+								loading="lazy"
+								widths={[128, 256, 512, 768, mScott.width]}
+								sizes={`${imageSizes} ${mScott.width}px`}
+								quality={75}
+							/>
+							<p>This is totally <em>not</em> a pyramid scheme!</p>
+							<small>M. Scott</small>
+						</blockquote>
+					</li>
+					<li>
+						<blockquote>
+							<Image
+								src={mrCreature}
+								alt=""
+								loading="lazy"
+								widths={[128, 256, 512, 768, mrCreature.width]}
+								sizes={`${imageSizes} ${mrCreature.width}px`}
+								quality={75}
+							/>
+							<p>Thanks to QuickRichClub, I learned a valuable lesson in financial caution. Also, my friends learned how to block numbers.</p>
+							<small>Mr. Creature</small>
+						</blockquote>
+					</li>
+				</ul>
+			</section>
+
+			<section id="cta">
+				<h2>Act Now!</h2>
+
+				<p>Sign up today and experience the thrill of watching your money disappear! Join QuickRichClub &mdash; the not-a-pyramid scheme that might make someone rich!</p>
+				<p><small class="tiny-text">(spoiler: it's not you)</small></p>
+
+				<form method="get" action="#">
+					<input
+						id="email"
+						name="email"
+						type="email"
+						placeholder="Enter your email here"
+						aria-label="Your email"
+						required
+					/>
+					<button type="submit">Access now!</button>
+				</form>
+			</section>
+		</main>
+
+		<footer id="page-footer">
+			<p id="small-print">
+				By providing your email you subscribe to a lifetime suply of Sildenafil, also known as "Magic Blue Pills" or "Daddy Little Helpers".
+			</p>
+		</footer>
+		<IabEscape />
+		<script src="../assets/js/pages/triangle.ts"></script>
+	</body>
+</html>

@@ -3,10 +3,15 @@ import '../../assets/css/pages/talk.css';
 import '../../assets/css/code.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
+import CSSNakedDay from '../../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../../components/Effects/Effects.astro';
+import HtmlHead from '../../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../../components/IabEscape/IabEscape.astro';
 import Logo from '../../components/Logo/Logo.astro';
-import { TALKS } from '../../constants.js';
-import InternalPageLayout from '../../layouts/InternalPage.astro';
-import { join } from '../../utils/path.js';
+import OldStyleButtons from '../../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../../components/Webrings/Webrings.astro';
 import { listAllTalks } from '../../utils/talks.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -42,154 +47,168 @@ const {
 		techStack
 	}
 } = Astro.props;
-const { talk: talkId } = Astro.params;
 const { Content } = await render();
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
 ---
-<InternalPageLayout
-	htmlTitle={[title, ...TALKS.title]}
-	{title}
-	description={summary}
-	url={join([TALKS.url, talkId])}
-	tags={TALKS.tags}
-	image={image?.src}
-	{imageAlt}
-	createdAt={date}
-	pageSchema="Event"
->
-	<Logo
-		subtitle="Talks"
-		shortSubtitle="Talks"
-		url={TALKS.url}
-		urlTitle="Talks Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/Event">
+	<HtmlHead
+		title={`${title} | Marco Campos`}
+		description={summary}
+		url={Astro.url.href}
+		image={image?.src}
+		{imageAlt}
+		createdAt={date}
 	/>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Talks"
+						shortSubtitle="Talks"
+						url="/talks/"
+						title="Talks Page"
+					/>
+					<h1 itemprop="name">
+						{draft && <draft-tag>Draft</draft-tag>}
+						{title}
+					</h1>
+				</div>
+			</header>
 
-	{draft && <span slot="header" id="talk-draft-tag">Draft</span>}
-	<Fragment slot="header" itemprop="name">
-		{title}
-	</Fragment>
+			<h2>
+				<Icon name="uil:info-circle" title="" role="presentation" />
+				Talk info
+			</h2>
 
-	<Content />
+			<div itemprop="location" itemscope itemtype={isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+				<meta itemprop={isOnline ? 'url' : 'address'} content={isOnline ? eventUrl : address} />
+				<meta itemprop="eventAttendanceMode" content={isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'} />
+				<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
+			</div>
 
-	<h2>
-		<Icon name="uil:info-circle" title="" role="presentation" />
-		Talk info
-	</h2>
+			<ul id="talk-info">
+				{
+					event && (
+						<li>
+							<strong>
+								<Icon name="uil:presentation-play" title="" role="presentation" />
+								Event:
+							</strong>
+							<span>
+								{eventUrl ? <a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">{event}</a> : event}
+							</span>
+						</li>
+					)
+				}
 
-	<div itemprop="location" itemscope itemtype={isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
-		<meta itemprop={isOnline ? 'url' : 'address'} content={isOnline ? eventUrl : address} />
-		<meta itemprop="eventAttendanceMode" content={isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'} />
-		<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
-	</div>
-
-	<ul id="talk-info">
-		{
-			event && (
 				<li>
 					<strong>
-						<Icon name="uil:presentation-play" title="" role="presentation" />
-						Event:
+						<Icon name="uil:calendar-alt" title="" role="presentation" />
+						Date:
 					</strong>
-					<span>
-						{eventUrl ? <a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">{event}</a> : event}
-					</span>
+					<meta itemprop="startDate" content={date ? date.toISOString() : '0000-01-01T00:00:00.000Z'} />
+					{date ? <time datetime={date.toISOString()}>{formatter.format(date)}</time> : <span>&mdash;</span>}
 				</li>
-			)
-		}
 
-		<li>
-			<strong>
-				<Icon name="uil:calendar-alt" title="" role="presentation" />
-				Date:
-			</strong>
-			<meta itemprop="startDate" content={date ? date.toISOString() : '0000-01-01T00:00:00.000Z'} />
-			{date ? <time datetime={date.toISOString()}>{formatter.format(date)}</time> : <span>&mdash;</span>}
-		</li>
+				{
+					slides && (
+						<li>
+							<strong>
+								<Icon name="uil:clapper-board" title="" role="presentation" />
+								Slides:
+							</strong>
+							<a href={slides} rel="noopener noreferrer" referrerpolicy="no-referrer">{slides}</a>
+						</li>
+					)
+				}
 
-		{
-			slides && (
-				<li>
-					<strong>
-						<Icon name="uil:clapper-board" title="" role="presentation" />
-						Slides:
-					</strong>
-					<a href={slides} rel="noopener noreferrer" referrerpolicy="no-referrer">{slides}</a>
-				</li>
-			)
-		}
+				{
+					video && (
+						<li>
+							<strong>
+								<Icon name="uil:video" title="" role="presentation" />
+								Video:
+							</strong>
+							<a href={video} rel="noopener noreferrer" referrerpolicy="no-referrer">{video}</a>
+						</li>
+					)
+				}
 
-		{
-			video && (
-				<li>
-					<strong>
-						<Icon name="uil:video" title="" role="presentation" />
-						Video:
-					</strong>
-					<a href={video} rel="noopener noreferrer" referrerpolicy="no-referrer">{video}</a>
-				</li>
-			)
-		}
+				{
+					code && (
+						<li>
+							<strong>
+								<Icon name="uil:brackets-curly" title="" role="presentation" />
+								Code:
+							</strong>
+							<a href={code} rel="noopener noreferrer" referrerpolicy="no-referrer">{code}</a>
+						</li>
+					)
+				}
+			</ul>
 
-		{
-			code && (
-				<li>
-					<strong>
-						<Icon name="uil:brackets-curly" title="" role="presentation" />
-						Code:
-					</strong>
-					<a href={code} rel="noopener noreferrer" referrerpolicy="no-referrer">{code}</a>
-				</li>
-			)
-		}
-	</ul>
+			<Content />
 
-	{
-		relatedContent && (
-			<Fragment>
-				<h2>
-					<Icon name="uil:file-share-alt" title="" role="presentation" />
-					Related content
-				</h2>
-				<ul id="related-content">
-					{
-						relatedContent?.map(({ url: contentUrl, title: contentTitle }) => (
-							<li>
-								<a href={contentUrl} rel="noopener noreferrer" referrerpolicy="no-referrer">{contentTitle}</a>
-							</li>
-						))
-					}
-				</ul>
-			</Fragment>
-		)
-	}
+			{
+				demo && (
+					<Fragment>
+						<h2>
+							<Icon name="uil:flask" title="" role="presentation" />
+							Demo
+						</h2>
 
-	<h2>
-		<Icon name="uil:cog" title="" role="presentation" />
-		Technologies used
-	</h2>
-	<ul id="technology-tags">
-		{techStack?.map((tech) => <li class="tag">{tech}</li>)}
-	</ul>
+						<iframe
+							src={demo}
+							loading="lazy"
+							referrerpolicy="no-referrer"
+							sandbox="allow-forms allow-scripts allow-same-origin"
+							title={`Demo for ${title}`}
+						>
+							A local running demo of the project.
+						</iframe>
+					</Fragment>
+				)
+			}
 
-	{
-		demo && (
-			<Fragment>
-				<h2>
-					<Icon name="uil:flask" title="" role="presentation" />
-					Demo
-				</h2>
+			{
+				relatedContent && (
+					<Fragment>
+						<h2>
+							<Icon name="uil:file-share-alt" title="" role="presentation" />
+							Related content
+						</h2>
+						<ul id="related-content">
+							{
+								relatedContent?.map(({ url: contentUrl, title: contentTitle }) => (
+									<li>
+										<a href={contentUrl} rel="noopener noreferrer" referrerpolicy="no-referrer">{contentTitle}</a>
+									</li>
+								))
+							}
+						</ul>
+					</Fragment>
+				)
+			}
 
-				<iframe
-					src={demo}
-					loading="lazy"
-					referrerpolicy="no-referrer"
-					sandbox="allow-forms allow-scripts allow-same-origin"
-					title={`Demo for ${title}`}
-				>
-					A local running demo of the project.
-				</iframe>
-			</Fragment>
-		)
-	}
-</InternalPageLayout>
+			<h2>
+				<Icon name="uil:cog" title="" role="presentation" />
+				Technologies used
+			</h2>
+			<ul id="technology-tags">
+				{techStack?.map((tech) => <li class="tag">{tech}</li>)}
+			</ul>
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

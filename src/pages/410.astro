@@ -1,30 +1,52 @@
 ---
 import '../assets/css/pages/404.css';
-import GlitchLogo from '../components/GlitchLogo/GlitchLogo.astro';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
+import Logo from '../components/Logo/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import BaseLayout from '../layouts/Base.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 ---
-<BaseLayout
-	htmlTitle={['Dead end']}
-	title="Dead end"
-	description="Dead end"
-	url="/410"
-	tags={['Dead End', 'Error']}
->
-	<SkipToContent slot="header" />
-	<header slot="header">
-		<SiteNav />
-		<div>
-			<GlitchLogo />
-		</div>
-		<h1>410 - Begone, fool!</h1>
-	</header>
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="410 | Marco Campos"
+		description="410 - Dead End"
+		url={Astro.url.href}
+	/>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Dead End"
+						shortSubtitle="410"
+						url="/"
+						title="Home Page"
+						micro
+						glitch
+					/>
+					<h1>410 - Begone fool!</h1>
+				</div>
+			</header>
 
-	<div id="contents">
-		<p>This page should not exist, you are here by mistake.</p>
-		<p>
-			<a href="/">Go back home</a>
-		</p>
-	</div>
-</BaseLayout>
+			<div id="contents">
+				<p>This page should not exist, you are here by mistake.</p>
+				<p>
+					<a href="/">Go back home</a>
+				</p>
+			</div>
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

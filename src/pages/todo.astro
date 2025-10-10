@@ -1,8 +1,14 @@
 ---
 import '../assets/css/pages/todo.css';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.js';
 
 interface Task {
@@ -162,56 +168,73 @@ const tasks: Task[] = [
 	{ isDone: false, text: 'Have a [brag document](https://uxdesign.cc/why-you-should-have-a-brag-document-eb6cc82ec80a)' }
 ];
 ---
-
-<InternalPageLayout
-	htmlTitle={['To-Do', ...GLOBALS.title]}
-	title="To-Do"
-	description="To-Do and work in progress items for Marco Campos website."
-	url="/todo/"
-	tags={['todo', 'wip', 'work in progress', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="TODO"
-		shortSubtitle="TODO"
-		url="/todo/"
-		urlTitle="TODO Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="To-Do | Marco Campos"
+		description="To-Do and work in progress items for Marco Campos website."
+		url={Astro.url.href}
 	/>
-	<Fragment slot="header">To-Do</Fragment>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="TODO"
+						shortSubtitle="TODO"
+						url="/todo/"
+						title="TODO Page"
+					/>
+					<h1>To Do</h1>
+				</div>
+			</header>
 
-	<p>
-		Based on <a href="https://jamesg.blog/2024/02/19/personal-website-ideas/">this post</a> and <a href="https://shellsharks.com/notes/2023/08/15/website-component-checklist"
-		>this checklist</a>.
-	</p>
+			<p>
+				Based on <a href="https://jamesg.blog/2024/02/19/personal-website-ideas/">this post</a> and <a
+					href="https://shellsharks.com/notes/2023/08/15/website-component-checklist"
+				>this checklist</a>.
+			</p>
 
-	<ul id="todo-list">
-		<Fragment set:html={tasks.map((task) => renderTask(task)).join('\n')} />
-	</ul>
+			<ul id="todo-list">
+				<Fragment set:html={tasks.map((task) => renderTask(task)).join('\n')} />
+			</ul>
 
-	<h2>Webmention references</h2>
+			<h2>Webmention references</h2>
 
-	<ul>
-		<li>
-			<a href="https://indiewebify.me">https://indiewebify.me</a>
-		</li>
-		<li>
-			<a href="https://webmention.io/dashboard">https://webmention.io/dashboard</a>
-		</li>
-		<li>
-			<a href="https://telegraph.p3k.io/dashboard">https://telegraph.p3k.io/dashboard</a>
-		</li>
-		<li>
-			<a href="https://webmention.rocks/">https://webmention.rocks/</a>
-		</li>
-		<li>
-			<a href="https://indieweb.org/posts#Types_of_Posts">https://indieweb.org/posts#Types_of_Posts</a>
-		</li>
-		<li>
-			<a href="https://kld.dev/adding-webmentions/">https://kld.dev/adding-webmentions/</a>
-		</li>
-		<li>
-			<a href="https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/">https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/</a>
-		</li>
-	</ul>
-	<script src="../assets/js/pages/todo.ts"></script>
-</InternalPageLayout>
+			<ul>
+				<li>
+					<a href="https://indiewebify.me">https://indiewebify.me</a>
+				</li>
+				<li>
+					<a href="https://webmention.io/dashboard">https://webmention.io/dashboard</a>
+				</li>
+				<li>
+					<a href="https://telegraph.p3k.io/dashboard">https://telegraph.p3k.io/dashboard</a>
+				</li>
+				<li>
+					<a href="https://webmention.rocks/">https://webmention.rocks/</a>
+				</li>
+				<li>
+					<a href="https://indieweb.org/posts#Types_of_Posts">https://indieweb.org/posts#Types_of_Posts</a>
+				</li>
+				<li>
+					<a href="https://kld.dev/adding-webmentions/">https://kld.dev/adding-webmentions/</a>
+				</li>
+				<li>
+					<a href="https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/">https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/</a>
+				</li>
+			</ul>
+			<script src="../assets/js/pages/todo.ts"></script>
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

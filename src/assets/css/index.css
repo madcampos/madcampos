@@ -1,6 +1,7 @@
-@import './vars.css';
-@import './fonts.css';
-@import './base.css';
-@import './transitions.css';
-@import './themes/index.css';
-@import './accessible.css';
+@import url('./vars.css');
+@import url('./fonts.css');
+@import url('./base.css');
+@import url('./components/index.css');
+@import url('./transitions.css');
+@import url('./themes/index.css');
+@import url('./accessible.css');

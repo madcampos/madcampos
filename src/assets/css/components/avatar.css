@@ -1,0 +1,53 @@
+@layer components {
+	m-avatar {
+		--image-size: var(--avatar-size);
+		display: block;
+		position: relative;
+		border: var(--theme-color) var(--border-style) var(--border-width);
+		border-radius: 100vmax;
+		width: var(--image-size);
+		height: var(--image-size);
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		&::after {
+			display: block;
+			position: absolute;
+			opacity: 0.2;
+			transition: all 0.2s ease-in-out;
+			inset: 0;
+			background: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
+			width: 100%;
+			height: 100%;
+			content: '';
+
+			@media (prefers-contrast: more) {
+				opacity: 0.4;
+				backdrop-filter: contrast(200%);
+				background: radial-gradient(circle at bottom, transparent, var(--theme-color));
+			}
+
+			@media (forced-colors: active) {
+				opacity: 0;
+				backdrop-filter: none;
+				background: none;
+			}
+
+			@media (prefers-reduced-transparency: reduce) {
+				opacity: 0;
+				backdrop-filter: none;
+				background: none;
+			}
+		}
+
+		&:hover::after { opacity: 0.4; }
+
+		@media (forced-colors: active) { filter: grayscale(1) contrast(120%) brightness(110%); }
+	}
+}

@@ -1,30 +1,52 @@
 ---
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants.js';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Now', ...GLOBALS.title]}
-	title="What I'm doing now"
-	description="What I'm doing now, my current focus and priorities."
-	url="/now/"
-	tags={['now', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Now"
-		shortSubtitle="Now"
-		url="/now/"
-		urlTitle="Now Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="What I'm doing now"
+		description="What I'm doing now, my current focus and priorities."
+		url={Astro.url.href}
 	/>
-	<Fragment slot="header">What I'm doing now?</Fragment>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Now"
+						shortSubtitle="Now"
+						url="/now/"
+						title="Now Page"
+					/>
+					<h1>What am I doing now?</h1>
+				</div>
+			</header>
 
-	<p>Here’s what I’m currently focused on, in no particular order:</p>
+			<p>Here’s what I’m currently focused on, in no particular order:</p>
 
-	<ul>
-		<li>Helping on the toronto JS community (Take a look at the <a href="https://github.com/orgs/torontojs/projects/6/views/1">Community Hub Project</a>).</li>
-		<li>Working on this site to make it more "<a href="https://indieweb.org/">IndieWeb</a>-ified".</li>
-		<li>Saving to buy boardgames.</li>
-	</ul>
-</InternalPageLayout>
+			<ul>
+				<li>Rebuilding the static site generator used for this website</li>
+				<li>Working on this site to make it more "<a href="https://indieweb.org/">IndieWeb</a>-ified".</li>
+				<li>Saving to buy boardgames and Lego.</li>
+			</ul>
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

@@ -1,16 +1,21 @@
 ---
+import { Image } from 'astro:assets';
 import './styles.css';
+import { inlineMarkdownStrip } from '../../utils/markdown.ts';
 
 interface Props {
 	itemtype: string;
 	url?: string;
 	draft?: boolean;
 	class?: string;
+	image?: ImageMetadata;
+	imageAlt?: string;
+	themeImages?: Record<string, ImageMetadata>;
 }
 
-const { itemtype, url, draft, class: cardClass } = Astro.props;
+const { itemtype, url, draft, class: cardClass, image, imageAlt, themeImages } = Astro.props;
 ---
-<div class="card-container">
+<m-card>
 	<article class={`card ${cardClass ?? ''}`} itemscope {itemtype}>
 		<div hidden class="card-meta">
 			<meta itemprop="url" content={url} />
@@ -18,7 +23,38 @@ const { itemtype, url, draft, class: cardClass } = Astro.props;
 		</div>
 
 		<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-			<slot name="image"></slot>
+			{
+				image && (
+					<Fragment>
+						<Image
+							itemprop="contentUrl"
+							src={image}
+							alt={inlineMarkdownStrip(imageAlt ?? '')}
+							loading="lazy"
+							widths={[64, 128, 256, 512]}
+							width={256}
+							sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
+							quality={75}
+						/>
+						{
+							Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
+								<Image
+									itemprop="contentUrl"
+									data-theme-image={theme}
+									src={themeImage}
+									alt={inlineMarkdownStrip(imageAlt ?? '')}
+									loading="lazy"
+									widths={[64, 128, 256, 512]}
+									width={256}
+									sizes="(max-width: 360px) 64px, (max-width: 720px) 128px, (max-width: 1280px) 256px, 512px"
+									quality={75}
+									hidden
+								/>
+							))
+						}
+					</Fragment>
+				)
+			}
 		</picture>
 
 		<header>
@@ -46,4 +82,4 @@ const { itemtype, url, draft, class: cardClass } = Astro.props;
 			<slot name="footer"></slot>
 		</footer>
 	</article>
-</div>
+</m-card>

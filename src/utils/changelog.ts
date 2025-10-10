@@ -1,5 +1,6 @@
 import type { MarkdownInstance } from 'astro';
 import { getCollection, render } from 'astro:content';
+import { inlineMarkdownRender } from './markdown.ts';
 
 export async function listAllChangelogs() {
 	const collectionEntries = await getCollection('changelog');
@@ -14,7 +15,7 @@ export async function listAllChangelogs() {
 
 			return {
 				...entry,
-				title: entry.data.versionName ? `${entry.id} - ${entry.data.versionName}` : entry.id,
+				title: inlineMarkdownRender(entry.data.versionName ? `${entry.id} - ${entry.data.versionName}` : entry.id),
 				render: async () => render(entry),
 				renderString: async () => entryMarkdown?.compiledContent() ?? ''
 			};

@@ -1,6 +1,15 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import BlogPostLayout from '../../../../layouts/BlogPost.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import Card from '../../../../components/Card/Card.astro';
+import Effects from '../../../../components/Effects/Effects.astro';
+import HtmlHead from '../../../../components/HtmlHead/HtmlHead.astro';
+import OldStyleButtons from '../../../../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../../../../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../../../../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../../../../components/Webrings/Webrings.astro';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../../../../utils/markdown.js';
 import { listAllPosts } from '../../../../utils/post.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -33,28 +42,289 @@ const {
 		draft
 	},
 	readingTime,
-	letterCount,
 	wordCount,
 	relatedPosts
 } = Astro.props;
 const { Content } = await render();
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
+const formatUpdateDate = (date: Date) =>
+	new Intl.DateTimeFormat('en-US', {
+		dateStyle: 'long',
+		timeStyle: 'short'
+	}).format(date);
 ---
-<BlogPostLayout
-	{url}
-	{title}
-	{summary}
-	{image}
-	{imageAlt}
-	{imageRights}
-	{createdAt}
-	{updatedAt}
-	{updates}
-	{tags}
-	{readingTime}
-	{wordCount}
-	{letterCount}
-	{draft}
-	{relatedPosts}
->
-	<Content />
-</BlogPostLayout>
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/BlogPosting">
+	<HtmlHead
+		title={`${inlineMarkdownStrip(title)} | Marco Campos Blog`}
+		{url}
+		{tags}
+		description={inlineMarkdownStrip(summary)}
+		image={image?.src}
+		{imageAlt}
+		{createdAt}
+		{updatedAt}
+	/>
+	<body class="h-entry">
+		<SkipToContent
+			title="Skip to post content"
+			target="post-contents"
+		/>
+		<SiteNav />
+		<header id="post-header">
+			<div id="post-header-wrapper">
+				{draft && <span id="post-draft-tag">DRAFT</span>}
+				<a id="post-title" class="u-uid u-url" href={url}>
+					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(title)} /></h1>
+				</a>
+
+				{
+					image && (imageRights ? (
+						<figure id="hero-image">
+							<Image
+								src={image}
+								alt={imageAlt ?? ''}
+								itemprop="image"
+								loading="eager"
+							/>
+							<figcaption><Fragment set:html={inlineMarkdownRender(imageRights)} /></figcaption>
+						</figure>
+					) : (
+						<Image
+							id="hero-image"
+							src={image}
+							alt={imageAlt ?? ''}
+							itemprop="image"
+							loading="eager"
+						/>
+					))
+				}
+
+				<blockquote id="post-summary" class="p-summary" itemprop="description">
+					<p><Fragment set:html={inlineMarkdownRender(summary)} /></p>
+				</blockquote>
+
+				<aside id="post-metadata">
+					<small>
+						<span>
+							Published on <time itemprop="datePublished" class="dt-published" datetime={createdAt.toISOString()}>{formatter.format(createdAt)}</time>.
+						</span>
+
+						{
+							updatedAt && (
+								<span>
+									Updated on <time itemprop="dateModified" class="dt-updated" datetime={updatedAt.toISOString()}>{formatter.format(updatedAt)}</time>
+									{
+										updates && updates.length > 0 && (
+											<a href="#update-history" aria-label="Go to updates section">
+												<Icon name="uil:sync-exclamation" title="" role="presentation" />
+											</a>
+										)
+									}
+								</span>
+							)
+						}
+					</small>
+
+					{
+						readingTime && (
+							<small>
+								<time itemprop="timeRequired" class="dt-duration" datetime={`PT${readingTime}M`}>
+									{readingTime} minute read
+								</time>
+								{wordCount && <span> &mdash; {wordCount} words</span>}
+							</small>
+						)
+					}
+				</aside>
+
+				<aside id="post-share" aria-label="Share options">
+					<button
+						id="ps-copy"
+						type="button"
+						title="Copy link to clipboard"
+					>
+						<Icon name="uil:link" title="" role="presentation" />
+						<sr-only>Copy link to clipboard</sr-only>
+					</button>
+					<button
+						id="ps-email"
+						type="button"
+						title="Send post by email"
+					>
+						<Icon name="uil:envelope-share" title="" role="presentation" />
+						<sr-only>Send post by email</sr-only>
+					</button>
+					<button
+						id="ps-native"
+						type="button"
+						title="Share using native app"
+					>
+						<Icon name="uil:share-alt" title="" role="presentation" />
+						<sr-only>Share using native app</sr-only>
+					</button>
+					<script src="./index.ts"></script>
+				</aside>
+			</div>
+		</header>
+
+		<scroll-to-top>
+			<hr id="page-top" />
+
+			<a id="scroll-to-top-link" href="#page-top">
+				<Icon name="uil:top-arrow-to-top" title="" role="presentation" />
+				<span>Scroll to top</span>
+				<Icon name="uil:top-arrow-to-top" title="" role="presentation" />
+			</a>
+		</scroll-to-top>
+
+		<main>
+			<article id="post-contents" itemprop="articleBody" class="e-content">
+				{
+					updates && (
+						<aside id="update-history">
+							<details open>
+								<summary>Update History</summary>
+								<ul>
+									{
+										updates.map((update) => (
+											<li>
+												<time
+													datetime={update.date.toISOString()}
+													title={update.date.toISOString()}
+												>
+													{formatUpdateDate(update.date)}
+												</time>
+												<span>&mdash;</span>
+												<span>{update.changes}</span>
+											</li>
+										))
+									}
+								</ul>
+							</details>
+						</aside>
+					)
+				}
+
+				<Content />
+			</article>
+
+			<hr id="post-separator" />
+		</main>
+
+		<footer id="page-footer">
+			<aside class="author-card-wrapper">
+				<div class="author-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
+					<a class="author-picture" href="https://madcampos.dev/">
+						<m-avatar>
+							<picture
+								class="user-avatar"
+								itemprop="image"
+								itemscope
+								itemtype="https://schema.org/ImageObject"
+							>
+								<Image
+									class="u-photo photo"
+									itemprop="contentUrl"
+									src={avatar}
+									alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
+									loading="lazy"
+									widths={[128, 256, 512, 768, 1024]}
+									width={512}
+									sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+									quality={75}
+								/>
+							</picture>
+						</m-avatar>
+					</a>
+
+					<a class="p-author h-card author-name" rel="author" itemprop="url" href="https://madcampos.dev/">
+						<h2 itemprop="name">Marco Campos</h2>
+					</a>
+
+					<div class="author-bio">
+						<small>
+							Marco is a Senior web developer with over 10 years of experience, ranging from front-end to back-end development, and as he likes to put it: "When I
+							started layouts were done with tables and Flash was still a thing." He has a passion for accessibility and PWAs and loves to teach and share his
+							knowledge with others. He strongly believe that technology and specially the web should be open and available to eveyone, and that's why he's always
+							looking for ways to make the web a better place and contribute to open source projects.
+						</small>
+					</div>
+				</div>
+			</aside>
+
+			<!--
+				<aside>
+					<details>
+						<summary>This post in other platforms</summary>
+						<ul>
+							<li>
+								<a class="u-syndication u-as-downstream-duplicate u-alternate" rel="syndication" href="">...</a>
+							</li>
+						</ul>
+					</details>
+				</aside>
+			-->
+			<!--
+				<aside>
+					<details>
+						<summary>Comments and mentions</summary>
+					</details>
+				</aside>
+			-->
+
+			{
+				tags && tags.length > 0 && (
+					<details class="tag-list" open>
+						<summary>Tags</summary>
+						<ul>
+							{tags.map((tag) => <li class="p-category tag"><a href={`/blog/tags/${tag}/`}>{tag}</a></li>)}
+						</ul>
+					</details>
+				)
+			}
+
+			{
+				relatedPosts && relatedPosts.length > 0 && (
+					<details id="related-posts" open>
+						<summary id="related-posts-title">Related Posts</summary>
+						<div id="related-posts-wrapper">
+							<nav aria-labelledby="related-posts-title">
+								<ul>
+									{
+										relatedPosts.map((post) => (
+											<li>
+												<Card
+													url={`/blog/${post.url}/`}
+													itemtype="https://schema.org/BlogPosting"
+													image={post.image}
+													imageAlt={post.imageAlt ?? ''}
+												>
+													<Fragment slot="title" set:html={inlineMarkdownRender(post.title)} />
+
+													<Fragment set:html={inlineMarkdownRender(post.summary)} />
+												</Card>
+											</li>
+										))
+									}
+								</ul>
+							</nav>
+						</div>
+					</details>
+				)
+			}
+
+			<aside id="post-license">
+				<small>
+					<em>
+						Unless otherwise noted, all content on this site is licensed under a
+						<a href="/license" class="u-license">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+					</em>
+				</small>
+			</aside>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+	</body>
+</html>

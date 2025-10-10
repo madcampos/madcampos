@@ -1,31 +1,52 @@
 ---
 import '../assets/css/pages/404.css';
-import GlitchLogo from '../components/GlitchLogo/GlitchLogo.astro';
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
+import Logo from '../components/Logo/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import { ERROR } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 ---
-<BaseLayout
-	htmlTitle={ERROR.title}
-	title={ERROR.titleString}
-	description={ERROR.description}
-	url={ERROR.url}
-	tags={ERROR.tags}
->
-	<SkipToContent slot="header" />
-	<header slot="header">
-		<SiteNav />
-		<div>
-			<GlitchLogo />
-		</div>
-		<h1>404 - Not found</h1>
-	</header>
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="404 | Marco Campos"
+		description="404 - Not Found"
+		url={Astro.url.href}
+	/>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Page Not Found"
+						shortSubtitle="404"
+						url="/"
+						title="Home Page"
+						micro
+						glitch
+					/>
+					<h1>404 - Not Found</h1>
+				</div>
+			</header>
 
-	<div id="contents">
-		<p>Looks like you hit a dead end.</p>
-		<p>
-			<a href="/">Go back home</a>
-		</p>
-	</div>
-</BaseLayout>
+			<div id="contents">
+				<p>Looks like you hit a dead end.</p>
+				<p>
+					<a href="/">Go back home</a>
+				</p>
+			</div>
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

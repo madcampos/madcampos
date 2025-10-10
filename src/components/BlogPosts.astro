@@ -1,0 +1,135 @@
+---
+import '../assets/css/pages/blog.css';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import type { Post } from '../utils/post.js';
+import Card from './Card/Card.astro';
+import CSSNakedDay from './CSSNakedDay/CSSNakedDay.astro';
+import Effects from './Effects/Effects.astro';
+import HtmlHead from './HtmlHead/HtmlHead.astro';
+import IabEscape from './IabEscape/IabEscape.astro';
+import Logo from './Logo/Logo.astro';
+import OldStyleButtons from './OldStyleButtons/OldStyleButtons.astro';
+import Pagination from './Pagination/Pagination.astro';
+import SiteNav from './SiteNav/SiteNav.astro';
+import SkipToContent from './SkipToContent/SkipToContent.astro';
+import Webrings from './Webrings/Webrings.astro';
+
+interface Props {
+	posts: Post[];
+	title?: string;
+	baseUrl: string;
+	currentPage: number;
+	lastPage: number;
+	prevUrl?: string;
+	nextUrl?: string;
+	start: number;
+	end: number;
+	total: number;
+	size: number;
+}
+
+const {
+	title = '',
+	posts,
+	baseUrl,
+	currentPage,
+	lastPage,
+	prevUrl,
+	nextUrl,
+	start,
+	end,
+	total,
+	size
+} = Astro.props;
+
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/Blog">
+	<HtmlHead
+		title={`${title} | Marco Campos' Blog`}
+		description="A space where I talk about web development and other programming related (or not) things"
+		url={Astro.url.href}
+	/>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent target="posts-list" />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Blog"
+						shortSubtitle="Blog"
+						url="/blog/"
+						title="Blog"
+					/>
+					<h1>{title}</h1>
+				</div>
+			</header>
+
+			<div id="posts-list">
+				{
+					posts.map((post) => (
+						<Card
+							url={`/blog/${post.url}/`}
+							itemtype="https://schema.org/BlogPosting"
+							draft={post.data.draft}
+							image={post.data.image}
+							imageAlt={post.data.imageAlt ?? ''}
+						>
+							<h2 slot="title">
+								<Fragment set:html={inlineMarkdownRender(post.data.title)} />
+							</h2>
+							<small slot="subtitle" class="post-time">
+								<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
+							</small>
+
+							<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
+
+							<a slot="links" class="read-more-link" href={`/blog/${post.url}/`}>
+								<span>Read more</span>
+								<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
+								<span>...</span>
+							</a>
+							{
+								post.data.tags && post.data.tags.length > 0 && (
+									<details class="tag-list" slot="footer">
+										<summary>Tags</summary>
+										<ul>
+											{
+												Object.entries(post.data.tags).map(([tag, url]) => (
+													<li class="p-category tag">
+														<a href={`/blog/tags/${url}/`}>{tag}</a>
+													</li>
+												))
+											}
+										</ul>
+									</details>
+								)
+							}
+						</Card>
+					))
+				}
+			</div>
+		</main>
+
+		<footer id="page-footer">
+			<Pagination
+				{baseUrl}
+				{currentPage}
+				{lastPage}
+				{prevUrl}
+				{nextUrl}
+				{start}
+				{end}
+				{total}
+				{size}
+			/>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>

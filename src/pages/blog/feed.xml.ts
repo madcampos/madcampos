@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
 import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
-import { BLOG } from '../../constants.js';
 import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllPosts } from '../../utils/post.js';
 
@@ -17,7 +16,7 @@ export const GET: APIRoute = async (context) => {
 
 	baseUrl.protocol = 'https:';
 
-	const blogUrl = new URL(BLOG.url, baseUrl).toString();
+	const blogUrl = new URL('/blog/', baseUrl).toString();
 	const feedUrl = new URL('./feed.xml', blogUrl).toString();
 
 	const allPosts = await listAllPosts();
@@ -45,17 +44,16 @@ export const GET: APIRoute = async (context) => {
 	}));
 
 	const atomFeed = `<?xml version="1.0" encoding="UTF-8"?>
-		<?xml-stylesheet type="text/xsl" href="${new URL('feed.xsl', new URL(BLOG.url, baseUrl).toString()).toString()}"?>
 		<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
 			<title>Marco Campos' Blog</title>
-			<subtitle>${BLOG.description}</subtitle>
+			<subtitle>Marco Campos' Blog — A space where I talk about web development and other programming related (or not) things.</subtitle>
 			<id>${blogUrl}</id>
 			<link rel="alternate" type="text/html" href="${blogUrl}" />
 			<link rel="self" type="application/atom+xml" href="${feedUrl}" />
 			<updated>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toISOString()}</updated>
 			<generator uri="https://astro.build/">Astro</generator>
-			<logo>${escapeHtmlTags(new URL(blogImage.src, baseUrl).toString())}</logo>
-			<icon>${escapeHtmlTags(new URL(blogImage.src, baseUrl).toString())}</icon>
+			<logo>${escapeHtmlTags(new URL(blogImage.src, baseUrl).href)}</logo>
+			<icon>${escapeHtmlTags(new URL(blogImage.src, baseUrl).href)}</icon>
 			<author>
 				<name>Marco Campos</name>
 				<email>me@madcampos.dev</email>

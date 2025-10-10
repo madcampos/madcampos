@@ -1,5 +1,5 @@
 @layer components {
-	#iab-escape[open] {
+	iab-escape dialog[open] {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -11,10 +11,10 @@
 		height: clamp(10rem, 70vh, 35rem);
 		overscroll-behavior: contain;
 		text-align: center;
-	}
 
-	#iab-escape::backdrop {
-		backdrop-filter: blur(1rem);
-		background-color: rgba(0, 0, 0, 0.5);
+		&::backdrop {
+			backdrop-filter: blur(1rem);
+			background-color: rgba(0, 0, 0, 0.5);
+		}
 	}
 }

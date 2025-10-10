@@ -1,62 +1,85 @@
 ---
+import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
+import Effects from '../components/Effects/Effects.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants.js';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Style Guide', ...GLOBALS.title]}
-	title="Madcampos Style Guide"
-	description="Style Guide for my personal website."
-	url="/styleguide/"
-	tags={['css', 'html', 'meta', 'style', 'styleguide', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Style Guide"
-		shortSubtitle="Style"
-		url="/styleguide/"
-		urlTitle="Style Guide"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Madcampos Style Guide"
+		description="Style Guide for my personal website."
+		url={Astro.url.href}
+		tags={['css', 'html', 'meta', 'style', 'styleguide']}
 	/>
-	<Fragment slot="header">Style Guide</Fragment>
+	<body>
+		<CSSNakedDay />
+		<main>
+			<header id="page-header">
+				<SkipToContent />
+				<SiteNav />
+				<div>
+					<Logo
+						subtitle="Style Guide"
+						shortSubtitle="Style"
+						url="/styleguide/"
+						title="Style Guide"
+					/>
+					<h1>Style Guide</h1>
+				</div>
+			</header>
 
-	<!-- Colors -->
-	<!-- Fonts -->
-	<!-- Icons -->
-	<!-- Themes (as iframes?) -->
+			<!-- Colors -->
+			<!-- Fonts -->
+			<!-- Icons -->
+			<!-- Themes (as iframes?) -->
 
-	<!-- html elements -->
-	<!-- TODO: should those be separate pages in a directory structure with all only those things? -->
-	<!-- sectioning: address, article, aside, footer, header, h1-h6, hgroup, main, nav, section, search -->
-	<!-- block text content: blockquote, dd, div, dl, dt, figcaption, figure, hr, li, menu, ol, p, pre, ul -->
-	<!-- inline text content: a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kbd, mark, q, rp, rt, ruby, s, samp, small, span,strong, sub, sup, time, u, var, wbr -->
-	<!-- image and media: area, audio, img, map, track, video -->
-	<!-- mebedded content: embed, fencedframe, iframe, object, picture, portal, source -->
-	<!-- svg and math: svg, math -->
-	<!-- scripting: canvas, noscript, script -->
-	<!-- edits: del, ins -->
-	<!-- tables: caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr -->
-	<!-- forms: button, datalist, fieldset, form, input, label, legend, meter, optgroup, option, output, progress, select, textarea -->
-	<!-- interactive elements: details, dialog, summary -->
-	<!-- web components: slot, template -->
-	<!--
-		obsolete: acronym, big, center, content, dir, font, frame, frameset, image, marquee, menuitem, nobr, noembed, noframes, param, plaintext, rb, rtc, shadow, strike, tt, xmp
-	-->
+			<!-- html elements -->
+			<!-- TODO: should those be separate pages in a directory structure with all only those things? -->
+			<!-- sectioning: address, article, aside, footer, header, h1-h6, hgroup, main, nav, section, search -->
+			<!-- block text content: blockquote, dd, div, dl, dt, figcaption, figure, hr, li, menu, ol, p, pre, ul -->
+			<!-- inline text content: a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kbd, mark, q, rp, rt, ruby, s, samp, small, span,strong, sub, sup, time, u, var, wbr -->
+			<!-- image and media: area, audio, img, map, track, video -->
+			<!-- mebedded content: embed, fencedframe, iframe, object, picture, portal, source -->
+			<!-- svg and math: svg, math -->
+			<!-- scripting: canvas, noscript, script -->
+			<!-- edits: del, ins -->
+			<!-- tables: caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr -->
+			<!-- forms: button, datalist, fieldset, form, input, label, legend, meter, optgroup, option, output, progress, select, textarea -->
+			<!-- interactive elements: details, dialog, summary -->
+			<!-- web components: slot, template -->
+			<!--
+				obsolete: acronym, big, center, content, dir, font, frame, frameset, image, marquee, menuitem, nobr, noembed, noframes, param, plaintext, rb, rtc, shadow, strike, tt, xmp
+			-->
 
-	<!--
-		Another potential structure:
-		- Sectioning
-		- Block text
-		- Lists
-		- Inline text
-		- Images, media, and embedding (figure, picture, canvas, svg, etc)
-		- Tables
-		- Forms
-		- Interactive
-		- Web components (include styles for componetns not loaded yet)
-		- Math
-		- Ruby
-		- Obsolete
-	-->
-	<!-- Ref: https://alexandersandberg.github.io/html5-elements-tester/ -->
-</InternalPageLayout>
+			<!--
+				Another potential structure:
+				- Sectioning
+				- Block text
+				- Lists
+				- Inline text
+				- Images, media, and embedding (figure, picture, canvas, svg, etc)
+				- Tables
+				- Forms
+				- Interactive
+				- Web components (include styles for componetns not loaded yet)
+				- Math
+				- Ruby
+				- Obsolete
+			-->
+			<!-- Ref: https://alexandersandberg.github.io/html5-elements-tester/ -->
+		</main>
+
+		<footer id="page-footer">
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<Effects />
+		<IabEscape />
+	</body>
+</html>
