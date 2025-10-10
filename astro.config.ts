@@ -29,6 +29,9 @@ export default defineConfig({
 	output: 'static',
 	site: 'https://madcampos.dev/',
 	base: '/',
+	redirects: mode !== 'production'
+		? { '/api/': 'https://localhost:4242/api/' }
+		: {},
 	trailingSlash: 'ignore',
 	devToolbar: { enabled: false },
 	compressHTML: true,
