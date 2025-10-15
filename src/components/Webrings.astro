@@ -1,0 +1,45 @@
+---
+import './styles.css';
+import { Icon } from 'astro-icon/components';
+---
+<m-webrings>
+	<details id="webrings">
+		<summary>
+			<h2 id="webrings-label">
+				<Icon name="uil:globe" title="" role="presentation" />
+				<span>Webrings links</span>
+			</h2>
+		</summary>
+
+		<div id="webrings-list">
+			<article id="a11y-webring-club" class="webring" aria-labelledby="a11y-webring-club-header">
+				<h3 id="a11y-webring-club-header">a11y-webring.club</h3>
+
+				<blockquote>
+					<p>This site is a member of the <a rel="external" href="https://a11y-webring.club/">a11y-webring.club</a>.</p>
+				</blockquote>
+
+				<ul>
+					<li class="webring-previous-website">
+						<a rel="external" referrerpolicy="strict-origin" rel="external noopener" href="https://a11y-webring.club/prev">
+							<Icon name="uil:angle-double-left" title="" role="presentation" />
+							<span>Previous website</span>
+						</a>
+					</li>
+					<li>
+						<a rel="external" referrerpolicy="strict-origin" rel="external noopener" href="https://a11y-webring.club/random">
+							<Icon name="uil:arrow-random" title="" role="presentation" />
+							<span>Random website</span>
+						</a>
+					</li>
+					<li class="webring-next-website">
+						<a rel="external" referrerpolicy="strict-origin" rel="external noopener" href="https://a11y-webring.club/next">
+							<span>Next website</span>
+							<Icon name="uil:angle-double-right" title="" role="presentation" />
+						</a>
+					</li>
+				</ul>
+			</article>
+		</div>
+	</details>
+</m-webrings>

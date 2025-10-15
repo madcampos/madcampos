@@ -3,9 +3,9 @@ import type { Root } from 'mdast';
 import type { ContainerDirective, LeafDirective, TextDirective } from 'mdast-util-directive';
 import { visit } from 'unist-util-visit';
 import { features } from 'web-features';
-import { render as renderBaseline } from '../components/Baseline/Baseline.ts';
-import { render as renderCodepen } from '../components/CodepenEmbed/CodepenEmbed.ts';
-import { render as renderYoutube } from '../components/YoutubeEmbed/YoutubeEmbed.ts';
+import { render as renderBaseline } from '../assets/js/components/Baseline.ts';
+import { render as renderCodepen } from '../assets/js/components/CodepenEmbed.ts';
+import { render as renderYoutube } from '../assets/js/components/youtube.ts';
 
 interface VFile {
 	fail(reason: string, parentNode?: unknown): void;

@@ -1,14 +1,12 @@
 ---
 import '../assets/css/pages/sitemap.css';
-import CSSNakedDay from '../components/CSSNakedDay/CSSNakedDay.astro';
-import Effects from '../components/Effects/Effects.astro';
-import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import Effects from '../components/Effects.astro';
+import HtmlHead from '../components/HtmlHead.astro';
 import IabEscape from '../components/IabEscape/IabEscape.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import Webrings from '../components/Webrings/Webrings.astro';
+import Webrings from '../components/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.js';
 import { listPostsByYearAndMonth } from '../utils/post.js';
 import { listAllTalks } from '../utils/talks.js';
@@ -78,106 +76,120 @@ const blogPages = await listPostsByYearAndMonth();
 		url={Astro.url.href}
 	/>
 	<body>
-		<CSSNakedDay />
-		<main>
-			<header id="page-header">
-				<SkipToContent />
-				<SiteNav />
-				<div>
-					<Logo
-						subtitle="Site Map"
-						shortSubtitle="Map"
-						url="/sitemap/"
-						title="Site Map Page"
-					/>
-					<h1>Site Map</h1>
-				</div>
-			</header>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+
+		<css-naked-day hidden>
+			<div id="css-banner">
+				<hr />
+				<h2>Why this website looks so weird?</h2>
+				<p>We are celebrating CSS Naked Day!</p>
+				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+				<hr />
+			</div>
+			<script src="./index.ts"></script>
+		</css-naked-day>
+
+		<header id="page-header">
+			<div>
+				<Logo
+					subtitle="Site Map"
+					shortSubtitle="Map"
+					url="/sitemap/"
+					title="Site Map Page"
+				/>
+				<h1>Site Map</h1>
+			</div>
+		</header>
+
+		<main id="main">
+			<h2>About Pages</h2>
+			<dl>
+				{
+					aboutPages.map(({ url, title, description, hidden, wip }) => (
+						<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+							<a href={url}>
+								<Fragment set:html={inlineMarkdownRender(title)} />
+							</a>
+						</dt>
+						<dd>
+							<Fragment set:html={inlineMarkdownRender(description)} />
+						</dd>
+					))
+				}
+			</dl>
+			<h2>Cool Pages</h2>
+			<dl>
+				{
+					coolPages.map(({ url, title, description, hidden, wip }) => (
+						<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+							<a href={url}>
+								<Fragment set:html={inlineMarkdownRender(title)} />
+							</a>
+						</dt>
+						<dd>
+							<Fragment set:html={inlineMarkdownRender(description)} />
+						</dd>
+					))
+				}
+			</dl>
+			<h2>Talks Pages</h2>
+			<dl>
+				<dt><a href="/talks/">Talks Home</a></dt>
+				<dd>A list of talks that I've presented before.</dd>
+				{
+					talkPages.map(({ url, title, description, hidden, wip }) => (
+						<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+							<a href={url}>
+								<Fragment set:html={inlineMarkdownRender(title)} />
+							</a>
+						</dt>
+						<dd>
+							<Fragment set:html={inlineMarkdownRender(description)} />
+						</dd>
+					))
+				}
+			</dl>
+			<h2>Blog</h2>
+			<dl>
+				<dt><a href="/blog/">Blog Home</a></dt>
+				<dd>The blog main page.</dd>
+
+				{
+					blogPages.entries().map(([year, months]) => (
+						<dt><a href={`/blog/${year}/`}>{year}</a></dt>
+						<dd>
+							<dl>
+								{
+									months.entries().map(([month, posts]) => (
+										<dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>
+										<dd>
+											<dl>
+												{
+													posts.map(({ url, data: { title, summary, draft } }) => (
+														<dt data-wip={draft || null}>
+															<a href={`/blog/${url}/`}>
+																<Fragment set:html={inlineMarkdownRender(title)} />
+															</a>
+														</dt>
+														<dd>
+															<Fragment set:html={inlineMarkdownRender(summary)} />
+														</dd>
+													))
+												}
+											</dl>
+										</dd>
+									))
+								}
+							</dl>
+						</dd>
+					))
+				}
+			</dl>
 		</main>
-
-		<h2>About Pages</h2>
-		<dl>
-			{
-				aboutPages.map(({ url, title, description, hidden, wip }) => (
-					<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
-						<a href={url}>
-							<Fragment set:html={inlineMarkdownRender(title)} />
-						</a>
-					</dt>
-					<dd>
-						<Fragment set:html={inlineMarkdownRender(description)} />
-					</dd>
-				))
-			}
-		</dl>
-		<h2>Cool Pages</h2>
-		<dl>
-			{
-				coolPages.map(({ url, title, description, hidden, wip }) => (
-					<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
-						<a href={url}>
-							<Fragment set:html={inlineMarkdownRender(title)} />
-						</a>
-					</dt>
-					<dd>
-						<Fragment set:html={inlineMarkdownRender(description)} />
-					</dd>
-				))
-			}
-		</dl>
-		<h2>Talks Pages</h2>
-		<dl>
-			<dt><a href="/talks/">Talks Home</a></dt>
-			<dd>A list of talks that I've presented before.</dd>
-			{
-				talkPages.map(({ url, title, description, hidden, wip }) => (
-					<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
-						<a href={url}>
-							<Fragment set:html={inlineMarkdownRender(title)} />
-						</a>
-					</dt>
-					<dd>
-						<Fragment set:html={inlineMarkdownRender(description)} />
-					</dd>
-				))
-			}
-		</dl>
-		<h2>Blog</h2>
-		<dl>
-			<dt><a href="/blog/">Blog Home</a></dt>
-			<dd>The blog main page.</dd>
-
-			{
-				blogPages.entries().map(([year, months]) => (
-					<dt><a href={`/blog/${year}/`}>{year}</a></dt>
-					<dd>
-						<dl>
-							{
-								months.entries().map(([month, posts]) => (
-									<dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>
-									<dd>
-										<dl>
-											{
-												posts.map(({ url, data: { title, summary, draft } }) => (
-													<dt data-wip={draft || null}>
-														<a href={`/blog/${url}/`}>
-															<Fragment set:html={inlineMarkdownRender(title)} />
-														</a>
-													</dt>
-													<dd>
-														<Fragment set:html={inlineMarkdownRender(summary)} />
-													</dd>
-												))
-											}
-										</dl>
-									</dd>
-								))
-							}
-						</dl>
-					</dd>
-				))
-			}
-		</dl>
 
 		<footer id="page-footer">
 			<OldStyleButtons />

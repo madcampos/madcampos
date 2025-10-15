@@ -1,18 +1,16 @@
 ---
+import { Icon } from 'astro-icon/components';
 import '../assets/css/pages/blog.css';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import type { Post } from '../utils/post.js';
 import Card from './Card/Card.astro';
-import CSSNakedDay from './CSSNakedDay/CSSNakedDay.astro';
-import Effects from './Effects/Effects.astro';
-import HtmlHead from './HtmlHead/HtmlHead.astro';
+import Effects from './Effects.astro';
+import HtmlHead from './HtmlHead.astro';
 import IabEscape from './IabEscape/IabEscape.astro';
 import Logo from './Logo/Logo.astro';
 import OldStyleButtons from './OldStyleButtons/OldStyleButtons.astro';
-import Pagination from './Pagination/Pagination.astro';
 import SiteNav from './SiteNav/SiteNav.astro';
-import SkipToContent from './SkipToContent/SkipToContent.astro';
-import Webrings from './Webrings/Webrings.astro';
+import Webrings from './Webrings.astro';
 
 interface Props {
 	posts: Post[];
@@ -43,6 +41,20 @@ const {
 } = Astro.props;
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+const TRIM_PAGE_NUMBER = 2;
+const firstPageInNav = Math.max(1, currentPage - TRIM_PAGE_NUMBER);
+const lastPageInNav = Math.min(lastPage, currentPage + TRIM_PAGE_NUMBER);
+
+const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i) => {
+	const currentPageNumber = firstPageInNav + i;
+	const href = currentPageNumber === 1 ? '' : `${currentPageNumber.toString()}/`;
+
+	return {
+		label: currentPageNumber.toString(),
+		url: `${baseUrl}${href}`,
+		isCurrentPage: currentPageNumber === currentPage
+	};
+});
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/Blog">
@@ -52,80 +64,154 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		url={Astro.url.href}
 	/>
 	<body>
-		<CSSNakedDay />
-		<main>
-			<header id="page-header">
-				<SkipToContent target="posts-list" />
-				<SiteNav />
-				<div>
-					<Logo
-						subtitle="Blog"
-						shortSubtitle="Blog"
-						url="/blog/"
-						title="Blog"
-					/>
-					<h1>{title}</h1>
-				</div>
-			</header>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-			<div id="posts-list">
-				{
-					posts.map((post) => (
-						<Card
-							url={`/blog/${post.url}/`}
-							itemtype="https://schema.org/BlogPosting"
-							draft={post.data.draft}
-							image={post.data.image}
-							imageAlt={post.data.imageAlt ?? ''}
-						>
-							<h2 slot="title">
-								<Fragment set:html={inlineMarkdownRender(post.data.title)} />
-							</h2>
-							<small slot="subtitle" class="post-time">
-								<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
-							</small>
-
-							<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
-
-							<a slot="links" class="read-more-link" href={`/blog/${post.url}/`}>
-								<span>Read more</span>
-								<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
-								<span>...</span>
-							</a>
-							{
-								post.data.tags && post.data.tags.length > 0 && (
-									<details class="tag-list" slot="footer">
-										<summary>Tags</summary>
-										<ul>
-											{
-												Object.entries(post.data.tags).map(([tag, url]) => (
-													<li class="p-category tag">
-														<a href={`/blog/tags/${url}/`}>{tag}</a>
-													</li>
-												))
-											}
-										</ul>
-									</details>
-								)
-							}
-						</Card>
-					))
-				}
+		<SiteNav />
+		<css-naked-day hidden>
+			<div id="css-banner">
+				<hr />
+				<h2>Why this website looks so weird?</h2>
+				<p>We are celebrating CSS Naked Day!</p>
+				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+				<hr />
 			</div>
+			<script src="./index.ts"></script>
+		</css-naked-day>
+
+		<header id="page-header">
+			<div>
+				<Logo
+					subtitle="Blog"
+					shortSubtitle="Blog"
+					url="/blog/"
+					title="Blog"
+				/>
+				<h1>{title}</h1>
+			</div>
+		</header>
+
+		<main id="main">
+			{
+				posts.map((post) => (
+					<Card
+						url={`/blog/${post.url}/`}
+						itemtype="https://schema.org/BlogPosting"
+						draft={post.data.draft}
+						image={post.data.image}
+						imageAlt={post.data.imageAlt ?? ''}
+					>
+						<h2 slot="title">
+							<Fragment set:html={inlineMarkdownRender(post.data.title)} />
+						</h2>
+						<small slot="subtitle" class="post-time">
+							<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
+						</small>
+
+						<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
+
+						<a slot="links" class="read-more-link" href={`/blog/${post.url}/`}>
+							<span>Read more</span>
+							<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
+							<span>...</span>
+						</a>
+						{
+							post.data.tags && post.data.tags.length > 0 && (
+								<details class="tag-list" slot="footer">
+									<summary>Tags</summary>
+									<ul>
+										{
+											Object.entries(post.data.tags).map(([tag, url]) => (
+												<li class="p-category tag">
+													<a href={`/blog/tags/${url}/`}>{tag}</a>
+												</li>
+											))
+										}
+									</ul>
+								</details>
+							)
+						}
+					</Card>
+				))
+			}
 		</main>
 
 		<footer id="page-footer">
-			<Pagination
-				{baseUrl}
-				{currentPage}
-				{lastPage}
-				{prevUrl}
-				{nextUrl}
-				{start}
-				{end}
-				{total}
-				{size}
-			/>
+			<m-pagination>
+				<nav aria-label="Pagination">
+					<div id="pagination">
+						<a
+							href={baseUrl}
+							id="first-page"
+						>
+							<Icon name="uil:angle-double-left" title="" role="presentation" />
+							<span class="pagination-link-text">First<sr-only> page</sr-only></span>
+						</a>
+
+						<a
+							href={prevUrl ? prevUrl : null}
+							aria-disabled={!prevUrl ? 'true' : null}
+							id="prev-page"
+						>
+							<Icon name="uil:angle-left" title="" role="presentation" />
+							<span class="pagination-link-text">Previous<sr-only> page</sr-only></span>
+						</a>
+
+						<ol>
+							{
+								firstPageInNav > 1 && (
+									<>
+										<li><a href={baseUrl}><sr-only>Page </sr-only>1</a></li>
+										<li><span>…</span></li>
+									</>
+								)
+							}
+
+							{
+								navLinks.map(({ url, label, isCurrentPage }) => (
+									<li>
+										<a
+											href={`${url}${isCurrentPage ? '#' : ''}`}
+											aria-current={isCurrentPage ? 'page' : null}
+										><sr-only>Page </sr-only>{label}</a>
+									</li>
+								))
+							}
+
+							{
+								lastPageInNav < lastPage && (
+									<>
+										<li><span>…</span></li>
+										<li><a href={`${baseUrl}${lastPage}/`}><sr-only>Page </sr-only>{lastPage}</a></li>
+									</>
+								)
+							}
+						</ol>
+
+						<a
+							href={nextUrl ? nextUrl : null}
+							aria-disabled={!nextUrl ? 'true' : null}
+							id="next-page"
+						>
+							<span class="pagination-link-text">Next<sr-only> page</sr-only></span>
+							<Icon name="uil:angle-right" title="" role="presentation" />
+						</a>
+
+						<a
+							href={`${baseUrl}${lastPage}/`}
+							id="last-page"
+						>
+							<span class="pagination-link-text">Last<sr-only> page</sr-only></span>
+							<Icon name="uil:angle-double-right" title="" role="presentation" />
+						</a>
+					</div>
+					<aside id="pagination-info">
+						{start + 1} &mdash; {end + 1} of {total} ({size} per page)
+					</aside>
+				</nav>
+			</m-pagination>
+
 			<OldStyleButtons />
 			<Webrings />
 		</footer>

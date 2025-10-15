@@ -22,7 +22,7 @@
 		"binaryExpression.linePerExpression": false,
 		"jsx.bracketPosition": "nextLine",
 		"jsx.forceNewLinesSurroundingContent": false,
-		"jsx.multiLineParens": "always",
+		"jsx.multiLineParens": "prefer",
 		"memberExpression.linePerExpression": false,
 		"typeLiteral.separatorKind": "comma",
 		"enumDeclaration.memberSpacing": "newLine",

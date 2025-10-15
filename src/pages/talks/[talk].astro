@@ -3,15 +3,13 @@ import '../../assets/css/pages/talk.css';
 import '../../assets/css/code.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
-import CSSNakedDay from '../../components/CSSNakedDay/CSSNakedDay.astro';
-import Effects from '../../components/Effects/Effects.astro';
-import HtmlHead from '../../components/HtmlHead/HtmlHead.astro';
+import Effects from '../../components/Effects.astro';
+import HtmlHead from '../../components/HtmlHead.astro';
 import IabEscape from '../../components/IabEscape/IabEscape.astro';
 import Logo from '../../components/Logo/Logo.astro';
 import OldStyleButtons from '../../components/OldStyleButtons/OldStyleButtons.astro';
 import SiteNav from '../../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../../components/SkipToContent/SkipToContent.astro';
-import Webrings from '../../components/Webrings/Webrings.astro';
+import Webrings from '../../components/Webrings.astro';
 import { listAllTalks } from '../../utils/talks.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -61,25 +59,39 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		createdAt={date}
 	/>
 	<body>
-		<CSSNakedDay />
-		<main>
-			<header id="page-header">
-				<SkipToContent />
-				<SiteNav />
-				<div>
-					<Logo
-						subtitle="Talks"
-						shortSubtitle="Talks"
-						url="/talks/"
-						title="Talks Page"
-					/>
-					<h1 itemprop="name">
-						{draft && <draft-tag>Draft</draft-tag>}
-						{title}
-					</h1>
-				</div>
-			</header>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
+		<SiteNav />
+
+		<css-naked-day hidden>
+			<div id="css-banner">
+				<hr />
+				<h2>Why this website looks so weird?</h2>
+				<p>We are celebrating CSS Naked Day!</p>
+				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+				<hr />
+			</div>
+			<script src="./index.ts"></script>
+		</css-naked-day>
+
+		<header id="page-header">
+			<div>
+				<Logo
+					subtitle="Talks"
+					shortSubtitle="Talks"
+					url="/talks/"
+					title="Talks Page"
+				/>
+				<h1 itemprop="name">
+					{draft && <draft-tag>Draft</draft-tag>}
+					{title}
+				</h1>
+			</div>
+		</header>
+
+		<main id="main">
 			<h2>
 				<Icon name="uil:info-circle" title="" role="presentation" />
 				Talk info

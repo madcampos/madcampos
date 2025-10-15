@@ -1,4 +1,4 @@
-import { SiteSettings } from '../../assets/js/settings.ts';
+import { SiteSettings } from '../settings.ts';
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (!document.body.classList.contains('js-enabled')) {
