@@ -1,5 +1,4 @@
 ---
-import './styles.css';
 import { Icon } from 'astro-icon/components';
 
 interface SiteTheme {
@@ -71,8 +70,6 @@ const themes: SiteTheme[] = [
 ---
 <theme-switcher>
 	<aside id="theme-switcher">
-		<script src="./index.ts"></script>
-
 		<button type="button" popovertarget="theme-switcher-dialog" aria-label="Theme Switcher">
 			<Icon name="uil:palette" title="" role="presentation" />
 		</button>

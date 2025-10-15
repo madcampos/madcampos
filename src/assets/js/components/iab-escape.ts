@@ -1,6 +1,6 @@
 // Ref: https://frontendmasters.com/blog/the-pitfalls-of-in-app-browsers/
 import InAppSpy, { SFSVCExperimental } from 'inapp-spy';
-import { SiteSettings } from '../../assets/js/settings.ts';
+import { SiteSettings } from '../settings.ts';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	if (!document.body.classList.contains('js-enabled')) {

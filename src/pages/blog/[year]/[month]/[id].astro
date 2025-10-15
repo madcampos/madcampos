@@ -3,11 +3,11 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../../../assets/images/me.jpg';
-import Card from '../../../../components/Card/Card.astro';
+import Card from '../../../../components/Card.astro';
 import Effects from '../../../../components/Effects.astro';
 import HtmlHead from '../../../../components/HtmlHead.astro';
-import OldStyleButtons from '../../../../components/OldStyleButtons/OldStyleButtons.astro';
-import SiteNav from '../../../../components/SiteNav/SiteNav.astro';
+import OldStyleButtons from '../../../../components/OldStyleButtons.astro';
+import SiteNav from '../../../../components/SiteNav.astro';
 import Webrings from '../../../../components/Webrings.astro';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../../../../utils/markdown.js';
 import { listAllPosts } from '../../../../utils/post.js';
@@ -80,7 +80,6 @@ const formatUpdateDate = (date: Date) =>
 				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
 				<hr />
 			</div>
-			<script src="./index.ts"></script>
 		</css-naked-day>
 
 		<header id="post-header">
@@ -175,7 +174,6 @@ const formatUpdateDate = (date: Date) =>
 						<Icon name="uil:share-alt" title="" role="presentation" />
 						<sr-only>Share using native app</sr-only>
 					</button>
-					<script src="./index.ts"></script>
 				</aside>
 			</div>
 		</header>

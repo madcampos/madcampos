@@ -1,6 +1,7 @@
 ---
-import printStylesheet from '../../assets/css/print.css?url';
-import defaultSocialImage from '../../assets/images/social/social.png';
+import baseStyles from '../assets/css/index.css?url';
+import printStylesheet from '../assets/css/print.css?url';
+import defaultSocialImage from '../assets/images/social/social.png';
 
 interface Props {
 	title: string;
@@ -97,10 +98,8 @@ const {
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<!-- Default CSS layers -->
-	<style is:inline>
-		@layer fonts, vars, base, pages, components, code, theme, print, contrast;
-	</style>
+	<!-- Root styles -->
+	<link rel="stylesheet" type="text/css" href={baseStyles} />
 
 	<!-- Print Stylesheet -->
 	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
@@ -116,6 +115,4 @@ const {
 			}]
 		}
 	</script>
-
-	<script src="./index.ts"></script>
 </head>
