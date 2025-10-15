@@ -1,6 +1,6 @@
 # Hello You! 🙋‍♂️
 
-I am a developer and designer who likes colorful and beautifull things, good food and puzzles.
+I am a developer and designer who likes colorful and beautiful things, good food and puzzles.
 My language of choice is javascript, but I do work with whatever tool gets the job done.
 
 ## 📢 Reach me at
@@ -15,7 +15,7 @@ Working @[LightsOn Software](https://lightsonsoftware.com/), with lots of Javasc
 
 - React
 - Typescript
-- Powershell
+- PowerShell
 
 ## ℹ Fun facts
 
