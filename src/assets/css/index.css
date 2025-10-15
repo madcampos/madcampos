@@ -1,6 +1,7 @@
 @layer fonts, vars, base, pages, components, code, theme, print, contrast;
 
 @import url('./fonts.css');
+@import 'open-props/style' layer(vars);
 @import url('./vars.css');
 @import url('./base.css');
 @import url('./components/index.css');

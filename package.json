@@ -15,24 +15,17 @@
 		"bootstrap:types": "wrangler types server/env.d.ts",
 		"bootstrap:certs": "mkdir certs && mkcert -key-file='./certs/server.key' -cert-file='./certs/server.crt' 'localhost'",
 		"bootstrap": "npm run bootstrap:types && npm run bootstrap:astro",
-
 		"prestart:api": "npm run bootstrap:types",
 		"start:api": "wrangler dev --env=local --https-cert-path certs/server.crt --https-key-path certs/server.key",
-
 		"prestart": "npm run bootstrap:astro",
 		"start": "astro dev --site=https://localhost:3000/",
-
 		"prebuild": "npm run bootstrap",
 		"build": "astro build",
-
 		"prepreview": "npm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
-
 		"predeploy": "npm run build",
 		"deploy": "wrangler deploy --minify --env=\"\"",
-
 		"format": "dprint fmt --staged",
-
 		"typecheck": "tsc --noEmit",
 		"lint:js": "eslint --fix",
 		"lint:md": "astro check",
@@ -81,6 +74,7 @@
 	},
 	"dependencies": {
 		"inapp-spy": "^5.0.5",
+		"open-props": "1.7.16",
 		"wrangler": "^4.42.2"
 	}
 }
