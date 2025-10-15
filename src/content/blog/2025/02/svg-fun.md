@@ -69,7 +69,7 @@ But that can be changed with regular CSS selectors as well as other properties o
 
 For the visual readers, there is what it looks like:
 
-::codepen[SVG - inline example]{#WbNQYvE username=madcampos}
+<codepen-embbed title="SVG - inline example" href="https://codepen.io/madcampos/pen/WbNQYvE"></codepen-embbed>
 
 That super power is the reason the [logos on this website](https://github.com/madcampos/madcampos/blob/main/src/components/Logo/index.astro#L28) are inlined to the HTML instead of image files. It allows the logo to change color and style based on the theme and be interactive as other elements in the page, having hover and active styles, for example.
 
@@ -88,7 +88,7 @@ For the first, it is really easy to get done: simply switch the [`display`](http
 Both logo "images" (i.e. the actual drawings themselves) live in the html at the same time, and depending on the theme, one is shown and the other is hidden. Very very simple and straightforward trick.
 
 It works like the following demo (a `select` is used for simplicity):
-::codepen[SVG - switch elements]{#VYwvVaY username=madcampos}
+<codepen-embbed title="SVG - switch elements" href="https://codepen.io/madcampos/pen/VYwvVaY"></codepen-embbed>
 
 Indeed, that was the second version of the logo, after adding it as a component.
 
@@ -105,7 +105,7 @@ The drawback is: it is an image format for doing stuff like in Photoshop, so yes
 So, adding the text was as simple as adding a [`<text>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text) tag with some dynamic content, provided by a parameter on the component. Sometimes the simpler solutions are the best[^3]!
 
 Here is a demo of dynamically changing text in SVG:
-::codepen[SVG - text]{#pvojQEV username=madcampos}
+<codepen-embbed title="SVG - text" href="https://codepen.io/madcampos/pen/pvojQEV"></codepen-embbed>
 
 ## Responsive logo
 
