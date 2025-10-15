@@ -178,7 +178,7 @@ if (!customElements.get('dad-jokes-bonanza')) {
 
 You can check out the full code on CodePen: https://codepen.io/madcampos/pen/WNxYoPv
 
-<codepen-embbed title="Dad Jokes - Infinite Scroller" href="https://codepen.io/madcampos/pen/WNxYoPv"></codepen-embbed>
+<codepen-embed title="Dad Jokes - Infinite Scroller" href="https://codepen.io/madcampos/pen/WNxYoPv"></codepen-embed>
 
 I intentionally left styling and some complexities related to components to make the post brief and easy to follow.
 The API is extremely powerful and let's us do a lot... but that is for [other posts](/blog/2023/07/tabs-web-component/).

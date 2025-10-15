@@ -1,0 +1,136 @@
+@layer components {
+	:host {
+		--icon-size: 2rem;
+		--browser-icon-size: 1rem;
+		display: block;
+		margin-inline: auto;
+		max-width: var(--medium-width);
+	}
+
+	#svg-defs {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		width: 0;
+		height: 0;
+		overflow: hidden;
+		pointer-events: none;
+		user-select: none;
+	}
+
+	summary {
+		display: grid;
+		grid-template-rows: auto auto;
+		grid-template-columns: var(--icon-size) 1fr;
+		grid-template-areas:
+			'icon name'
+			'icon status';
+		align-items: center;
+		border: var(--border-style) var(--border-width) var(--theme-color);
+		border-radius: var(--border-radius);
+		background-color: var(--bg-color);
+		padding: var(--spacing-medium);
+		list-style: none;
+
+		#marker {
+			grid-area: icon;
+			width: var(--icon-size);
+			height: var(--icon-size);
+			color: var(--theme-color);
+		}
+	}
+
+	details[open] summary #marker { transform: rotate(90deg); }
+
+	#feature-name {
+		grid-area: name;
+		color: var(--theme-color);
+		font-weight: bold;
+		font-size: 2em;
+	}
+
+	aside {
+		display: flex;
+		grid-area: status;
+		justify-content: space-between;
+		align-items: start;
+		gap: var(--spacing-large);
+
+		@media (max-width: 50rem) { flex-direction: column; }
+	}
+
+	#baseline-status {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-medium);
+	}
+
+	#baseline-icon svg {
+		width: var(--icon-size);
+		height: var(--icon-size);
+	}
+
+	.browser-support {
+		display: inline-flex;
+		position: relative;
+		align-items: center;
+		gap: calc(var(--browser-icon-size) * 0.5);
+		border: solid thin currentColor;
+		border-radius: var(--browser-icon-size);
+		padding: calc(var(--browser-icon-size) * 0.1) calc(var(--browser-icon-size) * 0.2);
+
+		&[data-status='supported'] {
+			border-color: currentColor;
+			background-color: var(--baseline-supported-bg);
+			color: var(--baseline-supported-color);
+		}
+
+		&[data-status='unsupported'] {
+			border-color: currentColor;
+			background-color: var(--baseline-unsupported-bg);
+			color: var(--baseline-unsupported-color);
+		}
+
+		.browser-label {
+			border: 0;
+			clip: rect(0 0 0 0);
+			position: absolute;
+			clip-path: inset(100%);
+			margin: -1px;
+			padding: 0;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			pointer-events: none;
+			color: transparent;
+			user-select: none;
+			white-space: nowrap;
+		}
+
+		.browser-icon {
+			display: flex;
+			width: var(--browser-icon-size);
+			height: var(--browser-icon-size);
+		}
+
+		.browser-status {
+			display: flex;
+			width: var(--browser-icon-size);
+			height: var(--browser-icon-size);
+		}
+	}
+
+	#table-wrapper { overflow: auto; }
+	table {
+		border: var(--border-style) var(--border-color) var(--border-width);
+		border-collapse: collapse;
+	}
+	table thead tr { background-color: var(--bg-color); }
+	table :is(td, th) {
+		border: var(--border-style) var(--border-color) var(--border-width);
+		padding: var(--spacing-medium);
+		text-align: center;
+	}
+	table tbody tr:nth-of-type(odd) { background: var(--dark-bg-color); }
+	table tbody tr:nth-of-type(even) { background: var(--bg-color); }
+}

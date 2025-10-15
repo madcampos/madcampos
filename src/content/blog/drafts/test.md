@@ -120,11 +120,11 @@ http://www.example.com
 
 ## Embedded content
 
-<baseline-info title="Anchor Positioning" feature="anchor-positioning"></baseline-info>
+<baseline-info feature="anchor-positioning"></baseline-info>
 
-<youtube-embbed title="Never Gonna Give you Up - Rick Astley" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></youtube-embbed>
+<youtube-embed title="Never Gonna Give you Up - Rick Astley" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></youtube-embed>
 
-<codepen-embbed title="SVG - inline example" href="https://codepen.io/madcampos/pen/WbNQYvE"></codepen-embbed>
+<codepen-embed title="SVG - inline example" href="https://codepen.io/madcampos/pen/WbNQYvE"></codepen-embed>
 
 ## HTML `<dl>` Example
 

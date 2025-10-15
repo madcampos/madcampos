@@ -49,4 +49,4 @@ After that I set some pre-selection criteria to make my life easier: All colors 
 
 Here is the end result:
 
-<codepen-embbed title="Color contrast list checking" href="https://codepen.io/madcampos/pen/abMVLXm"></codepen-embbed>
+<codepen-embed title="Color contrast list checking" href="https://codepen.io/madcampos/pen/abMVLXm"></codepen-embed>
