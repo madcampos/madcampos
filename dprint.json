@@ -81,7 +81,7 @@
 		"blockSelectorLinebreak": "consistent",
 		"omitNumberLeadingZero": false,
 		"trailingComma": false,
-		"formatComments": false,
+		"formatComments": true,
 		"alignComments": true,
 		"linebreakInPseudoParens": false,
 		"declarationOrder": "concentric",

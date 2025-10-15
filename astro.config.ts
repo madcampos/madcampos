@@ -13,14 +13,9 @@ import { transformerTwoslash } from '@shikijs/twoslash';
 import astroIcon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
-import remarkBehead from 'remark-behead';
 import remarkBreaks from 'remark-breaks';
-import remarkDirective from 'remark-directive';
 import remarkHighlight from 'remark-flexible-markers';
 import remarkIns from 'remark-ins';
-
-import { baselineInfo, codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
-
 import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
@@ -80,14 +75,9 @@ export default defineConfig({
 			]
 		},
 		remarkPlugins: [
-			[remarkBehead, { minDepth: 2 }],
 			remarkBreaks,
 			remarkIns,
-			[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }],
-			remarkDirective,
-			youtubeEmbed,
-			codepenEmbed,
-			baselineInfo
+			[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }]
 		],
 		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'], referrerpolicy: 'no-referrer' }]]
 	},
