@@ -6,7 +6,7 @@
 		container-name: logo;
 		container-type: inline-size;
 		margin-inline: auto;
-		width: clamp(var(--min-width, 5rem), 70vmin, var(--medium-width, 30rem));
+		width: clamp(var(--size-header-0), 70vmin, var(--size-header-2));
 
 		.logo-part {
 			fill: var(--logo-part-color, var(--theme-color));
@@ -76,7 +76,7 @@
 			@media not (prefers-reduced-motion) {
 				.pixelated-logo {
 					filter: url('#pixelate-filter');
-					--logo-part-color: var(--bg-color);
+					--logo-part-color: var(--surface-1);
 				}
 
 				.logo-part { /* filter: url("#glitch-filter"); */ filter: url('#animated-glitch-filter'); }
@@ -100,7 +100,7 @@
 			height: 100%;
 
 			&:focus-visible [data-theme='system'] {
-				--logo-part-color: var(--text-color);
+				--logo-part-color: var(--text-1);
 				--logo-text-color: var(--theme-color);
 			}
 

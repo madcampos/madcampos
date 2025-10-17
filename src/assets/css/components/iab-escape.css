@@ -3,10 +3,10 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		border: var(--border-color) var(--border-style) var(--border-width);
+		border: var(--surface-3) var(--border-style) var(--border-width);
 		border-radius: var(--border-radius);
-		background-color: var(--dark-bg-color);
-		padding: var(--spacing-large);
+		background-color: var(--surface-2);
+		padding: var(--size-3);
 		width: clamp(10rem, 70vw, 35rem);
 		height: clamp(10rem, 70vh, 35rem);
 		overscroll-behavior: contain;

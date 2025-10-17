@@ -7,7 +7,7 @@
 	main {
 		margin-inline: auto;
 		width: 100%;
-		max-width: var(--max-width);
+		max-width: var(--size-content-3);
 	}
 
 	h1 {
@@ -17,7 +17,7 @@
 		hyphenate-character: '-';
 		hyphenate-limit-chars: 8 3 2;
 		margin-block: 1em;
-		padding: 0 var(--spacing-large);
+		padding: 0 var(--size-3);
 		/* stylelint-disable-next-line property-no-vendor-prefix */
 		-webkit-hyphens: auto;
 		hyphens: auto;
@@ -41,9 +41,9 @@
 			'image form';
 		justify-content: center;
 		justify-items: center;
-		gap: var(--spacing-large);
-		margin-block: var(--spacing-large);
-		background-color: var(--bg-color);
+		gap: var(--size-3);
+		margin-block: var(--size-3);
+		background-color: var(--surface-1);
 		width: 100%;
 		font-size: 1.5em;
 		text-align: center;
@@ -58,27 +58,27 @@
 	#hero p {
 		grid-area: text;
 		align-self: end;
-		padding: 0 var(--spacing-large);
-		width: calc(100% - var(--spacing-large));
+		padding: 0 var(--size-3);
+		width: calc(100% - var(--size-3));
 	}
 
 	#hero form {
 		grid-area: form;
-		padding: 0 var(--spacing-large);
-		width: calc(100% - var(--spacing-large));
+		padding: 0 var(--size-3);
+		width: calc(100% - var(--size-3));
 	}
 
 	h2 { text-align: center; }
 
 	#why ul {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(10rem, calc(30% - var(--spacing-large) * 0.5)));
+		grid-template-columns: repeat(auto-fill, minmax(10rem, calc(30% - var(--size-3) * 0.5)));
 		grid-auto-rows: auto;
 		place-content: center;
 		align-items: start;
 		justify-items: center;
-		gap: var(--spacing-large);
-		padding: 0 var(--spacing-large);
+		gap: var(--size-3);
+		padding: 0 var(--size-3);
 		list-style: none;
 		text-align: center;
 	}
@@ -90,7 +90,7 @@
 	}
 
 	.fun-text {
-		filter: drop-shadow(2px 3px color-mix(in srgb, var(--text-color), transparent 70%));
+		filter: drop-shadow(2px 3px color-mix(in srgb, var(--text-1), transparent 70%));
 		background: linear-gradient(45deg, firebrick, orange, yellow, seagreen, dodgerblue, magenta);
 		-webkit-background-clip: text;
 		background-clip: text;
@@ -100,21 +100,21 @@
 	}
 
 	#steps {
-		background-color: var(--bg-color);
-		padding-block: var(--spacing-medium);
+		background-color: var(--surface-1);
+		padding-block: var(--size-2);
 		text-align: center;
 	}
 
 	#steps ol {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(10rem, calc(30% - var(--spacing-large) * 0.5)));
+		grid-template-columns: repeat(auto-fill, minmax(10rem, calc(30% - var(--size-3) * 0.5)));
 		grid-auto-rows: auto;
 		place-content: center;
 		align-items: start;
 		justify-items: center;
-		gap: var(--spacing-large);
+		gap: var(--size-3);
 		counter-reset: steps;
-		padding: 0 var(--spacing-large);
+		padding: 0 var(--size-3);
 		list-style: none;
 		text-align: center;
 	}
@@ -131,13 +131,13 @@
 
 	#testimonials ul {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(15rem, calc(50% - var(--spacing-large) * 0.5)));
+		grid-template-columns: repeat(auto-fill, minmax(15rem, calc(50% - var(--size-3) * 0.5)));
 		grid-auto-rows: auto;
 		place-content: center;
 		align-items: start;
 		justify-items: stretch;
-		gap: var(--spacing-large);
-		padding: 0 var(--spacing-large);
+		gap: var(--size-3);
+		padding: 0 var(--size-3);
 		width: 100%;
 		list-style: none;
 	}
@@ -149,8 +149,8 @@
 		grid-template-areas:
 			'image quote'
 			'image person';
-		gap: var(--spacing-large);
-		margin: var(--spacing-medium);
+		gap: var(--size-3);
+		margin: var(--size-2);
 	}
 
 	#testimonials blockquote p {
@@ -181,45 +181,45 @@
 	#testimonials blockquote small::before { content: '— '; }
 
 	#cta {
-		margin-block-end: var(--spacing-medium);
-		background-color: var(--bg-color);
-		padding: var(--spacing-large);
+		margin-block-end: var(--size-2);
+		background-color: var(--surface-1);
+		padding: var(--size-3);
 		text-align: center;
 	}
 
 	:is(#hero, #cta) form input {
 		display: block;
-		margin: var(--spacing-medium);
+		margin: var(--size-2);
 		border: var(--border-style) var(--theme-color) var(--border-width);
-		border-radius: var(--spacing-large);
-		background-color: var(--dark-bg-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		width: calc(100% - var(--spacing-large) * 2);
-		color: var(--text-color);
+		border-radius: var(--size-3);
+		background-color: var(--surface-2);
+		padding: var(--size-1) var(--size-2);
+		width: calc(100% - var(--size-3) * 2);
+		color: var(--text-1);
 		font-size: inherit;
 	}
 
 	:is(#hero, #cta) form button {
-		margin: var(--spacing-medium);
+		margin: var(--size-2);
 		border: var(--border-style) transparent var(--border-width);
-		border-radius: var(--spacing-large);
+		border-radius: var(--size-3);
 		background-color: var(--accent-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		color: var(--text-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--text-1);
 		font-size: inherit;
 	}
 
 	:is(#hero, #cta) form button:active {
-		background-color: var(--text-color);
+		background-color: var(--text-1);
 		color: var(--theme-color);
 	}
 
 	#small-print {
 		margin-inline: auto;
-		background-color: var(--bg-color);
-		padding: var(--spacing-small);
+		background-color: var(--surface-1);
+		padding: var(--size-1);
 		width: 100%;
-		max-width: var(--max-width);
+		max-width: var(--size-content-3);
 		font-size: 0.3em;
 		text-align: center;
 	}
@@ -234,7 +234,7 @@
 				'image'
 				'text'
 				'form';
-			padding-block-end: var(--spacing-large);
+			padding-block-end: var(--size-3);
 		}
 
 		#testimonials blockquote {

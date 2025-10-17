@@ -1,10 +1,11 @@
-@layer fonts, vars, base, pages, components, code, theme, print, contrast;
+@layer openprops, fonts, vars, base, pages, components, code, theme, print, contrast;
 
+@import 'open-props/style' layer(openprops);
 @import url('./fonts.css');
-@import 'open-props/style' layer(vars);
 @import url('./vars.css');
 @import url('./base.css');
-@import url('./components/index.css');
+@import url('./pages/base.css');
 @import url('./transitions.css');
+@import url('./components/index.css');
 @import url('./themes/index.css');
 @import url('./accessible.css');

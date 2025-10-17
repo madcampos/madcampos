@@ -11,6 +11,6 @@ button:active #button-css-gradient stop:nth-child(1) { stop-color: dodgerblue; }
 button:active #button-css-gradient stop:nth-child(2) { stop-color: deepskyblue; }
 
 @media (prefers-contrast: more), (forced-colors: active) {
-	button #button-base { fill: var(--bg-color); }
+	button #button-base { fill: var(--surface-1); }
 	button #adobe-logo { fill: var(--theme-color); }
 }

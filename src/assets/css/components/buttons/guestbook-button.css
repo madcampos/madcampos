@@ -24,7 +24,7 @@ button:active svg { fill: magenta; }
 
 @media (prefers-contrast: more), (forced-colors: active) {
 	button { animation-name: none; }
-	button text { fill: var(--text-color); }
+	button text { fill: var(--text-1); }
 	button .emphasis-text { fill: var(--theme-color); }
 	button svg { fill: var(--theme-color); }
 

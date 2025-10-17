@@ -2,22 +2,22 @@
 	#tag-list {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-large);
+		gap: var(--size-3);
 		margin: 0;
-		margin-block: var(--spacing-large);
+		margin-block: var(--size-3);
 		padding: 0;
 		list-style-type: '';
 	}
 
 	#tag-list .tag {
-		--tag-width: var(--tag-size);
-		--tag-height: var(--tag-size);
+		--tag-width: var(--size-3);
+		--tag-height: var(--size-3);
 		--tag-hole-size: 0.3;
 		display: inline-block;
 		position: relative;
-		margin: var(--spacing-small);
-		padding: var(--spacing-small) var(--spacing-medium);
-		padding-inline-start: calc(var(--tag-width) + var(--spacing-medium));
+		margin: var(--size-1);
+		padding: var(--size-1) var(--size-2);
+		padding-inline-start: calc(var(--tag-width) + var(--size-2));
 		overflow: visible;
 		color: var(--tag-color);
 		font-size: larger;
@@ -45,13 +45,13 @@
 		content: '';
 	}
 
-	#tag-list .tag:hover::before { background-color: var(--text-color); }
+	#tag-list .tag:hover::before { background-color: var(--text-1); }
 
 	#tag-list .tag:focus-within {
 		outline: var(--theme-color) var(--border-style) var(--border-width);
-		outline-offset: var(--spacing-small);
+		outline-offset: var(--size-1);
 		border-radius: var(--border-radius);
-		color: var(--dark-bg-color);
+		color: var(--surface-2);
 	}
 
 	#tag-list .tag:hover {

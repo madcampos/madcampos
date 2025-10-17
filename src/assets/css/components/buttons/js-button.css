@@ -30,15 +30,15 @@ button:active tspan:nth-child(1) { fill: white; }
 @media (prefers-contrast: more), (forced-colors: active) {
 	button { animation-name: none; }
 	button #button-base { fill: var(--theme-color); }
-	button text { fill: var(--dark-bg-color); }
-	button tspan:nth-child(1) { fill: var(--bg-color); }
+	button text { fill: var(--surface-2); }
+	button tspan:nth-child(1) { fill: var(--surface-1); }
 
-	button #button-warning-icon > path:nth-child(1) { fill: var(--text-color); }
+	button #button-warning-icon > path:nth-child(1) { fill: var(--text-1); }
 	button #button-warning-icon > path:nth-child(2) { fill: var(--accent-color); }
-	button #button-warning-icon > g { stroke: var(--dark-bg-color); }
+	button #button-warning-icon > g { stroke: var(--surface-2); }
 
 	button:hover #button-base { fill: var(--accent-color); }
 
-	button:active #button-base { fill: var(--text-color); }
-	button:active :is(text, tspan:nth-child(1)) { fill: var(--bg-color); }
+	button:active #button-base { fill: var(--text-1); }
+	button:active :is(text, tspan:nth-child(1)) { fill: var(--surface-1); }
 }

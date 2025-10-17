@@ -1,12 +1,11 @@
 @layer components {
 	m-avatar {
-		--image-size: var(--avatar-size);
 		display: block;
 		position: relative;
 		border: var(--theme-color) var(--border-style) var(--border-width);
 		border-radius: 100vmax;
-		width: var(--image-size);
-		height: var(--image-size);
+		width: var(--size-13);
+		height: var(--size-13);
 		overflow: hidden;
 
 		img {
@@ -47,6 +46,11 @@
 		}
 
 		&:hover::after { opacity: 0.4; }
+
+		@media (max-width: 25rem) {
+			width: var(--size-12);
+			height: var(--size-12);
+		}
 
 		@media (forced-colors: active) { filter: grayscale(1) contrast(120%) brightness(110%); }
 	}

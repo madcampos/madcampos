@@ -14,7 +14,7 @@
 	.webring ul {
 		display: flex;
 		justify-content: center;
-		gap: var(--spacing-large);
+		gap: var(--size-3);
 		padding: 0;
 		list-style: none;
 	}

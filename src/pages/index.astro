@@ -40,99 +40,95 @@ import Webrings from '../components/Webrings.astro';
 			</h1>
 		</header>
 
-		<main>
-			<div class="h-card vcard">
-				<article id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
-					<aside>
-						<m-avatar>
-							<picture
-								class="user-avatar"
-								itemprop="image"
-								itemscope
-								itemtype="https://schema.org/ImageObject"
-							>
-								<Image
-									class="u-photo photo"
-									itemprop="contentUrl"
-									src={avatar}
-									alt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
-									loading="eager"
-									widths={[128, 256, 512, 768, 1024]}
-									width={512}
-									sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
-									quality={75}
-								/>
-							</picture>
-						</m-avatar>
-					</aside>
-					<div>
-						<div class="p-note note" itemprop="description">
-							<p>
-								Hi there! My name is <em class="p-name fn n" itemprop="name"><span class="p-given-name given-name" itemprop="givenName">Marco</span>
-									<span class="p-family-name family-name" itemprop="familyName">Campos</span></em>. I go by <em>@</em>
-								<em class="p-nickname nickname" itemprop="alternateName">madcampos</em> on most social networks and my pronouns are he/him!
-								<br />
-								I'm a <span class="p-category category p-job-title" itemprop="jobTitle">Senior Web Developer</span> based in <span
-									class="p-adr adr"
-									itemprop="address"
-									itemscope
-									itemtype="https://schema.org/PostalAddress"
-								><span class="p-locality locality" itemprop="addressLocality">Toronto</span>, <span class="p-country-name country-name" itemprop="addressCountry"
-									>Canada</span></span>.
-							</p>
+		<main class="h-card vcard" id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
+			<aside>
+				<m-avatar>
+					<picture
+						class="user-avatar"
+						itemprop="image"
+						itemscope
+						itemtype="https://schema.org/ImageObject"
+					>
+						<Image
+							class="u-photo photo"
+							itemprop="contentUrl"
+							src={avatar}
+							alt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+							loading="eager"
+							widths={[128, 256, 512, 768, 1024]}
+							width={512}
+							sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+							quality={75}
+						/>
+					</picture>
+				</m-avatar>
+			</aside>
+			<div>
+				<div class="p-note note" itemprop="description">
+					<p>
+						Hi there! My name is <em class="p-name fn n" itemprop="name"><span class="p-given-name given-name" itemprop="givenName">Marco</span>
+							<span class="p-family-name family-name" itemprop="familyName">Campos</span></em>. I go by <em>@</em>
+						<em class="p-nickname nickname" itemprop="alternateName">madcampos</em> on most social networks and my pronouns are he/him!
+						<br />
+						I'm a <span class="p-category category p-job-title" itemprop="jobTitle">Senior Web Developer</span> based in <span
+							class="p-adr adr"
+							itemprop="address"
+							itemscope
+							itemtype="https://schema.org/PostalAddress"
+						><span class="p-locality locality" itemprop="addressLocality">Toronto</span>, <span class="p-country-name country-name" itemprop="addressCountry"
+							>Canada</span></span>.
+					</p>
 
-							<p>I have experience with both frontend and backend development, with focus on responsive and accessible design, typescript and node.js.</p>
-						</div>
+					<p>I have experience with both frontend and backend development, with focus on responsive and accessible design, typescript and node.js.</p>
+				</div>
 
-						<p>You can find my projects, personal work, blog and some social networks on the links below:</p>
-						<nav>
-							<ul>
-								<li>
-									<a href="/blog/">
-										<Icon name="uil:file-edit-alt" title="" role="presentation" />
-										My Blog
-									</a>
-								</li>
-								<li>
-									<a href="/projects/">
-										<Icon name="uil:flask" title="" role="presentation" />
-										Project Highlights
-									</a>
-								</li>
-								<li>
-									<a href="/talks/">
-										<Icon name="uil:presentation-check" title="" role="presentation" />
-										Talks I've given
-									</a>
-								</li>
-								<li>
-									<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
-										<Icon name="uil:github-alt" title="" role="presentation" />
-										GitHub
-									</a>
-								</li>
-								<li>
-									<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
-										<Icon name="brandico:codepen" title="" role="presentation" />
-										CodePen
-									</a>
-								</li>
-								<li>
-									<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
-										<Icon name="uil:linkedin-alt" title="" role="presentation" />
-										LinkedIn
-									</a>
-								</li>
-								<li>
-									<a href="mailto:me@madcampos.dev" rel="me">
-										<Icon name="uil:envelope" title="" role="presentation" />
-										<span class="u-email email" itemprop="email">me@madcampos.dev</span>
-									</a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</article>
+				<p>You can find my projects, personal work, blog and some social networks on the links below:</p>
+				<nav>
+					<ul>
+						<li>
+							<a href="/blog/">
+								<Icon name="uil:file-edit-alt" title="" role="presentation" />
+								My Blog
+							</a>
+						</li>
+						<li>
+							<a href="/projects/">
+								<Icon name="uil:flask" title="" role="presentation" />
+								Project Highlights
+							</a>
+						</li>
+						<li>
+							<a href="/talks/">
+								<Icon name="uil:presentation-check" title="" role="presentation" />
+								Talks I've given
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
+								<Icon name="uil:github-alt" title="" role="presentation" />
+								GitHub
+							</a>
+						</li>
+						<li>
+							<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
+								<Icon name="brandico:codepen" title="" role="presentation" />
+								CodePen
+							</a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
+								<Icon name="uil:linkedin-alt" title="" role="presentation" />
+								LinkedIn
+							</a>
+						</li>
+						<li>
+							<a href="mailto:me@madcampos.dev" rel="me">
+								<Icon name="uil:envelope" title="" role="presentation" />
+								<span class="u-email email" itemprop="email">me@madcampos.dev</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</main>
 

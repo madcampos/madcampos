@@ -62,7 +62,7 @@
 		display: inline-flex;
 		position: relative;
 		cursor: pointer;
-		margin: var(--spacing-small);
+		margin: var(--size-1);
 		border: var(--old-button-border);
 		border-radius: var(--old-button-border-radius);
 		background: none;
@@ -133,10 +133,10 @@
 
 	button:focus-visible {
 		outline: var(--theme-color) var(--border-style) var(--border-width);
-		outline-offset: var(--spacing-small);
+		outline-offset: var(--size-1);
 		border-radius: var(--border-radius);
-		background-color: var(--bg-color);
-		color: var(--text-color);
+		background-color: var(--surface-1);
+		color: var(--text-1);
 	}
 
 	button:hover #button-base { fill: silver; }
@@ -146,18 +146,18 @@
 	button:active :is(#button-border-down, #button-border-right) { fill: white; }
 
 	@media (prefers-contrast: more), (forced-colors: active) {
-		button text { fill: var(--text-color); }
-		button #button-base { fill: var(--bg-color); }
+		button text { fill: var(--text-1); }
+		button #button-base { fill: var(--surface-1); }
 		button #button-text-path { stroke: var(--theme-color); }
-		button .button-badge-bg { fill: var(--text-color); }
-		button .button-badge-text { fill: var(--bg-color); }
+		button .button-badge-bg { fill: var(--text-1); }
+		button .button-badge-text { fill: var(--surface-1); }
 
-		button:hover #button-base { fill: var(--dark-bg-color); }
-		button:hover .emphasis-text { stroke: var(--dark-bg-color); }
+		button:hover #button-base { fill: var(--surface-2); }
+		button:hover .emphasis-text { stroke: var(--surface-2); }
 
 		button .emphasis-text {
 			fill: var(--theme-color);
-			stroke: var(--bg-color);
+			stroke: var(--surface-1);
 		}
 	}
 }

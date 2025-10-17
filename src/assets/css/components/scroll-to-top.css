@@ -16,32 +16,32 @@
 		position: fixed;
 		justify-content: center;
 		align-items: center;
-		gap: var(--spacing-medium);
+		gap: var(--size-2);
 		translate: 0 200%;
 		z-index: calc(1 * infinity);
 		margin-inline: auto;
-		inset-block-end: var(--spacing-medium);
-		inset-inline: var(--spacing-medium);
-		border: var(--border-style) var(--highlight-border-color) var(--border-width);
-		background-color: var(--bg-color);
-		padding: var(--spacing-medium) var(--spacing-large);
+		inset-block-end: var(--size-2);
+		inset-inline: var(--size-2);
+		border: var(--border-style) var(--surface-4) var(--border-width);
+		background-color: var(--surface-1);
+		padding: var(--size-2) var(--size-3);
 		color: var(--theme-color);
 		text-align: center;
 	}
 
 	#scroll-to-top-link:focus {
-		background-color: var(--text-color);
-		color: var(--bg-color);
+		background-color: var(--text-1);
+		color: var(--surface-1);
 	}
 
 	#scroll-to-top-link:hover {
 		background-color: var(--theme-color);
-		color: var(--bg-color);
+		color: var(--surface-1);
 	}
 
 	#scroll-to-top-link:active {
 		background-color: var(--accent-color);
-		color: var(--bg-color);
+		color: var(--surface-1);
 	}
 
 	/* dprint-ignore */

@@ -13,9 +13,9 @@
 			'avatar name'
 			'avatar bio';
 		place-items: center;
-		gap: var(--spacing-large);
-		margin: var(--spacing-large) 0;
-		padding-inline: var(--spacing-large);
+		gap: var(--size-3);
+		margin: var(--size-3) 0;
+		padding-inline: var(--size-3);
 	}
 
 	.author-card .author-name * { margin: 0; }
@@ -32,11 +32,11 @@
 
 	.author-card .author-draft-tag {
 		display: inline-block;
-		margin: var(--spacing-small);
+		margin: var(--size-1);
 		border-radius: var(--border-radius);
 		background-color: var(--accent-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		color: var(--bg-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--surface-1);
 		text-transform: uppercase;
 	}
 

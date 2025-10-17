@@ -1,29 +1,33 @@
 @layer theme {
 	[data-theme='y2k'] {
 		/* Border */
-		--border-width: 0.2rem;
+		--border-width: var(--size-2);
 		--border-style: ridge;
 		--link-underline: solid;
 		--border-radius: 0;
+
 		/* Theme colors */
 		--theme-color: aqua;
 		--secondary-color: blue;
 		--accent-color: yellow;
 		--complementary-color: fuchsia;
+
 		/* Base colors */
-		--text-color: white;
-		--bg-color: black;
-		--dark-bg-color: black;
-		--border-color: yellow;
-		--scrollbar-bg: rgba(255, 255, 255, 0.1);
+		--text-1: white;
+		--surface-1: black;
+		--surface-2: black;
+		--surface-3: yellow;
+
 		/* Tag colors */
 		--tag-bg: var(--theme-color);
-		--tag-color: var(--dark-bg-color);
+		--tag-color: var(--surface-2);
+
 		/* Link colors */
 		--link-color: aqua;
 		--link-visited-color: fuchsia;
 		--link-hover-color: var(--accent-color);
 		--link-active-color: var(--complementary-color);
+
 		/* Code colors */
 		--diff-add-color: limegreen;
 		--diff-add-bg: rgba(0, 100, 0, 0.3);
@@ -35,6 +39,7 @@
 		--highlight-error-bg: rgba(255, 99, 71, 0.2);
 		--highlight-warning-color: yellow;
 		--highlight-warning-bg: rgba(218, 165, 32, 0.2);
+
 		/* Baseline colors */
 		--baseline-high-color: limegreen;
 		--baseline-high-bg: seagreen;
@@ -48,19 +53,23 @@
 		--baseline-supported-bg: black;
 		--baseline-unsupported-color: yellow;
 		--baseline-unsupported-bg: black;
+
 		/* Old Buttons */
 		--old-button-border: none;
 		--old-button-border-visibility: visible;
 		--old-button-tint: none;
 		--old-button-blend-mode: none;
 		--old-button-border-radius: 0;
+
 		/* Icons */
 		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='aqua' d='M15.54 11.29L9.88 5.64a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l4.95 5L8.46 17a1 1 0 0 0 0 1.41a1 1 0 0 0 .71.3a1 1 0 0 0 .71-.3l5.66-5.65a1 1 0 0 0 0-1.47'/%3E%3C/svg%3E");
 		--external-link-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='fuchsia' d='M18 10.82a1 1 0 0 0-1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7.18a1 1 0 0 0 0-2H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-7.18a1 1 0 0 0-1-1m3.92-8.2a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59L8.29 14.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38'/%3E%3C/svg%3E");
 		--hr-decoration-icon: none;
+
 		/* Fonts */
 		--headers-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 		--text-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: dark;
@@ -94,21 +103,21 @@
 		border-color: var(--theme-color);
 		border-radius: 0;
 		background-color: var(--theme-color);
-		color: var(--bg-color);
+		color: var(--surface-1);
 	}
 
 	[data-theme='y2k'] hr { padding: 0; }
 
-	[data-theme='y2k'] input::placeholder { color: var(--bg-color); }
+	[data-theme='y2k'] input::placeholder { color: var(--surface-1); }
 
 	[data-theme='y2k'] #site-nav a {
 		border-width: var(--border-width);
 		border-style: outset;
 		border-color: var(--theme-color);
 		background-color: var(--theme-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		height: var(--button-size);
-		color: var(--bg-color);
+		padding: var(--size-1) var(--size-2);
+		height: var(--size-7);
+		color: var(--surface-1);
 	}
 
 	[data-theme='y2k'] button {
@@ -117,20 +126,20 @@
 		border-color: var(--theme-color);
 		border-radius: 0;
 		background-color: var(--theme-color);
-		color: var(--bg-color);
+		color: var(--surface-1);
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):focus-visible {
-		border-color: var(--text-color);
-		background-color: var(--text-color);
-		color: var(--bg-color);
+		border-color: var(--text-1);
+		background-color: var(--text-1);
+		color: var(--surface-1);
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):hover {
 		outline-color: var(--accent-color);
 		border-color: var(--accent-color);
 		background-color: var(--accent-color);
-		color: var(--bg-color);
+		color: var(--surface-1);
 	}
 
 	[data-theme='y2k'] :is(#site-nav a, button):active {
@@ -142,7 +151,7 @@
 
 	[data-theme='y2k'] .tag {
 		background-color: var(--tag-bg);
-		padding-inline-start: var(--spacing-medium);
+		padding-inline-start: var(--size-2);
 	}
 
 	[data-theme='y2k'] .tag:focus-within { outline-style: dotted; }

@@ -1,10 +1,10 @@
 @layer pages {
-	details { margin-block: var(--spacing-large); }
+	details { margin-block: var(--size-3); }
 
 	summary header {
 		display: inline-flex;
 		flex-direction: column;
-		gap: var(--spacing-medium);
+		gap: var(--size-2);
 	}
 
 	summary h2 { margin: 0; }
@@ -12,11 +12,11 @@
 
 	.changelog-draft-tag {
 		display: inline-block;
-		margin: var(--spacing-small);
+		margin: var(--size-1);
 		border-radius: var(--border-radius);
 		background-color: var(--accent-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		color: var(--bg-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--surface-1);
 		text-transform: uppercase;
 	}
 }

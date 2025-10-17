@@ -1,12 +1,12 @@
 :host {
 	display: block;
-	margin: var(--spacing-large);
+	margin: var(--size-3);
 }
 
 fieldset {
-	border: var(--border-style) var(--border-width) var(--border-color);
+	border: var(--border-style) var(--border-width) var(--surface-3);
 	border-radius: var(--border-radius);
-	padding: var(--spacing-small);
+	padding: var(--size-1);
 }
 
 legend {
@@ -16,7 +16,7 @@ legend {
 }
 
 blockquote {
-	margin: var(--spacing-medium) auto;
+	margin: var(--size-2) auto;
 	width: fit-content;
 	font-style: italic;
 }
@@ -30,31 +30,31 @@ aside { text-align: center; }
 	z-index: 1;
 	border: var(--border-style) var(--border-width) var(--theme-color);
 	border-radius: 100vmax;
-	background: var(--bg-color);
-	padding: var(--spacing-medium);
+	background: var(--surface-1);
+	padding: var(--size-2);
 	width: fit-content;
-	height: var(--button-size);
+	height: var(--size-7);
 	color: var(--theme-color);
 }
 
 button:focus-visible {
-	border-color: var(--text-color);
+	border-color: var(--text-1);
 	background-color: var(--theme-color);
-	color: var(--text-color);
+	color: var(--text-1);
 }
 
 button:hover {
 	outline-color: var(--accent-color);
 	border-color: var(--accent-color);
-	background-color: var(--dark-bg-color);
+	background-color: var(--surface-2);
 	color: var(--accent-color);
 }
 
 button:active {
-	outline-color: var(--text-color);
-	border-color: var(--text-color);
+	outline-color: var(--text-1);
+	border-color: var(--text-1);
 	background-color: var(--accent-color);
-	color: var(--text-color);
+	color: var(--text-1);
 }
 
 button svg {
@@ -116,14 +116,14 @@ button svg {
 	);
 	box-sizing: border-box;
 	inset: 0;
-	background: var(--bg-color);
-	color: var(--text-color);
+	background: var(--surface-1);
+	color: var(--text-1);
 	list-style: none;
 }
 
 .item-wrapper {
 	display: block;
-	padding-inline: var(--spacing-large);
+	padding-inline: var(--size-3);
 	text-align: start;
 }
 
@@ -142,82 +142,82 @@ button svg {
 
 li:nth-child(1) {
 	--index: 1;
-	--bg-color: light-dark(blueviolet, blueviolet);
+	--surface-1: light-dark(blueviolet, blueviolet);
 	--text-color: black;
 }
 
 li:nth-child(2) {
 	--index: 2;
-	--bg-color: light-dark(darkgreen, greenyellow);
+	--surface-1: light-dark(darkgreen, greenyellow);
 	--text-color: black;
 }
 
 li:nth-child(3) {
 	--index: 3;
-	--bg-color: light-dark(coral, coral);
+	--surface-1: light-dark(coral, coral);
 	--text-color: black;
 }
 
 li:nth-child(4) {
 	--index: 4;
-	--bg-color: light-dark(steelblue, turquoise);
+	--surface-1: light-dark(steelblue, turquoise);
 	--text-color: black;
 }
 
 li:nth-child(5) {
 	--index: 5;
-	--bg-color: light-dark(maroon, darkorange);
+	--surface-1: light-dark(maroon, darkorange);
 	--text-color: black;
 }
 
 li:nth-child(6) {
 	--index: 6;
-	--bg-color: light-dark(seagreen, lightseagreen);
+	--surface-1: light-dark(seagreen, lightseagreen);
 	--text-color: black;
 }
 
 li:nth-child(7) {
 	--index: 7;
-	--bg-color: light-dark(deeppink, deeppink);
+	--surface-1: light-dark(deeppink, deeppink);
 	--text-color: black;
 }
 
 li:nth-child(8) {
 	--index: 8;
-	--bg-color: light-dark(darkgoldenrod, goldenrod);
+	--surface-1: light-dark(darkgoldenrod, goldenrod);
 	--text-color: black;
 }
 
 li:nth-child(9) {
 	--index: 9;
-	--bg-color: light-dark(dodgerblue, dodgerblue);
+	--surface-1: light-dark(dodgerblue, dodgerblue);
 	--text-color: black;
 }
 
 li:nth-child(10) {
 	--index: 10;
-	--bg-color: light-dark(olivedrab, yellowgreen);
+	--surface-1: light-dark(olivedrab, yellowgreen);
 	--text-color: black;
 }
 
 li:nth-child(11) {
 	--index: 11;
-	--bg-color: light-dark(navy, cornflowerblue);
+	--surface-1: light-dark(navy, cornflowerblue);
 	--text-color: black;
 }
 
 li:nth-child(12) {
 	--index: 12;
-	--bg-color: light-dark(firebrick, firebrick);
+	--surface-1: light-dark(firebrick, firebrick);
 	--text-color: black;
 }
 
-@media (max-width: 40rem) { #wheel-container { margin: var(--spacing-small); } }
+@media (max-width: 40rem) { #wheel-container { margin: var(--size-1); } }
 @media (max-width: 25rem) {
-	:host { margin-inline: var(--spacing-small); }
+	:host { margin-inline: var(--size-1); }
 	legend { font-size: 1.4em; }
 	.item-wrapper {
-		padding-inline-start: var(--spacing-medium);
+		padding-inline-start: var(--size-2);
 		font-size: smaller;
 	}
 }

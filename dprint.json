@@ -84,7 +84,7 @@
 		"formatComments": true,
 		"alignComments": true,
 		"linebreakInPseudoParens": false,
-		"declarationOrder": "concentric",
+		"declarationOrder": null,
 		"declarationOrderGroupBy": "nonDeclarationAndEmptyLine",
 		"singleLineBlockThreshold": 1,
 		"keyframeSelectorNotation": null,

@@ -14,10 +14,10 @@ button #button-astro-icon-square { fill: url(#netscape-gradient); }
 	button #button-text-path { stroke: var(--theme-color); }
 	button .emphasis-text { fill: var(--theme-color); }
 	button #netscape-gradient stop { stop-color: var(--theme-color); }
-	button #astro-icon-fire stop { stop-color: var(--text-color); }
-	button #astro-icon path:last-child { fill: var(--dark-bg-color); }
+	button #astro-icon-fire stop { stop-color: var(--text-1); }
+	button #astro-icon path:last-child { fill: var(--surface-2); }
 	button circle {
-		fill: var(--bg-color);
-		stroke: var(--text-color);
+		fill: var(--surface-1);
+		stroke: var(--text-1);
 	}
 }

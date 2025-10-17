@@ -1,9 +1,9 @@
 @layer code {
 	pre {
-		border: var(--border-style) var(--border-color) var(--border-width);
+		border: var(--border-style) var(--surface-3) var(--border-width);
 		border-radius: var(--border-radius);
-		background-color: var(--shiki-light-bg, var(--bg-color));
-		padding: var(--spacing-medium) var(--spacing-small);
+		background-color: var(--shiki-light-bg, var(--surface-1));
+		padding: var(--size-2) var(--size-1);
 		overflow: clip;
 		font-size: smaller;
 		font-family: var(--code-font-family);
@@ -12,11 +12,11 @@
 
 	pre:focus-visible {
 		border-color: transparent;
-		background-color: var(--shiki-light-bg, var(--bg-color));
+		background-color: var(--shiki-light-bg, var(--surface-1));
 	}
 
 	pre span {
-		color: var(--shiki-light, var(--text-color));
+		color: var(--shiki-light, var(--text-1));
 		font-style: var(--shiki-light-font-style, normal);
 		font-weight: var(--shiki-light-font-weight, normal);
 		font-family: var(--code-font-family);
@@ -41,7 +41,7 @@
 		margin-left: calc((var(--line-counter-width) + var(--line-counter-margin-right)) * -1);
 		width: var(--line-counter-width);
 		content: counter(step, decimal-leading-zero);
-		color: var(--border-color);
+		color: var(--surface-3);
 		text-align: right;
 	}
 
@@ -78,7 +78,7 @@
 		filter: contrast(0.5) brightness(1.2);
 		outline: var(--border-width) var(--border-style) var(--highlight-color);
 		background-color: var(--highlight-default-bg);
-		padding-inline: var(--spacing-small);
+		padding-inline: var(--size-1);
 	}
 
 	code .line :is(.tab, .space)::before { opacity: 0.1; }
@@ -103,15 +103,15 @@
 	}
 
 	@media screen and (prefers-color-scheme: dark) {
-		pre { background-color: var(--shiki-dark-bg, var(--bg-color)); }
+		pre { background-color: var(--shiki-dark-bg, var(--surface-1)); }
 
 		pre:focus-visible {
 			border-color: transparent;
-			background-color: var(--shiki-dark-bg, var(--bg-color));
+			background-color: var(--shiki-dark-bg, var(--surface-1));
 		}
 
 		pre span {
-			color: var(--shiki-dark, var(--text-color));
+			color: var(--shiki-dark, var(--text-1));
 			font-style: var(--shiki-dark-font-style, normal);
 			font-weight: var(--shiki-dark-font-weight, normal);
 			text-decoration: var(--shiki-dark-text-decoration, none);
@@ -119,10 +119,10 @@
 	}
 
 	@media (prefers-contrast: more) {
-		pre { background-color: var(--shiki-contrast-bg, var(--bg-color)); }
+		pre { background-color: var(--shiki-contrast-bg, var(--surface-1)); }
 
 		pre span {
-			color: var(--shiki-contrast, var(--text-color));
+			color: var(--shiki-contrast, var(--text-1));
 			font-style: var(--shiki-contrast-font-style, normal);
 			font-weight: var(--shiki-contrast-font-weight, normal);
 			text-decoration: var(--shiki-contrast-text-decoration, none);

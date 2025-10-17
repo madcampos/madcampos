@@ -3,13 +3,13 @@
 		display: flex;
 		flex-direction: column;
 		place-items: center stretch;
-		gap: var(--spacing-large);
+		gap: var(--size-3);
 	}
 
 	#page-header h1 {
 		hyphenate-character: '-';
 		hyphenate-limit-chars: 8 3 2;
-		padding: var(--spacing-large);
+		padding: var(--size-3);
 		/* stylelint-disable-next-line property-no-vendor-prefix */
 		-webkit-hyphens: auto;
 		hyphens: auto;
@@ -19,17 +19,17 @@
 		word-break: break-word;
 	}
 
-	#page-header:has(img) { padding: var(--spacing-large); }
+	#page-header:has(img) { padding: var(--size-3); }
 
 	#page-header img {
-		width: clamp(var(--min-width), 70vmin, var(--medium-width));
+		width: clamp(var(--size-header-0), 70vmin, var(--size-header-2));
 		height: 100%;
 		object-fit: contain;
 	}
 
 	@media (max-width: 25rem) {
 		#page-header img {
-			width: calc(100vw - var(--spacing-large) * 2);
+			width: calc(100vw - var(--size-3) * 2);
 			height: auto;
 		}
 	}

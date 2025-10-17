@@ -1,23 +1,23 @@
 @layer pages {
-	main { padding-inline: min(10vw, var(--min-width)); }
+	main { padding-inline: min(10vw, var(--size-content-1)); }
 
-	ul li { padding-block: var(--spacing-small); }
+	ul li { padding-block: var(--size-1); }
 
 	#talk-draft-tag {
 		display: inline-block;
-		margin: var(--spacing-small);
+		margin: var(--size-1);
 		border-radius: var(--border-radius);
 		background-color: var(--accent-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		color: var(--bg-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--surface-1);
 		text-transform: uppercase;
 	}
 
 	#technology-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-large);
-		margin: var(--spacing-large) 0;
+		gap: var(--size-3);
+		margin: var(--size-3) 0;
 		padding: 0;
 		list-style-type: '';
 	}
@@ -26,17 +26,17 @@
 		display: inline-block;
 		margin: 0;
 		background-color: var(--tag-bg);
-		padding: var(--spacing-small) var(--spacing-medium);
+		padding: var(--size-1) var(--size-2);
 		color: var(--tag-color);
-		font-size: var(--small-text);
+		font-size: var(--font-size-0);
 		list-style-type: '';
 	}
 
 	main img {
 		display: block;
 		margin-inline: auto;
-		width: clamp(var(--min-width), 100%, var(--medium-width));
-		height: clamp(var(--min-width), 70vh, var(--medium-width));
+		width: clamp(var(--size-content-1), 100%, var(--size-content-2));
+		height: clamp(var(--size-content-1), 70vh, var(--size-content-2));
 		object-fit: contain;
 	}
 
@@ -54,17 +54,17 @@
 	}
 
 	blockquote {
-		margin: var(--spacing-medium);
-		border: var(--border-width) var(--border-style) var(--border-color);
+		margin: var(--size-2);
+		border: var(--border-width) var(--border-style) var(--surface-3);
 		border-radius: var(--border-radius);
 		border-inline-end-color: var(--theme-color);
 		border-block-end-color: var(--theme-color);
-		padding-inline: var(--spacing-medium);
+		padding-inline: var(--size-2);
 		font-style: italic;
 	}
 
 	blockquote > p {
 		margin-block: 0;
-		padding-block: var(--spacing-large);
+		padding-block: var(--size-3);
 	}
 }

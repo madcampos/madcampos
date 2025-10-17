@@ -1,5 +1,6 @@
-@layers components {
+@layer components {
 	svg-effects {
+		display: block;
 		border: 0;
 		clip: rect(0, 0, 0, 0);
 		position: absolute;

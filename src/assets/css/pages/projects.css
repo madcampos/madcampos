@@ -3,12 +3,12 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--spacing-medium);
+		gap: var(--size-2);
 	}
 
 	.card .project-status {
-		padding: var(--spacing-small) var(--spacing-medium);
-		color: var(--dark-bg-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--surface-2);
 	}
 
 	.card .project-status[data-status='finished'] { background-color: limegreen; }
@@ -37,8 +37,8 @@
 	.card .technology-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-large);
-		margin: var(--spacing-large) 0;
+		gap: var(--size-3);
+		margin: var(--size-3) 0;
 		padding: 0;
 		list-style-type: '';
 	}
@@ -47,9 +47,9 @@
 		display: inline-block;
 		margin: 0;
 		background-color: var(--tag-bg);
-		padding: var(--spacing-small) var(--spacing-medium);
+		padding: var(--size-1) var(--size-2);
 		color: var(--tag-color);
-		font-size: var(--small-text);
+		font-size: var(--font-size-0);
 		list-style-type: '';
 	}
 }

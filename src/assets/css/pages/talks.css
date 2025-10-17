@@ -4,6 +4,6 @@
 		flex-direction: column;
 		justify-content: start;
 		align-items: start;
-		gap: var(--spacing-small);
+		gap: var(--size-1);
 	}
 }

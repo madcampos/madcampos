@@ -13,5 +13,5 @@ button text {
 @media (prefers-contrast: more), (forced-colors: active) {
 	button { animation-name: none; }
 	button #button-base { fill: var(--accent-color); }
-	button text { fill: var(--dark-bg-color); }
+	button text { fill: var(--surface-2); }
 }

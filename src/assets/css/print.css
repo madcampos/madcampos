@@ -4,15 +4,17 @@
 			--body-text: 12pt;
 			--headers-font-family: monospace;
 			--text-font-family: sans-serif;
+
 			/* Base colors */
-			--text-color: black;
-			--bg-color: white;
-			--dark-bg-color: white;
-			--border-color: black;
-			--scrollbar-bg: transparent;
+			--text-1: black;
+			--surface-1: white;
+			--surface-2: white;
+			--surface-3: black;
+
 			/* Tag colors */
 			--tag-bg: var(--secondary-color);
-			--tag-color: var(--text-color);
+			--tag-color: var(--text-1);
+
 			/* Link colors */
 			--link-color: #065bd1;
 			--link-visited-color: #4c2c92;
@@ -34,8 +36,7 @@
 
 		a { text-decoration: underline; }
 
-		/* dprint-ignore */
-		a:not(:has( > :is(img, picture)))[href]::after {
+		a:not(:has(> :is(img, picture)))[href]::after {
 			content: '\00a0(' attr(href) ')';
 			font-size: smaller;
 		}

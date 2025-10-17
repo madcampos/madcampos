@@ -1,0 +1,23 @@
+@layer pages {
+	body {
+		display: flex;
+		flex-direction: column;
+		justify-content: stretch;
+		align-items: stretch;
+		background: var(--surface-2);
+		color: var(--text-1);
+	}
+
+	main { flex-grow: 1; }
+
+	#page-footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		align-items: stretch;
+		gap: var(--size-2);
+		margin-inline: auto;
+		padding: var(--size-3);
+		width: clamp(var(--size-content-1), 80vw, var(--size-content-4));
+	}
+}

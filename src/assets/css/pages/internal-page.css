@@ -1,12 +1,12 @@
 @layer pages {
 	main {
 		margin-inline: auto;
-		padding-block-end: var(--spacing-large);
+		padding-block-end: var(--size-3);
 		width: 100%;
-		max-width: var(--max-width);
+		max-width: var(--size-content-3);
 	}
 
-	#contents { margin-inline: min(10vw, var(--min-width)); }
+	#contents { margin-inline: min(10vw, var(--size-content-1)); }
 
-	@media (max-width: 40rem) { #contents { margin-inline: var(--spacing-large); } }
+	@media (max-width: 40rem) { #contents { margin-inline: var(--size-3); } }
 }

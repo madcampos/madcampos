@@ -1,153 +1,156 @@
 @layer components {
-	#theme-switcher {
+	theme-switcher {
 		/* INFO: fix for safari */
 		display: inline-block;
 		align-self: center;
+
+		button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: var(--border-style) var(--border-width) var(--theme-color);
+			border-radius: 100vmax;
+			background: var(--surface-2);
+			padding: var(--size-2);
+			font-size: var(--font-size-3);
+			color: var(--theme-color);
+
+			&:focus-visible {
+				border-color: var(--text-1);
+				background-color: var(--theme-color);
+				color: var(--text-1);
+			}
+
+			&:hover {
+				outline-color: var(--accent-color);
+				border-color: var(--accent-color);
+				background-color: var(--surface-2);
+				color: var(--accent-color);
+			}
+
+			&:active {
+				outline-color: var(--text-1);
+				border-color: var(--text-1);
+				background-color: var(--accent-color);
+				color: var(--text-1);
+			}
+
+			svg {
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+			}
+		}
+
+		dialog {
+			border: var(--surface-3) var(--border-style) var(--border-width);
+			border-radius: var(--border-radius);
+			background-color: var(--surface-2);
+			width: clamp(10rem, 70vw, 35rem);
+			height: clamp(10rem, 70vh, 35rem);
+			overscroll-behavior: contain;
+
+			&::backdrop {
+				backdrop-filter: blur(1rem);
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+
+			form {
+				display: flex;
+				flex-direction: column;
+				padding: var(--size-2);
+				width: 100%;
+				height: 100%;
+			}
+
+			button {
+				width: fit-content;
+				height: fit-content;
+				font-size: var(--font-size-1);
+			}
+		}
+
+		#theme-list {
+			display: flex;
+			flex-grow: 1;
+			flex-wrap: wrap;
+			justify-content: center;
+			container-name: theme-switcher;
+			container-type: size;
+			overflow: auto;
+			overscroll-behavior: contain;
+		}
+
+		.theme-preview { display: block; }
+
+		.theme-preview-border {
+			paint-order: stroke;
+			stroke: var(--surface-3);
+			stroke-width: 2px;
+		}
+
+		.theme-preview-bg { fill: var(--surface-1); }
+		.theme-preview-dark-bg { fill: var(--surface-2); }
+		.theme-preview-theme-color { fill: var(--theme-color); }
+		.theme-preview-accent-color { fill: var(--accent-color); }
+		.theme-preview-secondary-color { fill: var(--secondary-color); }
+		.theme-preview-complementary-color { fill: var(--complementary-color); }
+		.theme-preview-text-text { font-family: var(--text-font-family); }
+		.theme-preview-header-text { font-family: var(--headers-font-family); }
+
+		.theme-preview-text {
+			fill: var(--text-1);
+			font-size: 28px;
+		}
+
+		.theme-label {
+			display: flex;
+			position: relative;
+			flex-direction: column;
+			justify-content: start;
+			align-items: center;
+			margin: var(--size-2);
+			border: transparent var(--border-width) var(--border-style);
+			padding: var(--size-2);
+			width: calc(50% - 1.5rem);
+			max-width: var(--size-content-2);
+			height: fit-content;
+			text-align: center;
+
+			svg {
+				width: 100%;
+				height: auto;
+			}
+
+			small {
+				display: block;
+				font-size: 0.7em;
+
+				svg { width: 1em; }
+			}
+
+			input[type='radio'] {
+				position: absolute;
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			&:is(:hover, :focus-within) {
+				border-color: var(--accent-color);
+				background-color: var(--text-1);
+				color: var(--surface-1);
+			}
+
+			&:has(input[type='radio']:checked) {
+				border-color: var(--theme-color);
+				background-color: var(--surface-1);
+				color: var(--theme-color);
+			}
+
+			@container (max-width: 25rem) { width: 100%; }
+		}
 	}
 
-	body:not(.js-enabled) #theme-switcher { display: none; }
-
-	#theme-switcher button {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border: var(--border-style) var(--border-width) var(--theme-color);
-		border-radius: 100vmax;
-		background: var(--bg-color);
-		padding: var(--spacing-medium);
-		width: var(--button-size);
-		height: var(--button-size);
-		color: var(--theme-color);
-	}
-
-	#theme-switcher button:focus-visible {
-		border-color: var(--text-color);
-		background-color: var(--theme-color);
-		color: var(--text-color);
-	}
-
-	#theme-switcher button:hover {
-		outline-color: var(--accent-color);
-		border-color: var(--accent-color);
-		background-color: var(--dark-bg-color);
-		color: var(--accent-color);
-	}
-
-	#theme-switcher button:active {
-		outline-color: var(--text-color);
-		border-color: var(--text-color);
-		background-color: var(--accent-color);
-		color: var(--text-color);
-	}
-
-	#theme-switcher button svg {
-		width: 100%;
-		height: 100%;
-		pointer-events: none;
-	}
-
-	#theme-switcher-dialog {
-		border: var(--border-color) var(--border-style) var(--border-width);
-		border-radius: var(--border-radius);
-		background-color: var(--dark-bg-color);
-		width: clamp(10rem, 70vw, 35rem);
-		height: clamp(10rem, 70vh, 35rem);
-		overscroll-behavior: contain;
-	}
-
-	#theme-switcher-dialog::backdrop {
-		backdrop-filter: blur(1rem);
-		background-color: rgba(0, 0, 0, 0.5);
-	}
-
-	#theme-switcher-dialog form {
-		display: flex;
-		flex-direction: column;
-		padding: var(--spacing-medium);
-		width: 100%;
-		height: 100%;
-	}
-
-	#theme-switcher-dialog button {
-		width: fit-content;
-		height: fit-content;
-	}
-
-	#theme-list {
-		display: flex;
-		flex-grow: 1;
-		flex-wrap: wrap;
-		justify-content: center;
-		container-name: theme-switcher;
-		container-type: size;
-		overflow: auto;
-		overscroll-behavior: contain;
-	}
-
-	#theme-switcher .theme-preview { display: block; }
-
-	#theme-switcher .theme-preview-border {
-		paint-order: stroke;
-		stroke: var(--border-color);
-		stroke-width: 2px;
-	}
-	#theme-switcher .theme-preview-bg { fill: var(--bg-color); }
-	#theme-switcher .theme-preview-dark-bg { fill: var(--dark-bg-color); }
-	#theme-switcher .theme-preview-theme-color { fill: var(--theme-color); }
-	#theme-switcher .theme-preview-accent-color { fill: var(--accent-color); }
-	#theme-switcher .theme-preview-secondary-color { fill: var(--secondary-color); }
-	#theme-switcher .theme-preview-complementary-color { fill: var(--complementary-color); }
-	#theme-switcher .theme-preview-text-text { font-family: var(--text-font-family); }
-	#theme-switcher .theme-preview-header-text { font-family: var(--headers-font-family); }
-	#theme-switcher .theme-preview-text {
-		fill: var(--text-color);
-		font-size: 28px;
-	}
-
-	#theme-switcher .theme-label {
-		display: flex;
-		position: relative;
-		flex-direction: column;
-		justify-content: start;
-		align-items: center;
-		margin: var(--spacing-medium);
-		border: transparent var(--border-width) var(--border-style);
-		padding: var(--spacing-medium);
-		width: calc(50% - 1.5rem);
-		max-width: var(--avatar-size);
-		height: fit-content;
-		text-align: center;
-	}
-
-	#theme-switcher .theme-label svg {
-		width: 100%;
-		height: auto;
-	}
-
-	#theme-switcher .theme-label small {
-		display: block;
-		font-size: 0.7em;
-	}
-	#theme-switcher .theme-label small svg { width: 1em; }
-
-	#theme-switcher .theme-label input[type='radio'] {
-		position: absolute;
-		opacity: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-	#theme-switcher .theme-label:is(:hover, :focus-within) {
-		border-color: var(--accent-color);
-		background-color: var(--text-color);
-		color: var(--bg-color);
-	}
-
-	#theme-switcher .theme-label:has(input[type='radio']:checked) {
-		border-color: var(--theme-color);
-		background-color: var(--bg-color);
-		color: var(--theme-color);
-	}
-
-	@container (max-width: 25rem) { #theme-switcher .theme-label { width: 100%; } }
+	body:not(.js-enabled) theme-switcher { display: none; }
 }

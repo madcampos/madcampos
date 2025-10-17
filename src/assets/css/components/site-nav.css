@@ -2,12 +2,12 @@
 	#site-nav {
 		display: flex;
 		margin-inline: auto;
-		border-block-end: var(--border-style) var(--highlight-border-color) var(--border-width);
+		border-block-end: var(--border-style) var(--surface-4) var(--border-width);
 		border-end-start-radius: var(--border-radius);
 		border-end-end-radius: var(--border-radius);
-		background-color: var(--bg-color);
+		background-color: var(--surface-1);
 		width: 100%;
-		max-width: var(--max-width);
+		max-width: var(--size-content-3);
 	}
 
 	#site-nav ul {
@@ -15,9 +15,9 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
-		gap: var(--spacing-large);
-		margin: var(--spacing-large) auto;
-		padding: 0 var(--spacing-large);
+		gap: var(--size-3);
+		margin: var(--size-3) auto;
+		padding: 0 var(--size-3);
 		width: 100%;
 		list-style-type: '';
 	}

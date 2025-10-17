@@ -5,18 +5,18 @@
 		container-type: inline-size;
 		margin-inline: auto;
 		width: 100%;
-		max-width: var(--max-width);
+		max-width: var(--size-content-3);
 		height: fit-content;
 	}
 
 	#post-draft-tag {
 		display: inline-block;
 		grid-area: draft;
-		margin: var(--spacing-small);
+		margin: var(--size-1);
 		border-radius: var(--border-radius);
 		background-color: var(--accent-color);
-		padding: var(--spacing-small) var(--spacing-medium);
-		color: var(--bg-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--surface-1);
 		font-weight: bold;
 		font-size: 2rem;
 		text-transform: uppercase;
@@ -34,12 +34,12 @@
 			'share share';
 		place-items: end center;
 		justify-self: stretch;
-		gap: var(--spacing-large);
-		margin: var(--spacing-large);
-		border: var(--border-style) var(--highlight-border-color) var(--border-width);
+		gap: var(--size-3);
+		margin: var(--size-3);
+		border: var(--border-style) var(--surface-4) var(--border-width);
 		border-radius: var(--border-radius);
-		background: var(--bg-color);
-		padding: var(--spacing-large);
+		background: var(--surface-1);
+		padding: var(--size-3);
 	}
 
 	#post-header-wrapper:not(:has(#hero-image)) {
@@ -90,8 +90,8 @@
 		grid-area: summary;
 		margin: 0;
 		border: none;
-		background: var(--dark-bg-color);
-		padding: var(--spacing-large);
+		background: var(--surface-2);
+		padding: var(--size-3);
 		font-size: smaller;
 	}
 
@@ -102,7 +102,7 @@
 		grid-area: metadata;
 		flex-flow: column wrap;
 		justify-content: center;
-		gap: var(--spacing-medium);
+		gap: var(--size-2);
 		width: 100%;
 		text-align: center;
 	}
@@ -115,7 +115,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
-		gap: var(--spacing-large);
+		gap: var(--size-3);
 	}
 
 	body:not(.js-enabled) #post-share { display: none; }
@@ -126,31 +126,31 @@
 		align-items: center;
 		border: var(--border-style) var(--border-width) var(--theme-color);
 		border-radius: 100vmax;
-		background: var(--bg-color);
-		padding: var(--spacing-medium);
-		width: var(--button-size);
-		height: var(--button-size);
+		background: var(--surface-1);
+		padding: var(--size-2);
+		width: var(--size-7);
+		height: var(--size-7);
 		color: var(--theme-color);
 	}
 
 	#post-share button:focus-visible {
-		border-color: var(--text-color);
+		border-color: var(--text-1);
 		background-color: var(--theme-color);
-		color: var(--text-color);
+		color: var(--text-1);
 	}
 
 	#post-share button:hover {
 		outline-color: var(--accent-color);
 		border-color: var(--accent-color);
-		background-color: var(--dark-bg-color);
+		background-color: var(--surface-2);
 		color: var(--accent-color);
 	}
 
 	#post-share button:active {
-		outline-color: var(--text-color);
-		border-color: var(--text-color);
+		outline-color: var(--text-1);
+		border-color: var(--text-1);
 		background-color: var(--accent-color);
-		color: var(--text-color);
+		color: var(--text-1);
 	}
 
 	#post-share button svg {

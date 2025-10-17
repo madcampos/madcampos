@@ -16,9 +16,9 @@ button:active .button-badge-bg { fill: blue; }
 	button .emphasis-text { fill: var(--theme-color); }
 	button .button-badge-bg { fill: var(--theme-color); }
 
-	button:hover #button-text-path { stroke: var(--text-color); }
-	button:hover .emphasis-text { fill: var(--text-color); }
-	button:hover .button-badge-bg { fill: var(--text-color); }
+	button:hover #button-text-path { stroke: var(--text-1); }
+	button:hover .emphasis-text { fill: var(--text-1); }
+	button:hover .button-badge-bg { fill: var(--text-1); }
 
 	button:active #button-text-path { stroke: var(--accent-color); }
 	button:active .emphasis-text { fill: var(--accent-color); }
