@@ -285,11 +285,21 @@ const formatUpdateDate = (date: Date) =>
 
 			{
 				tags && tags.length > 0 && (
-					<details class="tag-list" open>
+					<details open>
 						<summary>Tags</summary>
-						<ul>
-							{tags.map((tag) => <li class="p-category tag"><a href={`/blog/tags/${tag}/`}>{tag}</a></li>)}
-						</ul>
+						<tag-list>
+							<ul>
+								{
+									tags.map((tag) => (
+										<li class="p-category">
+											<tag-item>
+												<a href={`/blog/tags/${tag}/`}>{tag}</a>
+											</tag-item>
+										</li>
+									))
+								}
+							</ul>
+						</tag-list>
 					</details>
 				)
 			}

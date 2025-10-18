@@ -112,17 +112,21 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 						</a>
 						{
 							post.data.tags && post.data.tags.length > 0 && (
-								<details class="tag-list" slot="footer">
+								<details slot="footer">
 									<summary>Tags</summary>
-									<ul>
-										{
-											Object.entries(post.data.tags).map(([tag, url]) => (
-												<li class="p-category tag">
-													<a href={`/blog/tags/${url}/`}>{tag}</a>
-												</li>
-											))
-										}
-									</ul>
+									<tag-list>
+										<ul>
+											{
+												post.data.tags.map((tag) => (
+													<li class="p-category">
+														<tag-item>
+															<a href={`/blog/tags/${tag}/`}>{tag}</a>
+														</tag-item>
+													</li>
+												))
+											}
+										</ul>
+									</tag-list>
 								</details>
 							)
 						}

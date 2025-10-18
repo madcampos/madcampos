@@ -1,16 +1,19 @@
 @layer components {
-	.tag-list ul {
+	tag-list ul {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: start;
 		gap: var(--size-2);
 		padding: 0;
 		list-style-type: '';
+
+		@media (prefers-contrast: more) { font-weight: bolder; }
 	}
 
-	.tag-list .tag {
+	tag-item {
 		--tag-width: var(--size-2);
 		--tag-height: var(--size-2);
+
 		display: inline-block;
 		position: relative;
 		margin: var(--size-1);
@@ -20,46 +23,43 @@
 		color: var(--tag-color);
 		font-size: var(--font-size-0);
 		list-style-type: '';
-	}
 
-	.tag-list .tag * {
-		position: relative;
-		outline: none;
-		background-color: transparent;
-		color: inherit;
-	}
-
-	.tag-list .tag::before {
-		position: absolute;
-		clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
-		mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
-		inset: 0;
-		background-color: var(--tag-bg);
-		content: '';
-	}
-
-	.tag-list .tag:hover::before { background-color: var(--text-1); }
-
-	.tag-list .tag:focus-within {
-		outline: var(--theme-color) var(--border-style) var(--border-width);
-		outline-offset: var(--size-1);
-		border-radius: var(--border-radius);
-		color: var(--surface-2);
-	}
-
-	.tag-list .tag:hover {
-		outline-color: var(--link-hover-color);
-		color: var(--link-hover-color);
-	}
-
-	@media (prefers-contrast: more) { .tag-list { font-weight: bolder; } }
-
-	@media (forced-colors: active) {
-		.tag-list .tag {
-			border: var(--border-style) currentcolor var(--border-width);
-			padding-inline-start: var(--size-2);
+		* {
+			position: relative;
+			outline: none;
+			background-color: transparent;
+			color: inherit;
+			text-decoration: none;
 		}
 
-		.tag-list .tag::before { display: none; }
+		&::before {
+			position: absolute;
+			clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
+			mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
+			inset: 0;
+			background-color: var(--tag-bg);
+			content: '';
+		}
+
+		&:focus-within {
+			outline: var(--theme-color) var(--border-style) var(--border-width);
+			outline-offset: var(--size-1);
+			border-radius: var(--border-radius);
+			color: var(--surface-2);
+		}
+
+		&:hover {
+			outline-color: var(--link-hover-color);
+			color: var(--link-hover-color);
+
+			&::before { background-color: var(--text-1); }
+		}
+
+		@media (forced-colors: active) {
+			border: var(--border-style) currentcolor var(--border-width);
+			padding-inline-start: var(--size-2);
+
+			&::before { display: none; }
+		}
 	}
 }

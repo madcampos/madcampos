@@ -48,19 +48,21 @@ const tags = Object.keys(await listPostsByTag());
 			<link itemprop="itemListOrder" href="https://schema.org/ItemListUnordered" />
 			<meta itemprop="numberOfItems" content={tags.length.toString()} />
 
-			<div id="contents">
-				<ul id="tag-list">
+			<tag-list>
+				<ul>
 					{
 						tags.map((tag) => (
 							<li class="tag">
-								<a href={`/blog/tags/${tag}`} itemprop="url">
-									<span itemprop="itemListElement">{tag}</span>
-								</a>
+								<tag-item>
+									<a href={`/blog/tags/${tag}`} itemprop="url">
+										<span itemprop="itemListElement">{tag}</span>
+									</a>
+								</tag-item>
 							</li>
 						))
 					}
 				</ul>
-			</div>
+			</tag-list>
 		</main>
 
 		<footer>
