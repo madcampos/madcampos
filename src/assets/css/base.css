@@ -1,6 +1,5 @@
 @layer base {
 	:root {
-		interpolate-size: allow-keywords;
 		scrollbar-gutter: stable;
 		-webkit-text-size-adjust: none;
 		text-size-adjust: none;
@@ -14,6 +13,12 @@
 		tab-size: 4;
 		-webkit-tap-highlight-color: transparent;
 		accent-color: var(--theme-color);
+
+		@media (prefers-reduced-motion: no-preference) {
+			interpolate-size: allow-keywords;
+
+			&:focus-within { scroll-behavior: smooth; }
+		}
 	}
 
 	:where(*, *::after, *::before) {
@@ -27,28 +32,6 @@
 	}
 
 	:where(body) { margin: 0; }
-	:where(button, input, select, textarea) { font-size: inherit; }
-	:where(table) { border-collapse: collapse; }
-
-	:where(audio, iframe, img, svg, video) {
-		max-inline-size: 100%;
-		max-block-size: 100%;
-	}
-
-	:where(*:not([hidden]):has(> svg)) {
-		display: inline-flex;
-		align-items: center;
-		vertical-align: bottom;
-		gap: 0.3em;
-		line-height: 1.5;
-		overflow-wrap: break-word;
-
-		svg {
-			align-self: center;
-			min-width: 1em;
-			min-height: 1em;
-		}
-	}
 
 	:where(a) {
 		color: var(--link-color);
@@ -86,7 +69,10 @@
 		font-family: var(--headers-font-family);
 	}
 
-	:where(h1, h2, h3, h4, h5, h6) { margin-block: var(--size-relative-3); }
+	:where(h1, h2, h3, h4, h5, h6) {
+		margin-block: var(--size-relative-3);
+		text-wrap: balance;
+	}
 
 	:where(h1) {
 		margin-inline: auto;
@@ -125,6 +111,18 @@
 
 	details[open] > summary::before { transform: rotate(90deg); }
 
+	:where(p, li, dd) { text-wrap: pretty; }
+
+	:where(sub, sup) {
+		font-size: 0.8em;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+
+	:where(sub) { inset-block-end: -0.25em; }
+	:where(sup) { inset-block-start: -0.5em; }
+
 	:where(ul) { list-style: '◆ '; }
 	:where(ol) { list-style: decimal-leading-zero; }
 
@@ -144,40 +142,78 @@
 		& > details > summary::before { margin-inline-start: calc(var(--icon-size) * -1); }
 	}
 
-	:where(iframe) {
+	:where(audio, iframe, img, video) {
 		display: block;
 		margin-inline: auto;
+		max-inline-size: 100%;
+		max-block-size: 100%;
+		block-size: auto;
+		border-style: none;
+		min-inline-size: var(--size-content-1);
+		min-block-size: var(--size-content-1);
+		object-fit: contain;
+		object-position: center;
+	}
+
+	:where(iframe) {
 		border: var(--border-style) var(--border-width) var(--theme-color);
 		border-radius: var(--border-radius);
 		aspect-ratio: 3 / 2;
-		width: clamp(var(--size-content-1), 100%, var(--size-content-3));
-		min-width: var(--size-content-1);
-		height: auto;
-		min-height: var(--size-content-1);
-		max-height: 100%;
+		inline-size: 100%;
+		max-inline-size: var(--size-content-3);
 		overflow: clip;
 	}
 
 	:where(figure) {
 		text-align: center;
+		inline-size: fit-content;
+		margin-inline: auto;
+
+		figcaption {
+			contain: inline-size;
+			font-size: var(--font-size-0);
+		}
 
 		img {
-			width: clamp(5rem, 50vw, 20rem);
+			inline-size: clamp(var(--size-inline-0), 50vw, var(--size-inline-2));
 			height: auto;
 		}
 	}
+
+	:where(svg[data-icon]) {
+		vertical-align: -0.2em;
+		min-inline-size: 1em;
+		min-block-size: 1em;
+		margin-inline-end: 0.15em;
+	}
+
+	:where(pre, code, kbd, samp) { font-family: var(--code-font-family); }
+	:where(pre) { white-space: pre-wrap; }
 
 	:where(*:not(pre) > code) {
 		display: inline-block;
 		background-color: var(--surface-2);
 		padding-inline: var(--size-1);
-		font-family: var(--code-font-family);
 	}
 
 	:where(hr) {
 		border: none;
 		border-block-start: var(--theme-color) var(--border-style) var(--border-width);
 		width: clamp(5rem, 70vw, 50rem);
+	}
+
+	:where(button, input, select, textarea) { font-size: inherit; }
+
+	:where(table) {
+		border-collapse: collapse;
+		caption-side: bottom;
+	}
+
+	:where(table-wrapper[role='region'][aria-labelledby][tabindex]) { overflow: auto; }
+
+	:target {
+		scroll-margin: var(--size-3);
+		scroll-snap-align: start;
 	}
 
 	::selection {
