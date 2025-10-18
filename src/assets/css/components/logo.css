@@ -6,7 +6,7 @@
 		container-name: logo;
 		container-type: inline-size;
 		margin-inline: auto;
-		width: clamp(var(--size-header-0), 70vmin, var(--size-header-2));
+		width: clamp(var(--size-header-0), 70vmin, var(--size-header-4));
 
 		.logo-part {
 			fill: var(--logo-part-color, var(--theme-color));
