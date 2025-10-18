@@ -20,5 +20,7 @@
 			width: 100%;
 			list-style-type: none;
 		}
+
+		button { margin: 0; }
 	}
 }

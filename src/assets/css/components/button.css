@@ -1,0 +1,41 @@
+@layer components {
+	button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: var(--border-style) var(--border-width) var(--theme-color);
+		border-radius: 100vmax;
+		background: var(--surface-2);
+		padding: var(--size-2);
+		margin: var(--size-2);
+		font-size: var(--font-size-3);
+		color: var(--theme-color);
+		cursor: pointer;
+
+		&:focus-visible {
+			border-color: var(--text-1);
+			background-color: var(--theme-color);
+			color: var(--text-1);
+		}
+
+		&:hover {
+			outline-color: var(--accent-color);
+			border-color: var(--accent-color);
+			background-color: var(--surface-2);
+			color: var(--accent-color);
+		}
+
+		&:active {
+			outline-color: var(--text-1);
+			border-color: var(--text-1);
+			background-color: var(--accent-color);
+			color: var(--text-1);
+		}
+
+		svg[data-icon] {
+			inline-size: 100%;
+			block-size: 100%;
+			pointer-events: none;
+		}
+	}
+}
