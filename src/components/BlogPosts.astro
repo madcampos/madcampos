@@ -69,25 +69,21 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 
 		<SiteNav />
 		<css-naked-day>
-			<div>
-				<hr />
-				<h2>Why this website looks so weird?</h2>
-				<p>We are celebrating CSS Naked Day!</p>
-				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
-				<hr />
-			</div>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
 		</css-naked-day>
 
-		<header id="page-header">
-			<div>
-				<Logo
-					subtitle="Blog"
-					shortSubtitle="Blog"
-					url="/blog/"
-					title="Blog"
-				/>
-				<h1>{title ? title : "Marco Campos' Blog"}</h1>
-			</div>
+		<header>
+			<Logo
+				subtitle="Blog"
+				shortSubtitle="Blog"
+				url="/blog/"
+				title="Blog"
+			/>
+			<h1>{title ? title : "Marco Campos' Blog"}</h1>
 		</header>
 
 		<main id="main">
@@ -135,7 +131,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 			}
 		</main>
 
-		<footer id="page-footer">
+		<footer>
 			<m-pagination>
 				<nav aria-labelledby="pagination-label">
 					<sr-only id="pagination-label">Pagination</sr-only>

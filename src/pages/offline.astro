@@ -15,49 +15,44 @@ import Webrings from '../components/Webrings.astro';
 		url={Astro.url.href}
 	/>
 	<body>
+		<SiteNav />
+
 		<css-naked-day>
-			<div>
-				<hr />
-				<h2>Why this website looks so weird?</h2>
-				<p>We are celebrating CSS Naked Day!</p>
-				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
-				<hr />
-			</div>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
 		</css-naked-day>
 
-		<header id="page-header">
-			<SiteNav />
-			<div>
-				<Logo
-					subtitle="Offline"
-					shortSubtitle="Off."
-					url="/"
-					title="Home Page"
-					micro
-					glitch
-				/>
-				<h1>Dead (or offline) end</h1>
-			</div>
+		<header>
+			<Logo
+				subtitle="Offline"
+				shortSubtitle="Off."
+				url="/"
+				title="Home Page"
+				micro
+				glitch
+			/>
+			<h1>Dead (or offline) end</h1>
 		</header>
 
 		<main>
-			<div id="contents">
-				<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
+			<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
 
-				<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
-				<p>If you are completely offline, you won't be able to see or use:</p>
-				<ul>
-					<li>Images from pages not visited before.</li>
-					<li>Some dynamic content, like adding comments.</li>
-				</ul>
+			<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
+			<p>If you are completely offline, you won't be able to see or use:</p>
+			<ul>
+				<li>Images from pages not visited before.</li>
+				<li>Some dynamic content, like adding comments.</li>
+			</ul>
 
-				<p>
-					<a href="/">Go back home</a>
-				</p>
-			</div>
+			<p>
+				<a href="/">Go back home</a>
+			</p>
 		</main>
 
-		<footer id="page-footer">
+		<footer>
 			<OldStyleButtons />
 			<Webrings />
 		</footer>

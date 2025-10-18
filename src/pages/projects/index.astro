@@ -36,25 +36,21 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 		<SiteNav />
 
 		<css-naked-day>
-			<div>
-				<hr />
-				<h2>Why this website looks so weird?</h2>
-				<p>We are celebrating CSS Naked Day!</p>
-				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
-				<hr />
-			</div>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
 		</css-naked-day>
 
-		<header id="page-header">
-			<div>
-				<Logo
-					subtitle="Projects"
-					shortSubtitle="Proj."
-					url="/projects/"
-					title="Projects Page"
-				/>
-				<h1>Project Highlight</h1>
-			</div>
+		<header>
+			<Logo
+				subtitle="Projects"
+				shortSubtitle="Proj."
+				url="/projects/"
+				title="Projects Page"
+			/>
+			<h1>Project Highlight</h1>
 		</header>
 
 		<main id="main">
@@ -142,7 +138,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 			}
 		</main>
 
-		<footer id="page-footer">
+		<footer>
 			<OldStyleButtons />
 			<Webrings />
 		</footer>

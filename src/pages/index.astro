@@ -18,13 +18,11 @@ import Webrings from '../components/Webrings.astro';
 	/>
 	<body>
 		<css-naked-day>
-			<div>
-				<hr />
-				<h2>Why this website looks so weird?</h2>
-				<p>We are celebrating CSS Naked Day!</p>
-				<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
-				<hr />
-			</div>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
 		</css-naked-day>
 
 		<header>
@@ -86,37 +84,37 @@ import Webrings from '../components/Webrings.astro';
 						<li>
 							<a href="/blog/">
 								<Icon name="uil:file-edit-alt" aria-hidden="true" />
-								My Blog
+								<span>My Blog</span>
 							</a>
 						</li>
 						<li>
 							<a href="/projects/">
 								<Icon name="uil:flask" aria-hidden="true" />
-								Project Highlights
+								<span>Project Highlights</span>
 							</a>
 						</li>
 						<li>
 							<a href="/talks/">
 								<Icon name="uil:presentation-check" aria-hidden="true" />
-								Talks I've given
+								<span>Talks I've given</span>
 							</a>
 						</li>
 						<li>
 							<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
 								<Icon name="uil:github-alt" aria-hidden="true" />
-								GitHub
+								<span>GitHub</span>
 							</a>
 						</li>
 						<li>
 							<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
 								<Icon name="brandico:codepen" aria-hidden="true" />
-								CodePen
+								<span>CodePen</span>
 							</a>
 						</li>
 						<li>
 							<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
 								<Icon name="uil:linkedin-alt" aria-hidden="true" />
-								LinkedIn
+								<span>LinkedIn</span>
 							</a>
 						</li>
 						<li>
@@ -130,7 +128,7 @@ import Webrings from '../components/Webrings.astro';
 			</div>
 		</main>
 
-		<footer id="page-footer">
+		<footer>
 			<OldButtons />
 			<Webrings />
 			<theme-switcher></theme-switcher>

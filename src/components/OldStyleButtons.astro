@@ -23,612 +23,611 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 			<span>Old style internet buttons</span>
 		</h2>
 	</summary>
-	<div>
-		<old-style-button dest="https://en.wikipedia.org/wiki/Browser_wars">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={ieStyles} />
 
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
+	<old-style-button dest="https://en.wikipedia.org/wiki/Browser_wars">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={ieStyles} />
 
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
 
-						<g>
-							<path class="button-badge-bg" d="M2 2h7v27H2z" />
-							<text x="-27.5" y="8" textLength="24" class="button-badge-text">BEST</text>
-						</g>
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
 
+					<g>
+						<path class="button-badge-bg" d="M2 2h7v27H2z" />
+						<text x="-27.5" y="8" textLength="24" class="button-badge-text">BEST</text>
+					</g>
+
+					<g transform="translate(0, 1.5)">
+						<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
+					</g>
+					<text x="32" y="9">
+						<tspan>Viewed on</tspan>
+						<textPath href="#button-text-path" class="emphasis-text" startOffset="13">Any!</textPath>
+						<tspan x="32" y="27">Browser</tspan>
+					</text>
+
+					<g>
+						<path d="M59 2h27v27H59z" />
+						<path
+							id="ie-logo"
+							fill="#1ebbee"
+							d="M82.83 4.573c-1.807-1.628-5.902.325-8.161 1.645a12.727 12.727 0 0 0-2.035-.158c-2.856 0-5.159.841-6.91 2.424-1.991 1.824-3.095 4.211-3.095 6.97v.072c2.802-4.389 7.111-6.639 8.253-7.234.182-.085.29.133.121.216-.013.037-.013 0 0 0-1.921 1.151-5.484 4.483-7.796 9.28l-.002-.006c-1.464 3.023-2.699 7.27-.228 8.828 1.873 1.176 5.225-.214 7.922-1.978.651.093 1.338.14 2.059.141 4.978 0 8.47-2.747 9.717-6.754l-6.838-.011c-.287 1.414-1.248 2.171-2.747 2.171-1.884 0-3.18-1.031-3.263-3.419l12.979-.012c.024-.495-.035-.841-.035-1.225 0-4.475-2.679-7.974-7.037-9.089 1.773-1.103 5.092-2.736 6.69-1.432 1.2.972.54 3.011.252 3.85-.048.217.205.253.252.049.599-1.509.779-3.537-.097-4.328h-.001ZM70.279 24.526c-2.106 1.258-5.006 2.165-6.427 1.1-1.059-.798-.593-2.958.341-5.063a9.298 9.298 0 0 0 2.107 2.242c1.127.848 2.45 1.421 3.979 1.721m-.476-10.765c.036-2.075 1.523-2.975 3.083-2.975 1.645 0 2.975.948 2.975 2.975h-6.058Z"
+						/>
+					</g>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={ccStyles} />
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<text>
+						<tspan x="50%" y="8">PAGE UNDER</tspan>
+						<tspan x="50%" y="19">CC BY-NC-SA</tspan>
+						<tspan x="50%" y="27">FREE TO SHARE</tspan>
+					</text>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://astro.build/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={astroStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<linearGradient id="netscape-gradient" x1="0" x2="0" y1="0" y2="108" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="teal" />
+						<stop offset="0.25" stop-color="darkturquoise" />
+						<stop offset="0.5" stop-color="skyblue" />
+						<stop offset="0.75" stop-color="lightcyan" />
+						<stop offset="1" stop-color="orange" />
+					</linearGradient>
+					<linearGradient
+						id="astro-icon-fire"
+						x1="0"
+						x2="1"
+						y1="0"
+						y2="0"
+						gradientTransform="matrix(10.023 -4.72414 4.72414 10.023 11.218 26.988)"
+						gradientUnits="userSpaceOnUse"
+					>
+						<stop offset="0" stop-color="#d83333" />
+						<stop offset="1" stop-color="#f041ff" />
+					</linearGradient>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<text x="60" y="10">Built with</text>
+
+					<g transform="rotate(10) translate(25 -7)">
 						<g transform="translate(0, 1.5)">
 							<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
 						</g>
-						<text x="32" y="9">
-							<tspan>Viewed on</tspan>
-							<textPath href="#button-text-path" class="emphasis-text" startOffset="13">Any!</textPath>
-							<tspan x="32" y="27">Browser</tspan>
+						<text x="32" y="9" class="emphasis-text" font-size="11">
+							<textPath href="#button-text-path" startOffset="-14">Astro!</textPath>
 						</text>
+					</g>
 
-						<g>
-							<path d="M59 2h27v27H59z" />
-							<path
-								id="ie-logo"
-								fill="#1ebbee"
-								d="M82.83 4.573c-1.807-1.628-5.902.325-8.161 1.645a12.727 12.727 0 0 0-2.035-.158c-2.856 0-5.159.841-6.91 2.424-1.991 1.824-3.095 4.211-3.095 6.97v.072c2.802-4.389 7.111-6.639 8.253-7.234.182-.085.29.133.121.216-.013.037-.013 0 0 0-1.921 1.151-5.484 4.483-7.796 9.28l-.002-.006c-1.464 3.023-2.699 7.27-.228 8.828 1.873 1.176 5.225-.214 7.922-1.978.651.093 1.338.14 2.059.141 4.978 0 8.47-2.747 9.717-6.754l-6.838-.011c-.287 1.414-1.248 2.171-2.747 2.171-1.884 0-3.18-1.031-3.263-3.419l12.979-.012c.024-.495-.035-.841-.035-1.225 0-4.475-2.679-7.974-7.037-9.089 1.773-1.103 5.092-2.736 6.69-1.432 1.2.972.54 3.011.252 3.85-.048.217.205.253.252.049.599-1.509.779-3.537-.097-4.328h-.001ZM70.279 24.526c-2.106 1.258-5.006 2.165-6.427 1.1-1.059-.798-.593-2.958.341-5.063a9.298 9.298 0 0 0 2.107 2.242c1.127.848 2.45 1.421 3.979 1.721m-.476-10.765c.036-2.075 1.523-2.975 3.083-2.975 1.645 0 2.975.948 2.975 2.975h-6.058Z"
-							/>
-						</g>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={ccStyles} />
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<text>
-							<tspan x="50%" y="8">PAGE UNDER</tspan>
-							<tspan x="50%" y="19">CC BY-NC-SA</tspan>
-							<tspan x="50%" y="27">FREE TO SHARE</tspan>
-						</text>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://astro.build/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={astroStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<linearGradient id="netscape-gradient" x1="0" x2="0" y1="0" y2="108" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="teal" />
-							<stop offset="0.25" stop-color="darkturquoise" />
-							<stop offset="0.5" stop-color="skyblue" />
-							<stop offset="0.75" stop-color="lightcyan" />
-							<stop offset="1" stop-color="orange" />
-						</linearGradient>
-						<linearGradient
-							id="astro-icon-fire"
-							x1="0"
-							x2="1"
-							y1="0"
-							y2="0"
-							gradientTransform="matrix(10.023 -4.72414 4.72414 10.023 11.218 26.988)"
-							gradientUnits="userSpaceOnUse"
-						>
-							<stop offset="0" stop-color="#d83333" />
-							<stop offset="1" stop-color="#f041ff" />
-						</linearGradient>
-
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<text x="60" y="10">Built with</text>
-
-						<g transform="rotate(10) translate(25 -7)">
-							<g transform="translate(0, 1.5)">
-								<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
-							</g>
-							<text x="32" y="9" class="emphasis-text" font-size="11">
-								<textPath href="#button-text-path" startOffset="-14">Astro!</textPath>
-							</text>
-						</g>
-
-						<path d="M2 2h27v27H2z" id="button-astro-icon-square" />
-						<clipPath id="button-astro-icon-clip"><use xlink:href="#button-astro-icon-square" /></clipPath>
-						<circle clip-path="url(#button-astro-icon-clip)" cx="15.5" cy="39.377" r="23.877" stroke="white" paint-order="stroke" />
-						<g id="astro-icon">
-							<path
-								fill="url(#astro-icon-fire)"
-								d="M11.413 19.196c-.437 1.437-.127 3.436.908 4.379v-.035l.034-.092c.127-.609.621-.988 1.254-.965.585.011.92.322.999 1 .035.253.035.506.046.77v.081c0 .575.161 1.126.483 1.609.288.46.69.815 1.23 1.057l-.023-.046-.023-.092c-.402-1.207-.115-2.045.942-2.758l.322-.219.713-.471a3.49 3.49 0 0 0 1.471-2.494 2.99 2.99 0 0 0-.126-1.276l-.173.115c-1.597.85-3.425 1.15-5.195.805-1.069-.162-2.103-.46-2.874-1.357l.012-.011Z"
-							/>
-							<path
-								fill="white"
-								d="M6.402 18.943s3.069-1.495 6.149-1.495l2.333-7.195c.081-.345.334-.575.621-.575.288 0 .529.23.621.586l2.322 7.184c3.655 0 6.15 1.495 6.15 1.495L19.368 4.69c-.138-.425-.403-.69-.736-.69h-6.253c-.334 0-.575.265-.736.69L6.402 18.943Z"
-							/>
-						</g>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="/blog/feed.xml">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={feedStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<linearGradient id="button-feed-gradient" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="orange" />
-							<stop offset="1" stop-color="orangered" />
-						</linearGradient>
-
-						<linearGradient
-							id="icon-rss-gradient"
-							x1="0"
-							x2="1"
-							y1="0"
-							y2="0"
-							gradientTransform="rotate(45 23.224 80.325) scale(23.942)"
-							gradientUnits="userSpaceOnUse"
-						>
-							<stop offset="0" stop-color="#e3702d" />
-							<stop offset=".11" stop-color="#ea7d31" />
-							<stop offset=".35" stop-color="#f69537" />
-							<stop offset=".5" stop-color="#fb9e3a" />
-							<stop offset=".7" stop-color="#ea7c31" />
-							<stop offset=".89" stop-color="#de642b" />
-							<stop offset="1" stop-color="#d95b29" />
-						</linearGradient>
-
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<g>
-							<path class="button-badge-bg" d="M2 2h7v27H2z" />
-							<text class="button-badge-text" x="-27.5" y="8" textLength="24">FEED</text>
-						</g>
-
-						<text x="35" y="10">Subscribe</text>
-
-						<g transform="rotate(5) translate(2 1)">
-							<g transform="translate(0, 1.5)">
-								<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
-							</g>
-							<text x="32" class="emphasis-text">
-								<textPath href="#button-text-path" startOffset="-20">Now!</textPath>
-							</text>
-						</g>
-						<g id="rss-icon">
-							<path
-								fill="#cc5d15"
-								d="M83 10.51v9.98a6.013 6.013 0 0 1-6.01 6.01h-9.98A6.013 6.013 0 0 1 61 20.49v-9.98a6.013 6.013 0 0 1 6.01-6.01h9.98A6.013 6.013 0 0 1 83 10.51Z"
-							/>
-							<path
-								fill="#f49c52"
-								d="M82.568 10.394v10.204a5.473 5.473 0 0 1-5.47 5.47H66.894a5.473 5.473 0 0 1-5.47-5.47V10.394a5.473 5.473 0 0 1 5.47-5.47h10.204a5.473 5.473 0 0 1 5.47 5.47Z"
-							/>
-							<path
-								fill="url(#icon-rss-gradient)"
-								d="M82.151 10.504v10.007a5.142 5.142 0 0 1-5.14 5.14H67.004a5.142 5.142 0 0 1-5.14-5.14V10.504a5.142 5.142 0 0 1 5.14-5.14h10.007a5.142 5.142 0 0 1 5.14 5.14Z"
-							/>
-							<path
-								fill="white"
-								d="M64.787 7.769v3.009c6.593.004 12.017 5.428 12.022 12.021h3.009c-.009-8.244-6.795-15.023-15.039-15.023l.008-.007Zm0 5.067v2.923c3.864.005 7.04 3.185 7.04 7.048h2.923v-.008c0-5.469-4.501-9.97-9.971-9.97l.008.007Zm2.059 5.846a2.077 2.077 0 0 0-2.067 2.059c0 1.133.933 2.066 2.067 2.066a2.076 2.076 0 0 0 2.066-2.066 2.077 2.077 0 0 0-2.066-2.067v.008Z"
-							/>
-						</g>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/CSS">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={cssStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<linearGradient id="button-css-gradient" x1="0" x2="1" y1="0" y2="0" gradientTransform="matrix(84 0 0 84 2 15.5)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="white" />
-							<stop offset="1" stop-color="deepskyblue" />
-						</linearGradient>
-
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
+					<path d="M2 2h27v27H2z" id="button-astro-icon-square" />
+					<clipPath id="button-astro-icon-clip"><use xlink:href="#button-astro-icon-square" /></clipPath>
+					<circle clip-path="url(#button-astro-icon-clip)" cx="15.5" cy="39.377" r="23.877" stroke="white" paint-order="stroke" />
+					<g id="astro-icon">
 						<path
-							id="adobe-logo"
-							fill="#fa0f00"
-							d="m17.256 12.419 6.243 14.811h-4.092l-1.867-4.717h-4.569l4.285-10.094ZM30.507 3.77v23.457l-9.8-23.457h9.8Zm-16.703 0L4 27.227V3.77h9.804Z"
+							fill="url(#astro-icon-fire)"
+							d="M11.413 19.196c-.437 1.437-.127 3.436.908 4.379v-.035l.034-.092c.127-.609.621-.988 1.254-.965.585.011.92.322.999 1 .035.253.035.506.046.77v.081c0 .575.161 1.126.483 1.609.288.46.69.815 1.23 1.057l-.023-.046-.023-.092c-.402-1.207-.115-2.045.942-2.758l.322-.219.713-.471a3.49 3.49 0 0 0 1.471-2.494 2.99 2.99 0 0 0-.126-1.276l-.173.115c-1.597.85-3.425 1.15-5.195.805-1.069-.162-2.103-.46-2.874-1.357l.012-.011Z"
 						/>
-
-						<text y="12">
-							<tspan x="58">Powered by</tspan>
-							<tspan x="58" dy="1em" font-size="1.3em">SVG & CSS</tspan>
-						</text>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={jsStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<text y="14">
-							<tspan x="56">Warning:</tspan>
-							<tspan x="56" dy="1.5em">Contains JavaScript</tspan>
-						</text>
-						<g id="button-warning-icon">
-							<path
-								fill="yellow"
-								d="M13.272 5.412a1.786 1.786 0 0 1 3.073 0l9.221 18.398c.153.269.243.569.263.878a1.788 1.788 0 0 1-1.756 1.778H5.574a1.752 1.752 0 0 1-1.743-1.734c0-.313.091-.618.264-.878l9.177-18.442Z"
-							/>
-							<path
-								fill="red"
-								d="M14.903 16.786c0 .689-1.25 1.746-1.25 2.745l-.027.086s-.148.655-.637.655a.594.594 0 0 1-.354-.149c-.12-.112-.275.06-.251.21.073.6 1.385 2.53 2.369 2.53 1.126 0 2.122-1.35 2.21-1.826 0-.228-.382-.086-.382-.4 0-.267.233-.442.233-.793a.19.19 0 0 0-.195-.173c-.087 0-.211.061-.309.061-.375 0-.461-.341-.461-.692 0 0 .07.023.07-.724a2.707 2.707 0 0 0-.651-1.601.26.26 0 0 0-.164-.061c-.087 0-.201.039-.201.132"
-							/>
-							<g fill="none" stroke="black">
-								<path d="M12.013 23.006a3.807 3.807 0 0 0 2.721 1.069 4.056 4.056 0 0 0 2.759-1.069m-6.331-1.099s-2.041-2.177-.097-5.053c0 0 .392.499.691.977.222.257.626.695.84.695h.008a.463.463 0 0 0 .458-.505v-.175a7.1 7.1 0 0 1 .7-3.343c.501-1.041 1.36.738.777-2.837 0 0 3.1 2.089 2.984 5.548 0 .253.113.447.388.447.27 0 1.094-.262 1.094-.515.019.019 1.224 2.546-.486 4.761" />
-								<path d="M13.632 19.567s-.137.752-.682.7a1.26 1.26 0 0 1-.28-.112c-.15-.165-.309.038-.286.178a5.019 5.019 0 0 0 1.384 2.05c.625.557.426.314.449.314m1.196.029c.248-.142.485-.303.709-.481.359-.312.642-.702.828-1.139a.16.16 0 0 0 .01-.057.153.153 0 0 0-.146-.153.358.358 0 0 1-.228-.21c-.04-.101-.046-.14.136-.455a.733.733 0 0 0 .092-.42.217.217 0 0 0-.296-.122.442.442 0 0 1-.591-.193c-.11-.214-.143-.07-.007-.751a2.75 2.75 0 0 0-.653-2.03.253.253 0 0 0-.173-.061.183.183 0 0 0-.191.132" />
-								<path d="M13.272 5.412a1.786 1.786 0 0 1 3.073 0l9.221 18.398c.153.269.243.569.263.878a1.788 1.788 0 0 1-1.756 1.778H5.574a1.752 1.752 0 0 1-1.743-1.734c0-.313.091-.618.264-.878l9.177-18.442Z" />
-							</g>
-						</g>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/HTML">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={htmlStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<g id="icon-w3c">
-							<path fill="white" d="M2 2h46v27H2z" />
-							<g>
-								<path
-									fill="#005a9c"
-									d="m16.074 5.483 3.606 12.263 3.608-12.263h2.611L19.928 25.63h-.248l-3.731-12.485-3.731 12.485h-.249L6 5.483h2.612l3.606 12.263 2.438-8.258-1.194-4.005h2.612Z M33.313 19.163c0 1.825-.485 3.358-1.453 4.602-.971 1.243-2.228 1.865-3.77 1.865-1.16 0-2.171-.37-3.034-1.107-.862-.739-1.501-1.738-1.915-2.996l2.039-.846c.299.763.693 1.364 1.182 1.802.489.439 1.064.66 1.728.66.697 0 1.286-.391 1.767-1.169.481-.78.721-1.716.721-2.811 0-1.211-.258-2.146-.772-2.81-.597-.779-1.534-1.17-2.81-1.17h-.994V13.99l3.482-6.019h-4.205L24.11 9.96h-.745V5.483h9.699v1.218l-3.681 6.343c1.293.415 2.271 1.17 2.935 2.264.664 1.094.995 2.378.995 3.855z"
-								/>
-								<path d="m43.435 5.37.423 2.571-1.497 2.865s-.575-1.215-1.53-1.887c-.805-.568-1.33-.691-2.148-.522-1.055.218-2.247 1.476-2.768 3.028-.623 1.857-.629 2.756-.651 3.582-.035 1.323.173 2.105.173 2.105s-.909-1.682-.9-4.145c.005-1.759.283-3.354 1.096-4.927.716-1.384 1.779-2.214 2.723-2.311.976-.102 1.749.368 2.344.879.625.534 1.26 1.703 1.26 1.703l1.475-2.941Zm.184 14.553s-.661 1.183-1.074 1.638c-.412.456-1.15 1.258-2.061 1.661-.912.401-1.389.478-2.291.39-.9-.086-1.736-.607-2.029-.826-.292-.216-1.042-.856-1.464-1.451-.424-.598-1.086-1.793-1.086-1.793s.368 1.196.6 1.704c.132.292.541 1.185 1.121 1.965.539.725 1.589 1.974 3.184 2.256 1.596.282 2.692-.433 2.962-.607.271-.173.843-.651 1.206-1.039a9.14 9.14 0 0 0 .932-1.229c.145-.226.381-.683.381-.683l-.381-1.986Z" />
-							</g>
-						</g>
-
-						<text x="100" y="100" class="hidden-text">W3C Validator:</text>
-						<text y="14">
-							<tspan x="50">HTML</tspan>
-							<tspan x="50" dy="1em">5</tspan>
-						</text>
-						<text x="100" y="100" class="hidden-text">Pass</text>
-						<path
-							id="checkmark"
-							fill="maroon"
-							d="M85 13.833c0 .385-.135.712-.404.981L72.184 27.226a1.336 1.336 0 0 1-.981.404c-.385 0-.712-.135-.981-.404l-7.188-7.187a1.34 1.34 0 0 1-.404-.982c0-.385.135-.712.404-.981l1.963-1.963a1.34 1.34 0 0 1 .982-.404c.384 0 .711.135.981.404l4.243 4.258 9.467-9.482c.27-.27.597-.404.982-.404s.712.134.981.404l1.963 1.963c.269.269.404.596.404.981"
-						/>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://www.w3.org/WAI/standards-guidelines/wcag/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={ariaStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<g id="icon-w3c">
-							<path fill="white" d="M2 2h46v27H2z" />
-							<g>
-								<path
-									fill="#005a9c"
-									d="m16.074 5.483 3.606 12.263 3.608-12.263h2.611L19.928 25.63h-.248l-3.731-12.485-3.731 12.485h-.249L6 5.483h2.612l3.606 12.263 2.438-8.258-1.194-4.005h2.612Z M33.313 19.163c0 1.825-.485 3.358-1.453 4.602-.971 1.243-2.228 1.865-3.77 1.865-1.16 0-2.171-.37-3.034-1.107-.862-.739-1.501-1.738-1.915-2.996l2.039-.846c.299.763.693 1.364 1.182 1.802.489.439 1.064.66 1.728.66.697 0 1.286-.391 1.767-1.169.481-.78.721-1.716.721-2.811 0-1.211-.258-2.146-.772-2.81-.597-.779-1.534-1.17-2.81-1.17h-.994V13.99l3.482-6.019h-4.205L24.11 9.96h-.745V5.483h9.699v1.218l-3.681 6.343c1.293.415 2.271 1.17 2.935 2.264.664 1.094.995 2.378.995 3.855z"
-								/>
-								<path d="m43.435 5.37.423 2.571-1.497 2.865s-.575-1.215-1.53-1.887c-.805-.568-1.33-.691-2.148-.522-1.055.218-2.247 1.476-2.768 3.028-.623 1.857-.629 2.756-.651 3.582-.035 1.323.173 2.105.173 2.105s-.909-1.682-.9-4.145c.005-1.759.283-3.354 1.096-4.927.716-1.384 1.779-2.214 2.723-2.311.976-.102 1.749.368 2.344.879.625.534 1.26 1.703 1.26 1.703l1.475-2.941Zm.184 14.553s-.661 1.183-1.074 1.638c-.412.456-1.15 1.258-2.061 1.661-.912.401-1.389.478-2.291.39-.9-.086-1.736-.607-2.029-.826-.292-.216-1.042-.856-1.464-1.451-.424-.598-1.086-1.793-1.086-1.793s.368 1.196.6 1.704c.132.292.541 1.185 1.121 1.965.539.725 1.589 1.974 3.184 2.256 1.596.282 2.692-.433 2.962-.607.271-.173.843-.651 1.206-1.039a9.14 9.14 0 0 0 .932-1.229c.145-.226.381-.683.381-.683l-.381-1.986Z" />
-							</g>
-						</g>
-
-						<text x="100" y="100" class="hidden-text">W3C Validator:</text>
-						<text y="14">
-							<tspan x="50">WAI-<tspan fill="red">AA</tspan></tspan>
-							<tspan x="50" dy="1em">WCAG 2.2</tspan>
-						</text>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://workers.cloudflare.com/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={poweredStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<radialGradient id="icon-php-gradient" cx="0" cy="0" r="1" gradientTransform="translate(54.608 8.337) scale(27.5761)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="#aeb2d5" />
-							<stop offset=".3" stop-color="#aeb2d5" />
-							<stop offset=".75" stop-color="#484c89" />
-							<stop offset="1" stop-color="#484c89" />
-						</radialGradient>
-
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<text y="14">
-							<tspan x="40">Powered</tspan>
-							<tspan x="38" dy="1em">by</tspan>
-						</text>
-
-						<g id="icon-php">
-							<g>
-								<path
-									fill="url(#icon-php-gradient)"
-									d="M42 15.5c0 6.101 9.402 11.047 21 11.047S84 21.601 84 15.5c0-6.101-9.402-11.047-21-11.047S42 9.399 42 15.5"
-								/>
-								<path
-									fill="#777bb3"
-									d="M63 25.727c11.145 0 20.18-4.579 20.18-10.227 0-5.648-9.035-10.227-20.18-10.227S42.82 9.852 42.82 15.5c0 5.648 9.035 10.227 20.18 10.227"
-								/>
-							</g>
-							<text x="100" y="100" class="hidden-text">Cloudflare Workers -</text>
-							<text y="16.5" x="62">cfw</text>
-						</g>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://obsidian.md/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={writtenStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<g id="button-written-footer">
-							<path fill="#f3632e" d="M2 27h21v2H2z" />
-							<path fill="#fac705" d="M23 27h21v2H23z" />
-							<path fill="#66c557" d="M44 27h21v2H44z" />
-							<path fill="#3d87cf" d="M65 27h21v2H65z" />
-						</g>
-
-						<g id="icon-office">
-							<path
-								fill="#3d87cf"
-								d="m81.594 4.728-10.206-.002v2.729c-.784 1.174-2.75-1.819-3.921.241-.099.243-.539 1.289-.516 2.106.025.91.467 1.601.467 1.962 2.058 1.959 3.97-1.616 3.97.832v1.519h2.791c.614-.341.453-.647-.061-1.754-.821-1.773.923-2.557 2.446-2.758 2.383.241 3.316 1.325 2.048 3.615-.195.352-.095.505.098.849h2.886l-.002-9.339"
-							/>
-							<path
-								fill="#f3632e"
-								d="M61.995 4.693v10.206l2.731-.002c1.169.786-1.826 2.747.238 3.921.246.096 1.291.536 2.109.513.909-.025 1.599-.465 1.959-.465 1.962-2.058-1.616-3.969.834-3.969h1.52v-2.792c-.344-.612-.65-.45-1.757.063-1.773.82-2.556-.92-2.757-2.445.241-2.381 1.324-3.316 3.615-2.048.352.195.505.094.848-.096V4.693h-9.34"
-							/>
-							<path
-								fill="#66c557"
-								d="m81.539 24.296-.002-10.206c-.775.004-1.712.004-2.728.004-1.174-.788 1.819-2.752-.241-3.923-.246-.098-1.289-.537-2.109-.516-.909.028-1.599.466-1.959.466-1.962 2.06 1.618 3.971-.832 3.971h-1.522v2.792c.344.614.65.45 1.757-.061 1.773-.822 2.556.918 2.76 2.443-.246 2.383-1.325 3.316-3.62 2.048-.354-.195-.507-.094-.848.096v2.886h9.342"
-							/>
-							<path
-								fill="#fac705"
-								d="M61.989 24.263h10.206l-.002-2.729c.787-1.172 2.751 1.821 3.925-.239.096-.245.536-1.289.513-2.108-.025-.91-.465-1.599-.465-1.96-2.058-1.961-3.969 1.618-3.971-.832v-1.521h-2.792c-.612.343-.45.649.063 1.756.819 1.773-.92 2.557-2.444 2.758-2.385-.241-3.317-1.325-2.049-3.615.197-.354.092-.507-.097-.849h-2.887v9.339"
-							/>
-							<path
-								fill="none"
-								stroke="black"
-								d="M81.581 4.707H61.976l.002 19.6h19.603v-19.6Z M71.409 14.8v-2.259c-.023-1.771-1.645-.161-2.188-.132-1.587.088-2.268-1.194-2.238-2.705-.03-1.509.622-2.897 2.267-2.595.537.097 2.136 1.528 2.159-.243V4.707m.664 10.171h-2.261c-1.771.025-.231 1.656-.13 2.188.302 1.645-1.197 2.265-2.708 2.238-1.509.027-3.007-.593-2.705-2.238.098-.537 1.638-2.163-.132-2.188h-2.159m10.177-.669v2.262c.023 1.771 1.651.23 2.188.132 1.645-.302 2.265 1.194 2.238 2.705.027 1.509-.593 3.008-2.238 2.708-.535-.099-2.165-1.641-2.188.13v2.158m-.667-10.17h2.264c1.771-.025.228-1.654.128-2.188-.3-1.645 1.198-2.267 2.707-2.238 1.511-.029 3.01.593 2.708 2.238-.099.534-1.641 2.163.132 2.188h2.158"
-							/>
-						</g>
-
-						<text y="5">
-							<tspan x="5" font-size="5" font-weight="200">Written on</tspan>
-							<tspan x="5" dy="3" font-size="12" font-weight="900">Obsidian</tspan>
-							<tspan x="24" dy="9" font-size="7" font-weight="400">Markdown</tspan>
-						</text>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://www.the519.org/support-the-519/donate/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={prideStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<g>
-							<path class="button-badge-bg" d="M2 2h7v27H2z" />
-							<text x="-27.5" y="8" textLength="24" class="button-badge-text">
-								<tspan dx="-1.5" fill="none" font-size="1">#</tspan>
-								<tspan>PRIDE</tspan>
-							</text>
-						</g>
-
-						<text x="32" y="10">This site is</text>
-
-						<g transform="rotate(6) translate(-4 -1)">
-							<g transform="translate(0, 1.5)">
-								<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
-							</g>
-							<text x="32" y="9" class="emphasis-text"><textPath href="#button-text-path" startOffset="-12">LGBTQ+</textPath></text>
-						</g>
-
-						<g>
-							<clipPath id="button-pride-icon-clip">
-								<path id="button-pride-icon-square" d="M56 2h30v27H56z" />
-							</clipPath>
-							<g clip-path="url(#button-pride-icon-clip)">
-								<path fill="#6d2380" d="M56 2h42.52v27H56z" />
-								<path fill="#2c58a4" d="M56 2h42.52v22.5H56z" />
-								<path fill="#78b82a" d="M56 2h42.52v18H56z" />
-								<path fill="#efe524" d="M56 2h42.52v13.5H56z" />
-								<path fill="#f28917" d="M56 2h42.52v9H56z" />
-								<path fill="#e22016" d="M56 2h42.52v4.5H56z" />
-								<path d="M67.161 2H56v27h11.161l12.508-13.5L67.161 2Z" />
-								<path fill="#945516" d="M64.539 2H56v27h8.539l12.508-13.5L64.539 2Z" />
-								<path fill="#7bcce5" d="M61.953 2H56v27h5.953l12.508-13.5L61.953 2Z" />
-								<path fill="#f4aec8" d="M59.366 2H56v27h3.366l12.508-13.5L59.366 2Z" />
-								<path fill="#fff" d="M56 2v27h.78l12.472-13.5L56.78 2H56Z" />
-								<path fill="#fdd817" d="M56 27.016 66.665 15.5 56 3.949v23.067Z" />
-								<circle cx="59.933" cy="15.5" r="2.835" fill="none" stroke="#66338b" />
-							</g>
-						</g>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button dest="https://code.visualstudio.com/">
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={codeStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<pattern id="dotted-pattern" viewBox="0 0 2 2" width="2" height="2" patternUnits="userSpaceOnUse">
-							<circle cx="1" cy="1" r=".5" opacity="0.1" />
-						</pattern>
-
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<path id="button-vscode-bg" d="M2 2h42v27H2zm62.117 4.939 7.879 3.889-11.541 11.035L66.339 28l11.54-11.237 4.394 8.08L85 3 64.117 6.939Z" />
-						<rect x="2" y="2" width="84" height="27" fill="url(#dotted-pattern)" />
-
 						<path
 							fill="white"
-							id="frontpage-icon"
-							d="M28 3v25H3V3h25Zm-12.566 8.048c-1.157-.824-2.481-1.236-3.971-1.236-1.918-.008-3.558.674-4.93 2.037-1.363 1.371-2.045 3.012-2.037 4.93-.008 1.91.674 3.551 2.037 4.906 1.372 1.355 3.012 2.037 4.93 2.045 1.593-.008 2.996-.475 4.209-1.419 1.545 1.562 2.679 2.751 3.384 3.551.579.666 1.395.872 2.449.61 1.118-.269 2.045-.959 2.782-2.068-.626-.753-1.712-1.91-3.273-3.472.451-.911 1.934-2.806 4.462-5.699.737-.848 1.11-1.656 1.118-2.441.008-.65-.238-1.236-.737-1.759-1.712-1.792-3.916-3.987-6.611-6.587-.99-.19-1.846-.095-2.568.294-.879.444-1.672 1.339-2.377 2.679.642.657 1.387 1.45 2.251 2.377l-1.118 1.252Zm1.672-5.318c.603-.357 1.158-.436 1.673-.238a94.402 94.402 0 0 1 5.35 5.311c-1.07.198-2.021.935-2.846 2.203-2.686-2.845-4.517-4.708-5.476-5.588.229-.753.657-1.315 1.299-1.688Zm3.052 19.553c-.404-.404-.317-1.498.277-3.273l2.339 2.425c-1.245 1.07-2.117 1.348-2.616.848Zm-1.744-8.504c-.008-1.879-.658-3.495-1.965-4.851l1.014-1.205 3.931 4.082a37.884 37.884 0 0 1 2.093-2.378c.253-.277.523-.436.816-.467a.868.868 0 0 1 .69.206c.19.158.293.372.317.642.031.301-.056.594-.254.887-.499.706-1.324 1.728-2.473 3.084-1.014 1.196-1.823 2.258-2.425 3.194-.975 1.514-1.419 2.861-1.348 4.042l-2.282-2.481c1.252-1.331 1.878-2.916 1.886-4.755Zm-3.757-2.425-2.472 1.22 3.622 3.464-1.847 1.926-3.622-3.527-1.379 2.536-.856-6.856 6.554 1.237Z"
+							d="M6.402 18.943s3.069-1.495 6.149-1.495l2.333-7.195c.081-.345.334-.575.621-.575.288 0 .529.23.621.586l2.322 7.184c3.655 0 6.15 1.495 6.15 1.495L19.368 4.69c-.138-.425-.403-.69-.736-.69h-6.253c-.334 0-.575.265-.736.69L6.402 18.943Z"
 						/>
+					</g>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
 
-						<text y="11">
-							<tspan x="30" font-size="5" font-weight="200">Created with</tspan>
-							<tspan x="30" dy="7" font-size="8" font-weight="900">Visual Studio</tspan>
-							<tspan x="68" dy="5" font-size="6" font-weight="400">Code</tspan>
+	<old-style-button dest="/blog/feed.xml">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={feedStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<linearGradient id="button-feed-gradient" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="orange" />
+						<stop offset="1" stop-color="orangered" />
+					</linearGradient>
+
+					<linearGradient
+						id="icon-rss-gradient"
+						x1="0"
+						x2="1"
+						y1="0"
+						y2="0"
+						gradientTransform="rotate(45 23.224 80.325) scale(23.942)"
+						gradientUnits="userSpaceOnUse"
+					>
+						<stop offset="0" stop-color="#e3702d" />
+						<stop offset=".11" stop-color="#ea7d31" />
+						<stop offset=".35" stop-color="#f69537" />
+						<stop offset=".5" stop-color="#fb9e3a" />
+						<stop offset=".7" stop-color="#ea7c31" />
+						<stop offset=".89" stop-color="#de642b" />
+						<stop offset="1" stop-color="#d95b29" />
+					</linearGradient>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<g>
+						<path class="button-badge-bg" d="M2 2h7v27H2z" />
+						<text class="button-badge-text" x="-27.5" y="8" textLength="24">FEED</text>
+					</g>
+
+					<text x="35" y="10">Subscribe</text>
+
+					<g transform="rotate(5) translate(2 1)">
+						<g transform="translate(0, 1.5)">
+							<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
+						</g>
+						<text x="32" class="emphasis-text">
+							<textPath href="#button-text-path" startOffset="-20">Now!</textPath>
 						</text>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button>
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={graphicDesignStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<radialGradient id="graphic-design-gradient" cx="0" cy="0" r="1" gradientTransform="matrix(84 0 0 13.5 2 15.5)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="#9370db" />
-							<stop offset=".34" stop-color="orchid" />
-							<stop offset=".63" stop-color="#9370db" />
-							<stop offset="1" stop-color="#ba55d3" />
-						</radialGradient>
-
-						<image
-							href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAHJ4c3J9eHGTmF5tb29xs//z3d3z//////////////////////////////////////////////////////////8BGRkZGBoYFxseGB4fHiAZOh0eJiAnVz5DJ0M+V4VTYVNTYVOFdY5zbHOOddOlk5Ol0/PMwczz///////////////AABEIAK8ArAMBIgACEQEDEQH/xABrAAEBAQEBAAAAAAAAAAAAAAAAAwIBBBABAQEBAAIDAQEBAAAAAAAAAAECERIxAxMhQVFhAQADAQEAAAAAAAAAAAAAAAAAAgMBBBEAAgICAgIDAQEAAAAAAAAAAAECESExAxJBURMiYXEy/9oADAMBAAIRAxEAPwD0gAAAAAAAM3UjqHulk6r2xJy61W2b+yt511G2eXJCXlK3KLVtNMRynCS7NNM9CGtWta2xm8olK2ophOVyUE97HOfxbN7EeWW2t/G1LrKk8M2K6TSTbTRUA5UAAAAAAAAAAAAAAAAPPZyra1Ihe1PkapZyR5nGlnPg72uAnbe2QblLcrABXRjoOy2OEvQpSWUKpTVtFJtV5156i3HJyTs6uGbmnZ0GN3kUKt0rNifxt28CdoE7SZ0T+yKALTAANA5fSed1jaTQrkk0n5KuW8jqO/bJPqmwnLrFszbbe1zrrlkrmu3bOG+0rkBKzWTy0fp6aKx4JyzB2VZu5GP2u5wKist2PPg+LPI8+jsl17bArbZBty8YD0pYz/VV4RpHVxQ6x/WENXulreRDNk7Wv0PKnSZX8xlG6tP3VVmM59sdy/grTn+IxnNq7HnHZqX+tXXSY0eqxFo0n9kbs7HnsubyiTa0ZNyStI9HuIerYZ1xrfLywsvvHG0JOuSFraKZvYxvLmNRY2JRyPSnDJ5ui1xKnrFym+L0RfB6MucjPadpejFXHJabRsY7RvQ34/LZ3qmJ1JSash11Q6UInoZupELq/wCk7fUHd+IjfI3/AJga1q6YU8NMWWFantk2uTchO/xrw2zJb6dmtT+tx1zYyrr9ro747d+pTN7GjqMVlIpGEI5SDOuX2lds81odvSsO9ukmxeS/jhZyib2Rls7+HbPVcV+oRi/DCEHtNnJvRd/8ZuNRnpm5odvkRzhx10jlRJza8meOtOF7ifLfk4404ZNDxaKZwrJI5m9jS51JLwGN57GwGkMd8lbmVoCRiVKjkkkdAGmfGf4zvTWryIyXRZXpCTb1HbMklrWpM1TE5CqORIw+zsxidq4HSpFUqVE91Him/bCU3khyS+38QdBB22ccrkwAKQdV6Djo1YGTo7i8q7zLYvY6IO1R28UrVGwFCoAAAAAAABi4lrYAAAAJfImtudiCU1k5+VZv2jQ46gcoAAAAAcU+NNvGotxnTwFgFjpAAAAAAAAAJ7rG6VmN0mzt3GPsrAl8jejm+aUtaN/ZU7QDk3s1zb2JWmQjV6JyjeUaHAhOjo47M6plFvSGjCUtIzQsuRRpos4uODed2LSyvM7LY1TrY0eSsM9IznUrSpcAAAAACe89UAY1ao8ovcSpXNiThWiD42taMV39Bia8mJrygKTUvuO/Xk3VPTH+NPTJOztvFPqjczMhQXk1cSvJnkxErvVb+VNsnQTl1wjhx0JbJqTOddBjpmOmjXqry9jzr5nJDcV07H4O1NM0AqXAAADlvEbdWsZjbSwrKXcTu6neupuUiLlP8ABKZOnYV+OpLYnIpBMrxp7KDnYdULGdzsQj09iO4WStCTjaMuHTqKtHOlKLKSY019cQ9VfGuqppl4yjKsI7MSNudh2HKHQAABnXefgAzrSVtamNVSYkJUn+InU5bwiMzbHLItuVzOP7RTuloxxd0sLyzOcWtfXFQ1IokkTmHeVsaaY4eNbABjxONgA82sXLPOvVZ1Dc8CST2iU4vcdmI7ns1G8Sbjv16YotNMxQaaa16N8p4tihY5HQAH//2Q=="
-							id="graphic-design-froggy"
-							width="25"
-							height="25"
+					</g>
+					<g id="rss-icon">
+						<path
+							fill="#cc5d15"
+							d="M83 10.51v9.98a6.013 6.013 0 0 1-6.01 6.01h-9.98A6.013 6.013 0 0 1 61 20.49v-9.98a6.013 6.013 0 0 1 6.01-6.01h9.98A6.013 6.013 0 0 1 83 10.51Z"
 						/>
+						<path
+							fill="#f49c52"
+							d="M82.568 10.394v10.204a5.473 5.473 0 0 1-5.47 5.47H66.894a5.473 5.473 0 0 1-5.47-5.47V10.394a5.473 5.473 0 0 1 5.47-5.47h10.204a5.473 5.473 0 0 1 5.47 5.47Z"
+						/>
+						<path
+							fill="url(#icon-rss-gradient)"
+							d="M82.151 10.504v10.007a5.142 5.142 0 0 1-5.14 5.14H67.004a5.142 5.142 0 0 1-5.14-5.14V10.504a5.142 5.142 0 0 1 5.14-5.14h10.007a5.142 5.142 0 0 1 5.14 5.14Z"
+						/>
+						<path
+							fill="white"
+							d="M64.787 7.769v3.009c6.593.004 12.017 5.428 12.022 12.021h3.009c-.009-8.244-6.795-15.023-15.039-15.023l.008-.007Zm0 5.067v2.923c3.864.005 7.04 3.185 7.04 7.048h2.923v-.008c0-5.469-4.501-9.97-9.971-9.97l.008.007Zm2.059 5.846a2.077 2.077 0 0 0-2.067 2.059c0 1.133.933 2.066 2.067 2.066a2.076 2.076 0 0 0 2.066-2.066 2.077 2.077 0 0 0-2.066-2.067v.008Z"
+						/>
+					</g>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
 
-						<path id="button-base" d="M0 0h88v31H0z" />
+	<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/CSS">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={cssStyles} />
 
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+			<button>
+				<svg viewBox="0 0 88 31">
+					<linearGradient id="button-css-gradient" x1="0" x2="1" y1="0" y2="0" gradientTransform="matrix(84 0 0 84 2 15.5)" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="white" />
+						<stop offset="1" stop-color="deepskyblue" />
+					</linearGradient>
 
-						<text>
-							<tspan x="32" y="13">Graphic Design</tspan>
-							<tspan x="32" dy="1em">is my passion</tspan>
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<path
+						id="adobe-logo"
+						fill="#fa0f00"
+						d="m17.256 12.419 6.243 14.811h-4.092l-1.867-4.717h-4.569l4.285-10.094ZM30.507 3.77v23.457l-9.8-23.457h9.8Zm-16.703 0L4 27.227V3.77h9.804Z"
+					/>
+
+					<text y="12">
+						<tspan x="58">Powered by</tspan>
+						<tspan x="58" dy="1em" font-size="1.3em">SVG & CSS</tspan>
+					</text>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={jsStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<text y="14">
+						<tspan x="56">Warning:</tspan>
+						<tspan x="56" dy="1.5em">Contains JavaScript</tspan>
+					</text>
+					<g id="button-warning-icon">
+						<path
+							fill="yellow"
+							d="M13.272 5.412a1.786 1.786 0 0 1 3.073 0l9.221 18.398c.153.269.243.569.263.878a1.788 1.788 0 0 1-1.756 1.778H5.574a1.752 1.752 0 0 1-1.743-1.734c0-.313.091-.618.264-.878l9.177-18.442Z"
+						/>
+						<path
+							fill="red"
+							d="M14.903 16.786c0 .689-1.25 1.746-1.25 2.745l-.027.086s-.148.655-.637.655a.594.594 0 0 1-.354-.149c-.12-.112-.275.06-.251.21.073.6 1.385 2.53 2.369 2.53 1.126 0 2.122-1.35 2.21-1.826 0-.228-.382-.086-.382-.4 0-.267.233-.442.233-.793a.19.19 0 0 0-.195-.173c-.087 0-.211.061-.309.061-.375 0-.461-.341-.461-.692 0 0 .07.023.07-.724a2.707 2.707 0 0 0-.651-1.601.26.26 0 0 0-.164-.061c-.087 0-.201.039-.201.132"
+						/>
+						<g fill="none" stroke="black">
+							<path d="M12.013 23.006a3.807 3.807 0 0 0 2.721 1.069 4.056 4.056 0 0 0 2.759-1.069m-6.331-1.099s-2.041-2.177-.097-5.053c0 0 .392.499.691.977.222.257.626.695.84.695h.008a.463.463 0 0 0 .458-.505v-.175a7.1 7.1 0 0 1 .7-3.343c.501-1.041 1.36.738.777-2.837 0 0 3.1 2.089 2.984 5.548 0 .253.113.447.388.447.27 0 1.094-.262 1.094-.515.019.019 1.224 2.546-.486 4.761" />
+							<path d="M13.632 19.567s-.137.752-.682.7a1.26 1.26 0 0 1-.28-.112c-.15-.165-.309.038-.286.178a5.019 5.019 0 0 0 1.384 2.05c.625.557.426.314.449.314m1.196.029c.248-.142.485-.303.709-.481.359-.312.642-.702.828-1.139a.16.16 0 0 0 .01-.057.153.153 0 0 0-.146-.153.358.358 0 0 1-.228-.21c-.04-.101-.046-.14.136-.455a.733.733 0 0 0 .092-.42.217.217 0 0 0-.296-.122.442.442 0 0 1-.591-.193c-.11-.214-.143-.07-.007-.751a2.75 2.75 0 0 0-.653-2.03.253.253 0 0 0-.173-.061.183.183 0 0 0-.191.132" />
+							<path d="M13.272 5.412a1.786 1.786 0 0 1 3.073 0l9.221 18.398c.153.269.243.569.263.878a1.788 1.788 0 0 1-1.756 1.778H5.574a1.752 1.752 0 0 1-1.743-1.734c0-.313.091-.618.264-.878l9.177-18.442Z" />
+						</g>
+					</g>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/HTML">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={htmlStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<g id="icon-w3c">
+						<path fill="white" d="M2 2h46v27H2z" />
+						<g>
+							<path
+								fill="#005a9c"
+								d="m16.074 5.483 3.606 12.263 3.608-12.263h2.611L19.928 25.63h-.248l-3.731-12.485-3.731 12.485h-.249L6 5.483h2.612l3.606 12.263 2.438-8.258-1.194-4.005h2.612Z M33.313 19.163c0 1.825-.485 3.358-1.453 4.602-.971 1.243-2.228 1.865-3.77 1.865-1.16 0-2.171-.37-3.034-1.107-.862-.739-1.501-1.738-1.915-2.996l2.039-.846c.299.763.693 1.364 1.182 1.802.489.439 1.064.66 1.728.66.697 0 1.286-.391 1.767-1.169.481-.78.721-1.716.721-2.811 0-1.211-.258-2.146-.772-2.81-.597-.779-1.534-1.17-2.81-1.17h-.994V13.99l3.482-6.019h-4.205L24.11 9.96h-.745V5.483h9.699v1.218l-3.681 6.343c1.293.415 2.271 1.17 2.935 2.264.664 1.094.995 2.378.995 3.855z"
+							/>
+							<path d="m43.435 5.37.423 2.571-1.497 2.865s-.575-1.215-1.53-1.887c-.805-.568-1.33-.691-2.148-.522-1.055.218-2.247 1.476-2.768 3.028-.623 1.857-.629 2.756-.651 3.582-.035 1.323.173 2.105.173 2.105s-.909-1.682-.9-4.145c.005-1.759.283-3.354 1.096-4.927.716-1.384 1.779-2.214 2.723-2.311.976-.102 1.749.368 2.344.879.625.534 1.26 1.703 1.26 1.703l1.475-2.941Zm.184 14.553s-.661 1.183-1.074 1.638c-.412.456-1.15 1.258-2.061 1.661-.912.401-1.389.478-2.291.39-.9-.086-1.736-.607-2.029-.826-.292-.216-1.042-.856-1.464-1.451-.424-.598-1.086-1.793-1.086-1.793s.368 1.196.6 1.704c.132.292.541 1.185 1.121 1.965.539.725 1.589 1.974 3.184 2.256 1.596.282 2.692-.433 2.962-.607.271-.173.843-.651 1.206-1.039a9.14 9.14 0 0 0 .932-1.229c.145-.226.381-.683.381-.683l-.381-1.986Z" />
+						</g>
+					</g>
+
+					<text x="100" y="100" class="hidden-text">W3C Validator:</text>
+					<text y="14">
+						<tspan x="50">HTML</tspan>
+						<tspan x="50" dy="1em">5</tspan>
+					</text>
+					<text x="100" y="100" class="hidden-text">Pass</text>
+					<path
+						id="checkmark"
+						fill="maroon"
+						d="M85 13.833c0 .385-.135.712-.404.981L72.184 27.226a1.336 1.336 0 0 1-.981.404c-.385 0-.712-.135-.981-.404l-7.188-7.187a1.34 1.34 0 0 1-.404-.982c0-.385.135-.712.404-.981l1.963-1.963a1.34 1.34 0 0 1 .982-.404c.384 0 .711.135.981.404l4.243 4.258 9.467-9.482c.27-.27.597-.404.982-.404s.712.134.981.404l1.963 1.963c.269.269.404.596.404.981"
+					/>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://www.w3.org/WAI/standards-guidelines/wcag/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={ariaStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<g id="icon-w3c">
+						<path fill="white" d="M2 2h46v27H2z" />
+						<g>
+							<path
+								fill="#005a9c"
+								d="m16.074 5.483 3.606 12.263 3.608-12.263h2.611L19.928 25.63h-.248l-3.731-12.485-3.731 12.485h-.249L6 5.483h2.612l3.606 12.263 2.438-8.258-1.194-4.005h2.612Z M33.313 19.163c0 1.825-.485 3.358-1.453 4.602-.971 1.243-2.228 1.865-3.77 1.865-1.16 0-2.171-.37-3.034-1.107-.862-.739-1.501-1.738-1.915-2.996l2.039-.846c.299.763.693 1.364 1.182 1.802.489.439 1.064.66 1.728.66.697 0 1.286-.391 1.767-1.169.481-.78.721-1.716.721-2.811 0-1.211-.258-2.146-.772-2.81-.597-.779-1.534-1.17-2.81-1.17h-.994V13.99l3.482-6.019h-4.205L24.11 9.96h-.745V5.483h9.699v1.218l-3.681 6.343c1.293.415 2.271 1.17 2.935 2.264.664 1.094.995 2.378.995 3.855z"
+							/>
+							<path d="m43.435 5.37.423 2.571-1.497 2.865s-.575-1.215-1.53-1.887c-.805-.568-1.33-.691-2.148-.522-1.055.218-2.247 1.476-2.768 3.028-.623 1.857-.629 2.756-.651 3.582-.035 1.323.173 2.105.173 2.105s-.909-1.682-.9-4.145c.005-1.759.283-3.354 1.096-4.927.716-1.384 1.779-2.214 2.723-2.311.976-.102 1.749.368 2.344.879.625.534 1.26 1.703 1.26 1.703l1.475-2.941Zm.184 14.553s-.661 1.183-1.074 1.638c-.412.456-1.15 1.258-2.061 1.661-.912.401-1.389.478-2.291.39-.9-.086-1.736-.607-2.029-.826-.292-.216-1.042-.856-1.464-1.451-.424-.598-1.086-1.793-1.086-1.793s.368 1.196.6 1.704c.132.292.541 1.185 1.121 1.965.539.725 1.589 1.974 3.184 2.256 1.596.282 2.692-.433 2.962-.607.271-.173.843-.651 1.206-1.039a9.14 9.14 0 0 0 .932-1.229c.145-.226.381-.683.381-.683l-.381-1.986Z" />
+						</g>
+					</g>
+
+					<text x="100" y="100" class="hidden-text">W3C Validator:</text>
+					<text y="14">
+						<tspan x="50">WAI-<tspan fill="red">AA</tspan></tspan>
+						<tspan x="50" dy="1em">WCAG 2.2</tspan>
+					</text>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://workers.cloudflare.com/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={poweredStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<radialGradient id="icon-php-gradient" cx="0" cy="0" r="1" gradientTransform="translate(54.608 8.337) scale(27.5761)" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="#aeb2d5" />
+						<stop offset=".3" stop-color="#aeb2d5" />
+						<stop offset=".75" stop-color="#484c89" />
+						<stop offset="1" stop-color="#484c89" />
+					</radialGradient>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<text y="14">
+						<tspan x="40">Powered</tspan>
+						<tspan x="38" dy="1em">by</tspan>
+					</text>
+
+					<g id="icon-php">
+						<g>
+							<path
+								fill="url(#icon-php-gradient)"
+								d="M42 15.5c0 6.101 9.402 11.047 21 11.047S84 21.601 84 15.5c0-6.101-9.402-11.047-21-11.047S42 9.399 42 15.5"
+							/>
+							<path
+								fill="#777bb3"
+								d="M63 25.727c11.145 0 20.18-4.579 20.18-10.227 0-5.648-9.035-10.227-20.18-10.227S42.82 9.852 42.82 15.5c0 5.648 9.035 10.227 20.18 10.227"
+							/>
+						</g>
+						<text x="100" y="100" class="hidden-text">Cloudflare Workers -</text>
+						<text y="16.5" x="62">cfw</text>
+					</g>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://obsidian.md/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={writtenStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<g id="button-written-footer">
+						<path fill="#f3632e" d="M2 27h21v2H2z" />
+						<path fill="#fac705" d="M23 27h21v2H23z" />
+						<path fill="#66c557" d="M44 27h21v2H44z" />
+						<path fill="#3d87cf" d="M65 27h21v2H65z" />
+					</g>
+
+					<g id="icon-office">
+						<path
+							fill="#3d87cf"
+							d="m81.594 4.728-10.206-.002v2.729c-.784 1.174-2.75-1.819-3.921.241-.099.243-.539 1.289-.516 2.106.025.91.467 1.601.467 1.962 2.058 1.959 3.97-1.616 3.97.832v1.519h2.791c.614-.341.453-.647-.061-1.754-.821-1.773.923-2.557 2.446-2.758 2.383.241 3.316 1.325 2.048 3.615-.195.352-.095.505.098.849h2.886l-.002-9.339"
+						/>
+						<path
+							fill="#f3632e"
+							d="M61.995 4.693v10.206l2.731-.002c1.169.786-1.826 2.747.238 3.921.246.096 1.291.536 2.109.513.909-.025 1.599-.465 1.959-.465 1.962-2.058-1.616-3.969.834-3.969h1.52v-2.792c-.344-.612-.65-.45-1.757.063-1.773.82-2.556-.92-2.757-2.445.241-2.381 1.324-3.316 3.615-2.048.352.195.505.094.848-.096V4.693h-9.34"
+						/>
+						<path
+							fill="#66c557"
+							d="m81.539 24.296-.002-10.206c-.775.004-1.712.004-2.728.004-1.174-.788 1.819-2.752-.241-3.923-.246-.098-1.289-.537-2.109-.516-.909.028-1.599.466-1.959.466-1.962 2.06 1.618 3.971-.832 3.971h-1.522v2.792c.344.614.65.45 1.757-.061 1.773-.822 2.556.918 2.76 2.443-.246 2.383-1.325 3.316-3.62 2.048-.354-.195-.507-.094-.848.096v2.886h9.342"
+						/>
+						<path
+							fill="#fac705"
+							d="M61.989 24.263h10.206l-.002-2.729c.787-1.172 2.751 1.821 3.925-.239.096-.245.536-1.289.513-2.108-.025-.91-.465-1.599-.465-1.96-2.058-1.961-3.969 1.618-3.971-.832v-1.521h-2.792c-.612.343-.45.649.063 1.756.819 1.773-.92 2.557-2.444 2.758-2.385-.241-3.317-1.325-2.049-3.615.197-.354.092-.507-.097-.849h-2.887v9.339"
+						/>
+						<path
+							fill="none"
+							stroke="black"
+							d="M81.581 4.707H61.976l.002 19.6h19.603v-19.6Z M71.409 14.8v-2.259c-.023-1.771-1.645-.161-2.188-.132-1.587.088-2.268-1.194-2.238-2.705-.03-1.509.622-2.897 2.267-2.595.537.097 2.136 1.528 2.159-.243V4.707m.664 10.171h-2.261c-1.771.025-.231 1.656-.13 2.188.302 1.645-1.197 2.265-2.708 2.238-1.509.027-3.007-.593-2.705-2.238.098-.537 1.638-2.163-.132-2.188h-2.159m10.177-.669v2.262c.023 1.771 1.651.23 2.188.132 1.645-.302 2.265 1.194 2.238 2.705.027 1.509-.593 3.008-2.238 2.708-.535-.099-2.165-1.641-2.188.13v2.158m-.667-10.17h2.264c1.771-.025.228-1.654.128-2.188-.3-1.645 1.198-2.267 2.707-2.238 1.511-.029 3.01.593 2.708 2.238-.099.534-1.641 2.163.132 2.188h2.158"
+						/>
+					</g>
+
+					<text y="5">
+						<tspan x="5" font-size="5" font-weight="200">Written on</tspan>
+						<tspan x="5" dy="3" font-size="12" font-weight="900">Obsidian</tspan>
+						<tspan x="24" dy="9" font-size="7" font-weight="400">Markdown</tspan>
+					</text>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://www.the519.org/support-the-519/donate/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={prideStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<g>
+						<path class="button-badge-bg" d="M2 2h7v27H2z" />
+						<text x="-27.5" y="8" textLength="24" class="button-badge-text">
+							<tspan dx="-1.5" fill="none" font-size="1">#</tspan>
+							<tspan>PRIDE</tspan>
 						</text>
+					</g>
 
-						<use xlink:href="#graphic-design-froggy" transform="translate(60 3)" />
+					<text x="32" y="10">This site is</text>
+
+					<g transform="rotate(6) translate(-4 -1)">
+						<g transform="translate(0, 1.5)">
+							<path d="M21,23C36.333,12 58,14 58,14" fill="none" id="button-text-path" stroke-linecap="round" />
+						</g>
+						<text x="32" y="9" class="emphasis-text"><textPath href="#button-text-path" startOffset="-12">LGBTQ+</textPath></text>
+					</g>
+
+					<g>
+						<clipPath id="button-pride-icon-clip">
+							<path id="button-pride-icon-square" d="M56 2h30v27H56z" />
+						</clipPath>
+						<g clip-path="url(#button-pride-icon-clip)">
+							<path fill="#6d2380" d="M56 2h42.52v27H56z" />
+							<path fill="#2c58a4" d="M56 2h42.52v22.5H56z" />
+							<path fill="#78b82a" d="M56 2h42.52v18H56z" />
+							<path fill="#efe524" d="M56 2h42.52v13.5H56z" />
+							<path fill="#f28917" d="M56 2h42.52v9H56z" />
+							<path fill="#e22016" d="M56 2h42.52v4.5H56z" />
+							<path d="M67.161 2H56v27h11.161l12.508-13.5L67.161 2Z" />
+							<path fill="#945516" d="M64.539 2H56v27h8.539l12.508-13.5L64.539 2Z" />
+							<path fill="#7bcce5" d="M61.953 2H56v27h5.953l12.508-13.5L61.953 2Z" />
+							<path fill="#f4aec8" d="M59.366 2H56v27h3.366l12.508-13.5L59.366 2Z" />
+							<path fill="#fff" d="M56 2v27h.78l12.472-13.5L56.78 2H56Z" />
+							<path fill="#fdd817" d="M56 27.016 66.665 15.5 56 3.949v23.067Z" />
+							<circle cx="59.933" cy="15.5" r="2.835" fill="none" stroke="#66338b" />
+						</g>
+					</g>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button dest="https://code.visualstudio.com/">
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={codeStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<pattern id="dotted-pattern" viewBox="0 0 2 2" width="2" height="2" patternUnits="userSpaceOnUse">
+						<circle cx="1" cy="1" r=".5" opacity="0.1" />
+					</pattern>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<path id="button-vscode-bg" d="M2 2h42v27H2zm62.117 4.939 7.879 3.889-11.541 11.035L66.339 28l11.54-11.237 4.394 8.08L85 3 64.117 6.939Z" />
+					<rect x="2" y="2" width="84" height="27" fill="url(#dotted-pattern)" />
+
+					<path
+						fill="white"
+						id="frontpage-icon"
+						d="M28 3v25H3V3h25Zm-12.566 8.048c-1.157-.824-2.481-1.236-3.971-1.236-1.918-.008-3.558.674-4.93 2.037-1.363 1.371-2.045 3.012-2.037 4.93-.008 1.91.674 3.551 2.037 4.906 1.372 1.355 3.012 2.037 4.93 2.045 1.593-.008 2.996-.475 4.209-1.419 1.545 1.562 2.679 2.751 3.384 3.551.579.666 1.395.872 2.449.61 1.118-.269 2.045-.959 2.782-2.068-.626-.753-1.712-1.91-3.273-3.472.451-.911 1.934-2.806 4.462-5.699.737-.848 1.11-1.656 1.118-2.441.008-.65-.238-1.236-.737-1.759-1.712-1.792-3.916-3.987-6.611-6.587-.99-.19-1.846-.095-2.568.294-.879.444-1.672 1.339-2.377 2.679.642.657 1.387 1.45 2.251 2.377l-1.118 1.252Zm1.672-5.318c.603-.357 1.158-.436 1.673-.238a94.402 94.402 0 0 1 5.35 5.311c-1.07.198-2.021.935-2.846 2.203-2.686-2.845-4.517-4.708-5.476-5.588.229-.753.657-1.315 1.299-1.688Zm3.052 19.553c-.404-.404-.317-1.498.277-3.273l2.339 2.425c-1.245 1.07-2.117 1.348-2.616.848Zm-1.744-8.504c-.008-1.879-.658-3.495-1.965-4.851l1.014-1.205 3.931 4.082a37.884 37.884 0 0 1 2.093-2.378c.253-.277.523-.436.816-.467a.868.868 0 0 1 .69.206c.19.158.293.372.317.642.031.301-.056.594-.254.887-.499.706-1.324 1.728-2.473 3.084-1.014 1.196-1.823 2.258-2.425 3.194-.975 1.514-1.419 2.861-1.348 4.042l-2.282-2.481c1.252-1.331 1.878-2.916 1.886-4.755Zm-3.757-2.425-2.472 1.22 3.622 3.464-1.847 1.926-3.622-3.527-1.379 2.536-.856-6.856 6.554 1.237Z"
+					/>
+
+					<text y="11">
+						<tspan x="30" font-size="5" font-weight="200">Created with</tspan>
+						<tspan x="30" dy="7" font-size="8" font-weight="900">Visual Studio</tspan>
+						<tspan x="68" dy="5" font-size="6" font-weight="400">Code</tspan>
+					</text>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button>
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={graphicDesignStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<radialGradient id="graphic-design-gradient" cx="0" cy="0" r="1" gradientTransform="matrix(84 0 0 13.5 2 15.5)" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="#9370db" />
+						<stop offset=".34" stop-color="orchid" />
+						<stop offset=".63" stop-color="#9370db" />
+						<stop offset="1" stop-color="#ba55d3" />
+					</radialGradient>
+
+					<image
+						href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAHJ4c3J9eHGTmF5tb29xs//z3d3z//////////////////////////////////////////////////////////8BGRkZGBoYFxseGB4fHiAZOh0eJiAnVz5DJ0M+V4VTYVNTYVOFdY5zbHOOddOlk5Ol0/PMwczz///////////////AABEIAK8ArAMBIgACEQEDEQH/xABrAAEBAQEBAAAAAAAAAAAAAAAAAwIBBBABAQEBAAIDAQEBAAAAAAAAAAECERIxAxMhQVFhAQADAQEAAAAAAAAAAAAAAAAAAgMBBBEAAgICAgIDAQEAAAAAAAAAAAECESExAxJBURMiYXEy/9oADAMBAAIRAxEAPwD0gAAAAAAAM3UjqHulk6r2xJy61W2b+yt511G2eXJCXlK3KLVtNMRynCS7NNM9CGtWta2xm8olK2ophOVyUE97HOfxbN7EeWW2t/G1LrKk8M2K6TSTbTRUA5UAAAAAAAAAAAAAAAAPPZyra1Ihe1PkapZyR5nGlnPg72uAnbe2QblLcrABXRjoOy2OEvQpSWUKpTVtFJtV5156i3HJyTs6uGbmnZ0GN3kUKt0rNifxt28CdoE7SZ0T+yKALTAANA5fSed1jaTQrkk0n5KuW8jqO/bJPqmwnLrFszbbe1zrrlkrmu3bOG+0rkBKzWTy0fp6aKx4JyzB2VZu5GP2u5wKist2PPg+LPI8+jsl17bArbZBty8YD0pYz/VV4RpHVxQ6x/WENXulreRDNk7Wv0PKnSZX8xlG6tP3VVmM59sdy/grTn+IxnNq7HnHZqX+tXXSY0eqxFo0n9kbs7HnsubyiTa0ZNyStI9HuIerYZ1xrfLywsvvHG0JOuSFraKZvYxvLmNRY2JRyPSnDJ5ui1xKnrFym+L0RfB6MucjPadpejFXHJabRsY7RvQ34/LZ3qmJ1JSash11Q6UInoZupELq/wCk7fUHd+IjfI3/AJga1q6YU8NMWWFantk2uTchO/xrw2zJb6dmtT+tx1zYyrr9ro747d+pTN7GjqMVlIpGEI5SDOuX2lds81odvSsO9ukmxeS/jhZyib2Rls7+HbPVcV+oRi/DCEHtNnJvRd/8ZuNRnpm5odvkRzhx10jlRJza8meOtOF7ifLfk4404ZNDxaKZwrJI5m9jS51JLwGN57GwGkMd8lbmVoCRiVKjkkkdAGmfGf4zvTWryIyXRZXpCTb1HbMklrWpM1TE5CqORIw+zsxidq4HSpFUqVE91Him/bCU3khyS+38QdBB22ccrkwAKQdV6Djo1YGTo7i8q7zLYvY6IO1R28UrVGwFCoAAAAAAABi4lrYAAAAJfImtudiCU1k5+VZv2jQ46gcoAAAAAcU+NNvGotxnTwFgFjpAAAAAAAAAJ7rG6VmN0mzt3GPsrAl8jejm+aUtaN/ZU7QDk3s1zb2JWmQjV6JyjeUaHAhOjo47M6plFvSGjCUtIzQsuRRpos4uODed2LSyvM7LY1TrY0eSsM9IznUrSpcAAAAACe89UAY1ao8ovcSpXNiThWiD42taMV39Bia8mJrygKTUvuO/Xk3VPTH+NPTJOztvFPqjczMhQXk1cSvJnkxErvVb+VNsnQTl1wjhx0JbJqTOddBjpmOmjXqry9jzr5nJDcV07H4O1NM0AqXAAADlvEbdWsZjbSwrKXcTu6neupuUiLlP8ABKZOnYV+OpLYnIpBMrxp7KDnYdULGdzsQj09iO4WStCTjaMuHTqKtHOlKLKSY019cQ9VfGuqppl4yjKsI7MSNudh2HKHQAABnXefgAzrSVtamNVSYkJUn+InU5bwiMzbHLItuVzOP7RTuloxxd0sLyzOcWtfXFQ1IokkTmHeVsaaY4eNbABjxONgA82sXLPOvVZ1Dc8CST2iU4vcdmI7ns1G8Sbjv16YotNMxQaaa16N8p4tihY5HQAH//2Q=="
+						id="graphic-design-froggy"
+						width="25"
+						height="25"
+					/>
+
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<text>
+						<tspan x="32" y="13">Graphic Design</tspan>
+						<tspan x="32" dy="1em">is my passion</tspan>
+					</text>
+
+					<use xlink:href="#graphic-design-froggy" transform="translate(60 3)" />
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
+
+	<old-style-button>
+		<template shadowrootmode="open">
+			<link rel="stylesheet" href={baseStyles} />
+			<link rel="stylesheet" href={guestbookStyles} />
+
+			<button>
+				<svg viewBox="0 0 88 31">
+					<path id="button-base" d="M0 0h88v31H0z" />
+
+					<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
+					<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
+					<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
+					<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
+
+					<text x="55" y="12">Sign my</text>
+
+					<text x="55" y="23" class="emphasis-text">Guestbook!</text>
+					<svg width="20" height="20" x="5" y="5" viewBox="0 0 2048 2048">
+						<path d="M1747 290q14 8 23 23t9 32q0 8-2 15t-5 14l-707 1415q-9 19-28 28l-173 87q-32 16-69 16h-9q-4 0-10-1l-47 94q-8 16-23 25t-34 10q-26 0-45-19t-19-45q0-12 7-30t16-37t20-37t15-28q-26-40-26-87v-165q0-16 7-29l576-1152l-65-32l-237 474q-8 16-23 25t-34 10q-26 0-45-19t-19-45q0-13 7-29l239-478q16-32 43-50t63-19q35 0 66 17t62 32l71-142q8-17 23-26t34-9q13 0 22 4q12-24 23-47t26-43t36-30t53-12q32 0 61 15l94 47q32 16 50 42t19 64q0 34-15 63t-30 59m-202-101l87 43l29-58l-87-43zm84 185l-192-96l-669 1337v150q0 11 8 19t19 8q4 0 16-5t29-13t35-17t36-19t30-16t19-10zm163 394q53 0 99 20t82 55t55 81t20 100q0 53-20 99t-55 82t-81 55t-100 20h-288l64-128h224q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-26 0-45-19t-19-45t19-45t45-19M128 1600q0 66 25 124t68 102t102 69t125 25h44q-5 15-8 31t-4 33q0 17 3 33t9 31h-44q-93 0-174-35t-142-96t-96-142t-36-175q0-93 35-174t96-142t142-96t175-36h224l-64 128H448q-66 0-124 25t-102 69t-69 102t-25 124" />
 					</svg>
-				</button>
-			</template>
-		</old-style-button>
-
-		<old-style-button>
-			<template shadowrootmode="open">
-				<link rel="stylesheet" href={baseStyles} />
-				<link rel="stylesheet" href={guestbookStyles} />
-
-				<button>
-					<svg viewBox="0 0 88 31">
-						<path id="button-base" d="M0 0h88v31H0z" />
-
-						<path id="button-border-down" fill-opacity="0.4" d="M88 31H0l2-2h84l2 2Z" />
-						<path id="button-border-right" fill-opacity="0.4" d="M88 0v31l-2-2V2l2-2Z" />
-						<path id="button-border-up" fill-opacity="0.4" d="M0 0h88l-2 2H2L0 0Z" />
-						<path id="button-border-left" fill-opacity="0.4" d="M0 31V0l2 2v27l-2 2Z" />
-
-						<text x="55" y="12">Sign my</text>
-
-						<text x="55" y="23" class="emphasis-text">Guestbook!</text>
-						<svg width="20" height="20" x="5" y="5" viewBox="0 0 2048 2048">
-							<path d="M1747 290q14 8 23 23t9 32q0 8-2 15t-5 14l-707 1415q-9 19-28 28l-173 87q-32 16-69 16h-9q-4 0-10-1l-47 94q-8 16-23 25t-34 10q-26 0-45-19t-19-45q0-12 7-30t16-37t20-37t15-28q-26-40-26-87v-165q0-16 7-29l576-1152l-65-32l-237 474q-8 16-23 25t-34 10q-26 0-45-19t-19-45q0-13 7-29l239-478q16-32 43-50t63-19q35 0 66 17t62 32l71-142q8-17 23-26t34-9q13 0 22 4q12-24 23-47t26-43t36-30t53-12q32 0 61 15l94 47q32 16 50 42t19 64q0 34-15 63t-30 59m-202-101l87 43l29-58l-87-43zm84 185l-192-96l-669 1337v150q0 11 8 19t19 8q4 0 16-5t29-13t35-17t36-19t30-16t19-10zm163 394q53 0 99 20t82 55t55 81t20 100q0 53-20 99t-55 82t-81 55t-100 20h-288l64-128h224q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-26 0-45-19t-19-45t19-45t45-19M128 1600q0 66 25 124t68 102t102 69t125 25h44q-5 15-8 31t-4 33q0 17 3 33t9 31h-44q-93 0-174-35t-142-96t-96-142t-36-175q0-93 35-174t96-142t142-96t175-36h224l-64 128H448q-66 0-124 25t-102 69t-69 102t-25 124" />
-						</svg>
-					</svg>
-				</button>
-			</template>
-		</old-style-button>
-	</div>
+				</svg>
+			</button>
+		</template>
+	</old-style-button>
 </details>
