@@ -1,37 +1,55 @@
 @layer components {
-	#pagination {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		gap: var(--size-2);
-		margin: var(--size-2);
-		text-align: center;
+	m-pagination {
+		&:has(li:only-child), &:has(li:only-child) + * { display: none; }
+
+		div {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: var(--size-2);
+			margin: var(--size-2);
+			text-align: center;
+		}
+
+		ol {
+			display: flex;
+			gap: var(--size-3);
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			flex-wrap: wrap;
+		}
+
+		svg[data-icon] {
+			width: 1.5em;
+			height: 1.5em;
+			vertical-align: -0.5em;
+			margin: 0;
+		}
+
+		a:not([href]) { color: var(--text-2); }
+
+		aside {
+			padding: var(--size-1) var(--size-2);
+			text-align: center;
+		}
+
+		@media (max-width: 40rem) {
+			.pagination-link-text {
+				border: 0;
+				clip: rect(0, 0, 0, 0);
+				position: absolute;
+				opacity: 0;
+				z-index: -1;
+				margin: 0;
+				padding: 0;
+				width: 1px;
+				height: 1px;
+				overflow: hidden;
+				pointer-events: none;
+				user-select: none;
+			}
+		}
 	}
-
-	#pagination ol {
-		display: flex;
-		gap: var(--size-3);
-		margin: 0;
-		padding: 0;
-		list-style-type: '';
-	}
-
-	#pagination li { list-style-type: ''; }
-
-	#pagination:has(li:only-child), #pagination:has(li:only-child) + * { display: none; }
-
-	#pagination svg {
-		width: 1.5em;
-		height: 1.5em;
-	}
-
-	#pagination a:not([href]) { color: var(--link-visited-color); }
-
-	#pagination-info {
-		padding: var(--size-1) var(--size-2);
-		text-align: center;
-	}
-
-	@media (max-width: 40rem) { .pagination-link-text { display: none; } }
 }

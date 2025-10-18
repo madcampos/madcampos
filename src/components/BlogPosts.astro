@@ -139,7 +139,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 			<m-pagination>
 				<nav aria-labelledby="pagination-label">
 					<sr-only id="pagination-label">Pagination</sr-only>
-					<div id="pagination">
+					<div>
 						<a
 							href={baseUrl}
 							id="first-page"
@@ -205,7 +205,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 							<Icon name="uil:angle-double-right" aria-hidden="true" />
 						</a>
 					</div>
-					<aside id="pagination-info">
+					<aside>
 						{start + 1} &mdash; {end + 1} of {total} ({size} per page)
 					</aside>
 				</nav>
