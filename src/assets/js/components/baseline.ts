@@ -2,6 +2,7 @@ import baselineStyleUrl from '../../css/components/baseline.css?url';
 import baselineStatusSvg from '../../images/components/baseline/baseline-status.svg?url';
 import browserIconsSvg from '../../images/components/baseline/browser-icons.svg?url';
 import browserStatusSvg from '../../images/components/baseline/browser-status.svg?url';
+import { SiteSettings } from '../settings.ts';
 
 type BrowserIdentifier = 'chrome_android' | 'chrome' | 'edge' | 'firefox_android' | 'firefox' | 'safari_ios' | 'safari';
 type BaselineHighLow = 'high' | 'low';
@@ -244,4 +245,8 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 			default:
 		}
 	}
+}
+
+if (SiteSettings.js !== 'disabled' && !customElements.get('baseline-info')) {
+	customElements.define('baseline-info', BaselineInfo);
 }

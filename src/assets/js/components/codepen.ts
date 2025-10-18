@@ -1,3 +1,5 @@
+import { SiteSettings } from '../settings.ts';
+
 export class CodepenEmbed extends HTMLElement implements CustomElement {
 	static observedAttributes = ['title', 'href', 'tab'];
 	declare shadowRoot: ShadowRoot;
@@ -122,6 +124,6 @@ export class CodepenEmbed extends HTMLElement implements CustomElement {
 	}
 }
 
-if (!customElements.get('codepen-embed')) {
+if (SiteSettings.js !== 'disabled' && !customElements.get('codepen-embed')) {
 	customElements.define('codepen-embed', CodepenEmbed);
 }

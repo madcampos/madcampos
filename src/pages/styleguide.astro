@@ -1,7 +1,6 @@
 ---
 import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
-import IabEscape from '../components/IabEscape.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
@@ -22,8 +21,8 @@ import Webrings from '../components/Webrings.astro';
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -93,6 +92,6 @@ import Webrings from '../components/Webrings.astro';
 			<Webrings />
 		</footer>
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

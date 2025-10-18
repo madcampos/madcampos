@@ -2,30 +2,48 @@
 import InAppSpy, { SFSVCExperimental } from 'inapp-spy';
 import { SiteSettings } from '../settings.ts';
 
-document.addEventListener('DOMContentLoaded', async () => {
-	if (!document.body.classList.contains('js-enabled')) {
-		return;
+class IabExcape extends HTMLElement implements CustomElement {
+	constructor() {
+		super();
+
+		this.innerHTML = `
+			<dialog tabindex="0">
+				<h2>It's a trap!</h2>
+				<div>
+					<p>You are locked inside an In-App Browser.</p>
+					<p>
+						Those are made to lock you inside a platform and control all your data.
+						<br />
+						They may promise you privacy, but dont'respect that.
+					</p>
+					<p>Tap the link below to open this page in your default browser.</p>
+				</div>
+				<a href="#" target="_blank">Escape this trap</a>
+			</dialog>
+		`;
 	}
 
-	// eslint-disable-next-line new-cap
-	const { isInApp } = InAppSpy();
-	// eslint-disable-next-line new-cap
-	const isSFSVC = await SFSVCExperimental();
+	async connectedCallback() {
+		// eslint-disable-next-line new-cap
+		const { isInApp } = InAppSpy();
+		// eslint-disable-next-line new-cap
+		const isSFSVC = await SFSVCExperimental();
 
-	const url = window.location.href;
+		const url = window.location.href;
 
-	if (isInApp || isSFSVC || SiteSettings.enableIab) {
-		let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
+		if (isInApp || isSFSVC || SiteSettings.iabEscape) {
+			let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
 
-		if (navigator.userAgent.includes('Android')) {
-			link = `intent:${url}#Intent;end`;
+			if (navigator.userAgent.includes('Android')) {
+				link = `intent:${url}#Intent;end`;
+			}
+
+			this.querySelector<HTMLDialogElement>('a')?.setAttribute('href', link);
+			this.querySelector<HTMLDialogElement>('dialog')?.showModal();
 		}
-
-		window.location.replace(link);
-
-		const iabAlert = document.querySelector<HTMLDialogElement>('#iab-escape');
-
-		iabAlert?.querySelector('a')?.setAttribute('href', link);
-		iabAlert?.showModal();
 	}
-});
+}
+
+if (SiteSettings.js !== 'disabled' && !customElements.get('iab-escape')) {
+	customElements.define('iab-escape', IabExcape);
+}

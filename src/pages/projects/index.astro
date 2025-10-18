@@ -4,7 +4,6 @@ import { Icon } from 'astro-icon/components';
 import Card from '../../components/Card.astro';
 import Effects from '../../components/Effects.astro';
 import HtmlHead from '../../components/HtmlHead.astro';
-import IabEscape from '../../components/IabEscape.astro';
 import Logo from '../../components/Logo.astro';
 import OldStyleButtons from '../../components/OldStyleButtons.astro';
 import SiteNav from '../../components/SiteNav.astro';
@@ -36,8 +35,8 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -111,7 +110,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 							{
 								data.url && (
 									<a href={data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
-										<Icon name="uil:link" title="" role="presentation" />
+										<Icon name="uil:link" aria-hidden="true" />
 										View Project
 									</a>
 								)
@@ -120,7 +119,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 							{
 								data.repository && (
 									<a href={data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
-										<Icon name="uil:github" title="" role="presentation" />
+										<Icon name="uil:github" aria-hidden="true" />
 										View Repository
 									</a>
 								)
@@ -130,7 +129,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 						<details slot="footer">
 							<summary>
 								<span>
-									<Icon name="uil:cog" title="" role="presentation" />
+									<Icon name="uil:cog" aria-hidden="true" />
 									Technologies used
 								</span>
 							</summary>
@@ -148,6 +147,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 			<Webrings />
 		</footer>
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

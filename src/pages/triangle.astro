@@ -9,7 +9,6 @@ import mScott from '../assets/images/piramid/m-scott.jpg';
 import mrCreature from '../assets/images/piramid/mr-creature.jpg';
 import richHero from '../assets/images/piramid/rich1.png';
 import HtmlHead from '../components/HtmlHead.astro';
-import IabEscape from '../components/IabEscape.astro';
 import SiteNav from '../components/SiteNav.astro';
 
 const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px';
@@ -29,8 +28,8 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -242,7 +241,7 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 				By providing your email you subscribe to a lifetime suply of Sildenafil, also known as "Magic Blue Pills" or "Daddy Little Helpers".
 			</p>
 		</footer>
-		<IabEscape />
+		<iab-escape></iab-escape>
 		<script src="../assets/js/pages/triangle.ts"></script>
 	</body>
 </html>

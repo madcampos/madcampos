@@ -5,10 +5,8 @@ import { Image } from 'astro:assets';
 import avatar from '../assets/images/me.jpg';
 import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
-import IabEscape from '../components/IabEscape.astro';
 import Logo from '../components/Logo.astro';
 import OldButtons from '../components/OldStyleButtons.astro';
-import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 import Webrings from '../components/Webrings.astro';
 ---
 <!DOCTYPE html>
@@ -19,8 +17,8 @@ import Webrings from '../components/Webrings.astro';
 		description="Tech Stack: Vue.js, Node.js, TypeScript, JavaScript"
 	/>
 	<body>
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -87,43 +85,43 @@ import Webrings from '../components/Webrings.astro';
 					<ul>
 						<li>
 							<a href="/blog/">
-								<Icon name="uil:file-edit-alt" title="" role="presentation" />
+								<Icon name="uil:file-edit-alt" aria-hidden="true" />
 								My Blog
 							</a>
 						</li>
 						<li>
 							<a href="/projects/">
-								<Icon name="uil:flask" title="" role="presentation" />
+								<Icon name="uil:flask" aria-hidden="true" />
 								Project Highlights
 							</a>
 						</li>
 						<li>
 							<a href="/talks/">
-								<Icon name="uil:presentation-check" title="" role="presentation" />
+								<Icon name="uil:presentation-check" aria-hidden="true" />
 								Talks I've given
 							</a>
 						</li>
 						<li>
 							<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="uil:github-alt" title="" role="presentation" />
+								<Icon name="uil:github-alt" aria-hidden="true" />
 								GitHub
 							</a>
 						</li>
 						<li>
 							<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="brandico:codepen" title="" role="presentation" />
+								<Icon name="brandico:codepen" aria-hidden="true" />
 								CodePen
 							</a>
 						</li>
 						<li>
 							<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="uil:linkedin-alt" title="" role="presentation" />
+								<Icon name="uil:linkedin-alt" aria-hidden="true" />
 								LinkedIn
 							</a>
 						</li>
 						<li>
 							<a href="mailto:me@madcampos.dev" rel="me">
-								<Icon name="uil:envelope" title="" role="presentation" />
+								<Icon name="uil:envelope" aria-hidden="true" />
 								<span class="u-email email" itemprop="email">me@madcampos.dev</span>
 							</a>
 						</li>
@@ -135,10 +133,10 @@ import Webrings from '../components/Webrings.astro';
 		<footer id="page-footer">
 			<OldButtons />
 			<Webrings />
-			<ThemeSwitcher />
+			<theme-switcher></theme-switcher>
 		</footer>
 
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

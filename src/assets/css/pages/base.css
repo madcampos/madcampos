@@ -4,11 +4,17 @@
 		flex-direction: column;
 		justify-content: stretch;
 		align-items: stretch;
-		background: var(--surface-2);
+		background: var(--surface-1);
 		color: var(--text-1);
 	}
 
-	main { flex-grow: 1; }
+	main {
+		flex-grow: 1;
+		width: 100%;
+		max-width: var(--size-content-4);
+		margin-inline: auto;
+		padding-inline: clamp(var(--size-3), 10vw, var(--size-10));
+	}
 
 	#page-footer {
 		display: flex;

@@ -1,47 +1,49 @@
 ---
 import { Icon } from 'astro-icon/components';
-import ThemeSwitcher from './ThemeSwitcher.astro';
 ---
-<nav id="site-nav" aria-label="Primary navigation">
-	<ul>
-		<li>
-			<a href="/">
-				<Icon name="uil:home-alt" title="" role="presentation" />
-				Home
-			</a>
-		</li>
-		<li>
-			<a href="/blog/">
-				<Icon name="uil:file-edit-alt" title="" role="presentation" />
-				Blog
-			</a>
-		</li>
-		<li>
-			<a href="/projects/">
-				<Icon name="uil:flask" title="" role="presentation" />
-				Projects
-			</a>
-		</li>
-		<li>
-			<a href="/talks/">
-				<Icon name="uil:presentation-check" title="" role="presentation" />
-				Talks
-			</a>
-		</li>
-		<li>
-			<a href="/accessibility/">
-				<Icon name="uil:accessible-icon-alt" title="" role="presentation" />
-				Accessibility
-			</a>
-		</li>
-		<li>
-			<a href="/license/">
-				<Icon name="uil:award-alt" title="" role="presentation" />
-				License
-			</a>
-		</li>
-		<li>
-			<ThemeSwitcher />
-		</li>
-	</ul>
-</nav>
+<site-nav>
+	<nav id="site-nav" aria-labelledby="site-nav-label">
+		<sr-only id="site-nav-label">Main Links</sr-only>
+		<ul>
+			<li>
+				<a href="/">
+					<Icon name="uil:home-alt" aria-hidden="true" />
+					Home
+				</a>
+			</li>
+			<li>
+				<a href="/blog/">
+					<Icon name="uil:file-edit-alt" aria-hidden="true" />
+					Blog
+				</a>
+			</li>
+			<li>
+				<a href="/projects/">
+					<Icon name="uil:flask" aria-hidden="true" />
+					Projects
+				</a>
+			</li>
+			<li>
+				<a href="/talks/">
+					<Icon name="uil:presentation-check" aria-hidden="true" />
+					Talks
+				</a>
+			</li>
+			<li>
+				<a href="/accessibility/">
+					<Icon name="uil:accessible-icon-alt" aria-hidden="true" />
+					Accessibility
+				</a>
+			</li>
+			<li>
+				<a href="/license/">
+					<Icon name="uil:award-alt" aria-hidden="true" />
+					License
+				</a>
+			</li>
+			<li>
+				<theme-switcher></theme-switcher>
+			</li>
+		</ul>
+	</nav>
+</site-nav>

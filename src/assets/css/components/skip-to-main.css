@@ -1,5 +1,5 @@
 @layer components {
-	#skip-to-main {
+	skip-to-content a {
 		display: block;
 		position: absolute;
 		z-index: calc(1 * infinity);
@@ -9,18 +9,18 @@
 		padding: var(--size-2);
 		color: var(--surface-1);
 		text-align: center;
-	}
 
-	#skip-to-main:focus-visible { inset-block-start: var(--size-2); }
+		&:focus-within { inset-block-start: var(--size-2); }
 
-	#skip-to-main:hover {
-		background-color: var(--theme-color);
-		color: var(--surface-1);
-	}
+		&:hover {
+			background-color: var(--theme-color);
+			color: var(--surface-1);
+		}
 
-	#skip-to-main:active {
-		background-color: var(--accent-color);
-		color: var(--surface-1);
+		&:active {
+			background-color: var(--accent-color);
+			color: var(--surface-1);
+		}
 	}
 
 	:target {

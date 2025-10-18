@@ -1,3 +1,5 @@
+import { SiteSettings } from '../settings.ts';
+
 class OldStyleButton extends HTMLElement {
 	constructor() {
 		super();
@@ -16,6 +18,6 @@ class OldStyleButton extends HTMLElement {
 	}
 }
 
-if (!customElements.get('old-style-button')) {
+if (SiteSettings.js !== 'disabled' && !customElements.get('old-style-button')) {
 	customElements.define('old-style-button', OldStyleButton);
 }

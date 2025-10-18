@@ -1,10 +1,6 @@
 import { SiteSettings } from '../settings.ts';
 
-document.addEventListener('DOMContentLoaded', () => {
-	if (SiteSettings.js === 'disabled') {
-		return;
-	}
-
+if (SiteSettings.js !== 'disabled') {
 	let shouldAddJS = true;
 
 	const JS_NAKED_MONTH = 3;
@@ -35,4 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (shouldAddJS) {
 		document.body.classList.add('js-enabled');
 	}
-});
+}

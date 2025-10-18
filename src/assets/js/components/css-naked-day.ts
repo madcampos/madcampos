@@ -1,14 +1,6 @@
 import { SiteSettings } from '../settings.ts';
 
-document.addEventListener('DOMContentLoaded', () => {
-	if (!document.body.classList.contains('js-enabled')) {
-		return;
-	}
-
-	if (SiteSettings.css === 'enabled') {
-		return;
-	}
-
+if (SiteSettings.css !== 'enabled') {
 	let shouldRemoveCSS = false;
 
 	const CSS_NAKED_MONTH = 3;
@@ -38,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	if (shouldRemoveCSS) {
-		[...document.querySelectorAll('style, link[rel~="stylesheet"]')].forEach((css) => css.remove());
+		document.querySelectorAll('style, link[rel~="stylesheet"]').forEach((css) => css.remove());
 
-		[...document.querySelectorAll('[style]')].forEach((element) => element.removeAttribute('style'));
+		document.querySelectorAll('[style]').forEach((element) => element.removeAttribute('style'));
 	}
-});
+}

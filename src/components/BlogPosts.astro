@@ -6,7 +6,6 @@ import type { Post } from '../utils/post.js';
 import Card from './Card.astro';
 import Effects from './Effects.astro';
 import HtmlHead from './HtmlHead.astro';
-import IabEscape from './IabEscape.astro';
 import Logo from './Logo.astro';
 import OldStyleButtons from './OldStyleButtons.astro';
 import SiteNav from './SiteNav.astro';
@@ -59,7 +58,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/Blog">
 	<HtmlHead
-		title={`${title} | Marco Campos' Blog`}
+		title={`${title ? `${title} | ` : ''}Marco Campos' Blog`}
 		description="A space where I talk about web development and other programming related (or not) things"
 		url={Astro.url.href}
 	/>
@@ -69,8 +68,8 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 		</skip-to-content>
 
 		<SiteNav />
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -87,7 +86,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 					url="/blog/"
 					title="Blog"
 				/>
-				<h1>{title}</h1>
+				<h1>{title ? title : "Marco Campos' Blog"}</h1>
 			</div>
 		</header>
 
@@ -138,13 +137,14 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 
 		<footer id="page-footer">
 			<m-pagination>
-				<nav aria-label="Pagination">
+				<nav aria-labelledby="pagination-label">
+					<sr-only id="pagination-label">Pagination</sr-only>
 					<div id="pagination">
 						<a
 							href={baseUrl}
 							id="first-page"
 						>
-							<Icon name="uil:angle-double-left" title="" role="presentation" />
+							<Icon name="uil:angle-double-left" aria-hidden="true" />
 							<span class="pagination-link-text">First<sr-only> page</sr-only></span>
 						</a>
 
@@ -153,7 +153,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 							aria-disabled={!prevUrl ? 'true' : null}
 							id="prev-page"
 						>
-							<Icon name="uil:angle-left" title="" role="presentation" />
+							<Icon name="uil:angle-left" aria-hidden="true" />
 							<span class="pagination-link-text">Previous<sr-only> page</sr-only></span>
 						</a>
 
@@ -194,7 +194,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 							id="next-page"
 						>
 							<span class="pagination-link-text">Next<sr-only> page</sr-only></span>
-							<Icon name="uil:angle-right" title="" role="presentation" />
+							<Icon name="uil:angle-right" aria-hidden="true" />
 						</a>
 
 						<a
@@ -202,7 +202,7 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 							id="last-page"
 						>
 							<span class="pagination-link-text">Last<sr-only> page</sr-only></span>
-							<Icon name="uil:angle-double-right" title="" role="presentation" />
+							<Icon name="uil:angle-double-right" aria-hidden="true" />
 						</a>
 					</div>
 					<aside id="pagination-info">
@@ -215,6 +215,6 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 			<Webrings />
 		</footer>
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

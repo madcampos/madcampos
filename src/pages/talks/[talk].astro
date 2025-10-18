@@ -5,7 +5,6 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Effects from '../../components/Effects.astro';
 import HtmlHead from '../../components/HtmlHead.astro';
-import IabEscape from '../../components/IabEscape.astro';
 import Logo from '../../components/Logo.astro';
 import OldStyleButtons from '../../components/OldStyleButtons.astro';
 import SiteNav from '../../components/SiteNav.astro';
@@ -65,8 +64,8 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -92,7 +91,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 		<main id="main">
 			<h2>
-				<Icon name="uil:info-circle" title="" role="presentation" />
+				<Icon name="uil:info-circle" aria-hidden="true" />
 				Talk info
 			</h2>
 
@@ -107,7 +106,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					event && (
 						<li>
 							<strong>
-								<Icon name="uil:presentation-play" title="" role="presentation" />
+								<Icon name="uil:presentation-play" aria-hidden="true" />
 								Event:
 							</strong>
 							<span>
@@ -119,7 +118,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 				<li>
 					<strong>
-						<Icon name="uil:calendar-alt" title="" role="presentation" />
+						<Icon name="uil:calendar-alt" aria-hidden="true" />
 						Date:
 					</strong>
 					<meta itemprop="startDate" content={date ? date.toISOString() : '0000-01-01T00:00:00.000Z'} />
@@ -130,7 +129,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					slides && (
 						<li>
 							<strong>
-								<Icon name="uil:clapper-board" title="" role="presentation" />
+								<Icon name="uil:clapper-board" aria-hidden="true" />
 								Slides:
 							</strong>
 							<a href={slides} rel="noopener noreferrer" referrerpolicy="no-referrer">{slides}</a>
@@ -142,7 +141,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					video && (
 						<li>
 							<strong>
-								<Icon name="uil:video" title="" role="presentation" />
+								<Icon name="uil:video" aria-hidden="true" />
 								Video:
 							</strong>
 							<a href={video} rel="noopener noreferrer" referrerpolicy="no-referrer">{video}</a>
@@ -154,7 +153,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 					code && (
 						<li>
 							<strong>
-								<Icon name="uil:brackets-curly" title="" role="presentation" />
+								<Icon name="uil:brackets-curly" aria-hidden="true" />
 								Code:
 							</strong>
 							<a href={code} rel="noopener noreferrer" referrerpolicy="no-referrer">{code}</a>
@@ -169,7 +168,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				demo && (
 					<Fragment>
 						<h2>
-							<Icon name="uil:flask" title="" role="presentation" />
+							<Icon name="uil:flask" aria-hidden="true" />
 							Demo
 						</h2>
 
@@ -190,7 +189,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				relatedContent && (
 					<Fragment>
 						<h2>
-							<Icon name="uil:file-share-alt" title="" role="presentation" />
+							<Icon name="uil:file-share-alt" aria-hidden="true" />
 							Related content
 						</h2>
 						<ul id="related-content">
@@ -207,7 +206,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			}
 
 			<h2>
-				<Icon name="uil:cog" title="" role="presentation" />
+				<Icon name="uil:cog" aria-hidden="true" />
 				Technologies used
 			</h2>
 			<ul id="technology-tags">
@@ -220,6 +219,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			<Webrings />
 		</footer>
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

@@ -1,3 +1,5 @@
+import { SiteSettings } from '../settings.ts';
+
 export class YoutubeEmbed extends HTMLElement implements CustomElement {
 	static observedAttributes = ['title', 'href'];
 
@@ -95,6 +97,6 @@ export class YoutubeEmbed extends HTMLElement implements CustomElement {
 	}
 }
 
-if (!customElements.get('youtube-embed')) {
+if (SiteSettings.js !== 'disabled' && !customElements.get('youtube-embed')) {
 	customElements.define('youtube-embed', YoutubeEmbed);
 }

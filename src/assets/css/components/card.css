@@ -1,10 +1,11 @@
 @layer components {
 	m-card {
+		display: block;
 		container-name: card;
 		container-type: inline-size;
 
 		article {
-			--image-size: var(--size-header-1);
+			--image-size: var(--size-header-2);
 
 			display: grid;
 			grid-template-rows: auto 1fr auto auto;
@@ -18,23 +19,10 @@
 			margin: var(--size-3) 0;
 			border: var(--border-style) var(--surface-4) var(--border-width);
 			border-radius: var(--border-radius);
-			background-color: var(--surface-1);
+			background-color: var(--surface-2);
 			padding: var(--size-3);
 
-			@container card (max-width: 25rem) {
-				grid-template-rows: auto var(--image-size) 1fr auto auto;
-				grid-template-columns: 1fr;
-				grid-template-areas:
-					'header'
-					'picture'
-					'content'
-					'links'
-					'footer';
-			}
-
-			@container card (max-width: 15rem) { grid-template-rows: auto 1fr auto auto auto; }
-
-			&:not(:has(slot[name='picture']::slotted(*))) {
+			&:not(:has(picture)) {
 				grid-template-rows: auto 1fr auto auto;
 				grid-template-columns: 1fr;
 				grid-template-areas:
@@ -50,10 +38,17 @@
 
 			.card-title {
 				display: flex;
+				flex-wrap: wrap;
 				align-items: center;
 				gap: var(--size-2);
 
 				:is(h2, h3, h4, h5, h6) { margin-block: 0; }
+				a { flex-grow: 1; }
+
+				@container (max-width: 25rem) {
+					text-align: center;
+					justify-content: center;
+				}
 			}
 
 			.card-subtitle {
@@ -92,11 +87,31 @@
 				& > *:last-child { margin-block-end: 0; }
 			}
 
-			.card-links { grid-area: links; }
-			&:not(:has(slot[name='links']::slotted(*))) .card-links { display: none; }
+			.card-links {
+				grid-area: links;
 
-			footer { grid-area: footer; }
-			&:not(:has(slot[name='footer']::slotted(*))) footer { display: none; }
+				&:empty { display: none; }
+			}
+
+			footer {
+				grid-area: footer;
+
+				&:empty { display: none; }
+			}
+
+			@container card (max-width: 25rem) {
+				--image-size: var(--size-header-1);
+				grid-template-rows: auto var(--image-size) 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'header'
+					'picture'
+					'content'
+					'links'
+					'footer';
+			}
+
+			@container card (max-width: 15rem) { grid-template-rows: auto 1fr auto auto auto; }
 		}
 	}
 }

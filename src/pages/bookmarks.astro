@@ -2,7 +2,6 @@
 import { Icon } from 'astro-icon/components';
 import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
-import IabEscape from '../components/IabEscape.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
@@ -538,8 +537,8 @@ const links: BookmarkSection[] = [
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -589,6 +588,6 @@ const links: BookmarkSection[] = [
 			<Webrings />
 		</footer>
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

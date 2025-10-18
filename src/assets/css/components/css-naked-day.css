@@ -1,1 +1,7 @@
-@layer components { #css-banner { display: none; } }
+@layer components {
+	css-naked-day {
+		display: none;
+		padidng: var(--size-3);
+		margin: var(--size-3);
+	}
+}

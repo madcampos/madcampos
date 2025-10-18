@@ -72,8 +72,8 @@ const formatUpdateDate = (date: Date) =>
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -84,7 +84,7 @@ const formatUpdateDate = (date: Date) =>
 
 		<header id="post-header">
 			<div id="post-header-wrapper">
-				{draft && <span id="post-draft-tag">DRAFT</span>}
+				{draft && <draft-tag>Draft</draft-tag>}
 				<a id="post-title" class="u-uid u-url" href={url}>
 					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(title)} /></h1>
 				</a>
@@ -127,8 +127,9 @@ const formatUpdateDate = (date: Date) =>
 									Updated on <time itemprop="dateModified" class="dt-updated" datetime={updatedAt.toISOString()}>{formatter.format(updatedAt)}</time>
 									{
 										updates && updates.length > 0 && (
-											<a href="#update-history" aria-label="Go to updates section">
-												<Icon name="uil:sync-exclamation" title="" role="presentation" />
+											<a href="#update-history">
+												<sr-only>Go to updates section</sr-only>
+												<Icon name="uil:sync-exclamation" aria-hidden="true" />
 											</a>
 										)
 									}
@@ -149,13 +150,14 @@ const formatUpdateDate = (date: Date) =>
 					}
 				</aside>
 
-				<aside id="post-share" aria-label="Share options">
+				<aside id="post-share" aria-labell="post-share-label">
+					<sr-only is="post-share-label">Share Options</sr-only>
 					<button
 						id="ps-copy"
 						type="button"
 						title="Copy link to clipboard"
 					>
-						<Icon name="uil:link" title="" role="presentation" />
+						<Icon name="uil:link" aria-hidden="true" />
 						<sr-only>Copy link to clipboard</sr-only>
 					</button>
 					<button
@@ -163,7 +165,7 @@ const formatUpdateDate = (date: Date) =>
 						type="button"
 						title="Send post by email"
 					>
-						<Icon name="uil:envelope-share" title="" role="presentation" />
+						<Icon name="uil:envelope-share" aria-hidden="true" />
 						<sr-only>Send post by email</sr-only>
 					</button>
 					<button
@@ -171,7 +173,7 @@ const formatUpdateDate = (date: Date) =>
 						type="button"
 						title="Share using native app"
 					>
-						<Icon name="uil:share-alt" title="" role="presentation" />
+						<Icon name="uil:share-alt" aria-hidden="true" />
 						<sr-only>Share using native app</sr-only>
 					</button>
 				</aside>
@@ -216,9 +218,9 @@ const formatUpdateDate = (date: Date) =>
 			<hr id="page-top" />
 
 			<a id="scroll-to-top-link" href="#page-top">
-				<Icon name="uil:top-arrow-to-top" title="" role="presentation" />
+				<Icon name="uil:top-arrow-to-top" aria-hidden="true" />
 				<span>Scroll to top</span>
-				<Icon name="uil:top-arrow-to-top" title="" role="presentation" />
+				<Icon name="uil:top-arrow-to-top" aria-hidden="true" />
 			</a>
 		</scroll-to-top>
 

@@ -2,7 +2,6 @@
 import { Icon } from 'astro-icon/components';
 import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
-import IabEscape from '../components/IabEscape.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
@@ -22,8 +21,8 @@ import Webrings from '../components/Webrings.astro';
 
 		<SiteNav />
 
-		<css-naked-day hidden>
-			<div id="css-banner">
+		<css-naked-day>
+			<div>
 				<hr />
 				<h2>Why this website looks so weird?</h2>
 				<p>We are celebrating CSS Naked Day!</p>
@@ -41,7 +40,7 @@ import Webrings from '../components/Webrings.astro';
 					title="License page"
 				/>
 				<h1>
-					<Icon name="fa6-brands:creative-commons" title="" role="presentation" />
+					<Icon name="fa6-brands:creative-commons" aria-hidden="true" />
 					License &amp; Disclaimer
 				</h1>
 			</div>
@@ -116,7 +115,7 @@ import Webrings from '../components/Webrings.astro';
 			<ul>
 				<li>
 					<strong>
-						<Icon name="fa6-brands:creative-commons-by" title="" role="presentation" />
+						<Icon name="fa6-brands:creative-commons-by" aria-hidden="true" />
 						Attribution:
 					</strong>
 					You must give appropriate credit to the original author(s) and the website, provide a link to the license, and indicate if changes were made. You may do so in
@@ -124,14 +123,14 @@ import Webrings from '../components/Webrings.astro';
 				</li>
 				<li>
 					<strong>
-						<Icon name="fa6-brands:creative-commons-nc" title="" role="presentation" />
+						<Icon name="fa6-brands:creative-commons-nc" aria-hidden="true" />
 						NonCommercial:
 					</strong>
 					You may not use the material for commercial purposes, such as selling, advertising, or promoting products or services.
 				</li>
 				<li>
 					<strong>
-						<Icon name="fa6-brands:creative-commons-sa" title="" role="presentation" />
+						<Icon name="fa6-brands:creative-commons-sa" aria-hidden="true" />
 						ShareAlike:
 					</strong>
 					If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
@@ -242,6 +241,6 @@ import Webrings from '../components/Webrings.astro';
 			<Webrings />
 		</footer>
 		<Effects />
-		<IabEscape />
+		<iab-escape></iab-escape>
 	</body>
 </html>

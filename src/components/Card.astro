@@ -21,44 +21,42 @@ const { itemtype, url, draft, class: cardClass, image, imageAlt, themeImages } =
 			<slot name="metadata"></slot>
 		</div>
 
-		<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-			{
-				image && (
-					<Fragment>
-						<Image
-							itemprop="contentUrl"
-							src={image}
-							alt={inlineMarkdownStrip(imageAlt ?? '')}
-							loading="lazy"
-							widths={[64, 128, 256, 512]}
-							width={256}
-							sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
-							quality={75}
-						/>
-						{
-							Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
-								<Image
-									itemprop="contentUrl"
-									data-theme-image={theme}
-									src={themeImage}
-									alt={inlineMarkdownStrip(imageAlt ?? '')}
-									loading="lazy"
-									widths={[64, 128, 256, 512]}
-									width={256}
-									sizes="(max-width: 360px) 64px, (max-width: 720px) 128px, (max-width: 1280px) 256px, 512px"
-									quality={75}
-									hidden
-								/>
-							))
-						}
-					</Fragment>
-				)
-			}
-		</picture>
+		{
+			image && (
+				<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+					<Image
+						itemprop="contentUrl"
+						src={image}
+						alt={inlineMarkdownStrip(imageAlt ?? '')}
+						loading="lazy"
+						widths={[64, 128, 256, 512]}
+						width={256}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
+						quality={75}
+					/>
+					{
+						Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
+							<Image
+								itemprop="contentUrl"
+								data-theme-image={theme}
+								src={themeImage}
+								alt={inlineMarkdownStrip(imageAlt ?? '')}
+								loading="lazy"
+								widths={[64, 128, 256, 512]}
+								width={256}
+								sizes="(max-width: 360px) 64px, (max-width: 720px) 128px, (max-width: 1280px) 256px, 512px"
+								quality={75}
+								hidden
+							/>
+						))
+					}
+				</picture>
+			)
+		}
 
 		<header>
 			<div class="card-title">
-				{draft && <span class="draft-tag">Draft</span>}
+				{draft && <draft-tag>Draft</draft-tag>}
 				<a href={url ?? null} itemprop="name">
 					<slot name="title"></slot>
 				</a>

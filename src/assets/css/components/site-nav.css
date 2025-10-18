@@ -1,24 +1,24 @@
 @layer components {
-	#site-nav {
+	site-nav nav {
 		display: flex;
 		margin-inline: auto;
 		border-block-end: var(--border-style) var(--surface-4) var(--border-width);
 		border-end-start-radius: var(--border-radius);
 		border-end-end-radius: var(--border-radius);
-		background-color: var(--surface-1);
+		background-color: var(--surface-2);
 		width: 100%;
-		max-width: var(--size-content-3);
-	}
+		max-width: var(--size-content-4);
 
-	#site-nav ul {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		gap: var(--size-3);
-		margin: var(--size-3) auto;
-		padding: 0 var(--size-3);
-		width: 100%;
-		list-style-type: '';
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: var(--size-3);
+			margin: var(--size-3) auto;
+			padding: 0 var(--size-3);
+			width: 100%;
+			list-style-type: none;
+		}
 	}
 }

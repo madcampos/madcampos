@@ -81,29 +81,7 @@
 			overscroll-behavior: contain;
 		}
 
-		.theme-preview { display: block; }
-
-		.theme-preview-border {
-			paint-order: stroke;
-			stroke: var(--surface-3);
-			stroke-width: 2px;
-		}
-
-		.theme-preview-bg { fill: var(--surface-1); }
-		.theme-preview-dark-bg { fill: var(--surface-2); }
-		.theme-preview-theme-color { fill: var(--theme-color); }
-		.theme-preview-accent-color { fill: var(--accent-color); }
-		.theme-preview-secondary-color { fill: var(--secondary-color); }
-		.theme-preview-complementary-color { fill: var(--complementary-color); }
-		.theme-preview-text-text { font-family: var(--text-font-family); }
-		.theme-preview-header-text { font-family: var(--headers-font-family); }
-
-		.theme-preview-text {
-			fill: var(--text-1);
-			font-size: 28px;
-		}
-
-		.theme-label {
+		label {
 			display: flex;
 			position: relative;
 			flex-direction: column;
@@ -120,9 +98,14 @@
 			svg {
 				width: 100%;
 				height: auto;
+
+				&[data-dual-theme] use { display: block; }
+
+				text:nth-of-type(1) { font-family: var(--headers-font-family); }
+				text:nth-of-type(2) { font-family: var(--text-font-family); }
 			}
 
-			small {
+			small:not([hidden]) {
 				display: block;
 				font-size: 0.7em;
 
@@ -136,21 +119,19 @@
 				height: 100%;
 			}
 
-			&:is(:hover, :focus-within) {
-				border-color: var(--accent-color);
-				background-color: var(--text-1);
-				color: var(--surface-1);
-			}
-
 			&:has(input[type='radio']:checked) {
 				border-color: var(--theme-color);
 				background-color: var(--surface-1);
 				color: var(--theme-color);
 			}
 
+			&:is(:hover, :focus-within) {
+				border-color: var(--accent-color);
+				background-color: var(--text-1);
+				color: var(--surface-1);
+			}
+
 			@container (max-width: 25rem) { width: 100%; }
 		}
 	}
-
-	body:not(.js-enabled) theme-switcher { display: none; }
 }
