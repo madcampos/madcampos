@@ -22,9 +22,4 @@
 			color: var(--surface-1);
 		}
 	}
-
-	:target {
-		scroll-margin: var(--size-3);
-		scroll-snap-align: start;
-	}
 }
