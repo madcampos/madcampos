@@ -2,7 +2,7 @@
 import InAppSpy, { SFSVCExperimental } from 'inapp-spy';
 import { SiteSettings } from '../settings.ts';
 
-class IabExcape extends HTMLElement implements CustomElement {
+class IabEscape extends HTMLElement implements CustomElement {
 	constructor() {
 		super();
 
@@ -45,5 +45,5 @@ class IabExcape extends HTMLElement implements CustomElement {
 }
 
 if (SiteSettings.js !== 'disabled' && !customElements.get('iab-escape')) {
-	customElements.define('iab-escape', IabExcape);
+	customElements.define('iab-escape', IabEscape);
 }

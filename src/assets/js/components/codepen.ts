@@ -46,12 +46,12 @@ export class CodepenEmbed extends HTMLElement implements CustomElement {
 
 	get username() {
 		// pathname: /<user>/pen/<id>
-		return this.href?.pathname.split('/')[0] ?? '';
+		return this.href?.pathname.split('/')[1] ?? '';
 	}
 
 	get penId() {
 		// pathname: /<user>/pen/<id>
-		return this.href?.pathname.split('/')[2] ?? '';
+		return this.href?.pathname.split('/')[3] ?? '';
 	}
 
 	get tab(): string {
@@ -71,9 +71,22 @@ export class CodepenEmbed extends HTMLElement implements CustomElement {
 	render() {
 		this.shadowRoot.innerHTML = `
 			<style>
-				:host {
+				iframe {
 					display: block;
 					margin-inline: auto;
+					max-block-size: 100%;
+					max-inline-size: var(--size-content-3);
+					block-size: auto;
+					border-style: none;
+					min-inline-size: var(--size-content-1);
+					min-block-size: var(--size-content-1);
+					object-fit: contain;
+					object-position: center;
+					border: var(--border-style) var(--border-width) var(--theme-color);
+					border-radius: var(--border-radius);
+					aspect-ratio: 3 / 2;
+					inline-size: 100%;
+					overflow: clip;
 				}
 			</style>
 			<iframe
@@ -87,7 +100,7 @@ export class CodepenEmbed extends HTMLElement implements CustomElement {
 				allowfullscreen
 				allowtransparency
 				credentialless
-				referrerpolicy="no-referrer"
+				referrerpolicy="strict-origin"
 				sandbox="allow-forms allow-scripts allow-same-origin"
 			>
 				<p>

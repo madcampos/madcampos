@@ -1,5 +1,6 @@
 import { SiteSettings } from '../settings.ts';
 
+// TODO: turn into web component?
 if (SiteSettings.css !== 'enabled') {
 	let shouldRemoveCSS = false;
 
