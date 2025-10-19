@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 import '../assets/css/pages/blog.css';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 import type { Post } from '../utils/post.js';
@@ -8,6 +7,7 @@ import Effects from './Effects.astro';
 import HtmlHead from './HtmlHead.astro';
 import Logo from './Logo.astro';
 import OldStyleButtons from './OldStyleButtons.astro';
+import Pagination from './Pagination.astro';
 import SiteNav from './SiteNav.astro';
 import Webrings from './Webrings.astro';
 
@@ -17,8 +17,6 @@ interface Props {
 	baseUrl: string;
 	currentPage: number;
 	lastPage: number;
-	prevUrl?: string;
-	nextUrl?: string;
 	start: number;
 	end: number;
 	total: number;
@@ -31,8 +29,6 @@ const {
 	baseUrl,
 	currentPage,
 	lastPage,
-	prevUrl,
-	nextUrl,
 	start,
 	end,
 	total,
@@ -40,20 +36,6 @@ const {
 } = Astro.props;
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
-const TRIM_PAGE_NUMBER = 2;
-const firstPageInNav = Math.max(1, currentPage - TRIM_PAGE_NUMBER);
-const lastPageInNav = Math.min(lastPage, currentPage + TRIM_PAGE_NUMBER);
-
-const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i) => {
-	const currentPageNumber = firstPageInNav + i;
-	const href = currentPageNumber === 1 ? '' : `${currentPageNumber.toString()}/`;
-
-	return {
-		label: currentPageNumber.toString(),
-		url: `${baseUrl}${href}`,
-		isCurrentPage: currentPageNumber === currentPage
-	};
-});
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/Blog">
@@ -136,81 +118,15 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(null).map((_, i)
 		</main>
 
 		<footer>
-			<m-pagination>
-				<nav aria-labelledby="pagination-label">
-					<sr-only id="pagination-label">Pagination</sr-only>
-					<div>
-						<a
-							href={baseUrl}
-							id="first-page"
-						>
-							<Icon name="uil:angle-double-left" aria-hidden="true" />
-							<span class="pagination-link-text">First<sr-only> page</sr-only></span>
-						</a>
-
-						<a
-							href={prevUrl ? prevUrl : null}
-							aria-disabled={!prevUrl ? 'true' : null}
-							id="prev-page"
-						>
-							<Icon name="uil:angle-left" aria-hidden="true" />
-							<span class="pagination-link-text">Previous<sr-only> page</sr-only></span>
-						</a>
-
-						<ol>
-							{
-								firstPageInNav > 1 && (
-									<>
-										<li><a href={baseUrl}><sr-only>Page </sr-only>1</a></li>
-										<li><span>…</span></li>
-									</>
-								)
-							}
-
-							{
-								navLinks.map(({ url, label, isCurrentPage }) => (
-									<li>
-										<a
-											href={`${url}${isCurrentPage ? '#' : ''}`}
-											aria-current={isCurrentPage ? 'page' : null}
-										><sr-only>Page </sr-only>{label}</a>
-									</li>
-								))
-							}
-
-							{
-								lastPageInNav < lastPage && (
-									<>
-										<li><span>…</span></li>
-										<li><a href={`${baseUrl}${lastPage}/`}><sr-only>Page </sr-only>{lastPage}</a></li>
-									</>
-								)
-							}
-						</ol>
-
-						<a
-							href={nextUrl ? nextUrl : null}
-							aria-disabled={!nextUrl ? 'true' : null}
-							id="next-page"
-						>
-							<span class="pagination-link-text">Next<sr-only> page</sr-only></span>
-							<Icon name="uil:angle-right" aria-hidden="true" />
-						</a>
-
-						<a
-							href={`${baseUrl}${lastPage}/`}
-							id="last-page"
-						>
-							<span class="pagination-link-text">Last<sr-only> page</sr-only></span>
-							<Icon name="uil:angle-double-right" aria-hidden="true" />
-						</a>
-					</div>
-					<aside>
-						{start + 1} &mdash; {end + 1} of {total} ({size} per page)
-					</aside>
-				</nav>
-			</m-pagination>
-
+			<Pagination
+				{baseUrl}
+				{currentPage}
+				{lastPage}
+				{start}
+				{end}
+				{total}
+				{size}
+			/>
 			<OldStyleButtons />
 			<Webrings />
 		</footer>
