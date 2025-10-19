@@ -21,13 +21,6 @@
 			flex-wrap: wrap;
 		}
 
-		svg[data-icon] {
-			width: 1.5em;
-			height: 1.5em;
-			vertical-align: -0.5em;
-			margin: 0;
-		}
-
 		a:not([href]) { color: var(--text-2); }
 
 		aside {

@@ -87,7 +87,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 								}
 							</span>
 							<span>
-								<Icon name="uil:calendar-alt" title="Date started" />
+								<Icon name="mingcute:calendar-2-line" title="Date started" />
 								<time datetime={data.createdAt.toISOString()} itemprop="dateCreated">{formatter.format(data.createdAt)}</time>
 								{
 									data.updatedAt && (
@@ -96,7 +96,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 								}
 							</span>
 							<span itemprop="softwareVersion">
-								<Icon name="uil:box" title="Current version" /> {data.version}
+								<Icon name="mingcute:package-2-line" title="Current version" /> {data.version}
 							</span>
 						</Fragment>
 
@@ -106,7 +106,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 							{
 								data.url && (
 									<a href={data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
-										<Icon name="uil:link" aria-hidden="true" />
+										<Icon name="mingcute:link-2-line" aria-hidden="true" />
 										View Project
 									</a>
 								)
@@ -115,7 +115,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 							{
 								data.repository && (
 									<a href={data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
-										<Icon name="uil:github" aria-hidden="true" />
+										<Icon name="mingcute:github-line" aria-hidden="true" />
 										View Repository
 									</a>
 								)
@@ -125,7 +125,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 						<details slot="footer">
 							<summary>
 								<span>
-									<Icon name="uil:cog" aria-hidden="true" />
+									<Icon name="mingcute:tool-line" aria-hidden="true" />
 									Technologies used
 								</span>
 							</summary>

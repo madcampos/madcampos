@@ -181,10 +181,9 @@
 	}
 
 	:where(svg[data-icon]) {
-		vertical-align: -0.13em;
-		min-inline-size: 1em;
-		min-block-size: 1em;
-		margin: 0.07em;
+		vertical-align: -0.32em;
+		min-inline-size: 1.3em;
+		min-block-size: 1.3em;
 	}
 
 	:where(pre, code, kbd, samp) { font-family: var(--code-font-family); }

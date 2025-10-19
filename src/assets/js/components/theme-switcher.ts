@@ -74,8 +74,14 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 		this.innerHTML = `
 			<aside>
 				<button type="button" popovertarget="theme-switcher-dialog">
-					<svg width="1em" height="1em" aria-hidden="true">
-						<path fill="currentColor" d="M7.42 15.54a1 1 0 0 0 0 1.41a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.41a1 1 0 0 0-1.42 0m0-8.49a1 1 0 0 0 0 1.41a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.41a1 1 0 0 0-1.42 0m4.95 10a1 1 0 1 0 1 1a1 1 0 0 0-1-1.05Zm-6-6a1 1 0 1 0 1 1a1 1 0 0 0-1-1.05Zm6-6a1 1 0 1 0 1 1a1 1 0 0 0-1-1.05Zm3.54 2.05a1 1 0 1 0 1.41 0a1 1 0 0 0-1.41-.05Zm6.3 0a11 11 0 1 0-7.85 15.74a3.87 3.87 0 0 0 2.5-1.65a4.2 4.2 0 0 0 .61-3.19a5.7 5.7 0 0 1-.1-1a5 5 0 0 1 3-4.56a3.84 3.84 0 0 0 2.06-2.25a4 4 0 0 0-.22-3.11Zm-1.7 2.44a1.9 1.9 0 0 1-1 1.09A7 7 0 0 0 15.37 17a7.3 7.3 0 0 0 .14 1.4a2.16 2.16 0 0 1-.31 1.65a1.8 1.8 0 0 1-1.21.8a8.7 8.7 0 0 1-1.62.15a9 9 0 0 1-9-9.28A9.05 9.05 0 0 1 11.85 3h.51a9 9 0 0 1 8.06 5a2 2 0 0 1 .09 1.52ZM12.37 11a1 1 0 1 0 1 1a1 1 0 0 0-1-1" />
+					<svg
+						viewBox="0 0 24 24"
+						width="1em"
+						height="1em"
+						aria-hidden="true"
+						data-icon="mingcute:palette-3-line"
+					>
+						<path fill="currentColor" d="M11 3c.48 0 .922.17 1.267.452l4.831 2.79c.416.24.713.607.87 1.024l2.79 4.832a2 2 0 0 1-.732 2.732l-9.447 5.455A5.1 5.1 0 0 1 8.021 21a5.06 5.06 0 0 1-2.602-.718a5 5 0 0 1-1.412-1.273A4.98 4.98 0 0 1 3 16V5a2 2 0 0 1 2-2zm-.053 2H5v11c0 1.625 1.362 3 3 3c1.634 0 3-1.374 3-3V5.03zM8 14.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m9.238-4.5l-3.578 6.196l5.366-3.098zM13 6.185v7.155L16.083 8l-.03-.052z" />
 					</svg>
 					<sr-only>Theme Switcher</sr-only>
 				</button>
@@ -148,8 +154,14 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 					<strong>${theme.name}</strong>
 					<small><em>${theme.description}</em></small>
 					<small ${theme.accessible ? 'hidden' : ''}>
-						<svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
-							<path fill="currentColor" d="M12 16a1 1 0 1 0 1 1a1 1 0 0 0-1-1m10.67 1.47l-8.05-14a3 3 0 0 0-5.24 0l-8 14A3 3 0 0 0 3.94 22h16.12a3 3 0 0 0 2.61-4.53m-1.73 2a1 1 0 0 1-.88.51H3.94a1 1 0 0 1-.88-.51a1 1 0 0 1 0-1l8-14a1 1 0 0 1 1.78 0l8.05 14a1 1 0 0 1 .05 1.02ZM12 8a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1"/>
+						<svg
+							width="1em"
+							height="1em"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+							data-icon="mingcute:alert-line"
+						>
+							<path fill="currentColor" d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="m13.299 3.148l8.634 14.954a1.5 1.5 0 0 1-1.299 2.25H3.366a1.5 1.5 0 0 1-1.299-2.25l8.634-14.954c.577-1 2.02-1 2.598 0M12 4.898L4.232 18.352h15.536zM12 15a1 1 0 1 1 0 2a1 1 0 0 1 0-2m0-7a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1" />
 						</svg>
 						<strong>Warning: Theme is not fully accessible</strong>
 					</small>
