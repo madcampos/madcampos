@@ -1,64 +1,52 @@
 @layer components {
-	/* TODO: move to web component */
-	.author-card-wrapper {
+	author-card {
 		container-name: author-card;
 		container-type: inline-size;
-	}
 
-	.author-card {
-		display: grid;
-		grid-template-rows: 1fr auto;
-		grid-template-columns: 1fr auto;
-		grid-template-areas:
-			'avatar name'
-			'avatar bio';
-		place-items: center;
-		gap: var(--size-3);
-		margin: var(--size-3) 0;
-		padding-inline: var(--size-3);
-	}
-
-	.author-card .author-name * { margin: 0; }
-
-	.author-card .author-picture {
-		grid-area: avatar;
-		align-self: start;
-	}
-
-	.author-card .author-name {
-		grid-area: name;
-		justify-self: start;
-	}
-
-	.author-card .author-draft-tag {
-		display: inline-block;
-		margin: var(--size-1);
-		border-radius: var(--border-radius);
-		background-color: var(--accent-color);
-		padding: var(--size-1) var(--size-2);
-		color: var(--surface-1);
-		text-transform: uppercase;
-	}
-
-	.author-card .author-bio { grid-area: bio; }
-
-	.author-card .author-bio img {
-		max-width: 100%;
-		height: auto;
-	}
-
-	@container author-card (max-width: 35rem) {
-		.author-card {
-			grid-template-rows: 1fr auto auto;
-			grid-template-columns: 1fr;
+		aside {
+			display: grid;
+			grid-template-rows: auto auto;
+			grid-template-columns: 1fr auto;
 			grid-template-areas:
-				'avatar'
-				'name'
-				'bio';
+				'avatar name'
+				'avatar bio';
+			place-items: center;
+			gap: var(--size-3);
+			margin: var(--size-3) 0;
+			padding-inline: var(--size-3);
+
+			@container author-card (max-width: 35rem) {
+				grid-template-rows: 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'avatar'
+					'name'
+					'bio';
+			}
 		}
 
-		.author-card .author-picture { place-self: center center; }
+		a:has(> m-avatar) {
+			grid-area: avatar;
+			align-self: start;
 
-		.author-card .author-name { justify-self: center; }
+			@container author-card (max-width: 35rem) { place-self: center center; }
+		}
+
+		a:has(> h2) {
+			grid-area: name;
+			justify-self: start;
+
+			h2 { margin: 0; }
+
+			@container author-card (max-width: 35rem) { justify-self: center; }
+		}
+
+		p {
+			grid-area: bio;
+			font-size: var(--font-size-0);
+			align-self: start;
+			margin: 0;
+			color: var(--text-2);
+		}
 	}
 }

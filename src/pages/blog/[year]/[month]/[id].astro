@@ -223,9 +223,9 @@ const formatUpdateDate = (date: Date) =>
 		</scroll-to-top>
 
 		<footer>
-			<aside class="author-card-wrapper">
-				<div class="author-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
-					<a class="author-picture" href="https://madcampos.dev/">
+			<author-card>
+				<aside itemprop="author" itemscope itemtype="https://schema.org/Person">
+					<a href="https://madcampos.dev/">
 						<m-avatar>
 							<picture
 								class="user-avatar"
@@ -252,16 +252,14 @@ const formatUpdateDate = (date: Date) =>
 						<h2 itemprop="name">Marco Campos</h2>
 					</a>
 
-					<div class="author-bio">
-						<small>
-							Marco is a Senior web developer with over 10 years of experience, ranging from front-end to back-end development, and as he likes to put it: "When I
-							started layouts were done with tables and Flash was still a thing." He has a passion for accessibility and PWAs and loves to teach and share his
-							knowledge with others. He strongly believe that technology and specially the web should be open and available to eveyone, and that's why he's always
-							looking for ways to make the web a better place and contribute to open source projects.
-						</small>
-					</div>
-				</div>
-			</aside>
+					<p>
+						Marco is a Senior web developer with over 10 years of experience, ranging from front-end to back-end development, and as he likes to put it: "When I started
+						layouts were done with tables and Flash was still a thing." He has a passion for accessibility and PWAs and loves to teach and share his knowledge with
+						others. He strongly believe that technology and specially the web should be open and available to eveyone, and that's why he's always looking for ways to
+						make the web a better place and contribute to open source projects.
+					</p>
+				</aside>
+			</author-card>
 
 			<!--
 				<aside>
