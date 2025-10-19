@@ -1,26 +1,20 @@
 @layer components {
-	#webrings-label {
-		display: inline-flex;
-		margin: 0;
-		width: 100%;
-	}
+	m-webrings {
+		article {
+			blockquote {
+				margin: 0;
+				font-style: italic;
+				text-align: center;
+				color: var(--text-2);
+			}
 
-	.webring blockquote {
-		margin: 0;
-		font-style: italic;
-		text-align: center;
-	}
-
-	.webring ul {
-		display: flex;
-		justify-content: center;
-		gap: var(--size-3);
-		padding: 0;
-		list-style: none;
-	}
-
-	.webring :is(.webring-previous-website, .webring-next-website) svg {
-		width: 1.5em;
-		height: 1.5em;
+			ul {
+				display: flex;
+				justify-content: center;
+				gap: var(--size-3);
+				padding: 0;
+				list-style: none;
+			}
+		}
 	}
 }

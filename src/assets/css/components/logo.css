@@ -48,8 +48,8 @@
 		}
 
 		&[full] #logo-graphics {
-			[data-theme='system']:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
-			[data-theme='system'][data-size='full'] { visibility: visible; }
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='system'][data-size='full']) { visibility: visible; }
 		}
 
 		&[mini] #logo-graphics {
@@ -57,15 +57,15 @@
 
 			@container logo (max-width: 15rem) { height: 7rem; }
 
-			[data-theme='system']:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
-			[data-theme='system'][data-size='mini'] { visibility: visible; }
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='system'][data-size='mini']) { visibility: visible; }
 		}
 
 		&[micro] #logo-graphics {
 			height: 15rem;
 
-			[data-theme='system']:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
-			[data-theme='system'][data-size='micro'] { visibility: visible; }
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='system'][data-size='micro']) { visibility: visible; }
 
 			@container logo (max-width: 15rem) { height: 10rem; }
 		}

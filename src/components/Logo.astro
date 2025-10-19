@@ -28,7 +28,7 @@ const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch } = Astro
 const logoLabelId = generateUniqueId();
 ---
 <m-logo {micro} {mini} {full} {glitch}>
-	<a href={url} class="u-url url" id="logo-container">
+	<a href={url} class="u-url url">
 		<svg
 			color-interpolation-filters="sRGB"
 			preserveAspectRatio="xMinYMin slice"

@@ -105,8 +105,11 @@
 			background-repeat: no-repeat;
 			width: 1.5em;
 			height: 1.5em;
+			vertical-align: -0.2em;
 			content: '';
 		}
+
+		& > :where(h1, h2, h3, h4, h5, h6) { margin: 0; }
 	}
 
 	details[open] > summary::before { transform: rotate(90deg); }
@@ -154,6 +157,8 @@
 		object-fit: contain;
 		object-position: center;
 	}
+
+	:where(audio) { min-block-size: var(--size-8); }
 
 	:where(iframe) {
 		border: var(--border-style) var(--border-width) var(--theme-color);

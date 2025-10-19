@@ -53,6 +53,7 @@
 
 			.card-subtitle {
 				margin-block-start: var(--size-2);
+				color: var(--text-2);
 				font-style: italic;
 				font-size: 0.8rem;
 			}
