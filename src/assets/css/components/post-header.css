@@ -1,179 +1,97 @@
 @layer components {
-	/* TODO: refactor */
-	#post-header {
+	post-header {
 		display: block;
 		container-name: post-header;
 		container-type: inline-size;
 		margin-inline: auto;
 		width: 100%;
-		max-width: var(--size-content-3);
+		max-width: var(--size-content-4);
 		height: fit-content;
-	}
 
-	#post-draft-tag {
-		display: inline-block;
-		grid-area: draft;
-		margin: var(--size-1);
-		border-radius: var(--border-radius);
-		background-color: var(--accent-color);
-		padding: var(--size-1) var(--size-2);
-		color: var(--surface-1);
-		font-weight: bold;
-		font-size: 2rem;
-		text-transform: uppercase;
-	}
-
-	#post-header-wrapper {
-		display: grid;
-		grid-template-rows: auto 1fr repeat(3, auto);
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-areas:
-			'draft hero-image'
-			'title hero-image'
-			'summary hero-image'
-			'metadata metadata'
-			'share share';
-		place-items: end center;
-		justify-self: stretch;
-		gap: var(--size-3);
-		margin: var(--size-3);
-		border: var(--border-style) var(--surface-4) var(--border-width);
-		border-radius: var(--border-radius);
-		background: var(--surface-1);
-		padding: var(--size-3);
-	}
-
-	#post-header-wrapper:not(:has(#hero-image)) {
-		grid-template-rows: auto 1fr repeat(3, auto);
-		grid-template-areas:
-			'draft draft'
-			'title draft'
-			'summary summary'
-			'metadata metadata'
-			'share share';
-	}
-
-	#post-header h1 {
-		display: block;
-		height: auto;
-		font-weight: bold;
-		font-size: clamp(2rem, 5vmax, 4rem);
-		hyphenate-character: '-';
-		hyphenate-limit-chars: 8 3 2;
-		margin: 0;
-		margin-inline: auto;
-		padding: 0;
-		/* stylelint-disable-next-line property-no-vendor-prefix */
-		-webkit-hyphens: auto;
-		hyphens: auto;
-		line-break: loose;
-		overflow-wrap: break-word;
-		text-wrap: balance;
-		width: 100%;
-		word-break: break-word;
-	}
-
-	#post-header #back-to-blog { grid-area: menu; }
-	#post-header #post-title { grid-area: title; }
-
-	#post-header #hero-image { grid-area: hero-image; }
-
-	#post-header #hero-image:is(img),
-	#post-header #hero-image img {
-		border-radius: var(--border-radius);
-		width: 100%;
-		height: 100%;
-		overflow: clip;
-		object-fit: contain;
-	}
-
-	#post-summary {
-		grid-area: summary;
-		margin: 0;
-		border: none;
-		background: var(--surface-2);
-		padding: var(--size-3);
-		font-size: smaller;
-	}
-
-	#post-summary p { padding: 0; }
-
-	#post-metadata {
-		display: flex;
-		grid-area: metadata;
-		flex-flow: column wrap;
-		justify-content: center;
-		gap: var(--size-2);
-		width: 100%;
-		text-align: center;
-	}
-
-	#post-metadata a { vertical-align: middle; }
-
-	#post-share {
-		display: flex;
-		grid-area: share;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		gap: var(--size-3);
-	}
-
-	body:not(.js-enabled) #post-share { display: none; }
-
-	#post-share button {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border: var(--border-style) var(--border-width) var(--theme-color);
-		border-radius: 100vmax;
-		background: var(--surface-1);
-		padding: var(--size-2);
-		width: var(--size-7);
-		height: var(--size-7);
-		color: var(--theme-color);
-	}
-
-	#post-share button:focus-visible {
-		border-color: var(--text-1);
-		background-color: var(--theme-color);
-		color: var(--text-1);
-	}
-
-	#post-share button:hover {
-		outline-color: var(--accent-color);
-		border-color: var(--accent-color);
-		background-color: var(--surface-2);
-		color: var(--accent-color);
-	}
-
-	#post-share button:active {
-		outline-color: var(--text-1);
-		border-color: var(--text-1);
-		background-color: var(--accent-color);
-		color: var(--text-1);
-	}
-
-	#post-share button svg {
-		width: 100%;
-		height: 100%;
-		pointer-events: none;
-	}
-
-	@container post-header (max-width: 40rem) {
-		#post-header-wrapper {
-			grid-template-rows: 1fr repeat(5, auto);
+		header {
+			display: grid;
+			grid-template-rows: auto 1fr repeat(3, auto);
+			grid-template-columns: repeat(2, 1fr);
 			grid-template-areas:
-				'hero-image hero-image'
-				'draft draft'
-				'title title'
-				'summary summary'
+				'draft hero-image'
+				'title hero-image'
+				'summary hero-image'
 				'metadata metadata'
 				'share share';
+			place-items: end center;
+			justify-self: stretch;
+			gap: var(--size-3);
+			margin: var(--size-3);
+			border: var(--border-style) var(--surface-4) var(--border-width);
+			border-radius: var(--border-radius);
+			background: var(--surface-2);
+			padding: var(--size-3);
+
+			&:not(:has(figure)) {
+				grid-template-rows: auto 1fr repeat(3, auto);
+				grid-template-areas:
+					'draft draft'
+					'title title'
+					'summary summary'
+					'metadata metadata'
+					'share share';
+			}
+
+			draft-tag {
+				place-self: center;
+				grid-area: draft;
+			}
+
+			figure {
+				grid-area: hero-image;
+
+				@media (forced-colors: active) { filter: grayscale(1) contrast(120%) brightness(110%); }
+			}
+
+			a:has(> h1) { grid-area: title; }
+			h1 { padding: 0; }
+
+			blockquote {
+				grid-area: summary;
+				margin: 0;
+				border: none;
+				background: var(--surface-1);
+				padding: var(--size-3);
+				font-size: var(--font-size-0);
+				color: var(--text-2);
+				text-align: center;
+				font-style: italic;
+
+				p { margin: 0; }
+			}
+
+			post-metadata {
+				grid-area: metadata;
+
+				aside {
+					display: flex;
+					flex-flow: column wrap;
+					justify-content: center;
+					gap: var(--size-2);
+					width: 100%;
+					text-align: center;
+				}
+			}
+
+			share-options { grid-area: share; }
+
+			@container post-header (max-width: 40rem) {
+				grid-template-rows: 1fr repeat(5, auto);
+				grid-template-areas:
+					'hero-image hero-image'
+					'draft draft'
+					'title title'
+					'summary summary'
+					'metadata metadata'
+					'share share';
+			}
+
+			@container post-header (max-width: 25rem) { margin-inline: 0; }
 		}
 	}
-
-	@container post-header (max-width: 25rem) { #post-header-wrapper { margin-inline: 0; } }
-
-	@media (forced-colors: active) { #post-header #hero-image { filter: grayscale(1) contrast(120%) brightness(110%); } }
 }

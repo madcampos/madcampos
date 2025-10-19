@@ -82,41 +82,33 @@ const formatUpdateDate = (date: Date) =>
 			<hr />
 		</css-naked-day>
 
-		<header id="post-header">
-			<div id="post-header-wrapper">
+		<post-header>
+			<header>
 				{draft && <draft-tag>Draft</draft-tag>}
 				<a id="post-title" class="u-uid u-url" href={url}>
 					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(title)} /></h1>
 				</a>
 
 				{
-					image && (imageRights ? (
-						<figure id="hero-image">
+					image && (
+						<figure>
 							<Image
 								src={image}
 								alt={imageAlt ?? ''}
 								itemprop="image"
 								loading="eager"
 							/>
-							<figcaption><Fragment set:html={inlineMarkdownRender(imageRights)} /></figcaption>
+							{imageRights && <figcaption><Fragment set:html={inlineMarkdownRender(imageRights)} /></figcaption>}
 						</figure>
-					) : (
-						<Image
-							id="hero-image"
-							src={image}
-							alt={imageAlt ?? ''}
-							itemprop="image"
-							loading="eager"
-						/>
-					))
+					)
 				}
 
-				<blockquote id="post-summary" class="p-summary" itemprop="description">
+				<blockquote class="p-summary" itemprop="description">
 					<p><Fragment set:html={inlineMarkdownRender(summary)} /></p>
 				</blockquote>
 
-				<aside id="post-metadata">
-					<small>
+				<post-metadata>
+					<aside>
 						<span>
 							Published on <time itemprop="datePublished" class="dt-published" datetime={createdAt.toISOString()}>{formatter.format(createdAt)}</time>.
 						</span>
@@ -124,61 +116,23 @@ const formatUpdateDate = (date: Date) =>
 						{
 							updatedAt && (
 								<span>
-									Updated on <time itemprop="dateModified" class="dt-updated" datetime={updatedAt.toISOString()}>{formatter.format(updatedAt)}</time>
-									{
-										updates && updates.length > 0 && (
-											<a href="#update-history">
-												<sr-only>Go to updates section</sr-only>
-												<Icon name="mingcute:alert-line" aria-hidden="true" />
-											</a>
-										)
-									}
+									Updated on <time itemprop="dateModified" class="dt-updated" datetime={updatedAt.toISOString()}>{formatter.format(updatedAt)}</time>.
 								</span>
 							)
 						}
-					</small>
 
-					{
-						readingTime && (
-							<small>
-								<time itemprop="timeRequired" class="dt-duration" datetime={`PT${readingTime}M`}>
-									{readingTime} minute read
-								</time>
-								{wordCount && <span> &mdash; {wordCount} words</span>}
-							</small>
-						)
-					}
-				</aside>
-
-				<aside id="post-share" aria-labell="post-share-label">
-					<sr-only is="post-share-label">Share Options</sr-only>
-					<button
-						id="ps-copy"
-						type="button"
-						title="Copy link to clipboard"
-					>
-						<Icon name="mingcute:alert-line" aria-hidden="true" />
-						<sr-only>Copy link to clipboard</sr-only>
-					</button>
-					<button
-						id="ps-email"
-						type="button"
-						title="Send post by email"
-					>
-						<Icon name="mingcute:mail-send-line" aria-hidden="true" />
-						<sr-only>Send post by email</sr-only>
-					</button>
-					<button
-						id="ps-native"
-						type="button"
-						title="Share using native app"
-					>
-						<Icon name="mingcute:share-forward-line" aria-hidden="true" />
-						<sr-only>Share using native app</sr-only>
-					</button>
-				</aside>
-			</div>
-		</header>
+						{
+							readingTime && (
+								<span>
+									<time itemprop="timeRequired" class="dt-duration" datetime={`PT${readingTime}M`}>
+										{readingTime} minute read
+									</time>
+									{wordCount && <span> &mdash; {wordCount} words</span>}
+								</span>
+							)
+						}
+					</aside>
+				</post-metadata>
 
 		<main id="main">
 			<article id="post-contents" itemprop="articleBody" class="e-content">
