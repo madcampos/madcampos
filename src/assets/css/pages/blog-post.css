@@ -1,3 +1,5 @@
+@import url('../components/scroll-to-top.css');
+
 @layer pages {
 	main, body > footer {
 		margin-inline: auto;

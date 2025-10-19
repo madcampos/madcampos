@@ -4,14 +4,9 @@
 		container-type: scroll-state;
 	}
 
-	#page-top {
-		margin: 0;
-		border: none;
-		width: 100%;
-		height: 0;
-	}
+	body > footer { padding-block-end: var(--size-10); }
 
-	#scroll-to-top-link {
+	scroll-to-top a {
 		display: flex;
 		position: fixed;
 		justify-content: center;
@@ -23,33 +18,28 @@
 		inset-block-end: var(--size-2);
 		inset-inline: var(--size-2);
 		border: var(--border-style) var(--surface-4) var(--border-width);
-		background-color: var(--surface-1);
+		background-color: var(--surface-2);
 		padding: var(--size-2) var(--size-3);
 		color: var(--theme-color);
 		text-align: center;
-	}
+		max-inline-size: var(--size-content-4);
 
-	#scroll-to-top-link:focus {
-		background-color: var(--text-1);
-		color: var(--surface-1);
-	}
-
-	#scroll-to-top-link:hover {
-		background-color: var(--theme-color);
-		color: var(--surface-1);
-	}
-
-	#scroll-to-top-link:active {
-		background-color: var(--accent-color);
-		color: var(--surface-1);
-	}
-
-	/* dprint-ignore */
-	@container body-scroller scroll-state(scrollable: top) {
-		#scroll-to-top-link {
-			translate: 0 0;
+		&:focus {
+			background-color: var(--text-1);
+			color: var(--surface-1);
 		}
-	}
 
-	@media not (prefers-reduced-motion) { #scroll-to-top-link { transition: 0.4s translate; } }
+		&:hover {
+			background-color: var(--theme-color);
+			color: var(--surface-1);
+		}
+
+		&:active {
+			background-color: var(--accent-color);
+			color: var(--surface-1);
+		}
+
+		@media not (prefers-reduced-motion) { transition: 0.4s translate; }
+		@container body-scroller scroll-state(scrollable: top) { translate: 0 0; }
+	}
 }

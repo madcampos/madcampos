@@ -1,4 +1,5 @@
 ---
+import '../../../../assets/css/pages/blog-post.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
@@ -66,6 +67,7 @@ const formatUpdateDate = (date: Date) =>
 		{updatedAt}
 	/>
 	<body class="h-entry">
+		<page-top id="page-top"></page-top>
 		<skip-to-content>
 			<a href="#main">Skip to post content</a>
 		</skip-to-content>
@@ -213,7 +215,7 @@ const formatUpdateDate = (date: Date) =>
 		</main>
 
 		<scroll-to-top>
-			<a href="#main">
+			<a href="#page-top">
 				<Icon name="mingcute:arrow-to-up-line" aria-hidden="true" />
 				<span>Scroll to top</span>
 				<Icon name="mingcute:arrow-to-up-line" aria-hidden="true" />
