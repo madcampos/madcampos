@@ -1,5 +1,4 @@
 ---
-import '../../assets/css/pages/projects.css';
 import { Icon } from 'astro-icon/components';
 import Card from '../../components/Card.astro';
 import Effects from '../../components/Effects.astro';
@@ -82,7 +81,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 
 						<Fragment slot="subtitle">
 							<span class="project-status" data-status={data.status}>
-								<Icon name={data.status === 'ongoing' ? 'uil:history' : 'uil:check-circle'} title="Project status" /> {
+								<Icon name={data.status === 'ongoing' ? 'mingcute:time-line' : 'mingcute:check-circle-line'} title="Project status" /> {
 									data.status === 'ongoing' ? 'Ongoing' : 'Finished'
 								}
 							</span>
@@ -129,9 +128,12 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 									Technologies used
 								</span>
 							</summary>
-							<ul class="technology-tags">
-								{data.techStack?.map((tech) => <li class="tag">{tech}</li>)}
-							</ul>
+
+							<tag-list>
+								<ul>
+									{data.techStack?.map((tech) => <li><tag-item><span>{tech}</span></tag-item></li>)}
+								</ul>
+							</tag-list>
 						</details>
 					</Card>
 				))

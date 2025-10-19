@@ -2,6 +2,7 @@ import type { MarkdownInstance } from 'astro';
 import { getCollection, render } from 'astro:content';
 import { inlineMarkdownRender } from './markdown.ts';
 
+// TODO: sort in reverse
 export async function listAllChangelogs() {
 	const collectionEntries = await getCollection('changelog');
 	const collectionFiles = import.meta.glob<MarkdownInstance<{}>>('../content/changelog/**/*.md', { eager: true });

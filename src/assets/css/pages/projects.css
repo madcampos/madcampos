@@ -34,23 +34,4 @@
 		object-fit: contain;
 		object-position: top center;
 	}
-
-	.card .technology-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--size-3);
-		margin: var(--size-3) 0;
-		padding: 0;
-		list-style-type: '';
-	}
-
-	.card .tag {
-		display: inline-block;
-		margin: 0;
-		background-color: var(--tag-bg);
-		padding: var(--size-1) var(--size-2);
-		color: var(--tag-color);
-		font-size: var(--font-size-0);
-		list-style-type: '';
-	}
 }

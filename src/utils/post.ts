@@ -1,3 +1,4 @@
+// TODO: refactor
 import type { MarkdownInstance } from 'astro';
 import { getImage } from 'astro:assets';
 import { type CollectionEntry, getCollection, render } from 'astro:content';

@@ -63,9 +63,6 @@
 				grid-area: picture;
 				place-self: start center;
 				border-radius: var(--border-radius);
-				width: var(--image-size);
-				height: var(--image-size);
-				overflow: clip;
 
 				img {
 					width: 100%;
@@ -74,11 +71,7 @@
 					object-position: center;
 				}
 
-				@container card (max-width: 25rem) {
-					place-self: center;
-					width: calc(100% - var(--size-1));
-					height: calc(100% - var(--size-1));
-				}
+				@container card (max-width: 30rem) { align-self: center; }
 			}
 
 			.card-content {
@@ -100,9 +93,8 @@
 				&:empty { display: none; }
 			}
 
-			@container card (max-width: 25rem) {
-				--image-size: var(--size-header-1);
-				grid-template-rows: auto var(--image-size) 1fr auto auto;
+			@container card (max-width: 30rem) {
+				grid-template-rows: auto fit-content 1fr auto auto;
 				grid-template-columns: 1fr;
 				grid-template-areas:
 					'header'

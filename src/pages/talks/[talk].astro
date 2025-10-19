@@ -1,6 +1,5 @@
 ---
-import '../../assets/css/pages/talk.css';
-import '../../assets/css/code.css';
+import '../../assets/css/components/content.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Effects from '../../components/Effects.astro';
@@ -158,7 +157,9 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				}
 			</ul>
 
-			<Content />
+			<rendered-content>
+				<Content />
+			</rendered-content>
 
 			{
 				demo && (
@@ -205,9 +206,12 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				<Icon name="mingcute:tool-line" aria-hidden="true" />
 				Technologies used
 			</h2>
-			<ul id="technology-tags">
-				{techStack?.map((tech) => <li class="tag">{tech}</li>)}
-			</ul>
+
+			<tag-list>
+				<ul id="technology-tags">
+					{techStack?.map((tech) => <li><tag-item><span>{tech}</span></tag-item></li>)}
+				</ul>
+			</tag-list>
 		</main>
 
 		<footer>

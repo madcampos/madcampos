@@ -2,7 +2,7 @@
 	related-posts {
 		display: block;
 		margin-inline: auto;
-		width: calc(100cqw - var(--size-3) * 4);
+		width: 100%;
 		max-width: var(--size-content-3);
 		overflow-x: auto;
 

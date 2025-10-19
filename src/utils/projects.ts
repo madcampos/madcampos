@@ -1,3 +1,4 @@
+// TODO: refactor
 import { getCollection, render } from 'astro:content';
 import { inlineMarkdownRender } from './markdown.ts';
 
