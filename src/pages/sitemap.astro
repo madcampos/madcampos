@@ -104,9 +104,10 @@ const blogPages = await listPostsByYearAndMonth();
 			<dl>
 				{
 					aboutPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+						<dt data-hidden={hidden ?? null}>
 							<a href={url}>
 								<Fragment set:html={inlineMarkdownRender(title)} />
+								{wip && <draft-tag>WIP</draft-tag>}
 							</a>
 						</dt>
 						<dd>
@@ -119,9 +120,10 @@ const blogPages = await listPostsByYearAndMonth();
 			<dl>
 				{
 					coolPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+						<dt data-hidden={hidden ?? null}>
 							<a href={url}>
 								<Fragment set:html={inlineMarkdownRender(title)} />
+								{wip && <draft-tag>WIP</draft-tag>}
 							</a>
 						</dt>
 						<dd>
@@ -136,9 +138,10 @@ const blogPages = await listPostsByYearAndMonth();
 				<dd>A list of talks that I've presented before.</dd>
 				{
 					talkPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-wip={wip ?? null} data-hidden={hidden ?? null}>
+						<dt data-hidden={hidden ?? null}>
 							<a href={url}>
 								<Fragment set:html={inlineMarkdownRender(title)} />
+								{wip && <draft-tag>WIP</draft-tag>}
 							</a>
 						</dt>
 						<dd>
@@ -164,9 +167,10 @@ const blogPages = await listPostsByYearAndMonth();
 											<dl>
 												{
 													posts.map(({ url, data: { title, summary, draft } }) => (
-														<dt data-wip={draft || null}>
+														<dt>
 															<a href={`/blog/${url}/`}>
 																<Fragment set:html={inlineMarkdownRender(title)} />
+																{draft && <draft-tag>Draft</draft-tag>}
 															</a>
 														</dt>
 														<dd>

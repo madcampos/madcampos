@@ -1,14 +1,4 @@
 @layer pages {
-	main dt[data-wip]::after {
-		display: inline-block;
-		margin-inline-start: var(--size-2);
-		background-color: orange;
-		padding: var(--size-1) var(--size-2);
-		content: 'WIP';
-		color: var(--surface-2);
-		font-size: smaller;
-	}
-
-	main dt[data-hidden] a { color: var(--surface-1); }
-	main dt[data-hidden] + dd { color: var(--surface-1); }
+	main dt[data-hidden] a { color: var(--surface-2); }
+	main dt[data-hidden] + dd { color: var(--surface-2); }
 }

@@ -1,3 +1,4 @@
+/* TODO: review */
 @layer pages {
 	main { padding-inline: min(10vw, var(--size-content-1)); }
 

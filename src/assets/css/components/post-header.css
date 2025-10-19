@@ -1,4 +1,5 @@
 @layer components {
+	/* TODO: refactor */
 	#post-header {
 		display: block;
 		container-name: post-header;

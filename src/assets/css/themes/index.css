@@ -1,7 +1,8 @@
-@import './light.css';
-@import './dark.css';
-@import './uwu.css';
-@import './high-contrast.css';
-@import './y2k.css';
-@import './hacker.css';
-@import './cork-board.css';
+/* TODO: review */
+@import url('./light.css');
+@import url('./dark.css');
+@import url('./uwu.css');
+@import url('./high-contrast.css');
+@import url('./y2k.css');
+@import url('./hacker.css');
+@import url('./cork-board.css');

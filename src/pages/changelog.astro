@@ -1,5 +1,4 @@
 ---
-import '../assets/css/pages/changelogs.css';
 import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
@@ -73,6 +72,8 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 				))
 			}
 		</main>
+
+		<hr />
 
 		<footer>
 			<OldStyleButtons />

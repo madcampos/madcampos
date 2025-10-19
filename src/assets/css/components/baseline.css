@@ -1,4 +1,5 @@
 @layer components {
+	/* TODO: review */
 	:host {
 		--icon-size: 2rem;
 		--browser-icon-size: 1rem;
