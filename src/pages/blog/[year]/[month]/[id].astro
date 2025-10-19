@@ -48,11 +48,6 @@ const {
 } = Astro.props;
 const { Content } = await render();
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
-const formatUpdateDate = (date: Date) =>
-	new Intl.DateTimeFormat('en-US', {
-		dateStyle: 'long',
-		timeStyle: 'short'
-	}).format(date);
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/BlogPosting">
@@ -137,39 +132,39 @@ const formatUpdateDate = (date: Date) =>
 				<share-options></share-options>
 			</header>
 		</post-header>
+
 		<main id="main">
-			<article id="post-contents" itemprop="articleBody" class="e-content">
-				{
-					updates && (
-						<aside id="update-history">
-							<details open>
-								<summary>Update History</summary>
-								<ul>
-									{
-										updates.map((update) => (
-											<li>
-												<time
-													datetime={update.date.toISOString()}
-													title={update.date.toISOString()}
-												>
-													{formatUpdateDate(update.date)}
-												</time>
-												<span>&mdash;</span>
-												<span>{update.changes}</span>
-											</li>
-										))
-									}
-								</ul>
-							</details>
-						</aside>
-					)
-				}
+			{
+				updates && (
+					<aside id="update-history">
+						<hr />
+						<details open>
+							<summary>Update History</summary>
+							<ul>
+								{
+									updates.map((update) => (
+										<li>
+											<time datetime={update.date.toISOString()}>
+												{formatter.format(update.date)}
+											</time>
+											<span>&mdash;</span>
+											<span>{update.changes}</span>
+										</li>
+									))
+								}
+							</ul>
+						</details>
+						<hr />
+					</aside>
+				)
+			}
 
+			<rendered-content itemprop="articleBody" class="e-content">
 				<Content />
-			</article>
-
-			<hr id="post-separator" />
+			</rendered-content>
 		</main>
+
+		<hr id="post-separator" />
 
 		<scroll-to-top>
 			<a href="#page-top">
@@ -263,7 +258,7 @@ const formatUpdateDate = (date: Date) =>
 				relatedPosts && relatedPosts.length > 0 && (
 					<details id="related-posts" open>
 						<summary id="related-posts-title">Related Posts</summary>
-						<div id="related-posts-wrapper">
+						<related-posts>
 							<nav aria-labelledby="related-posts-title">
 								<ul>
 									{
@@ -284,7 +279,7 @@ const formatUpdateDate = (date: Date) =>
 									}
 								</ul>
 							</nav>
-						</div>
+						</related-posts>
 					</details>
 				)
 			}

@@ -13,19 +13,18 @@
 		flex-direction: column;
 		place-items: center stretch;
 		gap: var(--size-3);
+	}
 
-		h1 {
-			hyphenate-character: '-';
-			hyphenate-limit-chars: 8 3 2;
-			padding: var(--size-3);
-			/* stylelint-disable-next-line property-no-vendor-prefix */
-			-webkit-hyphens: auto;
-			hyphens: auto;
-			line-break: loose;
-			overflow-wrap: break-word;
-			text-wrap: balance;
-			word-break: break-word;
-		}
+	h1 {
+		hyphenate-character: '-';
+		hyphenate-limit-chars: 8 3 2;
+		padding: var(--size-3);
+		-webkit-hyphens: auto;
+		hyphens: auto;
+		line-break: loose;
+		overflow-wrap: break-word;
+		text-wrap: balance;
+		word-break: break-word;
 	}
 
 	body > main {

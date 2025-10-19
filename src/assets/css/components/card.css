@@ -75,7 +75,7 @@
 				}
 
 				@container card (max-width: 25rem) {
-					align-self: center center;
+					place-self: center;
 					width: calc(100% - var(--size-1));
 					height: calc(100% - var(--size-1));
 				}

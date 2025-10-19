@@ -1,0 +1,32 @@
+@layer components {
+	rendered-content {
+		a[rel~='external']::after {
+			display: inline-block;
+			vertical-align: 0.2em;
+			background-image: var(--external-link-icon);
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			width: var(--font-size-0);
+			height: var(--font-size-0);
+			content: '';
+		}
+
+		blockquote {
+			margin: var(--size-2);
+			background-color: var(--surface-2);
+			border: var(--border-width) var(--border-style) var(--surface-4);
+			border-radius: var(--border-radius);
+			padding-block: var(--size-3);
+			padding-inline: var(--size-4);
+			font-style: italic;
+
+			p { margin: 0; }
+		}
+
+		p > img:only-child {
+			--image-size: 35vw;
+			width: clamp(var(--size-content-1), var(--image-size), var(--size-content-3));
+		}
+	}
+}

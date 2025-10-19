@@ -57,9 +57,12 @@ Another paragraph, followd by an horizontal line:
 - List item 1
 - List item 2
   - Nested item
+    - Deep nested
 
 1. List item 1
 2. List item 2
+   1. Nested item
+      1. Deep nested
 
 ## Block quote
 
