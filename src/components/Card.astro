@@ -6,17 +6,16 @@ interface Props {
 	itemtype: string;
 	url?: string;
 	draft?: boolean;
-	class?: string;
 	image?: ImageMetadata;
 	imageAlt?: string;
 	themeImages?: Record<string, ImageMetadata>;
 }
 
-const { itemtype, url, draft, class: cardClass, image, imageAlt, themeImages } = Astro.props;
+const { itemtype, url, draft, image, imageAlt, themeImages } = Astro.props;
 ---
 <m-card>
-	<article class={`card ${cardClass ?? ''}`} itemscope {itemtype}>
-		<div hidden class="card-meta">
+	<article itemscope {itemtype}>
+		<div hidden>
 			<meta itemprop="url" content={url} />
 			<slot name="metadata"></slot>
 		</div>
@@ -55,23 +54,23 @@ const { itemtype, url, draft, class: cardClass, image, imageAlt, themeImages } =
 		}
 
 		<header>
-			<div class="card-title">
+			<div>
 				{draft && <draft-tag>Draft</draft-tag>}
 				<a href={url ?? null} itemprop="name">
 					<slot name="title"></slot>
 				</a>
 			</div>
 
-			<aside class="card-subtitle">
+			<aside>
 				<slot name="subtitle"></slot>
 			</aside>
 		</header>
 
-		<div class="card-content" itemprop="description">
+		<rendered-content itemprop="description">
 			<slot></slot>
-		</div>
+		</rendered-content>
 
-		<aside class="card-links">
+		<aside>
 			<slot name="links"></slot>
 		</aside>
 

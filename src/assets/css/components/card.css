@@ -34,28 +34,30 @@
 				picture { display: none; }
 			}
 
-			header { grid-area: header; }
+			header {
+				grid-area: header;
 
-			.card-title {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				gap: var(--size-2);
+				& > div {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					gap: var(--size-2);
 
-				:is(h2, h3, h4, h5, h6) { margin-block: 0; }
-				a { flex-grow: 1; }
+					:is(h2, h3, h4, h5, h6) { margin-block: 0; }
+					a { flex-grow: 1; }
 
-				@container (max-width: 25rem) {
-					text-align: center;
-					justify-content: center;
+					@container (max-width: 25rem) {
+						text-align: center;
+						justify-content: center;
+					}
 				}
-			}
 
-			.card-subtitle {
-				margin-block-start: var(--size-2);
-				color: var(--text-2);
-				font-style: italic;
-				font-size: 0.8rem;
+				& > aside {
+					margin-block-start: var(--size-2);
+					color: var(--text-2);
+					font-style: italic;
+					font-size: 0.8rem;
+				}
 			}
 
 			picture {
@@ -71,17 +73,19 @@
 					object-position: center;
 				}
 
+				:where(img[data-theme-image]) { display: none; }
+
 				@container card (max-width: 30rem) { align-self: center; }
 			}
 
-			.card-content {
+			rendered-content {
 				grid-area: content;
 
 				& > *:first-child { margin-block-start: 0; }
 				& > *:last-child { margin-block-end: 0; }
 			}
 
-			.card-links {
+			& > aside {
 				grid-area: links;
 
 				&:empty { display: none; }

@@ -50,7 +50,7 @@ const tags = Object.keys(await listPostsByTag());
 				<ul>
 					{
 						tags.map((tag) => (
-							<li class="tag">
+							<li>
 								<tag-item>
 									<a href={`/blog/tags/${tag}`} itemprop="url">
 										<span itemprop="itemListElement">{tag}</span>

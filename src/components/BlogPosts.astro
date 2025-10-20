@@ -80,13 +80,13 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<h2 slot="title">
 							<Fragment set:html={inlineMarkdownRender(post.data.title)} />
 						</h2>
-						<small slot="subtitle" class="post-time">
+						<small slot="subtitle">
 							<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
 						</small>
 
 						<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
 
-						<a slot="links" class="read-more-link" href={`/blog/${post.url}`}>
+						<a slot="links" href={`/blog/${post.url}`}>
 							<span>Read more</span>
 							<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
 							<span>...</span>
