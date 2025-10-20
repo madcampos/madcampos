@@ -2,7 +2,6 @@ import type { MarkdownInstance } from 'astro';
 import { getCollection, render } from 'astro:content';
 import { inlineMarkdownRender } from './markdown.ts';
 
-// TODO: sort in reverse
 export async function listAllChangelogs() {
 	const collectionEntries = await getCollection('changelog');
 	const collectionFiles = import.meta.glob<MarkdownInstance<{}>>('../content/changelog/**/*.md', { eager: true });
@@ -10,7 +9,7 @@ export async function listAllChangelogs() {
 	const entries = collectionEntries
 		.filter((entry) => entry.data)
 		.filter(({ data: { draft } }) => !draft || import.meta.env.DEV)
-		.sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateA.getTime() - dateB.getTime())
+		.sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.getTime() - dateA.getTime())
 		.map((entry) => {
 			const [, entryMarkdown] = Object.entries(collectionFiles).find(([filePath]) => filePath.includes(entry.id)) ?? [];
 

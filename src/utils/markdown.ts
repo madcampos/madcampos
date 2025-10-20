@@ -23,7 +23,7 @@ export function inlineMarkdownRender(input: string) {
 }
 
 export function inlineMarkdownStrip(input: string) {
-	const results = escapeHtmlTags(input)
+	const results = input
 		// Bold
 		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '$1$2')
 		// Italics

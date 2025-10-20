@@ -24,21 +24,19 @@ export const GET: APIRoute = async (context) => {
 		const image = await post.getImage();
 		const imageTag = image ? `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
 
-		const postContent = escapeHtmlTags(`
-			${imageTag}
-			${await post.renderString()}
-		`);
-
 		const postTags = post.data.tags?.map((tag) => `<category term="${tag}" />`).join('\n') ?? '';
 
 		return `<entry>
 			<id>${new URL(post.url, blogUrl).toString()}</id>
-			<title>${inlineMarkdownStrip(post.data.title)}</title>
+			<title><![CDATA[${inlineMarkdownStrip(post.data.title)}]]></title>
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
 			<published>${post.data.createdAt}</published>
 			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
-			<summary>${inlineMarkdownStrip(post.data.summary)}</summary>
-			<content type="html">${postContent}</content>
+			<summary><![CDATA[${inlineMarkdownStrip(post.data.summary)}]]></summary>
+			<content type="html"><![CDATA[
+				${imageTag}
+				${await post.renderString()}
+			]]></content>
 			${postTags}
 		</entry>`;
 	}));

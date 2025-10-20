@@ -1,8 +1,6 @@
-// TODO: refactor
 import type { MarkdownInstance } from 'astro';
 import { getImage } from 'astro:assets';
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import { join } from './path.js';
 
 export type PostSorting = 'ascending' | 'descending';
 
@@ -67,7 +65,7 @@ function getPostUrl(post: CollectionEntry<'blog'>) {
 	const id = formatPostId(post);
 	const { year, month } = getPostDate(post);
 
-	return join([year, month, id]);
+	return `${year}/${month}/${id}/`;
 }
 
 async function getRelatedPosts(post: CollectionEntry<'blog'>) {
@@ -164,19 +162,7 @@ export async function listAllPosts(sorting: PostSorting = 'descending') {
 export async function listPostPagesByYear(sorting: PostSorting = 'descending') {
 	const posts = await listAllPosts(sorting);
 
-	const years = new Map<string, Post[]>();
-
-	for (const post of posts) {
-		const year = post.year.toString();
-
-		if (!years.has(year)) {
-			years.set(year, []);
-		}
-
-		years.get(year)?.push(post as Post);
-	}
-
-	return years;
+	return Map.groupBy(posts, ({ year }) => year);
 }
 
 export async function listPostsByYearAndMonth(sorting: PostSorting = 'descending') {
@@ -184,22 +170,7 @@ export async function listPostsByYearAndMonth(sorting: PostSorting = 'descending
 	const postsByYearAndMonth = new Map<string, Map<string, Post[]>>();
 
 	for (const [year, posts] of postsByYear.entries()) {
-		if (!postsByYearAndMonth.has(year)) {
-			postsByYearAndMonth.set(year, new Map());
-		}
-
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const postsByMonth = postsByYearAndMonth.get(year)!;
-
-		for (const post of posts) {
-			const month = post.month.toString();
-
-			if (!postsByMonth.has(month)) {
-				postsByMonth.set(month, []);
-			}
-
-			postsByMonth.get(month)?.push(post);
-		}
+		postsByYearAndMonth.set(year, Map.groupBy(posts, ({ month }) => month));
 	}
 
 	return postsByYearAndMonth;
