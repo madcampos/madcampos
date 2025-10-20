@@ -1,4 +1,4 @@
-@layer openprops, fonts, vars, base, pages, components, code, theme, print, contrast;
+@layer openprops, fonts, vars, base, components, pages, code, theme, print, contrast;
 
 @import 'open-props/style' layer(openprops);
 @import url('./fonts.css');

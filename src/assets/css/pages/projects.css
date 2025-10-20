@@ -1,37 +1,18 @@
-/* TODO: review */
 @layer pages {
-	.card .card-subtitle {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: var(--size-2);
-	}
+	m-card {
+		header aside draft-tag {
+			font-weight: 600;
 
-	.card .project-status {
-		padding: var(--size-1) var(--size-2);
-		color: var(--surface-2);
-	}
+			&[data-status='finished'] { background-color: limegreen; }
+			&[data-status='ongoing'] { background-color: orange; }
+		}
 
-	.card .project-status[data-status='finished'] { background-color: limegreen; }
-	.card .project-status[data-status='ongoing'] { background-color: orange; }
-
-	.card picture {
-		display: block;
-		mask: url('../../images/squircle.svg');
-		mask-position: center;
-		mask-size: contain;
-		mask-repeat: no-repeat;
-		aspect-ratio: 1 / 1;
-		width: 100%;
-		height: auto;
-		max-height: 100%;
-		overflow: hidden;
-	}
-
-	.card picture img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: top center;
+		picture {
+			mask: url('../../images/squircle.svg');
+			mask-position: center;
+			mask-size: contain;
+			mask-repeat: no-repeat;
+			aspect-ratio: 1 / 1;
+		}
 	}
 }
