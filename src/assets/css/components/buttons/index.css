@@ -1,4 +1,4 @@
-@layer {
+@layer components {
 	@property --rotate {
 		inherits: true;
 		initial-value: 0deg;
@@ -48,7 +48,15 @@
 		100% { --rotate: 0deg; }
 	}
 
-	:host { display: block; }
+	:host {
+		--old-button-border: none;
+		--old-button-border-visibility: hidden;
+		--old-button-tint: none;
+		--old-button-blend-mode: none;
+		--old-button-border-radius: 0.2rem;
+
+		display: block;
+	}
 
 	button {
 		--button-font-oldstyle: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
@@ -59,6 +67,7 @@
 		--button-font-slab: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
 		--button-font-humanist: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 		--button-font-ui: system-ui, sans-serif;
+
 		display: inline-flex;
 		position: relative;
 		cursor: pointer;
@@ -70,94 +79,100 @@
 		width: fit-content;
 		height: fit-content;
 		overflow: hidden;
-	}
 
-	button::after {
-		display: block;
-		position: absolute;
-		mix-blend-mode: var(--old-button-blend-mode);
-		inset: 0;
-		background: var(--old-button-tint);
-		content: '';
-	}
+		&::after {
+			display: block;
+			position: absolute;
+			mix-blend-mode: var(--old-button-blend-mode);
+			inset: 0;
+			background: var(--old-button-tint);
+			content: '';
+		}
 
-	button text {
-		font-size: 8px;
-		font-family: var(--button-font-humanist);
-		text-anchor: middle;
-	}
+		text {
+			font-size: 8px;
+			font-family: var(--button-font-humanist);
+			text-anchor: middle;
+		}
 
-	button .hidden-text {
-		fill: none;
-		pointer-events: none;
-		font-size: 1px;
-		stroke: none;
-		user-select: none;
-	}
+		.hidden-text {
+			fill: none;
+			pointer-events: none;
+			font-size: 1px;
+			stroke: none;
+			user-select: none;
+		}
 
-	button .button-badge-bg { fill: red; }
-	button .button-badge-text {
-		fill: white;
-		font-weight: 900;
-		font-size: 7px;
-		font-family: var(--button-font-humanist);
-		text-anchor: start;
-		transform: rotate(-90deg);
-		transform-origin: top left;
-	}
+		.button-badge-bg { fill: red; }
+		.button-badge-text {
+			fill: white;
+			font-weight: 900;
+			font-size: 7px;
+			font-family: var(--button-font-humanist);
+			text-anchor: start;
+			transform: rotate(-90deg);
+			transform-origin: top left;
+		}
 
-	button .emphasis-text {
-		fill: red;
-		paint-order: stroke;
-		font-weight: bold;
-		font-size: 9px;
-		font-family: var(--button-font-hand);
-		stroke: #d3d3d3;
-	}
+		.emphasis-text {
+			fill: red;
+			paint-order: stroke;
+			font-weight: bold;
+			font-size: 9px;
+			font-family: var(--button-font-hand);
+			stroke: #d3d3d3;
+		}
 
-	button svg {
-		aspect-ratio: 88 / 31;
-		height: 2rem;
-	}
+		svg {
+			aspect-ratio: 88 / 31;
+			height: 2rem;
+		}
 
-	button #button-text-path {
-		stroke-dasharray: 0 7 16 100;
-		stroke-dashoffset: 2;
-		transform: translate(0.5px, 1.5px);
-	}
+		#button-text-path {
+			stroke-dasharray: 0 7 16 100;
+			stroke-dashoffset: 2;
+			transform: translate(0.5px, 1.5px);
+		}
 
-	button #button-base { fill: #d3d3d3; }
-	button :is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility); }
-	button :is(#button-border-up, #button-border-left) { fill: white; }
-	button :is(#button-border-down, #button-border-right) { fill: black; }
+		#button-base { fill: #d3d3d3; }
+		:is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility); }
+		:is(#button-border-up, #button-border-left) { fill: white; }
+		:is(#button-border-down, #button-border-right) { fill: black; }
 
-	button:focus-visible {
-		outline: var(--theme-color) var(--border-style) var(--border-width);
-		outline-offset: var(--size-1);
-		border-radius: var(--border-radius);
-		background-color: var(--surface-1);
-		color: var(--text-1);
-	}
+		&:focus-visible {
+			outline: var(--theme-color) var(--border-style) var(--border-width);
+			outline-offset: var(--size-1);
+			border-radius: var(--border-radius);
+			background-color: var(--surface-1);
+			color: var(--text-1);
+		}
 
-	button:hover #button-base { fill: silver; }
-	button:hover .emphasis-text { stroke: silver; }
+		&:hover {
+			#button-base { fill: silver; }
+			.emphasis-text { stroke: silver; }
+		}
 
-	button:active :is(#button-border-up, #button-border-left) { fill: black; }
-	button:active :is(#button-border-down, #button-border-right) { fill: white; }
+		&:active {
+			:is(#button-border-up, #button-border-left) { fill: black; }
+			:is(#button-border-down, #button-border-right) { fill: white; }
+		}
 
-	@media (prefers-contrast: more), (forced-colors: active) {
-		button text { fill: var(--text-1); }
-		button #button-base { fill: var(--surface-1); }
-		button #button-text-path { stroke: var(--theme-color); }
-		button .button-badge-bg { fill: var(--text-1); }
-		button .button-badge-text { fill: var(--surface-1); }
+		@media (prefers-contrast: more), (forced-colors: active) {
+			text { fill: var(--text-1); }
+			#button-base { fill: var(--surface-1); }
+			#button-text-path { stroke: var(--theme-color); }
+			.button-badge-bg { fill: var(--text-1); }
+			.button-badge-text { fill: var(--surface-1); }
 
-		button:hover #button-base { fill: var(--surface-2); }
-		button:hover .emphasis-text { stroke: var(--surface-2); }
+			.emphasis-text {
+				fill: var(--theme-color);
+				stroke: var(--surface-1);
+			}
 
-		button .emphasis-text {
-			fill: var(--theme-color);
-			stroke: var(--surface-1);
+			&:hover {
+				#button-base { fill: var(--surface-2); }
+				.emphasis-text { stroke: var(--surface-2); }
+			}
 		}
 	}
 }

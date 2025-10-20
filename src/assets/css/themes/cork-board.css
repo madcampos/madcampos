@@ -18,10 +18,6 @@
 		--surface-3: deeppink;
 		--surface-4: transparent;
 
-		/* Tag colors */
-		--tag-bg: var(--secondary-color);
-		--tag-color: var(--text-1);
-
 		/* Link colors */
 		--link-color: navy;
 		--link-visited-color: darkorchid;
@@ -39,20 +35,6 @@
 		--highlight-error-bg: rgba(255, 99, 71, 0.3);
 		--highlight-warning-color: goldenrod;
 		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
-
-		/* Baseline colors */
-		--baseline-high-color: lightseagreen;
-		--baseline-high-bg: lightgreen;
-		--baseline-low-color: dodgerblue;
-		--baseline-low-bg: royalblue;
-		--baseline-limited-color: orangered;
-		--baseline-limited-bg: orange;
-		--baseline-no-data-color: dimgray;
-		--baseline-no-data-bg: dimgray;
-		--baseline-supported-color: darkgreen;
-		--baseline-supported-bg: color-mix(in srgb, lightseagreen, transparent 80%);
-		--baseline-unsupported-color: darkgoldenrod;
-		--baseline-unsupported-bg: color-mix(in srgb, yellow, transparent 80%);
 
 		/* Old Buttons */
 		--old-button-border: var(--surface-3) solid var(--border-width);

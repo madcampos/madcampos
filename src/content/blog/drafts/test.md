@@ -70,9 +70,85 @@ Another paragraph, followd by an horizontal line:
 
 ## Code block
 
-```js
+```ts
 // Code block
 console.log('Hello, Markdown!');
+
+function testNesting() {
+	if (true) {
+		console.log('true');
+	}
+}
+```
+
+```ts
+console.log('hewwo'); // [!code --]
+console.log('hello'); // [!code ++]
+console.log('goodbye');
+```
+
+```ts
+console.log('Not highlighted');
+console.log('Highlighted'); // [!code highlight]
+console.log('Not highlighted');
+```
+
+```ts
+// [!code highlight:3]
+console.log('Highlighted');
+console.log('Highlighted');
+console.log('Not highlighted');
+```
+
+```ts
+console.log('Not highlighted');
+// [!code highlight:1]
+console.log('Highlighted');
+console.log('Not highlighted');
+```
+
+```ts
+// [!code word:Hello]
+const message = 'Hello World';
+console.log(message); // prints Hello World
+```
+
+```ts
+// [!code word:Hello:1]
+const message = 'Hello World';
+console.log(message); // prints Hello World
+```
+
+```ts
+console.log('Not focused');
+console.log('Focused'); // [!code focus]
+console.log('Not focused');
+```
+
+```ts
+// [!code focus:2]
+console.log('Focused');
+console.log('Focused');
+console.log('Not focused');
+```
+
+```ts
+console.log('No errors or warnings');
+console.error('Error'); // [!code error]
+console.warn('Warning'); // [!code warning]
+```
+
+```js {1,3-4}
+console.log('1');
+console.log('2');
+console.log('3');
+console.log('4');
+```
+
+```js /Hello/
+const msg = 'Hello World';
+console.log(msg);
+console.log(msg); // prints Hello World
 ```
 
 ## Markdown Table

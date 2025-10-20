@@ -18,10 +18,6 @@
 		--surface-2: black;
 		--surface-3: yellow;
 
-		/* Tag colors */
-		--tag-bg: var(--theme-color);
-		--tag-color: var(--surface-2);
-
 		/* Link colors */
 		--link-color: aqua;
 		--link-visited-color: fuchsia;
@@ -39,20 +35,6 @@
 		--highlight-error-bg: rgba(255, 99, 71, 0.2);
 		--highlight-warning-color: yellow;
 		--highlight-warning-bg: rgba(218, 165, 32, 0.2);
-
-		/* Baseline colors */
-		--baseline-high-color: limegreen;
-		--baseline-high-bg: seagreen;
-		--baseline-low-color: dodgerblue;
-		--baseline-low-bg: darkslateblue;
-		--baseline-limited-color: orange;
-		--baseline-limited-bg: silver;
-		--baseline-no-data-color: silver;
-		--baseline-no-data-bg: silver;
-		--baseline-supported-color: greenyellow;
-		--baseline-supported-bg: black;
-		--baseline-unsupported-color: yellow;
-		--baseline-unsupported-bg: black;
 
 		/* Old Buttons */
 		--old-button-border: none;

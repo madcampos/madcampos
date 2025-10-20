@@ -91,6 +91,8 @@
 				border-color: var(--accent-color);
 				background-color: var(--text-1);
 				color: var(--surface-1);
+
+				@media (forced-colors: active) { :is(strong, small) { forced-color-adjust: none; } }
 			}
 
 			@container (max-width: 25rem) { width: 100%; }

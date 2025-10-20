@@ -7,6 +7,7 @@ import {
 	transformerNotationFocus,
 	transformerNotationHighlight,
 	transformerNotationWordHighlight,
+	transformerRemoveNotationEscape,
 	transformerRenderWhitespace
 } from '@shikijs/transformers';
 import { transformerTwoslash } from '@shikijs/twoslash';
@@ -60,6 +61,7 @@ export default defineConfig({
 			defaultColor: false,
 			wrap: true,
 			transformers: [
+				transformerRemoveNotationEscape(),
 				transformerTwoslash({
 					explicitTrigger: true,
 					rendererRich: { errorRendering: 'hover' }

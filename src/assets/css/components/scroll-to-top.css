@@ -4,8 +4,6 @@
 		container-type: scroll-state;
 	}
 
-	body > footer { padding-block-end: var(--size-10); }
-
 	scroll-to-top a {
 		display: flex;
 		position: fixed;
@@ -43,3 +41,5 @@
 		@container body-scroller scroll-state(scrollable: top) { translate: 0 0; }
 	}
 }
+
+@layer pages { body > footer { padding-block-end: var(--size-10); } }

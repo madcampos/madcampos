@@ -42,12 +42,7 @@
 				grid-area: draft;
 			}
 
-			figure {
-				grid-area: hero-image;
-
-				@media (forced-colors: active) { filter: grayscale(1) contrast(120%) brightness(110%); }
-			}
-
+			figure { grid-area: hero-image; }
 			a:has(> h1) { grid-area: title; }
 			h1 { padding: 0; }
 

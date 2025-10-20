@@ -19,10 +19,6 @@
 		--surface-3: var(--theme-color);
 		--surface-4: var(--theme-color);
 
-		/* Tag colors */
-		--tag-bg: var(--text-1);
-		--tag-color: var(--surface-2);
-
 		/* Link colors */
 		--link-color: lightyellow;
 		--link-visited-color: goldenrod;
@@ -40,20 +36,6 @@
 		--highlight-error-bg: rgba(255, 99, 71, 0.3);
 		--highlight-warning-color: goldenrod;
 		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
-
-		/* Baseline colors */
-		--baseline-high-color: greenyellow;
-		--baseline-high-bg: #257146;
-		--baseline-low-color: dodgerblue;
-		--baseline-low-bg: darkslateblue;
-		--baseline-limited-color: orange;
-		--baseline-limited-bg: #424242;
-		--baseline-no-data-color: silver;
-		--baseline-no-data-bg: silver;
-		--baseline-supported-color: greenyellow;
-		--baseline-supported-bg: color-mix(in srgb, seagreen, transparent 80%);
-		--baseline-unsupported-color: hsl(50, 100%, 50%);
-		--baseline-unsupported-bg: color-mix(in srgb, goldenrod, transparent 80%);
 
 		/* Old Buttons */
 		--old-button-border: var(--surface-3) var(--border-style) var(--border-width);

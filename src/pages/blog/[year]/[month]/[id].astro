@@ -80,7 +80,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		<post-header>
 			<header>
 				{draft && <draft-tag>Draft</draft-tag>}
-				<a id="post-title" class="u-uid u-url" href={url}>
+				<a class="u-uid u-url" href={url}>
 					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(title)} /></h1>
 				</a>
 
@@ -136,9 +136,9 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		<main id="main">
 			{
 				updates && (
-					<aside id="update-history">
+					<aside>
 						<hr />
-						<details open>
+						<details>
 							<summary>Update History</summary>
 							<ul>
 								{

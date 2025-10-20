@@ -5,6 +5,13 @@
 
 			&[data-status='finished'] { background-color: limegreen; }
 			&[data-status='ongoing'] { background-color: orange; }
+
+			@media (prefers-contrast: more) {
+				&[data-status='finished'] { background-color: var(--theme-color); }
+				&[data-status='ongoing'] { background-color: var(--secondary-color); }
+			}
+
+			@media (forced-colors: active) { background-color: transparent; }
 		}
 
 		picture {

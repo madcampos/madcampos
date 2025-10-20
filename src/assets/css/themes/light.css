@@ -19,10 +19,6 @@
 		--surface-3: dimgray;
 		--surface-4: transparent;
 
-		/* Tag colors */
-		--tag-bg: var(--secondary-color);
-		--tag-color: var(--text-1);
-
 		/* Link colors */
 		--link-color: #002eaa;
 		--link-visited-color: #073869;
@@ -40,20 +36,6 @@
 		--highlight-error-bg: rgba(255, 99, 71, 0.3);
 		--highlight-warning-color: goldenrod;
 		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
-
-		/* Baseline colors */
-		--baseline-high-color: #1ea446;
-		--baseline-high-bg: #c4eed0;
-		--baseline-low-color: #1b6ef3;
-		--baseline-low-bg: #a8c7fa;
-		--baseline-limited-color: hsl(30, 93%, 45%);
-		--baseline-limited-bg: silver;
-		--baseline-no-data-color: dimgray;
-		--baseline-no-data-bg: dimgray;
-		--baseline-supported-color: seagreen;
-		--baseline-supported-bg: color-mix(in srgb, greenyellow, transparent 80%);
-		--baseline-unsupported-color: goldenrod;
-		--baseline-unsupported-bg: color-mix(in srgb, yellow, transparent 80%);
 
 		/* Old Buttons */
 		--old-button-border: none;

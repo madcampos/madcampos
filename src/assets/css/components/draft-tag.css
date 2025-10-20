@@ -8,5 +8,11 @@
 		color: var(--surface-1);
 		font-weight: bold;
 		text-transform: uppercase;
+
+		@media (forced-colors: active) {
+			background-color: transparent;
+			color: var(--theme-color);
+			border: var(--border-style) var(--border-width) var(--theme-color);
+		}
 	}
 }

@@ -20,7 +20,7 @@
 		padding: var(--size-1) var(--size-2);
 		padding-inline-start: calc(var(--tag-width) + var(--size-2));
 		overflow: visible;
-		color: var(--tag-color);
+		color: var(--text-2);
 		font-size: var(--font-size-0);
 
 		* {
@@ -36,7 +36,7 @@
 			clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
 			mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
 			inset: 0;
-			background-color: var(--tag-bg);
+			background-color: var(--surface-2);
 			content: '';
 		}
 
@@ -44,17 +44,17 @@
 			outline: var(--theme-color) var(--border-style) var(--border-width);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
-			color: var(--surface-2);
+			color: var(--theme-color);
 		}
 
-		&:hover {
+		&:has(a):hover {
 			outline-color: var(--link-hover-color);
 			color: var(--link-hover-color);
 
-			&::before { background-color: var(--text-1); }
+			&::before { background-color: var(--surface-3); }
 		}
 
-		@media (forced-colors: active) {
+		@media (prefers-contrast: more), (forced-colors: active) {
 			border: var(--border-style) currentcolor var(--border-width);
 			padding-inline-start: var(--size-2);
 

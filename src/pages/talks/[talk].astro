@@ -97,7 +97,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
 			</div>
 
-			<ul id="talk-info">
+			<ul>
 				{
 					event && (
 						<li>
@@ -192,7 +192,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							<Icon name="mingcute:share-2-line" aria-hidden="true" />
 							Related content
 						</h2>
-						<ul id="related-content">
+						<ul>
 							{
 								relatedContent?.map(({ url: contentUrl, title: contentTitle }) => (
 									<li>
@@ -211,7 +211,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			</h2>
 
 			<tag-list>
-				<ul id="technology-tags">
+				<ul>
 					{techStack?.map((tech) => <li><tag-item><span>{tech}</span></tag-item></li>)}
 				</ul>
 			</tag-list>
