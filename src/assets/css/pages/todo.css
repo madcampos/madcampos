@@ -1,18 +1,17 @@
-/* TODO: review */
 @layer pages {
-	#todo-list label:has(input:checked) {
-		text-decoration: line-through;
-		text-decoration-style: solid;
-		text-decoration-thickness: calc(var(--border-width) * 0.5);
-	}
+	#todo-list {
+		label:has(input:checked) {
+			text-decoration: line-through;
+			text-decoration-style: solid;
+			text-decoration-color: color-mix(in srgb, var(--text-2), transparent 40%);
+			text-decoration-thickness: var(--size-1);
 
-	#todo-list label:has(input[aria-disabled]) {
-		text-decoration-line: line-through;
-		text-decoration-style: double;
-	}
+			@media (prefers-contrast: no-preference) { text-decoration-style: wavy; }
+		}
 
-	#todo-list input[aria-disabled] {
-		filter: grayscale(1);
-		pointer-events: none;
+		input[aria-disabled] {
+			filter: grayscale(1);
+			pointer-events: none;
+		}
 	}
 }
