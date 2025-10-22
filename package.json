@@ -33,7 +33,6 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/cloudflare": "^12.6.10",
 		"@astrojs/sitemap": "^3.6.0",
 		"@iconify-json/fa6-brands": "^1.2.6",
 		"@iconify-json/mingcute": "1.2.5",
