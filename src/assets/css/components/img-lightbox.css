@@ -1,0 +1,51 @@
+@layer components {
+	img-lightbox {
+		--image-size: 35vw;
+
+		inline-size: clamp(var(--size-content-1), var(--image-size), var(--size-content-3));
+		margin-inline: auto;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		grid-template-areas: 'image';
+		place-items: stretch;
+		isolation: isolate;
+
+		& > * { grid-area: image; }
+
+		button {
+			align-self: start;
+			z-index: 1;
+			&.lightbox-alt { justify-self: start; }
+			&.lightbox-zoom { justify-self: end; }
+		}
+
+		dialog {
+			header {
+				display: flex;
+				align-items: center;
+
+				h2 {
+					flex-grow: 1;
+					margin: 0;
+				}
+			}
+
+			div {
+				overflow: auto;
+				block-size: 100%;
+				inline-size: 100%;
+				flex-grow: 1;
+
+				img {
+					min-inline-size: initial;
+					max-inline-size: initial;
+					inline-size: auto;
+					block-size: auto;
+					max-block-size: initial;
+					min-block-size: initial;
+				}
+			}
+		}
+	}
+}

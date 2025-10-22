@@ -1,4 +1,3 @@
-/* TODO: refactor random measuerments scattered through code, logic properties (width, height, etc), colors */
 @layer openprops, fonts, vars, base, components, pages, theme, print, accessible;
 
 @import 'open-props/style' layer(openprops);

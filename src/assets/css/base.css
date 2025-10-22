@@ -228,7 +228,7 @@
 		block-size: clamp(var(--size-content-0), 70vh, var(--size-content-3));
 		overscroll-behavior: contain;
 
-		&[open] { display: flex; }
+		&:where([open], :popover-open) { display: flex; }
 
 		&::backdrop {
 			backdrop-filter: blur(var(--size-3));
