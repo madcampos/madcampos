@@ -1,8 +1,8 @@
 @layer components {
 	/* TODO: review */
 	:host {
-		--icon-size: 2rem;
-		--browser-icon-size: 1rem;
+		--icon-size: var(--size-7);
+		--browser-icon-size: var(--size-3);
 		display: block;
 		margin-inline: auto;
 		max-width: var(--size-content-2);
@@ -12,8 +12,8 @@
 		position: absolute;
 		visibility: hidden;
 		opacity: 0;
-		width: 0;
-		height: 0;
+		inline-size: 0;
+		block-size: 0;
 		overflow: hidden;
 		pointer-events: none;
 		user-select: none;
@@ -27,7 +27,7 @@
 			'icon name'
 			'icon status';
 		align-items: center;
-		border: var(--border-style) var(--border-width) var(--theme-color);
+		border: var(--border-style) var(--border-size) var(--theme-color);
 		border-radius: var(--border-radius);
 		background-color: var(--surface-1);
 		padding: var(--size-2);
@@ -35,8 +35,8 @@
 
 		#marker {
 			grid-area: icon;
-			width: var(--icon-size);
-			height: var(--icon-size);
+			inline-size: var(--icon-size);
+			block-size: var(--icon-size);
 			color: var(--theme-color);
 		}
 	}
@@ -67,8 +67,8 @@
 	}
 
 	#baseline-icon svg {
-		width: var(--icon-size);
-		height: var(--icon-size);
+		inline-size: var(--icon-size);
+		block-size: var(--icon-size);
 	}
 
 	.browser-support {
@@ -99,8 +99,8 @@
 			clip-path: inset(100%);
 			margin: -1px;
 			padding: 0;
-			width: 1px;
-			height: 1px;
+			inline-size: 1px;
+			block-size: 1px;
 			overflow: hidden;
 			pointer-events: none;
 			color: transparent;
@@ -110,25 +110,25 @@
 
 		.browser-icon {
 			display: flex;
-			width: var(--browser-icon-size);
-			height: var(--browser-icon-size);
+			inline-size: var(--browser-icon-size);
+			block-size: var(--browser-icon-size);
 		}
 
 		.browser-status {
 			display: flex;
-			width: var(--browser-icon-size);
-			height: var(--browser-icon-size);
+			inline-size: var(--browser-icon-size);
+			block-size: var(--browser-icon-size);
 		}
 	}
 
 	#table-wrapper { overflow: auto; }
 	table {
-		border: var(--border-style) var(--surface-3) var(--border-width);
+		border: var(--border-style) var(--surface-3) var(--border-size);
 		border-collapse: collapse;
 	}
 	table thead tr { background-color: var(--surface-1); }
 	table :is(td, th) {
-		border: var(--border-style) var(--surface-3) var(--border-width);
+		border: var(--border-style) var(--surface-3) var(--border-size);
 		padding: var(--size-2);
 		text-align: center;
 	}

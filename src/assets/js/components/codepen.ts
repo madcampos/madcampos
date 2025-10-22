@@ -82,7 +82,7 @@ export class CodepenEmbed extends HTMLElement implements CustomElement {
 					min-block-size: var(--size-content-1);
 					object-fit: contain;
 					object-position: center;
-					border: var(--border-style) var(--border-width) var(--theme-color);
+					border: var(--border-style) var(--border-size) var(--theme-color);
 					border-radius: var(--border-radius);
 					aspect-ratio: 3 / 2;
 					inline-size: 100%;

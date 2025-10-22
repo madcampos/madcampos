@@ -23,7 +23,7 @@
 		}
 
 		to {
-			filter: sepia(1) blur(1rem);
+			filter: sepia(1) blur(var(--size-3));
 			opacity: 0;
 		}
 	}

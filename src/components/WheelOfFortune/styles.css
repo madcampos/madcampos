@@ -4,7 +4,7 @@
 }
 
 fieldset {
-	border: var(--border-style) var(--border-width) var(--surface-3);
+	border: var(--border-style) var(--border-size) var(--surface-3);
 	border-radius: var(--border-radius);
 	padding: var(--size-1);
 }
@@ -28,8 +28,8 @@ aside { text-align: center; }
 	justify-content: center;
 	align-items: center;
 	z-index: 1;
-	border: var(--border-style) var(--border-width) var(--theme-color);
-	border-radius: 100vmax;
+	border: var(--border-style) var(--border-size) var(--theme-color);
+	border-radius: var(--radius-round);
 	background: var(--surface-1);
 	padding: var(--size-2);
 	width: fit-content;

@@ -41,7 +41,7 @@
 		}
 
 		&:focus-within {
-			outline: var(--theme-color) var(--border-style) var(--border-width);
+			outline: var(--theme-color) var(--border-style) var(--border-size);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
 			color: var(--theme-color);
@@ -55,7 +55,7 @@
 		}
 
 		@media (prefers-contrast: more), (forced-colors: active) {
-			border: var(--border-style) currentcolor var(--border-width);
+			border: var(--border-style) currentcolor var(--border-size);
 			padding-inline-start: var(--size-2);
 
 			&::before { display: none; }

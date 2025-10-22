@@ -4,34 +4,6 @@
 		display: inline-block;
 		align-self: center;
 
-		dialog {
-			border: var(--surface-3) var(--border-style) var(--border-width);
-			border-radius: var(--border-radius);
-			background-color: var(--surface-2);
-			width: clamp(10rem, 70vw, 35rem);
-			height: clamp(10rem, 70vh, 35rem);
-			overscroll-behavior: contain;
-
-			&::backdrop {
-				backdrop-filter: blur(1rem);
-				background-color: rgba(0, 0, 0, 0.5);
-			}
-
-			form {
-				display: flex;
-				flex-direction: column;
-				padding: var(--size-2);
-				width: 100%;
-				height: 100%;
-			}
-
-			button {
-				width: fit-content;
-				height: fit-content;
-				font-size: var(--font-size-1);
-			}
-		}
-
 		#theme-list {
 			display: flex;
 			flex-grow: 1;
@@ -50,16 +22,16 @@
 			justify-content: start;
 			align-items: center;
 			margin: var(--size-2);
-			border: transparent var(--border-width) var(--border-style);
+			border: transparent var(--border-size) var(--border-style);
 			padding: var(--size-2);
-			width: calc(50% - 1.5rem);
-			max-width: var(--size-content-2);
-			height: fit-content;
+			inline-size: calc(50% - var(--size-5));
+			max-inline-size: var(--size-content-2);
+			block-size: fit-content;
 			text-align: center;
 
 			svg {
-				width: 100%;
-				height: auto;
+				inline-size: 100%;
+				block-size: auto;
 
 				&[data-dual-theme] use { display: block; }
 
@@ -69,16 +41,15 @@
 
 			small:not([hidden]) {
 				display: block;
-				font-size: 0.7em;
 
-				svg { width: 1em; }
+				svg { inline-size: 1em; }
 			}
 
 			input[type='radio'] {
 				position: absolute;
 				opacity: 0;
-				width: 100%;
-				height: 100%;
+				inline-size: 100%;
+				block-size: 100%;
 			}
 
 			&:has(input[type='radio']:checked) {
@@ -95,7 +66,7 @@
 				@media (forced-colors: active) { :is(strong, small) { forced-color-adjust: none; } }
 			}
 
-			@container (max-width: 25rem) { width: 100%; }
+			@container (max-width: 25rem) { inline-size: 100%; }
 		}
 	}
 }

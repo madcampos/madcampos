@@ -1,10 +1,10 @@
 @layer pages {
 	h1 {
 		color: var(--accent-color);
-		font-size: 5em;
+		font-size: var(--size-10);
 		font-family: var(--text-font-family);
 
-		@media (max-width: 40rem) { font-size: 3em; }
+		@media (max-width: 40rem) { font-size: var(--size-8); }
 	}
 
 	tiny-text {
@@ -29,17 +29,17 @@
 		input {
 			display: block;
 			margin: var(--size-2) auto;
-			border: var(--border-style) var(--theme-color) var(--border-width);
+			border: var(--border-style) var(--theme-color) var(--border-size);
 			border-radius: var(--size-3);
 			background-color: var(--surface-2);
 			padding: var(--size-1) var(--size-2);
-			width: calc(100% - var(--size-3) * 2);
+			inline-size: calc(100% - var(--size-3) * 2);
 			color: var(--text-1);
 			font-size: inherit;
 		}
 
 		button {
-			border: var(--border-style) transparent var(--border-width);
+			border: var(--border-style) transparent var(--border-size);
 			background-color: var(--accent-color);
 			color: var(--surface-1);
 			margin-inline: auto;
@@ -63,7 +63,7 @@
 		gap: var(--size-3);
 		margin-block: var(--size-3);
 		background-color: var(--surface-2);
-		width: 100%;
+		inline-size: 100%;
 		font-size: var(--font-size-4);
 		text-align: center;
 
@@ -90,7 +90,7 @@
 
 	:is(#why ul, #steps ol) {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(10rem, calc(30% - var(--size-3) * 0.5)));
+		grid-template-columns: repeat(auto-fill, minmax(var(--size-12), calc(30% - var(--size-3) * 0.5)));
 		grid-auto-rows: auto;
 		place-content: center;
 		align-items: start;
@@ -102,8 +102,8 @@
 	}
 
 	#why svg[data-icon] {
-		width: 7rem;
-		height: 7rem;
+		inline-size: var(--size-11);
+		block-size: var(--size-11);
 		color: var(--accent-color);
 	}
 
@@ -120,7 +120,7 @@
 				color: var(--accent-color);
 				font-style: italic;
 				font-weight: bold;
-				font-size: 5em;
+				font-size: var(--size-10);
 			}
 		}
 	}
@@ -135,14 +135,14 @@
 			justify-items: stretch;
 			gap: var(--size-3);
 			padding: 0 var(--size-3);
-			width: 100%;
+			inline-size: 100%;
 			list-style: none;
 		}
 
 		blockquote {
 			display: grid;
 			grid-template-rows: auto auto;
-			grid-template-columns: 5rem auto;
+			grid-template-columns: var(--size-10) auto;
 			grid-template-areas:
 				'image quote'
 				'image person';
@@ -157,10 +157,10 @@
 			img {
 				grid-area: image;
 				justify-self: center;
-				border: solid var(--border-width) var(--accent-color);
-				border-radius: 100vmax;
-				width: 5rem;
-				height: 5rem;
+				border: solid var(--border-size) var(--accent-color);
+				border-radius: var(--radius-round);
+				inline-size: var(--size-10);
+				block-size: var(--size-10);
 				overflow: hidden;
 				object-fit: contain;
 			}
@@ -168,7 +168,7 @@
 			small {
 				display: inline-block;
 				grid-area: person;
-				width: 100%;
+				inline-size: 100%;
 				font-style: italic;
 				text-align: end;
 
@@ -198,8 +198,8 @@
 		margin-inline: auto;
 		color: var(--text-2);
 		padding: var(--size-1);
-		width: 100%;
-		max-width: var(--size-content-3);
+		inline-size: 100%;
+		max-inline-size: var(--size-content-3);
 		font-size: 0.3em;
 		text-align: center;
 	}

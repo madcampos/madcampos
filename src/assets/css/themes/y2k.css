@@ -1,7 +1,7 @@
 @layer theme {
 	[data-theme='y2k'] {
 		/* Border */
-		--border-width: var(--size-2);
+		--border-size: var(--size-2);
 		--border-style: ridge;
 		--link-underline: solid;
 		--border-radius: 0;
@@ -93,12 +93,12 @@
 	[data-theme='y2k'] input::placeholder { color: var(--surface-1); }
 
 	[data-theme='y2k'] #site-nav a {
-		border-width: var(--border-width);
+		border-width: var(--border-size);
 		border-style: outset;
 		border-color: var(--theme-color);
 		background-color: var(--theme-color);
 		padding: var(--size-1) var(--size-2);
-		height: var(--size-7);
+		block-size: var(--size-7);
 		color: var(--surface-1);
 	}
 
@@ -145,10 +145,10 @@
 		content: none;
 	}
 
-	[data-theme='y2k'] .card { border: silver ridge var(--border-width); }
+	[data-theme='y2k'] .card { border: silver ridge var(--border-size); }
 	[data-theme='y2k'] .card picture {
 		mask: none;
-		border: silver ridge var(--border-width);
+		border: silver ridge var(--border-size);
 	}
 
 	[data-theme='y2k'] .project-card img { display: none; }

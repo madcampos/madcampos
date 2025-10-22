@@ -1,7 +1,7 @@
 @layer theme {
 	[data-theme='high-contrast'] {
 		/* Border */
-		--border-width: var(--size-1);
+		--border-size: var(--size-1);
 		--border-style: solid;
 		--link-underline: solid;
 		--border-radius: 0;
@@ -38,7 +38,7 @@
 		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
 
 		/* Old Buttons */
-		--old-button-border: var(--surface-3) var(--border-style) var(--border-width);
+		--old-button-border: var(--surface-3) var(--border-style) var(--border-size);
 		--old-button-border-visibility: hidden;
 		--old-button-tint: darkgoldenrod;
 		--old-button-blend-mode: color;
@@ -89,14 +89,14 @@
 	[data-theme='high-contrast'] code .line.diff {
 		border-style: solid;
 		border-inline-width: 0;
-		border-block-width: var(--border-width);
+		border-block-width: var(--border-size);
 	}
 
 	[data-theme='high-contrast'] code .line.diff.add { border-color: var(--diff-add-color); }
 	[data-theme='high-contrast'] code .line.diff.remove { border-color: var(--diff-remove-color); }
 
 	[data-theme='high-contrast'] code .line.highlighted {
-		border: var(--border-width) solid var(--highlight-color);
+		border: var(--border-size) solid var(--highlight-color);
 		border-inline-width: 0;
 	}
 

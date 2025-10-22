@@ -12,7 +12,7 @@
 		@media (forced-colors: active) {
 			background-color: transparent;
 			color: var(--theme-color);
-			border: var(--border-style) var(--border-width) var(--theme-color);
+			border: var(--border-style) var(--border-size) var(--theme-color);
 		}
 	}
 }

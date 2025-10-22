@@ -4,9 +4,9 @@
 		container-name: post-header;
 		container-type: inline-size;
 		margin-inline: auto;
-		width: 100%;
-		max-width: var(--size-content-4);
-		height: fit-content;
+		inline-size: 100%;
+		max-inline-size: var(--size-content-4);
+		block-size: fit-content;
 
 		header {
 			display: grid;
@@ -22,7 +22,7 @@
 			justify-self: stretch;
 			gap: var(--size-3);
 			margin: var(--size-3);
-			border: var(--border-style) var(--surface-4) var(--border-width);
+			border: var(--border-style) var(--surface-4) var(--border-size);
 			border-radius: var(--border-radius);
 			background: var(--surface-2);
 			padding: var(--size-3);
@@ -68,7 +68,7 @@
 					flex-flow: column wrap;
 					justify-content: center;
 					gap: var(--size-2);
-					width: 100%;
+					inline-size: 100%;
 					text-align: center;
 				}
 			}

@@ -17,7 +17,7 @@
 		--size-header-4: 96ch;
 
 		/* Border */
-		--border-width: var(--border-size-2);
+		--border-size: var(--border-size-2);
 		--border-style: dashed;
 		--link-underline: dashed;
 		--border-radius: 0;

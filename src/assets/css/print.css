@@ -21,8 +21,8 @@
 		}
 
 		@page {
-			margin-inline: 1.5rem;
-			margin-block: 3rem;
+			margin-inline: var(--size-5);
+			margin-block: var(--size-8);
 		}
 
 		h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
@@ -40,7 +40,7 @@
 			display: inline;
 			vertical-align: baseline;
 			background: none;
-			width: fit-content;
+			inline-size: fit-content;
 		}
 
 		related-posts ul { flex-wrap: wrap !important; }

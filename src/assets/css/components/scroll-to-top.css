@@ -15,7 +15,7 @@
 		margin-inline: auto;
 		inset-block-end: var(--size-2);
 		inset-inline: var(--size-2);
-		border: var(--border-style) var(--surface-4) var(--border-width);
+		border: var(--border-style) var(--surface-4) var(--border-size);
 		background-color: var(--surface-2);
 		padding: var(--size-2) var(--size-3);
 		color: var(--theme-color);

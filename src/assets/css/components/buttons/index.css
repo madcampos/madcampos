@@ -76,8 +76,8 @@
 		border-radius: var(--old-button-border-radius);
 		background: none;
 		padding: 0;
-		width: fit-content;
-		height: fit-content;
+		inline-size: fit-content;
+		block-size: fit-content;
 		overflow: hidden;
 
 		&::after {
@@ -125,7 +125,7 @@
 
 		svg {
 			aspect-ratio: 88 / 31;
-			height: 2rem;
+			block-size: 2rem;
 		}
 
 		#button-text-path {
@@ -140,7 +140,7 @@
 		:is(#button-border-down, #button-border-right) { fill: black; }
 
 		&:focus-visible {
-			outline: var(--theme-color) var(--border-style) var(--border-width);
+			outline: var(--theme-color) var(--border-style) var(--border-size);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
 			background-color: var(--surface-1);

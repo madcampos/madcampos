@@ -2,8 +2,8 @@
 	related-posts {
 		display: block;
 		margin-inline: auto;
-		width: 100%;
-		max-width: var(--size-content-3);
+		inline-size: 100%;
+		max-inline-size: var(--size-content-3);
 		overflow-x: auto;
 
 		ul {
@@ -14,19 +14,19 @@
 			gap: var(--size-3);
 			margin: 0;
 			padding: 0;
-			width: fit-content;
+			inline-size: fit-content;
 			scroll-behavior: smooth;
 			scroll-snap-type: x mandatory;
 			list-style-type: none;
 		}
 
 		li {
-			width: var(--size-13);
+			inline-size: var(--size-13);
 			scroll-margin: var(--size-3);
 			scroll-snap-align: center;
 			scroll-snap-stop: always;
 
-			@media (max-width: 25rem) { width: var(--size-12); }
+			@media (max-width: 25rem) { inline-size: var(--size-12); }
 		}
 
 		img { min-inline-size: 0; }

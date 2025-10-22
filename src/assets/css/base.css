@@ -27,8 +27,8 @@
 	}
 
 	:where(html, body) {
-		width: 100%;
-		height: 100%;
+		inline-size: 100%;
+		block-size: 100%;
 	}
 
 	:where(body) { margin: 0; }
@@ -103,8 +103,8 @@
 			background-position: center;
 			background-size: contain;
 			background-repeat: no-repeat;
-			width: 1.5em;
-			height: 1.5em;
+			inline-size: 1.5em;
+			block-size: 1.5em;
 			vertical-align: -0.2em;
 			content: '';
 		}
@@ -115,6 +115,8 @@
 	details[open] > summary::before { transform: rotate(90deg); }
 
 	:where(p, li, dd) { text-wrap: pretty; }
+
+	:where(small) { font-size: var(--font-size-0); }
 
 	:where(sub, sup) {
 		font-size: 0.8em;
@@ -161,7 +163,7 @@
 	:where(audio) { min-block-size: var(--size-8); }
 
 	:where(iframe) {
-		border: var(--border-style) var(--border-width) var(--theme-color);
+		border: var(--border-style) var(--border-size) var(--theme-color);
 		border-radius: var(--border-radius);
 		aspect-ratio: 3 / 2;
 		inline-size: 100%;
@@ -181,7 +183,7 @@
 
 		img {
 			inline-size: clamp(var(--size-inline-0), 50vw, var(--size-inline-2));
-			height: auto;
+			block-size: auto;
 		}
 	}
 
@@ -202,8 +204,8 @@
 
 	:where(hr) {
 		border: none;
-		border-block-start: var(--theme-color) var(--border-style) var(--border-width);
-		width: clamp(5rem, 70vw, 50rem);
+		border-block-start: var(--theme-color) var(--border-style) var(--border-size);
+		inline-size: clamp(--size-content-0, 70vw, var(--size-content-3));
 	}
 
 	:where(button, input, select, textarea) { font-size: inherit; }
@@ -214,6 +216,39 @@
 	}
 
 	:where(table-wrapper[role='region'][aria-labelledby][tabindex]) { overflow: auto; }
+
+	:where(dialog) {
+		flex-direction: column;
+		justify-content: center;
+		padding: var(--size-3);
+		border: var(--surface-3) var(--border-style) var(--border-size);
+		border-radius: var(--border-radius);
+		background-color: var(--surface-2);
+		inline-size: clamp(var(--size-content-0), 70vw, var(--size-content-3));
+		block-size: clamp(var(--size-content-0), 70vh, var(--size-content-3));
+		overscroll-behavior: contain;
+
+		&[open] { display: flex; }
+
+		&::backdrop {
+			backdrop-filter: blur(var(--size-3));
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			padding: var(--size-2);
+			inline-size: 100%;
+			block-size: 100%;
+
+			button {
+				inline-size: fit-content;
+				block-size: fit-content;
+				font-size: var(--font-size-1);
+			}
+		}
+	}
 
 	:target {
 		scroll-margin: var(--size-3);
@@ -231,7 +266,7 @@
 	}
 
 	*:focus-visible {
-		outline: var(--theme-color) var(--border-style) var(--border-width);
+		outline: var(--theme-color) var(--border-style) var(--border-size);
 		outline-offset: var(--size-1);
 		border-radius: var(--border-radius);
 		background-color: var(--surface-1);

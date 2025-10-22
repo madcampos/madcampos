@@ -9,7 +9,7 @@
 		margin-block: calc(var(--size-3) * 2) var(--size-3);
 		border: none;
 		padding-inline-start: var(--size-7);
-		width: auto;
+		inline-size: auto;
 		overflow: visible;
 
 		&::before {
@@ -22,8 +22,8 @@
 			background-position: center;
 			background-size: contain;
 			background-repeat: no-repeat;
-			width: var(--size-7);
-			height: var(--size-7);
+			inline-size: var(--size-7);
+			block-size: var(--size-7);
 			content: '';
 			color: var(--theme-color);
 			text-align: center;
@@ -31,7 +31,7 @@
 
 		&::after {
 			display: block;
-			border-top: var(--border-width) var(--border-style) var(--theme-color);
+			border-block-start: var(--border-size) var(--border-style) var(--theme-color);
 			content: '';
 		}
 	}

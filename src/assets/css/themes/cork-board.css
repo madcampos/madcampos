@@ -1,7 +1,7 @@
 @layer theme {
 	[data-theme='cork-board'] {
 		/* Border */
-		--border-width: medium;
+		--border-size: medium;
 		--border-radius: var(--size-2);
 		--border-style: dashed;
 
@@ -37,7 +37,7 @@
 		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
 
 		/* Old Buttons */
-		--old-button-border: var(--surface-3) solid var(--border-width);
+		--old-button-border: var(--surface-3) solid var(--border-size);
 		--old-button-border-visibility: hidden;
 		--old-button-tint: color-mix(in srgb, hotpink, transparent 65%);
 		--old-button-blend-mode: color;
@@ -164,8 +164,8 @@
 		background-position: center;
 		background-size: contain;
 		background-repeat: no-repeat;
-		width: var(--details-size);
-		height: var(--details-size);
+		inline-size: var(--details-size);
+		block-size: var(--details-size);
 		pointer-events: none;
 	}
 
@@ -190,7 +190,7 @@
 		overflow: visible;
 	}
 
-	[data-theme='cork-board'] .project-card picture img { border-radius: 100vmax; }
+	[data-theme='cork-board'] .project-card picture img { border-radius: var(--radius-round); }
 
 	[data-theme='cork-board'] .project-card picture::after {
 		display: block;

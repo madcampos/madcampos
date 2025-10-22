@@ -7,8 +7,8 @@
 		z-index: -1;
 		margin: 0;
 		padding: 0;
-		width: 1px;
-		height: 1px;
+		inline-size: 1px;
+		block-size: 1px;
 		overflow: hidden;
 		pointer-events: none;
 		user-select: none;

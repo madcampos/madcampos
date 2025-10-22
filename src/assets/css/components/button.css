@@ -3,8 +3,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border: var(--border-style) var(--border-width) var(--theme-color);
-		border-radius: 100vmax;
+		border: var(--border-style) var(--border-size) var(--theme-color);
+		border-radius: var(--radius-round);
 		background: var(--surface-2);
 		padding: var(--size-2);
 		margin: var(--size-2);
