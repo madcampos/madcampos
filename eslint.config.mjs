@@ -502,7 +502,7 @@ const astroLanguageOptions = {
 	}
 };
 
-const ignores = ['node_modules/**/*', 'dist/**/*', 'public/**/*', 'dev-dist/**/*', 'src/content/**/*'];
+const ignores = ['node_modules/**/*', 'dist/**/*', 'public/**/*', 'dev-dist/**/*', 'src/content/**/*', '.astro/**/*', '.wrangler/**/*'];
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Plugins} */
 const plugins = {
@@ -519,31 +519,30 @@ export default [
 		languageOptions,
 		plugins,
 		rules
+	},
+	{
+		name: 'Astro files',
+		files: ['src/**/*.astro'],
+		ignores,
+		languageOptions: astroLanguageOptions,
+		plugins,
+		rules,
+		processor: 'astro/client-side-ts'
+	},
+	{
+		name: 'Astro JS files',
+		files: ['**/*.astro/*.js', '*.astro/*.js'],
+		ignores,
+		languageOptions,
+		plugins,
+		rules
+	},
+	{
+		name: 'Astro TS files',
+		files: ['**/*.astro/*.ts', '*.astro/*.ts'],
+		ignores,
+		languageOptions,
+		plugins,
+		rules
 	}
-	// TODO: reenable astro linting
-	// {
-	// 	name: 'Astro files',
-	// 	files: ['src/**/*.astro'],
-	// 	ignores,
-	// 	languageOptions: astroLanguageOptions,
-	// 	plugins,
-	// 	rules,
-	// 	processor: 'astro/client-side-ts'
-	// },
-	// {
-	// 	name: 'Astro JS files',
-	// 	files: ['**/*.astro/*.js', '*.astro/*.js'],
-	// 	ignores,
-	// 	languageOptions,
-	// 	plugins,
-	// 	rules
-	// },
-	// {
-	// 	name: 'Astro TS files',
-	// 	files: ['**/*.astro/*.ts', '*.astro/*.ts'],
-	// 	ignores,
-	// 	languageOptions,
-	// 	plugins,
-	// 	rules
-	// }
 ];

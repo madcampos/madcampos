@@ -57,7 +57,7 @@ const {
 	<meta property="og:description" name="description" itemprop="abstract" content={description} />
 	<meta name="twitter:description" content={description} />
 
-	<meta property="og:image" name="twitter:image" itemprop="image" content={`${Astro.site!.href}${image ?? defaultSocialImage.src}`} />
+	<meta property="og:image" name="twitter:image" itemprop="image" content={`${Astro.site?.href ?? ''}${image ?? defaultSocialImage.src}`} />
 	<meta property="og:image:alt" name="twitter:image:alt" content={imageAlt ?? 'The letter "m" on a monospaced font, in blue, between curly braces.'} />
 
 	<meta property="article:author" name="author" content="Marco Campos" />

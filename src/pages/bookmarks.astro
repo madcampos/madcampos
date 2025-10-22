@@ -1,4 +1,6 @@
 ---
+/* eslint-disable max-lines */
+
 import { Icon } from 'astro-icon/components';
 import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
@@ -22,7 +24,7 @@ interface BookmarkLink {
 	url: string;
 	title: string;
 	description: string;
-	type: 'article' | 'video' | 'podcast' | 'website' | 'tutorial' | 'reference' | 'guidelines';
+	type: 'article' | 'guidelines' | 'podcast' | 'reference' | 'tutorial' | 'video' | 'website';
 }
 
 interface BookmarkSection {
@@ -582,6 +584,7 @@ const links: BookmarkSection[] = [
 									<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
 								</dt>
 								<dd>
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
 								</dd>
 							))

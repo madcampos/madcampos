@@ -29,7 +29,6 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(undefined).map((
 		isCurrentPage: currentPageNumber === currentPage
 	};
 });
-console.log(firstPageInNav, lastPageInNav);
 ---
 <m-pagination>
 	<nav aria-labelledby="pagination-label">
@@ -50,6 +49,7 @@ console.log(firstPageInNav, lastPageInNav);
 
 			<ol>
 				{firstPageInNav > 1 && <li><a href={baseUrl}><sr-only>Page </sr-only>1</a></li>}
+				{/* eslint-disable-next-line @typescript-eslint/no-magic-numbers */}
 				{firstPageInNav > 2 && <li><span>…</span></li>}
 
 				{

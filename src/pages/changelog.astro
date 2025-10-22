@@ -8,7 +8,7 @@ import Webrings from '../components/Webrings.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
-const changelogs = await Promise.all(await listAllChangelogs());
+const changelogs = await listAllChangelogs();
 const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) => {
 	const { Content } = await changelog.render();
 
@@ -60,6 +60,7 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 							<header>
 								<h2>
 									{draft && <draft-tag>Draft</draft-tag>}
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={title} />
 								</h2>
 								<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>

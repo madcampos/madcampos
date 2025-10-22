@@ -22,7 +22,6 @@ export const getStaticPaths = (async () =>
 		props: talk
 	}))) satisfies GetStaticPaths;
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const {
 	render,
 	data: {
@@ -81,6 +80,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			/>
 			<h1 itemprop="name">
 				{draft && <draft-tag>Draft</draft-tag>}
+				{/* eslint-disable-next-line astro/no-set-html-directive */}
 				<Fragment set:html={inlineMarkdownRender(title)} />
 			</h1>
 		</header>
@@ -107,6 +107,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							</strong>
 							<span>
 								<a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={inlineMarkdownRender(event)} />
 								</a>
 							</span>

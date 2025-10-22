@@ -15,10 +15,10 @@ function generateUniqueId() {
 	return Math.trunc(Math.random() * 1000000).toString(16);
 }
 
-function generateSubtitle(paddingStart: number, paddingEnd: number, subtitle: string) {
+function generateSubtitle(paddingStart: number, paddingEnd: number, subtitleString: string) {
 	return [
 		...new Array(paddingStart).fill(0).map(() => `<tspan class="logo-text-padding-start">-</tspan>`),
-		...[...subtitle].map((char) => `<tspan class="logo-text-content">${char}</tspan>`),
+		...[...subtitleString].map((char) => `<tspan class="logo-text-content">${char}</tspan>`),
 		...new Array(paddingEnd).fill(0).map(() => `<tspan class="logo-text-padding-end">-</tspan>`)
 	].join('');
 }
@@ -76,6 +76,7 @@ const logoLabelId = generateUniqueId();
 					fill-rule="nonzero"
 					text-rendering="optimizeLegibility"
 				>
+					{/* eslint-disable-next-line astro/no-set-html-directive, @typescript-eslint/no-magic-numbers */}
 					<Fragment set:html={generateSubtitle(7, 2, shortSubtitle)} />
 				</text>
 				<text
@@ -88,6 +89,7 @@ const logoLabelId = generateUniqueId();
 					fill-rule="nonzero"
 					text-rendering="optimizeLegibility"
 				>
+					{/* eslint-disable-next-line astro/no-set-html-directive, @typescript-eslint/no-magic-numbers */}
 					<Fragment set:html={generateSubtitle(8, 4, shortSubtitle)} />
 				</text>
 				<text
@@ -100,6 +102,7 @@ const logoLabelId = generateUniqueId();
 					fill-rule="nonzero"
 					text-rendering="optimizeLegibility"
 				>
+					{/* eslint-disable-next-line astro/no-set-html-directive, @typescript-eslint/no-magic-numbers */}
 					<Fragment set:html={generateSubtitle(17, 4, subtitle)} />
 				</text>
 			</defs>
