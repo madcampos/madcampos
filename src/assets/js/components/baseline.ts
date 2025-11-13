@@ -1,7 +1,5 @@
+import baselineData from 'web-features/data.json' with { type: 'json' };
 import baselineStyleUrl from '../../css/components/baseline.css?url';
-import baselineStatusSvg from '../../images/components/baseline/baseline-status.svg?url';
-import browserIconsSvg from '../../images/components/baseline/browser-icons.svg?url';
-import browserStatusSvg from '../../images/components/baseline/browser-status.svg?url';
 import { SiteSettings } from '../settings.ts';
 
 type BrowserIdentifier = 'chrome_android' | 'chrome' | 'edge' | 'firefox_android' | 'firefox' | 'safari_ios' | 'safari';
@@ -30,9 +28,6 @@ const baselineStatus = new Map<BaselineHighLow | false | undefined, string>([
 	[undefined, '<strong>No data on this feature</strong>']
 ]);
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-let baselineData: typeof import('web-features/data.json') | undefined;
-
 export class BaselineInfo extends HTMLElement implements CustomElement {
 	static observedAttributes: ['feature'];
 
@@ -55,13 +50,11 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 			this.removeAttribute('feature');
 		}
 
-		void this.render();
+		this.render();
 	}
 
 	// eslint-disable-next-line complexity
-	async render() {
-		baselineData ??= (await import('web-features/data.json', { with: { type: 'json' } })).default;
-
+	render() {
 		if (!this.feature) {
 			this.shadowRoot.innerHTML = '';
 			return;
@@ -85,7 +78,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 						<div id="baseline-status" data-baseline="${data?.status.baseline.toString() ?? 'no-data'}">
 							<span id="baseline-icon">
 								<svg viewBox="0 0 36 20">
-									<use href="${baselineStatusSvg}#baseline-status-${data?.status.baseline.toString() ?? 'no-data'}" />
+									<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${data?.status.baseline.toString() ?? 'no-data'}" />
 								</svg>
 							</span>
 							<span>
@@ -99,12 +92,14 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.chrome ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 256">
-										<use href="${browserIconsSvg}#browser-logo-chrome" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.chrome ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.chrome ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Chrome on Desktop Version: ${data?.status.support.chrome ?? '&mdash;'}</span>
@@ -113,13 +108,15 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.chrome_android ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 256">
-										<use href="${browserIconsSvg}#browser-logo-chrome" />
-										<use href="${browserIconsSvg}#browser-logo-android" transform="translate(0 55) scale(0.5)" transform-origin="bottom right" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 55) scale(0.5)" transform-origin="bottom right" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.chrome_android ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.chrome_android ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Chrome on Android Version: ${data?.status.support.chrome_android ?? '&mdash;'}</span>
@@ -128,12 +125,14 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.edge ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 256">
-										<use href="${browserIconsSvg}#browser-logo-edge" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-edge" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.edge ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.edge ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Edge Version: ${data?.status.support.edge ?? '&mdash;'}</span>
@@ -142,12 +141,14 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.firefox ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 265">
-										<use href="${browserIconsSvg}#browser-logo-firefox" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.firefox ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.firefox ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Firefox Version: ${data?.status.support.firefox ?? '&mdash;'}</span>
@@ -155,13 +156,15 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.firefox_android ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 265">
-										<use href="${browserIconsSvg}#browser-logo-firefox" />
-										<use href="${browserIconsSvg}#browser-logo-android" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.firefox_android ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.firefox_android ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Firefox on Android Version: ${data?.status.support.firefox_android ?? '&mdash;'}</span>
@@ -169,12 +172,14 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.safari ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 256">
-										<use href="${browserIconsSvg}#browser-logo-safari" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.safari ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.safari ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Safari on Desktop Version: ${data?.status.support.safari ?? '&mdash;'}</span>
@@ -182,13 +187,15 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<span class="browser-support" data-status="${data?.status.support.safari_ios ? 'supported' : 'unsupported'}">
 								<span class="browser-icon">
 									<svg viewBox="0 0 256 256">
-										<use href="${browserIconsSvg}#browser-logo-safari" />
-										<use href="${browserIconsSvg}#browser-logo-ios" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
+										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-ios" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
 									</svg>
 								</span>
 								<span class="browser-status">
 									<svg viewBox="0 0 24 24">
-										<use href="${browserStatusSvg}#browser-status-${data?.status.support.safari_ios ? 'supported' : 'unsupported'}" />
+										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
+			data?.status.support.safari_ios ? 'supported' : 'unsupported'
+		}" />
 									</svg>
 								</span>
 								<span class="browser-label">Safari on iOS Version: ${data?.status.support.safari_ios ?? '&mdash;'}</span>
@@ -230,7 +237,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
-		void this.render();
+		this.render();
 	}
 
 	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
