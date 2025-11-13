@@ -37,7 +37,7 @@ This is a test for markdown syntax.
 
 This is a **bold** text and this is an _italic_ text.
 
-Here is a [link](https://example.com) and an inline `code` sample.
+Here is an [internal link](#headers) and an [external link](https://example.com) and an inline `code` sample.
 
 Here is an image:
 
@@ -48,7 +48,7 @@ Here is an image:
 Paragraph.
 With line break.
 
-Another paragraph, followd by an horizontal line:
+Another paragraph, followed by an horizontal line:
 
 ---
 
@@ -161,7 +161,7 @@ console.log(msg); // prints Hello World
 
 ## Footnotes
 
-Here is a statement with a footnote.[^1] And another one.[^2]
+Here is a statement with a footnote[^1], multiple[^1] times[^1]. And another one.[^2]
 
 [^1]: This is the first footnote.
 

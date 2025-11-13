@@ -2,11 +2,11 @@
 /* eslint-disable max-lines */
 
 import { Icon } from 'astro-icon/components';
-import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.ts';
 
@@ -598,7 +598,7 @@ const links: BookmarkSection[] = [
 			<OldStyleButtons />
 			<Webrings />
 		</footer>
-		<Effects />
+		<SvgDefs />
 		<iab-escape></iab-escape>
 	</body>
 </html>

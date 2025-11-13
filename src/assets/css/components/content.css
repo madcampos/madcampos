@@ -12,17 +12,19 @@
 		--highlight-warning-color: light-dark(goldenrod, yellow);
 		--highlight-warning-bg: light-dark(rgba(218, 165, 32, 0.3), rgba(218, 165, 32, 0.2));
 
-		a[rel~='external']::after {
-			display: inline-block;
-			vertical-align: 0.2em;
-			background-image: var(--external-link-icon);
-			background-position: center;
-			background-size: contain;
-			background-repeat: no-repeat;
-			inline-size: var(--font-size-0);
-			block-size: var(--font-size-0);
-			content: '';
+		sup svg {
+			inline-size: 1em;
+			block-size: 1em;
 		}
+
+		:is(h1, h2, h3, h4, h5, h6):has(a) a { color: inherit; }
+
+		:target {
+			background-color: var(--surface-2);
+			color: var(--accent-color);
+		}
+
+		[data-footnotes] a[data-footnote-backref] { text-decoration: none; }
 
 		blockquote {
 			margin: var(--size-2);

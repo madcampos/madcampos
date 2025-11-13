@@ -1,10 +1,10 @@
 ---
 import '../assets/css/pages/todo.css';
-import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.js';
 
@@ -241,7 +241,7 @@ const tasks: Task[] = [
 			<OldStyleButtons />
 			<Webrings />
 		</footer>
-		<Effects />
+		<SvgDefs />
 		<iab-escape></iab-escape>
 	</body>
 </html>

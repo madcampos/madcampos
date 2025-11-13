@@ -3,10 +3,10 @@ import '../assets/css/pages/home.css';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../assets/images/me.jpg';
-import Effects from '../components/Effects.astro';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
 import OldButtons from '../components/OldStyleButtons.astro';
+import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
 ---
 <!DOCTYPE html>
@@ -134,7 +134,7 @@ import Webrings from '../components/Webrings.astro';
 			<theme-switcher></theme-switcher>
 		</footer>
 
-		<Effects />
+		<SvgDefs />
 		<iab-escape></iab-escape>
 	</body>
 </html>

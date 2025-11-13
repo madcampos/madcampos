@@ -2,11 +2,11 @@
 import '../../assets/css/components/content.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
-import Effects from '../../components/Effects.astro';
 import HtmlHead from '../../components/HtmlHead.astro';
 import Logo from '../../components/Logo.astro';
 import OldStyleButtons from '../../components/OldStyleButtons.astro';
 import SiteNav from '../../components/SiteNav.astro';
+import SvgDefs from '../../components/SvgDefs.astro';
 import Webrings from '../../components/Webrings.astro';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllTalks } from '../../utils/talks.js';
@@ -222,7 +222,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			<OldStyleButtons />
 			<Webrings />
 		</footer>
-		<Effects />
+		<SvgDefs />
 		<iab-escape></iab-escape>
 	</body>
 </html>
