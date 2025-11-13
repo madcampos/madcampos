@@ -42,6 +42,7 @@
 		background: var(--surface-2);
 		padding: var(--size-3);
 		font-size: var(--font-size-0);
-		text-align: center;
+
+		& > *:nth-child(n+2) { margin-block-start: var(--size-3); }
 	}
 }
