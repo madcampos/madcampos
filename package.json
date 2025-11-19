@@ -34,7 +34,7 @@
 		"@types/node": "^24.9.2",
 		"@typescript-eslint/eslint-plugin": "^8.46.2",
 		"@typescript-eslint/parser": "^8.37.0",
-		"astro": "^5.15.3",
+		"astro": "^5.15.9",
 		"astro-icon": "^1.1.5",
 		"eslint": "^9.39.0",
 		"eslint-plugin-astro": "^1.4.0",
