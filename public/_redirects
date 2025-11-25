@@ -20,3 +20,10 @@
 
 # Test url, doesn't exist anymore, should redirect
 /blog/tags/:tag/1/ /blog/tags/:tag/ 308
+
+# Bots maze
+# /*.gz /yapping/tea
+# /*.sql /yapping/application2
+# /*.php /yapping/desk
+# /*.jar /yapping/guidance
+# /*/wlwmanifest.xml /yapping/intention
