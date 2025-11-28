@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"type": "module",
 	"engines": {
-		"node": ">=22.0.0"
+		"node": ">=22.0.0",
+		"pnpm": ">=10.24.0"
 	},
 	"volta": {
 		"node": "24.11.1"
@@ -14,25 +15,26 @@
 		"bootstrap:astro": "astro sync",
 		"bootstrap:types": "wrangler types server/env.d.ts",
 		"bootstrap:certs": "mkdir certs && mkcert -key-file='./certs/server.key' -cert-file='./certs/server.crt' 'localhost'",
-		"bootstrap": "npm run bootstrap:types && npm run bootstrap:astro",
-		"prestart:api": "npm run bootstrap:types",
+		"bootstrap": "pnpm run bootstrap:types && pnpm run bootstrap:astro",
+		"prestart:api": "pnpm run bootstrap:types",
 		"start:api": "wrangler dev --env=local --https-cert-path certs/server.crt --https-key-path certs/server.key",
-		"prestart": "npm run bootstrap:astro",
+		"prestart": "pnpm run bootstrap:astro",
 		"start": "astro dev --site=https://localhost:3000/",
-		"prebuild": "npm run bootstrap",
+		"prebuild": "pnpm run bootstrap",
 		"build": "astro build",
-		"prepreview": "npm run build",
+		"prepreview": "pnpm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
-		"predeploy": "npm run build",
+		"predeploy": "pnpm run build",
 		"deploy": "wrangler deploy --minify --env=\"\"",
 		"format": "dprint fmt --staged",
 		"typecheck": "tsc --noEmit",
 		"lint:js": "eslint --fix",
 		"lint:md": "astro check",
-		"lint": "npm run typecheck && npm run lint:js && npm run lint:md"
+		"lint": "pnpm run typecheck && pnpm run lint:js && pnpm run lint:md"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.5",
+		"@astrojs/markdown-remark": "^6.3.9",
 		"@astrojs/sitemap": "^3.6.0",
 		"@iconify-json/fa6-brands": "^1.2.6",
 		"@iconify-json/mingcute": "1.2.5",
@@ -54,6 +56,7 @@
 		"remark-breaks": "^4.0.0",
 		"remark-flexible-markers": "^1.3.2",
 		"remark-ins": "^1.2.2",
+		"sharp": "^0.34.5",
 		"typescript": "^5.9.3",
 		"wrangler": "^4.49.1"
 	},
