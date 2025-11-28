@@ -12,6 +12,8 @@ updates:
       day: "saturday"
       time: "14:00"
       timezone: "America/Toronto"
+    cooldown:
+      days: 21
     target-branch: "main"
     labels:
       - "dependencies"
