@@ -33,6 +33,27 @@ const {
 
 	<title>{title}</title>
 
+	<!-- Prefetch speculation rules -->
+	<!-- dprint-ignore -->
+	<script type="speculationrules" is:inline>
+		{
+			"prefetch": [{
+				"where": { "and": [{ "selector_matches": "a" }, {"href_matches": "/*" }] },
+				"eagerness": "moderate",
+				"requires": ["anonymous-client-ip-when-cross-origin"]
+			}]
+		}
+	</script>
+
+	<!-- Root styles -->
+	<link rel="stylesheet" type="text/css" href={baseStyles} />
+
+	<!-- Print Stylesheet -->
+	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
+
+	<!-- Main JS -->
+	<script src="../assets/js/index.ts"></script>
+
 	<!-- URLs -->
 	<link rel="canonical" href={url} />
 	<link rel="author" href="/humans.txt" />
@@ -97,24 +118,4 @@ const {
 	<!-- Apple Metadata -->
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-	<!-- Root styles -->
-	<link rel="stylesheet" type="text/css" href={baseStyles} />
-
-	<!-- Print Stylesheet -->
-	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
-
-	<!-- Prefetch speculation rules -->
-	<!-- dprint-ignore -->
-	<script type="speculationrules" is:inline>
-		{
-			"prefetch": [{
-				"where": { "and": [{ "selector_matches": "a" }, {"href_matches": "/*" }] },
-				"eagerness": "moderate",
-				"requires": ["anonymous-client-ip-when-cross-origin"]
-			}]
-		}
-	</script>
-
-	<script src="../assets/js/index.ts"></script>
 </head>
