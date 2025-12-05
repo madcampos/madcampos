@@ -3,6 +3,7 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
+    versioning-strategy: "increase"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
@@ -13,7 +14,7 @@ updates:
       time: "14:00"
       timezone: "America/Toronto"
     cooldown:
-      days: 21
+      default-days: 21
     target-branch: "main"
     labels:
       - "dependencies"
