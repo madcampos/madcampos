@@ -1,6 +1,6 @@
 {
-	"include": ["astro.config.ts", "src/**/*", ".astro/**/*", "server/index.ts"],
-	"exclude": ["node_modules/**/*", "dist/**/*", "src/content/.obsidian/**/*"],
+	"include": ["astro.config.ts", ".astro/**/*"],
+	"exclude": ["node_modules/**/*", "dist/**/*"],
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"allowJs": true,
