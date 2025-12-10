@@ -2,14 +2,6 @@
 /sdrlog https://sdrlog.madcampos.dev 308
 /sdrlog/ https://sdrlog.madcampos.dev 308
 
-# Retired
-/tojs-styleguide /api/410 308
-/tojs-styleguide/ /api/410 308
-
-# Wrong url, never existed
-/blog/2023/06/07/tabs-web-component /api/410 308
-/blog/2023/06/07/tabs-web-component/ /api/410 308
-
 # Permanent redirects
 /accessibility /accessibility/ 308
 
@@ -22,12 +14,12 @@
 /blog/tags/:tag/1/ /blog/tags/:tag/ 308
 
 # Bots maze
-/*.gz /api/yapping
-/*.sql /api/yapping
-/*.php /api/yapping
-/*.php7 /api/yapping
-/*.jar /api/yapping
-/*/wlwmanifest.xml /api/yapping
-/wp-* /api/yapping
-/wp/* /api/yapping
-/wordpress/* /api/yapping
+/*.gz /yapping
+/*.sql /yapping
+/*.php /yapping
+/*.php7 /yapping
+/*.jar /yapping
+/*/wlwmanifest.xml /yapping
+/wp-* /yapping
+/wp/* /yapping
+/wordpress/* /yapping
