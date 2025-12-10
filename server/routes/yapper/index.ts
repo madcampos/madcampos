@@ -1,7 +1,7 @@
 import data from './data.json' with { type: 'json' };
 
-export function yapper() {
-	// TODO: select one id and put all other as links
+export function yapper(request: Request) {
+	const url = new URL(request.url);
 
 	const body = `
 	<!DOCTYPE html>
@@ -30,5 +30,5 @@ export function yapper() {
 	</html>
 	`;
 
-	return new Response();
+	return new Response(body, { status: 200, headers: { 'Content-Type': 'text/html' } });
 }
