@@ -34,7 +34,8 @@ export default defineConfig({
 	devToolbar: { enabled: false },
 	compressHTML: true,
 	build: {
-		format: 'directory'
+		format: 'directory',
+		assets: 'assets'
 	},
 	server: {
 		host: 'localhost',
