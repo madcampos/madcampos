@@ -17,6 +17,8 @@ const tags = Object.keys(await listPostsByTag());
 		url={Astro.url.href}
 	/>
 	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
 		<skip-to-content>
 			<a href="#main">Skip to main content</a>
 		</skip-to-content>

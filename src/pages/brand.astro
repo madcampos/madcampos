@@ -1,19 +1,25 @@
 ---
-import '../assets/css/pages/error.css';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
-		title="404 | Marco Campos"
-		description="404 - Not Found"
+		title="Madcampos Style Guide"
+		description="Style Guide for my personal website."
 		url={Astro.url.href}
+		tags={['css', 'html', 'meta', 'style', 'styleguide']}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
 		<SiteNav />
 
@@ -27,23 +33,22 @@ import SvgDefs from '../components/SvgDefs.astro';
 
 		<header>
 			<Logo
-				subtitle="Page Not Found"
-				shortSubtitle="404"
-				url="/"
-				title="Home Page"
-				micro
-				glitch
+				subtitle="Style Guide"
+				shortSubtitle="Style"
+				url="/styleguide/"
+				title="Style Guide"
 			/>
-			<h1>404 - Not Found</h1>
+			<h1>Brand & Logo</h1>
 		</header>
 
-		<main>
-			<p>Looks like you hit a dead end.</p>
-			<p>
-				<a href="/">Go back home</a>
-			</p>
+		<main id="main">
+			<!-- TODO: logo, colors, style, and brand info -->
 		</main>
 
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
 	</body>
