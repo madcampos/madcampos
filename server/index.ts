@@ -8,6 +8,7 @@ const router = new Router({
 		'/tojs-styleguide/': nonExistentPages,
 		'/blog/2023/06/07/tabs-web-component': nonExistentPages,
 		'/blog/2023/06/07/tabs-web-component/': nonExistentPages,
+		'/yapping': yapper,
 		'/yapping/*': yapper
 	}
 });
