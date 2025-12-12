@@ -265,6 +265,11 @@
 		color: var(--surface-1);
 	}
 
+	::search-text {
+		background-color: var(--theme-color);
+		color: var(--surface-1);
+	}
+
 	*:focus-visible {
 		outline: var(--theme-color) var(--border-style) var(--border-size);
 		outline-offset: var(--size-1);
