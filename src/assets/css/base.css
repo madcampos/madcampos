@@ -158,6 +158,12 @@
 		min-block-size: var(--size-content-0);
 		object-fit: contain;
 		object-position: center;
+		font-family: var(--code-font-family);
+		font-size: var(--size-relative-4);
+		line-height: 1.5;
+		text-wrap: balance;
+		font-style: italic;
+		color: var(--accent-color);
 	}
 
 	:where(audio) { min-block-size: var(--size-8); }
