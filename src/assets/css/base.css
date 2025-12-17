@@ -164,6 +164,8 @@
 		text-wrap: balance;
 		font-style: italic;
 		color: var(--accent-color);
+
+		&[data-load-error] { /* TODO: add styles for load error & script to handle this case */ }
 	}
 
 	:where(audio) { min-block-size: var(--size-8); }
