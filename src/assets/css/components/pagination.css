@@ -22,6 +22,7 @@
 		}
 
 		a:not([href]) { color: var(--text-2); }
+		a[aria-current='page'] { color: var(--accent-color); }
 
 		aside {
 			padding: var(--size-1) var(--size-2);
