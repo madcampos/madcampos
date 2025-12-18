@@ -3,16 +3,16 @@ import '../../../../assets/css/pages/blog-post.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import Card from '../../../../../components/Card.astro';
+import HtmlHead from '../../../../../components/HtmlHead.astro';
+import OldStyleButtons from '../../../../../components/OldStyleButtons.astro';
+import PromptInjection from '../../../../../components/PromptInjection.astro';
+import SiteNav from '../../../../../components/SiteNav.astro';
+import SvgDefs from '../../../../../components/SvgDefs.astro';
+import Webrings from '../../../../../components/Webrings.astro';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../../../../../utils/markdown.js';
+import { listAllPosts } from '../../../../../utils/post.js';
 import avatar from '../../../../assets/images/me.jpg';
-import Card from '../../../../components/Card.astro';
-import HtmlHead from '../../../../components/HtmlHead.astro';
-import OldStyleButtons from '../../../../components/OldStyleButtons.astro';
-import PromptInjection from '../../../../components/PromptInjection.astro';
-import SiteNav from '../../../../components/SiteNav.astro';
-import SvgDefs from '../../../../components/SvgDefs.astro';
-import Webrings from '../../../../components/Webrings.astro';
-import { inlineMarkdownRender, inlineMarkdownStrip } from '../../../../utils/markdown.js';
-import { listAllPosts } from '../../../../utils/post.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
