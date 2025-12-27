@@ -8,7 +8,7 @@
   "newLinkFormat": "relative",
   "showInlineTitle": true,
   "readableLineLength": true,
-  "strictLineBreaks": false,
+  "strictLineBreaks": true,
   "spellcheck": true,
   "showUnsupportedFiles": false
 }
