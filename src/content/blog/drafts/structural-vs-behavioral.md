@@ -1,7 +1,7 @@
 ---
 title: "Structural vs Behavioral components: or how I stopped worrying and made found structure in all this madness"
 summary: Two different, but complimentary, ways of viewing components in web development, plus some patterns to organize them.
-createdAt: 2024-10-17T17:04:09.966-04:00
+createdAt: 2025-12-27T17:04:09.966-04:00
 draft: true
 tags:
   - WebDevelopment
