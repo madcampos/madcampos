@@ -67,16 +67,27 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 						${img.outerHTML}
 					</div>
 					<footer>
-						<label for="lightbox-zoom-level-${id}">Zoom level</label>
-						<input
-							id="lightbox-zoom-level-${id}"
-							type="range"
-							min="10"
-							max="500"
-							step="10"
-							value="100"
-						/>
-						<output for="lightbox-zoom-level-${id}">100%</output>
+						<form action="">
+							<span>
+								<label for="lightbox-zoom-level-${id}">Zoom level</label>
+								<input
+									id="lightbox-zoom-level-${id}"
+									type="range"
+									min="10"
+									max="500"
+									step="10"
+									value="100"
+								/>
+								<output for="lightbox-zoom-level-${id}">100%</output>
+							</span>
+
+							<button type="reset">
+								<sr-only>Reset zoom</sr-only>
+								<svg data-icon="mingcute:refresh-anticlockwise-1-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
+									<path fill="currentColor" d="M14.07 19.727a8 8 0 0 1-9.146-3.99a1 1 0 0 0-1.77.933c2.13 4.04 6.836 6.221 11.434 4.99c5.335-1.43 8.5-6.914 7.071-12.248c-1.43-5.335-6.913-8.5-12.247-7.071a10 10 0 0 0-7.414 9.58c-.007.903.995 1.402 1.713.919l2.673-1.801c1.008-.68.332-2.251-.854-1.986l-1.058.236a8 8 0 1 1 9.598 10.439Z"/>
+								</svg>
+							</button>
+						</form>
 					</footer>
 				</dialog>
 			`
@@ -98,6 +109,10 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 			const target = evt.target as HTMLInputElement;
 
 			this.#updateZoom(id, target.value);
+		});
+
+		this.querySelector<HTMLDialogElement>(`#lightbox-zoom-dialog-${id}`)?.addEventListener('reset', () => {
+			this.#updateZoom(id, '100');
 		});
 	}
 }

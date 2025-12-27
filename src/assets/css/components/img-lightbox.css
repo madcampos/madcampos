@@ -37,6 +37,11 @@
 				inline-size: 100%;
 				flex-grow: 1;
 
+				&:has(img) {
+					display: grid;
+					place-items: center;
+				}
+
 				img {
 					min-inline-size: initial;
 					max-inline-size: initial;
@@ -45,6 +50,15 @@
 					max-block-size: initial;
 					min-block-size: initial;
 				}
+			}
+
+			form {
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				gap: var(--size-3);
+
+				button { margin: 0; }
 			}
 		}
 	}
