@@ -1,8 +1,9 @@
 ---
-import '../../../../assets/css/pages/blog-post.css';
+import '../../../../../assets/css/pages/blog-post.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import avatar from '../../../../../assets/images/me.jpg';
 import Card from '../../../../../components/Card.astro';
 import HtmlHead from '../../../../../components/HtmlHead.astro';
 import OldStyleButtons from '../../../../../components/OldStyleButtons.astro';
@@ -12,7 +13,6 @@ import SvgDefs from '../../../../../components/SvgDefs.astro';
 import Webrings from '../../../../../components/Webrings.astro';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../../../../../utils/markdown.js';
 import { listAllPosts } from '../../../../../utils/post.js';
-import avatar from '../../../../assets/images/me.jpg';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
@@ -306,6 +306,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			<Webrings />
 		</footer>
 		<SvgDefs />
-		<script src="../../../../assets/js/pages/blog.ts"></script>
+		<script src="../../../../../assets/js/pages/blog.ts"></script>
 	</body>
 </html>
