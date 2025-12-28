@@ -26,6 +26,8 @@ const {
 	createdAt: publishedDate,
 	updatedAt: updatedDate
 } = Astro.props;
+
+const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(url);
 ---
 <head>
 	<meta charset="utf-8" />
@@ -58,7 +60,17 @@ const {
 	<link rel="canonical" href={url} />
 	<link rel="author" href="/humans.txt" />
 	<link rel="sitemap" href="/sitemap.xml" />
-	<link rel="alternate" type="application/atom+xml" href="/blog/feed.xml" title="Marco Campos' Blog" />
+	<link rel="alternate" type="application/atom+xml" href="/blog/feed.atom.xml" title="Marco Campos' Blog" />
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed.rss.xml" title="Marco Campos' Blog" />
+
+	{
+		isBlogPostUrl && (
+			<link rel="alternate" type="application/json+oembed" href={`${url}oembed.json`} title="oEmbed (JSON)" />
+			<link rel="alternate" type="text/xml+oembed" href={`${url}oembed.xml`} title="oEmbed (XML)" />
+			<link rel="alternate" type="text/plain" href={`${url}txt`} title="Plain Text Version" />
+			<link rel="alternate" type="text/markdown" href={`${url}md`} title="Markdown Version" />
+		)
+	}
 
 	<!-- App Metadata -->
 	<link rel="icon" href="/assets/icons/icon.svg" sizes="any" type="image/svg+xml" />
