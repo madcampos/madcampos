@@ -1,10 +1,5 @@
 import { SiteSettings } from '../settings.ts';
 
-function html(strings: TemplateStringsArray, ...values: unknown[]) {
-	// eslint-disable-next-line @typescript-eslint/restrict-plus-operands, @typescript-eslint/no-base-to-string
-	return strings.reduce((result, str, i) => result + str + (values[i] ?? ''), '');
-}
-
 type BrowserIdentifier = 'chrome_android' | 'chrome' | 'edge' | 'firefox_android' | 'firefox' | 'safari_ios' | 'safari';
 type BaselineHighLow = 'high' | 'low';
 
@@ -82,7 +77,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '&mdash;';
 
-		this.innerHTML = html`
+		this.innerHTML = `
 			<baseline-icon>
 				<sr-only>Baseline status: ${baselineStatus.get(data?.status?.baseline)}</sr-only>
 				<svg viewBox="0 0 36 20" width="36" height="20" aria-hidden="true">
