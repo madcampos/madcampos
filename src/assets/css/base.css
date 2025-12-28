@@ -221,9 +221,16 @@
 	:where(table) {
 		border-collapse: collapse;
 		caption-side: bottom;
+		min-inline-size: var(--size-content-2);
 	}
 
-	:where(table-wrapper[role='region'][aria-labelledby][tabindex]) { overflow: auto; }
+	:where(table-wrapper[role='region'][aria-labelledby][tabindex]) {
+		overflow: auto;
+		display: block;
+		inline-size: fit-content;
+		max-inline-size: 100%;
+		margin-inline: auto;
+	}
 
 	:where(dialog) {
 		flex-direction: column;
