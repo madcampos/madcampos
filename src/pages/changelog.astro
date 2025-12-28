@@ -25,7 +25,6 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 	<HtmlHead
 		title="Changelog | Marco Campos"
 		description="List of changes in diferent versions of the website."
-		url={Astro.url.href}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
@@ -48,7 +47,6 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 			<Logo
 				subtitle="Changelog"
 				shortSubtitle="Log"
-				url="/changelog/"
 				title="Changelog page"
 			/>
 			<h1>Changelog</h1>

@@ -3,7 +3,7 @@ interface Props {
 	title: string;
 	subtitle: string;
 	shortSubtitle: string;
-	url: URL | string;
+	url?: URL | string;
 
 	micro?: boolean;
 	mini?: boolean;
@@ -28,7 +28,7 @@ const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch } = Astro
 const logoLabelId = generateUniqueId();
 ---
 <m-logo {micro} {mini} {full} {glitch}>
-	<a href={url} class="u-url url">
+	<a href={url ?? Astro.url.pathname} class="u-url url">
 		<svg
 			color-interpolation-filters="sRGB"
 			preserveAspectRatio="xMinYMin slice"

@@ -19,7 +19,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	<HtmlHead
 		title="Talks | Marco Campos"
 		description="A list of talks I've given on meetups, conferences, or other events."
-		url={Astro.url.href}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
@@ -42,7 +41,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			<Logo
 				subtitle="Talks"
 				shortSubtitle="Talks"
-				url="/talks/"
 				title="Talks Page"
 			/>
 			<h1>Talks, Presentations & Workshops</h1>

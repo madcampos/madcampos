@@ -53,7 +53,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 <html lang="en-US" itemscope itemtype="https://schema.org/BlogPosting">
 	<HtmlHead
 		title={`${inlineMarkdownStrip(title)} | Marco Campos Blog`}
-		url={Astro.url.pathname}
 		{tags}
 		description={inlineMarkdownStrip(summary)}
 		image={image?.src}

@@ -74,7 +74,6 @@ const blogPages = await listPostsByYearAndMonth();
 	<HtmlHead
 		title="Site Map | Marco Campos"
 		description="A list of all pages on the website."
-		url={Astro.url.href}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
@@ -97,7 +96,6 @@ const blogPages = await listPostsByYearAndMonth();
 			<Logo
 				subtitle="Site Map"
 				shortSubtitle="Map"
-				url="/sitemap/"
 				title="Site Map Page"
 			/>
 			<h1>Site Map</h1>

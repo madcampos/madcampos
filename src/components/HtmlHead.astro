@@ -5,7 +5,6 @@ import defaultSocialImage from '../assets/images/social/social.png';
 
 interface Props {
 	title: string;
-	url: string;
 	description: string;
 	tags?: string[];
 	image?: string;
@@ -16,7 +15,6 @@ interface Props {
 
 const {
 	title,
-	url,
 	description,
 	tags,
 
@@ -27,7 +25,7 @@ const {
 	updatedAt: updatedDate
 } = Astro.props;
 
-const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(url);
+const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(Astro.url.pathname);
 ---
 <head>
 	<meta charset="utf-8" />
@@ -57,7 +55,7 @@ const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(url);
 	<script src="../assets/js/index.ts"></script>
 
 	<!-- URLs -->
-	<link rel="canonical" href={url} />
+	<link rel="canonical" href={Astro.url.href} />
 	<link rel="author" href="/humans.txt" />
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="alternate" type="application/atom+xml" href="/blog/feed.atom.xml" title="Marco Campos' Blog" />
@@ -65,10 +63,10 @@ const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(url);
 
 	{
 		isBlogPostUrl && (
-			<link rel="alternate" type="application/json+oembed" href={`${url}oembed.json`} title="oEmbed (JSON)" />
-			<link rel="alternate" type="text/xml+oembed" href={`${url}oembed.xml`} title="oEmbed (XML)" />
-			<link rel="alternate" type="text/plain" href={`${url}txt`} title="Plain Text Version" />
-			<link rel="alternate" type="text/markdown" href={`${url}md`} title="Markdown Version" />
+			<link rel="alternate" type="application/json+oembed" href={`${Astro.url.href}oembed.json`} title="oEmbed (JSON)" />
+			<link rel="alternate" type="text/xml+oembed" href={`${Astro.url.href}oembed.xml`} title="oEmbed (XML)" />
+			<link rel="alternate" type="text/plain" href={`${Astro.url.href}txt`} title="Plain Text Version" />
+			<link rel="alternate" type="text/markdown" href={`${Astro.url.href}md`} title="Markdown Version" />
 		)
 	}
 
@@ -85,7 +83,7 @@ const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(url);
 	<meta name="twitter:card" content="summary_large_image" />
 
 	<meta property="og:locale" itemprop="inLanguage" content="en_US" />
-	<meta property="og:url" itemprop="url" content={url} />
+	<meta property="og:url" itemprop="url" content={Astro.url.href} />
 
 	<meta property="og:description" name="description" itemprop="abstract" content={description} />
 	<meta name="twitter:description" content={description} />

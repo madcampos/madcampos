@@ -51,7 +51,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	<HtmlHead
 		title={`${inlineMarkdownStrip(title)} | Marco Campos`}
 		description={inlineMarkdownStrip(summary)}
-		url={Astro.url.href}
 		image={image?.src}
 		{imageAlt}
 		createdAt={date}
