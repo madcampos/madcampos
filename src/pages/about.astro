@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import picture from '../assets/images/me-old-avatar.jpg';
 import HtmlHead from '../components/HtmlHead.astro';
@@ -42,20 +43,26 @@ import Webrings from '../components/Webrings.astro';
 			<h1>About Me</h1>
 		</header>
 
-		<main id="main">
-			<p>
-				Hey! Name is <strong>Marco</strong>, best known online by the moniker &ldquo;<em>madcampos</em>&rdquo;.
-			</p>
-			<p>I work as a programmer and like to build things, be it digitally with websites or physically with Legos, crochet, or cardboard.</p>
-			<p>
-				I like challanges and interesting stuff to just create and have fun. To me some of the best ideas come from moments when we say
-				<q>what if we did this...</q> or <q>wouldn't it be interesting to do that...?</q>
-			</p>
-			<p>
-				Ah, yes, I do enjoy geeking about web standards as well, like reading proposals and talking about them. <em>don't</em> say the magic words <q>web components</q>
-				near me or I'll talk non stop for hours.
-			</p>
-			<p>Lastly, here is a picture of me:</p>
+		<main id="main" class="h-card vcard" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
+			<div class="p-note note" itemprop="description">
+				<p>
+					Hey! Name is <strong class="p-name fn n" itemprop="name">Marco</strong>, best known online by the moniker &ldquo;<em
+						class="p-nickname nickname"
+						itemprop="alternateName"
+					>madcampos</em>&rdquo;.
+				</p>
+				<p>I work as a programmer and like to build things, be it digitally with websites or physically with Legos, crochet, or cardboard.</p>
+				<p>
+					I like challanges and interesting stuff to just create and have fun. To me some of the best ideas come from moments when we say
+					<q>what if we did this...</q> or <q>wouldn't it be interesting to do that...?</q>
+				</p>
+				<p>
+					Ah, yes, I do enjoy geeking about web standards as well, like reading proposals and talking about them. <em>don't</em> say the magic words <q>web components</q>
+					near me or I'll talk non stop for hours.
+				</p>
+			</div>
+
+			<p>Here is a picture if yo uare a visual person:</p>
 
 			<figure>
 				<Image
@@ -66,6 +73,34 @@ import Webrings from '../components/Webrings.astro';
 				/>
 				<figcaption>Me making a face</figcaption>
 			</figure>
+
+			<h2>Contact</h2>
+
+			<p>Here are ways to contact me:</p>
+
+			<ul>
+				<li>
+					<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
+						<Icon name="mingcute:linkedin-line" aria-hidden="true" />
+						<sr-only>LinkedIn:</sr-only>
+						<span>madcampos</span>
+					</a>
+				</li>
+				<li>
+					<a href="mailto:me@madcampos.dev" rel="me">
+						<Icon name="mingcute:mail-line" aria-hidden="true" />
+						<sr-only>Email:</sr-only>
+						<span class="u-email email" itemprop="email">me@madcampos.dev</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.instagram.com/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer">
+						<Icon name="mingcute:instagram-line" aria-hidden="true" />
+						<sr-only>Instagram:</sr-only>
+						<span>@madcampos</span>
+					</a>
+				</li>
+			</ul>
 		</main>
 
 		<footer>
