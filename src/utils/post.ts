@@ -145,7 +145,18 @@ export async function listAllPosts(sorting: PostSorting = 'descending') {
 	const filteredPosts = posts.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
 	const formattedPosts = await Promise.all(filteredPosts.map(async (post) => {
 		const formattedPost = await formatPostMetadata(post);
-		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => filePath.includes(formattedPost.url)) ?? [];
+		const [, postMarkdown] = Object.entries(postFiles).find(([filePath]) => {
+			const hasId = filePath.includes(formattedPost.id);
+
+			if (formattedPost.data.draft) {
+				return hasId;
+			}
+
+			const hasYear = filePath.includes(formattedPost.year);
+			const hasMonth = filePath.includes(formattedPost.month);
+
+			return hasId && hasYear && hasMonth;
+		}) ?? [];
 
 		return {
 			...formattedPost,
