@@ -3,7 +3,14 @@ title: Test **_MD_** & <html> content
 summary: Test post with all **_markdown_** content and <html> tags
 image: ./assets/test.png
 imageAlt: Test <html> tag and **_markdown_** content.
+imageRights: Test <html> tag and **_markdown_** content.
 createdAt: 9999-12-31T23:59:59.999Z
+updatedAt: 9999-12-31T23:59:59.999Z
+updates:
+  - date: 9999-12-31T23:59:59.999Z
+    changes: Test <html> tag and **_markdown_** content.
+  - date: 9999-12-31T23:59:59.999Z
+    changes: Test <html> tag and **_markdown_** content.
 draft: true
 tags:
   - Test
