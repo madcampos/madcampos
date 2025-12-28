@@ -1,0 +1,31 @@
+BEGIN:VCARD
+VERSION:4.0
+FN:Marco Campos
+N:Campos;Marco;;;
+NICKNAME:madcampos
+GENDER:M;he/him
+UID:urn:uuid:a51d10e1-ffc3-4214-b4bd-b33691d1cdb1
+KIND:individual
+LANG;PREF=1:en
+LANG;PREF=2:pt-BR
+LANG;PREF=3:es
+LANG;PREF=4:fr
+BDAY:19900923
+EMAIL;TYPE=WORK:me@madcampos.dev
+ADR;TYPE=WORK:;;;Toronto;ON;;Canada
+TITLE:Staff Web Developer
+ROLE:Web Developer
+CATEGORIES:staff web developer, senior web developer, web developer, node.js, javascript, typescript, webdev
+SOURCE:https://madcampos.dev/assets/madcampos.vcf
+URL:https://madcampos.dev/
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/madcampos
+X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/madcampos
+X-SOCIALPROFILE;TYPE=GitHub:https://github.com/madcampos
+LOGO;PREF=1;MEDIATYPE=image/svg+xml:https://madcampos.dev/assets/icons/icon.svg
+LOGO;PREF=10;MEDIATYPE=image/png:https://madcampos.dev/assets/icons/icon-1024x1024.png
+LOGO;PREF=100;MEDIATYPE=image/png:https://madcampos.dev/assets/icons/icon-64x64.png
+PHOTO;MEDIATYPE=image/jpeg:https://madcampos.dev/assets/images/me.jpg
+SOUND;TYPE=ringtone::https://madcampos.dev/assets/audio/burbon-blues.mp3
+REV:2025-12-28T05:45:07.866Z
+TZ:America/Toronto
+END:VCARD
