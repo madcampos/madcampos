@@ -103,7 +103,7 @@ For now, put a pin on it, and we will get back to that on the behavioural compon
 
 For now, we can simplify this with [Declarative Shadow DOM](https://web.dev/articles/declarative-shadow-dom).
 
-<baseline-info feature="declarative-shadow-dom">[Declarative Shadow DOM baseline info]</baseline-info>
+<baseline-info feature="declarative-shadow-dom"></baseline-info>
 
 Really cool and definitely less verbose, plus it is HTML, it is declarative:
 
@@ -145,11 +145,11 @@ Nowadays we have very good support for things like:
 - [`:has`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:has)
 - [Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_queries)
 
-<baseline-info feature="cascade-layers">[Cascade Layers baseline info]</baseline-info>
-<baseline-info feature="nesting">[CSS Nesting baseline info]</baseline-info>
-<baseline-info feature="scope">[@scope baseline info]</baseline-info>
-<baseline-info feature="has">[:has baseline info]</baseline-info>
-<baseline-info feature="container-queries">[Container queries baseline info]</baseline-info>
+<baseline-info feature="cascade-layers"></baseline-info>
+<baseline-info feature="nesting"></baseline-info>
+<baseline-info feature="scope"></baseline-info>
+<baseline-info feature="has"></baseline-info>
+<baseline-info feature="container-queries"></baseline-info>
 
 All of those things help to simplify the CSS we write and organize it in a way that gives more control over the cascade, it helps us scope things to a specific element in an easier way.
 We basically have our cake and eat it too, no Shadow DOM, no complex arbitrary rules to follow.
