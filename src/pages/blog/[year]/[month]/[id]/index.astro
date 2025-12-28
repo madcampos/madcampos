@@ -143,19 +143,21 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<hr />
 						<details>
 							<summary>Update History</summary>
-							<ul>
+							<dl>
 								{
 									updates.map((update) => (
-										<li>
+										<dt>
 											<time datetime={update.date.toISOString()}>
 												{formatter.format(update.date)}
 											</time>
-											<span>&mdash;</span>
-											<span>{update.changes}</span>
-										</li>
+										</dt>
+										<dd>
+											{/* eslint-disable-next-line astro/no-set-html-directive */}
+											<p><Fragment set:html={inlineMarkdownRender(update.changes)} /></p>
+										</dd>
 									))
 								}
-							</ul>
+							</dl>
 						</details>
 						<hr />
 					</aside>
