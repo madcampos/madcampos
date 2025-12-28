@@ -1,5 +1,9 @@
-import baselineStyleUrl from '../../css/components/baseline.css?url';
 import { SiteSettings } from '../settings.ts';
+
+function html(strings: TemplateStringsArray, ...values: unknown[]) {
+	// eslint-disable-next-line @typescript-eslint/restrict-plus-operands, @typescript-eslint/no-base-to-string
+	return strings.reduce((result, str, i) => result + str + (values[i] ?? ''), '');
+}
 
 type BrowserIdentifier = 'chrome_android' | 'chrome' | 'edge' | 'firefox_android' | 'firefox' | 'safari_ios' | 'safari';
 type BaselineHighLow = 'high' | 'low';
@@ -30,13 +34,7 @@ const baselineStatus = new Map<BaselineHighLow | false | undefined, string>([
 export class BaselineInfo extends HTMLElement implements CustomElement {
 	static observedAttributes: ['feature'];
 
-	declare shadowRoot: ShadowRoot;
-
-	constructor() {
-		super();
-
-		this.attachShadow({ mode: 'open' });
-	}
+	#id = Math.trunc(Math.random() * 1000000).toString(16);
 
 	get feature(): string {
 		return this.getAttribute('feature') ?? '';
@@ -49,13 +47,26 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 			this.removeAttribute('feature');
 		}
 
-		this.render();
+		void this.render();
+	}
+
+	get headingLevel() {
+		const headings = Array.from(document.querySelectorAll('rendered-content :is(h1, h2, h3, h4, h5, h6)'));
+		const previousHeading = headings.findLast((heading) => this.compareDocumentPosition(heading) === Node.DOCUMENT_POSITION_PRECEDING);
+
+		if (previousHeading) {
+			const level = Number.parseInt(previousHeading.tagName.substring(1));
+			// eslint-disable-next-line @typescript-eslint/no-magic-numbers
+			return Math.min(level + 1, 6).toString();
+		}
+
+		return '2';
 	}
 
 	// eslint-disable-next-line complexity
 	async render() {
 		if (!this.feature) {
-			this.shadowRoot.innerHTML = '';
+			this.innerHTML = '';
 			return;
 		}
 
@@ -71,160 +82,99 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '&mdash;';
 
-		this.shadowRoot.innerHTML = `
-			<link rel="stylesheet" href="${baselineStyleUrl}" />
+		this.innerHTML = html`
+			<baseline-icon>
+				<sr-only>Baseline status: ${baselineStatus.get(data?.status?.baseline)}</sr-only>
+				<svg viewBox="0 0 36 20" width="36" height="20" aria-hidden="true">
+					<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${data?.status?.baseline.toString() ?? 'no-data'}" />
+				</svg>
+			</baseline-icon>
+
+			<hgroup>
+				<baseline-heading
+					role="heading"
+					aria-level="${this.headingLevel}"
+					data-baseline="${data?.status?.baseline.toString() ?? 'no-data'}"
+				>${data?.name ?? 'Unknown feature'}</baseline-heading>
+
+				<p>
+					<span>${baselineStatus.get(data?.status?.baseline)}</span>
+					<span>${formattedBaselineDate}</span>
+				</p>
+			</hgroup>
+
 			<details>
-				<summary>
-					<svg id="marker" width="24" height="24" viewBox="0 0 24 24">
-						<path
-							fill="currentColor"
-							d="M15.54 11.29L9.88 5.64a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l4.95 5L8.46 17a1 1 0 0 0 0 1.41a1 1 0 0 0 .71.3a1 1 0 0 0 .71-.3l5.66-5.65a1 1 0 0 0 0-1.47"
-						/>
-					</svg>
-					<span id="feature-name">${data?.name ?? 'Unknown feature'}</span>
-					<aside>
-						<div id="baseline-status" data-baseline="${data?.status?.baseline.toString() ?? 'no-data'}">
-							<span id="baseline-icon">
-								<svg viewBox="0 0 36 20">
-									<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${data?.status?.baseline.toString() ?? 'no-data'}" />
-								</svg>
-							</span>
-							<span>
-								<span id="baseline-status-text">
-									${baselineStatus.get(data?.status?.baseline)}
-								</span>
-								<span id="baseline-status-date">${formattedBaselineDate}</span>
-							</span>
-						</div>
-						<div id="browser-support">
-							<span class="browser-support" data-status="${data?.status?.support.chrome ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 256">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.chrome ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Chrome on Desktop Version: ${data?.status?.support.chrome ?? '&mdash;'}</span>
-							</span>
+				<summary>Browser support & details</summary>
 
-							<span class="browser-support" data-status="${data?.status?.support.chrome_android ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 256">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 55) scale(0.5)" transform-origin="bottom right" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.chrome_android ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Chrome on Android Version: ${data?.status?.support.chrome_android ?? '&mdash;'}</span>
-							</span>
-
-							<span class="browser-support" data-status="${data?.status?.support.edge ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 256">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-edge" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.edge ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Edge Version: ${data?.status?.support.edge ?? '&mdash;'}</span>
-							</span>
-
-							<span class="browser-support" data-status="${data?.status?.support.firefox ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 265">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.firefox ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Firefox Version: ${data?.status?.support.firefox ?? '&mdash;'}</span>
-							</span>
-							<span class="browser-support" data-status="${data?.status?.support.firefox_android ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 265">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.firefox_android ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Firefox on Android Version: ${data?.status?.support.firefox_android ?? '&mdash;'}</span>
-							</span>
-							<span class="browser-support" data-status="${data?.status?.support.safari ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 256">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.safari ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Safari on Desktop Version: ${data?.status?.support.safari ?? '&mdash;'}</span>
-							</span>
-							<span class="browser-support" data-status="${data?.status?.support.safari_ios ? 'supported' : 'unsupported'}">
-								<span class="browser-icon">
-									<svg viewBox="0 0 256 256">
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
-										<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-ios" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
-									</svg>
-								</span>
-								<span class="browser-status">
-									<svg viewBox="0 0 24 24">
-										<use href="/assets/images/components/baseline/browser-status.svg#browser-status-${
-			data?.status?.support.safari_ios ? 'supported' : 'unsupported'
-		}" />
-									</svg>
-								</span>
-								<span class="browser-label">Safari on iOS Version: ${data?.status?.support.safari_ios ?? '&mdash;'}</span>
-							</span>
-						</div>
-					</aside>
-				</summary>
-				<p id="feature-description">
+				<p>
 					${data?.description_html ?? data?.description ?? 'No data on this feature'}
 				</p>
-				<div id="table-wrapper">
+
+				<table-wrapper role="region" tabindex="0" aria-labelledby="browser-support-table-${this.#id}">
 					<table>
+						<caption id="browser-support-table-${this.#id}">Browser Support</caption>
 						<thead>
 							<tr>
-								<th>Chrome</th>
-								<th>Chrome on Android</th>
-								<th>Edge</th>
-								<th>Firefox</th>
-								<th>Firefox on Android</th>
-								<th>Safari</th>
-								<th>Safari on iOS</th>
+								<th>
+									<sr-only>Chrome Desktop</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 256" width="24" height="24">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
+										</svg>
+									</baseline-browser-icon>
+								</th>
+								<th>
+									<sr-only>Chrome on Android</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 256" width="24" height="24">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 55) scale(0.5)" transform-origin="bottom right" />
+										</svg>
+									</baseline-browser-icon>
+								</th>
+								<th>
+									<sr-only>Edge Desktop</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 256" width="24" height="24">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-edge" />
+										</svg>
+									</baseline-browser-icon>
+								</th>
+								<th>
+									<sr-only>Firefox Desktop</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 265">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
+										</svg>
+									</baseline-browser-icon>
+
+								</th>
+								<th>
+									<sr-only>Firefox on Android</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 265">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
+										</svg>
+									</baseline-browser-icon>
+								</th>
+								<th>
+									<sr-only>Safari Desktop</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 256" width="24" height="24">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
+										</svg>
+									</baseline-browser-icon>
+								</th>
+								<th>
+									<sr-only>Safari on iOS</sr-only>
+									<baseline-browser-icon>
+										<svg viewBox="0 0 256 256" width="24" height="24">
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
+											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-ios" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
+										</svg>
+									</baseline-browser-icon>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -239,13 +189,13 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</table-wrapper>
 			</details>
 		`;
 	}
 
 	connectedCallback() {
-		this.render();
+		void this.render();
 	}
 
 	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
