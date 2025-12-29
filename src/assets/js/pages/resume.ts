@@ -1,12 +1,12 @@
 const CUTOUT_YEAR = 5;
-const fiveYearsAgo = new Date();
+const cutoutDate = new Date();
 
-fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - CUTOUT_YEAR);
+cutoutDate.setFullYear(cutoutDate.getFullYear() - CUTOUT_YEAR);
 
 document.querySelectorAll<HTMLTimeElement>('[data-enddate]').forEach((element) => {
 	const dateTime = new Date(element.dateTime);
 
-	if (fiveYearsAgo.getFullYear() < dateTime.getFullYear()) {
+	if (cutoutDate.getFullYear() < dateTime.getFullYear()) {
 		return;
 	}
 

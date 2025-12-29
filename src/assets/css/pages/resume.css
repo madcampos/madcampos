@@ -72,8 +72,10 @@
 	hgroup {
 		text-align: center;
 		font-size: var(--font-size-4);
+		font-family: var(--code-font-family);
 
 		h1 { font-size: var(--font-size-8); }
+		p { font-style: italic; }
 	}
 
 	hr {

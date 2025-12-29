@@ -52,7 +52,7 @@
 		--accent-12: #540000;
 
 		--theme-color: var(--theme-6);
-		--secondary-color: var(--theme-1);
+		--secondary-color: var(--theme-10);
 		--accent-color: var(--accent-5);
 		--complementary-color: var(--red-7);
 
@@ -82,6 +82,8 @@
 
 	@media screen and (prefers-color-scheme: dark) {
 		:root {
+			--secondary-color: var(--theme-1);
+
 			/* Base colors */
 			--text-1: var(--gray-1);
 			--text-2: var(--gray-5);

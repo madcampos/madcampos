@@ -1,5 +1,5 @@
 {
-	"include": ["astro.config.ts", ".astro/**/*"],
+	"include": ["astro.config.ts", ".astro/**/*", "build/**/*"],
 	"exclude": ["node_modules/**/*", "dist/**/*"],
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
