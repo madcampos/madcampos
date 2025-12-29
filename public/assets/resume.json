@@ -1,0 +1,307 @@
+{
+	"$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+	"meta": {
+		"version": "v1.0.0",
+		"lastModified": "2025-12-28T11:09:33",
+		"canonical": "https://madcampos.dev/assets/resume.json"
+	},
+	"basics": {
+		"name": "Marco Campos",
+		"label": "Staff Developer - Full Stack",
+		"email": "me@madcampos.dev",
+		"image": "https://madcampos.dev/assets/images/me.jpg",
+		"url": "https://madcampos.dev/",
+		"location": {
+			"city": "Toronto",
+			"region": "Ontario",
+			"countryCode": "CA"
+		},
+		"summary": "Strong understanding of JavaScript and its basis with 15+ years of experience working with node.js and web technologies.\nGood team and leadership experience by managing a full team of developers, working as a scrum master for 3 years, and menthoring other developers.",
+		"profiles": [
+			{
+				"network": "LinkedIn",
+				"username": "madcampos",
+				"url": "https://linedin.com/in/madcampos"
+			},
+			{
+				"network": "Github",
+				"username": "madcampos",
+				"url": "https://github.com/madcampos"
+			},
+			{
+				"network": "Codepen",
+				"username": "madcampos",
+				"url": "https://codepen.io/madcampos"
+			}
+		]
+	},
+	"languages": [
+		{ "language": "English", "fluency": "Fluent" },
+		{ "language": "Portuguese", "fluency": "Fluent" }
+	],
+	"work": [
+		{
+			"name": "Tenstorrent",
+			"position": "Staff Developer — Full Stack",
+			"description": "AI Hardware Manufacturer",
+			"location": "Toronto, Canada (Hybrid)",
+			"startDate": "2024-01",
+			"summary": "Worked on data visualization tools for analyzing large performance datasets.",
+			"highlights": [
+				"Improved performance of data heavy react app from 1 minute to under 3 seconds.",
+				"Implemented UI and logic for loading app data via SSH.",
+				"Forked a Google and added features to it while maintaining more than 95% compatibility.",
+				"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes."
+			]
+		},
+		{
+			"name": "Lights On Software",
+			"position": "Staff Developer — Full Stack",
+			"description": "Software Agency",
+			"location": "Toronto, Canada (Hybrid)",
+			"startDate": "2024-01",
+			"summary": "Worked on projects for clients long term, providing full stack skills and knowhow.",
+			"highlights": [
+				"Maintained a good relationship with clients, with always positive feedback.",
+				"Delivered new features and bug fixes swiftly."
+			]
+		},
+		{
+			"name": "Moka/Mogo",
+			"position": "Senior Backend Developer",
+			"description": "Stock trading application",
+			"location": "Toronto, Canada (Remote)",
+			"startDate": "2021-03",
+			"endDate": "2023-12",
+			"summary": "Responsible for writing backend code, communicate with the finance team, and bridge communications between teams in Canada and Europe.",
+			"highlights": [
+				"Improved delivery time of the project by acting as Scrum Master and managing tasks for the team.",
+				"Responsible for improving the core product backend and improving experience for users across Canada and Europe.",
+				"Reduced costs with third-party services by refactoring part of the application and removing redundant calls to external services.",
+				"Improved delivery time by acting as a scrum master, where I improved visibility on project status and current bugs.",
+				"Facilitated knowledge sharing between team members and worked as an onboarding partner for three new team members.",
+				"Built and deployed new services and APIs using Docker and Node.js.",
+				"Implemented AWS lambdas to process a pipeline to buy and sell on the stock market.",
+				"Worked on integration with third party provides, including Braze and Contentful, to provide backend proxies to those providers."
+			]
+		},
+		{
+			"name": "Drag App",
+			"position": "Senior Full Stack Developer",
+			"description": "Gmail integration app",
+			"location": "UK (Remote)",
+			"startDate": "2020-10",
+			"endDate": "2021-03",
+			"summary": "Responsible for improving the application code and implementing new features.",
+			"highlights": [
+				"Improved applciation load times, making the user experience smoother.",
+				"Refactored and consolidated multiple components to share code, improving code maintainability and design consistency.",
+				"Refactored the codebase to remove old dependencies, improving reliability and moving code closer to standards."
+			]
+		},
+		{
+			"name": "DomPixel",
+			"position": "Web Applciation Developer",
+			"description": "Design and software agency",
+			"location": "Brazil (In-Person)",
+			"startDate": "2020-05",
+			"endDate": "2020-10",
+			"summary": "Designed and implemented websites and web applications for clients.",
+			"highlights": [
+				"Introduced scrum methodology to the development team, improving delivery times and reliability.",
+				"Implemented a complex feature for date tracking in an extensible manner, with fast performance, and observability for the results."
+			]
+		},
+		{
+			"name": "Happy Code",
+			"position": "Coding School Coordinator",
+			"description": "Coding school for kids",
+			"location": "Brazil (In-Person)",
+			"startDate": "2028-06",
+			"endDate": "2020-05",
+			"summary": "Coordinated a team of teachers, ensuring student satisfaction, program and calendar planning, and teaching classes.",
+			"highlights": [
+				"Kept good relationship with parents, listening to feedback and ensuring satisfaction.",
+				"Improved school schedule organization, eliminating issues with double booking of demonstrative classes and increasing client conversion.",
+				"Kept the team motivated, providing coaching sessions to improve their skills."
+			]
+		},
+		{
+			"name": "Kashew Tecnologia",
+			"position": "Mobile Developer",
+			"description": "Design and software agency",
+			"location": "Brazil (In-Person)",
+			"startDate": "2017-03",
+			"endDate": "2018-02",
+			"summary": "Implemented mobile apps using cross platform tools, using a wrapper for web aplication. With focus in compatibility between OSes.",
+			"highlights": [
+				"Improved communication between development team and key project stakeholders.",
+				"Oversaw the release of a complex feature under a tight schedule, with maintainable and testable code."
+			]
+		},
+		{
+			"name": "UFMT - Universidade Federal do Mato Grosso",
+			"position": "Intern Web Developer",
+			"description": "Internship at university",
+			"location": "Brazil (In-Person)",
+			"startDate": "2014-02",
+			"endDate": "2015-02",
+			"summary": "Created and deployed a news blog for the university's research projects.",
+			"highlights": [
+				"Created customized Wordpress theme from the ground up.",
+				"Ensured browser compatibility and accessibility for the existing design."
+			]
+		},
+		{
+			"name": "W3 Sites",
+			"position": "Web Developer",
+			"description": "Design and software Agency",
+			"location": "Brazil (In-Person)",
+			"startDate": "2009-09",
+			"endDate": "2010-09",
+			"summary": "Maintained existing websites and implement newer websites based on provided designs.",
+			"highlights": [
+				"Implemented \"Address Book\" website with search features in PHP."
+			]
+		}
+	],
+	"volunteer": [
+		{
+			"organization": "Toronto Javascript",
+			"position": "Dev Community Volunteer",
+			"url": "https://torontojs.com/",
+			"startDate": "2022-11",
+			"endDate": "2025-09",
+			"summary": "Organized and hosted events for the community.",
+			"highlights": [
+				"Presented in 4 talks at \"Teck Talk\" events.",
+				"Hosted \"Code Club\" event focused on mob programming and pair coding.",
+				"Worked as project manager for a volunteer management system, managing goals and a team of 10 developers while providing feedback and mentoring to the junior developers on the team."
+			]
+		},
+		{
+			"organization": "Boy Scouts of Brazil",
+			"position": "Aduls Leadership Trainer/Scout Leader",
+			"url": "https://www.escoteiros.org.br/",
+			"startDate": "2013-10",
+			"endDate": "2021-01",
+			"summary": "Responsible for lectures and courses with adults; and planning and execution of activities with kids.",
+			"highlights": [
+				"Helped streamline the scout group structure and improve engagement from parents.",
+				"Lectured at conferences and courses on how to build team cohesion and plan and organize activities for kids.",
+				"Planned, managed, and executed large scale activities involving more than 20 volunteers and 300 kids.",
+				"Assisted other scout groups in organizing and planning activities for kids."
+			]
+		}
+	],
+	"education": [
+		{
+			"institution": "Unicesumar",
+			"studyType": "Post-Graduation",
+			"area": "Agile Methodologies",
+			"url": "https://www.unicesumar.edu.br/",
+			"startDate": "2020",
+			"endDate": "2021"
+		},
+		{
+			"institution": "Universidade de Cuiabá",
+			"studyType": "B.Sc.",
+			"area": "Computer Science",
+			"url": "https://www.unic.com.br/",
+			"startDate": "2016",
+			"endDate": "2019"
+		}
+	],
+	"publications": [
+		{ "name": "Designing a platform to facilitate the development of virtual e-participation environments" },
+		{ "name": "Desenvolvimento Da Interface Do Sistema De Aprendizagem Colaborativa Cooled" },
+		{ "name": "Padrões de acessibilidade para governo eletrônico usando a plataforma Liferay" }
+	],
+	"projects": [
+		{
+			"name": "Welcome to the Internet - Building websites like it's 1995",
+			"entity": "Tech Tank TO",
+			"type": "talk",
+			"startDate": "2024-10-08",
+			"endDate": "2024-10-08",
+			"description": "An overview on features that are available to use on the web without the need of extra tools."
+		},
+		{
+			"name": "Community Hub",
+			"entity": "Toronto JS",
+			"type": "application",
+			"roles": ["Project Manager"],
+			"startDate": "2024-11",
+			"endDate": "2025-09",
+			"url": "https://github.com/torontojs/communityhub",
+			"description": "A platform to aggregate volunteer information and to allow community organizers to manage volunteers."
+		},
+		{
+			"name": "Zalgo - And other Unicode Eldritch Horrors",
+			"entity": "Toronto JS",
+			"type": "talk",
+			"startDate": "2024-09-25",
+			"endDate": "2024-09-25",
+			"url": "https://madcampos.dev/talks/tojs-unicode/",
+			"description": "A deep dive into text encoding and JavaScript, it's challenges and how to solve them."
+		},
+		{
+			"name": "Form validation with (almost) no JS",
+			"entity": "Toronto JS",
+			"type": "talk",
+			"startDate": "2024-08-29",
+			"endDate": "2024-08-29",
+			"url": "https://madcampos.dev/talks/tojs-forms/",
+			"description": "A view on how to do form validation using mostly HTML and CSS."
+		},
+		{
+			"name": "The Web Can Do That?!",
+			"entity": "Toronto JS",
+			"type": "talk",
+			"startDate": "2024-04-30",
+			"endDate": "2024-04-30",
+			"url": "https://madcampos.dev/talks/tojs-web-features/",
+			"description": "A quick summary of 5 features the web platform has that you might not know about."
+		},
+		{
+			"name": "Web Components for fun and profit",
+			"entity": "Toronto JS",
+			"type": "talk",
+			"startDate": "2023-07-27",
+			"endDate": "2023-07-27",
+			"url": "https://madcampos.dev/talks/tojs-web-components/",
+			"description": "An intermedite level quick talk about Web Components. Starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility."
+		}
+	],
+	"awards": [
+		{
+			"title": "2nd place at GovHack MT Hackaton",
+			"awarder": "GovHack MT",
+			"date": "2016-11"
+		}
+	],
+	"interests": [
+		{ "name": "Crochet" },
+		{ "name": "Lego" },
+		{ "name": "Board Games" },
+		{ "name": "Role-Playing Games" }
+	],
+	"skills": [
+		{ "name": "JavaScript", "level": "15+ years" },
+		{ "name": "TypeScript", "level": "8 years" },
+		{ "name": "MongoDB", "level": "5 years" },
+		{ "name": "Vue.js", "level": "2 years" },
+		{ "name": "Node.js", "level": "15+ years" },
+		{ "name": "MySQL", "level": "5 years" },
+		{ "name": "PHP", "level": "7 years" },
+		{ "name": "Laravel", "level": "2 years" },
+		{ "name": "WordPress", "level": "5 years" },
+		{ "name": "Docker", "level": "4 years" },
+		{ "name": "AWS", "level": "3 years" },
+		{ "name": "Scrum", "level": "5 years" },
+		{ "name": "React", "level": "4 years" },
+		{ "name": "Angular", "level": "4 years" },
+		{ "name": "Python", "level": "1 years" },
+		{ "name": "Git", "level": "10 years" }
+	]
+}
