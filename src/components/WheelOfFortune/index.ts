@@ -1,3 +1,5 @@
+// TODO: reimplement wheel of fortune
+// Ref: https://stackoverflow.com/questions/33850201/how-to-draw-a-wheel-of-fortune
 class WheelOffortune extends HTMLElement {
 	static observedAttributes = ['display'] as const;
 	static DISPLAY_TYPES = ['wheel', 'list'] as const;
