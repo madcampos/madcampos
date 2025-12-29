@@ -4,7 +4,7 @@ import { default as PizZip } from 'pizzip';
 import resume from '../public/assets/resume.json' with { type: 'json' };
 
 const SOURCE_FILE = './template.docx';
-const DEST_FOLDER = './dist/assets/';
+const DEST_FOLDER = '../public/assets/';
 const DEST_FILE = `${DEST_FOLDER}resume.docx`;
 
 const template = await fs.readFile(new URL(SOURCE_FILE, import.meta.url), 'binary');
