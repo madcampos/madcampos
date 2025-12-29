@@ -1,7 +1,7 @@
 @layer print {
 	@media print {
 		:root {
-			--body-text: 12pt;
+			--base-font-size: 12pt;
 
 			/* Base colors */
 			--text-1: black;

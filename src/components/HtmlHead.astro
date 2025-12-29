@@ -26,6 +26,7 @@ const {
 } = Astro.props;
 
 const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(Astro.url.pathname);
+const isResumeUrl = Astro.url.pathname.startsWith('/resume');
 ---
 <head>
 	<meta charset="utf-8" />
@@ -52,7 +53,7 @@ const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(Astro.url.pathname);
 	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
 
 	<!-- Main JS -->
-	<script src="../assets/js/index.ts"></script>
+	{!isResumeUrl && <script src="../assets/js/index.ts"></script>}
 
 	<!-- URLs -->
 	<link rel="canonical" href={Astro.url.href} />

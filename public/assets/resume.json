@@ -24,12 +24,12 @@
 				"url": "https://linedin.com/in/madcampos"
 			},
 			{
-				"network": "Github",
+				"network": "GitHub",
 				"username": "madcampos",
 				"url": "https://github.com/madcampos"
 			},
 			{
-				"network": "Codepen",
+				"network": "CodePen",
 				"username": "madcampos",
 				"url": "https://codepen.io/madcampos"
 			}
@@ -181,7 +181,7 @@
 		},
 		{
 			"organization": "Boy Scouts of Brazil",
-			"position": "Aduls Leadership Trainer/Scout Leader",
+			"position": "Adults Leadership Trainer/Scout Leader",
 			"url": "https://www.escoteiros.org.br/",
 			"startDate": "2013-10",
 			"endDate": "2021-01",
@@ -201,7 +201,10 @@
 			"area": "Agile Methodologies",
 			"url": "https://www.unicesumar.edu.br/",
 			"startDate": "2020",
-			"endDate": "2021"
+			"endDate": "2021",
+			"highlights": [
+				"Wrote a case study of the results of implementing scrum on the team I was working with at the time."
+			]
 		},
 		{
 			"institution": "Universidade de Cuiabá",
@@ -209,13 +212,20 @@
 			"area": "Computer Science",
 			"url": "https://www.unic.com.br/",
 			"startDate": "2016",
-			"endDate": "2019"
+			"endDate": "2019",
+			"highlights": [
+				"Worked in academic research on usability, accessibility, and user experience.",
+				"Published 3 research papers.",
+				"Was elected president of the student union for 4 years."
+			]
 		}
 	],
 	"publications": [
-		{ "name": "Designing a platform to facilitate the development of virtual e-participation environments" },
-		{ "name": "Desenvolvimento Da Interface Do Sistema De Aprendizagem Colaborativa Cooled" },
-		{ "name": "Padrões de acessibilidade para governo eletrônico usando a plataforma Liferay" }
+		{
+			"name": "Designing a platform to facilitate the development of virtual e-participation environments",
+			"publisher": "ACM",
+			"releaseDate": "2010"
+		}
 	],
 	"projects": [
 		{
@@ -224,6 +234,7 @@
 			"type": "talk",
 			"startDate": "2024-10-08",
 			"endDate": "2024-10-08",
+			"url": "https://www.techtankto.com/",
 			"description": "An overview on features that are available to use on the web without the need of extra tools."
 		},
 		{
