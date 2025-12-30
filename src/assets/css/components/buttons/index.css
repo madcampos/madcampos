@@ -48,15 +48,7 @@
 		100% { --rotate: 0deg; }
 	}
 
-	:host {
-		--old-button-border: none;
-		--old-button-border-visibility: hidden;
-		--old-button-tint: none;
-		--old-button-blend-mode: none;
-		--old-button-border-radius: 0.2rem;
-
-		display: block;
-	}
+	:host { display: block; }
 
 	button {
 		--button-font-oldstyle: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
@@ -72,8 +64,8 @@
 		position: relative;
 		cursor: pointer;
 		margin: var(--size-1);
-		border: var(--old-button-border);
-		border-radius: var(--old-button-border-radius);
+		border: var(--old-button-border, none);
+		border-radius: var(--old-button-border-radius, 0.2rem);
 		background: none;
 		padding: 0;
 		inline-size: fit-content;
@@ -83,9 +75,9 @@
 		&::after {
 			display: block;
 			position: absolute;
-			mix-blend-mode: var(--old-button-blend-mode);
+			mix-blend-mode: var(--old-button-blend-mode, none);
 			inset: 0;
-			background: var(--old-button-tint);
+			background: var(--old-button-tint, none);
 			content: '';
 		}
 
@@ -135,7 +127,7 @@
 		}
 
 		#button-base { fill: #d3d3d3; }
-		:is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility); }
+		:is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility, hidden); }
 		:is(#button-border-up, #button-border-left) { fill: white; }
 		:is(#button-border-down, #button-border-right) { fill: black; }
 

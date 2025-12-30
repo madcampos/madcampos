@@ -1,0 +1,104 @@
+@layer theme {
+	[data-theme='TEMPLATE'] {
+		/* Border */
+		--border-size: ;
+		--border-style: ;
+		--link-underline: ;
+		--border-radius: ;
+
+		/* Theme colors */
+		--theme-0: ;
+		--theme-1: ;
+		--theme-2: ;
+		--theme-3: ;
+		--theme-4: ;
+		--theme-5: ;
+		--theme-6: ;
+		--theme-7: ;
+		--theme-8: ;
+		--theme-9: ;
+		--theme-10: ;
+		--theme-11: ;
+		--theme-12: ;
+
+		--accent-0: ;
+		--accent-1: ;
+		--accent-2: ;
+		--accent-3: ;
+		--accent-4: ;
+		--accent-5: ;
+		--accent-6: ;
+		--accent-7: ;
+		--accent-8: ;
+		--accent-9: ;
+		--accent-10: ;
+		--accent-11: ;
+		--accent-12: ;
+
+		--theme-color: ;
+		--secondary-color: ;
+		--accent-color: ;
+		--complementary-color: ;
+
+		/* Base colors */
+		--text-1: ;
+		--text-2: ;
+		--surface-1: ;
+		--surface-2: ;
+		--surface-3: ;
+		--surface-4: ;
+
+		/* Link colors */
+		--link-color: ;
+		--link-visited-color: ;
+		--link-hover-color: ;
+		--link-active-color: ;
+
+		/* Code colors */
+		--diff-add-color: ;
+		--diff-add-bg: ;
+		--diff-remove-color: ;
+		--diff-remove-bg: ;
+		--highlight-color: ;
+		--highlight-default-bg: ;
+		--highlight-error-color: ;
+		--highlight-error-bg: ;
+		--highlight-warning-color: ;
+		--highlight-warning-bg: ;
+
+		/* Baseline colors */
+		--baseline-high-color: ;
+		--baseline-high-bg: ;
+		--baseline-low-color: ;
+		--baseline-low-bg: ;
+		--baseline-limited-color: ;
+		--baseline-limited-bg: ;
+		--baseline-no-data-color: ;
+		--baseline-no-data-bg: ;
+
+		--baseline-supported-color: ;
+		--baseline-supported-bg: ;
+		--baseline-unsupported-color: ;
+		--baseline-unsupported-bg: ;
+
+		/* Old Buttons Overrides */
+		--old-button-border: ;
+		--old-button-border-visibility: ;
+		--old-button-tint: ;
+		--old-button-blend-mode: ;
+		--old-button-border-radius: ;
+
+		/* Fonts */
+		--headers-font-family: ;
+		--code-font-family: ;
+		--text-font-family: ;
+
+		/* Icons */
+		--details-icon: ;
+		--hr-decoration-icon: ;
+
+		/* Global settings */
+		accent-color: var(--theme-color);
+		color-scheme: light dark;
+	}
+}

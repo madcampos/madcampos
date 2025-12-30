@@ -1,5 +1,5 @@
 @layer components {
-	rendered-content {
+	:root {
 		/* colors */
 		--diff-add-color: light-dark(darkgreen, limegreen);
 		--diff-add-bg: light-dark(rgba(0, 194, 0, 0.3), rgba(0, 100, 0, 0.3));
@@ -11,7 +11,9 @@
 		--highlight-error-bg: light-dark(rgba(255, 99, 71, 0.3), rgba(255, 99, 71, 0.2));
 		--highlight-warning-color: light-dark(goldenrod, yellow);
 		--highlight-warning-bg: light-dark(rgba(218, 165, 32, 0.3), rgba(218, 165, 32, 0.2));
+	}
 
+	rendered-content {
 		sup svg {
 			inline-size: 1em;
 			block-size: 1em;
