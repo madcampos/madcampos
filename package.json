@@ -16,17 +16,26 @@
 		"bootstrap:types": "wrangler types server/env.d.ts",
 		"bootstrap:certs": "mkdir certs && mkcert -key-file='./certs/server.key' -cert-file='./certs/server.crt' 'localhost'",
 		"bootstrap": "pnpm run bootstrap:types && pnpm run bootstrap:astro",
+
 		"prestart:api": "pnpm run bootstrap:types",
 		"start:api": "wrangler dev --env=local --https-cert-path certs/server.crt --https-key-path certs/server.key",
+
 		"prestart": "pnpm run bootstrap:astro",
 		"start": "astro dev --site=https://localhost:3000/",
+
 		"prebuild": "pnpm run bootstrap",
 		"build": "astro build",
+
+		"build:resume": "node ./build/render-resume.ts",
+
 		"prepreview": "pnpm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
+
 		"predeploy": "pnpm run build",
 		"deploy": "wrangler deploy --minify --env=\"\"",
+
 		"format": "dprint fmt --staged",
+
 		"typecheck": "tsc --noEmit",
 		"lint:js": "eslint --fix",
 		"lint:md": "astro check",

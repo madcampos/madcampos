@@ -69,6 +69,19 @@
 		@media print { display: none; }
 	}
 
+	header details {
+		ul {
+			display: flex;
+			list-style: none;
+			padding-inline-start: 0;
+			gap: var(--size-7);
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		@media print { display: none; }
+	}
+
 	hgroup {
 		text-align: center;
 		font-size: var(--font-size-4);

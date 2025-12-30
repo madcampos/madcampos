@@ -1,10 +1,10 @@
 import { default as Docxtemplater } from 'docxtemplater';
 import fs from 'node:fs/promises';
 import { default as PizZip } from 'pizzip';
-import resume from '../public/assets/resume.json' with { type: 'json' };
+import resume from '../public/assets/documents/resume.json' with { type: 'json' };
 
 const SOURCE_FILE = './template.docx';
-const DEST_FOLDER = '../public/assets/';
+const DEST_FOLDER = '../public/assets/documents/';
 const DEST_FILE = `${DEST_FOLDER}resume.docx`;
 
 const template = await fs.readFile(new URL(SOURCE_FILE, import.meta.url), 'binary');
@@ -15,6 +15,7 @@ const doc = new Docxtemplater(unzippedTemplate, {
 });
 
 const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric' });
+const langNameFormatter = new Intl.DisplayNames('en-CA', { type: 'language' });
 const collator = new Intl.Collator('en', { usage: 'sort' });
 
 function dateSorter(
@@ -54,8 +55,7 @@ doc.render({
 	skills: [
 		...resume.skills.toSorted(({ name: nameA }, { name: nameB }) => collator.compare(nameA, nameB)),
 		...resume.languages
-			.toSorted(({ language: langA }, { language: langB }) => collator.compare(langA, langB))
-			.map(({ language, fluency }) => ({ name: language, level: fluency }))
+			.map(({ language, fluency }) => ({ name: langNameFormatter.of(language), level: fluency }))
 	],
 	work: resume.work
 		.toSorted(dateSorter)

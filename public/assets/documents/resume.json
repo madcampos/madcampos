@@ -3,7 +3,7 @@
 	"meta": {
 		"version": "v1.0.0",
 		"lastModified": "2025-12-28T11:09:33",
-		"canonical": "https://madcampos.dev/assets/resume.json"
+		"canonical": "https://madcampos.dev/assets/documents/resume.json"
 	},
 	"basics": {
 		"name": "Marco Campos",
@@ -36,8 +36,10 @@
 		]
 	},
 	"languages": [
-		{ "language": "English", "fluency": "Fluent" },
-		{ "language": "Portuguese", "fluency": "Fluent" }
+		{ "language": "en", "fluency": "Fluent" },
+		{ "language": "pt", "fluency": "Fluent" },
+		{ "language": "es", "fluency": "Basic" },
+		{ "language": "fr", "fluency": "Basic" }
 	],
 	"work": [
 		{

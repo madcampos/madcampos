@@ -1,10 +1,11 @@
 ---
 import '../assets/css/pages/resume.css';
 import { Icon } from 'astro-icon/components';
-import resume from '../../public/assets/resume.json' with { type: 'json' };
+import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
 import HtmlHead from '../components/HtmlHead.astro';
 
 const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric' });
+const langNameFormatter = new Intl.DisplayNames('en-CA', { type: 'language' });
 const collator = new Intl.Collator('en', { usage: 'sort' });
 const projectsMap = {
 	application: 'mingcute:code-line',
@@ -42,44 +43,86 @@ function dateSorter(
 		title="Resume | Marco Campos"
 		description="Resume"
 	/>
-	<body>
-		<!-- TODO: add schema metadata -->
-		<!-- TODO: add links to download other formats -->
+	<body
+		class="h-resume"
+		itemprop="about"
+		itemscope
+		itemprop="https://schema.org/Person"
+	>
 		<header>
 			<hgroup>
-				<h1>{resume.basics.name}</h1>
-				<p>{resume.basics.label}</p>
+				<h1 class="p-name" itemprop="name">{resume.basics.name}</h1>
+				<p class="p-job-title" itemprop="jobTitle">{resume.basics.label}</p>
 			</hgroup>
-			<aside>
+
+			<details>
+				<summary>Alternative File Formats</summary>
+
+				<ul>
+					<li><a href="/assets/documents/resume.docx" download><abbr title="Microsoft Word">DOCX</abbr></a></li>
+					<li><a href="/assets/documents/resume.pdf" download><abbr title="Portable Document File">PDF</abbr></a></li>
+					<li><a href="/assets/documents/resume.json" download><abbr title="JavaScript Object Notation">JSON</abbr></a></li>
+				</ul>
+			</details>
+
+			<aside class="p-contact h-card">
 				<ul id="links">
 					<li>
 						<Icon name="mingcute:mail-line" aria-hidden="true" />
-						<a href={`mailto:${resume.basics.email}`} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{resume.basics.email}</a>
+						<a
+							href={`mailto:${resume.basics.email}`}
+							target="_blank"
+							rel="noopener noreferrer me"
+							referrerpolicy="no-referrer"
+							itemprop="email"
+							class="u-email"
+						>{resume.basics.email}</a>
 					</li>
 					<!-- INFO: phone not added for privacy reasons -->
 					<!--
 						<li>
 							<Icon name="mingcute:phone-line" aria-hidden="true" />
-							<a href={`tel:${resume.basics.phone}`} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{resume.basics.phone}</a>
+							<a
+								href={`tel:${resume.basics.phone}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								referrerpolicy="no-referrer"
+								itemprop="telephone"
+								class="p-tel"
+							>{resume.basics.phone}</a>
 						</li>
 					-->
 					<li>
 						<Icon name="mingcute:link-line" aria-hidden="true" />
-						<a href={resume.basics.url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{resume.basics.url}</a>
+						<a
+							href={resume.basics.url}
+							rel="me"
+							itemprop="url"
+							class="u-url"
+						>{resume.basics.url}</a>
 					</li>
 					{
-						resume.basics.profiles.map(({ network, url }) => (
-							<li>
+						resume.basics.profiles.map(({ network, url, username }) => (
+							<li itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
 								{/* @ts-expect-error */}
 								<Icon name={linksMap[network] ?? 'mingcute:link-line'} aria-hidden="true" />
-								<a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{network}</a>
+								<meta itemprop="contactType" content={network} />
+								<meta itemprop="identifier" content={username} />
+								<a
+									href={url}
+									target="_blank"
+									rel="noopener noreferrer me"
+									referrerpolicy="no-referrer"
+									class="u-url"
+									itemprop="url"
+								>{network}</a>
 							</li>
 						))
 					}
 				</ul>
 			</aside>
 
-			<blockquote>{resume.basics.summary}</blockquote>
+			<blockquote class="p-summary">{resume.basics.summary}</blockquote>
 		</header>
 
 		<hr />
@@ -92,12 +135,26 @@ function dateSorter(
 					{
 						resume.skills
 							.toSorted(({ name: nameA }, { name: nameB }) => collator.compare(nameA, nameB))
-							.map(({ name, level }) => <li>{name} ({level})</li>)
+							.map(({ name, level }) => (
+							<li>
+								<span class="p-skill" itemprop="knowsAbout">{name}</span>
+								<span>({level})</span>
+							</li>
+						))
 					}
 					{
 						resume.languages
-							.toSorted(({ language: langA }, { language: langB }) => collator.compare(langA, langB))
-							.map(({ language, fluency }) => <li>{language} ({fluency})</li>)
+							.map(({ language, fluency }) => (
+							<li
+								itemprop="knowsLanguage"
+								itemscope
+								itemtype="https://schema.org/Language"
+							>
+								<meta itemprop="name" content={language} />
+								<span class="p-skill" itemprop="alternateName">{langNameFormatter.of(language)}</span>
+								<span>({fluency})</span>
+							</li>
+						))
 					}
 				</ul>
 
@@ -112,32 +169,55 @@ function dateSorter(
 						resume.work.toSorted(dateSorter).map((
 							{ name, position, description, highlights, location, startDate, endDate, summary }
 						) => (
-							<dt>
-								<entry-title>
-									<span>{position}</span>
-								</entry-title>
-								<entry-subtitle>
-									<span>{name}</span>
-									<small>{description}</small>
-								</entry-subtitle>
-								<entry-date>
-									<time datetime={new Date(startDate).toISOString()}>{formatter.format(new Date(startDate))}</time>
-									<span>&mdash;</span>
-									{
-										endDate
-											? <time data-enddate datetime={new Date(endDate).toISOString()}>{formatter.format(new Date(endDate))}</time>
-										: <span>Present</span>
-									}
-								</entry-date>
-								<entry-location>{location}</entry-location>
-							</dt>
-							<dd>
-								<p>{summary}</p>
+							<div
+								class="h-event"
+								itemprop="hasOccupation"
+								itemscope
+								itemtype="https://schema.org/Role"
+							>
+								<dt>
+									<entry-title class="p-name" itemprop="name">{position}</entry-title>
+									<entry-subtitle
+										class="h-card"
+										itemprop="owner"
+										itemscope
+										itemtype="https://schema.org/Organization"
+									>
+										<span class="p-name" itemprop="name">{name}</span>
+										<small class="p-description" itemprop="description">{description}</small>
+									</entry-subtitle>
+									<entry-date>
+										<time
+											datetime={new Date(startDate).toISOString()}
+											class="dt-start"
+											itemprop="startDate"
+										>{formatter.format(new Date(startDate))}</time>
+										<span>&mdash;</span>
+										{
+											endDate
+												? (
+												<time
+													data-enddate
+													datetime={new Date(endDate).toISOString()}
+													class="dt-end"
+													itemprop="endDate"
+												>{formatter.format(new Date(endDate))}</time>
+											)
+											: <span>Present</span>
+										}
+									</entry-date>
+									<entry-location>
+										<address class="p-location">{location}</address>
+									</entry-location>
+								</dt>
+								<dd class="p-summary" itemprop="description">
+									<p>{summary}</p>
 
-								<ul>
-									{highlights.map((highlight) => <li>{highlight}</li>)}
-								</ul>
-							</dd>
+									<ul>
+										{highlights.map((highlight) => <li>{highlight}</li>)}
+									</ul>
+								</dd>
+							</div>
 						))
 					}
 				</dl>
@@ -152,30 +232,58 @@ function dateSorter(
 						resume.volunteer.toSorted(dateSorter).map((
 							{ position, highlights, startDate, endDate, summary, organization, url }
 						) => (
-							<dt>
-								<entry-title>
-									<span>{position}</span>
-								</entry-title>
-								<entry-subtitle>
-									<a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{organization}</a>
-								</entry-subtitle>
-								<entry-date>
-									<time datetime={new Date(startDate).toISOString()}>{formatter.format(new Date(startDate))}</time>
-									<span>&mdash;</span>
-									{
-										endDate
-											? <time data-enddate datetime={new Date(endDate).toISOString()}>{formatter.format(new Date(endDate))}</time>
-										: <span>Present</span>
-									}
-								</entry-date>
-							</dt>
-							<dd>
-								<p>{summary}</p>
+							<div
+								class="h-event"
+								itemprop="hasOccupation"
+								itemscope
+								itemtype="https://schema.org/Role"
+							>
+								<dt>
+									<entry-title class="p-name" itemprop="name">{position}</entry-title>
+									<entry-subtitle
+										class="h-card"
+										itemprop="owner"
+										itemscope
+										itemtype="https://schema.org/Organization"
+									>
+										<meta class="p-name" itemprop="name" content={organization} />
+										<a
+											href={url}
+											target="_blank"
+											rel="noopener noreferrer"
+											referrerpolicy="no-referrer"
+											itemprop="sameAs"
+										>{organization}</a>
+									</entry-subtitle>
+									<entry-date>
+										<time
+											datetime={new Date(startDate).toISOString()}
+											class="dt-start"
+											itemprop="startDate"
+										>{formatter.format(new Date(startDate))}</time>
+										<span>&mdash;</span>
+										{
+											endDate
+												? (
+												<time
+													data-enddate
+													datetime={new Date(endDate).toISOString()}
+													class="dt-end"
+													itemprop="endDate"
+												>{formatter.format(new Date(endDate))}</time>
+											)
+											: <span>Present</span>
+										}
+									</entry-date>
+								</dt>
+								<dd class="p-summary" itemprop="description">
+									<p>{summary}</p>
 
-								<ul>
-									{highlights.map((highlight) => <li>{highlight}</li>)}
-								</ul>
-							</dd>
+									<ul>
+										{highlights.map((highlight) => <li>{highlight}</li>)}
+									</ul>
+								</dd>
+							</div>
 						))
 					}
 				</dl>
@@ -191,28 +299,46 @@ function dateSorter(
 						resume.education.toSorted(dateSorter).map((
 							{ startDate, endDate, url, institution, area, studyType, highlights }
 						) => (
-							<dt>
-								<entry-title>
-									<span>{studyType} {area}</span>
-								</entry-title>
-								<entry-subtitle>
-									<a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{institution}</a>
-								</entry-subtitle>
-								<entry-date>
-									<time datetime={new Date(startDate).toISOString()}>{formatter.format(new Date(startDate))}</time>
-									<span>&mdash;</span>
-									{
-										endDate
-											? <time datetime={new Date(endDate).toISOString()}>{formatter.format(new Date(endDate))}</time>
-										: <span>Present</span>
-									}
-								</entry-date>
-							</dt>
-							<dd>
-								<ul>
-									{highlights.map((highlight) => <li>{highlight}</li>)}
-								</ul>
-							</dd>
+							<div
+								class="h-event"
+								itemprop="hasCredential"
+								itemscope
+								itemtype="https://schema.org/EducationalOccupationalCredential"
+							>
+								<dt>
+									<entry-title class="p-name" itemprop="educationalLevel">{studyType} {area}</entry-title>
+									<entry-subtitle
+										class="h-card"
+										itemprop="recognizedBy"
+										itemscope
+										itemtype="https://schema.org/Organization"
+									>
+										<meta class="p-name" itemprop="name" content={institution} />
+										<a
+											href={url}
+											target="_blank"
+											rel="noopener noreferrer"
+											referrerpolicy="no-referrer"
+											itemprop="sameAs"
+										>{institution}</a>
+									</entry-subtitle>
+									<entry-date>
+										<meta itemprop="temporalCoverage" content={`${startDate} — ${endDate ?? 'Present'}`} />
+										<time datetime={new Date(startDate).toISOString()}>{formatter.format(new Date(startDate))}</time>
+										<span>&mdash;</span>
+										{
+											endDate
+												? <time datetime={new Date(endDate).toISOString()}>{formatter.format(new Date(endDate))}</time>
+											: <span>Present</span>
+										}
+									</entry-date>
+								</dt>
+								<dd class="p-summary" itemprop="description">
+									<ul>
+										{highlights.map((highlight) => <li>{highlight}</li>)}
+									</ul>
+								</dd>
+							</div>
 						))
 					}
 				</dl>
@@ -228,26 +354,64 @@ function dateSorter(
 						resume.projects.toSorted(dateSorter).map((
 							{ startDate, endDate, url, description, entity, name, type }
 						) => (
-							<dt>
-								{/* @ts-expect-error */}
-								<Icon name={projectsMap[type] ?? 'mingcute:test-tube-line'} aria-hidden="true" />
-								<entry-title>{name}</entry-title>
-								<entry-subtitle>
-									<a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{entity}</a>
-								</entry-subtitle>
-								<entry-date>
-									<time datetime={new Date(startDate).toISOString()}>{formatter.format(new Date(startDate))}</time>
-									<span>&mdash;</span>
-									{
-										endDate
-											? <time data-enddate datetime={new Date(endDate).toISOString()}>{formatter.format(new Date(endDate))}</time>
-										: <span>Present</span>
-									}
-								</entry-date>
-							</dt>
-							<dd>
-								<p>{description}</p>
-							</dd>
+							<div
+								class="h-card"
+								itemprop={type === 'talk' ? 'performerIn' : 'subjectOf'}
+								itemscope
+								itemtype={`https://schema.org/${type === 'talk' ? 'Event' : 'CreativeWork'}`}
+							>
+								<dt>
+									{/* @ts-expect-error */}
+									<Icon name={projectsMap[type] ?? 'mingcute:test-tube-line'} aria-hidden="true" />
+									<entry-title itemprop="name">{name}</entry-title>
+									<entry-subtitle
+										class="h-card"
+										itemprop={type === 'talk' ? 'organizer' : 'publisher'}
+										itemscope
+										itemtype="https://schema.org/Organization"
+									>
+										<meta class="p-name" itemprop="name" content={entity} />
+										<a
+											href={url}
+											target="_blank"
+											rel="noopener noreferrer"
+											referrerpolicy="no-referrer"
+											itemprop="sameAs"
+										>{entity}</a>
+									</entry-subtitle>
+									<entry-date>
+										{
+											type !== 'talk' && (
+												<meta
+													itemprop="temporalCoverage"
+													content={`${startDate} — ${endDate ?? 'Present'}`}
+												/>
+											)
+										}
+										<time
+											datetime={new Date(startDate).toISOString()}
+											class="dt-start"
+											itemprop={type === 'talk' ? 'startDate' : null}
+										>{formatter.format(new Date(startDate))}</time>
+										<span>&mdash;</span>
+										{
+											endDate
+												? (
+												<time
+													data-enddate
+													datetime={new Date(endDate).toISOString()}
+													class="dt-end"
+													itemprop={type === 'talk' ? 'endDate' : null}
+												>{formatter.format(new Date(endDate))}</time>
+											)
+											: <span>Present</span>
+										}
+									</entry-date>
+								</dt>
+								<dd class="p-summary" itemprop="description">
+									<p>{description}</p>
+								</dd>
+							</div>
 						))
 					}
 				</dl>
@@ -266,7 +430,7 @@ function dateSorter(
 							<li>
 								<Icon name="mingcute:medal-line" aria-hidden="true" />
 								<entry-title>
-									<span>{title}</span>
+									<cite itemprop="award">{title}</cite>
 								</entry-title>
 								<entry-subtitle>
 									<span>{awarder}</span>
@@ -281,16 +445,20 @@ function dateSorter(
 						resume.publications.map((
 							{ name, publisher, releaseDate }
 						) => (
-							<li>
+							<li itemprop="subjectOf" itemscope itemtype="https://schema.org/ScholarlyArticle">
 								<Icon name="mingcute:document-3-line" aria-hidden="true" />
 								<entry-title>
-									<span>{name}</span>
+									<cite itemprop="name">{name}</cite>
 								</entry-title>
-								<entry-subtitle>
-									<span>{publisher}</span>
+								<entry-subtitle itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+									<span itemprop="name">{publisher}</span>
 								</entry-subtitle>
 								<entry-date>
-									<time data-enddate datetime={new Date(releaseDate).toISOString()}>{formatter.format(new Date(releaseDate))}</time>
+									<time
+										data-enddate
+										datetime={new Date(releaseDate).toISOString()}
+										itemprop="datePublished"
+									>{formatter.format(new Date(releaseDate))}</time>
 								</entry-date>
 							</li>
 						))
@@ -309,7 +477,7 @@ function dateSorter(
 							{ name }
 						) => (
 							<li>
-								<span>{name}</span>
+								<span itemprop="knowsAbout">{name}</span>
 							</li>
 						))
 					}
