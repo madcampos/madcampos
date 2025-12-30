@@ -1,26 +1,30 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute, GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
 import { getImage } from 'astro:assets';
 import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
 import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
-import { listAllPosts } from '../../utils/post.js';
+import { listAllPosts, MAX_POSTS_PER_PAGE } from '../../utils/post.js';
 
-// TODO: add pagination
-// Ref: https://stackoverflow.com/questions/1301392/pagination-in-feeds-like-atom-and-rss
-// Ref: https://kevincox.ca/2022/05/06/rss-feed-best-practices/
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
+type APIProps = InferGetStaticPropsType<typeof getStaticPaths>;
 
-export const GET: APIRoute = async (context) => {
+export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 	const blogImage = await getImage({ src: defaultImage, format: 'png', width: 512, height: 512 });
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const baseUrl = new URL(context.site!);
+	const baseUrl = new URL(site!);
 
 	baseUrl.protocol = 'https:';
 
 	const blogUrl = new URL('/blog/', baseUrl).toString();
-	const feedUrl = new URL('./feed.xml', blogUrl).toString();
+	const currentPageUrl = new URL(`./feed.atom${props.page.currentPage === 1 ? '' : props.page.currentPage}.xml`, blogUrl).toString();
+	const nextPageUrl = props.page.currentPage < props.page.lastPage
+		? new URL(`./feed.atom${props.page.currentPage + 1}.xml`, blogUrl).toString()
+		: undefined;
+	const prevPageUrl = props.page.currentPage > 1
+		? new URL(`./feed.atom${props.page.currentPage - 1 === 1 ? '' : props.page.currentPage - 1}.xml`, blogUrl).toString()
+		: undefined;
 
-	const allPosts = await listAllPosts();
-	const items = await Promise.all(allPosts.map(async (post) => {
+	const items = await Promise.all(props.page.data.map(async (post) => {
 		const image = await post.getImage();
 		const imageTag = image ? `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
 
@@ -28,7 +32,7 @@ export const GET: APIRoute = async (context) => {
 
 		return `<entry>
 			<id>${new URL(post.url, blogUrl).toString()}</id>
-			<title><![CDATA[${inlineMarkdownStrip(post.data.title)}]]></title>
+			<title>${escapeHtmlTags(inlineMarkdownStrip(post.data.title))}</title>
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
 			<published>${post.data.createdAt}</published>
 			<link rel="alternate" type="text/html" href="${new URL(post.url, blogUrl).toString()}" />
@@ -47,8 +51,14 @@ export const GET: APIRoute = async (context) => {
 			<subtitle>Marco Campos' Blog — A space where I talk about web development and other programming related (or not) things.</subtitle>
 			<id>${blogUrl}</id>
 			<link rel="alternate" type="text/html" href="${blogUrl}" />
-			<link rel="self" type="application/atom+xml" href="${feedUrl}" />
-			<updated>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toISOString()}</updated>
+			<link rel="self" type="application/atom+xml" href="${currentPageUrl}" />
+
+			<link rel="first" href="${new URL('./feed.atom.xml', blogUrl).toString()}" />
+			${prevPageUrl ? `<link rel="previous" href="${prevPageUrl}" />` : ''}
+			${nextPageUrl ? `<link rel="next" href="${nextPageUrl}" />` : ''}
+			<link rel="last" href="${new URL(`./feed.atom${props.page.lastPage}.xml`, blogUrl).toString()}" />
+
+			<updated>${new Date().toISOString()}</updated>
 			<generator uri="https://astro.build/">Astro</generator>
 			<logo>${escapeHtmlTags(new URL(blogImage.src, baseUrl).href)}</logo>
 			<icon>${escapeHtmlTags(new URL(blogImage.src, baseUrl).href)}</icon>
@@ -67,3 +77,11 @@ export const GET: APIRoute = async (context) => {
 		}
 	});
 };
+
+export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {
+	const postsList = await listAllPosts();
+
+	return paginate(postsList, {
+		pageSize: MAX_POSTS_PER_PAGE
+	});
+}) satisfies GetStaticPaths;
