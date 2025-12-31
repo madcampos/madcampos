@@ -1,17 +1,18 @@
 ---
 import '../assets/css/pages/resume.css';
 import { Icon } from 'astro-icon/components';
+import type { Icon as IconName } from 'virtual:astro-icon';
 import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
 import HtmlHead from '../components/HtmlHead.astro';
 
 const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric' });
 const langNameFormatter = new Intl.DisplayNames('en-CA', { type: 'language' });
 const collator = new Intl.Collator('en', { usage: 'sort' });
-const projectsMap = {
+const projectsMap: Record<string, IconName> = {
 	application: 'mingcute:code-line',
 	talk: 'mingcute:drawing-board-line'
 };
-const linksMap = {
+const linksMap: Record<string, IconName> = {
 	GitHub: 'mingcute:github-line',
 	CodePen: 'mingcute:codepen-line',
 	LinkedIn: 'mingcute:linkedin-line'
@@ -104,7 +105,6 @@ function dateSorter(
 					{
 						resume.basics.profiles.map(({ network, url, username }) => (
 							<li itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
-								{/* @ts-expect-error */}
 								<Icon name={linksMap[network] ?? 'mingcute:link-line'} aria-hidden="true" />
 								<meta itemprop="contactType" content={network} />
 								<meta itemprop="identifier" content={username} />
@@ -361,7 +361,6 @@ function dateSorter(
 								itemtype={`https://schema.org/${type === 'talk' ? 'Event' : 'CreativeWork'}`}
 							>
 								<dt>
-									{/* @ts-expect-error */}
 									<Icon name={projectsMap[type] ?? 'mingcute:test-tube-line'} aria-hidden="true" />
 									<entry-title itemprop="name">{name}</entry-title>
 									<entry-subtitle

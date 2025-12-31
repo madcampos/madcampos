@@ -22,7 +22,7 @@ declare class CustomElement extends HTMLElement {
 	disconnectedCallback?(): void;
 
 	/** Called when the element is associated or disassociated with a form. */
-	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+	 
 	formAssociatedCallback?(form: HTMLFormElement | null): void;
 
 	/** Called when the disabled state of the element changes. */
@@ -38,7 +38,7 @@ declare class CustomElement extends HTMLElement {
 /** Constructor interface for custom elements. */
 interface CustomElementConstructor<T = CustomElement> {
 	/** Creates a new instance of the custom element. */
-	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-explicit-any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	new (...args: any[]): HTMLElement & T;
 
 	/** List of attributes to observe for changes, invoking `attributeChangedCallback`. */
