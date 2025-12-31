@@ -3,23 +3,66 @@
 		/* Border */
 		--border-size: medium;
 		--border-radius: var(--size-2);
+		--link-underline: dashed;
 		--border-style: dashed;
 
 		/* Theme colors */
-		--theme-color: dodgerblue;
-		--secondary-color: lightblue;
-		--accent-color: darkorchid;
-		--complementary-color: deeppink;
+		--theme-0: #1e90ff;
+		--theme-1: #2c97fd;
+		--theme-2: #399efa;
+		--theme-3: #46a4f8;
+		--theme-4: #52aaf6;
+		--theme-5: #5eb0f4;
+		--theme-6: #6ab6f2;
+		--theme-7: #76bcf0;
+		--theme-8: #81c2ee;
+		--theme-9: #8cc7ec;
+		--theme-10: #97cdea;
+		--theme-11: #a2d3e8;
+		--theme-12: #add8e6;
+
+		--accent-0: #9932cc;
+		--accent-1: #a430c7;
+		--accent-2: #ae2fc2;
+		--accent-3: #b72dbe;
+		--accent-4: #c02bb9;
+		--accent-5: #c929b4;
+		--accent-6: #d127af;
+		--accent-7: #d924ab;
+		--accent-8: #e122a6;
+		--accent-9: #e91fa1;
+		--accent-10: #f01c9d;
+		--accent-11: #f81898;
+		--accent-12: #ff1493;
+
+		--secondary-0: #dda0dd;
+		--secondary-1: #e0a2db;
+		--secondary-2: #e3a4d8;
+		--secondary-3: #e6a5d6;
+		--secondary-4: #e9a7d4;
+		--secondary-5: #eca9d1;
+		--secondary-6: #efabcf;
+		--secondary-7: #f2adcd;
+		--secondary-8: #f4afca;
+		--secondary-9: #f7b0c8;
+		--secondary-10: #fab2c6;
+		--secondary-11: #fcb4c3;
+		--secondary-12: #ffb6c1;
+
+		--theme-color: var(--theme-0);
+		--secondary-color: var(--theme-12);
+		--accent-color: var(--accent-0);
+		--complementary-color: var(--accent-12);
 
 		/* Base colors */
 		--text-1: black;
-		--surface-1: lightpink;
-		--surface-2: plum;
-		--surface-3: deeppink;
+		--surface-1: var(--secondary-12);
+		--surface-2: var(--secondary-0);
+		--surface-3: var(--accent-12);
 		--surface-4: transparent;
 
 		/* Link colors */
-		--link-color: navy;
+		--link-color: color-mix(in oklch, var(--theme-0), black 80%);
 		--link-visited-color: darkorchid;
 		--link-hover-color: deeppink;
 		--link-active-color: hotpink;
@@ -36,6 +79,21 @@
 		--highlight-warning-color: goldenrod;
 		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
 
+		/* Baseline colors */
+		--baseline-high-color: ;
+		--baseline-high-bg: ;
+		--baseline-low-color: ;
+		--baseline-low-bg: ;
+		--baseline-limited-color: ;
+		--baseline-limited-bg: ;
+		--baseline-no-data-color: ;
+		--baseline-no-data-bg: ;
+
+		--baseline-supported-color: ;
+		--baseline-supported-bg: ;
+		--baseline-unsupported-color: ;
+		--baseline-unsupported-bg: ;
+
 		/* Old Buttons */
 		--old-button-border: var(--surface-3) solid var(--border-size);
 		--old-button-border-visibility: hidden;
@@ -43,13 +101,12 @@
 		--old-button-blend-mode: color;
 		--old-button-border-radius: 0.5rem;
 
-		/* Icons */
-		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='deeppink' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
-		--hr-decoration-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 32 32'%3E%3Cpath fill='deeppink' d='M11.108 10.27c1.083-1.875.16-4.442-2.06-5.724a5.248 5.248 0 0 0-2.615-.72c-1.46 0-2.72.672-3.373 1.8c-.545.944-.608 2.077-.176 3.188C3.287 9.85 4.08 10.75 5.12 11.35a5.242 5.242 0 0 0 2.616.723c.673 0 1.3-.15 1.85-.414l2.4 1.385c1.582.914.56 3.86 5.918 6.955C23.26 23.094 29.4 21.535 29.4 21.535L10.75 10.767c.132-.156.255-.318.358-.496zm-1.733-1c-.506.88-2.033 1.056-3.255.348c-.646-.373-1.134-.916-1.37-1.528c-.21-.535-.194-1.055.042-1.464c.293-.51.892-.8 1.64-.8c.543 0 1.102.156 1.616.453c1.243.716 1.85 2.086 1.327 2.99zm7.87 6.522c0 .483-.39.875-.874.875c-.036 0-.067-.017-.103-.02l.667-1.512a.86.86 0 0 1 .312.657zm-.874-.875c.038 0 .07.017.105.02l-.666 1.51a.851.851 0 0 1-.313-.655c0-.483.39-.875.874-.875m13.03-4.45s-6.14-1.56-11.496 1.535c-.537.31-.995.618-1.415.924l4.325 2.497zm-16.23 6.63c-.35.85-.574 1.508-1.186 1.86l-2.4 1.385a4.235 4.235 0 0 0-1.85-.414c-.893 0-1.797.25-2.615.72c-2.22 1.283-3.144 3.852-2.06 5.727c.65 1.127 1.91 1.8 3.372 1.8c.894 0 1.8-.25 2.616-.72c1.04-.602 1.833-1.502 2.236-2.537c.432-1.112.368-2.245-.178-3.19a3.436 3.436 0 0 0-.356-.493l3.982-2.3a9.7 9.7 0 0 1-1.56-1.838zm-3.75 7.095c-.238.612-.725 1.155-1.37 1.528c-1.222.706-2.75.532-3.258-.347c-.522-.903.086-2.274 1.328-2.992a3.254 3.254 0 0 1 1.615-.452c.75 0 1.346.29 1.64.8c.237.41.253.93.045 1.464z'/%3E%3C/svg%3E");
-
 		/* Fonts */
 		--headers-font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
 		--text-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+
+		/* Icons */
+		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='deeppink' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 
 		/* Global settings */
 		accent-color: var(--theme-color);
