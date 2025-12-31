@@ -28,6 +28,8 @@
 			font-family: var(--logo-font, 'Mecano-Light', 'Mecano', monospace);
 		}
 
+		:is(.noise-logo, .overlay-logo, .pixelated-logo) { fill: var(--logo-part-color, transparent); }
+
 		#logo-graphics {
 			paint-order: stroke;
 			inline-size: 100%;
