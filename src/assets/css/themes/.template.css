@@ -95,10 +95,17 @@
 
 		/* Icons */
 		--details-icon: ;
-		--hr-decoration-icon: ;
 
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: light dark;
 	}
+
+	[data-theme='TEMPLATE'] decorated-line,
+	decorated-line[data-theme='TEMPLATE'] {
+		[data-theme] { display: none; }
+		[data-theme='TEMPLATE'] { display: block; }
+	}
+
+	/* TODO: add logo item details */
 }
