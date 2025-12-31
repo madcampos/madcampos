@@ -101,7 +101,7 @@ console.log('Not highlighted');
 ```
 
 ```ts
-// [!code highlight:3]
+// [!code highlight:2]
 console.log('Highlighted');
 console.log('Highlighted');
 console.log('Not highlighted');
