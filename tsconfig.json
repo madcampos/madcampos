@@ -1,5 +1,5 @@
 {
-	"include": ["astro.config.ts", ".astro/**/*", "build/**/*"],
+	"include": ["astro.config.ts", ".astro/**/*", "build/**/*", "src/**/*", "server/**/*"],
 	"exclude": ["node_modules/**/*", "dist/**/*"],
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
@@ -17,8 +17,8 @@
 		"incremental": true,
 		"isolatedModules": true,
 		"isolatedDeclarations": false,
-		"lib": ["ESNext"],
-		"module": "esnext",
+		"lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
+		"module": "ESNext",
 		"moduleResolution": "bundler",
 		"newLine": "LF",
 		"noEmit": true,
@@ -37,7 +37,7 @@
 		"skipLibCheck": true,
 		"sourceMap": false,
 		"strict": true,
-		"target": "ESNext",
+		"target": "ES2020",
 		"tsBuildInfoFile": "dist/.tsbuildinfo",
 		"useDefineForClassFields": true,
 		"useUnknownInCatchVariables": false,
