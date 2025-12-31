@@ -1,4 +1,9 @@
 ---
+/* eslint-disable max-lines */
+
+import { Icon } from 'astro-icon/components';
+import '../assets/css/pages/styleguide.css';
+import DecoratedLine from '../components/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
@@ -40,47 +45,764 @@ import Webrings from '../components/Webrings.astro';
 		</header>
 
 		<main id="main">
-			<!-- Colors -->
-			<!-- Fonts -->
-			<!-- Icons -->
-			<!-- Themes (as iframes?) -->
+			<details open>
+				<summary>
+					<h2>Sectioning Elements</h2>
+				</summary>
 
-			<!-- html elements -->
-			<!-- TODO: should those be separate pages in a directory structure with all only those things? -->
-			<!-- sectioning: address, article, aside, footer, header, h1-h6, hgroup, main, nav, section, search -->
-			<!-- block text content: blockquote, dd, div, dl, dt, figcaption, figure, hr, li, menu, ol, p, pre, ul -->
-			<!--
-				inline text content: a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kbd, mark, q, rp, rt, ruby, s, samp, small, span,strong, sub, sup, time, u, var, wbr
-			-->
-			<!-- image and media: area, audio, img, map, track, video -->
-			<!-- mebedded content: embed, fencedframe, iframe, object, picture, portal, source -->
-			<!-- svg and math: svg, math -->
-			<!-- scripting: canvas, noscript, script -->
-			<!-- edits: del, ins -->
-			<!-- tables: caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr -->
+				<section>
+					<h3>Address</h3>
+
+					<address>
+						123 M.A.D. Way<br />
+						Fieldstown, Interwebs<br />
+						<a href="mailto:me@madcampos.dev">me@madcampos.dev</a>
+					</address>
+				</section>
+
+				<section>
+					<h3>Headings</h3>
+
+					<h1>I'm Important</h1>
+					<h2>I'm less important</h2>
+					<h3>I'm even less important</h3>
+					<h4>I'm ridiculously less important</h4>
+					<h5>I'm not important at all</h5>
+					<h6>Why even bother?</h6>
+				</section>
+
+				<section>
+					<h3>Heading Group</h3>
+
+					<hgroup>
+						<h1>Main Title & Co.</h1>
+						<p>Or: how to group a title and a subtitle together semantically, and stylistically.</p>
+					</hgroup>
+				</section>
+
+				<section>
+					<h3>Search</h3>
+
+					<search>
+						<form action="#" method="get">
+							<label for="search-input">Thine inquiry:</label>
+							<input type="search" id="search-input" name="q" placeholder="Inquire away..." />
+							<button type="submit">
+								<sr-only>Inquire</sr-only>
+								<Icon name="mingcute:crystal-ball-line" aria-hidden="true" />
+							</button>
+						</form>
+					</search>
+				</section>
+
+				<section>
+					<h3>Other sectioning elements</h3>
+
+					<p>Other sectioning elements are not represented directly, as they are used in conjunction with other elements as building blocks.</p>
+
+					<p>The elements are:</p>
+
+					<ul>
+						<li><code>&lt;article&gt;</code></li>
+						<li><code>&lt;aside&gt;</code></li>
+						<li><code>&lt;footer&gt;</code></li>
+						<li><code>&lt;header&gt;</code></li>
+						<li><code>&lt;main&gt;</code></li>
+						<li><code>&lt;nav&gt;</code></li>
+						<li><code>&lt;section&gt;</code></li>
+					</ul>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Block Level Text Elements</h2>
+				</summary>
+
+				<section>
+					<h3>Block Quote</h3>
+
+					<figure>
+						<blockquote>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</p>
+							<p>
+								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+								in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+								mollit anim id est laborum.
+							</p>
+						</blockquote>
+						<figcaption><cite>Some Old Roman Dude, Probably</cite></figcaption>
+					</figure>
+				</section>
+
+				<section>
+					<h3>Definition List</h3>
+
+					<dl>
+						<dt>definition (noun)</dt>
+						<dd>A statement of meaning.</dd>
+
+						<dt>list (noum)</dt>
+						<dd>A series of things.</dd>
+					</dl>
+				</section>
+
+				<section>
+					<h3>Figure</h3>
+
+					<figure>
+						<img
+							src="/assets/test/good-parts.jpg"
+							alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
+							loading="lazy"
+							width="512"
+						/>
+						<figcaption>The joys of web development</figcaption>
+					</figure>
+				</section>
+
+				<section>
+					<h3>Horizontal Line</h3>
+
+					<p>Regular line:</p>
+					<hr />
+
+					<p>
+						Line with <a href="https://en.wikipedia.org/wiki/Fleuron_(typography)" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">fleuron</a>:
+					</p>
+					<DecoratedLine />
+				</section>
+
+				<section>
+					<h3>Ordered List</h3>
+
+					<ol>
+						<li>
+							<span>Cem</span>
+
+							<ol>
+								<li>
+									<span>Cento e dez</span>
+									<ol>
+										<li>Cento e onze</li>
+										<li>Cento e doze</li>
+									</ol>
+								</li>
+								<li>
+									<span>Cento e vinte</span>
+									<ol>
+										<li>Cento e vinte e um</li>
+										<li>Cento e vinte e dois</li>
+									</ol>
+								</li>
+							</ol>
+						</li>
+						<li>
+							<span>Duzentos</span>
+
+							<ol>
+								<li>
+									<span>Duzentos e dez</span>
+									<ol>
+										<li>Duzentos e onze</li>
+										<li>Duzentos e doze</li>
+									</ol>
+								</li>
+								<li>
+									<span>Duzentos e vinte</span>
+									<ol>
+										<li>Duzentos e vinte e um</li>
+										<li>Duzentos e vinte e dois</li>
+									</ol>
+								</li>
+							</ol>
+						</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>Unordered List</h3>
+
+					<ul>
+						<li>
+							<span>Things I like</span>
+
+							<ul>
+								<li>
+									<span>Video Games</span>
+
+									<ul>
+										<li>Fallout 2</li>
+										<li>Rollercoaster Tycoon 2</li>
+									</ul>
+								</li>
+								<li>
+									<span>Role-playing Games</span>
+
+									<ul>
+										<li>Shadowrun</li>
+										<li>Paranoia</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<span>Things I dislike</span>
+
+							<ul>
+								<li>
+									<span>Prejudice</span>
+
+									<ul>
+										<li>Homphobia</li>
+										<li>Ableism</li>
+										<li>Racism</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Paragraph</h3>
+
+					<p>The quick brown fox jumped over the lazy dog.</p>
+				</section>
+
+				<section>
+					<h3>Preformatted Text</h3>
+
+					<p>Simple text (ASCII art drawing of a whale):</p>
+					<pre>
+ __v_
+(____\/&lcub;
+</pre>
+
+					<p>
+						Code example (pre-rendered through <a href="https://shiki.style/" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">Shiki</a>).
+						<strong>Note:</strong> the code only highlights when inside a <code>&ltrendered-content;&gt;</code> element:
+					</p>
+
+					<rendered-content>
+						<pre
+							class="astro-code astro-code-themes light-plus dark-plus Noctis High Contrast has-diff has-highlighted has-focused"
+							style="--shiki-light: #000000; --shiki-dark: #d4d4d4; --shiki-contrast: #ffffff; --shiki-light-bg: #ffffff; --shiki-dark-bg: #1e1e1e; --shiki-contrast-bg: #000000; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word"
+							tabindex="0"
+							data-language="ts"
+						><code><span class="line"><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic">//</span><span class="space"> </span><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic" class="highlighted-word">Code</span><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic"> block</span></span>
+	<span class="line diff remove"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Hewwo, World!'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line diff add"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Hello, World!'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Highlighted'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted error"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">error</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Error'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted warning"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">warn</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Warning'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line focused"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Focused'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span></code></pre>
+					</rendered-content>
+				</section>
+
+				<section>
+					<h3>Menu</h3>
+
+					<p><strong>Note:</strong> the <code>&lt;menu&gt;</code> element is no different semantically than the <code>&lt;ul&gt;</code> element.</p>
+
+					<menu>
+						<li><button type="button">Say "Hey"</button></li>
+						<li><button type="button">Say "Ho"</button></li>
+						<li><button type="button">Say "Hey Ho"</button></li>
+					</menu>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Inline Text Elements</h2>
+				</summary>
+
+				<section>
+					<h3>Links</h3>
+
+					<p>Visited link: <a href="/styleguide/">This Page</a></p>
+					<p>Not visited link: <a href="#" id="random-link">Random Error Page</a></p>
+					<script type="module">
+						(/** @type {HTMLAnchorElement} */ (document.querySelector('#random-link'))).href = crypto.randomUUID();
+					</script>
+				</section>
+
+				<section>
+					<h3>Abbteviation & Inline Definition</h3>
+
+					<p>
+						The term "<dfn><abbr title="Situation Normal, All Fucked Up">SNAFU</abbr></dfn>", meaning "Situation Normal, All Fucked Up", originates from <abbr
+							title="World War II"
+						>WW2</abbr> military slang.
+					</p>
+				</section>
+
+				<section>
+					<h3>Strong & Bold</h3>
+
+					<p>Whiskey is a <strong>strong</strong> drink, while wine can be <b>bold</b>.</p>
+				</section>
+
+				<section>
+					<h3>Emphasis & Italic</h3>
+
+					<p><i>Italics</i> is a form of <em>emphasize</em> text.</p>
+				</section>
+
+				<section>
+					<h3>Size & Position</h3>
+
+					<p>Like on rollercoasters, we can go <sup>up</sup>, <sub>down</sub>, or feel <small>tiny</small>.</p>
+				</section>
+
+				<section>
+					<h3>Inline Quotes & Citations</h3>
+
+					<p>
+						As best said by the Cheshire Cat in <cite><a
+								href="https://www.gutenberg.org/ebooks/19033"
+								target="_blank"
+								rel="noopener noreferrer"
+								referrerpolicy="no-referrer"
+							>Alice's Adventure in Wonderland</a></cite>:
+						<q>If you don't know where you are going any road can take you there.</q>
+					</p>
+				</section>
+
+				<section>
+					<h3>Highlights & Annotations</h3>
+
+					<p>A <mark>highlight</mark> of marking text is that you can indicate <u>typos</u> and <s>cleverness</s> sarcasm.</p>
+
+					<p>Or even, text <del>deletions</del><ins>insertions</ins>.</p>
+				</section>
+
+				<section>
+					<h3>Computer text</h3>
+
+					<p>You can <code>type</code> all you like, even try to <kbd>Ctrl</kbd> my <var>vars</var>, but all they say is:</p>
+					<p><samp>Null Pointer Exception.</samp></p>
+				</section>
+
+				<section>
+					<h3>Machine readable markup</h3>
+
+					<p><data value="42">The Answer to the Ultimate Question of Life, the Universe, and Everything</data></p>
+
+					<p>Current date and time: <time datetime="" id="cur-time">&mdash;</time></p>
+					<script type="module">
+						const curTimeElement = /** @type {HTMLTimeElement} */ (document.querySelector('#cur-time'));
+
+						setInterval(() => {
+							const now = new Date();
+
+							curTimeElement.dateTime = now.toISOString();
+							curTimeElement.innerText = now.toLocaleString();
+						}, 1000);
+					</script>
+				</section>
+
+				<section>
+					<h3>Breaks & Text Direction</h3>
+
+					<p>
+						Here is a line break:
+						<br />
+						That's it.
+					</p>
+
+					<p>Here is a <span>span of text</span>.</p>
+
+					<p>Here is a super long word in a tiny space just for the sake of having word break opportunities:</p>
+					<p style="max-inline-size: var(--size-content-0); outline: solid thin var(--theme-color)">
+						pneumono<wbr />ultra<wbr />microscopic<wbr />silico<wbr />volcano<wbr />coniosis
+					</p>
+
+					<p>Here is some text intentionally right-to-left:</p>
+					<p>
+						The Hebrew word "<bdo dir="rtl">שָׁלוֹם</bdo>" (Shalom) and the Arabic word "<bdi>سَلَام</bdi>" (Salām) share the same etymologic root. Both have a literal
+						meaning of "peace".
+					</p>
+				</section>
+
+				<section>
+					<h3>Ruby Text</h3>
+
+					<p>
+						"Ruby" text is a type of annotation to help understanding the meaning of text.
+					</p>
+					<p>
+						In Japanese, this text is know as "<span lang="jp"><ruby>振<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby><span>り</span><ruby>仮<rp>
+									(
+								</rp><rt>が</rt><rp>)</rp></ruby><ruby>名<rp>(</rp><rt>な</rt><rp>)</rp></ruby></span>" (Furigana).
+					</p>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Media Elements</h2>
+				</summary>
+
+				<section>
+					<h3>Image & Picture</h3>
+
+					<p>An image:</p>
+
+					<img
+						src="/assets/images/test/same-meme-clean.webp"
+						alt="A meme from The Office with two panels, on the top two squares, one has the text &quot;img&quot;, and the other has the text &quot;picture&quot;. Below them a caption reads &quot;Corporate needs you to find the difference between this picture and this picture.&quot;. The panel below has Pam staring at the camera with a smirk and the caption &quot;They're the same picture.&quot;"
+						loading="lazy"
+						width="512"
+					/>
+
+					<p>A <em>picture</em>:</p>
+
+					<picture>
+						<source srcset="/assets/images/test/same-meme.jxl" type="image/jxl" />
+						<source srcset="/assets/images/test/same-meme.avif" type="image/avif" />
+						<source srcset="/assets/images/test/same-meme.webp" type="image/webp" />
+						<source srcset="/assets/images/test/same-meme.png" type="image/png" />
+						<source srcset="/assets/images/test/same-meme.gif" type="image/gif" />
+						<img
+							src="/assets/images/test/same-meme.jpg"
+							alt="A meme from The Office with two panels, on the top two squares, one has the text &quot;img&quot;, and the other has the text &quot;picture&quot;. Below them a caption reads &quot;Corporate needs you to find the difference between this picture and this picture.&quot;. The panel below has Pam staring at the camera with a smirk and the caption &quot;They're the same picture.&quot;"
+							loading="lazy"
+							width="512"
+						/>
+					</picture>
+				</section>
+
+				<section>
+					<h3>Area & Map</h3>
+
+					<map name="click-here">
+						<area shape="rect" coords="0,3,200,100" href="#click" alt="Click" />
+						<area shape="rect" coords="200,0,400,100" href="#here" alt="Here" />
+						<img
+							src="/assets/images/test/click-here.svg"
+							alt="A teal background with black text on top saying &quot;Click Here&quot;."
+							width="400"
+							usemap="#click-here"
+						/>
+					</map>
+				</section>
+
+				<section>
+					<h3>Audio</h3>
+
+					<audio
+						src="/assets/audio/bourbon-blues.mp3"
+						controls
+						preload="auto"
+					>
+						<a href="/assets/audio/bourbon-blues.mp3" download>Download the audio file</a>
+					</audio>
+				</section>
+
+				<section>
+					<h3>Video</h3>
+
+					<video controls>
+						<source src="/assets/video/test/big-buck-bunny.webm" type="video/webm" />
+						<source src="/assets/video/test/big-buck-bunny.mp4" type="video/mp4" />
+						<track kind="subtitles" default label="Test Subtitles" src="/assets/video/test/subtitles.vtt" />
+						<track kind="captions" label="Test Captions" src="/assets/video/test/captions.vtt" />
+						<track kind="descriptions" label="Test Descriptions" src="/assets/video/test/descriptions.vtt" />
+						<track kind="chapters" label="Test Chapters" src="/assets/video/test/chapters.vtt" />
+					</video>
+
+					<details>
+						<summary>Video Description</summary>
+
+						<p>
+							The video contains the first 10 seconds of "<cite><a href="https://peach.blender.org/" target="_blank" rel="noopener noreferrer"
+								>Big Buck Bunny</a></cite>" with no audio.
+						</p>
+
+						<p>In the background there is a lush forest with dense trees.</p>
+						<p>In the foreground a small grassy hill with a thick tree on top of it and some rocks scattered around.</p>
+						<p>On that hill there is a round opening to a hole.</p>
+						<p>The camera slowly closes in to the hole.</p>
+					</details>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Embedded Content</h2>
+				</summary>
+
+				<section>
+					<h3>Iframe Element</h3>
+
+					<p>Simple iframe:</p>
+					<iframe
+						src="/"
+						title="Home page"
+						width="320"
+						height="240"
+						loading="lazy"
+					></iframe>
+
+					<p>PDF file:</p>
+					<iframe
+						src="/assets/documents/test.pdf"
+						title="Sample PDF file"
+						width="320"
+						height="240"
+						loading="lazy"
+					></iframe>
+				</section>
+
+				<section>
+					<h3>Embed element</h3>
+
+					<p>PDF file:</p>
+					<embed
+						src="/assets/documents/test.pdf"
+						type="application/pdf"
+						width="320"
+						height="240"
+					/>
+
+					<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
+					<embed
+						src="/assets/ruffle-logo.swf"
+						type="application/x-shockwave-flash"
+						width="320"
+						height="240"
+					/>
+				</section>
+
+				<section>
+					<h3>Object Element</h3>
+
+					<p>PDF file:</p>
+					<object
+						data="/assets/documents/test.pdf"
+						type="application/pdf"
+						width="320"
+						height="240"
+					>
+						<p>The pdf file did not load.</p>
+					</object>
+
+					<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
+					<object
+						data="/assets/ruffle-logo.swf"
+						type="application/x-shockwave-flash"
+						width="320"
+						height="240"
+					>
+						<p>The flash file did not load.</p>
+					</object>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>SVG & Math</h2>
+				</summary>
+
+				<section>
+					<h3>SVG</h3>
+
+					<p>An SVG:</p>
+					<svg viewBox="0 0 20 10" width="320" height="240">
+						<rect x="0" y="0" width="20" height="20" fill="teal" />
+						<text y="6" x="10" font-size="3" font-weight="bold" text-anchor="middle" dominant-baseline="middle" font-family="system-ui">I'm an SVG</text>
+					</svg>
+
+					<p>The quadratic formula:</p>
+					<math display="block">
+						<mrow>
+							<mi>x</mi>
+							<mo>=</mo>
+							<mfrac>
+								<mrow>
+									<mrow>
+										<mo>−</mo>
+										<mi>b</mi>
+									</mrow>
+									<mo>±</mo>
+									<msqrt>
+										<mrow>
+											<msup>
+												<mi>b</mi>
+												<mn>2</mn>
+											</msup>
+											<mo>−</mo>
+											<mrow>
+												<mn>4</mn>
+												<mo>⁢</mo>
+												<mi>a</mi>
+												<mo>⁢</mo>
+												<mi>c</mi>
+											</mrow>
+										</mrow>
+									</msqrt>
+								</mrow>
+								<mrow>
+									<mn>2</mn>
+									<mo>⁢</mo>
+									<mi>a</mi>
+								</mrow>
+							</mfrac>
+						</mrow>
+					</math>
+
+					<p>Some inline math: <math display="inline"><mi>x</mi> <mo>=</mo> <mn>0</mn></math></p>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Canvas</h2>
+				</summary>
+
+				<section>
+					<h3>2D Canvas</h3>
+					<canvas width="320" height="240" id="canvas-2d"></canvas>
+					<script type="module">
+						const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d'));
+						const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
+						ctx.fillStyle = 'teal';
+						ctx.fillRect(10, 10, 100, 100);
+					</script>
+				</section>
+
+				<section>
+					<h3>3D Canvas</h3>
+					<canvas width="320" height="240" id="canvas-3d"></canvas>
+					<script type="x-shader/x-vertex" id="vertex-shader">
+						{
+							`#version 100
+						void main() {
+							gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+							gl_PointSize = 64.0;
+						}`;
+						}
+					</script>
+					<script type="x-shader/x-fragment" id="fragment-shader">
+						{
+							`#version 100
+						void main() {
+							gl_FragColor = vec4(0.18, 0.54, 0.34, 1.0);
+						}`;
+						}
+					</script>
+					<script type="module">
+						const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-3d'));
+						const gl = /** @type {WebGLRenderingContext} */ (canvas.getContext('webgl'));
+
+						const vertexSource = (/** @type {HTMLScriptElement} */ (document.querySelector('#vertex-shader'))).innerHTML;
+						const vertexShader = /** @type {WebGLShader} */ (gl.createShader(gl.VERTEX_SHADER));
+						gl.shaderSource(vertexShader, vertexSource);
+						gl.compileShader(vertexShader);
+
+						const fragmentSource = (/** @type {HTMLScriptElement} */ (document.querySelector('#fragment-shader'))).innerHTML;
+						const fragmentShader = /** @type {WebGLShader} */ (gl.createShader(gl.FRAGMENT_SHADER));
+						gl.shaderSource(fragmentShader, fragmentSource);
+						gl.compileShader(fragmentShader);
+
+						const program = gl.createProgram();
+						gl.attachShader(program, vertexShader);
+						gl.attachShader(program, fragmentShader);
+						gl.linkProgram(program);
+						gl.detachShader(program, vertexShader);
+						gl.detachShader(program, fragmentShader);
+						gl.deleteShader(vertexShader);
+						gl.deleteShader(fragmentShader);
+
+						gl.enableVertexAttribArray(0);
+						const buffer = gl.createBuffer();
+						gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+						gl.vertexAttribPointer(0, 1, gl.FLOAT, false, 0, 0);
+
+						gl.useProgram(program);
+						gl.drawArrays(gl.POINTS, 0, 1);
+
+						gl.useProgram(null);
+						gl.deleteBuffer(buffer);
+						gl.deleteProgram(program);
+					</script>
+				</section>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Tables</h2>
+				</summary>
+
+				<table-wrapper role="region" tabindex="0" aria-labelledby="table-caption">
+					<table>
+						<caption>D&D Party Treasure</caption>
+						<colgroup>
+							<col />
+							<col />
+							<col />
+						</colgroup>
+
+						<thead>
+							<tr>
+								<th>Character</th>
+								<th>GP</th>
+								<th>Gems</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Leeroy</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<td>Sly</td>
+								<td>153</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>Clara</td>
+								<td>300</td>
+								<td>1</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Total</th>
+								<td>453</td>
+								<td>4</td>
+							</tr>
+						</tfoot>
+					</table>
+				</table-wrapper>
+			</details>
+
+			<details open>
+				<summary>
+					<h2>Forms</h2>
+				</summary>
+
+				<form action="#" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<legend>General Knowledge Questions</legend>
+
+						<label for=""></label>
+					</fieldset>
+				</form>
+			</details>
+
+			<!-- Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements -->
 			<!-- forms: button, datalist, fieldset, form, input, label, legend, meter, optgroup, option, output, progress, select, textarea -->
 			<!-- interactive elements: details, dialog, summary -->
 			<!-- web components: slot, template -->
 			<!--
 				obsolete: acronym, big, center, content, dir, font, frame, frameset, image, marquee, menuitem, nobr, noembed, noframes, param, plaintext, rb, rtc, shadow, strike, tt, xmp
 			-->
-
-			<!--
-				Another potential structure:
-				- Sectioning
-				- Block text
-				- Lists
-				- Inline text
-				- Images, media, and embedding (figure, picture, canvas, svg, etc)
-				- Tables
-				- Forms
-				- Interactive
-				- Web components (include styles for componetns not loaded yet)
-				- Math
-				- Ruby
-				- Obsolete
-			-->
-			<!-- Ref: https://alexandersandberg.github.io/html5-elements-tester/ -->
 		</main>
 
 		<footer>

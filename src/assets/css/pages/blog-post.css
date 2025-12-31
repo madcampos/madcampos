@@ -6,39 +6,6 @@
 @import url('../components/share-options.css');
 
 @layer pages {
-	#post-separator {
-		position: relative;
-		margin-inline: calc(var(--size-3) * 4);
-		margin-block: calc(var(--size-3) * 2) var(--size-3);
-		border: none;
-		padding-inline-start: var(--size-7);
-		inline-size: auto;
-		overflow: visible;
-
-		&::before {
-			display: block;
-			position: absolute;
-			transform: scaleY(-1);
-			inset-block-start: calc(var(--size-7) * -0.5);
-			inset-inline-start: 0;
-			background-image: var(--hr-decoration-icon);
-			background-position: center;
-			background-size: contain;
-			background-repeat: no-repeat;
-			inline-size: var(--size-7);
-			block-size: var(--size-7);
-			content: '';
-			color: var(--theme-color);
-			text-align: center;
-		}
-
-		&::after {
-			display: block;
-			border-block-start: var(--border-size) var(--border-style) var(--theme-color);
-			content: '';
-		}
-	}
-
 	#post-license {
 		margin-block-start: var(--size-3);
 		border-radius: var(--border-radius);

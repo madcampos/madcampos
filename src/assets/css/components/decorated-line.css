@@ -1,0 +1,26 @@
+@layer components {
+	decorated-line {
+		display: flex;
+		align-items: center;
+		margin-inline: var(--size-9);
+		margin-block: var(--size-3);
+		color: var(--accent-color);
+		position: relative;
+
+		hr {
+			border: none;
+			margin: 0;
+			border-block-start: var(--border-size) var(--border-style) var(--theme-color);
+			inline-size: 100%;
+		}
+
+		[data-theme] { display: none; }
+
+		svg[data-icon][data-theme='system'] {
+			display: block;
+			transform: rotate(90deg);
+			block-size: var(--size-7);
+			inline-size: var(--size-7);
+		}
+	}
+}

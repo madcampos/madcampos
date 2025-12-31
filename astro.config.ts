@@ -35,7 +35,7 @@ export default defineConfig({
 	compressHTML: true,
 	build: {
 		format: 'directory',
-		assets: 'assets'
+		assets: 'assets/build'
 	},
 	server: {
 		host: 'localhost',

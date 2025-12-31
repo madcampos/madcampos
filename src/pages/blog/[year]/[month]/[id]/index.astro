@@ -5,6 +5,7 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../../../../assets/images/me.jpg';
 import Card from '../../../../../components/Card.astro';
+import DecoratedLine from '../../../../../components/DecoratedLine.astro';
 import HtmlHead from '../../../../../components/HtmlHead.astro';
 import OldStyleButtons from '../../../../../components/OldStyleButtons.astro';
 import PromptInjection from '../../../../../components/PromptInjection.astro';
@@ -168,7 +169,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			</rendered-content>
 		</main>
 
-		<hr id="post-separator" />
+		<DecoratedLine />
 
 		<scroll-to-top>
 			<a href="#page-top">
