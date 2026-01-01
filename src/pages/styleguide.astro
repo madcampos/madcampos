@@ -10,6 +10,19 @@ import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
+
+const vertexShader = `#version 100
+void main() {
+	gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+	gl_PointSize = 64.0;
+}
+`;
+
+const fragmentShader = `#version 100
+void main() {
+	gl_FragColor = vec4(0.18, 0.54, 0.34, 1.0);
+}
+`;
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -85,8 +98,10 @@ import Webrings from '../components/Webrings.astro';
 
 					<search>
 						<form action="#" method="get">
-							<label for="search-input">Thine inquiry:</label>
-							<input type="search" id="search-input" name="q" placeholder="Inquire away..." />
+							<input-wrapper>
+								<label for="search-input">Thine inquiry:</label>
+								<input type="search" id="search-input" name="q" placeholder="Inquire away..." />
+							</input-wrapper>
 							<button type="submit">
 								<sr-only>Inquire</sr-only>
 								<Icon name="mingcute:crystal-ball-line" aria-hidden="true" />
@@ -154,7 +169,7 @@ import Webrings from '../components/Webrings.astro';
 
 					<figure>
 						<img
-							src="/assets/test/good-parts.jpg"
+							src="/assets/images/test/good-parts.webp"
 							alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
 							loading="lazy"
 							width="512"
@@ -325,7 +340,7 @@ import Webrings from '../components/Webrings.astro';
 
 					<p>Visited link: <a href="/styleguide/">This Page</a></p>
 					<p>Not visited link: <a href="#" id="random-link">Random Error Page</a></p>
-					<script type="module">
+					<script type="module" is:inline>
 						(/** @type {HTMLAnchorElement} */ (document.querySelector('#random-link'))).href = crypto.randomUUID();
 					</script>
 				</section>
@@ -393,7 +408,7 @@ import Webrings from '../components/Webrings.astro';
 					<p><data value="42">The Answer to the Ultimate Question of Life, the Universe, and Everything</data></p>
 
 					<p>Current date and time: <time datetime="" id="cur-time">&mdash;</time></p>
-					<script type="module">
+					<script type="module" is:inline>
 						const curTimeElement = /** @type {HTMLTimeElement} */ (document.querySelector('#cur-time'));
 
 						setInterval(() => {
@@ -667,7 +682,7 @@ import Webrings from '../components/Webrings.astro';
 				<section>
 					<h3>2D Canvas</h3>
 					<canvas width="320" height="240" id="canvas-2d"></canvas>
-					<script type="module">
+					<script type="module" is:inline>
 						const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d'));
 						const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
 						ctx.fillStyle = 'teal';
@@ -678,24 +693,15 @@ import Webrings from '../components/Webrings.astro';
 				<section>
 					<h3>3D Canvas</h3>
 					<canvas width="320" height="240" id="canvas-3d"></canvas>
-					<script type="x-shader/x-vertex" id="vertex-shader">
-						{
-							`#version 100
-						void main() {
-							gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-							gl_PointSize = 64.0;
-						}`;
-						}
-					</script>
-					<script type="x-shader/x-fragment" id="fragment-shader">
-						{
-							`#version 100
-						void main() {
-							gl_FragColor = vec4(0.18, 0.54, 0.34, 1.0);
-						}`;
-						}
-					</script>
-					<script type="module">
+					<template type="x-shader/x-vertex" id="vertex-shader">
+						{/* eslint-disable-next-line astro/no-set-html-directive */}
+						<Fragment set:html={vertexShader} />
+					</template>
+					<template type="x-shader/x-fragment" id="fragment-shader">
+						{/* eslint-disable-next-line astro/no-set-html-directive */}
+						<Fragment set:html={fragmentShader} />
+					</template>
+					<script type="module" is:inline>
 						const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-3d'));
 						const gl = /** @type {WebGLRenderingContext} */ (canvas.getContext('webgl'));
 
@@ -761,12 +767,12 @@ import Webrings from '../components/Webrings.astro';
 								<td>0</td>
 							</tr>
 							<tr>
-								<td>Sly</td>
+								<td>EdgeLord69</td>
 								<td>153</td>
 								<td>3</td>
 							</tr>
 							<tr>
-								<td>Clara</td>
+								<td>Karen</td>
 								<td>300</td>
 								<td>1</td>
 							</tr>
@@ -791,13 +797,622 @@ import Webrings from '../components/Webrings.astro';
 					<fieldset>
 						<legend>General Knowledge Questions</legend>
 
-						<label for=""></label>
+						<input-wrapper>
+							<label for="input-name">What is your name?</label>
+							<input
+								type="text"
+								name="name"
+								id="input-name"
+								required
+								autocomplete="name"
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-quest">What is your quest?</label>
+							<input
+								type="text"
+								name="quest"
+								id="input-quest"
+								required
+								minlength="1"
+								list="list-quests"
+							/>
+							<datalist id="list-quests">
+								<option>To seek the Holy Grail</option>
+								<option>To slay the Beast of Caerbanog</option>
+								<option>To find a shrubbery</option>
+							</datalist>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-color">What is your favourite colour?</label>
+							<input
+								type="color"
+								name="color"
+								id="input-color"
+								required
+								list="list-colors"
+							/>
+							<datalist id="list-colors">
+								<option value="#0080ff">Marco's Blue</option>
+								<option value="#ff8000">Marco's Orange</option>
+								<option value="#ff0000">Red</option>
+								<option value="#00ff00">Blue</option>
+								<option value="#0000ff">Green</option>
+								<option value="#000000">Black</option>
+								<option value="#ffffff">White</option>
+								<option value="seagreen">Sea Green</option>
+								<option value="navy">Navy Blue</option>
+								<option value="tomato">Tomato</option>
+								<option value="deeppink">Deep Pink</option>
+							</datalist>
+						</input-wrapper>
+
+						<fieldset>
+							<legend>What is the capital of Assyria?</legend>
+							<input-wrapper>
+								<input
+									type="radio"
+									name="capital-of-assyria"
+									id="input-capital-1"
+									required
+									checked
+									value="Assur"
+								/>
+								<label for="input-capital-1">Assur</label>
+							</input-wrapper>
+							<input-wrapper>
+								<input
+									type="radio"
+									name="capital-of-assyria"
+									id="input-capital-2"
+									required
+									value="Kar-Tukulti-Ninurta"
+								/>
+								<label for="input-capital-2">Kar-Tukulti-Ninurta</label>
+							</input-wrapper>
+							<input-wrapper>
+								<input
+									type="radio"
+									name="capital-of-assyria"
+									id="input-capital-3"
+									required
+									value="Nimrud"
+								/>
+								<label for="input-capital-3">Nimrud</label>
+							</input-wrapper>
+							<input-wrapper>
+								<input
+									type="radio"
+									name="capital-of-assyria"
+									id="input-capital-4"
+									required
+									value="Dur-Sharrukin"
+								/>
+								<label for="input-capital-4">Dur-Sharrukin</label>
+							</input-wrapper>
+							<input-wrapper>
+								<input
+									type="radio"
+									name="capital-of-assyria"
+									id="input-capital-5"
+									required
+									value="Nieveh"
+								/>
+								<label for="input-capital-5">Nieveh</label>
+							</input-wrapper>
+							<input-wrapper>
+								<input
+									type="radio"
+									name="capital-of-assyria"
+									id="input-capital-6"
+									required
+									value="Harran"
+								/>
+								<label for="input-capital-6">Harran</label>
+							</input-wrapper>
+						</fieldset>
+
+						<fieldset>
+							<legend>What is the airspeed velocity of an unladen swallow?</legend>
+
+							<input-wrapper>
+								<label for="input-swallow-type">Type of swallow:</label>
+
+								<select
+									name="type-of-swallow"
+									id="input-swallow-type"
+									required
+								>
+									<option value="" disabled selected hidden>Select a type of swallow</option>
+
+									<optgroup label="Africa">
+										<option>Pied-winged Swallow</option>
+										<option>Whire-tailed Swallow</option>
+										<option>Whire-throated Swallow</option>
+									</optgroup>
+									<hr />
+									<optgroup label="Asia">
+										<option>Barn Swallow</option>
+										<option>Pacific Swallow</option>
+										<option>Red-rumped Swallow</option>
+										<option>Whire-tailed Swallow</option>
+									</optgroup>
+									<hr />
+									<optgroup label="Europe">
+										<option>Barn Swallow</option>
+										<option>Red-rumped Swallow</option>
+									</optgroup>
+									<hr />
+									<optgroup label="North America">
+										<option>Cave Swallow</option>
+										<option>Clif Swallow</option>
+										<option>Tree Swallow</option>
+									</optgroup>
+									<hr />
+									<optgroup label="Oceania">
+										<option>Pacific Swallow</option>
+										<option>Welcome Swallow</option>
+									</optgroup>
+								</select>
+							</input-wrapper>
+
+							<input-wrapper>
+								<label for="input-swallow-velocity">Airspeed velocity:</label>
+								<input-wrapper>
+									<input
+										type="number"
+										name="airspeed-velocity-of-an-unladen-swallow"
+										id="input-swallow-velocity"
+										required
+										min="0"
+										max="1000"
+										step="0.1"
+									/>
+									<input-infix>m/s</input-infix>
+								</input-wrapper>
+							</input-wrapper>
+						</fieldset>
 					</fieldset>
+
+					<fieldset>
+						<legend>Dates and Time</legend>
+
+						<input-wrapper>
+							<label for="input-date">What day is today?</label>
+							<input
+								type="date"
+								name="today"
+								id="input-date"
+								required
+								step="1"
+							/>
+							<script type="module" is:inline>
+								const dateInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-date'));
+								const now = new Date();
+								const todayString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${
+									now.getDate().toString().padStart(2, '0')
+								}`;
+
+								dateInput.min = todayString;
+								dateInput.max = todayString;
+								dateInput.value = todayString;
+							</script>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-datetime">Your birth date and time (for your astrology birth chart):</label>
+							<input
+								type="datetime-local"
+								name="birthday"
+								id="input-datetime"
+								required
+								autocomplete="bday"
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-month">Summer has come and past, the innocent can never last, when should you wake up?</label>
+							<input
+								type="month"
+								name="wake-me-up-when-september-ends"
+								id="input-month"
+								required
+							/>
+							<script type="module" is:inline>
+								const monthInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-month'));
+								const targetDate = new Date();
+
+								if (targetDate.getMonth() >= 9) {
+									targetDate.setFullYear(targetDate.getFullYear() + 1);
+								}
+
+								monthInput.min = `${targetDate.getFullYear()}-10`;
+								monthInput.max = `${targetDate.getFullYear()}-12`;
+							</script>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-time">What time to set an alarm for?</label>
+							<input
+								type="time"
+								name="alarm"
+								id="input-time"
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-week">Choose a week for the corporate quarterly meeting:</label>
+							<input
+								type="week"
+								name="corporate-quarterly-meeting"
+								id="input-week"
+								required
+								min="2020-W04"
+								max="2020-W50"
+							/>
+						</input-wrapper>
+					</fieldset>
+
+					<fieldset>
+						<legend>Marketing Options</legend>
+
+						<input-wrapper>
+							<label for="input-email">Your email:</label>
+							<input
+								type="email"
+								name="email"
+								id="input-email"
+								required
+								autocomplete="email"
+								inputmode="email"
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-tel">Your phone number:</label>
+							<input-hint>Phone numbers must start with a "+", followed by the country code, a space, and the phone number without spaces.</input-hint>
+							<input
+								type="tel"
+								name="phone"
+								id="input-tel"
+								required
+								autocomplete="tel"
+								pattern="+\d{1,3} \d{4,}"
+								placeholder="+XX XXXXXXXX"
+								inputmode="tel"
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-url">Link to your social media account:</label>
+							<input
+								type="url"
+								name="social-media-link"
+								id="input-url"
+								required
+								autocomplete="url"
+								inputmode="url"
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-file">Photo of your government ID:</label>
+							<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+							<input
+								type="file"
+								name="government-id"
+								id="input-file"
+								required
+								accept=".jpg,.jpeg,.png,.gif"
+							/>
+							<input-hint>Formats accepted: JPEG, PNG, GIF. Maximum file size: 2mb</input-hint>
+						</input-wrapper>
+						<figure>
+							<figcaption>ID preview:</figcaption>
+							<output for="input-file" id="output-file" aria-live="off"></output>
+						</figure>
+						<script type="module" is:inline>
+							const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file'));
+							const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file'));
+
+							function updateOutput() {
+								// TODO: output to image
+							}
+
+							input.addEventListener('input', updateOutput);
+							input.addEventListener('change', updateOutput);
+						</script>
+
+						<input-wrapper>
+							<label for="input-file-capture">Provide a selfie:</label>
+							<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+							<input
+								type="file"
+								name="selfie"
+								id="input-file-capture"
+								required
+								accept=".jpg,.jpeg,.png,.gif"
+								capture
+							/>
+							<input-hint>Formats accepted: JPEG, PNG, GIF. Maximum file size: 2mb</input-hint>
+						</input-wrapper>
+						<figure>
+							<figcaption>Selfie preview:</figcaption>
+							<output for="input-file-capture" id="output-file-capture" aria-live="off"></output>
+						</figure>
+						<script type="module" is:inline>
+							const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-capture'));
+							const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file-capture'));
+
+							function updateOutput() {
+								// TODO: output to image
+							}
+
+							input.addEventListener('input', updateOutput);
+							input.addEventListener('change', updateOutput);
+						</script>
+
+						<input-wrapper>
+							<label for="input-file-dir">A folder with your last 5 years of tax documents:</label>
+							<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+							<input
+								type="file"
+								name="tax-documents"
+								id="input-file-dir"
+								required
+								webkitdirectory
+							/>
+						</input-wrapper>
+						<figure>
+							<figcaption>Folder list preview:</figcaption>
+							<output for="input-file-dir" id="output-file-dir" aria-live="off"></output>
+						</figure>
+						<script type="module" is:inline>
+							const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-dir'));
+							const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file-dir'));
+
+							function updateOutput() {
+								// TODO: output file list
+							}
+
+							input.addEventListener('input', updateOutput);
+							input.addEventListener('change', updateOutput);
+						</script>
+
+						<input-wrapper>
+							<label for="input-file-multiple">A collection of photos and videos for training AI models:</label>
+							<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+							<input
+								type="file"
+								name="ai-training-data"
+								id="input-file-multiple"
+								required
+								multiple
+								accept="image/*,video/*"
+							/>
+						</input-wrapper>
+						<figure>
+							<figcaption>Training data preview:</figcaption>
+							<output for="input-file-multiple" id="output-file-multiple" aria-live="off"></output>
+						</figure>
+						<script type="module" is:inline>
+							const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-multiple'));
+							const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file-multiple'));
+
+							function updateOutput() {
+								// TODO: output list of files
+							}
+
+							input.addEventListener('input', updateOutput);
+							input.addEventListener('change', updateOutput);
+						</script>
+
+						<input-wrapper>
+							<label for="input-password">A secure password for your subscription:</label>
+							<input-hint>The password is rerquired for any changes in the future.</input-hint>
+							<input
+								type="password"
+								name="password"
+								id="input-password"
+								required
+								minlength="256"
+							/>
+							<input-hint>
+								<label for="password-strength">Password Strength:</label>
+								<output for="input-password" aria-live="off">
+									<meter
+										id="password-strength"
+										min="0"
+										low="1"
+										high="2"
+										optimum="3"
+										max="4"
+										value="0"
+									>
+										&mdash;
+									</meter>
+								</output>
+							</input-hint>
+							<script type="module" is:inline>
+								const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-password'));
+								const output = /** @type {HTMLMeterElement} */ (document.querySelector('#password-meter'));
+
+								function updateOutput() {
+									// TODO: output password strength by length
+								}
+
+								input.addEventListener('input', updateOutput);
+								input.addEventListener('change', updateOutput);
+							</script>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-range">Number of emails to receive per hour:</label>
+							<input
+								type="range"
+								name="emails-per-hour"
+								id="input-range"
+								required
+								min="20"
+								max="1000"
+								step="10"
+								value="150"
+							/>
+
+							<output for="input-range" id="output-range" aria-live="polite">150</output>
+
+							<script type="module" is:inline>
+								const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-range'));
+								const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-range'));
+
+								function updateOutput() {
+									output.textContent = input.value;
+								}
+
+								input.addEventListener('input', updateOutput);
+								input.addEventListener('change', updateOutput);
+							</script>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="input-email-multiple">Friends to invite to our newsletter:</label>
+							<input
+								type="email"
+								name="spam-email"
+								id="input-email-multiple"
+								inputmode="email"
+								multiple
+							/>
+						</input-wrapper>
+
+						<input-wrapper>
+							<label for="select-multiple">Select from the list below which of our partners you would like to share your data:</label>
+
+							<select
+								name="share-partners"
+								id="select-multiple"
+								multiple
+								required
+							>
+								<optgroup label="Data Harvesting">
+									<option selected>YourData.com</option>
+									<option selected>Meta-Data</option>
+									<option selected>Alphabetical</option>
+									<option selected>Visage Livre</option>
+									<option selected>Astronomically Large Number</option>
+								</optgroup>
+								<hr />
+								<optgroup label="Advertizing">
+									<option selected>ClickRate</option>
+									<option selected>Ad2Click</option>
+									<option selected>Ads4You</option>
+									<option selected>AdsSquared</option>
+								</optgroup>
+							</select>
+						</input-wrapper>
+
+						<input-wrapper>
+							<input
+								type="checkbox"
+								name="tos-accepted"
+								id="input-checkbox"
+								required
+							/>
+							<label for="input-checkbox">I hereby unconditinally accept all terms and conditions</label>
+							<input-hint>Note: reading the terms and conditions is optional. Accepting them is mandatory.</input-hint>
+						</input-wrapper>
+					</fieldset>
+
+					<fieldset>
+						<legend>Miss Universe Acceptance Sppech</legend>
+
+						<input-wrapper>
+							<label for="input-textarea">Your speech:</label>
+							<input-hint>Please write a 700 word essay on why you deserve and are worth to be crowned Miss Universe.</input-hint>
+							<textarea
+								name="acceptance-speech"
+								id="input-textarea"
+								rows="10"
+								cols="20"
+								autocapitalize="sentences"
+								autocorrect="on"
+								spellcheck="true"
+								wrap="soft"
+								required
+								placeholder="I personally believe..."
+							></textarea>
+							<input-hint>
+								<label for="word-count">Word count:</label>
+								<output for="input-textarea" aria-live="off">
+									<progress
+										id="word-count"
+										max="700"
+										value="0"
+									>
+										&mdash;
+									</progress>
+								</output>
+							</input-hint>
+
+							<script type="module" is:inline>
+								const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-textarea'));
+								const output = /** @type {HTMLOutputElement} */ (document.querySelector('#word-count'));
+
+								function updateOutput() {
+									// TODO: count words using segmenter API
+								}
+
+								input.addEventListener('input', updateOutput);
+								input.addEventListener('change', updateOutput);
+							</script>
+						</input-wrapper>
+					</fieldset>
+
+					<fieldset>
+						<legend>Magic Elements</legend>
+
+						<input-wrapper>
+							<label for="input-hidden">Security code, please take note:</label>
+							<input type="hidden" name="hidden" id="input-hidden" value="password" />
+						</input-wrapper>
+
+						<input-wrapper>
+							<input type="checkbox" name="maybe" id="input-intermediate" value="maybe" />
+							<label for="input-intermediate">It's checked, maybe.</label>
+							<script type="module" is:inline>
+								const intermediateCheckbox = /** @type {HTMLInputElement} */ (document.querySelector('#input-intermediate'));
+
+								intermediateCheckbox.indeterminate = true;
+							</script>
+						</input-wrapper>
+					</fieldset>
+
+					<footer>
+						<button type="submit">Submit</button>
+						<input type="submit" value="Submit, but input" />
+						<input
+							type="image"
+							src="/assets/images/test/fancy-submit.svg"
+							alt="Submit, but fancier"
+							height="32"
+						/>
+						<hr />
+						<button type="reset">Reset</button>
+						<input type="reset" value="Reset, but input" />
+						<hr />
+						<button type="button">Button</button>
+						<input type="button" value="Button, but input" />
+
+						<script type="module" is:inline>
+							// TODO: display alert when buttons are clicked
+						</script>
+					</footer>
 				</form>
 			</details>
 
 			<!-- Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements -->
-			<!-- forms: button, datalist, fieldset, form, input, label, legend, meter, optgroup, option, output, progress, select, textarea -->
 			<!-- interactive elements: details, dialog, summary -->
 			<!-- web components: slot, template -->
 			<!--
