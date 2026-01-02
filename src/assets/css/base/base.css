@@ -1,0 +1,55 @@
+@layer base {
+	:root {
+		scrollbar-gutter: stable;
+		-webkit-text-size-adjust: none;
+		text-size-adjust: none;
+		scrollbar-color: var(--theme-color) var(--surface-2);
+		hanging-punctuation: first allow-end last;
+		color-scheme: light dark;
+		font-size: var(--base-font-size);
+		line-height: var(--font-lineheight-3);
+		font-family: var(--text-font-family);
+		word-break: break-word;
+		tab-size: 4;
+		-webkit-tap-highlight-color: transparent;
+		accent-color: var(--theme-color);
+
+		@media (prefers-reduced-motion: no-preference) {
+			interpolate-size: allow-keywords;
+
+			&:focus-within { scroll-behavior: smooth; }
+		}
+	}
+
+	:where(*, *::after, *::before) {
+		box-sizing: border-box;
+		font-family: inherit;
+	}
+
+	:where(html, body) {
+		inline-size: 100%;
+		block-size: 100%;
+	}
+
+	:where(body) { margin: 0; }
+
+	:target {
+		scroll-margin: var(--size-3);
+		scroll-snap-align: start;
+	}
+
+	::selection {
+		background-color: var(--theme-color);
+		color: var(--surface-1);
+	}
+
+	::target-text {
+		background-color: var(--accent-color);
+		color: var(--surface-1);
+	}
+
+	::search-text {
+		background-color: var(--theme-color);
+		color: var(--surface-1);
+	}
+}

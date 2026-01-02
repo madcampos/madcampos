@@ -1,0 +1,37 @@
+@layer base {
+	:where(audio, img, video) {
+		display: block;
+		margin-inline: auto;
+		max-inline-size: var(--size-content-3);
+		max-block-size: var(--size-content-3);
+		block-size: auto;
+		inline-size: 100%;
+		border-style: none;
+		min-inline-size: var(--size-content-0);
+		min-block-size: var(--size-content-0);
+		object-fit: contain;
+		object-position: center;
+		text-wrap: balance;
+		font-style: italic;
+		color: var(--accent-color);
+
+		&[data-load-error] { /* TODO: add styles for load error & script to handle this case */ }
+	}
+
+	:where(audio) {
+		min-block-size: var(--size-8);
+		inline-size: 100%;
+	}
+
+	:where(audio, video):focus-visible {
+		outline: var(--theme-color) var(--border-style) var(--border-size);
+		outline-offset: var(--size-1);
+		background-color: var(--surface-1);
+	}
+
+	area:focus-visible {
+		outline-color: var(--theme-color);
+		outline-width: var(--border-size);
+		outline-offset: var(--size-1);
+	}
+}

@@ -1,0 +1,97 @@
+@layer base {
+	:where(a) {
+		color: var(--link-color);
+		text-decoration-style: var(--link-underline);
+		text-decoration-thickness: 0.11em;
+		text-decoration-skip-ink: auto;
+		text-underline-offset: 0.2em;
+		word-break: break-word;
+		overflow-wrap: break-word;
+
+		&:visited { color: var(--link-visited-color); }
+		&:focus-visible {
+			color: var(--text-1);
+			outline: var(--theme-color) var(--border-style) var(--border-size);
+			outline-offset: var(--size-1);
+			background-color: var(--surface-1);
+		}
+
+		&:hover {
+			outline-color: var(--link-hover-color);
+			color: var(--link-hover-color);
+		}
+
+		&:active {
+			outline-color: var(--link-active-color);
+			color: var(--link-active-color);
+		}
+
+		&:has(img) {
+			display: inline-flex;
+
+			&:focus-visible { background-color: var(--surface-1); }
+		}
+	}
+
+	:where(dfn, cite, q) {
+		font-style: italic;
+		color: var(--text-2);
+	}
+
+	:where(abbr, u, s, ins, del) {
+		text-decoration: underline;
+		text-decoration-style: var(--link-underline);
+		text-decoration-thickness: 0.11em;
+		text-decoration-skip-ink: auto;
+		text-underline-offset: 0.2em;
+	}
+
+	:where(strong, b) { font-weight: 900; }
+	:where(em, i) { font-style: italic; }
+
+	:where(small) { font-size: var(--font-size-0); }
+
+	:where(sub, sup) {
+		font-size: 0.8em;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+
+	:where(sub) { inset-block-end: -0.25em; }
+	:where(sup) { inset-block-start: -0.5em; }
+
+	:where(mark) {
+		color: var(--surface-1);
+		background-color: var(--accent-color);
+	}
+
+	:where(s, del) { text-decoration-line: line-through; }
+
+	:where(ins) {
+		color: var(--diff-add-color);
+		background-color: var(--diff-add-bg);
+	}
+
+	:where(del) {
+		color: var(--diff-remove-color);
+		background-color: var(--diff-remove-bg);
+	}
+
+	:where(code, kbd, samp) {
+		font-family: var(--code-font-family);
+		display: inline-block;
+		background-color: var(--surface-2);
+		padding-inline: var(--size-1);
+	}
+
+	:where(kbd) {
+		border: var(--border-size) outset var(--surface-3);
+		border-radius: var(--border-radius);
+	}
+
+	:where(var) {
+		font-style: italic;
+		font-family: var(--code-font-family);
+	}
+}

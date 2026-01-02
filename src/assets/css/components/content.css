@@ -1,18 +1,4 @@
 @layer components {
-	:root {
-		/* colors */
-		--diff-add-color: light-dark(darkgreen, limegreen);
-		--diff-add-bg: light-dark(rgba(0, 194, 0, 0.3), rgba(0, 100, 0, 0.3));
-		--diff-remove-color: light-dark(maroon, red);
-		--diff-remove-bg: light-dark(rgba(255, 68, 68, 0.3), rgba(193, 0, 0, 0.3));
-		--highlight-color: light-dark(dimgray, silver);
-		--highlight-default-bg: light-dark(rgba(105, 105, 105, 0.35), rgba(192, 192, 192, 0.2));
-		--highlight-error-color: light-dark(maroon, tomato);
-		--highlight-error-bg: light-dark(rgba(255, 99, 71, 0.3), rgba(255, 99, 71, 0.2));
-		--highlight-warning-color: light-dark(goldenrod, yellow);
-		--highlight-warning-bg: light-dark(rgba(218, 165, 32, 0.3), rgba(218, 165, 32, 0.2));
-	}
-
 	rendered-content {
 		sup svg {
 			inline-size: 1em;
@@ -28,23 +14,13 @@
 
 		[data-footnotes] a[data-footnote-backref] { text-decoration: none; }
 
-		blockquote {
-			margin: var(--size-2);
-			background-color: var(--surface-2);
-			border: var(--border-size) var(--border-style) var(--surface-4);
-			border-radius: var(--border-radius);
-			padding-block: var(--size-3);
-			padding-inline: var(--size-4);
-			font-style: italic;
-
-			p { margin: 0; }
-		}
-
-		p > img:only-child {
+		/* TODO: review */
+		p > :is(img, img-lightbox):only-child {
 			--image-size: 35vw;
-			inline-size: clamp(var(--size-content-1), var(--image-size), var(--size-content-3));
+			inline-size: clamp(var(--size-content-0), var(--image-size), var(--size-content-3));
 		}
 
+		/* TODO: wrap in a "code-block" component when building */
 		pre {
 			--line-counter-width: 2em;
 			--line-counter-margin-right: 1em;
@@ -96,6 +72,8 @@
 				white-space: normal;
 				word-break: break-word;
 				overflow-wrap: break-word;
+				background-color: transparent;
+				padding-inline: 0;
 
 				.line::before {
 					display: inline-block;

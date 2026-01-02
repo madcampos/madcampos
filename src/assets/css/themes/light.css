@@ -20,6 +20,31 @@
 		--link-hover-color: var(--accent-9);
 		--link-active-color: var(--accent-12);
 
+		/* Code colors */
+		--diff-add-color: darkgreen;
+		--diff-add-bg: rgba(0, 194, 0, 0.3);
+		--diff-remove-color: maroon;
+		--diff-remove-bg: rgba(255, 68, 68, 0.3);
+		--highlight-color: dimgray;
+		--highlight-default-bg: rgba(105, 105, 105, 0.35);
+		--highlight-error-color: maroon;
+		--highlight-error-bg: rgba(255, 99, 71, 0.3);
+		--highlight-warning-color: goldenrod;
+		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
+
+		/* Table styles */
+		--table-header-bg: var(--theme-2);
+		--table-header-color: var(--gray-10);
+		--table-header-border: var(--border-size) var(--border-style) var(--theme-color);
+
+		--table-rows-odd: var(--surface-1);
+		--table-rows-even: var(--surface-2);
+		--table-rows-hover: var(--surface-3);
+
+		--table-footer-bg: var(--theme-1);
+		--table-footer-color: var(--text-2);
+		--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
+
 		/* Global settings */
 		color-scheme: light;
 	}

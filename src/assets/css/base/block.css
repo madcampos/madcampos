@@ -1,0 +1,75 @@
+@layer base {
+	:where(blockquote) {
+		margin: var(--size-2);
+		background-color: var(--surface-2);
+		border: var(--border-size) var(--border-style) var(--surface-4);
+		border-radius: var(--border-radius);
+		padding-block: var(--size-3);
+		padding-inline: var(--size-4);
+		font-style: italic;
+
+		p { margin: 0; }
+	}
+
+	:where(dl) {
+		dt {
+			color: var(--accent-color);
+			font-weight: bold;
+			text-decoration: underline;
+			text-decoration-style: var(--link-underline);
+			text-decoration-thickness: 0.11em;
+			text-decoration-skip-ink: auto;
+			text-underline-offset: 0.2em;
+		}
+
+		dd { margin-inline-start: var(--size-3); }
+	}
+
+	:where(figure) {
+		inline-size: fit-content;
+		min-inline-size: var(--size-content-0);
+		margin-inline: auto;
+
+		figcaption {
+			text-align: center;
+			contain: inline-size;
+			font-size: var(--font-size-0);
+		}
+	}
+
+	:where(hr) {
+		border: none;
+		border-block-start: var(--theme-color) var(--border-style) var(--border-size);
+		inline-size: clamp(--size-content-0, 70vw, var(--size-content-3));
+	}
+
+	:where(ul) { list-style: '◆ '; }
+	:where(ol) { list-style: decimal-leading-zero; }
+
+	:where(ol, ul) {
+		ul { list-style: '◇ '; }
+		ol { list-style: lower-latin; }
+
+		:where(ol, ul) {
+			ul { list-style: '✢ '; }
+			ol { list-style: lower-roman; }
+		}
+	}
+
+	:where(p, li, dd) { text-wrap: pretty; }
+
+	:where(pre) {
+		white-space: pre-wrap;
+		font-family: var(--code-font-family);
+		color: var(--text-2);
+	}
+
+	:where(menu) {
+		list-style: none;
+		display: flex;
+		margin: 0;
+		padding: var(--size-1);
+		gap: var(--size-2);
+		background: var(--surface-2);
+	}
+}

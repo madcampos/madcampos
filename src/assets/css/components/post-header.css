@@ -49,15 +49,10 @@
 			blockquote {
 				grid-area: summary;
 				margin: 0;
-				border: none;
 				background: var(--surface-1);
-				padding: var(--size-3);
 				font-size: var(--font-size-0);
 				color: var(--text-2);
 				text-align: center;
-				font-style: italic;
-
-				p { margin: 0; }
 			}
 
 			post-metadata {

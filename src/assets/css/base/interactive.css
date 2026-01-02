@@ -1,0 +1,68 @@
+@layer base {
+	:where(summary) {
+		display: flex;
+		align-items: center;
+		gap: var(--size-1);
+		list-style: none;
+
+		&::-webkit-details-marker { display: none; }
+		&::marker { display: none; }
+
+		&::before {
+			display: inline-block;
+			background-image: var(--details-icon);
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			inline-size: 1.5em;
+			block-size: 1.5em;
+			vertical-align: -0.2em;
+			content: '';
+			flex-shrink: 0;
+		}
+
+		& > :where(h1, h2, h3, h4, h5, h6) { margin: 0; }
+
+		&:focus-visible {
+			outline: var(--theme-color) var(--border-style) var(--border-size);
+			outline-offset: var(--size-1);
+			background-color: var(--surface-1);
+		}
+	}
+
+	:where(details[open]) > summary::before { transform: rotate(90deg); }
+
+	:where(dialog) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: start;
+		padding: var(--size-3);
+		border: var(--surface-3) var(--border-style) var(--border-size);
+		border-radius: var(--border-radius);
+		background-color: var(--surface-2);
+		inline-size: clamp(var(--size-content-0), 70vw, var(--size-content-3));
+		block-size: clamp(var(--size-content-0), 70vh, var(--size-content-3));
+		overscroll-behavior: contain;
+
+		&:where([open], :popover-open) { display: flex; }
+
+		&::backdrop {
+			backdrop-filter: blur(var(--size-3));
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			padding: var(--size-2);
+			inline-size: 100%;
+			block-size: 100%;
+
+			button {
+				inline-size: fit-content;
+				block-size: fit-content;
+				font-size: var(--font-size-1);
+			}
+		}
+	}
+}

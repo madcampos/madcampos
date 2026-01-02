@@ -27,19 +27,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const post = (await listAllPosts())[0]!;
 
-const vertexShader = `#version 100
-void main() {
-	gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-	gl_PointSize = 64.0;
-}
-`;
-
-const fragmentShader = `#version 100
-void main() {
-	gl_FragColor = vec4(0.18, 0.54, 0.34, 1.0);
-}
-`;
-
 const framesetHtml = `
 	<frameset cols="50%, 50%" rows="50%, 50%">
 		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
@@ -702,8 +689,19 @@ const framesetHtml = `
 
 					<p>Some inline math: <math display="inline"><mi>x</mi> <mo>=</mo> <mn>0</mn></math></p>
 				</section>
-			</details>
+						const { width, height } = canvas.getBoundingClientRect();
 
+						canvas.width = Math.floor(width);
+						canvas.height = Math.floor(height);
+
+						canvas.style.width = `${canvas.width}px`;
+						canvas.style.height = `${canvas.height}px`;
+
+						ctx.canvas.width = canvas.width;
+						ctx.canvas.height = canvas.height;
+
+			</details>
+						ctx.fillRect(Math.floor(canvas.width / 2) - 50, Math.floor(canvas.height / 2) - 50, 100, 100);
 			<details open>
 				<summary>
 					<h2>Canvas</h2>
@@ -715,57 +713,26 @@ const framesetHtml = `
 					<script type="module" is:inline>
 						const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d'));
 						const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
+						const { width, height } = canvas.getBoundingClientRect();
+
+						canvas.width = Math.floor(width);
+						canvas.height = Math.floor(height);
+
+						canvas.style.width = `${canvas.width}px`;
+						canvas.style.height = `${canvas.height}px`;
+
+						ctx.canvas.width = canvas.width;
+						ctx.canvas.height = canvas.height;
+
 						ctx.fillStyle = 'teal';
-						ctx.fillRect(10, 10, 100, 100);
+						ctx.fillRect(Math.floor(canvas.width / 2) - 50, Math.floor(canvas.height / 2) - 50, 100, 100);
 					</script>
 				</section>
 
 				<section>
 					<h3>3D Canvas</h3>
 					<canvas width="320" height="240" id="canvas-3d"></canvas>
-					<template type="x-shader/x-vertex" id="vertex-shader">
-						{/* eslint-disable-next-line astro/no-set-html-directive */}
-						<Fragment set:html={vertexShader} />
-					</template>
-					<template type="x-shader/x-fragment" id="fragment-shader">
-						{/* eslint-disable-next-line astro/no-set-html-directive */}
-						<Fragment set:html={fragmentShader} />
-					</template>
-					<script type="module" is:inline>
-						const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-3d'));
-						const gl = /** @type {WebGLRenderingContext} */ (canvas.getContext('webgl'));
-
-						const vertexSource = (/** @type {HTMLScriptElement} */ (document.querySelector('#vertex-shader'))).innerHTML;
-						const vertexShader = /** @type {WebGLShader} */ (gl.createShader(gl.VERTEX_SHADER));
-						gl.shaderSource(vertexShader, vertexSource);
-						gl.compileShader(vertexShader);
-
-						const fragmentSource = (/** @type {HTMLScriptElement} */ (document.querySelector('#fragment-shader'))).innerHTML;
-						const fragmentShader = /** @type {WebGLShader} */ (gl.createShader(gl.FRAGMENT_SHADER));
-						gl.shaderSource(fragmentShader, fragmentSource);
-						gl.compileShader(fragmentShader);
-
-						const program = gl.createProgram();
-						gl.attachShader(program, vertexShader);
-						gl.attachShader(program, fragmentShader);
-						gl.linkProgram(program);
-						gl.detachShader(program, vertexShader);
-						gl.detachShader(program, fragmentShader);
-						gl.deleteShader(vertexShader);
-						gl.deleteShader(fragmentShader);
-
-						gl.enableVertexAttribArray(0);
-						const buffer = gl.createBuffer();
-						gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-						gl.vertexAttribPointer(0, 1, gl.FLOAT, false, 0, 0);
-
-						gl.useProgram(program);
-						gl.drawArrays(gl.POINTS, 0, 1);
-
-						gl.useProgram(null);
-						gl.deleteBuffer(buffer);
-						gl.deleteProgram(program);
-					</script>
+					<script type="module" src="/assets/js/test/webgl-cube.js" is:inline></script>
 				</section>
 			</details>
 
@@ -785,9 +752,9 @@ const framesetHtml = `
 
 						<thead>
 							<tr>
-								<th>Character</th>
-								<th>GP</th>
-								<th>Gems</th>
+								<th aria-sort="none">Character</th>
+								<th aria-sort="none">GP</th>
+								<th aria-sort="none">Gems</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -1211,6 +1178,7 @@ const framesetHtml = `
 						<input-wrapper>
 							<label for="input-file-dir">A folder with your last 5 years of tax documents:</label>
 							<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+							{/* @ts-expect-error */}
 							<input
 								type="file"
 								name="tax-documents"
@@ -1355,19 +1323,20 @@ const framesetHtml = `
 
 						<input-wrapper>
 							<label for="input-range">Number of emails to receive per hour:</label>
-							<input
-								type="range"
-								name="emails-per-hour"
-								id="input-range"
-								required
-								min="20"
-								max="1000"
-								step="10"
-								value="150"
-							/>
+							<input-wrapper>
+								<input
+									type="range"
+									name="emails-per-hour"
+									id="input-range"
+									required
+									min="20"
+									max="1000"
+									step="10"
+									value="150"
+								/>
 
-							<output for="input-range" id="output-range" aria-live="polite">150</output>
-
+								<output for="input-range" id="output-range" aria-live="polite">150</output>
+							</input-wrapper>
 							<script type="module" is:inline>
 								const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-range'));
 								const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-range'));
@@ -2069,6 +2038,7 @@ const framesetHtml = `
 					<h3>Image Element</h3>
 					<p><strong>Note:</strong> Use <code>&lt;img&gt;</code> instead.</p>
 
+					{/* @ts-expect-error */}
 					<image
 						src="/assets/images/test/good-parts.webp"
 						alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
@@ -2192,21 +2162,21 @@ const framesetHtml = `
 
 					<p><tt>shutdown -t 0 -r</tt></p>
 				</section>
+
+				<section>
+					<h3><code>&lt;xmp&gt;</code></h3>
+
+					<p><strong>Note:</strong> Use <code>&lt;pre&gt;</code> instead.</p>
+
+					<p>This element ignores HTML tags inside of it, making it tricky to work with.</p>
+
+					<iframe
+						src="/assets/documents/test/xmp.html"
+						loading="lazy"
+						title="An example of the plaintext element"
+					></iframe>
+				</section>
 			</details>
-
-			<section>
-				<h3><code>&lt;xmp&gt;</code></h3>
-
-				<p><strong>Note:</strong> Use <code>&lt;pre&gt;</code> instead.</p>
-
-				<p>This element ignores HTML tags inside of it, making it tricky to work with.</p>
-
-				<iframe
-					src="/assets/documents/test/xmp.html"
-					loading="lazy"
-					title="An example of the plaintext element"
-				></iframe>
-			</section>
 		</main>
 
 		<footer></footer>

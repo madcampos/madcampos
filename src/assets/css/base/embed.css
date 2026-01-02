@@ -1,0 +1,24 @@
+@layer base {
+	:where(iframe, embed, object) {
+		display: block;
+		margin-inline: auto;
+		border: var(--border-style) var(--border-size) var(--theme-color);
+		border-radius: var(--border-radius);
+		aspect-ratio: 3 / 2;
+		inline-size: 100%;
+		block-size: auto;
+		min-inline-size: var(--size-content-0);
+		min-block-size: var(--size-content-0);
+		max-inline-size: var(--size-content-3);
+		max-block-size: var(--size-content-3);
+		object-fit: contain;
+		object-position: center;
+		overflow: clip;
+
+		text-wrap: balance;
+		font-style: italic;
+		color: var(--accent-color);
+
+		&[data-load-error] { /* TODO: add styles for load error & script to handle this case */ }
+	}
+}
