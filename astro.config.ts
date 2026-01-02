@@ -20,6 +20,10 @@ import remarkBreaks from 'remark-breaks';
 import remarkHighlight from 'remark-flexible-markers';
 import remarkIns from 'remark-ins';
 import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
+import { rehypePlugin as rehypeCode } from './src/utils/markdown-options/code.ts';
+import { settings as externalLinkSettings } from './src/utils/markdown-options/external-links.ts';
+import { settings as footnotesSettings } from './src/utils/markdown-options/footnotes.ts';
+import { rehypePlugin as rehypeTables } from './src/utils/markdown-options/tables.ts';
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
 
@@ -87,95 +91,13 @@ export default defineConfig({
 		rehypePlugins: [
 			rehypeHeadingIds,
 			[rehypeAutolinkHeadings, { behavior: 'wrap' }],
-			[rehypeExternalLinks, {
-				rel: ['external', 'noopener', 'noreferrer'],
-				referrerpolicy: 'no-referrer',
-				contentProperties: { 'data-external-link': '' },
-				content: [
-					{
-						type: 'element',
-						tagName: 'sr-only',
-						properties: {},
-						children: [{ type: 'text', value: '(External link)' }]
-					},
-					{
-						type: 'element',
-						tagName: 'sup',
-						properties: {},
-						children: [{
-							type: 'element',
-							tagName: 'svg',
-							properties: {
-								'aria-hidden': 'true',
-								'role': 'presentation',
-								'viewBox': '0 0 24 24',
-								'width': '24',
-								'height': '24'
-							},
-							children: [{
-								type: 'element',
-								tagName: 'use',
-								properties: { href: '#mingcute--external-link-line' },
-								children: []
-							}]
-						}]
-					}
-				]
-			}]
+			[rehypeExternalLinks, externalLinkSettings],
+			rehypeTables,
+			rehypeCode
 		],
 		remarkRehype: {
 			allowDangerousHtml: true,
-			clobberPrefix: '',
-			footnoteBackContent: (referenceIndex, rereferenceIndex) => {
-				if (rereferenceIndex <= 1) {
-					return [
-						{
-							type: 'element',
-							tagName: 'sr-only',
-							properties: {},
-							children: [{ type: 'text', value: `Back to reference ${referenceIndex + 1}` }]
-						},
-						{
-							type: 'element',
-							tagName: 'sup',
-							properties: {},
-							children: [{
-								type: 'element',
-								tagName: 'svg',
-								properties: {
-									'aria-hidden': 'true',
-									'role': 'presentation',
-									'viewBox': '0 0 24 24',
-									'width': '24',
-									'height': '24'
-								},
-								children: [{
-									type: 'element',
-									tagName: 'use',
-									properties: { href: '#mingcute--arrow-to-up-line' },
-									children: []
-								}]
-							}]
-						}
-					];
-				}
-
-				return [{
-					type: 'element',
-					tagName: 'sr-only',
-					properties: {},
-					children: [{ type: 'text', value: `Back to reference ${referenceIndex + 1}` }]
-				}, {
-					type: 'element',
-					tagName: 'sup',
-					properties: {},
-					children: [{ type: 'text', value: String.fromCharCode(95 + rereferenceIndex) }]
-				}];
-			},
-			footnoteBackLabel: () => '',
-			footnoteLabel: 'Footnotes',
-			footnoteLabelProperties: {},
-			footnoteLabelTagName: 'h2'
+			...footnotesSettings
 		}
 	},
 	integrations: [

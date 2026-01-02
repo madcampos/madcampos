@@ -40,11 +40,8 @@ importers:
         specifier: ^3.15.0
         version: 3.19.0(typescript@5.9.3)
       '@types/hast':
-        specifier: ^3.0.4
+        specifier: 3.0.4
         version: 3.0.4
-      '@types/mdast':
-        specifier: ^4.0.4
-        version: 4.0.4
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.1
@@ -102,6 +99,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      unist-util-visit:
+        specifier: 5.0.0
+        version: 5.0.0
       wrangler:
         specifier: ^4.49.1
         version: 4.54.0

@@ -15,4 +15,3 @@ ignoreDepScripts: true
 strictDepBuilds: true
 engineStrict: true
 ignorePnpmfile: true
-resolutionMode: "time-based"
