@@ -2,6 +2,7 @@ type SettingEnabledDisabled = 'disabled' | 'enabled';
 
 export class SiteSettings {
 	static AVAILABLE_SETTINGS = ['debug', 'css', 'js', 'iabEscape', 'theme', 'pwa', 'updateUrl'] as const;
+	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape'] as const;
 
 	static #searchParams?: URLSearchParams;
 
@@ -29,7 +30,10 @@ export class SiteSettings {
 		if (value) {
 			document.documentElement.dataset[setting] = value;
 			SiteSettings.#searchParams?.set(setting, value);
-			localStorage.setItem(setting, value);
+
+			if (!SiteSettings.VOLATILE_SETTINGS.includes(setting)) {
+				localStorage.setItem(setting, value);
+			}
 		} else {
 			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete document.documentElement.dataset[setting];

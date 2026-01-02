@@ -23,6 +23,7 @@
 		--browser-icon-size: var(--size-3);
 
 		margin-inline: auto;
+		margin-block: var(--size-3);
 		max-inline-size: var(--size-content-3);
 		display: grid;
 		grid-template-columns: var(--icon-size) 1fr;

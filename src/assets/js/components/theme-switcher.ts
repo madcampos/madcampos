@@ -68,6 +68,7 @@ const themes: SiteTheme[] = [
 ];
 
 class ThemeSwitcher extends HTMLElement implements CustomElement {
+	#id = Math.trunc(Math.random() * 1000000).toString(16);
 	constructor() {
 		super();
 
@@ -106,13 +107,13 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 		this.querySelector('#theme-list')?.insertAdjacentHTML(
 			'afterbegin',
 			themes.map((theme) => `
-				<label for="theme-input-${theme.id}" id="theme-label-${theme.id}">
+				<label for="theme-input-${theme.id}-${this.#id}" id="theme-label-${theme.id}-${this.#id}">
 					<input
 						type="radio"
 						name="theme"
 						required
 						value="${theme.id}"
-						id="theme-input-${theme.id}"
+						id="theme-input-${theme.id}-${this.#id}"
 					/>
 					<svg
 						viewBox="0 0 100 70"
@@ -123,7 +124,7 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 						height="70"
 						${theme.dual ? 'data-dual-theme' : ''}
 					>
-						<g id="theme-image-${theme.id}">
+						<g id="theme-image-${theme.id}-${this.#id}">
 							<rect x="5" y="2.5" rx="3" width="90" height="30" fill="var(--surface-1)" stroke="var(--surface-3)" />
 							<text x="10" y="27" font-size="30" fill="var(--text-1)">Aa</text>
 
@@ -147,7 +148,7 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 						<use
 							data-theme="dark"
 							clip-path="url(#theme-preview-system-mask)"
-							href="#theme-image-${theme.id}"
+							href="#theme-image-${theme.id}-${this.#id}"
 							display="none"
 						/>
 					</svg>
