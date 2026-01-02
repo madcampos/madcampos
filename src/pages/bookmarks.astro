@@ -25,6 +25,7 @@ interface BookmarkLink {
 	title: string;
 	description: string;
 	type: 'article' | 'guidelines' | 'podcast' | 'reference' | 'tutorial' | 'video' | 'website';
+	note?: string;
 }
 
 interface BookmarkSection {
@@ -340,6 +341,12 @@ const links: BookmarkSection[] = [
 				title: 'UX Myths',
 				description: 'A list of myths regarding UX with articles explaining why they are myths.',
 				type: 'website'
+			},
+			{
+				url: 'https://www.qualtrics.com/articles/customer-experience/ux-design-glossary/',
+				title: 'User Experience (UX) Design Glossary: Improving Your Customer Experience With a Good UX',
+				description: 'A glossary of common UX terms. Helpful to build a shared definition and understanding of concepts.',
+				type: 'reference'
 			},
 			{
 				url: 'https://alistapart.com/article/the-illusion-of-control-in-web-design/',
@@ -742,6 +749,17 @@ const links: BookmarkSection[] = [
 								<dd>
 									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
+									{
+										bookmark.note && (
+											<m-note data-type="info">
+												<Icon name="mingcute:information-line" aira-hidden="true" />
+												<rendered-content>
+													{/* eslint-disable-next-line astro/no-set-html-directive */}
+													<Fragment set:html={inlineMarkdownRender(bookmark.note)} />
+												</rendered-content>
+											</m-note>
+										)
+									}
 								</dd>
 							))
 						}

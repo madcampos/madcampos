@@ -45,6 +45,20 @@
 		--table-footer-color: var(--text-2);
 		--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
 
+		/* Note styles */
+		--note-success-bg: var(--green-11);
+		--note-success-color: var(--lime-2);
+		--note-error-bg: var(--red-11);
+		--note-error-color: var(--red-2);
+		--note-warning-bg: var(--yellow-10);
+		--note-warning-color: var(--brown-12);
+		--note-alert-bg: var(--teal-10);
+		--note-alert-color: var(--jungle-2);
+		--note-info-bg: var(--blue-12);
+		--note-info-color: var(--blue-2);
+		--note-debug-bg: var(--purple-10);
+		--note-debug-color: var(--violet-2);
+
 		/* Global settings */
 		color-scheme: dark;
 	}
