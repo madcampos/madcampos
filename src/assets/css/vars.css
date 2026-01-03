@@ -95,6 +95,53 @@
 		--table-footer-color: var(--text-2);
 		--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
 
+		/* Input styles */
+		--input-bg: var(--surface-2);
+		--input-color: var(--text-2);
+		--input-border: var(--border-size) solid var(--secondary-color);
+		--input-thumb-color: var(--theme-color);
+
+		--input-placeholder-color: var(--gray-5);
+
+		--input-valid-bg: var(--green-12);
+		--input-valid-color: var(--lime-1);
+		--input-invalid-bg: var(--red-12);
+		--input-invalid-color: var(--red-1);
+		--input-hover-bg: var(--surface-1);
+		--input-hover-color: var(--text-1);
+		--input-hover-border-color: var(--accent-color);
+		--input-focus-bg: var(--surface-1);
+		--input-focus-color: var(--text-1);
+		--input-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+		--input-selected-bg: var(--surface-1);
+		--input-selected-color: var(--theme-color);
+		--input-disabled-bg: var(--surface-1);
+		--input-disabled-color: var(--text-2);
+		--input-readonly-bg: var(--surface-1);
+		--input-readonly-color: var(--text-1);
+
+		--fieldset-border: var(--border-style) var(--border-size) var(--theme-color);
+
+		/* Button styles */
+		--button-bg: var(--surface-2);
+		--button-color: var(--theme-color);
+		--button-border: var(--border-style) var(--border-size) var(--theme-color);
+		--button-hover-bg: var(--surface-2);
+		--button-hover-color: var(--accent-color);
+		--button-focus-bg: var(--theme-color);
+		--button-focus-color: var(--text-1);
+		--button-active-bg: var(--accent-color);
+		--button-active-color: var(--text-1);
+		--button-disabled-bg: var(--gray-10);
+		--button-disabled-color: var(--gray-5);
+
+		/* Progress styles */
+		--progress-bg: var(--surface-2);
+		--progress-color: var(--theme-color);
+		--progress-border: var(--border-size) solid var(--theme-color);
+		--progress-hover-bg: var(--surface-1);
+		--progress-hover-color: var(--accent-color);
+
 		/* Note styles */
 		--note-success-bg: var(--green-11);
 		--note-success-color: var(--lime-2);
