@@ -1,6 +1,7 @@
 @import url('./base/base.css');
 @import url('./base/sectioning.css');
 @import url('./base/block.css');
+@import url('./base/code.css');
 @import url('./base/inline.css');
 @import url('./base/media.css');
 @import url('./base/embed.css');
