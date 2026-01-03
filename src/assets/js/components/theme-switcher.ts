@@ -92,7 +92,7 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 						<header>
 							<h2>Choose a theme</h2>
 						</header>
-						<div id="theme-list"></div>
+						<dialog-content id="theme-list"></dialog-content>
 
 						<footer>
 							<button type="submit" popovertarget="theme-switcher-dialog" popovertargetaction="hide">Apply theme</button>

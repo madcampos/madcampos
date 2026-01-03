@@ -6,9 +6,9 @@
 		max-block-size: var(--size-content-3);
 		block-size: auto;
 		inline-size: 100%;
-		border-style: none;
 		min-inline-size: var(--size-content-0);
 		min-block-size: var(--size-content-0);
+		border-style: none;
 		object-fit: contain;
 		object-position: center;
 		text-wrap: balance;

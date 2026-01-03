@@ -51,18 +51,34 @@
 			background-color: rgba(0, 0, 0, 0.5);
 		}
 
-		form {
-			display: flex;
-			flex-direction: column;
-			padding: var(--size-2);
-			inline-size: 100%;
-			block-size: 100%;
+		& > form { display: contents; }
 
-			button {
-				inline-size: fit-content;
-				block-size: fit-content;
-				font-size: var(--font-size-1);
+		& > header, & > form > header {
+			display: flex;
+			align-items: center;
+			inline-size: 100%;
+
+			button { flex-shrink: 0; }
+			:is(h1, h2, h3, h4, h5, h6) {
+				flex-grow: 1;
+				margin: 0;
 			}
+		}
+
+		& > footer, & > form > footer {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			inline-size: 100%;
+			gap: var(--size-2);
+
+			button { flex-shrink: 0; }
+		}
+
+		& > dialog-content, & > form > dialog-content {
+			flex-grow: 1;
+			overflow: auto;
+			inline-size: 100%;
 		}
 	}
 }

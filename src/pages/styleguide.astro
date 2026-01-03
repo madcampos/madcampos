@@ -310,7 +310,7 @@ const framesetHtml = `
 
 					<p>
 						Code example (pre-rendered through <a href="https://shiki.style/" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">Shiki</a>).
-						<strong>Note:</strong> the code only highlights when inside a <code>&ltrendered-content;&gt;</code> element:
+						<strong>Note:</strong> the code only highlights when inside a <code>&ltrendered-content&gt;</code> element:
 					</p>
 
 					<rendered-content>
@@ -512,8 +512,8 @@ const framesetHtml = `
 					<h3>Area & Map</h3>
 
 					<map name="click-here">
-						<area shape="rect" coords="0,3,200,100" href="#click" alt="Click" />
-						<area shape="rect" coords="200,0,400,100" href="#here" alt="Here" />
+						<area shape="rect" coords="0,3,200,200" href="#click" alt="Click" />
+						<area shape="rect" coords="200,0,400,200" href="#here" alt="Here" />
 						<img
 							src="/assets/images/test/click-here.svg"
 							alt="A teal background with black text on top saying &quot;Click Here&quot;."
@@ -538,7 +538,7 @@ const framesetHtml = `
 				<section>
 					<h3>Video</h3>
 
-					<video controls>
+					<video controls playsinline>
 						<source src="/assets/video/test/big-buck-bunny.webm" type="video/webm" />
 						<source src="/assets/video/test/big-buck-bunny.mp4" type="video/mp4" />
 						<track kind="subtitles" default label="Test Subtitles" src="/assets/video/test/subtitles.vtt" />
@@ -689,20 +689,9 @@ const framesetHtml = `
 
 					<p>Some inline math: <math display="inline"><mi>x</mi> <mo>=</mo> <mn>0</mn></math></p>
 				</section>
-						const { width, height } = canvas.getBoundingClientRect();
-
-						canvas.width = Math.floor(width);
-						canvas.height = Math.floor(height);
-
-						canvas.style.width = `${canvas.width}px`;
-						canvas.style.height = `${canvas.height}px`;
-
-						ctx.canvas.width = canvas.width;
-						ctx.canvas.height = canvas.height;
-
 			</details>
-						ctx.fillRect(Math.floor(canvas.width / 2) - 50, Math.floor(canvas.height / 2) - 50, 100, 100);
-			<details open>
+
+			<details>
 				<summary>
 					<h2>Canvas</h2>
 				</summary>
@@ -1375,7 +1364,7 @@ const framesetHtml = `
 									if (file.type.startsWith('image/')) {
 										result = `<img alt="" src="${url}" width="256" height="256" />`;
 									} else if (file.type.startsWith('video/')) {
-										result = `<video controls src="${url}" width="256" height="256"></video>`;
+										result = `<video controls playsinline src="${url}" width="256" height="256"></video>`;
 									}
 
 									output.insertAdjacentHTML('beforeend', result);
@@ -1722,8 +1711,12 @@ const framesetHtml = `
 					<p>Regular dialog:</p>
 					<button type="button" id="dialog-regular-open">Open Sesame</button>
 					<dialog id="dialog-regular">
-						<p>Hi, I'm Sesame, you can close me now.</p>
-						<button type="button" id="dialog-regular-close">Close Sesame</button>
+						<dialog-content>
+							<p>Hi, I'm Sesame, you can close me now.</p>
+						</dialog-content>
+						<footer>
+							<button type="button" id="dialog-regular-close">Close Sesame</button>
+						</footer>
 					</dialog>
 					<script type="module" is:inline>
 						const dialog = /** @type {HTMLDialogElement} */ (document.querySelector('#dialog-regular'));
@@ -1737,8 +1730,15 @@ const framesetHtml = `
 					<p>Light dismiss dialog:</p>
 					<button type="button" id="dialog-light-open">Open Sesame Light</button>
 					<dialog id="dialog-light" closedby="any">
-						<p>Hi, I'm Sesame Light, you can close me now.</p>
-						<button type="button" id="dialog-light-close">Close Sesame Light</button>
+						<header>
+							<h2>Light dismiss dialog</h2>
+						</header>
+						<dialog-content>
+							<p>Hi, I'm Sesame Light, you can close me now.</p>
+						</dialog-content>
+						<footer>
+							<button type="button" id="dialog-light-close">Close Sesame Light</button>
+						</footer>
 					</dialog>
 					<script type="module" is:inline>
 						const dialog = /** @type {HTMLDialogElement} */ (document.querySelector('#dialog-light'));
@@ -1759,15 +1759,21 @@ const framesetHtml = `
 						Open Sesame Pop
 					</button>
 					<dialog id="dialog-popover" closedby="any" popover>
-						<p>Hi, I'm Sesame Pop, you can close me now.</p>
-						<button
-							type="button"
-							id="dialog-popover-close"
-							popovertarget="dialog-popover"
-							popovertargetaction="hide"
-						>
-							Close Sesame Pop
-						</button>
+						<header>
+							<h2>Popover dialog</h2>
+
+							<button
+								type="button"
+								id="dialog-popover-close"
+								popovertarget="dialog-popover"
+								popovertargetaction="hide"
+							>
+								Close Sesame Pop
+							</button>
+						</header>
+						<dialog-content>
+							<p>Hi, I'm Sesame Pop, you can close me now.</p>
+						</dialog-content>
 					</dialog>
 				</section>
 			</details>

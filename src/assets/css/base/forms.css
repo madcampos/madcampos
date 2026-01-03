@@ -71,13 +71,15 @@
 		}
 
 		input-error {
-			background-color: var(--note-error-bg);
-			color: var(--note-error-color);
+			background-color: var(--input-invalid-bg);
+			color: var(--input-invalid-color);
+			border-color: var(--input-invalid-color);
 		}
 
 		input-success {
-			background-color: var(--note-success-bg);
-			color: var(--note-success-color);
+			background-color: var(--input-valid-bg);
+			color: var(--input-valid-color);
+			border-color: var(--input-valid-color);
 		}
 
 		:is(input-error, input-success, input-required) { display: none; }

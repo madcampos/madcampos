@@ -2,6 +2,7 @@
 	author-card {
 		container-name: author-card;
 		container-type: inline-size;
+		display: block;
 
 		aside {
 			display: grid;
@@ -29,7 +30,10 @@
 			grid-area: avatar;
 			align-self: start;
 
-			@container author-card (max-width: 35rem) { place-self: center center; }
+			@container author-card (max-width: 35rem) {
+				place-self: center center;
+				min-inline-size: 100%;
+			}
 		}
 
 		a:has(> h2) {
@@ -38,7 +42,10 @@
 
 			h2 { margin: 0; }
 
-			@container author-card (max-width: 35rem) { justify-self: center; }
+			@container author-card (max-width: 35rem) {
+				justify-self: center;
+				text-align: center;
+			}
 		}
 
 		p {

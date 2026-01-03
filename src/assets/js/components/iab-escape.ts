@@ -7,9 +7,11 @@ class IabEscape extends HTMLElement implements CustomElement {
 		super();
 
 		this.innerHTML = `
-			<dialog tabindex="0">
-				<h2>It's a trap!</h2>
-				<div>
+			<dialog>
+				<header>
+					<h2>It's a trap!</h2>
+				</header>
+				<dialog-content>
 					<p>You are locked inside an In-App Browser.</p>
 					<p>
 						Those are made to lock you inside a platform and control all your data.
@@ -17,8 +19,10 @@ class IabEscape extends HTMLElement implements CustomElement {
 						They may promise you privacy, but dont'respect that.
 					</p>
 					<p>Tap the link below to open this page in your default browser.</p>
-				</div>
-				<a href="#" target="_blank">Escape this trap</a>
+				</dialog-content>
+				<footer>
+					<a href="#" target="_blank">Escape this trap</a>
+				</footer>
 			</dialog>
 		`;
 	}

@@ -101,12 +101,12 @@
 		--input-border: var(--border-size) solid var(--secondary-color);
 		--input-thumb-color: var(--theme-color);
 
-		--input-placeholder-color: var(--gray-5);
+		--input-placeholder-color: var(--gray-7);
 
-		--input-valid-bg: var(--green-12);
-		--input-valid-color: var(--lime-1);
-		--input-invalid-bg: var(--red-12);
-		--input-invalid-color: var(--red-1);
+		--input-valid-bg: var(--green-2);
+		--input-valid-color: var(--lime-12);
+		--input-invalid-bg: var(--red-1);
+		--input-invalid-color: var(--red-12);
 		--input-hover-bg: var(--surface-1);
 		--input-hover-color: var(--text-1);
 		--input-hover-border-color: var(--accent-color);
@@ -129,11 +129,11 @@
 		--button-hover-bg: var(--surface-2);
 		--button-hover-color: var(--accent-color);
 		--button-focus-bg: var(--theme-color);
-		--button-focus-color: var(--text-1);
+		--button-focus-color: var(--surface-1);
 		--button-active-bg: var(--accent-color);
 		--button-active-color: var(--text-1);
-		--button-disabled-bg: var(--gray-10);
-		--button-disabled-color: var(--gray-5);
+		--button-disabled-bg: var(--gray-5);
+		--button-disabled-color: var(--gray-10);
 
 		/* Progress styles */
 		--progress-bg: var(--surface-2);
@@ -143,18 +143,33 @@
 		--progress-hover-color: var(--accent-color);
 
 		/* Note styles */
-		--note-success-bg: var(--green-11);
-		--note-success-color: var(--lime-2);
-		--note-error-bg: var(--red-11);
-		--note-error-color: var(--red-2);
-		--note-warning-bg: var(--yellow-10);
+		--note-success-bg: var(--green-2);
+		--note-success-color: var(--lime-12);
+		--note-error-bg: var(--red-1);
+		--note-error-color: var(--red-12);
+		--note-warning-bg: var(--yellow-2);
 		--note-warning-color: var(--brown-12);
-		--note-alert-bg: var(--teal-10);
-		--note-alert-color: var(--jungle-2);
-		--note-info-bg: var(--blue-12);
-		--note-info-color: var(--blue-2);
-		--note-debug-bg: var(--purple-10);
-		--note-debug-color: var(--violet-2);
+		--note-alert-bg: var(--teal-2);
+		--note-alert-color: var(--teal-11);
+		--note-info-bg: var(--blue-2);
+		--note-info-color: var(--blue-12);
+		--note-debug-bg: var(--violet-2);
+		--note-debug-color: var(--purple-12);
+
+		/* Baseline colors */
+		--baseline-high-color: #1ea446;
+		--baseline-high-bg: #c4eed0;
+		--baseline-low-color: #1b6ef3;
+		--baseline-low-bg: #a8c7fa;
+		--baseline-limited-color: #dd7308;
+		--baseline-limited-bg: silver;
+		--baseline-no-data-color: dimgray;
+		--baseline-no-data-bg: dimgray;
+
+		--baseline-supported-color: seagreen;
+		--baseline-supported-bg: color-mix(in srgb, greenyellow, transparent 80%);
+		--baseline-unsupported-color: goldenrod;
+		--baseline-unsupported-bg: color-mix(in srgb, yellow, transparent 80%);
 
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
@@ -214,14 +229,29 @@
 			--note-success-color: var(--lime-2);
 			--note-error-bg: var(--red-11);
 			--note-error-color: var(--red-2);
-			--note-warning-bg: var(--yellow-10);
-			--note-warning-color: var(--brown-12);
+			--note-warning-bg: var(--yellow-11);
+			--note-warning-color: var(--brown-1);
 			--note-alert-bg: var(--teal-10);
 			--note-alert-color: var(--jungle-2);
 			--note-info-bg: var(--blue-12);
 			--note-info-color: var(--blue-2);
 			--note-debug-bg: var(--purple-10);
 			--note-debug-color: var(--violet-2);
+
+			/* Baseline colors */
+			--baseline-high-color: #1ea446;
+			--baseline-high-bg: #125225;
+			--baseline-low-color: #4185ff;
+			--baseline-low-bg: #2d509e;
+			--baseline-limited-color: #f09409;
+			--baseline-limited-bg: #424242;
+			--baseline-no-data-color: #717171;
+			--baseline-no-data-bg: #717171;
+
+			--baseline-supported-color: greenyellow;
+			--baseline-supported-bg: color-mix(in srgb, seagreen, transparent 80%);
+			--baseline-unsupported-color: #ffd500;
+			--baseline-unsupported-bg: color-mix(in srgb, goldenrod, transparent 80%);
 		}
 	}
 }

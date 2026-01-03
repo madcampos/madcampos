@@ -14,10 +14,12 @@
 
 		[data-footnotes] a[data-footnote-backref] { text-decoration: none; }
 
-		/* TODO: review */
-		p > :is(img, img-lightbox):only-child {
-			--image-size: 35vw;
-			inline-size: clamp(var(--size-content-0), var(--image-size), var(--size-content-3));
+		img {
+			display: inline;
+			min-inline-size: revert;
+			min-block-size: revert;
+			inline-size: revert;
+			block-size: revert;
 		}
 
 		/* TODO: wrap in a "code-block" component when building */

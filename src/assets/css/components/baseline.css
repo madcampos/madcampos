@@ -1,21 +1,4 @@
 @layer components {
-	:root {
-		/* Colors */
-		--baseline-high-color: light-dark(#1ea446, #1ea446);
-		--baseline-high-bg: light-dark(#c4eed0, #125225);
-		--baseline-low-color: light-dark(#1b6ef3, #4185ff);
-		--baseline-low-bg: light-dark(#a8c7fa, #2d509e);
-		--baseline-limited-color: light-dark(hsl(30, 93%, 45%), #f09409);
-		--baseline-limited-bg: light-dark(silver, #424242);
-		--baseline-no-data-color: light-dark(dimgray, #717171);
-		--baseline-no-data-bg: light-dark(dimgray, #717171);
-
-		--baseline-supported-color: light-dark(seagreen, greenyellow);
-		--baseline-supported-bg: color-mix(in srgb, light-dark(greenyellow, seagreen), transparent 80%);
-		--baseline-unsupported-color: light-dark(goldenrod, hsl(50, 100%, 50%));
-		--baseline-unsupported-bg: color-mix(in srgb, light-dark(yellow, goldenrod), transparent 80%);
-	}
-
 	baseline-info:not(:defined) { display: none; }
 
 	baseline-info:defined {
