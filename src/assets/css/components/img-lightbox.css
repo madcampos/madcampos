@@ -4,43 +4,56 @@
 
 		inline-size: clamp(var(--size-content-1), var(--image-size), var(--size-content-3));
 		margin-inline: auto;
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: auto;
-		grid-template-areas: 'image';
-		place-items: stretch;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--size-2);
 		isolation: isolate;
 
-		& > * { grid-area: image; }
+		& > img {
+			display: block;
+			max-inline-size: var(--size-content-3);
+			max-block-size: var(--size-content-3);
+			block-size: auto;
+			inline-size: 100%;
+			min-inline-size: var(--size-content-0);
+			min-block-size: var(--size-content-0);
+		}
 
-		button {
-			align-self: start;
-			z-index: 1;
-			&.lightbox-alt { justify-self: start; }
-			&.lightbox-zoom { justify-self: end; }
+		img-lightbox-controls {
+			display: flex;
+			justify-content: center;
+
+			& > button {
+				margin: var(--size-1);
+
+				:is(svg[data-icon], use) {
+					min-inline-size: var(--size-2);
+					min-block-size: var(--size-2);
+					inline-size: var(--size-3);
+					block-size: var(--size-3);
+				}
+			}
 		}
 
 		dialog {
-			header {
+			form:fullscreen {
+				background: var(--surface-2);
 				display: flex;
-				align-items: center;
+				flex-direction: column;
+				block-size: 100dvb;
+				inline-size: 100dvi;
+				padding: var(--size-3);
 
-				h2 {
-					flex-grow: 1;
-					margin: 0;
-				}
+				button[popovertarget] { display: none; }
 			}
 
-			div {
-				overflow: auto;
-				block-size: 100%;
+			dialog-content:has(img) {
+				display: grid;
+				place-items: center;
 				inline-size: 100%;
-				flex-grow: 1;
-
-				&:has(img) {
-					display: grid;
-					place-items: center;
-				}
+				block-size: 100%;
 
 				img {
 					min-inline-size: initial;
@@ -52,14 +65,8 @@
 				}
 			}
 
-			form {
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
-				gap: var(--size-3);
-
-				button { margin: 0; }
-			}
+			input-wrapper { margin: 0; }
+			hr { border: none; }
 		}
 	}
 }

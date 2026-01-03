@@ -23,6 +23,7 @@ import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'js
 import { rehypePlugin as rehypeCode } from './src/utils/markdown-options/code.ts';
 import { settings as externalLinkSettings } from './src/utils/markdown-options/external-links.ts';
 import { settings as footnotesSettings } from './src/utils/markdown-options/footnotes.ts';
+import { rehypePlugin as rehypeImages } from './src/utils/markdown-options/images.ts';
 import { rehypePlugin as rehypeTables } from './src/utils/markdown-options/tables.ts';
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
@@ -93,7 +94,8 @@ export default defineConfig({
 			[rehypeAutolinkHeadings, { behavior: 'wrap' }],
 			[rehypeExternalLinks, externalLinkSettings],
 			rehypeTables,
-			rehypeCode
+			rehypeCode,
+			rehypeImages
 		],
 		remarkRehype: {
 			allowDangerousHtml: true,

@@ -26,6 +26,8 @@ Here is an image:
 
 ![Alt text](./assets/00-test.png)
 
+Here is an inline image: ![](./assets/icon-64x64.png)
+
 ### Task list
 
 - [ ] Unchecked task
