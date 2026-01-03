@@ -1,5 +1,5 @@
 @layer base {
-	:where(canvas) {
+	canvas {
 		display: block;
 		margin-inline: auto;
 		border: var(--border-style) var(--border-size) var(--theme-color);

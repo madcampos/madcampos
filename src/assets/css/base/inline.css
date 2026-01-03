@@ -1,5 +1,5 @@
 @layer base {
-	:where(a) {
+	a {
 		color: var(--link-color);
 		text-decoration-style: var(--link-underline);
 		text-decoration-thickness: 0.11em;
@@ -33,12 +33,12 @@
 		}
 	}
 
-	:where(dfn, cite, q) {
+	:is(dfn, cite, q) {
 		font-style: italic;
 		color: var(--text-2);
 	}
 
-	:where(abbr, u, s, ins, del) {
+	:is(abbr, u, s, ins, del) {
 		text-decoration: underline;
 		text-decoration-style: var(--link-underline);
 		text-decoration-thickness: 0.11em;
@@ -46,51 +46,51 @@
 		text-underline-offset: 0.2em;
 	}
 
-	:where(strong, b) { font-weight: 900; }
-	:where(em, i) { font-style: italic; }
+	:is(strong, b) { font-weight: 900; }
+	:is(em, i) { font-style: italic; }
 
-	:where(small) { font-size: var(--font-size-0); }
+	small { font-size: var(--font-size-0); }
 
-	:where(sub, sup) {
+	:is(sub, sup) {
 		font-size: 0.8em;
 		line-height: 0;
 		position: relative;
 		vertical-align: baseline;
 	}
 
-	:where(sub) { inset-block-end: -0.25em; }
-	:where(sup) { inset-block-start: -0.5em; }
+	sub { inset-block-end: -0.25em; }
+	sup { inset-block-start: -0.5em; }
 
-	:where(mark) {
+	mark {
 		color: var(--surface-1);
 		background-color: var(--accent-color);
 	}
 
-	:where(s, del) { text-decoration-line: line-through; }
+	:is(s, del) { text-decoration-line: line-through; }
 
-	:where(ins) {
+	ins {
 		color: var(--diff-add-color);
 		background-color: var(--diff-add-bg);
 	}
 
-	:where(del) {
+	del {
 		color: var(--diff-remove-color);
 		background-color: var(--diff-remove-bg);
 	}
 
-	:where(code, kbd, samp) {
+	:is(code, kbd, samp) {
 		font-family: var(--code-font-family);
 		display: inline-block;
 		background-color: var(--surface-2);
 		padding-inline: var(--size-1);
 	}
 
-	:where(kbd) {
+	kbd {
 		border: var(--border-size) outset var(--surface-3);
 		border-radius: var(--border-radius);
 	}
 
-	:where(var) {
+	var {
 		font-style: italic;
 		font-family: var(--code-font-family);
 	}

@@ -26,12 +26,12 @@
 		font-family: inherit;
 	}
 
-	:where(html, body) {
+	html, body {
 		inline-size: 100%;
 		block-size: 100%;
 	}
 
-	:where(body) { margin: 0; }
+	body { margin: 0; }
 
 	:target {
 		scroll-margin: var(--size-3);

@@ -1,5 +1,5 @@
 @layer base {
-	:where(svg, math) { max-inline-size: 100%; }
+	:is(svg, math) { max-inline-size: 100%; }
 
 	:where(svg[data-icon]) {
 		vertical-align: -0.32em;

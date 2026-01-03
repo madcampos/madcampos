@@ -1,5 +1,5 @@
 @layer base {
-	:where(iframe, embed, object) {
+	:is(iframe, embed, object) {
 		display: block;
 		margin-inline: auto;
 		border: var(--border-style) var(--border-size) var(--theme-color);

@@ -1,5 +1,5 @@
 @layer base {
-	:where(table-wrapper) {
+	table-wrapper {
 		overflow: auto;
 		display: block;
 		inline-size: 100%;
@@ -16,7 +16,7 @@
 		}
 	}
 
-	:where(table) {
+	table {
 		border-collapse: collapse;
 		border-spacing: 0;
 		caption-side: bottom;

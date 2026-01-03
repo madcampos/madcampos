@@ -1,5 +1,5 @@
 @layer base {
-	:where(blockquote) {
+	blockquote {
 		margin: var(--size-2);
 		background-color: var(--surface-2);
 		border: var(--border-size) var(--border-style) var(--surface-4);
@@ -11,7 +11,7 @@
 		p { margin: 0; }
 	}
 
-	:where(dl) {
+	dl {
 		dt {
 			color: var(--accent-color);
 			font-weight: bold;
@@ -25,7 +25,7 @@
 		dd { margin-inline-start: var(--size-3); }
 	}
 
-	:where(figure) {
+	figure {
 		inline-size: fit-content;
 		min-inline-size: var(--size-content-0);
 		margin-inline: auto;
@@ -37,34 +37,34 @@
 		}
 	}
 
-	:where(hr) {
+	hr {
 		border: none;
 		border-block-start: var(--theme-color) var(--border-style) var(--border-size);
 		inline-size: clamp(--size-content-0, 70vw, var(--size-content-3));
 	}
 
-	:where(ul) { list-style: '◆ '; }
-	:where(ol) { list-style: decimal-leading-zero; }
+	ul { list-style: '◆ '; }
+	ol { list-style: decimal-leading-zero; }
 
-	:where(ol, ul) {
+	:is(ol, ul) {
 		ul { list-style: '◇ '; }
 		ol { list-style: lower-latin; }
 
-		:where(ol, ul) {
+		:is(ol, ul) {
 			ul { list-style: '✢ '; }
 			ol { list-style: lower-roman; }
 		}
 	}
 
-	:where(p, li, dd) { text-wrap: pretty; }
+	:is(p, li, dd) { text-wrap: pretty; }
 
-	:where(pre) {
+	pre {
 		white-space: pre-wrap;
 		font-family: var(--code-font-family);
 		color: var(--text-2);
 	}
 
-	:where(menu) {
+	menu {
 		list-style: none;
 		display: flex;
 		margin: 0;

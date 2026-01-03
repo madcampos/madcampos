@@ -1,5 +1,5 @@
 @layer base {
-	:where(summary) {
+	summary {
 		display: flex;
 		align-items: center;
 		gap: var(--size-1);
@@ -30,9 +30,9 @@
 		}
 	}
 
-	:where(details[open]) > summary::before { transform: rotate(90deg); }
+	details[open] > summary::before { transform: rotate(90deg); }
 
-	:where(dialog) {
+	dialog {
 		flex-direction: column;
 		justify-content: center;
 		align-items: start;
