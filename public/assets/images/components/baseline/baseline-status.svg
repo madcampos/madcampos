@@ -10,7 +10,10 @@
 		</g>
 	</symbol>
 	<symbol id="baseline-status-low">
-		<path fill="var(--baseline-low-bg)" d="m10 0 2 2-2 2-2-2 2-2Zm4 4 2 2-2 2-2-2 2-2Zm16 0 2 2-2 2-2-2 2-2Zm4 4 2 2-2 2-2-2 2-2Zm-4 4 2 2-2 2-2-2 2-2Zm-4 4 2 2-2 2-2-2 2-2Zm-4-4 2 2-2 2-2-2 2-2ZM6 4l2 2-2 2-2-2 2-2Z" />
+		<path
+			fill="var(--baseline-low-bg)"
+			d="m10 0 2 2-2 2-2-2 2-2Zm4 4 2 2-2 2-2-2 2-2Zm16 0 2 2-2 2-2-2 2-2Zm4 4 2 2-2 2-2-2 2-2Zm-4 4 2 2-2 2-2-2 2-2Zm-4 4 2 2-2 2-2-2 2-2Zm-4-4 2 2-2 2-2-2 2-2ZM6 4l2 2-2 2-2-2 2-2Z"
+		/>
 		<path fill="var(--baseline-low-color)" d="m26 0 2 2-18 18L0 10l2-2 8 8L26 0Z" />
 	</symbol>
 	<symbol id="baseline-status-false">

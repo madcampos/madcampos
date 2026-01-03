@@ -7,4 +7,5 @@ tags:
   - Git
   - WebDevelopment
 ---
+
 So... I had a problem and patching a library was the solution, let's dive in...

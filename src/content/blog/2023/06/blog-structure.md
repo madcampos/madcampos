@@ -9,7 +9,7 @@ updates:
     changes: Added an image to the post.
 summary: A dive into the semantic html of a blog.
 image: ./assets/arcane-writings.jpg
-imageAlt: 'A close up of a parghement with a hand holding a quill writing on it. The writings are all undecipherable runes.'
+imageAlt: "A close up of a parghement with a hand holding a quill writing on it. The writings are all undecipherable runes."
 tags:
   - BuildInTheOpen
   - meta

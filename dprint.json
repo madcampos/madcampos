@@ -161,7 +161,9 @@
 	"excludes": [
 		"dist/**",
 		"**/node_modules",
-		"**/*-lock.json"
+		"**/*-lock.json",
+		"**/pnpm-lock.yaml",
+		"src/content/.obsidian/**"
 	],
 	"plugins": [
 		"https://plugins.dprint.dev/typescript-0.95.11.wasm",

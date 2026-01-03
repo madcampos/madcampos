@@ -22,7 +22,7 @@ declare class CustomElement extends HTMLElement {
 	disconnectedCallback?(): void;
 
 	/** Called when the element is associated or disassociated with a form. */
-	 
+
 	formAssociatedCallback?(form: HTMLFormElement | null): void;
 
 	/** Called when the disabled state of the element changes. */
