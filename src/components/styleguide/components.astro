@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import '../assets/css/pages/styleguide.css';
 import { Image } from 'astro:assets';
 import avatar from '../../assets/images/me.jpg';
 import { inlineMarkdownRender } from '../../utils/markdown.ts';
@@ -375,7 +374,30 @@ const post = (await listAllPosts())[0]!;
 	<section>
 		<h3>Related Posts</h3>
 
-		<!-- TODO -->
+		<related-posts>
+			<nav aria-labelledby="related-posts-title">
+				<ul>
+					{
+						post.relatedPosts.map((relatedPost) => (
+							<li>
+								<Card
+									url={`/blog/${relatedPost.url}/`}
+									itemtype="https://schema.org/BlogPosting"
+									image={relatedPost.image}
+									imageAlt={relatedPost.imageAlt ?? ''}
+								>
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
+									<Fragment slot="title" set:html={inlineMarkdownRender(relatedPost.title)} />
+
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
+									<Fragment set:html={inlineMarkdownRender(relatedPost.summary)} />
+								</Card>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+		</related-posts>
 	</section>
 
 	<section>

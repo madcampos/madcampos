@@ -4,7 +4,7 @@
 		display: inline-block;
 		align-self: center;
 
-		#theme-list {
+		dialog-content {
 			display: flex;
 			flex-grow: 1;
 			flex-wrap: wrap;

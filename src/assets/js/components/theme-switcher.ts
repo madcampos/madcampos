@@ -74,28 +74,39 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 
 		this.innerHTML = `
 			<aside>
-				<button type="button" popovertarget="theme-switcher-dialog">
-					<svg
-						viewBox="0 0 24 24"
-						width="1em"
-						height="1em"
-						aria-hidden="true"
-						data-icon="mingcute:palette-3-line"
-					>
-						<path fill="currentColor" d="M11 3c.48 0 .922.17 1.267.452l4.831 2.79c.416.24.713.607.87 1.024l2.79 4.832a2 2 0 0 1-.732 2.732l-9.447 5.455A5.1 5.1 0 0 1 8.021 21a5.06 5.06 0 0 1-2.602-.718a5 5 0 0 1-1.412-1.273A4.98 4.98 0 0 1 3 16V5a2 2 0 0 1 2-2zm-.053 2H5v11c0 1.625 1.362 3 3 3c1.634 0 3-1.374 3-3V5.03zM8 14.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m9.238-4.5l-3.578 6.196l5.366-3.098zM13 6.185v7.155L16.083 8l-.03-.052z" />
+				<button
+					type="button"
+					popovertarget="theme-switcher-dialog-${this.#id}"
+					popoveraction="show-modal"
+				>
+					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+						<use href="#theme-switcher-icon" width="24" height="24" />
 					</svg>
 					<sr-only>Theme Switcher</sr-only>
 				</button>
 
-				<dialog id="theme-switcher-dialog" popover>
+				<dialog id="theme-switcher-dialog-${this.#id}" popover>
+					<header>
+						<h2>Choose a theme</h2>
+						<button
+							type="button"
+							popovertarget="theme-switcher-dialog-${this.#id}"
+							popovertargetaction="hide"
+						>
+							<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+								<use href="#theme-switcher-icon-close" width="24" height="24" />
+							</svg>
+						</button>
+					</header>
 					<form action="./" method="get">
-						<header>
-							<h2>Choose a theme</h2>
-						</header>
-						<dialog-content id="theme-list"></dialog-content>
+						<dialog-content id="theme-list-${this.#id}"></dialog-content>
 
 						<footer>
-							<button type="submit" popovertarget="theme-switcher-dialog" popovertargetaction="hide">Apply theme</button>
+							<button
+								type="submit"
+								popovertarget="theme-switcher-dialog-${this.#id}"
+								popovertargetaction="hide"
+							>Apply theme</button>
 						</footer>
 					</form>
 				</dialog>
@@ -104,14 +115,13 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
-		this.querySelector('#theme-list')?.insertAdjacentHTML(
+		this.querySelector(`#theme-list-${this.#id}`)?.insertAdjacentHTML(
 			'afterbegin',
 			themes.map((theme) => `
 				<label for="theme-input-${theme.id}-${this.#id}" id="theme-label-${theme.id}-${this.#id}">
 					<input
 						type="radio"
 						name="theme"
-						required
 						value="${theme.id}"
 						id="theme-input-${theme.id}-${this.#id}"
 					/>
@@ -142,12 +152,12 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 							<circle cx="70" cy="57.5" r="5" fill="var(--accent-color)" />
 							<circle cx="85" cy="57.5" r="5" fill="var(--complementary-color)" />
 						</g>
-						<clipPath id="theme-preview-system-mask">
+						<clipPath id="theme-preview-system-mask-${this.#id}">
 							<polygon points="0,70 100,0 100,70" />
 						</clipPath>
 						<use
 							data-theme="dark"
-							clip-path="url(#theme-preview-system-mask)"
+							clip-path="url(#theme-preview-system-mask-${this.#id})"
 							href="#theme-image-${theme.id}-${this.#id}"
 							display="none"
 						/>
@@ -155,14 +165,8 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 					<strong>${theme.name}</strong>
 					<small><em>${theme.description}</em></small>
 					<small ${theme.accessible ? 'hidden' : ''}>
-						<svg
-							width="1em"
-							height="1em"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-							data-icon="mingcute:alert-line"
-						>
-							<path fill="currentColor" d="m13.299 3.148l8.634 14.954a1.5 1.5 0 0 1-1.299 2.25H3.366a1.5 1.5 0 0 1-1.299-2.25l8.634-14.954c.577-1 2.02-1 2.598 0M12 4.898L4.232 18.352h15.536zM12 15a1 1 0 1 1 0 2a1 1 0 0 1 0-2m0-7a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1" />
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#theme-switcher-icon-warning" width="24" height="24" />
 						</svg>
 						<strong>Warning: Theme is not fully accessible</strong>
 					</small>
@@ -181,7 +185,7 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 		this.querySelector('form')?.addEventListener('submit', (evt) => {
 			evt.preventDefault();
 			evt.stopPropagation();
-			this.querySelector<HTMLDialogElement>('#theme-switcher-dialog')?.hidePopover();
+			this.querySelector<HTMLDialogElement>(`#theme-switcher-dialog-${this.#id}`)?.hidePopover();
 
 			const theme = new FormData(evt.target as HTMLFormElement).get('theme') as string;
 

@@ -20,7 +20,7 @@
 		padding: var(--size-1) var(--size-2);
 		padding-inline-start: calc(var(--tag-width) + var(--size-2));
 		overflow: visible;
-		color: var(--text-2);
+		color: var(--tag-color);
 		font-size: var(--font-size-0);
 
 		* {
@@ -36,22 +36,24 @@
 			clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
 			mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
 			inset: 0;
-			background-color: var(--surface-2);
+			background-color: var(--tag-bg);
 			content: '';
 		}
 
 		&:focus-within {
-			outline: var(--theme-color) var(--border-style) var(--border-size);
+			outline: var(--tag-focus-border);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
-			color: var(--theme-color);
+			color: var(--tag-focus-color);
+
+			&::before { background-color: var(--tag-focus-bg); }
 		}
 
 		&:has(a):hover {
-			outline-color: var(--link-hover-color);
-			color: var(--link-hover-color);
+			outline-color: var(--tag-hover-color);
+			color: var(--tag-hover-color);
 
-			&::before { background-color: var(--surface-3); }
+			&::before { background-color: var(--tag-hover-bg); }
 		}
 
 		@media (prefers-contrast: more), (forced-colors: active) {

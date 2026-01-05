@@ -171,6 +171,15 @@
 		--baseline-unsupported-color: goldenrod;
 		--baseline-unsupported-bg: color-mix(in srgb, yellow, transparent 80%);
 
+		/* Tag list colors */
+		--tag-bg: var(--surface-2);
+		--tag-color: var(--text-2);
+		--tag-hover-bg: var(--accent-color);
+		--tag-hover-color: var(--surface-1);
+		--tag-focus-bg: var(--surface-2);
+		--tag-focus-color: var(--theme-color);
+		--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--code-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
@@ -247,6 +256,15 @@
 			--baseline-limited-bg: #424242;
 			--baseline-no-data-color: #717171;
 			--baseline-no-data-bg: #717171;
+
+			/* Tag list colors */
+			--tag-bg: var(--surface-2);
+			--tag-color: var(--text-2);
+			--tag-hover-bg: var(--accent-color);
+			--tag-hover-color: var(--surface-1);
+			--tag-focus-bg: var(--surface-2);
+			--tag-focus-color: var(--theme-color);
+			--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
 
 			--baseline-supported-color: greenyellow;
 			--baseline-supported-bg: color-mix(in srgb, seagreen, transparent 80%);
