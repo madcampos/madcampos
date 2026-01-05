@@ -56,6 +56,7 @@
 
 		/* Base colors */
 		--text-1: black;
+		--text-2: var(--pink-10);
 		--surface-1: var(--secondary-12);
 		--surface-2: var(--secondary-0);
 		--surface-3: var(--accent-12);
@@ -63,36 +64,157 @@
 
 		/* Link colors */
 		--link-color: color-mix(in oklch, var(--theme-0), black 80%);
-		--link-visited-color: darkorchid;
-		--link-hover-color: deeppink;
-		--link-active-color: hotpink;
+		--link-visited-color: var(--accent-0);
+		--link-hover-color: var(--accent-11);
+		--link-active-color: var(--theme-1);
 
 		/* Code colors */
-		--diff-add-color: darkgreen;
-		--diff-add-bg: rgba(0, 194, 0, 0.3);
-		--diff-remove-color: maroon;
-		--diff-remove-bg: rgba(255, 68, 68, 0.3);
-		--highlight-color: dimgray;
-		--highlight-default-bg: rgba(105, 105, 105, 0.35);
-		--highlight-error-color: maroon;
-		--highlight-error-bg: rgba(255, 99, 71, 0.3);
-		--highlight-warning-color: goldenrod;
-		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
+		--diff-add-color: var(--lime-10);
+		--diff-add-bg: color-mix(in srgb, var(--green-2), transparent);
+		--diff-remove-color: var(--red-10);
+		--diff-remove-bg: color-mix(in srgb, var(--red-2), transparent);
+		--highlight-color: var(--gray-7);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+		--highlight-error-color: var(--red-12);
+		--highlight-error-bg: color-mix(in srgb, var(--red-1), transparent);
+		--highlight-warning-color: var(--yellow-7);
+		--highlight-warning-bg: color-mix(in srgb, var(--yellow-2), transparent);
+
+		/* Table styles */
+		--table-header-bg: var(--accent-0);
+		--table-header-color: var(--theme-12);
+		--table-header-border: var(--border-size) var(--border-style) var(--theme-12);
+
+		--table-rows-odd: var(--secondary-0);
+		--table-rows-even: var(--secondary-12);
+		--table-rows-hover: var(--accent-10);
+
+		--table-footer-bg: var(--accent-4);
+		--table-footer-color: var(--gray-11);
+		--table-footer-border: var(--border-size) var(--border-style) var(--gray-11);
+
+		/* Input styles */
+		--input-bg: var(--secondary-10);
+		--input-color: var(--accent-10);
+		--input-border: solid medium var(--accent-5);
+		--input-thumb-color: var(--accent-5);
+
+		--input-placeholder-color: var(--accent-5);
+
+		--input-valid-bg: var(--lime-0);
+		--input-valid-color: var(--lime-10);
+		--input-invalid-bg: var(--red-1);
+		--input-invalid-color: var(--red-7);
+		--input-hover-bg: var(--theme-10);
+		--input-hover-color: var(--accent-0);
+		--input-hover-border-color: var(--accent-0);
+		--input-focus-bg: var(--theme-12);
+		--input-focus-color: var(--accent-12);
+		--input-focus-border: dashed medium var(--accent-12);
+		--input-selected-bg: var(--surface-1);
+		--input-selected-color: var(--theme-color);
+		--input-disabled-bg: var(--surface-1);
+		--input-disabled-color: var(--text-2);
+		--input-readonly-bg: var(--surface-1);
+		--input-readonly-color: var(--text-1);
+
+		--fieldset-border: var(--border-style) var(--border-size) var(--accent-5);
+
+		/* Button styles */
+		--button-bg: var(--secondary-0);
+		--button-color: var(--accent-0);
+		--button-border: var(--border-style) var(--border-size) var(--accent-0);
+		--button-hover-bg: var(--accent-12);
+		--button-hover-color: var(--theme-12);
+		--button-focus-bg: var(--theme-0);
+		--button-focus-color: var(--surface-1);
+		--button-active-bg: var(--accent-color);
+		--button-active-color: var(--accent-12);
+		--button-disabled-bg: var(--gray-5);
+		--button-disabled-color: var(--gray-10);
+
+		/* Progress styles */
+		--progress-bg: var(--secondary-10);
+		--progress-color: var(--accent-5);
+		--progress-border: var(--accent-10);
+		--progress-hover-bg: var(--secondary-0);
+		--progress-hover-color: var(--accent-12);
+
+		/* Note styles */
+		--note-success-bg: var(--green-2);
+		--note-success-color: var(--lime-12);
+		--note-error-bg: var(--red-1);
+		--note-error-color: var(--red-12);
+		--note-warning-bg: var(--yellow-2);
+		--note-warning-color: var(--brown-12);
+		--note-alert-bg: var(--teal-2);
+		--note-alert-color: var(--teal-11);
+		--note-info-bg: var(--blue-2);
+		--note-info-color: var(--blue-12);
+		--note-debug-bg: var(--violet-2);
+		--note-debug-color: var(--purple-12);
 
 		/* Baseline colors */
-		--baseline-high-color: ;
-		--baseline-high-bg: ;
-		--baseline-low-color: ;
-		--baseline-low-bg: ;
-		--baseline-limited-color: ;
-		--baseline-limited-bg: ;
-		--baseline-no-data-color: ;
-		--baseline-no-data-bg: ;
+		--baseline-high-color: var(--green-10);
+		--baseline-high-bg: var(--lime-2);
+		--baseline-low-color: var(--blue-8);
+		--baseline-low-bg: var(--blue-2);
+		--baseline-limited-color: var(--orange-8);
+		--baseline-limited-bg: var(--gray-3);
+		--baseline-no-data-color: var(--gray-8);
+		--baseline-no-data-bg: var(--gray-3);
 
-		--baseline-supported-color: ;
-		--baseline-supported-bg: ;
-		--baseline-unsupported-color: ;
-		--baseline-unsupported-bg: ;
+		/* Tag list colors */
+		--tag-bg: var(--surface-2);
+		--tag-color: var(--text-2);
+		--tag-hover-bg: var(--accent-color);
+		--tag-hover-color: var(--surface-1);
+		--tag-focus-bg: var(--surface-2);
+		--tag-focus-color: var(--theme-color);
+		--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+
+		/* Logo styles */
+		--logo-part-color: var(--theme-0);
+		--logo-part-stroke: var(--secondary-12);
+		--logo-part-stroke-width: 5rem;
+		--logo-extras-color: var(--pink-0);
+		--logo-extras-stroke: var(--accent-0);
+		--logo-extras-stroke-width: 1rem;
+		--logo-text-color: var(--accent-color);
+		--logo-text-stroke: transparent;
+		--logo-text-stroke-width: 0;
+		--logo-font: var(--text-font-family);
+		--logo-font-weight: 700;
+
+		--logo-pixel-color: var(--surface-1);
+		--logo-overlay-color: var(--complementary-color);
+		--logo-noise-color: var(--theme-color);
+
+		--logo-part-hover-color: white;
+		--logo-part-hover-stroke: var(--link-hover-color);
+		--logo-extras-hover-color: var(--accent-0);
+		--logo-extras-hover-stroke: var(--secondary-12);
+		--logo-text-hover-color: var(--theme-0);
+		--logo-text-hover-stroke: transparent;
+
+		--logo-part-focus-color: var(--secondary-12);
+		--logo-part-focus-stroke: white;
+		--logo-extras-focus-color: white;
+		--logo-extras-focus-stroke: var(--accent-0);
+		--logo-text-focus-color: var(--theme-0);
+		--logo-text-focus-stroke: transparent;
+
+		--logo-part-active-color: var(--link-active-color);
+		--logo-part-active-stroke: white;
+		--logo-extras-active-color: var(--link-active-color);
+		--logo-extras-active-stroke: white;
+		--logo-text-active-color: var(--link-active-color);
+		--logo-text-active-stroke: transparent;
+
+		/* Avatar styles */
+		--avatar-overlay: radial-gradient(circle at bottom, var(--accent-color), var(--surface-1));
+		--avatary-overlay-opacity: 1;
+		--avatary-overlay-blend-mode: hard-light;
 
 		/* Old Buttons */
 		--old-button-border: var(--surface-3) solid var(--border-size);
@@ -107,169 +229,139 @@
 
 		/* Icons */
 		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='deeppink' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
+		--select-icon: ;
 
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: light;
+
+		body {
+			animation: 1s steps(5) infinite uwu-cursor-normal;
+			cursor: url('./uwu/cursors/normal/1.svg'), auto;
+			background-image: linear-gradient(
+				to right,
+				mistyrose var(--size-1),
+				lavenderblush var(--size-1)
+			);
+			background-size: calc(var(--size-1) * 2);
+			background-repeat: repeat;
+			background-color: var(--surface-1);
+		}
 	}
 
-	[data-theme='uwu'] body {
-		animation: 1s steps(5) infinite uwu-cursor-normal;
-		cursor: url('./uwu/cursors/normal/1.svg'), auto;
-		background-image: linear-gradient(
-			to right,
-			mistyrose var(--size-1),
-			lavenderblush var(--size-1)
-		);
-		background-size: calc(var(--size-1) * 2);
-		background-repeat: repeat;
-		background-color: var(--surface-1);
-	}
-
-	[data-theme='uwu'] .user-avatar::after {
-		opacity: 1;
-		mix-blend-mode: hard-light;
-		background: radial-gradient(circle at bottom, var(--accent-color), var(--surface-1));
-	}
-
-	[data-theme='uwu'] :is(a, button, input, select) {
-		animation: 1s steps(5) infinite uwu-cursor-hand;
-		cursor: url('./uwu/cursors/hand/1.svg'), auto;
-	}
-
-	[data-theme='uwu'] .logo-part {
-		fill: var(--theme-color, dodgerblue);
-		paint-order: stroke;
-		stroke: var(--surface-1, lightpink);
-		stroke-width: 5rem;
-	}
-
-	[data-theme='uwu'] .logo-extras {
-		fill: lavenderblush;
-		paint-order: stroke;
-		stroke: var(--accent-color, darkorchid);
-		stroke-width: 1rem;
-	}
-
-	[data-theme='uwu'] .logo-text {
-		fill: var(--accent-color, darkorchid);
-		font-weight: 700;
-		font-family: var(--text-font-family);
-	}
-
-	[data-theme='uwu'] #logo-graphics [data-theme] { visibility: hidden; }
-	[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='full']) { visibility: visible; }
-
-	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-part {
-		fill: var(--surface-1);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-extras {
-		fill: white;
-		stroke: var(--surface-2);
-	}
-
-	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-text { fill: var(--theme-color); }
-
-	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-part {
-		fill: white;
-		stroke: var(--link-hover-color);
-	}
-
-	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-extras {
-		fill: var(--accent-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-text { fill: var(--theme-color); }
-
-	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-part {
-		fill: var(--link-active-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-extras {
-		fill: var(--link-active-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-text { fill: var(--link-active-color); }
-
-	[data-theme='uwu'] ul { list-style: '💖 '; }
-	[data-theme='uwu'] ul ul { list-style: '🦋 '; }
-	[data-theme='uwu'] ul ul ul { list-style: '🦄 '; }
-
-	[data-theme='uwu'] #site-nav {
+	:is([data-theme='uwu'] site-nav, site-nav[data-theme='uwu']) nav {
 		--edge-size: 3rem;
+
 		background: url('/src/assets/css/themes/uwu/border.svg'), linear-gradient(to top, lightpink, lightpink);
 		background-position: center bottom, center top;
 		background-size: auto var(--edge-size), auto calc(100% - var(--edge-size));
 		background-repeat: repeat no-repeat;
 		padding-block-end: var(--edge-size);
 		max-inline-size: 100%;
+
+		ul { list-style: none; }
 	}
 
-	[data-theme='uwu'] #site-nav ul { list-style: none; }
+	[data-theme='uwu'] ul, ul[data-theme='uwu'] {
+		list-style: '💖 ';
 
-	[data-theme='uwu'] .card { position: relative; }
-	[data-theme='uwu'] .card::after {
-		--details-size: 5rem;
-		display: block;
-		position: absolute;
-		background-position: center;
-		background-size: contain;
-		background-repeat: no-repeat;
-		inline-size: var(--details-size);
-		block-size: var(--details-size);
-		pointer-events: none;
+		ul {
+			list-style: '🦋 ';
+
+			ul { list-style: '🦄 '; }
+		}
 	}
 
-	[data-theme='uwu'] .card-container:nth-of-type(2n) .card::after {
-		inset-block-start: calc(var(--details-size) * 0.3 * -1);
-		inset-inline-end: calc(var(--details-size) * 0.3 * -1);
-		background-image: url('./uwu/details1.svg');
-		content: '';
+	:is([data-theme='uwu'] tag-list, tag-list[data-theme='uwu']) ul { list-style: none; }
+
+	[data-theme='uwu'] :is(a, button, input, select), :is(a, button, input, select)[data-theme='uwu'] {
+		animation: 1s steps(5) infinite uwu-cursor-hand;
+		cursor: url('./uwu/cursors/hand/1.svg'), auto;
 	}
 
-	[data-theme='uwu'] .card-container:nth-of-type(3n) .card::after {
-		inset: auto;
-		inset-block-end: calc(var(--details-size) * 0.4 * -1);
-		inset-inline-start: calc(var(--details-size) * 0.3 * -1);
-		background-image: url('./uwu/details2.svg');
-		content: '';
+	:is([data-theme='uwu'] m-card, m-card[data-theme='uwu']) {
+		article {
+			position: relative;
+
+			&::after {
+				--details-size: 5rem;
+				display: block;
+				position: absolute;
+				background-position: center;
+				background-size: contain;
+				background-repeat: no-repeat;
+				inline-size: var(--details-size);
+				block-size: var(--details-size);
+				pointer-events: none;
+			}
+		}
+
+		&:nth-of-type(2n) article::after {
+			inset-block-start: calc(var(--details-size) * 0.3 * -1);
+			inset-inline-end: calc(var(--details-size) * 0.3 * -1);
+			background-image: url('./uwu/details1.svg');
+			content: '';
+		}
+
+		&:nth-of-type(3n) article::after {
+			inset: auto;
+			inset-block-end: calc(var(--details-size) * 0.4 * -1);
+			inset-inline-start: calc(var(--details-size) * 0.3 * -1);
+			background-image: url('./uwu/details2.svg');
+			content: '';
+		}
+
+		&.project-card picture {
+			position: relative;
+			mask: none;
+			overflow: visible;
+
+			img { border-radius: var(--radius-round); }
+
+			&::after {
+				display: block;
+				position: absolute;
+				inset: 0;
+				inset-block-end: -20%;
+				inset-inline-end: -20%;
+				background-image: url('./uwu/mask.svg');
+				background-position: top left;
+				background-size: contain;
+				background-repeat: no-repeat;
+				pointer-events: none;
+				content: '';
+			}
+		}
 	}
 
-	[data-theme='uwu'] .project-card picture {
-		position: relative;
-		mask: none;
-		overflow: visible;
-	}
+	[data-theme='uwu'] m-logo,
+	m-logo[data-theme='uwu'] {
+		[data-theme] { visibility: hidden; }
 
-	[data-theme='uwu'] .project-card picture img { border-radius: var(--radius-round); }
+		[data-theme='uwu'] {
+			&:where([data-size='full']) { visibility: visible; }
 
-	[data-theme='uwu'] .project-card picture::after {
-		display: block;
-		position: absolute;
-		inset: 0;
-		inset-block-end: -20%;
-		inset-inline-end: -20%;
-		background-image: url('./uwu/mask.svg');
-		background-position: top left;
-		background-size: contain;
-		background-repeat: no-repeat;
-		pointer-events: none;
-		content: '';
-	}
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
 
-	@container logo (max-width: 25rem) {
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='mini']) { visibility: visible; }
-	}
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
 
-	@container logo (max-width: 15rem) {
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='micro']) { visibility: visible; }
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='uwu'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='uwu'][data-size='micro']) { visibility: visible; }
+		}
 	}
 
 	@keyframes uwu-cursor-normal {
