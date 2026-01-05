@@ -1,4 +1,5 @@
 @layer components {
+	/* TODO: reorganize CSS for extraction as single stylesheet */
 	m-logo {
 		display: flex;
 		justify-content: center;
@@ -203,5 +204,22 @@
 		#logo-text-full:has(tspan:nth-child(20 of .logo-text-content)) tspan:nth-child(17 of .logo-text-padding-start),
 		#logo-text-full:has(tspan:nth-child(21 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
 		#logo-text-full:not(:has(.logo-text-content)) { visibility: hidden; }
+
+		dialog {
+			text-align: start;
+			inline-size: fit-content;
+			block-size: fit-content;
+
+			ul {
+				list-style: none;
+				padding-inline-start: 0;
+			}
+
+			hr {
+				max-inline-size: var(--size-content-1);
+				margin-inline: 0;
+				margin-block-start: var(--size-3);
+			}
+		}
 	}
 }
