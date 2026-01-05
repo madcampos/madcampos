@@ -5,8 +5,16 @@
 		gap: var(--size-1);
 		list-style: none;
 
-		&::-webkit-details-marker { display: none; }
-		&::marker { display: none; }
+		&::-webkit-details-marker {
+			display: none;
+
+			@media (forced-colors: active) { display: revert; }
+		}
+		&::marker {
+			display: none;
+
+			@media (forced-colors: active) { display: revert; }
+		}
 
 		&::before {
 			display: inline-block;
@@ -19,6 +27,12 @@
 			vertical-align: -0.2em;
 			content: '';
 			flex-shrink: 0;
+
+			@media (forced-colors: active) {
+				background-image: none;
+				content: '▷' / '';
+				vertical-align: middle;
+			}
 		}
 
 		& > :where(h1, h2, h3, h4, h5, h6) { margin: 0; }

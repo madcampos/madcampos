@@ -7,31 +7,31 @@ class ShareOptions extends HTMLElement implements CustomElement {
 		this.innerHTML = `
 			<aside aria-labell="post-share-label">
 				<sr-only is="post-share-label">Share Options</sr-only>
-				<button type="button" class="share-os-link" title="Share Page Link">
+				<button type="button" class="share-os-link">
 					<sr-only>Share Page Link</sr-only>
 					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 						<use href="#share-icon-share" width="24" height="24" />
 					</svg>
 				</button>
-				<button type="button" class="share-copy" title="Copy Page Link">
+				<button type="button" class="share-copy">
 					<sr-only>Copy Page Link</sr-only>
 					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 						<use href="#share-icon-copy" width="24" height="24" />
 					</svg>
 				</button>
-				<button type="button" class="share-email" title="Share via Email">
+				<button type="button" class="share-email">
 					<sr-only>Share via Email</sr-only>
 					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 						<use href="#share-icon-email" width="24" height="24" />
 					</svg>
 				</button>
-				<button type="button" class="share-sms" title="Share via SMS">
+				<button type="button" class="share-sms">
 					<sr-only>Share via SMS</sr-only>
 					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 						<use href="#share-icon-sms" width="24" height="24" />
 					</svg>
 				</button>
-				<button type="button" class="share-print" title="Print Page">
+				<button type="button" class="share-print">
 					<sr-only>Print Page</sr-only>
 					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 						<use href="#share-icon-print" width="24" height="24" />

@@ -1,0 +1,161 @@
+@layer theme {
+	[data-theme='low-contrast'] {
+		/* Border */
+		--border-size: var(--border-size-2);
+		--border-style: dotted;
+		--link-underline: dotted;
+		--border-radius: 0;
+
+		/* Theme colors */
+		--theme-color: var(--theme-6);
+		--secondary-color: var(--theme-3);
+		--accent-color: var(--accent-5);
+		--complementary-color: var(--accent-7);
+
+		/* Base colors */
+		--text-1: var(--gray-8);
+		--text-2: var(--gray-6);
+		--surface-1: color-mix(in oklch increasing hue, var(--gray-2) 85%, var(--theme-0));
+		--surface-2: color-mix(in oklch increasing hue, var(--gray-2) 80%, var(--theme-3));
+		--surface-3: color-mix(in oklch increasing hue, var(--gray-6) 80%, var(--theme-6));
+		--surface-4: transparent;
+
+		/* Link colors */
+		--link-color: var(--theme-12);
+		--link-visited-color: var(--theme-10);
+		--link-hover-color: var(--accent-9);
+		--link-active-color: var(--accent-12);
+
+		/* Code colors */
+		--diff-add-color: var(--green-10);
+		--diff-add-bg: color-mix(in srgb, var(--green-1), transparent);
+		--diff-remove-color: var(--red-10);
+		--diff-remove-bg: color-mix(in srgb, var(--red-1), transparent);
+		--highlight-color: var(--gray-7);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+		--highlight-error-color: var(--red-12);
+		--highlight-error-bg: color-mix(in srgb, var(--red-1), transparent);
+		--highlight-warning-color: var(--yellow-7);
+		--highlight-warning-bg: color-mix(in srgb, var(--choco-1), transparent);
+
+		/* Table styles */
+		--table-header-bg: var(--theme-2);
+		--table-header-color: var(--gray-8);
+		--table-header-border: var(--border-size) var(--border-style) var(--theme-color);
+
+		--table-rows-odd: var(--surface-1);
+		--table-rows-even: var(--surface-2);
+		--table-rows-hover: var(--surface-3);
+
+		--table-footer-bg: var(--theme-1);
+		--table-footer-color: var(--text-2);
+		--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
+
+		/* Input styles */
+		--input-bg: var(--surface-2);
+		--input-color: var(--text-2);
+		--input-border: var(--border-size) solid var(--theme-1);
+		--input-thumb-color: var(--theme-3);
+
+		--input-placeholder-color: var(--gray-7);
+
+		--input-valid-bg: var(--green-1);
+		--input-valid-color: var(--lime-9);
+		--input-invalid-bg: var(--red-0);
+		--input-invalid-color: var(--red-9);
+		--input-hover-bg: var(--surface-1);
+		--input-hover-color: var(--text-1);
+		--input-hover-border-color: var(--accent-color);
+		--input-focus-bg: var(--surface-1);
+		--input-focus-color: var(--text-1);
+		--input-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+		--input-selected-bg: var(--surface-1);
+		--input-selected-color: var(--theme-color);
+		--input-disabled-bg: var(--surface-1);
+		--input-disabled-color: var(--text-2);
+		--input-readonly-bg: var(--surface-1);
+		--input-readonly-color: var(--text-1);
+
+		--fieldset-border: var(--border-style) var(--border-size) var(--theme-3);
+
+		/* Button styles */
+		--button-bg: var(--surface-2);
+		--button-color: var(--theme-4);
+		--button-border: var(--border-style) var(--border-size) var(--theme-4);
+		--button-hover-bg: var(--surface-2);
+		--button-hover-color: var(--accent-color);
+		--button-focus-bg: var(--theme-color);
+		--button-focus-color: var(--surface-1);
+		--button-active-bg: var(--accent-color);
+		--button-active-color: var(--text-1);
+		--button-disabled-bg: var(--gray-5);
+		--button-disabled-color: var(--gray-10);
+
+		/* Progress styles */
+		--progress-bg: var(--surface-2);
+		--progress-color: var(--theme-2);
+		--progress-border: var(--border-size) solid var(--theme-2);
+		--progress-hover-bg: var(--surface-1);
+		--progress-hover-color: var(--accent-color);
+
+		/* Note styles */
+		--note-success-bg: var(--green-1);
+		--note-success-color: var(--lime-9);
+		--note-error-bg: var(--red-0);
+		--note-error-color: var(--red-9);
+		--note-warning-bg: var(--yellow-1);
+		--note-warning-color: var(--brown-9);
+		--note-alert-bg: var(--teal-1);
+		--note-alert-color: var(--teal-9);
+		--note-info-bg: var(--blue-1);
+		--note-info-color: var(--blue-9);
+		--note-debug-bg: var(--violet-1);
+		--note-debug-color: var(--purple-9);
+
+		/* Baseline colors */
+		--baseline-high-color: var(--green-8);
+		--baseline-high-bg: var(--lime-1);
+		--baseline-low-color: var(--blue-9);
+		--baseline-low-bg: var(--blue-2);
+		--baseline-limited-color: var(--orange-6);
+		--baseline-limited-bg: var(--gray-1);
+		--baseline-no-data-color: var(--gray-5);
+		--baseline-no-data-bg: var(--gray-1);
+
+		/* Tag list colors */
+		--tag-bg: var(--surface-2);
+		--tag-color: var(--text-2);
+		--tag-hover-bg: var(--accent-color);
+		--tag-hover-color: var(--surface-1);
+		--tag-focus-bg: var(--surface-2);
+		--tag-focus-color: var(--theme-color);
+		--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+
+		/* Old Buttons */
+		--old-button-border: var(--surface-3) var(--border-style) var(--border-size);
+		--old-button-border-visibility: hidden;
+		--old-button-tint: darkgoldenrod;
+		--old-button-blend-mode: color;
+		--old-button-border-radius: var(--border-radius);
+
+		/* Fonts */
+		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
+		--text-font-family: 'Selawik Variable', 'Selawik', 'Segoe UI', 'Roboto', 'Open Sans', 'Arial', system-ui, sans-serif;
+
+		/* Global settings */
+		accent-color: var(--theme-color);
+		color-scheme: light;
+	}
+
+	:is([data-theme='low-contrast'] code-wrapper, code-wrapper[data-theme='low-contrast']) pre {
+		--code-bg: var(--shiki-light-bg, var(--surface-1));
+		--code-color: var(--shiki-light, var(--text-1));
+
+		span {
+			--code-color: var(--shiki-light, var(--text-1));
+			--code-font-style: var(--shiki-light-font-style, normal);
+			--code-font-weight: var(--shiki-light-font-weight, normal);
+			--code-text-decoration: var(--shiki-light-text-decoration, none);
+		}
+	}
+}

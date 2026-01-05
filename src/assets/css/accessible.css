@@ -1,33 +1,139 @@
 @layer accessible {
 	@media (prefers-contrast: more) {
 		:root {
+			/* Border */
+			--border-size: var(--size-1);
+			--border-style: solid;
+			--link-underline: solid;
+			--border-radius: 0;
+
 			/* Theme colors */
-			--theme-color: goldenrod;
-			--secondary-color: darkorange;
-			--accent-color: darkorange;
-			--complementary-color: orangered;
+			--theme-color: var(--yellow-6);
+			--secondary-color: var(--orange-7);
+			--accent-color: var(--orange-7);
+			--complementary-color: var(--orange-9);
 
 			/* Base colors */
-			--text-1: yellow;
-			--text-2: goldenrod;
+			--text-1: var(--yellow-3);
+			--text-2: var(--yellow-6);
 			--surface-1: black;
-			--surface-2: black;
+			--surface-2: var(--surface-1);
 			--surface-3: var(--theme-color);
 			--surface-4: var(--theme-color);
 
-			/* Border */
-			--border-style: solid;
-			--link-underline: solid;
-
 			/* Link colors */
-			--link-color: lightyellow;
-			--link-visited-color: goldenrod;
-			--link-hover-color: firebrick;
-			--link-active-color: maroon;
+			--link-color: var(--yellow-1);
+			--link-visited-color: var(--yellow-6);
+			--link-hover-color: var(--red-8);
+			--link-active-color: var(--red-10);
+
+			/* Code colors */
+			--diff-add-color: var(--lime-5);
+			--diff-add-bg: color-mix(in srgb, var(--green-10), transparent);
+			--diff-remove-color: var(--red-8);
+			--diff-remove-bg: color-mix(in srgb, var(--red-10), transparent);
+			--highlight-color: var(--gray-5);
+			--highlight-default-bg: color-mix(in srgb, var(--gray-10), transparent);
+			--highlight-error-color: var(--red-10);
+			--highlight-error-bg: color-mix(in srgb, var(--red-10), transparent);
+			--highlight-warning-color: var(--yellow-6);
+			--highlight-warning-bg: color-mix(in srgb, var(--yellow-6), transparent);
+
+			/* Table styles */
+			--table-header-bg: var(--text-2);
+			--table-header-color: var(--surface-1);
+			--table-header-border: var(--border-size) var(--border-style) var(--text-1);
+
+			--table-rows-odd: var(--surface-1);
+			--table-rows-even: var(--gray-7);
+			--table-rows-hover: var(--gray-6);
+
+			--table-footer-bg: var(--text-2);
+			--table-footer-color: var(--surface-1);
+			--table-footer-border: var(--border-size) var(--border-style) var(--text-1);
+
+			/* Input styles */
+			--input-bg: var(--surface-1);
+			--input-color: var(--text-1);
+			--input-border: var(--border-size) var(--border-style) var(--theme-color);
+			--input-thumb-color: var(--theme-color);
+
+			--input-placeholder-color: var(--text-2);
+
+			--input-valid-bg: var(--diff-add-bg);
+			--input-valid-color: var(--diff-add-color);
+			--input-invalid-bg: var(--diff-remove-bg);
+			--input-invalid-color: var(--diff-remove-color);
+			--input-hover-bg: var(--surface-2);
+			--input-hover-color: var(--yellow-1);
+			--input-hover-border-color: var(--yellow-1);
+			--input-focus-bg: var(--surface-2);
+			--input-focus-color: var(--text-2);
+			--input-focus-border: var(--text2);
+			--input-selected-bg: var(--surface-2);
+			--input-selected-color: var(--text-2);
+			--input-disabled-bg: var(--surface-1);
+			--input-disabled-color: var(--gray-7);
+			--input-readonly-bg: var(--gray-10);
+			--input-readonly-color: var(--gray-7);
+
+			--fieldset-border: var(--border-style) var(--border-size) var(--theme-color);
+
+			/* Button styles */
+			--button-bg: var(--surface-2);
+			--button-color: var(--theme-color);
+			--button-border: var(--border-style) var(--border-size) var(--theme-color);
+			--button-hover-bg: var(--surface-2);
+			--button-hover-color: var(--accent-color);
+			--button-focus-bg: var(--theme-color);
+			--button-focus-color: var(--surface-1);
+			--button-active-bg: var(--accent-color);
+			--button-active-color: var(--text-1);
+			--button-disabled-bg: var(--gray-5);
+			--button-disabled-color: var(--gray-10);
+
+			/* Progress styles */
+			--progress-bg: var(--surface-2);
+			--progress-color: var(--theme-color);
+			--progress-border: var(--border-size) solid var(--theme-color);
+			--progress-hover-bg: var(--surface-1);
+			--progress-hover-color: var(--accent-color);
+
+			/* Note styles */
+			--note-success-bg: color-mix(in srgb, var(--green-10), transparent);
+			--note-success-color: var(--lime-5);
+			--note-error-bg: color-mix(in srgb, var(--red-10), transparent 60%);
+			--note-error-color: var(--red-8);
+			--note-warning-bg: color-mix(in srgb, var(--yellow-3), transparent 80%);
+			--note-warning-color: var(--yellow-3);
+			--note-alert-bg: color-mix(in srgb, var(--teal-10), transparent);
+			--note-alert-color: var(--teal-3);
+			--note-info-bg: color-mix(in srgb, var(--blue-10), transparent);
+			--note-info-color: var(--blue-2);
+			--note-debug-bg: color-mix(in srgb, var(--purple-10), transparent);
+			--note-debug-color: var(--violet-3);
+
+			/* Baseline colors */
+			--baseline-high-color: var(--lime-5);
+			--baseline-high-bg: var(--green-10);
+			--baseline-low-color: var(--blue-6);
+			--baseline-low-bg: var(--blue-10);
+			--baseline-limited-color: var(--orange-6);
+			--baseline-limited-bg: var(--gray-7);
+			--baseline-no-data-color: var(--gray-5);
+			--baseline-no-data-bg: var(--gray-8);
+
+			/* Tag list colors */
+			--tag-bg: var(--surface-1);
+			--tag-color: var(--theme-color);
+			--tag-hover-bg: var(--surface-1);
+			--tag-hover-color: var(--accent-color);
+			--tag-focus-bg: var(--surface-1);
+			--tag-focus-color: var(--theme-color);
+			--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
 
 			/* Icons */
 			--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='goldenrod' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
-			--hr-decoration-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 32 32'%3E%3Cpath fill='goldenrod' d='M11.108 10.27c1.083-1.875.16-4.442-2.06-5.724a5.248 5.248 0 0 0-2.615-.72c-1.46 0-2.72.672-3.373 1.8c-.545.944-.608 2.077-.176 3.188C3.287 9.85 4.08 10.75 5.12 11.35a5.242 5.242 0 0 0 2.616.723c.673 0 1.3-.15 1.85-.414l2.4 1.385c1.582.914.56 3.86 5.918 6.955C23.26 23.094 29.4 21.535 29.4 21.535L10.75 10.767c.132-.156.255-.318.358-.496zm-1.733-1c-.506.88-2.033 1.056-3.255.348c-.646-.373-1.134-.916-1.37-1.528c-.21-.535-.194-1.055.042-1.464c.293-.51.892-.8 1.64-.8c.543 0 1.102.156 1.616.453c1.243.716 1.85 2.086 1.327 2.99zm7.87 6.522c0 .483-.39.875-.874.875c-.036 0-.067-.017-.103-.02l.667-1.512a.86.86 0 0 1 .312.657zm-.874-.875c.038 0 .07.017.105.02l-.666 1.51a.851.851 0 0 1-.313-.655c0-.483.39-.875.874-.875m13.03-4.45s-6.14-1.56-11.496 1.535c-.537.31-.995.618-1.415.924l4.325 2.497zm-16.23 6.63c-.35.85-.574 1.508-1.186 1.86l-2.4 1.385a4.235 4.235 0 0 0-1.85-.414c-.893 0-1.797.25-2.615.72c-2.22 1.283-3.144 3.852-2.06 5.727c.65 1.127 1.91 1.8 3.372 1.8c.894 0 1.8-.25 2.616-.72c1.04-.602 1.833-1.502 2.236-2.537c.432-1.112.368-2.245-.178-3.19a3.436 3.436 0 0 0-.356-.493l3.982-2.3a9.7 9.7 0 0 1-1.56-1.838zm-3.75 7.095c-.238.612-.725 1.155-1.37 1.528c-1.222.706-2.75.532-3.258-.347c-.522-.903.086-2.274 1.328-2.992a3.254 3.254 0 0 1 1.615-.452c.75 0 1.346.29 1.64.8c.237.41.253.93.045 1.464z'/%3E%3C/svg%3E");
 
 			color-scheme: dark;
 			line-height: 1.4;
@@ -35,10 +141,27 @@
 		}
 
 		p { line-height: 1.7; }
+
+		code-wrapper pre {
+			--code-bg: var(--shiki-contrast-bg, var(--surface-1));
+			--code-color: var(--shiki-contrast, var(--text-1));
+
+			span {
+				--code-color: var(--shiki-contrast, var(--text-1));
+				--code-font-style: var(--shiki-contrast-font-style, normal);
+				--code-font-weight: var(--shiki-contrast-font-weight, normal);
+				--code-text-decoration: var(--shiki-contrast-text-decoration, none);
+			}
+		}
 	}
 
 	@media (prefers-contrast: less) {
 		:root {
+			--border-size: var(--border-size-2);
+			--border-style: dotted;
+			--link-underline: dotted;
+			--border-radius: 0;
+
 			/* Theme colors */
 			--theme-color: var(--theme-6);
 			--secondary-color: var(--theme-3);
@@ -46,24 +169,137 @@
 			--complementary-color: var(--accent-7);
 
 			/* Base colors */
-			--text-1: var(--gray-5);
+			--text-1: var(--gray-8);
 			--text-2: var(--gray-6);
-			--surface-1: color-mix(in oklch, var(--gray-12) 80%, var(--theme-12));
-			--surface-2: color-mix(in oklch, var(--gray-11) 80%, var(--theme-11));
-			--surface-3: color-mix(in oklch, var(--gray-9) 90%, var(--theme-9));
+			--surface-1: color-mix(in oklch increasing hue, var(--gray-2) 85%, var(--theme-0));
+			--surface-2: color-mix(in oklch increasing hue, var(--gray-2) 80%, var(--theme-3));
+			--surface-3: color-mix(in oklch increasing hue, var(--gray-6) 80%, var(--theme-6));
 			--surface-4: transparent;
 
 			/* Link colors */
-			--link-color: var(--theme-3);
-			--link-visited-color: var(--theme-4);
-			--link-hover-color: var(--accent-4);
-			--link-active-color: var(--accent-5);
+			--link-color: var(--theme-12);
+			--link-visited-color: var(--theme-10);
+			--link-hover-color: var(--accent-9);
+			--link-active-color: var(--accent-12);
 
-			/* Border */
-			--border-style: dotted;
-			--link-underline: dotted;
+			/* Code colors */
+			--diff-add-color: var(--green-10);
+			--diff-add-bg: color-mix(in srgb, var(--green-1), transparent);
+			--diff-remove-color: var(--red-10);
+			--diff-remove-bg: color-mix(in srgb, var(--red-1), transparent);
+			--highlight-color: var(--gray-7);
+			--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+			--highlight-error-color: var(--red-12);
+			--highlight-error-bg: color-mix(in srgb, var(--red-1), transparent);
+			--highlight-warning-color: var(--yellow-7);
+			--highlight-warning-bg: color-mix(in srgb, var(--choco-1), transparent);
 
-			color-scheme: dark;
+			/* Table styles */
+			--table-header-bg: var(--theme-2);
+			--table-header-color: var(--gray-8);
+			--table-header-border: var(--border-size) var(--border-style) var(--theme-color);
+
+			--table-rows-odd: var(--surface-1);
+			--table-rows-even: var(--surface-2);
+			--table-rows-hover: var(--surface-3);
+
+			--table-footer-bg: var(--theme-1);
+			--table-footer-color: var(--text-2);
+			--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
+
+			/* Input styles */
+			--input-bg: var(--surface-2);
+			--input-color: var(--text-2);
+			--input-border: var(--border-size) solid var(--theme-1);
+			--input-thumb-color: var(--theme-3);
+
+			--input-placeholder-color: var(--gray-7);
+
+			--input-valid-bg: var(--green-1);
+			--input-valid-color: var(--lime-9);
+			--input-invalid-bg: var(--red-0);
+			--input-invalid-color: var(--red-9);
+			--input-hover-bg: var(--surface-1);
+			--input-hover-color: var(--text-1);
+			--input-hover-border-color: var(--accent-color);
+			--input-focus-bg: var(--surface-1);
+			--input-focus-color: var(--text-1);
+			--input-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+			--input-selected-bg: var(--surface-1);
+			--input-selected-color: var(--theme-color);
+			--input-disabled-bg: var(--surface-1);
+			--input-disabled-color: var(--text-2);
+			--input-readonly-bg: var(--surface-1);
+			--input-readonly-color: var(--text-1);
+
+			--fieldset-border: var(--border-style) var(--border-size) var(--theme-3);
+
+			/* Button styles */
+			--button-bg: var(--surface-2);
+			--button-color: var(--theme-4);
+			--button-border: var(--border-style) var(--border-size) var(--theme-4);
+			--button-hover-bg: var(--surface-2);
+			--button-hover-color: var(--accent-color);
+			--button-focus-bg: var(--theme-color);
+			--button-focus-color: var(--surface-1);
+			--button-active-bg: var(--accent-color);
+			--button-active-color: var(--text-1);
+			--button-disabled-bg: var(--gray-5);
+			--button-disabled-color: var(--gray-10);
+
+			/* Progress styles */
+			--progress-bg: var(--surface-2);
+			--progress-color: var(--theme-2);
+			--progress-border: var(--border-size) solid var(--theme-2);
+			--progress-hover-bg: var(--surface-1);
+			--progress-hover-color: var(--accent-color);
+
+			/* Note styles */
+			--note-success-bg: var(--green-1);
+			--note-success-color: var(--lime-9);
+			--note-error-bg: var(--red-0);
+			--note-error-color: var(--red-9);
+			--note-warning-bg: var(--yellow-1);
+			--note-warning-color: var(--brown-9);
+			--note-alert-bg: var(--teal-1);
+			--note-alert-color: var(--teal-9);
+			--note-info-bg: var(--blue-1);
+			--note-info-color: var(--blue-9);
+			--note-debug-bg: var(--violet-1);
+			--note-debug-color: var(--purple-9);
+
+			/* Baseline colors */
+			--baseline-high-color: var(--green-8);
+			--baseline-high-bg: var(--lime-1);
+			--baseline-low-color: var(--blue-9);
+			--baseline-low-bg: var(--blue-2);
+			--baseline-limited-color: var(--orange-6);
+			--baseline-limited-bg: var(--gray-1);
+			--baseline-no-data-color: var(--gray-5);
+			--baseline-no-data-bg: var(--gray-1);
+
+			/* Tag list colors */
+			--tag-bg: var(--surface-2);
+			--tag-color: var(--text-2);
+			--tag-hover-bg: var(--accent-color);
+			--tag-hover-color: var(--surface-1);
+			--tag-focus-bg: var(--surface-2);
+			--tag-focus-color: var(--theme-color);
+			--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+
+			color-scheme: light;
+		}
+
+		pre {
+			--code-bg: var(--shiki-light-bg, var(--surface-1));
+			--code-color: var(--shiki-light, var(--text-1));
+
+			span {
+				--code-color: var(--shiki-light, var(--text-1));
+				--code-font-style: var(--shiki-light-font-style, normal);
+				--code-font-weight: var(--shiki-light-font-weight, normal);
+				--code-text-decoration: var(--shiki-light-text-decoration, none);
+			}
 		}
 	}
 
@@ -83,13 +319,25 @@
 			--surface-3: LinkText;
 			--surface-4: LinkText;
 
+			/* Button Styles */
+			--button-focus-bg: Highlight;
+			--button-focus-color: revert;
+
 			/* Border */
 			--border-style: solid;
 			--link-underline: solid;
+		}
 
-			/* Icons */
-			--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='LinkText' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
-			--hr-decoration-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 32 32'%3E%3Cpath fill='LinkText' d='M11.108 10.27c1.083-1.875.16-4.442-2.06-5.724a5.248 5.248 0 0 0-2.615-.72c-1.46 0-2.72.672-3.373 1.8c-.545.944-.608 2.077-.176 3.188C3.287 9.85 4.08 10.75 5.12 11.35a5.242 5.242 0 0 0 2.616.723c.673 0 1.3-.15 1.85-.414l2.4 1.385c1.582.914.56 3.86 5.918 6.955C23.26 23.094 29.4 21.535 29.4 21.535L10.75 10.767c.132-.156.255-.318.358-.496zm-1.733-1c-.506.88-2.033 1.056-3.255.348c-.646-.373-1.134-.916-1.37-1.528c-.21-.535-.194-1.055.042-1.464c.293-.51.892-.8 1.64-.8c.543 0 1.102.156 1.616.453c1.243.716 1.85 2.086 1.327 2.99zm7.87 6.522c0 .483-.39.875-.874.875c-.036 0-.067-.017-.103-.02l.667-1.512a.86.86 0 0 1 .312.657zm-.874-.875c.038 0 .07.017.105.02l-.666 1.51a.851.851 0 0 1-.313-.655c0-.483.39-.875.874-.875m13.03-4.45s-6.14-1.56-11.496 1.535c-.537.31-.995.618-1.415.924l4.325 2.497zm-16.23 6.63c-.35.85-.574 1.508-1.186 1.86l-2.4 1.385a4.235 4.235 0 0 0-1.85-.414c-.893 0-1.797.25-2.615.72c-2.22 1.283-3.144 3.852-2.06 5.727c.65 1.127 1.91 1.8 3.372 1.8c.894 0 1.8-.25 2.616-.72c1.04-.602 1.833-1.502 2.236-2.537c.432-1.112.368-2.245-.178-3.19a3.436 3.436 0 0 0-.356-.493l3.982-2.3a9.7 9.7 0 0 1-1.56-1.838zm-3.75 7.095c-.238.612-.725 1.155-1.37 1.528c-1.222.706-2.75.532-3.258-.347c-.522-.903.086-2.274 1.328-2.992a3.254 3.254 0 0 1 1.615-.452c.75 0 1.346.29 1.64.8c.237.41.253.93.045 1.464z'/%3E%3C/svg%3E");
+		code-wrapper pre {
+			--code-bg: var(--shiki-contrast-bg, var(--surface-1));
+			--code-color: var(--shiki-contrast, var(--text-1));
+
+			span {
+				--code-color: var(--shiki-contrast, var(--text-1));
+				--code-font-style: var(--shiki-contrast-font-style, normal);
+				--code-font-weight: var(--shiki-contrast-font-weight, normal);
+				--code-text-decoration: var(--shiki-contrast-text-decoration, none);
+			}
 		}
 	}
 

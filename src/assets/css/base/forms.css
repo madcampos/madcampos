@@ -114,6 +114,8 @@
 			color: var(--button-focus-color);
 			outline: var(--button-focus-bg) var(--border-style) var(--border-size);
 			outline-offset: var(--size-1);
+
+			@media (forced-colors: active) { color: CanvasText; }
 		}
 
 		&:hover {
@@ -410,7 +412,11 @@
 		}
 
 		&:hover::-webkit-slider-thumb { background-color: var(--input-hover-border-color); }
-		&:active::-webkit-slider-thumb { background-color: var(--input-focus-color); }
+		&:active::-webkit-slider-thumb {
+			background-color: var(--input-focus-color);
+
+			@media (forced-colors: active) { background-color: Mark; }
+		}
 		&:focus-visible::-webkit-slider-thumb { background-color: var(--input-focus-color); }
 
 		&:is(:disabled, [aria-disabled])::-webkit-slider-thumb {
@@ -429,7 +435,11 @@
 		}
 
 		&:hover::-moz-range-thumb { background-color: var(--input-hover-border-color); }
-		&:active::-moz-range-thumb { background-color: var(--input-focus-color); }
+		&:active::-moz-range-thumb {
+			background-color: var(--input-focus-color);
+
+			@media (forced-colors: active) { background-color: Mark; }
+		}
 		&:focus-visible::-moz-range-thumb { background-color: var(--input-focus-color); }
 
 		&:is(:disabled, [aria-disabled])::-moz-range-thumb {

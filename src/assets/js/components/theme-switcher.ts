@@ -35,6 +35,12 @@ const themes: SiteTheme[] = [
 		accessible: true
 	},
 	{
+		id: 'low-contrast',
+		name: 'Low Contrast',
+		description: 'A low contrast light blue theme.',
+		accessible: true
+	},
+	{
 		id: 'uwu',
 		name: 'UwU',
 		description: 'A cute anime inspired theme.'
@@ -93,6 +99,7 @@ class ThemeSwitcher extends HTMLElement implements CustomElement {
 							popovertarget="theme-switcher-dialog-${this.#id}"
 							popovertargetaction="hide"
 						>
+							<sr-only>Close Theme Switcher</sr-only>
 							<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 								<use href="#theme-switcher-icon-close" width="24" height="24" />
 							</svg>
