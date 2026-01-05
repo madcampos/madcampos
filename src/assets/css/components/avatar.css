@@ -18,13 +18,14 @@
 		&::after {
 			display: block;
 			position: absolute;
-			opacity: 0.2;
+			opacity: var(--avatary-overlay-opacity);
 			transition: all 0.2s ease-in-out;
 			inset: 0;
-			background: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
+			background: var(--avatar-overlay);
 			inline-size: 100%;
 			block-size: 100%;
 			content: '';
+			mix-blend-mode: var(--avatary-overlay-blend-mode);
 
 			@media (prefers-contrast: more) {
 				opacity: 0.4;

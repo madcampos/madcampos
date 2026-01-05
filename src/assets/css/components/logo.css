@@ -9,52 +9,52 @@
 		inline-size: clamp(var(--size-header-0), 70vmin, var(--size-header-4));
 
 		.logo-part {
-			fill: var(--logo-part-color, var(--theme-color));
-			stroke: var(--logo-part-stroke, transparent);
-			stroke-width: var(--logo-part-stroke-width, 0);
+			fill: var(--logo-part-color);
+			stroke: var(--logo-part-stroke);
+			stroke-width: var(--logo-part-stroke-width);
 		}
 
 		.logo-extras {
-			fill: var(--logo-extras-color, var(--secondary-color));
-			stroke: var(--logo-extras-stroke, transparent);
-			stroke-width: var(--logo-extras-stroke-width, 0);
+			fill: var(--logo-extras-color);
+			stroke: var(--logo-extras-stroke);
+			stroke-width: var(--logo-extras-stroke-width);
 		}
 
 		.logo-text {
-			fill: var(--logo-text-color, var(--accent-color));
-			stroke: var(--logo-text-stroke, transparent);
-			stroke-width: var(--logo-text-stroke-width, 0);
-			font-weight: var(--logo-font-weight, 300);
-			font-family: var(--logo-font, 'Mecano-Light', 'Mecano', monospace);
+			fill: var(--logo-text-color);
+			stroke: var(--logo-text-stroke);
+			stroke-width: var(--logo-text-stroke-width);
+			font-weight: var(--logo-font-weight);
+			font-family: var(--logo-font);
 		}
 
-		:is(.noise-logo, .overlay-logo, .pixelated-logo) { fill: var(--logo-part-color, transparent); }
+		:where(.noise-logo, .overlay-logo, .pixelated-logo) { fill: transparent; }
 
-		#logo-graphics {
+		svg {
 			paint-order: stroke;
 			inline-size: 100%;
 			block-size: 100%;
 			object-fit: contain;
-
-			[data-theme] { visibility: hidden; }
-
-			[data-theme='system'] {
-				&:where([data-size='full']) { visibility: visible; }
-
-				@container logo (max-width: 25rem) { visibility: hidden; }
-				&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
-
-				@container logo (max-width: 15rem) { visibility: hidden; }
-				&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
-			}
 		}
 
-		&[full] #logo-graphics {
+		[data-theme] { visibility: hidden; }
+
+		[data-theme='system'] {
+			&:where([data-size='full']) { visibility: visible; }
+
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
+
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
+
+		&[full] {
 			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
 			:where([data-theme='system'][data-size='full']) { visibility: visible; }
 		}
 
-		&[mini] #logo-graphics {
+		&[mini] {
 			height: 10rem;
 
 			@container logo (max-width: 15rem) { height: 7rem; }
@@ -63,7 +63,7 @@
 			:where([data-theme='system'][data-size='mini']) { visibility: visible; }
 		}
 
-		&[micro] #logo-graphics {
+		&[micro] {
 			height: 15rem;
 
 			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
@@ -72,13 +72,13 @@
 			@container logo (max-width: 15rem) { height: 10rem; }
 		}
 
-		&[glitch] #logo-graphics {
+		&[glitch] svg {
 			image-rendering: pixelated;
 
 			@media not (prefers-reduced-motion) {
 				.pixelated-logo {
 					filter: url('#pixelate-filter');
-					--logo-part-color: var(--surface-1);
+					fill: var(--logo-pixel-color);
 				}
 
 				.logo-part { /* filter: url("#glitch-filter"); */ filter: url('#animated-glitch-filter'); }
@@ -86,12 +86,12 @@
 				.overlay-logo {
 					opacity: 0.6;
 					mix-blend-mode: overlay;
-					--logo-part-color: var(--complementary-color);
+					fill: var(--logo-overlay-color);
 				}
 
 				.noise-logo {
 					filter: url('#noise-filter');
-					--logo-part-color: var(--theme-color);
+					fill: var(--logo-noise-color);
 				}
 			}
 		}
@@ -101,19 +101,55 @@
 			inline-size: 100%;
 			block-size: 100%;
 
-			&:focus-visible [data-theme='system'] {
-				--logo-part-color: var(--text-1);
-				--logo-text-color: var(--theme-color);
+			&:focus-visible {
+				.logo-part {
+					--logo-part-color: var(--logo-part-focus-color);
+					--logo-part-stroke: var(--logo-part-focus-stroke);
+				}
+
+				.logo-text {
+					--logo-text-color: var(--logo-text-focus-color);
+					--logo-text-stroke: var(--logo-text-focus-stroke);
+				}
+
+				.logo-extras {
+					--logo-extras-color: var(--logo-extras-focus-color);
+					--logo-extras-stroke: var(--logo-extras-focus-stroke);
+				}
 			}
 
-			&:hover [data-theme='system'] {
-				--logo-part-color: var(--link-hover-color);
-				--logo-text-color: var(--theme-color);
+			&:hover {
+				.logo-part {
+					--logo-part-color: var(--logo-part-hover-color);
+					--logo-part-stroke: var(--logo-part-hover-stroke);
+				}
+
+				.logo-text {
+					--logo-text-color: var(--logo-text-hover-color);
+					--logo-text-stroke: var(--logo-text-hover-stroke);
+				}
+
+				.logo-extras {
+					--logo-extras-color: var(--logo-extras-hover-color);
+					--logo-extras-stroke: var(--logo-extras-hover-stroke);
+				}
 			}
 
-			&:active [data-theme='system'] {
-				--logo-part-color: var(--link-active-color);
-				--logo-text-color: var(--link-active-color);
+			&:active {
+				.logo-part {
+					--logo-part-color: var(--logo-part-active-color);
+					--logo-part-stroke: var(--logo-part-active-stroke);
+				}
+
+				.logo-text {
+					--logo-text-color: var(--logo-text-active-color);
+					--logo-text-stroke: var(--logo-text-active-stroke);
+				}
+
+				.logo-extras {
+					--logo-extras-color: var(--logo-extras-active-color);
+					--logo-extras-stroke: var(--logo-extras-active-stroke);
+				}
 			}
 		}
 

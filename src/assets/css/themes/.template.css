@@ -66,6 +66,80 @@
 		--highlight-warning-color: ;
 		--highlight-warning-bg: ;
 
+		/* Table styles */
+		--table-header-bg: ;
+		--table-header-color: ;
+		--table-header-border: ;
+
+		--table-rows-odd: ;
+		--table-rows-even: ;
+		--table-rows-hover: ;
+
+		--table-footer-bg: ;
+		--table-footer-color: ;
+		--table-footer-border: ;
+
+		/* Input styles */
+		--input-bg: ;
+		--input-color: ;
+		--input-border: ;
+		--input-thumb-color: ;
+
+		--input-placeholder-color: ;
+
+		--input-valid-bg: ;
+		--input-valid-color: ;
+		--input-invalid-bg: ;
+		--input-invalid-color: ;
+		--input-hover-bg: ;
+		--input-hover-color: ;
+		--input-hover-border-color: ;
+		--input-focus-bg: ;
+		--input-focus-color: ;
+		--input-focus-border: ;
+		--input-selected-bg: ;
+		--input-selected-color: ;
+		--input-disabled-bg: ;
+		--input-disabled-color: ;
+		--input-readonly-bg: ;
+		--input-readonly-color: ;
+
+		--fieldset-border: ;
+
+		/* Button styles */
+		--button-bg: ;
+		--button-color: ;
+		--button-border: ;
+		--button-hover-bg: ;
+		--button-hover-color: ;
+		--button-focus-bg: ;
+		--button-focus-color: ;
+		--button-active-bg: ;
+		--button-active-color: ;
+		--button-disabled-bg: ;
+		--button-disabled-color: ;
+
+		/* Progress styles */
+		--progress-bg: ;
+		--progress-color: ;
+		--progress-border: ;
+		--progress-hover-bg: ;
+		--progress-hover-color: ;
+
+		/* Note styles */
+		--note-success-bg: ;
+		--note-success-color: ;
+		--note-error-bg: ;
+		--note-error-color: ;
+		--note-warning-bg: ;
+		--note-warning-color: ;
+		--note-alert-bg: ;
+		--note-alert-color: ;
+		--note-info-bg: ;
+		--note-info-color: ;
+		--note-debug-bg: ;
+		--note-debug-color: ;
+
 		/* Baseline colors */
 		--baseline-high-color: ;
 		--baseline-high-bg: ;
@@ -76,10 +150,57 @@
 		--baseline-no-data-color: ;
 		--baseline-no-data-bg: ;
 
-		--baseline-supported-color: ;
-		--baseline-supported-bg: ;
-		--baseline-unsupported-color: ;
-		--baseline-unsupported-bg: ;
+		/* Tag list colors */
+		--tag-bg: ;
+		--tag-color: ;
+		--tag-hover-bg: ;
+		--tag-hover-color: ;
+		--tag-focus-bg: ;
+		--tag-focus-color: ;
+		--tag-focus-border: ;
+
+		/* Logo styles */
+		--logo-part-color: ;
+		--logo-part-stroke: ;
+		--logo-part-stroke-width: ;
+		--logo-extras-color: ;
+		--logo-extras-stroke: ;
+		--logo-extras-stroke-width: ;
+		--logo-text-color: ;
+		--logo-text-stroke: ;
+		--logo-text-stroke-width: ;
+		--logo-font: ;
+		--logo-font-weight: ;
+
+		--logo-pixel-color: ;
+		--logo-overlay-color: ;
+		--logo-noise-color: ;
+
+		--logo-part-hover-color: ;
+		--logo-part-hover-stroke: ;
+		--logo-extras-hover-color: ;
+		--logo-extras-hover-stroke: ;
+		--logo-text-hover-color: ;
+		--logo-text-hover-stroke: ;
+
+		--logo-part-focus-color: ;
+		--logo-part-focus-stroke: ;
+		--logo-extras-focus-color: ;
+		--logo-extras-focus-stroke: ;
+		--logo-text-focus-color: ;
+		--logo-text-focus-stroke: ;
+
+		--logo-part-active-color: ;
+		--logo-part-active-stroke: ;
+		--logo-extras-active-color: ;
+		--logo-extras-active-stroke: ;
+		--logo-text-active-color: ;
+		--logo-text-active-stroke: ;
+
+		/* Avatar styles */
+		--avatar-overlay: ;
+		--avatary-overlay-opacity: ;
+		--avatary-overlay-blend-mode: ;
 
 		/* Old Buttons Overrides */
 		--old-button-border: ;
@@ -95,6 +216,7 @@
 
 		/* Icons */
 		--details-icon: ;
+		--select-icon: ;
 
 		/* Global settings */
 		accent-color: var(--theme-color);
@@ -107,5 +229,55 @@
 		[data-theme='TEMPLATE'] { display: block; }
 	}
 
-	/* TODO: add logo item details */
+	[data-theme='TEMPLATE'] m-logo,
+	m-logo[data-theme='TEMPLATE'] {
+		[data-theme] { visibility: hidden; }
+
+		[data-theme='TEMPLATE'] {
+			&:where([data-size='full']) { visibility: visible; }
+
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
+
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
+
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='TEMPLATE'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='TEMPLATE'][data-size='micro']) { visibility: visible; }
+		}
+	}
+
+	:is([data-theme='TEMPLATE'] m-card, m-card[data-theme='TEMPLATE']) {
+		&.project-card picture { mask: none; }
+
+		img {
+			display: none;
+
+			&[data-theme-image='TEMPLATE'] { display: block; }
+		}
+	}
+
+	:is([data-theme='TEMPLATE'] code-wrapper, code-wrapper[data-theme='TEMPLATE']) pre {
+		--code-bg: var(--shiki--bg, var(--surface-1));
+		--code-color: var(--shiki-, var(--text-1));
+
+		span {
+			--code-color: var(--shiki-, var(--text-1));
+			--code-font-style: var(--shiki--font-style, normal);
+			--code-font-weight: var(--shiki--font-weight, normal);
+			--code-text-decoration: var(--shiki--text-decoration, none);
+		}
+	}
 }

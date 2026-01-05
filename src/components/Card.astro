@@ -9,14 +9,15 @@ interface Props {
 	image?: ImageMetadata;
 	imageAlt?: string;
 	themeImages?: Record<string, ImageMetadata>;
+	extraClass?: string;
 }
 
-const { itemtype, url, draft, image, imageAlt, themeImages } = Astro.props;
+const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro.props;
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
 const IMAGE_WIDTHS = [64, 128, 256, 512];
 ---
-<m-card>
+<m-card class:list={[extraClass]}>
 	<article itemscope {itemtype}>
 		<div hidden>
 			<meta itemprop="url" content={url} />

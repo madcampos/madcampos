@@ -236,7 +236,7 @@
 
 	:is(textarea, input)::placeholder { color: var(--input-placeholder-color); }
 
-	:is(textarea, input:not([type='color'], [type='range'], [type='button'], [type='reset'], [type='submit'], [type='image'])):not(:disabled):read-only {
+	:is(textarea, input:not([type='color'], [type='range'], [type='button'], [type='reset'], [type='submit'], [type='image'], [type='file'])):not(:disabled):read-only {
 		outline-color: var(--input-readonly-color);
 		border-color: var(--input-readonly-color);
 		color: var(--input-readonly-color);

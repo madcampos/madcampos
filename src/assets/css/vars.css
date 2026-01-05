@@ -71,16 +71,16 @@
 		--link-active-color: var(--accent-12);
 
 		/* Code colors */
-		--diff-add-color: darkgreen;
-		--diff-add-bg: rgba(0, 194, 0, 0.3);
-		--diff-remove-color: maroon;
-		--diff-remove-bg: rgba(255, 68, 68, 0.3);
-		--highlight-color: dimgray;
-		--highlight-default-bg: rgba(105, 105, 105, 0.35);
-		--highlight-error-color: maroon;
-		--highlight-error-bg: rgba(255, 99, 71, 0.3);
-		--highlight-warning-color: goldenrod;
-		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
+		--diff-add-color: var(--green-12);
+		--diff-add-bg: color-mix(in srgb, var(--green-3), transparent);
+		--diff-remove-color: var(--red-12);
+		--diff-remove-bg: color-mix(in srgb, var(--red-3), transparent);
+		--highlight-color: var(--gray-7);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+		--highlight-error-color: var(--red-12);
+		--highlight-error-bg: color-mix(in srgb, var(--red-2), transparent);
+		--highlight-warning-color: var(--yellow-7);
+		--highlight-warning-bg: color-mix(in srgb, var(--choco-7), transparent);
 
 		/* Table styles */
 		--table-header-bg: var(--theme-2);
@@ -166,11 +166,6 @@
 		--baseline-no-data-color: dimgray;
 		--baseline-no-data-bg: dimgray;
 
-		--baseline-supported-color: seagreen;
-		--baseline-supported-bg: color-mix(in srgb, greenyellow, transparent 80%);
-		--baseline-unsupported-color: goldenrod;
-		--baseline-unsupported-bg: color-mix(in srgb, yellow, transparent 80%);
-
 		/* Tag list colors */
 		--tag-bg: var(--surface-2);
 		--tag-color: var(--text-2);
@@ -179,6 +174,49 @@
 		--tag-focus-bg: var(--surface-2);
 		--tag-focus-color: var(--theme-color);
 		--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
+
+		/* Logo styles */
+		--logo-part-color: var(--theme-color);
+		--logo-part-stroke: transparent;
+		--logo-part-stroke-width: 0;
+		--logo-extras-color: var(--secondary-color);
+		--logo-extras-stroke: transparent;
+		--logo-extras-stroke-width: 0;
+		--logo-text-color: var(--accent-color);
+		--logo-text-stroke: transparent;
+		--logo-text-stroke-width: 0;
+		--logo-font: 'Mecano-Light', 'Mecano', monospace;
+		--logo-font-weight: 300;
+
+		--logo-pixel-color: var(--surface-1);
+		--logo-overlay-color: var(--complementary-color);
+		--logo-noise-color: var(--theme-color);
+
+		--logo-part-hover-color: var(--link-hover-color);
+		--logo-part-hover-stroke: transparent;
+		--logo-extras-hover-color: var(--link-active-color);
+		--logo-extras-hover-stroke: transparent;
+		--logo-text-hover-color: var(--theme-color);
+		--logo-text-hover-stroke: transparent;
+
+		--logo-part-focus-color: var(--text-1);
+		--logo-part-focus-stroke: transparent;
+		--logo-extras-focus-color: var(--secondary-color);
+		--logo-extras-focus-stroke: transparent;
+		--logo-text-focus-color: var(--theme-color);
+		--logo-text-focus-stroke: transparent;
+
+		--logo-part-active-color: var(--link-active-color);
+		--logo-part-active-stroke: transparent;
+		--logo-extras-active-color: var(--link-active-color);
+		--logo-extras-active-stroke: transparent;
+		--logo-text-active-color: var(--link-active-color);
+		--logo-text-active-stroke: transparent;
+
+		/* Avatar styles */
+		--avatar-overlay: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
+		--avatary-overlay-opacity: 0.2;
+		--avatary-overlay-blend-mode: normal;
 
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
@@ -209,16 +247,16 @@
 			--link-active-color: var(--accent-0);
 
 			/* Code colors */
-			--diff-add-color: limegreen;
-			--diff-add-bg: rgba(0, 100, 0, 0.3);
-			--diff-remove-color: red;
-			--diff-remove-bg: rgba(193, 0, 0, 0.3);
-			--highlight-color: silver;
-			--highlight-default-bg: rgba(192, 192, 192, 0.2);
-			--highlight-error-color: tomato;
-			--highlight-error-bg: rgba(255, 99, 71, 0.2);
-			--highlight-warning-color: yellow;
-			--highlight-warning-bg: rgba(218, 165, 32, 0.2);
+			--diff-add-color: var(--lime-4);
+			--diff-add-bg: color-mix(in srgb, var(--green-10), transparent);
+			--diff-remove-color: var(--red-8);
+			--diff-remove-bg: color-mix(in srgb, var(--red-11), transparent);
+			--highlight-color: var(--gray-5);
+			--highlight-default-bg: color-mix(in srgb, var(--gray-7), transparent);
+			--highlight-error-color: var(--red-6);
+			--highlight-error-bg: color-mix(in srgb, var(--red-12), transparent);
+			--highlight-warning-color: var(--yellow-3);
+			--highlight-warning-bg: color-mix(in srgb, var(--brown-9), transparent);
 
 			/* Table styles */
 			--table-header-bg: var(--theme-9);
@@ -246,30 +284,6 @@
 			--note-info-color: var(--blue-2);
 			--note-debug-bg: var(--purple-10);
 			--note-debug-color: var(--violet-2);
-
-			/* Baseline colors */
-			--baseline-high-color: #1ea446;
-			--baseline-high-bg: #125225;
-			--baseline-low-color: #4185ff;
-			--baseline-low-bg: #2d509e;
-			--baseline-limited-color: #f09409;
-			--baseline-limited-bg: #424242;
-			--baseline-no-data-color: #717171;
-			--baseline-no-data-bg: #717171;
-
-			/* Tag list colors */
-			--tag-bg: var(--surface-2);
-			--tag-color: var(--text-2);
-			--tag-hover-bg: var(--accent-color);
-			--tag-hover-color: var(--surface-1);
-			--tag-focus-bg: var(--surface-2);
-			--tag-focus-color: var(--theme-color);
-			--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
-
-			--baseline-supported-color: greenyellow;
-			--baseline-supported-bg: color-mix(in srgb, seagreen, transparent 80%);
-			--baseline-unsupported-color: #ffd500;
-			--baseline-unsupported-bg: color-mix(in srgb, goldenrod, transparent 80%);
 		}
 	}
 }

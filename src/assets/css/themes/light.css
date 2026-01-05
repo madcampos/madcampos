@@ -21,16 +21,16 @@
 		--link-active-color: var(--accent-12);
 
 		/* Code colors */
-		--diff-add-color: darkgreen;
-		--diff-add-bg: rgba(0, 194, 0, 0.3);
-		--diff-remove-color: maroon;
-		--diff-remove-bg: rgba(255, 68, 68, 0.3);
-		--highlight-color: dimgray;
-		--highlight-default-bg: rgba(105, 105, 105, 0.35);
-		--highlight-error-color: maroon;
-		--highlight-error-bg: rgba(255, 99, 71, 0.3);
-		--highlight-warning-color: goldenrod;
-		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
+		--diff-add-color: var(--green-12);
+		--diff-add-bg: color-mix(in srgb, var(--green-3), transparent);
+		--diff-remove-color: var(--red-12);
+		--diff-remove-bg: color-mix(in srgb, var(--red-3), transparent);
+		--highlight-color: var(--gray-7);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+		--highlight-error-color: var(--red-12);
+		--highlight-error-bg: color-mix(in srgb, var(--red-3), transparent);
+		--highlight-warning-color: var(--yellow-7);
+		--highlight-warning-bg: color-mix(in srgb, var(--choco-7), transparent);
 
 		/* Table styles */
 		--table-header-bg: var(--theme-2);
@@ -46,18 +46,18 @@
 		--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
 
 		/* Note styles */
-		--note-success-bg: var(--green-11);
-		--note-success-color: var(--lime-2);
-		--note-error-bg: var(--red-11);
-		--note-error-color: var(--red-2);
-		--note-warning-bg: var(--yellow-10);
+		--note-success-bg: var(--green-2);
+		--note-success-color: var(--lime-12);
+		--note-error-bg: var(--red-1);
+		--note-error-color: var(--red-12);
+		--note-warning-bg: var(--yellow-2);
 		--note-warning-color: var(--brown-12);
-		--note-alert-bg: var(--teal-10);
-		--note-alert-color: var(--jungle-2);
-		--note-info-bg: var(--blue-12);
-		--note-info-color: var(--blue-2);
-		--note-debug-bg: var(--purple-10);
-		--note-debug-color: var(--violet-2);
+		--note-alert-bg: var(--teal-2);
+		--note-alert-color: var(--teal-11);
+		--note-info-bg: var(--blue-2);
+		--note-info-color: var(--blue-12);
+		--note-debug-bg: var(--violet-2);
+		--note-debug-color: var(--purple-12);
 
 		/* Global settings */
 		color-scheme: light;

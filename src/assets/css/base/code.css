@@ -1,18 +1,22 @@
 @layer base {
 	code-wrapper pre {
+		--code-bg: light-dark(var(--shiki-light-bg, var(--surface-1)), var(--shiki-dark-bg, var(--surface-1)));
+		--code-color: light-dark(var(--shiki-light, var(--text-1)), var(--shiki-dark, var(--text-1)));
+
 		--line-counter-width: 2em;
 		--line-counter-margin-right: 1em;
 
 		border: var(--border-style) var(--surface-3) var(--border-size);
 		border-radius: var(--border-radius);
-		background-color: light-dark(var(--shiki-light-bg, var(--surface-1)), var(--shiki-dark-bg, var(--surface-1)));
+		background-color: var(--code-bg);
 		padding: var(--size-2) var(--size-1);
 		overflow: clip;
 		font-size: smaller;
 		font-family: var(--code-font-family);
 
-		&:focus-visible {
+		&:focus {
 			border-color: transparent;
+			outline: var(--border-size) var(--border-style) var(--theme-color);
 
 			.line {
 				opacity: 1 !important;
@@ -21,25 +25,16 @@
 		}
 
 		span {
-			color: light-dark(var(--shiki-light, var(--text-1)), var(--shiki-dark, var(--text-1)));
-			font-style: light-dark(var(--shiki-light-font-style, normal), var(--shiki-dark-font-style, normal));
-			font-weight: light-dark(var(--shiki-light-font-weight, normal), var(--shiki-dark-font-weight, normal));
+			--code-color: light-dark(var(--shiki-light, var(--text-1)), var(--shiki-dark, var(--text-1)));
+			--code-font-style: light-dark(var(--shiki-light-font-style, normal), var(--shiki-dark-font-style, normal));
+			--code-font-weight: light-dark(var(--shiki-light-font-weight, normal), var(--shiki-dark-font-weight, normal));
+			--code-text-decoration: light-dark(var(--shiki-light-text-decoration, none), var(--shiki-dark-text-decoration, none));
+
+			color: var(--code-color);
+			font-style: var(--code-font-style);
+			font-weight: var(--code-font-weight);
 			font-family: var(--code-font-family);
-			text-decoration: light-dark(var(--shiki-light-text-decoration, none), var(--shiki-dark-text-decoration, none));
-
-			@media (prefers-contrast: more), (forced-colors: active) {
-				color: var(--shiki-contrast, var(--text-1));
-				font-style: var(--shiki-contrast-font-style, normal);
-				font-weight: var(--shiki-contrast-font-weight, normal);
-				text-decoration: var(--shiki-contrast-text-decoration, none);
-			}
-
-			@media (prefers-contrast: less) {
-				color: var(--shiki-dark, var(--text-1));
-				font-style: var(--shiki-dark-font-style, normal);
-				font-weight: var(--shiki-dark-font-weight, normal);
-				text-decoration: var(--shiki-dark-text-decoration, none);
-			}
+			text-decoration: var(--code-text-decoration);
 		}
 
 		code {
@@ -209,8 +204,5 @@
 				}
 			}
 		}
-
-		@media (prefers-contrast: more), (forced-colors: active) { background-color: var(--shiki-contrast-bg, var(--surface-1)); }
-		@media (prefers-contrast: less) { background-color: var(--shiki-dark-bg, var(--surface-1)); }
 	}
 }

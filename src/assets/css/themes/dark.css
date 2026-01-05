@@ -50,14 +50,23 @@
 		--note-success-color: var(--lime-2);
 		--note-error-bg: var(--red-11);
 		--note-error-color: var(--red-2);
-		--note-warning-bg: var(--yellow-10);
-		--note-warning-color: var(--brown-12);
+		--note-warning-bg: var(--yellow-11);
+		--note-warning-color: var(--brown-1);
 		--note-alert-bg: var(--teal-10);
 		--note-alert-color: var(--jungle-2);
 		--note-info-bg: var(--blue-12);
 		--note-info-color: var(--blue-2);
 		--note-debug-bg: var(--purple-10);
 		--note-debug-color: var(--violet-2);
+
+		/* Tag list colors */
+		--tag-bg: var(--surface-2);
+		--tag-color: var(--text-2);
+		--tag-hover-bg: var(--accent-color);
+		--tag-hover-color: var(--surface-1);
+		--tag-focus-bg: var(--surface-2);
+		--tag-focus-color: var(--theme-color);
+		--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
 
 		/* Global settings */
 		color-scheme: dark;
