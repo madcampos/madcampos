@@ -1,0 +1,128 @@
+---
+
+---
+<details>
+	<summary>
+		<h2>Inline Text Elements</h2>
+	</summary>
+
+	<section>
+		<h3>Links</h3>
+
+		<p>Visited link: <a href="/styleguide/">This Page</a></p>
+		<p>Not visited link: <a href="#" id="random-link">Random Error Page</a></p>
+		<script type="module" is:inline>
+			(/** @type {HTMLAnchorElement} */ (document.querySelector('#random-link'))).href = crypto.randomUUID();
+		</script>
+	</section>
+
+	<section>
+		<h3>Abbteviation & Inline Definition</h3>
+
+		<p>
+			The term "<dfn><abbr title="Situation Normal, All Fucked Up">SNAFU</abbr></dfn>", meaning "Situation Normal, All Fucked Up", originates from <abbr title="World War II"
+			>WW2</abbr> military slang.
+		</p>
+	</section>
+
+	<section>
+		<h3>Strong & Bold</h3>
+
+		<p>Whiskey is a <strong>strong</strong> drink, while wine can be <b>bold</b>.</p>
+	</section>
+
+	<section>
+		<h3>Emphasis & Italic</h3>
+
+		<p><i>Italics</i> is a form of <em>emphasize</em> text.</p>
+	</section>
+
+	<section>
+		<h3>Size & Position</h3>
+
+		<p>Like on rollercoasters, we can go <sup>up</sup>, <sub>down</sub>, or feel <small>tiny</small>.</p>
+	</section>
+
+	<section>
+		<h3>Inline Quotes & Citations</h3>
+
+		<p>
+			As best said by the Cheshire Cat in <cite><a
+					href="https://www.gutenberg.org/ebooks/19033"
+					target="_blank"
+					rel="noopener noreferrer"
+					referrerpolicy="no-referrer"
+				>Alice's Adventure in Wonderland</a></cite>:
+			<q>If you don't know where you are going any road can take you there.</q>
+		</p>
+	</section>
+
+	<section>
+		<h3>Highlights & Annotations</h3>
+
+		<p>A <mark>highlight</mark> of marking text is that you can indicate <u>typos</u> and <s>cleverness</s> sarcasm.</p>
+
+		<p>Or even, text <del>deletions</del><ins>insertions</ins>.</p>
+	</section>
+
+	<section>
+		<h3>Computer text</h3>
+
+		<p>You can <code>type</code> all you like, even try to <kbd>Ctrl</kbd> my <var>vars</var>, but all they say is:</p>
+		<p><samp>Null Pointer Exception.</samp></p>
+	</section>
+
+	<section>
+		<h3>Machine readable markup</h3>
+
+		<p><data value="42">The Answer to the Ultimate Question of Life, the Universe, and Everything</data></p>
+
+		<p>Current date and time: <time datetime="" id="cur-time">&mdash;</time></p>
+		<script type="module" is:inline>
+			const curTimeElement = /** @type {HTMLTimeElement} */ (document.querySelector('#cur-time'));
+
+			setInterval(() => {
+				const now = new Date();
+
+				curTimeElement.dateTime = now.toISOString();
+				curTimeElement.innerText = now.toLocaleString();
+			}, 1000);
+		</script>
+	</section>
+
+	<section>
+		<h3>Breaks & Text Direction</h3>
+
+		<p>
+			Here is a line break:
+			<br />
+			That's it.
+		</p>
+
+		<p>Here is a <span>span of text</span>.</p>
+
+		<p>Here is a super long word in a tiny space just for the sake of having word break opportunities:</p>
+		<p style="max-inline-size: var(--size-content-0); outline: solid thin var(--theme-color)">
+			pneumono<wbr />ultra<wbr />microscopic<wbr />silico<wbr />volcano<wbr />coniosis
+		</p>
+
+		<p>Here is some text intentionally right-to-left:</p>
+		<p>
+			The Hebrew word "<bdo dir="rtl">שָׁלוֹם</bdo>" (Shalom) and the Arabic word "<bdi>سَلَام</bdi>" (Salām) share the same etymologic root. Both have a literal meaning of
+			"peace".
+		</p>
+	</section>
+
+	<section>
+		<h3>Ruby Text</h3>
+
+		<p>
+			"Ruby" text is a type of annotation to help understanding the meaning of text.
+		</p>
+		<p>
+			In Japanese, this text is know as "<span lang="jp"><ruby>振<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby><span>り</span><ruby>仮<rp>
+						(
+					</rp><rt>が</rt><rp>)</rp></ruby><ruby>名<rp>(</rp><rt>な</rt><rp>)</rp></ruby></span>" (Furigana).
+		</p>
+	</section>
+</details>

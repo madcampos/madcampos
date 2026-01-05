@@ -1,0 +1,210 @@
+---
+const framesetHtml = `
+	<frameset cols="50%, 50%" rows="50%, 50%">
+		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
+	</frameset>
+`;
+---
+<details>
+	<summary>
+		<h2>Obsolete Elements</h2>
+	</summary>
+
+	<section>
+		<h3>Acronym Element</h3>
+		<p><strong>Note:</strong> Use <code>&lt;abbr&gt;</code> instead.</p>
+		<p><acronym title="Abreviation">ABBR</acronym></p>
+	</section>
+
+	<section>
+		<h3>Big Text Element</h3>
+		<p><strong>Note:</strong> Use <code>font-size</code> in CSS instead.</p>
+		<p><big>Large Boi</big></p>
+	</section>
+
+	<section>
+		<h3>Text Centering Element</h3>
+		<p><strong>Note:</strong> Use CSS instead.</p>
+		<center><p>This will be centered, apparently.</p></center>
+	</section>
+
+	<section>
+		<h3>Directory Listing Element</h3>
+		<p>
+			<strong>Note:</strong> Use <code>&lt;abbr&gt;</code> for simple lists, or the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/">Tree View</a>
+			pattern instead.
+		</p>
+
+		<dir>
+			<li>..</li>
+			<li>.</li>
+			<li>.git</li>
+			<li>lib</li>
+			<li>src</li>
+			<li>DO_NOT_READ.txt</li>
+			<li>not-a-virus.exe</li>
+			<li>README.md</li>
+			<li>untitled.txt</li>
+		</dir>
+	</section>
+
+	<section>
+		<h3>Font Element</h3>
+		<p><strong>Note:</strong> Use CSS instead.</p>
+
+		<p><font color="deeppink" face="Comic Sans MS, cursive">I'm pretty</font></p>
+	</section>
+
+	<section>
+		<h3>Frameset & Frame Elements</h3>
+		<p><strong>Note:</strong> Use <code>&lt;iframe&gt;</code> instead.</p>
+
+		{/* eslint-disable-next-line astro/no-set-html-directive */}
+		<Fragment set:html={framesetHtml} />
+	</section>
+
+	<section>
+		<h3>Image Element</h3>
+		<p><strong>Note:</strong> Use <code>&lt;img&gt;</code> instead.</p>
+
+		{/* @ts-expect-error */}
+		<image
+			src="/assets/images/test/good-parts.webp"
+			alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
+			width="512"
+		/>
+	</section>
+
+	<section>
+		<h3>Marquee Element</h3>
+		<p><strong>Note:</strong> Use CSS instead.</p>
+
+		<marquee direction="up" behavior="alternate" width="640" height="480">
+			<marquee behavior="alternate">
+				<img height="80" width="80" src="https://www.freeiconspng.com/uploads/dvd-logo-png-33.png" alt="DVD Logo" style="margin: 0" />
+			</marquee>
+		</marquee>
+	</section>
+
+	<section>
+		<h3>Menu Item Element</h3>
+		<p>
+			<strong>Note:</strong> Use the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/">Menu Bar</a> or <a href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/"
+			>Menu Button</a> patterns instead.
+		</p>
+		<p>There is no example on this one.</p>
+	</section>
+
+	<section>
+		<h3>Non-Breaking Text Element</h3>
+		<p><strong>Note:</strong> Use <code>white-space</code> in CSS instead.</p>
+
+		<p style="max-inline-size: var(--size-content-0); outline: solid thin var(--theme-color); overflow: auto">
+			<nobr>pneumonoultramicroscopicsilicovolcanoconiosis</nobr>
+		</p>
+	</section>
+
+	<section>
+		<h3>No Embed Element</h3>
+		<p><strong>Note:</strong> Use <code>&lt;object&gt;</code> or <code>&lt;iframe&gt;</code> instead.</p>
+
+		<p>Show fallback content if the <code>&lt;embed&gt;</code> element is not supported:</p>
+		<noembed>No embed for you.</noembed>
+	</section>
+
+	<section>
+		<h3>No Frames Element</h3>
+		<p><strong>Note:</strong> Use <code>&lt;iframe&gt;</code> instead.</p>
+
+		<p>Show fallback content if the <code>&lt;frame&gt;</code> element is not supported:</p>
+		<noframes>No frame for you.</noframes>
+	</section>
+
+	<section>
+		<h3>Object Parameter Element</h3>
+		<p><strong>Note:</strong> Use <code>data-*</code> attributes instead.</p>
+
+		<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
+		<object
+			data="/assets/ruffle-logo.swf"
+			type="application/x-shockwave-flash"
+			width="320"
+			height="240"
+		>
+			<param name="pluginurl" value="http://www.adobe.com/go/getflashplayer" />
+			<param name="quality" value="high" />
+			<param name="bgcolor" value="#fff" />
+			<p>The flash file did not load.</p>
+		</object>
+	</section>
+
+	<section>
+		<h3>Plain Text Element</h3>
+		<p><strong>Note:</strong> <strong><em>DON'T USE THIS ELEMENT.</em></strong></p>
+		<p><strong>I repeat:</strong> <strong><em>DON'T USE THIS ELEMENT.</em></strong></p>
+		<p><strong>For good measure:</strong> <strong><em>DON'T USE THIS ELEMENT.</em></strong></p>
+
+		<p><strong>Note:</strong> Use <code>&lt;pre&gt;</code> instead.</p>
+
+		<p>This element will make <strong><em>EVERYTHING</em></strong> after it to render as plain text.</p>
+
+		<iframe
+			src="/assets/documents/test/plaintext.html"
+			loading="lazy"
+			title="An example of the plaintext element"
+		></iframe>
+	</section>
+
+	<section>
+		<h3>Ruby Base & Ruby Text Container Elements</h3>
+		<p><strong>Note:</strong> Use just the text inside a <code>&lt;ruby&gt;</code> element instead.</p>
+
+		<p>
+			<ruby lang="ja">
+				<rb>振</rb><rp>(</rp><rt>ふ</rt><rp>)</rp>
+				<rb>り</rb><rt>&nbsp;</rt>
+				<rb>仮</rb><rp>(</rp><rt>が</rt><rp>)</rp>
+				<rb>名</rb><rp>(</rp><rt>な</rt><rp>)</rp>
+				<rtc lang="en">
+					<rp>(</rp>
+					<rt>Furigana</rt>
+					<rp>)</rp>
+				</rtc>
+			</ruby>
+		</p>
+	</section>
+
+	<section>
+		<h3>Strikethrough Element</h3>
+		<p><strong>Note:</strong> Use <code>&lt;s&gt;</code> instead.</p>
+
+		<p>This text is <strike>stirked</strike>.</p>
+	</section>
+
+	<section>
+		<h3>Teletype Text Element</h3>
+		<p>
+			<strong>Note:</strong> Use <code>&lt;code&gt;</code>, <code>&lt;kbd&gt;</code>, <code>&lt;samp&gt;</code>, <code>&lt;pre&gt;</code>, or <code>&lt;var&gt;</code>
+			instead.
+		</p>
+
+		<p><tt>shutdown -t 0 -r</tt></p>
+	</section>
+
+	<section>
+		<h3><code>&lt;xmp&gt;</code></h3>
+
+		<p><strong>Note:</strong> Use <code>&lt;pre&gt;</code> instead.</p>
+
+		<p>This element ignores HTML tags inside of it, making it tricky to work with.</p>
+
+		<iframe
+			src="/assets/documents/test/xmp.html"
+			loading="lazy"
+			title="An example of the plaintext element"
+		></iframe>
+	</section>
+</details>

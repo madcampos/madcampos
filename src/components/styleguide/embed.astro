@@ -1,0 +1,74 @@
+---
+
+---
+<details>
+	<summary>
+		<h2>Embedded Content</h2>
+	</summary>
+
+	<section>
+		<h3>Iframe Element</h3>
+
+		<p>Simple iframe:</p>
+		<iframe
+			src="/"
+			title="Home page"
+			width="320"
+			height="240"
+			loading="lazy"
+		></iframe>
+
+		<p>PDF file:</p>
+		<iframe
+			src="/assets/documents/test/sample.pdf"
+			title="Sample PDF file"
+			width="320"
+			height="240"
+			loading="lazy"
+		></iframe>
+	</section>
+
+	<section>
+		<h3>Embed element</h3>
+
+		<p>PDF file:</p>
+		<embed
+			src="/assets/documents/test/sample.pdf"
+			type="application/pdf"
+			width="320"
+			height="240"
+		/>
+
+		<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
+		<embed
+			src="/assets/ruffle-logo.swf"
+			type="application/x-shockwave-flash"
+			width="320"
+			height="240"
+		/>
+	</section>
+
+	<section>
+		<h3>Object Element</h3>
+
+		<p>PDF file:</p>
+		<object
+			data="/assets/documents/test/sample.pdf"
+			type="application/pdf"
+			width="320"
+			height="240"
+		>
+			<p>The pdf file did not load.</p>
+		</object>
+
+		<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
+		<object
+			data="/assets/ruffle-logo.swf"
+			type="application/x-shockwave-flash"
+			width="320"
+			height="240"
+		>
+			<p>The flash file did not load.</p>
+		</object>
+	</section>
+</details>

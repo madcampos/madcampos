@@ -1,0 +1,110 @@
+---
+
+---
+<details>
+	<summary>
+		<h2>Interactive Elements</h2>
+	</summary>
+
+	<section>
+		<h3>Details & Summary</h3>
+
+		<p>Regular one:</p>
+
+		<details>
+			<summary>Spoiler alert</summary>
+
+			<p>You've been spoiled.</p>
+		</details>
+
+		<p>Exclusive accordion:</p>
+
+		<details name="exclusive-accordion">
+			<summary>The Good</summary>
+
+			<p>Some good content.</p>
+		</details>
+		<details name="exclusive-accordion">
+			<summary>The Bad</summary>
+
+			<p>Some bad content.</p>
+		</details>
+		<details name="exclusive-accordion">
+			<summary>The Ugly</summary>
+
+			<p>Some ugly content.</p>
+		</details>
+	</section>
+
+	<section>
+		<h3>Dialog</h3>
+
+		<p>Regular dialog:</p>
+		<button type="button" id="dialog-regular-open">Open Sesame</button>
+		<dialog id="dialog-regular">
+			<dialog-content>
+				<p>Hi, I'm Sesame, you can close me now.</p>
+			</dialog-content>
+			<footer>
+				<button type="button" id="dialog-regular-close">Close Sesame</button>
+			</footer>
+		</dialog>
+		<script type="module" is:inline>
+			const dialog = /** @type {HTMLDialogElement} */ (document.querySelector('#dialog-regular'));
+			const openButton = /** @type {HTMLButtonElement} */ (document.querySelector('#dialog-regular-open'));
+			const closeButton = /** @type {HTMLButtonElement} */ (document.querySelector('#dialog-regular-close'));
+
+			openButton.addEventListener('click', () => dialog.showModal());
+			closeButton.addEventListener('click', () => dialog.close());
+		</script>
+
+		<p>Light dismiss dialog:</p>
+		<button type="button" id="dialog-light-open">Open Sesame Light</button>
+		<dialog id="dialog-light" closedby="any">
+			<header>
+				<h2>Light dismiss dialog</h2>
+			</header>
+			<dialog-content>
+				<p>Hi, I'm Sesame Light, you can close me now.</p>
+			</dialog-content>
+			<footer>
+				<button type="button" id="dialog-light-close">Close Sesame Light</button>
+			</footer>
+		</dialog>
+		<script type="module" is:inline>
+			const dialog = /** @type {HTMLDialogElement} */ (document.querySelector('#dialog-light'));
+			const openButton = /** @type {HTMLButtonElement} */ (document.querySelector('#dialog-light-open'));
+			const closeButton = /** @type {HTMLButtonElement} */ (document.querySelector('#dialog-light-close'));
+
+			openButton.addEventListener('click', () => dialog.showModal());
+			closeButton.addEventListener('click', () => dialog.close());
+		</script>
+
+		<p>Popover dialog:</p>
+		<button
+			type="button"
+			id="dialog-popover-open"
+			popovertarget="dialog-popover"
+			popovertargetaction="show"
+		>
+			Open Sesame Pop
+		</button>
+		<dialog id="dialog-popover" closedby="any" popover>
+			<header>
+				<h2>Popover dialog</h2>
+
+				<button
+					type="button"
+					id="dialog-popover-close"
+					popovertarget="dialog-popover"
+					popovertargetaction="hide"
+				>
+					Close Sesame Pop
+				</button>
+			</header>
+			<dialog-content>
+				<p>Hi, I'm Sesame Pop, you can close me now.</p>
+			</dialog-content>
+		</dialog>
+	</section>
+</details>
