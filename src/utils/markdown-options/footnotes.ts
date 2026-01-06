@@ -28,7 +28,7 @@ export const settings: Partial<RemarkRehype> = {
 						children: [{
 							type: 'element',
 							tagName: 'use',
-							properties: { href: '#mingcute--arrow-to-up-line' },
+							properties: { width: '24', height: '24', href: '#footnote-icon-back' },
 							children: []
 						}]
 					}]

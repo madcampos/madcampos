@@ -1,0 +1,52 @@
+svg { paint-order: stroke; }
+
+/* Micro Logo text dashes */
+text[data-size='micro']:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+text[data-size='micro']:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+text[data-size='micro']:has(tspan:nth-child(9 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+text[data-size='micro']:not(:has(.logo-text-content)) { visibility: hidden; }
+
+/* Mini logo text dashes */
+text[data-size='mini']:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+text[data-size='mini']:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-end),
+text[data-size='mini']:has(tspan:nth-child(9 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-end),
+text[data-size='mini']:has(tspan:nth-child(10 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(11 of .logo-text-content)) tspan:nth-child(8 of .logo-text-padding-start),
+text[data-size='mini']:has(tspan:nth-child(12 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+text[data-size='mini']:not(:has(.logo-text-content)) { visibility: hidden; }
+
+/* Full logo text dashes */
+text[data-size='full']:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(8 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(9 of .logo-text-content)) tspan:nth-child(9 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(10 of .logo-text-content)) tspan:nth-child(10 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(11 of .logo-text-content)) tspan:nth-child(11 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(12 of .logo-text-content)) tspan:nth-child(12 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(13 of .logo-text-content)) tspan:nth-child(13 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(14 of .logo-text-content)) tspan:nth-child(14 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(15 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+text[data-size='full']:has(tspan:nth-child(16 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-end),
+text[data-size='full']:has(tspan:nth-child(17 of .logo-text-content)) tspan:nth-child(15 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(18 of .logo-text-content)) tspan:nth-child(16 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(19 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-end),
+text[data-size='full']:has(tspan:nth-child(20 of .logo-text-content)) tspan:nth-child(17 of .logo-text-padding-start),
+text[data-size='full']:has(tspan:nth-child(21 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+text[data-size='full']:not(:has(.logo-text-content)) { visibility: hidden; }

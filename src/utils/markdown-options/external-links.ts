@@ -26,7 +26,7 @@ export const settings = {
 				children: [{
 					type: 'element',
 					tagName: 'use',
-					properties: { href: '#mingcute--external-link-line' },
+					properties: { windth: '24', height: '24', href: '#link-icon-external' },
 					children: []
 				}]
 			}]

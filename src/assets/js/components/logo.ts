@@ -1,23 +1,39 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-// TODO: add styles to logos
-// TODO: fix logo as proper xml svg
+import logoBaseCss from '../../css/themes/logo/base.css?raw';
+import logoSystemCss from '../../css/themes/logo/system.css?raw';
 
-const serializer = new XMLSerializer();
-const logoClone = document.querySelector('m-logo svg.u-logo')?.cloneNode(true) as SVGElement;
-logoClone.querySelectorAll('[data-theme]:not([data-theme="system"])').forEach((node) => node.remove());
+function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
+	const serializer = new XMLSerializer();
+	const logoClone = document.querySelector('m-logo svg.u-logo')?.cloneNode(true) as SVGElement;
+	logoClone.querySelectorAll(`[data-theme]:not([data-theme="${theme}"], .pixelated-logo, .noise-logo, .overlay-logo)`).forEach((node) => node.remove());
 
-const fullLogo = logoClone.cloneNode(true) as SVGElement;
-fullLogo.querySelectorAll('[data-size]:not([data-size="full"])').forEach((node) => node.remove());
-const fullLogoUrl = URL.createObjectURL(new Blob([serializer.serializeToString(fullLogo)], { type: 'image/svg+xml' }));
+	logoClone.querySelector('title')?.insertAdjacentHTML(
+		'afterend',
+		`<style>
+		${logoBaseCss}
 
-const miniLogo = logoClone.cloneNode(true) as SVGElement;
-miniLogo.querySelectorAll('[data-size]:not([data-size="mini"])').forEach((node) => node.remove());
-const miniLogoUrl = URL.createObjectURL(new Blob([serializer.serializeToString(miniLogo)], { type: 'image/svg+xml' }));
+		${logoSystemCss}
+	</style>`
+	);
 
-const microLogo = logoClone.cloneNode(true) as SVGElement;
-microLogo.querySelectorAll('[data-size]:not([data-size="micro"])').forEach((node) => node.remove());
-const microLogoUrl = URL.createObjectURL(new Blob([serializer.serializeToString(microLogo)], { type: 'image/svg+xml' }));
+	const [x = '0', y = '0', width = '100', height = '100'] = logoClone.querySelector(`svg[data-size="${size}"]`)?.getAttribute('viewBox')?.split(' ') ?? [];
+	logoClone.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+	logoClone.setAttribute('width', width);
+	logoClone.setAttribute('height', height);
+
+	logoClone.querySelectorAll(`[data-size]:not([data-size="${size}"])`).forEach((node) => node.remove());
+
+	const logoString = serializer.serializeToString(logoClone);
+	const logoBlob = new Blob([logoString], { type: 'image/svg+xml' });
+	const logoUrl = URL.createObjectURL(logoBlob);
+
+	return logoUrl;
+}
+
+const fullLogoUrl = createLogoUrl('full');
+const miniLogoUrl = createLogoUrl('mini');
+const microLogoUrl = createLogoUrl('micro');
 
 document.querySelectorAll('m-logo dialog').forEach((dialog) => {
 	dialog.querySelector<HTMLAnchorElement>('a[download="full.svg"]')!.href = fullLogoUrl;
