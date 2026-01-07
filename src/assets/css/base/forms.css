@@ -199,6 +199,7 @@
 		margin: var(--size-2);
 		color: var(--button-color);
 		cursor: pointer;
+		font-family: inherit;
 	}
 
 	input[type='file']:focus-visible::file-selector-button {

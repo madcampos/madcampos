@@ -132,6 +132,7 @@
 		--progress-border: ;
 		--progress-hover-bg: ;
 		--progress-hover-color: ;
+		--progress-hover-border-color: ;
 
 		/* Meter styles */
 		--meter-background: ;
@@ -274,12 +275,14 @@
 	}
 
 	:is([data-theme='TEMPLATE'] m-card, m-card[data-theme='TEMPLATE']) {
-		&.project-card picture { mask: none; }
+		&.project-card article > picture {
+			mask: none;
 
-		img {
-			display: none;
+			img {
+				display: none;
 
-			&[data-theme-image='TEMPLATE'] { display: block; }
+				&[data-theme-image='hacker'] { display: block; }
+			}
 		}
 	}
 

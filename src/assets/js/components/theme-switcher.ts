@@ -54,7 +54,7 @@ const themes: SiteTheme[] = [
 		id: 'hacker',
 		name: 'Hacker',
 		description: 'A theme inspired by old CRT monitors.'
-	},
+	}
 	// {
 	// 	id: 'cork-board',
 	// 	name: 'Cork Board',
@@ -65,12 +65,6 @@ const themes: SiteTheme[] = [
 	// 	name: 'Mecha',
 	// 	description: 'A post apocaliptic mecha theme.'
 	// },
-	{
-		id: 'debug',
-		name: 'DEBUG',
-		description: 'Not a real theme, just some debugging styles.',
-		accessible: true
-	}
 ];
 
 class ThemeSwitcher extends HTMLElement implements CustomElement {

@@ -287,13 +287,14 @@
 	}
 
 	:is([data-theme='y2k'] m-card, m-card[data-theme='y2k']) {
-		&.project-card picture { mask: none; }
+		&.project-card article > picture {
+			mask: none;
 
-		img {
-			display: none;
-			border: inset var(--border-size) silver;
+			img {
+				display: none;
 
-			&[data-theme-image='y2k'] { display: block; }
+				&[data-theme-image='hacker'] { display: block; }
+			}
 		}
 	}
 

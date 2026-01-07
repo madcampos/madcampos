@@ -38,25 +38,27 @@ function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
 	return logoUrl;
 }
 
-const fullLogoUrl = createLogoUrl('full');
-const miniLogoUrl = createLogoUrl('mini');
-const microLogoUrl = createLogoUrl('micro');
+if (document.querySelector('m-logo')) {
+	const fullLogoUrl = createLogoUrl('full');
+	const miniLogoUrl = createLogoUrl('mini');
+	const microLogoUrl = createLogoUrl('micro');
 
-document.querySelectorAll('m-logo dialog').forEach((dialog) => {
-	dialog.querySelector<HTMLAnchorElement>('a[download="full.svg"]')!.href = fullLogoUrl;
-	dialog.querySelector<HTMLAnchorElement>('a[download="mini.svg"]')!.href = miniLogoUrl;
-	dialog.querySelector<HTMLAnchorElement>('a[download="micro.svg"]')!.href = microLogoUrl;
-});
+	document.querySelectorAll('m-logo dialog').forEach((dialog) => {
+		dialog.querySelector<HTMLAnchorElement>('a[download="full.svg"]')!.href = fullLogoUrl;
+		dialog.querySelector<HTMLAnchorElement>('a[download="mini.svg"]')!.href = miniLogoUrl;
+		dialog.querySelector<HTMLAnchorElement>('a[download="micro.svg"]')!.href = microLogoUrl;
+	});
 
-document.addEventListener('contextmenu', (evt) => {
-	const target = evt.target as HTMLElement;
+	document.addEventListener('contextmenu', (evt) => {
+		const target = evt.target as HTMLElement;
 
-	if (target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
-		const dialog = target.closest('m-logo')?.querySelector('dialog');
+		if (target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
+			const dialog = target.closest('m-logo')?.querySelector('dialog');
 
-		if (dialog) {
-			evt.preventDefault();
-			dialog.showPopover();
+			if (dialog) {
+				evt.preventDefault();
+				dialog.showPopover();
+			}
 		}
-	}
-}, { capture: false });
+	}, { capture: false });
+}
