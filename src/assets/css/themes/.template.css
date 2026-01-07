@@ -126,6 +126,14 @@
 		--progress-hover-bg: ;
 		--progress-hover-color: ;
 
+		/* Meter styles */
+		--meter-background: ;
+		--meter-optimal-color: ;
+		--meter-suboptimal-color: ;
+		--meter-subsuboptimal-color: ;
+		--meter-size-adjust: ;
+		--meter-border: ;
+
 		/* Note styles */
 		--note-success-bg: ;
 		--note-success-color: ;

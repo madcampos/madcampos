@@ -1,5 +1,5 @@
 ---
-
+/* eslint-disable max-lines */
 ---
 <details open>
 	<summary>
@@ -633,10 +633,10 @@
 						<meter
 							id="password-strength"
 							min="0"
-							low="1"
-							high="2"
-							optimum="3"
-							max="4"
+							low="26"
+							high="51"
+							optimum="76"
+							max="100"
 							value="0"
 						>
 							&mdash;
@@ -654,16 +654,16 @@
 						output.value = 0;
 						output.innerHTML = '&mdash;';
 					} else if (input.value.length <= 16) {
-						output.value = 1;
+						output.value = 25;
 						output.innerHTML = 'Poor';
 					} else if (input.value.length <= 24) {
-						output.value = 2;
+						output.value = 50;
 						output.innerHTML = 'Good';
 					} else if (input.value.length <= 32) {
-						output.value = 3;
+						output.value = 75;
 						output.innerHTML = 'Great';
 					} else {
-						output.value = 4;
+						output.value = 100;
 						output.innerHTML = 'Excellent';
 					}
 

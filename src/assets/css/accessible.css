@@ -99,6 +99,14 @@
 			--progress-hover-bg: var(--surface-1);
 			--progress-hover-color: var(--accent-color);
 
+			/* Meter styles */
+			--meter-background: var(--surface-2);
+			--meter-optimal-color: var(--green-2);
+			--meter-suboptimal-color: var(--yellow-5);
+			--meter-subsuboptimal-color: var(--red-12);
+			--meter-size-adjust: calc(var(--border-size) * 2);
+			--meter-border: var(--border-size) solid var(--theme-color);
+
 			/* Note styles */
 			--note-success-bg: color-mix(in srgb, var(--green-10), transparent);
 			--note-success-color: var(--lime-5);
@@ -253,6 +261,14 @@
 			--progress-border: var(--border-size) solid var(--theme-2);
 			--progress-hover-bg: var(--surface-1);
 			--progress-hover-color: var(--accent-color);
+
+			/* Meter styles */
+			--meter-background: var(--surface-2);
+			--meter-optimal-color: var(--green-3);
+			--meter-suboptimal-color: var(--yellow-3);
+			--meter-subsuboptimal-color: var(--red-3);
+			--meter-size-adjust: calc(var(--border-size) * 2);
+			--meter-border: var(--border-size) solid var(--theme-color);
 
 			/* Note styles */
 			--note-success-bg: var(--green-1);

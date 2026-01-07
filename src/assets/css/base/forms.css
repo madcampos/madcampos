@@ -23,7 +23,10 @@
 			& + input-wrapper { margin-block-start: 0; }
 		}
 
-		/* TODO: disabled */
+		&:disabled {
+			color: var(--input-disabled-color);
+			border-color: var(--input-disabled-color);
+		}
 	}
 
 	/* Input wrapper */
@@ -501,15 +504,26 @@
 	/* Meter */
 
 	meter {
-		/* appearance: none;
-		border: var(--border-size) solid var(--secondary-color);
+		appearance: none;
+		border: var(--meter-border);
 		border-radius: var(--border-radius);
-		background-color: var(--surface-2);
+		background: var(--surface-2);
 		inline-size: 100%;
 		min-inline-size: var(--size-content-0);
 		max-inline-size: var(--size-content-2);
-		block-size: var(--size-6); */
+		block-size: var(--size-3);
 
-		/* TODO: meter element */
+		&::-webkit-meter-bar {
+			block-size: calc(var(--size-3) - var(--meter-size-adjust));
+			background: none;
+		}
+
+		&::-webkit-meter-optimum-value { background: var(--meter-optimal-color); }
+		&::-webkit-meter-suboptimum-value { background: var(--meter-suboptimal-color); }
+		&::-webkit-meter-even-less-good-value { background: var(--meter-subsuboptimal-color); }
+
+		&:-moz-meter-optimum::-moz-meter-bar { background: var(--meter-optimal-color); }
+		&:-moz-meter-sub-optimum::-moz-meter-bar { background: var(--meter-suboptimal-color); }
+		&:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: var(--meter-subsuboptimal-color); }
 	}
 }

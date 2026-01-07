@@ -140,6 +140,14 @@
 		--progress-hover-bg: var(--secondary-0);
 		--progress-hover-color: var(--accent-12);
 
+		/* Meter styles */
+		--meter-background: var(--secondary-10);
+		--meter-optimal-color: var(--green-3);
+		--meter-suboptimal-color: var(--yellow-3);
+		--meter-subsuboptimal-color: var(--red-3);
+		--meter-size-adjust: calc(var(--border-size) * 2);
+		--meter-border: var(--border-size) solid var(--accent-10);
+
 		/* Note styles */
 		--note-success-bg: var(--green-2);
 		--note-success-color: var(--lime-12);
