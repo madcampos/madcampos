@@ -2,6 +2,8 @@
 import { Icon } from 'astro-icon/components';
 import LogoSvg from './LogoSvg.astro';
 
+type LogoThemes = 'all' | 'hacker' | 'system' | 'uwu' | 'y2k';
+
 interface Props {
 	title: string;
 	subtitle: string;
@@ -12,19 +14,20 @@ interface Props {
 	mini?: boolean;
 	full?: boolean;
 	glitch?: boolean;
+	theme?: LogoThemes;
 }
 
 function generateUniqueId() {
 	return Math.trunc(Math.random() * 1000000).toString(16);
 }
 
-const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch } = Astro.props;
+const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch, theme } = Astro.props;
 
 const logoLabelId = generateUniqueId();
 ---
 <m-logo {micro} {mini} {full} {glitch}>
 	<a href={url ?? Astro.url.pathname} class="u-url url">
-		<LogoSvg {url} {title} {subtitle} {shortSubtitle} />
+		<LogoSvg {url} {title} {subtitle} {shortSubtitle} {theme} />
 	</a>
 	<dialog popover="manual" closedby="closerequest" id={`logo-menu-${logoLabelId}`}>
 		<header>

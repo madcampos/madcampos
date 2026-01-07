@@ -146,6 +146,49 @@
 		--tag-focus-bg: var(--surface-2);
 		--tag-focus-color: var(--theme-color);
 
+		/* Logo styles */
+		--logo-part-color: var(--theme-color);
+		--logo-part-stroke: transparent;
+		--logo-part-stroke-width: 0;
+		--logo-extras-color: var(--secondary-color);
+		--logo-extras-stroke: transparent;
+		--logo-extras-stroke-width: 0;
+		--logo-text-color: var(--accent-color);
+		--logo-text-stroke: transparent;
+		--logo-text-stroke-width: 0;
+		--logo-font: 'Mecano-Light', 'Mecano', monospace;
+		--logo-font-weight: 300;
+
+		--logo-pixel-color: var(--surface-1);
+		--logo-overlay-color: var(--complementary-color);
+		--logo-noise-color: var(--theme-color);
+
+		--logo-part-hover-color: var(--link-hover-color);
+		--logo-part-hover-stroke: transparent;
+		--logo-extras-hover-color: var(--link-active-color);
+		--logo-extras-hover-stroke: transparent;
+		--logo-text-hover-color: var(--theme-color);
+		--logo-text-hover-stroke: transparent;
+
+		--logo-part-focus-color: var(--text-1);
+		--logo-part-focus-stroke: transparent;
+		--logo-extras-focus-color: var(--secondary-color);
+		--logo-extras-focus-stroke: transparent;
+		--logo-text-focus-color: var(--theme-color);
+		--logo-text-focus-stroke: transparent;
+
+		--logo-part-active-color: var(--link-active-color);
+		--logo-part-active-stroke: transparent;
+		--logo-extras-active-color: var(--link-active-color);
+		--logo-extras-active-stroke: transparent;
+		--logo-text-active-color: var(--link-active-color);
+		--logo-text-active-stroke: transparent;
+
+		/* Avatar styles */
+		--avatar-overlay: none;
+		--avatary-overlay-opacity: 0;
+		--avatary-overlay-blend-mode: normal;
+
 		/* Old Buttons */
 		--old-button-border: var(--surface-3) var(--border-style) var(--border-size);
 		--old-button-border-visibility: hidden;
