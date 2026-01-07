@@ -1,8 +1,0 @@
-/* Logo colors */
-[data-theme='system'] .logo-part { fill: #0080ff; }
-[data-theme='system'] .logo-extras { fill: transparent; }
-[data-theme='system'] .logo-text {
-	fill: #ff8000;
-	font-weight: 300;
-	font-family: 'Mecano-Light', 'Mecano', monospace;
-}

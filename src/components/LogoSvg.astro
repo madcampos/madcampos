@@ -1,8 +1,25 @@
 ---
 /* eslint-disable max-lines */
+import logoBaseCss from '../assets/css/components/logo-base.css?raw';
 
 type LogoThemes = 'all' | 'hacker' | 'system' | 'uwu' | 'y2k';
 type LogoSizes = 'all' | 'full' | 'micro' | 'mini';
+
+interface LogoItemStyle {
+	fill?: string;
+	stroke?: string;
+	strokeWidth?: string;
+	styles?: string;
+}
+
+interface LogoStyle {
+	part?: LogoItemStyle;
+	text?: LogoItemStyle & {
+		font?: string,
+		fontWeight?: string
+	};
+	extras?: LogoItemStyle;
+}
 
 interface Props {
 	url?: URL | string;
@@ -11,6 +28,7 @@ interface Props {
 	shortSubtitle: string;
 	theme?: LogoThemes;
 	size?: LogoSizes;
+	styles?: LogoStyle;
 }
 
 function generateUniqueId() {
@@ -26,20 +44,44 @@ function generateSubtitle(paddingStart: number, paddingEnd: number, subtitleStri
 }
 
 const logoLabelId = generateUniqueId();
-const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Astro.props;
+const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all', styles } = Astro.props;
+let width = '';
+let height = '';
+
+switch (size) {
+	case 'full':
+		width = '3500';
+		height = '900';
+		break;
+	case 'mini':
+		width = '2000';
+		height = '900';
+		break;
+	case 'micro':
+		width = '1100';
+		height = '900';
+		break;
+	case 'all':
+	default:
+		width = '100%';
+		height = '100%';
+}
 ---
 
 <svg
 	color-interpolation-filters="sRGB"
 	preserveAspectRatio="xMinYMin slice"
 	class="u-logo logo-svg"
-	width="100%"
-	height="100%"
+	{width}
+	{height}
+	viewBox={size !== 'all' ? `0 0 ${width} ${height}` : null}
 	role="img"
 	aria-labelledby={`logo-label-${logoLabelId}`}
 	shape-rendering="geometricPrecision"
 >
 	<title id={`logo-label-${logoLabelId}`}>Marco Campos' Logo{url ? `, to ${title ?? ''}` : ''}</title>
+	{/* eslint-disable-next-line astro/no-set-html-directive */}
+	{theme !== 'all' && <style is:inline set:html={logoBaseCss}></style>}
 
 	<!-- Text -->
 	<defs>
@@ -262,6 +304,23 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 			)
 		}
 		<!-- #endregion -->
+
+		<!-- #region Y2K Definition -->
+		{
+			theme === 'y2k' && (
+				<defs>
+					<linearGradient id="sunset" x1="0" x2="0" y1="0" y2="100%">
+						<stop offset="5%" stop-color="royalblue" />
+						<stop offset="45%" stop-color="lightskyblue" />
+						<stop offset="50%" stop-color="white" />
+						<stop offset="50%" stop-color="purple" />
+						<stop offset="80%" stop-color="hotpink" />
+						<stop offset="95%" stop-color="white" />
+					</linearGradient>
+				</defs>
+			)
+		}
+		<!-- #endregion -->
 	</defs>
 
 	<!-- Logos -->
@@ -269,16 +328,33 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 	<!-- #region System Logo -->
 	{
 		(['all', 'system'].includes(theme) && ['all', 'micro'].includes(size)) && (
-			<svg viewBox="0 0 1100 900" data-theme="system" data-size="micro" visibility="hidden">
+			<svg viewBox="0 0 1100 900" data-theme="system" data-size="micro" visibility={theme === 'system' && size === 'micro' ? null : 'hidden'}>
 				<use href={`#logo-system-micro-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-part" id={`logo-system-micro-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-system-micro-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} />
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-micro-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-micro-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-system-micro-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-system-micro-parts-${logoLabelId}`} class="noise-logo" />
@@ -287,10 +363,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 	}
 	{
 		(['all', 'system'].includes(theme) && ['all', 'mini'].includes(size)) && (
-			<svg viewBox="0 0 2000 900" data-theme="system" data-size="mini" visibility="hidden">
+			<svg viewBox="0 0 2000 900" data-theme="system" data-size="mini" visibility={theme === 'system' && size === 'mini' ? null : 'hidden'}>
 				<use href={`#logo-system-mini-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-part" id={`logo-system-mini-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-system-mini-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} />
 					<use href={`#logo-a-${logoLabelId}`} />
@@ -299,7 +382,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-mini-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-mini-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-system-mini-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-system-mini-parts-${logoLabelId}`} class="noise-logo" />
@@ -310,7 +403,14 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 			<svg viewBox="0 0 3500 900" data-theme="system" data-size="full">
 				<use href={`#logo-system-full-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-part" id={`logo-system-full-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-system-full-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} x="20" />
 					<use href={`#logo-a-${logoLabelId}`} />
@@ -324,7 +424,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-full-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-full-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-system-full-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-system-full-parts-${logoLabelId}`} class="noise-logo" />
@@ -337,18 +447,44 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 
 	{
 		(['all', 'uwu'].includes(theme) && ['all', 'micro'].includes(size)) && (
-			<svg viewBox="0 0 1100 900" data-theme="uwu" data-size="micro" visibility="hidden">
+			<svg viewBox="0 0 1100 900" data-theme="uwu" data-size="micro" visibility={theme === 'uwu' && size === 'micro' ? null : 'hidden'}>
 				<use href={`#logo-uwu-micro-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-part" id={`logo-uwu-micro-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-uwu-micro-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-uwu-bracket-${logoLabelId}`} transform="translate(-30, -50)" />
 					<use href={`#logo-uwu-m-${logoLabelId}`} transform="translate(50, 100)" />
 					<use href={`#logo-uwu-bracket-${logoLabelId}`} transform="rotate(190) translate(30, 80)" transform-origin="center" />
 				</g>
 
-				<use class="logo-extras" href={`#logo-uwu-ma-${logoLabelId}`} transform="translate(-220, -210) scale(0.72) rotate(-7)" />
+				<use
+					class="logo-extras"
+					href={`#logo-uwu-ma-${logoLabelId}`}
+					transform="translate(-220, -210) scale(0.72) rotate(-7)"
+					fill={styles?.extras?.fill}
+					stroke={styles?.extras?.stroke}
+					stroke-width={styles?.extras?.strokeWidth}
+					style={styles?.extras?.styles}
+				/>
 
-				<use class="logo-text" href={`#logo-text-micro-${logoLabelId}`} transform="rotate(-4.7)" font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-micro-${logoLabelId}`}
+					transform="rotate(-4.7)"
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-uwu-micro-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-uwu-micro-parts-${logoLabelId}`} class="noise-logo" />
@@ -357,10 +493,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 	}
 	{
 		(['all', 'uwu'].includes(theme) && ['all', 'mini'].includes(size)) && (
-			<svg viewBox="0 0 2000 900" data-theme="uwu" data-size="mini" visibility="hidden">
+			<svg viewBox="0 0 2000 900" data-theme="uwu" data-size="mini" visibility={theme === 'uwu' && size === 'mini' ? null : 'hidden'}>
 				<use href={`#logo-uwu-mini-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-part" id={`logo-uwu-mini-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-uwu-mini-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-uwu-bracket-${logoLabelId}`} />
 					<use href={`#logo-uwu-m-${logoLabelId}`} />
 					<use href={`#logo-uwu-a-${logoLabelId}`} />
@@ -369,12 +512,29 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-uwu-bracket-${logoLabelId}`} transform="rotate(190) translate(90, 150)" transform-origin="center" />
 				</g>
 
-				<g class="logo-extras">
+				<g
+					class="logo-extras"
+					fill={styles?.extras?.fill}
+					stroke={styles?.extras?.stroke}
+					stroke-width={styles?.extras?.strokeWidth}
+					style={styles?.extras?.styles}
+				>
 					<use href={`#logo-uwu-ma-${logoLabelId}`} />
 					<use href={`#logo-uwu-dc-${logoLabelId}`} />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-mini-${logoLabelId}`} transform="translate(0, 100) rotate(-4.7)" font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-mini-${logoLabelId}`}
+					transform="translate(0, 100) rotate(-4.7)"
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-uwu-mini-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-uwu-mini-parts-${logoLabelId}`} class="noise-logo" />
@@ -382,10 +542,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 		)
 	}{
 		(['all', 'uwu'].includes(theme) && ['all', 'full'].includes(size)) && (
-			<svg viewBox="0 0 3500 900" data-theme="uwu" data-size="full" visibility="hidden">
+			<svg viewBox="0 0 3500 900" data-theme="uwu" data-size="full" visibility={theme === 'uwu' && size === 'full' ? null : 'hidden'}>
 				<use href={`#logo-uwu-full-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-part" id={`logo-uwu-full-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-uwu-full-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-uwu-bracket-${logoLabelId}`} transform="translate(-20, -40) scale(1.12)" />
 					<use href={`#logo-uwu-m-${logoLabelId}`} transform="translate(-20, -35) scale(1.12)" />
 					<use href={`#logo-uwu-a-${logoLabelId}`} transform="translate(-20, -35) scale(1.12)" />
@@ -399,14 +566,29 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-uwu-bracket-${logoLabelId}`} transform="rotate(190) translate(250, 230) scale(1.12)" transform-origin="center" />
 				</g>
 
-				<g class="logo-extras">
+				<g
+					class="logo-extras"
+					fill={styles?.extras?.fill}
+					stroke={styles?.extras?.stroke}
+					stroke-width={styles?.extras?.strokeWidth}
+					style={styles?.extras?.styles}
+				>
 					<use href={`#logo-uwu-ma-${logoLabelId}`} transform="translate(-20, -30) scale(1.12)" />
 					<use href={`#logo-uwu-dc-${logoLabelId}`} transform="translate(-120, -20) scale(1.12)" />
 					<use href={`#logo-uwu-am-${logoLabelId}`} />
 					<use href={`#logo-uwu-pos-${logoLabelId}`} />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-full-${logoLabelId}`} transform="translate(0, 200) rotate(-4.7)" font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-full-${logoLabelId}`}
+					transform="translate(0, 200) rotate(-4.7)"
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				/>
 
 				<use href={`#logo-uwu-full-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-uwu-full-parts-${logoLabelId}`} class="noise-logo" />
@@ -419,22 +601,45 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 
 	{
 		(['all', 'y2k'].includes(theme) && ['all', 'micro'].includes(size)) && (
-			<svg viewBox="0 0 1100 900" data-theme="y2k" data-size="micro" visibility="hidden">
+			<svg viewBox="0 0 1100 900" data-theme="y2k" data-size="micro" visibility={theme === 'y2k' && size === 'micro' ? null : 'hidden'}>
 				<use href={`#logo-y2k-micro-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-extras">
+				<g
+					class="logo-extras"
+					fill={styles?.extras?.fill}
+					stroke={styles?.extras?.stroke}
+					stroke-width={styles?.extras?.strokeWidth}
+					style={styles?.extras?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} />
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<g class="logo-part" id={`logo-y2k-micro-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-y2k-micro-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} />
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-micro-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-micro-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-y2k-micro-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-y2k-micro-parts-${logoLabelId}`} class="noise-logo" />
@@ -443,10 +648,16 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 	}
 	{
 		(['all', 'y2k'].includes(theme) && ['all', 'mini'].includes(size)) && (
-			<svg viewBox="0 0 2000 900" data-theme="y2k" data-size="mini" visibility="hidden">
+			<svg viewBox="0 0 2000 900" data-theme="y2k" data-size="mini" visibility={theme === 'y2k' && size === 'mini' ? null : 'hidden'}>
 				<use href={`#logo-y2k-mini-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-extras">
+				<g
+					class="logo-extras"
+					fill={styles?.extras?.fill}
+					stroke={styles?.extras?.stroke}
+					stroke-width={styles?.extras?.strokeWidth}
+					style={styles?.extras?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} />
 					<use href={`#logo-a-${logoLabelId}`} />
@@ -455,7 +666,14 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<g class="logo-part" id={`logo-y2k-mini-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-y2k-mini-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} />
 					<use href={`#logo-a-${logoLabelId}`} />
@@ -464,7 +682,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-mini-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-mini-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-y2k-mini-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-y2k-mini-parts-${logoLabelId}`} class="noise-logo" />
@@ -472,10 +700,16 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 		)
 	}{
 		(['all', 'y2k'].includes(theme) && ['all', 'full'].includes(size)) && (
-			<svg viewBox="0 0 3500 900" data-theme="y2k" data-size="full" visibility="hidden">
+			<svg viewBox="0 0 3500 900" data-theme="y2k" data-size="full" visibility={theme === 'y2k' && size === 'full' ? null : 'hidden'}>
 				<use href={`#logo-y2k-full-parts-${logoLabelId}`} class="pixelated-logo" />
 
-				<g class="logo-extras">
+				<g
+					class="logo-extras"
+					fill={styles?.extras?.fill}
+					stroke={styles?.extras?.stroke}
+					stroke-width={styles?.extras?.strokeWidth}
+					style={styles?.extras?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} x="20" />
 					<use href={`#logo-a-${logoLabelId}`} />
@@ -489,7 +723,14 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<g class="logo-part" id={`logo-y2k-full-parts-${logoLabelId}`}>
+				<g
+					class="logo-part"
+					id={`logo-y2k-full-parts-${logoLabelId}`}
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-bracket-${logoLabelId}`} />
 					<use href={`#logo-m-${logoLabelId}`} x="20" />
 					<use href={`#logo-a-${logoLabelId}`} />
@@ -503,7 +744,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-full-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-full-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 
 				<use href={`#logo-y2k-full-parts-${logoLabelId}`} class="overlay-logo" />
 				<use href={`#logo-y2k-full-parts-${logoLabelId}`} class="noise-logo" />
@@ -516,21 +767,43 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 
 	{
 		(['all', 'hacker'].includes(theme) && ['all', 'micro'].includes(size)) && (
-			<svg viewBox="0 0 1100 900" data-theme="hacker" data-size="micro" visibility="hidden">
-				<g class="logo-part">
+			<svg viewBox="0 0 1100 900" data-theme="hacker" data-size="micro" visibility={theme === 'hacker' && size === 'micro' ? null : 'hidden'}>
+				<g
+					class="logo-part"
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-hacker-bracket-${logoLabelId}`} />
 					<use href={`#logo-hacker-m-${logoLabelId}`} x="70" />
 					<use href={`#logo-hacker-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-micro-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-micro-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 			</svg>
 		)
 	}
 	{
 		(['all', 'hacker'].includes(theme) && ['all', 'mini'].includes(size)) && (
-			<svg viewBox="0 0 2000 900" data-theme="hacker" data-size="mini" visibility="hidden">
-				<g class="logo-part">
+			<svg viewBox="0 0 2000 900" data-theme="hacker" data-size="mini" visibility={theme === 'hacker' && size === 'mini' ? null : 'hidden'}>
+				<g
+					class="logo-part"
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-hacker-bracket-${logoLabelId}`} />
 					<use href={`#logo-hacker-m-${logoLabelId}`} x="50" />
 					<use href={`#logo-hacker-a-${logoLabelId}`} x="50" />
@@ -539,13 +812,29 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-hacker-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-mini-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-mini-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 			</svg>
 		)
 	}{
 		(['all', 'hacker'].includes(theme) && ['all', 'full'].includes(size)) && (
-			<svg viewBox="0 0 3500 900" data-theme="hacker" data-size="full" visibility="hidden">
-				<g class="logo-part">
+			<svg viewBox="0 0 3500 900" data-theme="hacker" data-size="full" visibility={theme === 'hacker' && size === 'full' ? null : 'hidden'}>
+				<g
+					class="logo-part"
+					fill={styles?.part?.fill}
+					stroke={styles?.part?.stroke}
+					stroke-width={styles?.part?.strokeWidth}
+					style={styles?.part?.styles}
+				>
 					<use href={`#logo-hacker-bracket-${logoLabelId}`} />
 					<use href={`#logo-hacker-m-${logoLabelId}`} />
 					<use href={`#logo-hacker-a-${logoLabelId}`} />
@@ -559,7 +848,17 @@ const { url, title, subtitle, shortSubtitle, theme = 'all', size = 'all' } = Ast
 					<use href={`#logo-hacker-bracket-${logoLabelId}`} transform="scale(-1, 1)" transform-origin="center" />
 				</g>
 
-				<use class="logo-text" href={`#logo-text-full-${logoLabelId}`} font-size="8rem" />
+				<use
+					class="logo-text"
+					href={`#logo-text-full-${logoLabelId}`}
+					font-size="8rem"
+					fill={styles?.text?.fill}
+					stroke={styles?.text?.stroke}
+					stroke-width={styles?.text?.strokeWidth}
+					font-family={styles?.text?.font}
+					font-weight={styles?.text?.fontWeight}
+					style={styles?.text?.styles}
+				/>
 			</svg>
 		)
 	}

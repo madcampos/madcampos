@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import logoBaseCss from '../../css/themes/logo/base.css?raw';
-import logoSystemCss from '../../css/themes/logo/system.css?raw';
+import logoBaseCss from '../../css/components/logo-base.css?raw';
 
 function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
 	const serializer = new XMLSerializer();
@@ -11,9 +10,7 @@ function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
 	logoClone.querySelector('title')?.insertAdjacentHTML(
 		'afterend',
 		`<style>
-		${logoBaseCss}
-
-		${logoSystemCss}
+			${logoBaseCss}
 	</style>`
 	);
 
@@ -24,8 +21,18 @@ function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
 
 	logoClone.querySelectorAll(`[data-size]:not([data-size="${size}"])`).forEach((node) => node.remove());
 
+	logoClone.querySelectorAll('.logo-part').forEach((part) => {
+		part.setAttribute('fill', '#0080ff');
+	});
+
+	logoClone.querySelectorAll('.logo-text').forEach((part) => {
+		part.setAttribute('fill', '#ff8000');
+		part.setAttribute('font-family', "'Mecano-Light', 'Mecano', monospace");
+		part.setAttribute('font-weight', '300');
+	});
+
 	const logoString = serializer.serializeToString(logoClone);
-	const logoBlob = new Blob([logoString], { type: 'image/svg+xml' });
+	const logoBlob = new Blob([`<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n`, logoString], { type: 'image/svg+xml' });
 	const logoUrl = URL.createObjectURL(logoBlob);
 
 	return logoUrl;
