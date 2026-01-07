@@ -5,6 +5,7 @@
 		--border-style: ;
 		--link-underline: ;
 		--border-radius: ;
+		--focus-outline: ;
 
 		/* Theme colors */
 		--theme-0: ;
@@ -96,13 +97,15 @@
 		--input-hover-border-color: ;
 		--input-focus-bg: ;
 		--input-focus-color: ;
-		--input-focus-border: ;
-		--input-selected-bg: ;
-		--input-selected-color: ;
 		--input-disabled-bg: ;
 		--input-disabled-color: ;
 		--input-readonly-bg: ;
 		--input-readonly-color: ;
+
+		--select-option-bg: ;
+		--select-option-color: ;
+		--select-option-selected-bg: ;
+		--select-option-selected-color: ;
 
 		--fieldset-border: ;
 
@@ -112,12 +115,16 @@
 		--button-border: ;
 		--button-hover-bg: ;
 		--button-hover-color: ;
+		--button-hover-border-color: ;
 		--button-focus-bg: ;
 		--button-focus-color: ;
+		--button-focus-border-color: ;
 		--button-active-bg: ;
 		--button-active-color: ;
+		--button-active-border-color: ;
 		--button-disabled-bg: ;
 		--button-disabled-color: ;
+		--button-disabled-border-color: ;
 
 		/* Progress styles */
 		--progress-bg: ;
@@ -165,7 +172,6 @@
 		--tag-hover-color: ;
 		--tag-focus-bg: ;
 		--tag-focus-color: ;
-		--tag-focus-border: ;
 
 		/* Logo styles */
 		--logo-part-color: ;

@@ -30,7 +30,7 @@
 	}
 
 	:is(audio, video):focus-visible {
-		outline: var(--theme-color) var(--border-style) var(--border-size);
+		outline: var(--focus-outline);
 		outline-offset: var(--size-1);
 		background-color: var(--surface-1);
 	}

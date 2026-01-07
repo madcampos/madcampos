@@ -16,7 +16,7 @@
 
 		&:focus {
 			border-color: transparent;
-			outline: var(--border-size) var(--border-style) var(--theme-color);
+			outline: var(--focus-outline);
 
 			.line {
 				opacity: 1 !important;

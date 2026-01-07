@@ -41,7 +41,7 @@
 		}
 
 		&:focus-within {
-			outline: var(--tag-focus-border);
+			outline: var(--focus-outline);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
 			color: var(--tag-focus-color);

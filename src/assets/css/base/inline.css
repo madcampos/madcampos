@@ -11,7 +11,7 @@
 		&:visited { color: var(--link-visited-color); }
 		&:focus-visible {
 			color: var(--text-1);
-			outline: var(--theme-color) var(--border-style) var(--border-size);
+			outline: var(--focus-outline);
 			outline-offset: var(--size-1);
 			background-color: var(--surface-1);
 		}

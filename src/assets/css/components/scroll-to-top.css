@@ -22,7 +22,7 @@
 		text-align: center;
 		max-inline-size: var(--size-content-4);
 
-		&:focus {
+		&:focus-visible {
 			background-color: var(--text-1);
 			color: var(--surface-1);
 		}

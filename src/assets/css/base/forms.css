@@ -112,32 +112,32 @@
 		cursor: pointer;
 
 		&:focus-visible {
-			border-color: var(--button-focus-color);
+			border-color: var(--button-focus-border-color);
 			background-color: var(--button-focus-bg);
 			color: var(--button-focus-color);
-			outline: var(--button-focus-bg) var(--border-style) var(--border-size);
+			outline: var(--focus-outline);
 			outline-offset: var(--size-1);
 
 			@media (forced-colors: active) { color: CanvasText; }
 		}
 
 		&:hover {
-			outline-color: var(--button-hover-color);
-			border-color: var(--button-hover-color);
+			outline-color: var(--button-hover-border-color);
+			border-color: var(--button-hover-border-color);
 			background-color: var(--button-hover-bg);
 			color: var(--button-hover-color);
 		}
 
 		&:active {
-			outline-color: var(--button-active-color);
-			border-color: var(--button-active-color);
+			outline-color: var(--button-active-border-color);
+			border-color: var(--button-active-border-color);
 			background-color: var(--button-active-bg);
 			color: var(--button-active-color);
 		}
 
 		&:is(:disabled, [aria-disabled]) {
-			outline-color: var(--button-disabled-color);
-			border-color: var(--button-disabled-color);
+			outline-color: var(--button-disabled-border-color);
+			border-color: var(--button-disabled-border-color);
 			background-color: var(--button-disabled-bg);
 			color: var(--button-disabled-color);
 			cursor: not-allowed;
@@ -160,7 +160,7 @@
 		cursor: pointer;
 
 		&:focus-visible {
-			outline: var(--button-focus-bg) var(--border-style) var(--border-size);
+			outline: var(--focus-outline);
 			outline-offset: var(--size-1);
 		}
 
@@ -205,7 +205,7 @@
 		border-color: var(--button-focus-color);
 		background-color: var(--button-focus-bg);
 		color: var(--button-focus-color);
-		outline: var(--button-focus-bg) var(--border-style) var(--border-size);
+		outline: var(--focus-outline);
 		outline-offset: var(--size-1);
 	}
 
@@ -274,7 +274,7 @@
 		}
 
 		&:focus-visible {
-			outline: var(--input-focus-border);
+			outline: var(--focus-outline);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
 			background-color: var(--input-focus-bg);
@@ -324,19 +324,19 @@
 		&[multiple] { block-size: 20ch; }
 
 		option {
-			background-color: var(--input-bg);
-			color: var(--text-1);
+			background-color: var(--select-option-bg);
+			color: var(--select-option-color);
 
 			&:focus-visible {
 				color: var(--input-focus-color);
 				background-color: var(--input-focus-bg);
-				outline: var(--input-focus-border);
+				outline: var(--focus-outline);
 			}
 
 			&:checked {
 				font-weight: bold;
-				color: var(--input-selected-bolor);
-				background-color: var(--input-selected-bg);
+				color: var(--select-option-selected-color);
+				background-color: var(--select-option-selected-bg);
 			}
 		}
 
@@ -362,7 +362,7 @@
 
 		&:focus-visible { outline: none; }
 
-		&:checked { accent-color: var(--input-selected-color); }
+		&:checked { accent-color: var(--select-option-selected-color); }
 		&:user-invalid { accent-color: var(--input-invalid-color); }
 		&:user-valid { accent-color: var(--input-valid-color); }
 	}
@@ -377,7 +377,7 @@
 	input-wrapper:has(> input:is([type='radio'], [type='checkbox']):focus-visible) {
 		color: var(--input-focus-color);
 		background-color: var(--input-focus-bg);
-		outline: var(--input-focus-border);
+		outline: var(--focus-outline);
 	}
 
 	input-wrapper:has(> input:is([type='radio'], [type='checkbox'])):hover {
@@ -494,7 +494,7 @@
 
 		&::-moz-progress-bar { background-color: var(--progress-color); }
 
-		&:hover { border-color: var(--progress-hover-color); }
+		&:hover { border-color: var(--progress-hover-border-color); }
 		&:hover::-webkit-progress-bar { background-color: var(--progress-hover-bg); }
 		&:hover::-webkit-progress-value { background-color: var(--progress-hover-color); }
 

@@ -21,6 +21,7 @@
 		--border-style: dashed;
 		--link-underline: dashed;
 		--border-radius: 0;
+		--focus-outline: var(--theme-color) var(--border-style) var(--border-size);
 
 		/* Theme colors */
 		--theme-0: #bff6ff;
@@ -112,13 +113,15 @@
 		--input-hover-border-color: var(--accent-color);
 		--input-focus-bg: var(--surface-1);
 		--input-focus-color: var(--text-1);
-		--input-focus-border: var(--theme-color) var(--border-style) var(--border-size);
-		--input-selected-bg: var(--surface-1);
-		--input-selected-color: var(--theme-color);
 		--input-disabled-bg: var(--surface-1);
 		--input-disabled-color: var(--text-2);
 		--input-readonly-bg: var(--surface-1);
 		--input-readonly-color: var(--text-1);
+
+		--select-option-color: var(--theme-color);
+		--select-option-bg: var(--surface-1);
+		--select-option-selected-bg: var(--surface-2);
+		--select-option-selected-color: var(--text-2);
 
 		--fieldset-border: var(--border-style) var(--border-size) var(--theme-color);
 
@@ -128,12 +131,16 @@
 		--button-border: var(--border-style) var(--border-size) var(--theme-color);
 		--button-hover-bg: var(--surface-2);
 		--button-hover-color: var(--accent-color);
+		--button-hover-border-color: var(--accent-color);
 		--button-focus-bg: var(--theme-color);
 		--button-focus-color: var(--surface-1);
+		--button-focus-border-color: var(--surface-1);
 		--button-active-bg: var(--accent-color);
 		--button-active-color: var(--text-1);
+		--button-active-border-color: var(--text-1);
 		--button-disabled-bg: var(--gray-5);
 		--button-disabled-color: var(--gray-10);
+		--button-disabled-border-color: var(--gray-10);
 
 		/* Progress styles */
 		--progress-bg: var(--surface-2);
@@ -141,6 +148,7 @@
 		--progress-border: var(--border-size) solid var(--theme-color);
 		--progress-hover-bg: var(--surface-1);
 		--progress-hover-color: var(--accent-color);
+		--progress-hover-border-color: var(--accent-color);
 
 		/* Meter styles */
 		--meter-background: var(--surface-2);
@@ -181,7 +189,6 @@
 		--tag-hover-color: var(--surface-1);
 		--tag-focus-bg: var(--surface-2);
 		--tag-focus-color: var(--theme-color);
-		--tag-focus-border: var(--theme-color) var(--border-style) var(--border-size);
 
 		/* Logo styles */
 		--logo-part-color: var(--theme-color);

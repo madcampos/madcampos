@@ -8,7 +8,7 @@
 		max-block-size: 70vh;
 
 		&:focus-visible {
-			outline: var(--theme-color) var(--border-style) var(--border-size);
+			outline: var(--focus-outline);
 			outline-offset: var(--size-1);
 			border-radius: var(--border-radius);
 			background-color: var(--surface-1);
