@@ -71,6 +71,7 @@
 		}
 	},
 	"dependencies": {
+		"gl-matrix": "^3.4.4",
 		"inapp-spy": "^5.0.8",
 		"open-props": "1.7.16",
 		"web-features": "^3.9.2"
