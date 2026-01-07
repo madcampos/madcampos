@@ -15,7 +15,13 @@
 		font-style: italic;
 		color: var(--accent-color);
 
-		&[data-load-error] { /* TODO: add styles for load error & script to handle this case */ }
+		&[data-load-error] {
+			display: grid;
+			place-items: center;
+			color: var(--note-error-color);
+			background-color: var(--note-error-bg);
+			outline: var(--note-error-color) var(--border-style) var(--border-size);
+		}
 	}
 
 	audio {

@@ -26,6 +26,16 @@
 			height="240"
 			loading="lazy"
 		></iframe>
+
+		<p>Error loading:</p>
+		<iframe
+			src="x-err-protocol://error"
+			title="Error loading"
+			width="320"
+			height="240"
+			loading="lazy"
+			data-load-error
+		>Unable to load iframe</iframe>
 	</section>
 
 	<section>
@@ -45,6 +55,15 @@
 			type="application/x-shockwave-flash"
 			width="320"
 			height="240"
+		/>
+
+		<p>Error loading:</p>
+		<embed
+			src="x-err-protocol://error"
+			type="appliaction/x-error"
+			width="320"
+			height="240"
+			data-load-error
 		/>
 	</section>
 
@@ -69,6 +88,17 @@
 			height="240"
 		>
 			<p>The flash file did not load.</p>
+		</object>
+
+		<p>Error loading:</p>
+		<object
+			data="x-err-protocol://error"
+			type="appliaction/x-error"
+			width="320"
+			height="240"
+			data-load-error
+		>
+			<p>Unable to load</p>
 		</object>
 	</section>
 </details>

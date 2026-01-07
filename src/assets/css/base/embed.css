@@ -19,6 +19,11 @@
 		font-style: italic;
 		color: var(--accent-color);
 
-		&[data-load-error] { /* TODO: add styles for load error & script to handle this case */ }
+		&[data-load-error] {
+			display: grid;
+			place-items: center;
+			border-color: var(--note-error-color);
+			background: var(--note-error-bg);
+		}
 	}
 }

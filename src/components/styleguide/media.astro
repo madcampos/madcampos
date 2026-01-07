@@ -33,6 +33,16 @@
 				width="512"
 			/>
 		</picture>
+
+		<p>An error image:</p>
+
+		<img
+			src="x-err-protocol://error"
+			alt="Error loading image"
+			loading="lazy"
+			width="512"
+			data-load-error
+		/>
 	</section>
 
 	<section>
@@ -53,18 +63,32 @@
 	<section>
 		<h3>Audio</h3>
 
+		<p>Regular audio:</p>
 		<audio
 			src="/assets/audio/bourbon-blues.mp3"
 			controls
 			preload="auto"
+			playsinline
 		>
 			<a href="/assets/audio/bourbon-blues.mp3" download>Download the audio file</a>
+		</audio>
+
+		<p>Error audio:</p>
+
+		<audio
+			src="x-err-protocol://error"
+			controls
+			preload="auto"
+			playsinline
+			data-load-error
+		>
 		</audio>
 	</section>
 
 	<section>
 		<h3>Video</h3>
 
+		<p>Regular video:</p>
 		<video controls playsinline>
 			<source src="/assets/video/test/big-buck-bunny.webm" type="video/webm" />
 			<source src="/assets/video/test/big-buck-bunny.mp4" type="video/mp4" />
@@ -87,5 +111,11 @@
 			<p>On that hill there is a round opening to a hole.</p>
 			<p>The camera slowly closes in to the hole.</p>
 		</details>
+
+		<p>Error video:</p>
+
+		<video controls playsinline data-load-error>
+			<source src="x-err-protocol://error" type="appliaction/x-error" />
+		</video>
 	</section>
 </details>
