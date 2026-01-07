@@ -1,10 +1,11 @@
 @layer theme {
 	[data-theme='y2k'] {
 		/* Border */
-		--border-size: var(--size-2);
+		--border-size: 3px;
 		--border-style: ridge;
 		--link-underline: solid;
 		--border-radius: 0;
+		--focus-outline: white var(--border-size-2) dotted;
 
 		/* Theme colors */
 		--theme-color: aqua;
@@ -14,8 +15,9 @@
 
 		/* Base colors */
 		--text-1: white;
+		--text-2: silver;
 		--surface-1: black;
-		--surface-2: black;
+		--surface-2: dimgray;
 		--surface-3: yellow;
 
 		/* Link colors */
@@ -26,15 +28,165 @@
 
 		/* Code colors */
 		--diff-add-color: limegreen;
-		--diff-add-bg: rgba(0, 100, 0, 0.3);
+		--diff-add-bg: forestgreen;
 		--diff-remove-color: red;
-		--diff-remove-bg: rgba(193, 0, 0, 0.3);
+		--diff-remove-bg: darkred;
 		--highlight-color: silver;
-		--highlight-default-bg: rgba(192, 192, 192, 0.2);
+		--highlight-default-bg: dimgray;
 		--highlight-error-color: tomato;
-		--highlight-error-bg: rgba(255, 99, 71, 0.2);
+		--highlight-error-bg: maroon;
 		--highlight-warning-color: yellow;
-		--highlight-warning-bg: rgba(218, 165, 32, 0.2);
+		--highlight-warning-bg: olive;
+
+		/* Table styles */
+		--table-header-bg: royalblue;
+		--table-header-color: white;
+		--table-header-border: var(--border-size) var(--border-style) silver;
+
+		--table-rows-odd: dodgerblue;
+		--table-rows-even: skyblue;
+		--table-rows-hover: darkslateblue;
+
+		--table-footer-bg: darkblue;
+		--table-footer-color: silver;
+		--table-footer-border: var(--border-size) var(--border-style) silver;
+
+		/* Input styles */
+		--input-bg: lightgray;
+		--input-color: black;
+		--input-border: var(--border-size) inset lightgray;
+		--input-thumb-color: dimgray;
+
+		--input-placeholder-color: dimgray;
+
+		--input-valid-bg: lightseagreen;
+		--input-valid-color: darkgreen;
+		--input-invalid-bg: tomato;
+		--input-invalid-color: darkred;
+		--input-hover-bg: midnightblue;
+		--input-hover-color: white;
+		--input-hover-border-color: silver;
+		--input-focus-bg: white;
+		--input-focus-color: black;
+		--input-disabled-bg: dimgray;
+		--input-disabled-color: silver;
+		--input-readonly-bg: silver;
+		--input-readonly-color: dimgray;
+
+		--select-option-color: black;
+		--select-option-bg: white;
+		--select-option-selected-color: white;
+		--input-option-selected-bg: darkblue;
+
+		--fieldset-border: var(--border-size) groove lightgray;
+
+		/* Button styles */
+		--button-bg: lightgray;
+		--button-color: black;
+		--button-border: var(--border-size) outset lightgray;
+		--button-hover-bg: silver;
+		--button-hover-color: black;
+		--button-hover-border-color: silver;
+		--button-focus-bg: darkblue;
+		--button-focus-color: white;
+		--button-focus-border-color: lightgray;
+		--button-active-bg: black;
+		--button-active-color: white;
+		--button-active-border-color: darkblue;
+		--button-disabled-bg: dimgray;
+		--button-disabled-color: darkgray;
+		--button-disabled-border-color: darkgray;
+
+		/* Progress styles */
+		--progress-bg: lightgray;
+		--progress-color: darkblue;
+		--progress-border: var(--border-size) inset lightgray;
+		--progress-hover-bg: lightgray;
+		--progress-hover-color: midnightblue;
+		--progress-hover-border-color: lightgray;
+
+		/* Meter styles */
+		--meter-background: lightgray;
+		--meter-optimal-color: darkgreen;
+		--meter-suboptimal-color: gold;
+		--meter-subsuboptimal-color: red;
+		--meter-size-adjust: calc(var(--border-size) * 2);
+		--meter-border: var(--border-size) inset lightgray;
+
+		/* Note styles */
+		--note-success-bg: lightgreen;
+		--note-success-color: darkgreen;
+		--note-error-bg: pink;
+		--note-error-color: darkred;
+		--note-warning-bg: lightyellow;
+		--note-warning-color: darkgoldenrod;
+		--note-alert-bg: powderblue;
+		--note-alert-color: teal;
+		--note-info-bg: lightcyan;
+		--note-info-color: royalblue;
+		--note-debug-bg: violet;
+		--note-debug-color: purple;
+
+		/* Baseline colors */
+		--baseline-high-color: green;
+		--baseline-high-bg: lightgreen;
+		--baseline-low-color: blue;
+		--baseline-low-bg: lightblue;
+		--baseline-limited-color: yellow;
+		--baseline-limited-bg: silver;
+		--baseline-no-data-color: silver;
+		--baseline-no-data-bg: dimgray;
+
+		/* Tag list colors */
+		--tag-bg: dimgray;
+		--tag-color: snow;
+		--tag-hover-bg: midnightblue;
+		--tag-hover-color: silver;
+		--tag-focus-bg: navy;
+		--tag-focus-color: white;
+
+		/* Logo styles */
+		--logo-part-color: url(#sunset);
+		--logo-part-stroke: cyan;
+		--logo-part-stroke-width: 2rem;
+		--logo-extras-color: deeppink;
+		--logo-extras-stroke: transparent;
+		--logo-extras-stroke-width: 0;
+		--logo-text-color: cyan;
+		--logo-text-stroke: hotpink;
+		--logo-text-stroke-width: 0.5rem;
+		--logo-font: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		--logo-font-weight: 700;
+
+		--logo-pixel-color: var(--surface-1);
+		--logo-overlay-color: var(--complementary-color);
+		--logo-noise-color: var(--theme-color);
+
+		--logo-part-hover-color: url(#rainbow);
+		--logo-part-hover-stroke: var(--link-hover-color);
+		--logo-extras-hover-color: var(--link-hover-color);
+		--logo-extras-hover-stroke: transparent;
+		--logo-text-hover-color: var(--link-hover-color);
+		--logo-text-hover-stroke: hotpink;
+
+		--logo-part-focus-color: url(#sunset);
+		--logo-part-focus-stroke: deeppink;
+		--logo-extras-focus-color: deeppink;
+		--logo-extras-focus-stroke: transparent;
+		--logo-text-focus-color: deeppink;
+		--logo-text-focus-stroke: cyan;
+
+		--logo-part-active-color: url(#rainbow);
+		--logo-part-active-stroke: var(--link-active-color);
+		--logo-extras-active-color: var(--link-active-color);
+		--logo-extras-active-stroke: transparent;
+		--logo-text-active-color: var(--link-active-color);
+		--logo-text-active-stroke: cyan;
+
+		/* Avatar styles */
+		--avatar-overlay: none;
+		--avatary-overlay-opacity: 0;
+		--avatary-overlay-blend-mode: normal;
 
 		/* Old Buttons */
 		--old-button-border: none;
@@ -45,7 +197,7 @@
 
 		/* Icons */
 		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='aqua' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
-		--hr-decoration-icon: none;
+		--select-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg %3E%3Cpath fill='black' d='M12.707 15.707a1 1 0 0 1-1.414 0L5.636 10.05A1 1 0 1 1 7.05 8.636l4.95 4.95l4.95-4.95a1 1 0 0 1 1.414 1.414z'/%3E%3C/g%3E%3C/svg%3E");
 
 		/* Fonts */
 		--headers-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
@@ -61,145 +213,99 @@
 		background-image: url('./y2k/bg.svg');
 		background-size: 5rem;
 		background-repeat: repeat;
-	}
-
-	[data-theme='y2k'] a { cursor: url('./y2k/link.svg'), pointer; }
-
-	[data-theme='y2k'] :focus-visible { outline-style: dotted; }
-
-	[data-theme='y2k'] .user-avatar {
-		border-color: silver;
-		border-radius: 0;
-	}
-
-	[data-theme='y2k'] .user-avatar::after { content: none; }
-
-	[data-theme='y2k'] .user-avatar img {
-		filter: grayscale(1);
 		image-rendering: pixelated;
 	}
 
-	[data-theme='y2k'] input {
-		border-style: inset;
-		border-color: var(--theme-color);
-		border-radius: 0;
-		background-color: var(--theme-color);
-		color: var(--surface-1);
-	}
-
-	[data-theme='y2k'] hr { padding: 0; }
-
-	[data-theme='y2k'] input::placeholder { color: var(--surface-1); }
-
-	[data-theme='y2k'] #site-nav a {
-		border-width: var(--border-size);
-		border-style: outset;
-		border-color: var(--theme-color);
-		background-color: var(--theme-color);
-		padding: var(--size-1) var(--size-2);
-		block-size: var(--size-7);
-		color: var(--surface-1);
-	}
-
-	[data-theme='y2k'] button {
+	[data-theme='y2k'] :is(a, button, input:is([type='submit'], [type='reset'], [type='button'])),
+	[data-theme='y2k'] input[type='file']::file-selector-button,
+	:is(a, button, input:is([type='submit'], [type='reset'], [type='button']))[data-theme='y2k'],
+	input[type='file'][data-theme='y2k']::file-selector-button {
 		cursor: url('./y2k/link.svg'), pointer;
-		border-style: outset;
-		border-color: var(--theme-color);
 		border-radius: 0;
-		background-color: var(--theme-color);
-		color: var(--surface-1);
 	}
 
-	[data-theme='y2k'] :is(#site-nav a, button):focus-visible {
-		border-color: var(--text-1);
-		background-color: var(--text-1);
-		color: var(--surface-1);
+	[data-theme='y2k'] input[type='range'],
+	input[type='range'][data-theme='y2k'] {
+		&::-webkit-slider-thumb { border: var(--border-size) outset currentColor; }
+		&::-moz-range-thumb { border: var(--border-size) outset currentColor; }
 	}
 
-	[data-theme='y2k'] :is(#site-nav a, button):hover {
-		outline-color: var(--accent-color);
-		border-color: var(--accent-color);
-		background-color: var(--accent-color);
-		color: var(--surface-1);
+	[data-theme='y2k'] m-avatar,
+	m-avatar[data-theme='y2k'] {
+		border-color: silver;
+		border-radius: 0;
+
+		img { filter: grayscale(1); }
 	}
 
-	[data-theme='y2k'] :is(#site-nav a, button):active {
-		outline-color: var(--theme- color);
-		border-color: var(--accent-color);
-		background-color: var(--accent-color);
-		color: var(--theme-color);
+	[data-theme='y2k'] decorated-line,
+	decorated-line[data-theme='y2k'] {
+		hr {
+			height: var(--size-4);
+			background:
+				radial-gradient(ellipse at center, transparent, black),
+				repeating-linear-gradient(45deg, black, black 12px, yellow 12px, yellow 24px);
+			border: none;
+		}
+
+		[data-theme] { display: none; }
 	}
 
-	[data-theme='y2k'] .tag {
-		background-color: var(--tag-bg);
-		padding-inline-start: var(--size-2);
+	[data-theme='y2k'] m-logo,
+	m-logo[data-theme='y2k'] {
+		[data-theme] { visibility: hidden; }
+
+		[data-theme='y2k'] {
+			&:where([data-size='full']) { visibility: visible; }
+
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
+
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
+
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='y2k'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='y2k'][data-size='micro']) { visibility: visible; }
+		}
+
+		.logo-extras {
+			fill-opacity: 0.5;
+			transform: translate(2.5rem, 2.5rem);
+		}
 	}
 
-	[data-theme='y2k'] .tag:focus-within { outline-style: dotted; }
-	[data-theme='y2k'] .tag a:focus-visible { outline: none; }
+	:is([data-theme='y2k'] m-card, m-card[data-theme='y2k']) {
+		&.project-card picture { mask: none; }
 
-	[data-theme='y2k'] .tag::before {
-		clip-path: none;
-		mask: none;
-		content: none;
+		img {
+			display: none;
+			border: inset var(--border-size) silver;
+
+			&[data-theme-image='y2k'] { display: block; }
+		}
 	}
 
-	[data-theme='y2k'] .card { border: silver ridge var(--border-size); }
-	[data-theme='y2k'] .card picture {
-		mask: none;
-		border: silver ridge var(--border-size);
-	}
+	:is([data-theme='y2k'] code-wrapper, code-wrapper[data-theme='y2k']) pre {
+		--code-bg: var(--shiki-contrast-bg, var(--surface-1));
+		--code-color: var(--shiki-contrast, var(--text-1));
 
-	[data-theme='y2k'] .project-card img { display: none; }
-	[data-theme='y2k'] .project-card img[data-theme-image='y2k'] { display: block; }
-
-	[data-theme='y2k'] .logo-part {
-		fill: url(#sunset);
-		paint-order: stroke;
-		stroke: cyan;
-		stroke-width: 2rem;
-	}
-
-	[data-theme='y2k'] .logo-extras {
-		fill: deeppink;
-		fill-opacity: 0.5;
-		transform: translate(2.5rem, 2.5rem);
-	}
-
-	[data-theme='y2k'] .logo-text {
-		fill: cyan;
-		paint-order: stroke;
-		font-weight: 700;
-		font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-		stroke: hotpink;
-		stroke-width: 0.5rem;
-	}
-
-	[data-theme='y2k'] #logo-graphics [data-theme] { visibility: hidden; }
-	[data-theme='y2k'] #logo-graphics [data-theme='y2k']:where([data-size='full']) { visibility: visible; }
-
-	[data-theme='y2k'] a:focus-visible [data-theme='y2k'] .logo-part { stroke: deeppink; }
-	[data-theme='y2k'] a:focus-visible [data-theme='y2k'] .logo-text { fill: deeppink; }
-	[data-theme='y2k'] a:focus-visible [data-theme='y2k'] .logo-extras { fill: deeppink; }
-
-	[data-theme='y2k'] a:hover [data-theme='y2k'] .logo-part {
-		fill: url(#rainbow);
-		stroke: var(--link-hover-color);
-	}
-	[data-theme='y2k'] a:hover [data-theme='y2k'] .logo-text { fill: var(--link-hover-color); }
-	[data-theme='y2k'] a:hover [data-theme='y2k'] .logo-extras { fill: var(--link-hover-color); }
-
-	[data-theme='y2k'] a:active [data-theme='y2k'] .logo-part { stroke: var(--link-active-color); }
-	[data-theme='y2k'] a:active [data-theme='y2k'] .logo-text { fill: var(--link-active-color); }
-	[data-theme='y2k'] a:active [data-theme='y2k'] .logo-extras { fill: var(--link-active-color); }
-
-	@container logo (max-width: 25rem) {
-		[data-theme='y2k'] #logo-graphics [data-theme='y2k'] { visibility: hidden; }
-		[data-theme='y2k'] #logo-graphics [data-theme='y2k']:where([data-size='mini']) { visibility: visible; }
-	}
-
-	@container logo (max-width: 15rem) {
-		[data-theme='y2k'] #logo-graphics [data-theme='y2k'] { visibility: hidden; }
-		[data-theme='y2k'] #logo-graphics [data-theme='y2k']:where([data-size='micro']) { visibility: visible; }
+		span {
+			--code-color: var(--shiki-contrast, var(--text-1));
+			--code-font-style: var(--shiki-contrast-font-style, normal);
+			--code-font-weight: var(--shiki-contrast-font-weight, normal);
+			--code-text-decoration: var(--shiki-light-text-decoration, none);
+		}
 	}
 }

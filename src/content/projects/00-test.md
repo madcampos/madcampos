@@ -7,6 +7,9 @@ repository: https://github.com/madcampos/madcampos/
 image: ./assets/01-corny-unicorn.png
 imageAlt: TEST <html> & **_MD_**
 draft: true
+themeImages:
+  y2k: ./assets/y2k/01-corny-unicorn.jpg
+  hacker: ./assets/hacker/01-corny-unicorn.png
 techStack:
   - HTML
   - CSS

@@ -111,6 +111,7 @@ const post = (await listAllPosts())[0]!;
 			image={project.data.image}
 			imageAlt={project.data.imageAlt ?? ''}
 			themeImages={project.data.themeImages}
+			extraClass="project-card"
 		>
 			<Fragment slot="meta">
 				<meta itemprop="operatingSystem" content="https://schema.org/AllOperatingSystem" />
