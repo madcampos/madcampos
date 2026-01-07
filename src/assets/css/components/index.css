@@ -2,6 +2,7 @@
 @import url('./avatar.css');
 @import url('./card.css');
 @import url('./content.css');
+@import url('./color-swatch.css');
 @import url('./css-naked-day.css');
 @import url('./decorated-line.css');
 @import url('./draft-tag.css');
@@ -17,5 +18,6 @@
 @import url('./sr-only.css');
 @import url('./svg-defs.css');
 @import url('./tag-list.css');
+@import url('./text-swatch.css');
 @import url('./theme-switcher.css');
 @import url('./webrings.css');

@@ -1,0 +1,23 @@
+---
+interface Props {
+	font: string;
+	fontFamily: string;
+	fillerText?: string;
+}
+
+const {
+	font,
+	fontFamily,
+	fillerText = 'The quick brown fox jumped over the lazy dog.'
+} = Astro.props;
+---
+<text-swatch style={`--swatch-font: ${fontFamily};`}>
+	<figure>
+		<article>
+			<p>{fillerText}</p>
+			<p>{fillerText}</p>
+			<p>{fillerText}</p>
+		</article>
+		<figcaption>{font}</figcaption>
+	</figure>
+</text-swatch>

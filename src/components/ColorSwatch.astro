@@ -1,0 +1,28 @@
+---
+import chroma from 'chroma-js';
+
+interface Props {
+	color: string;
+	name?: string;
+}
+
+const { color, name } = Astro.props;
+
+const colorHex = chroma(color).hex();
+const colorOklch = chroma(color).css('oklch');
+const colorHsl = chroma(color).css('hsl');
+---
+<color-swatch>
+	<figure>
+		<article style={`--swatch-color: ${colorHex};`}></article>
+		<figcaption>
+			<data value={colorHex}>{name ?? color}</data>
+			<br />
+			<code>{colorHex}</code>
+			<br />
+			<code>{colorOklch}</code>
+			<br />
+			<code>{colorHsl}</code>
+		</figcaption>
+	</figure>
+</color-swatch>
