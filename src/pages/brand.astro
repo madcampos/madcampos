@@ -1,4 +1,5 @@
 ---
+import '../assets/css/pages/brand.css';
 import ColorSwatch from '../components/ColorSwatch.astro';
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
@@ -55,7 +56,7 @@ import Webrings from '../components/Webrings.astro';
 				<ColorSwatch color="#0080ff" name="Blissful Blue" />
 				<ColorSwatch color="#ff8000" name="Zany Orange" />
 				<ColorSwatch color="#00309b" name="Slumbering Blue" />
-				<ColorSwatch color="#f03e3e" name="Whacky Orange" />
+				<ColorSwatch color="#f03e3e" name="Whacky Red" />
 			</color-swatch-group>
 
 			<h2 id="fonts">Fonts</h2>
@@ -98,7 +99,9 @@ import Webrings from '../components/Webrings.astro';
 			<h3>Logo Gallery</h3>
 
 			<m-note data-type="info">
-				<strong>Note:</strong> The logos may be affected by accessibility settings.
+				<p>
+					<strong>Note:</strong> The logos may be affected by accessibility settings.
+				</p>
 			</m-note>
 
 			<details open>
@@ -110,6 +113,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						full
 						theme="system"
 					/>
@@ -118,6 +122,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						mini
 						theme="system"
 					/>
@@ -126,6 +131,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						theme="system"
 					/>
@@ -134,6 +140,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						glitch
 						theme="system"
@@ -150,6 +157,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						full
 						theme="system"
 					/>
@@ -158,6 +166,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						mini
 						theme="system"
 					/>
@@ -166,6 +175,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						theme="system"
 					/>
@@ -174,6 +184,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						glitch
 						theme="system"
@@ -190,6 +201,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						full
 						theme="system"
 					/>
@@ -198,6 +210,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						mini
 						theme="system"
 					/>
@@ -206,6 +219,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						theme="system"
 					/>
@@ -214,6 +228,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						glitch
 						theme="system"
@@ -230,6 +245,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						full
 						theme="uwu"
 					/>
@@ -238,6 +254,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						mini
 						theme="uwu"
 					/>
@@ -246,6 +263,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						theme="uwu"
 					/>
@@ -254,6 +272,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						glitch
 						theme="uwu"
@@ -270,6 +289,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						full
 						theme="y2k"
 					/>
@@ -278,6 +298,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						mini
 						theme="y2k"
 					/>
@@ -286,6 +307,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						theme="y2k"
 					/>
@@ -294,6 +316,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						glitch
 						theme="y2k"
@@ -310,6 +333,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						full
 						theme="hacker"
 					/>
@@ -318,6 +342,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						mini
 						theme="hacker"
 					/>
@@ -326,6 +351,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						theme="hacker"
 					/>
@@ -334,6 +360,7 @@ import Webrings from '../components/Webrings.astro';
 						subtitle="Branding"
 						shortSubtitle="Brand"
 						url={Astro.url.pathname}
+						setSvgSize
 						micro
 						glitch
 						theme="hacker"

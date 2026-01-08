@@ -2,7 +2,7 @@
 	img-lightbox {
 		--image-size: 35vw;
 
-		inline-size: clamp(var(--size-content-1), var(--image-size), var(--size-content-3));
+		inline-size: clamp(var(--size-content-0), var(--image-size), var(--size-content-3));
 		margin-inline: auto;
 		display: flex;
 		flex-direction: column;

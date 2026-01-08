@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import LogoSvg from './LogoSvg.astro';
 
 type LogoThemes = 'all' | 'hacker' | 'system' | 'uwu' | 'y2k';
+type LogoSizes = 'all' | 'full' | 'micro' | 'mini';
 
 interface Props {
 	title: string;
@@ -15,19 +16,30 @@ interface Props {
 	full?: boolean;
 	glitch?: boolean;
 	theme?: LogoThemes;
+	setSvgSize?: boolean;
 }
 
 function generateUniqueId() {
 	return Math.trunc(Math.random() * 1000000).toString(16);
 }
 
-const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch, theme } = Astro.props;
+const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch, theme, setSvgSize = false } = Astro.props;
 
 const logoLabelId = generateUniqueId();
+
+let svgSize: LogoSizes = 'all';
+
+if (setSvgSize && full) {
+	svgSize = 'full';
+} else if (setSvgSize && mini) {
+	svgSize = 'mini';
+} else if (setSvgSize && micro) {
+	svgSize = 'micro';
+}
 ---
 <m-logo {micro} {mini} {full} {glitch}>
 	<a href={url ?? Astro.url.pathname} class="u-url url">
-		<LogoSvg {url} {title} {subtitle} {shortSubtitle} {theme} />
+		<LogoSvg {url} {title} {subtitle} {shortSubtitle} {theme} size={svgSize} />
 	</a>
 	<dialog popover="manual" closedby="closerequest" id={`logo-menu-${logoLabelId}`}>
 		<header>

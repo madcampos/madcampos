@@ -51,6 +51,7 @@
 		justify-content: center;
 		align-items: start;
 		padding: var(--size-3);
+		gap: var(--size-2);
 		border: var(--surface-3) var(--border-style) var(--border-size);
 		border-radius: var(--border-radius);
 		background-color: var(--surface-2);
