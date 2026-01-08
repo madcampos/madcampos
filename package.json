@@ -22,7 +22,6 @@
 		"start": "astro dev --site=https://localhost:3000/",
 		"prebuild": "pnpm run bootstrap",
 		"build": "astro build",
-		"build:resume": "node ./build/render-resume.ts",
 		"prepreview": "pnpm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
 		"predeploy": "pnpm run build",
