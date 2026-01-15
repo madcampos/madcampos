@@ -11,6 +11,10 @@
 	"workers_dev": false,
 	"preview_urls": false,
 	"route": { "pattern": "madcampos.dev", "custom_domain": true },
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
 	"dev": {
 		"ip": "localhost",
 		"port": 4242,
