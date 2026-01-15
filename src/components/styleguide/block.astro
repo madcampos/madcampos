@@ -1,0 +1,209 @@
+---
+import DecoratedLine from '../DecoratedLine.astro';
+---
+
+<details open>
+	<summary>
+		<h2>Block Level Text Elements</h2>
+	</summary>
+
+	<section>
+		<h3>Block Quote</h3>
+
+		<figure>
+			<blockquote>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</p>
+				<p>
+					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+					velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+					laborum.
+				</p>
+			</blockquote>
+			<figcaption><cite>Some Old Roman Dude, Probably</cite></figcaption>
+		</figure>
+	</section>
+
+	<section>
+		<h3>Definition List</h3>
+
+		<dl>
+			<dt>definition (noun)</dt>
+			<dd>A statement of meaning.</dd>
+
+			<dt>list (noum)</dt>
+			<dd>A series of things.</dd>
+		</dl>
+	</section>
+
+	<section>
+		<h3>Figure</h3>
+
+		<figure>
+			<img
+				src="/assets/images/test/good-parts.webp"
+				alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
+				loading="lazy"
+				width="512"
+			/>
+			<figcaption>The joys of web development</figcaption>
+		</figure>
+	</section>
+
+	<section>
+		<h3>Horizontal Line</h3>
+
+		<p>Regular line:</p>
+		<hr />
+
+		<p>
+			Line with <a href="https://en.wikipedia.org/wiki/Fleuron_(typography)" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">fleuron</a>:
+		</p>
+		<DecoratedLine />
+	</section>
+
+	<section>
+		<h3>Ordered List</h3>
+
+		<ol>
+			<li>
+				<span>Cem</span>
+
+				<ol>
+					<li>
+						<span>Cento e dez</span>
+						<ol>
+							<li>Cento e onze</li>
+							<li>Cento e doze</li>
+						</ol>
+					</li>
+					<li>
+						<span>Cento e vinte</span>
+						<ol>
+							<li>Cento e vinte e um</li>
+							<li>Cento e vinte e dois</li>
+						</ol>
+					</li>
+				</ol>
+			</li>
+			<li>
+				<span>Duzentos</span>
+
+				<ol>
+					<li>
+						<span>Duzentos e dez</span>
+						<ol>
+							<li>Duzentos e onze</li>
+							<li>Duzentos e doze</li>
+						</ol>
+					</li>
+					<li>
+						<span>Duzentos e vinte</span>
+						<ol>
+							<li>Duzentos e vinte e um</li>
+							<li>Duzentos e vinte e dois</li>
+						</ol>
+					</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+
+	<section>
+		<h3>Unordered List</h3>
+
+		<ul>
+			<li>
+				<span>Things I like</span>
+
+				<ul>
+					<li>
+						<span>Video Games</span>
+
+						<ul>
+							<li>Fallout 2</li>
+							<li>Rollercoaster Tycoon 2</li>
+						</ul>
+					</li>
+					<li>
+						<span>Role-playing Games</span>
+
+						<ul>
+							<li>Shadowrun</li>
+							<li>Paranoia</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span>Things I dislike</span>
+
+				<ul>
+					<li>
+						<span>Prejudice</span>
+
+						<ul>
+							<li>Homphobia</li>
+							<li>Ableism</li>
+							<li>Racism</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>Paragraph</h3>
+
+		<p>The quick brown fox jumped over the lazy dog.</p>
+	</section>
+
+	<section>
+		<h3>Preformatted Text</h3>
+
+		<p>Simple text (ASCII art drawing of a whale):</p>
+		<pre>
+ __v_
+(____\/&lcub;
+</pre>
+
+		<p>
+			Code example (pre-rendered through <a href="https://shiki.style/" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">Shiki</a>).
+			<strong>Note:</strong> the code only highlights when inside a <code>&lt;code-wrapper&gt;</code> element:
+		</p>
+
+		<code-wrapper>
+			<pre
+				class="astro-code astro-code-themes light-plus dark-plus Noctis High Contrast has-diff has-highlighted has-focused"
+				style="--shiki-light: #000000; --shiki-dark: #d4d4d4; --shiki-contrast: #ffffff; --shiki-light-bg: #ffffff; --shiki-dark-bg: #1e1e1e; --shiki-contrast-bg: #000000; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word"
+				tabindex="0"
+				data-language="ts"
+			><code><span class="line"><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic">//</span><span class="space"> </span><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic" class="highlighted-word">Code</span><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic"> block</span></span>
+	<span class="line diff remove"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Hewwo, World!'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line diff add"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Hello, World!'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Highlighted'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted error"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">error</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Error'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted warning"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">warn</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Warning'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line focused"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Focused'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span></code></pre>
+		</code-wrapper>
+	</section>
+
+	<section>
+		<h3>Menu</h3>
+
+		<p><strong>Note:</strong> the <code>&lt;menu&gt;</code> element is no different semantically than the <code>&lt;ul&gt;</code> element.</p>
+
+		<menu>
+			<li><button type="button" id="menu-button-1">Say "Hey"</button></li>
+			<li><button type="button" id="menu-button-2">Say "Ho"</button></li>
+			<li><button type="button" id="menu-button-3">Say "Hey Ho"</button></li>
+		</menu>
+		<script type="module" is:inline>
+			document.querySelector('#menu-button-1')?.addEventListener('click', () => alert('Hey!'));
+			document.querySelector('#menu-button-2')?.addEventListener('click', () => alert('Ho!'));
+			document.querySelector('#menu-button-3')?.addEventListener('click', () => alert('Hey Ho!'));
+		</script>
+	</section>
+</details>

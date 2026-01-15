@@ -1,0 +1,895 @@
+---
+/* eslint-disable max-lines */
+---
+<details open>
+	<summary>
+		<h2>Forms</h2>
+	</summary>
+
+	<form action="#" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<legend>General Knowledge Questions</legend>
+
+			<input-wrapper>
+				<label for="input-name">
+					<span>What is your name?</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="text"
+					name="name"
+					id="input-name"
+					required
+					autocomplete="name"
+					placeholder="E.g.: King Arthur of Camelot"
+				/>
+				<input-error>Provide your name face serious consequences!</input-error>
+				<input-success>Thank you for not failing this simple task.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-quest">
+					<span>What is your quest?</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="text"
+					name="quest"
+					id="input-quest"
+					required
+					minlength="1"
+					list="list-quests"
+					placeholder="E.g.: To pass the bridge keeper"
+				/>
+				<datalist id="list-quests">
+					<option>To seek the Holy Grail</option>
+					<option>To slay the Beast of Caerbanog</option>
+					<option>To find a shrubbery</option>
+				</datalist>
+				<input-error>Provide your quest or you will be held from completing it, by the French!</input-error>
+				<input-success>Thank you, you may now proceed.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-color">
+					<span>What is your favourite colour?</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="color"
+					name="color"
+					id="input-color"
+					required
+					list="list-colors"
+				/>
+				<datalist id="list-colors">
+					<option value="#0080ff">Marco's Blue</option>
+					<option value="#ff8000">Marco's Orange</option>
+					<option value="#ff0000">Red</option>
+					<option value="#00ff00">Blue</option>
+					<option value="#0000ff">Green</option>
+					<option value="#000000">Black</option>
+					<option value="#ffffff">White</option>
+					<option value="seagreen">Sea Green</option>
+					<option value="navy">Navy Blue</option>
+					<option value="tomato">Tomato</option>
+					<option value="deeppink">Deep Pink</option>
+				</datalist>
+				<input-error>Tell me your favourite colour and brighten the world.</input-error>
+				<input-success>Thank you for making the world more colourfull.</input-success>
+			</input-wrapper>
+
+			<fieldset>
+				<legend>What is the capital of Assyria?</legend>
+				<input-wrapper>
+					<input-required><strong>(Required)</strong></input-required>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="capital-of-assyria"
+							id="input-capital-1"
+							required
+							value="Assur"
+						/>
+						<label for="input-capital-1">Assur</label>
+					</input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="capital-of-assyria"
+							id="input-capital-2"
+							required
+							value="Kar-Tukulti-Ninurta"
+						/>
+						<label for="input-capital-2">Kar-Tukulti-Ninurta</label>
+					</input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="capital-of-assyria"
+							id="input-capital-3"
+							required
+							value="Nimrud"
+						/>
+						<label for="input-capital-3">Nimrud</label>
+					</input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="capital-of-assyria"
+							id="input-capital-4"
+							required
+							value="Dur-Sharrukin"
+						/>
+						<label for="input-capital-4">Dur-Sharrukin</label>
+					</input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="capital-of-assyria"
+							id="input-capital-5"
+							required
+							value="Nieveh"
+						/>
+						<label for="input-capital-5">Nieveh</label>
+					</input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="capital-of-assyria"
+							id="input-capital-6"
+							required
+							value="Harran"
+						/>
+						<label for="input-capital-6">Harran</label>
+					</input-wrapper>
+
+					<input-error>How did you find this error? It should not be possible!</input-error>
+					<input-success>Your answer is correct.</input-success>
+				</input-wrapper>
+			</fieldset>
+
+			<fieldset>
+				<legend>What is the airspeed velocity of an unladen swallow?</legend>
+
+				<input-wrapper>
+					<label for="input-swallow-type">
+						<span>Type of Swallow:</span>
+						<input-required><strong>(Required)</strong></input-required>
+					</label>
+
+					<select
+						name="type-of-swallow"
+						id="input-swallow-type"
+						required
+					>
+						<option value="" disabled selected hidden>Select a type of swallow</option>
+
+						<optgroup label="Africa">
+							<option>Pied-winged Swallow</option>
+							<option>Whire-tailed Swallow</option>
+							<option>Whire-throated Swallow</option>
+						</optgroup>
+						<hr />
+						<optgroup label="Asia">
+							<option>Barn Swallow</option>
+							<option>Pacific Swallow</option>
+							<option>Red-rumped Swallow</option>
+							<option>Whire-tailed Swallow</option>
+						</optgroup>
+						<hr />
+						<optgroup label="Europe">
+							<option>Barn Swallow</option>
+							<option>Red-rumped Swallow</option>
+						</optgroup>
+						<hr />
+						<optgroup label="North America">
+							<option>Cave Swallow</option>
+							<option>Clif Swallow</option>
+							<option>Tree Swallow</option>
+						</optgroup>
+						<hr />
+						<optgroup label="Oceania">
+							<option>Pacific Swallow</option>
+							<option>Welcome Swallow</option>
+						</optgroup>
+					</select>
+
+					<input-error>Do not confuse me with your mind tricks!</input-error>
+					<input-success>Just the swallow I was thinking about...</input-success>
+				</input-wrapper>
+
+				<input-wrapper>
+					<label for="input-swallow-velocity">
+						<span>Airspeed Velocity:</span>
+						<input-required><strong>(Required)</strong></input-required>
+					</label>
+					<input-wrapper>
+						<input
+							type="number"
+							name="airspeed-velocity-of-an-unladen-swallow"
+							id="input-swallow-velocity"
+							required
+							min="0"
+							max="1000"
+							step="0.1"
+							placeholder="E.g.: 10"
+						/>
+						<input-infix>m/s</input-infix>
+					</input-wrapper>
+
+					<input-error>Not the correct velocity, keep guessing...</input-error>
+					<input-success>Your answer is correct.</input-success>
+				</input-wrapper>
+			</fieldset>
+		</fieldset>
+
+		<fieldset>
+			<legend>Dates and Time</legend>
+
+			<input-wrapper>
+				<label for="input-date">
+					<span>What day is today?</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="date"
+					name="today"
+					id="input-date"
+					required
+					step="1"
+				/>
+
+				<input-error>Not today, but close enough.</input-error>
+				<input-success>It is today, yay!</input-success>
+			</input-wrapper>
+			<script type="module" is:inline>
+				const dateInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-date'));
+				const now = new Date();
+				const todayString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+
+				dateInput.min = todayString;
+				dateInput.max = todayString;
+				dateInput.value = todayString;
+			</script>
+
+			<input-wrapper>
+				<label for="input-datetime">
+					<span>Your birth date and time (for your astrology birth chart):</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="datetime-local"
+					name="birthday"
+					id="input-datetime"
+					required
+					autocomplete="bday"
+				/>
+
+				<input-error>Astrology is really important and says a lot about us, please provide your birth date and time.</input-error>
+				<input-success>Thank you, your chart is coming soon...</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-month">
+					<span>Summer has come and past, the innocent can never last, when should you wake up?</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="month"
+					name="wake-me-up-when-september-ends"
+					id="input-month"
+					required
+				/>
+
+				<input-error>Still summer, not the right month.</input-error>
+				<input-success>Wake me up, when Spetember ends... 🎵</input-success>
+			</input-wrapper>
+			<script type="module" is:inline>
+				const monthInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-month'));
+				const targetDate = new Date();
+
+				if (targetDate.getMonth() >= 9) {
+					targetDate.setFullYear(targetDate.getFullYear() + 1);
+				}
+
+				monthInput.min = `${targetDate.getFullYear()}-10`;
+				monthInput.max = `${targetDate.getFullYear()}-12`;
+			</script>
+
+			<input-wrapper>
+				<label for="input-time">What time to set an alarm for?</label>
+				<input
+					type="time"
+					name="alarm"
+					id="input-time"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-week">
+					<span>Choose a week for the corporate quarterly meeting:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="week"
+					name="corporate-quarterly-meeting"
+					id="input-week"
+					required
+				/>
+
+				<input-error>Please provide a data, or else we will need to form a committe to formulate a plan of action, then form an assembly and vote on what to do with
+					you.</input-error>
+				<input-success>Thank you, your manager appeciates the input.</input-success>
+			</input-wrapper>
+			<script type="module" is:inline>
+				const weekInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-week'));
+				const now = new Date();
+
+				weekInput.min = `${now.getFullYear()}-W04`;
+				weekInput.max = `${now.getFullYear()}-W50`;
+			</script>
+		</fieldset>
+
+		<fieldset>
+			<legend>Marketing Options</legend>
+
+			<input-wrapper>
+				<label for="input-email">
+					<span>Your email:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="email"
+					name="email"
+					id="input-email"
+					required
+					autocomplete="email"
+					inputmode="email"
+					placeholder="E.g.: arthur@camelot.com"
+				/>
+
+				<input-error>Your email is very important to us.</input-error>
+				<input-success>Thank you, we won't send much spam.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-tel">
+					<span>Your phone number:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="tel"
+					name="phone"
+					id="input-tel"
+					required
+					autocomplete="tel"
+					pattern="+\d{1,3} \d{4,}"
+					placeholder="E.g.: +44 1234567890"
+					inputmode="tel"
+					aria-describedby="input-tel-hint"
+				/>
+
+				<input-error>Your phone number is extremely important to us.</input-error>
+				<input-success>Thank you, we won't call you... much.</input-success>
+
+				<input-hint id="input-tel-hint">Phone numbers must start with a "+", followed by the country code, a space, and the phone number without spaces.</input-hint>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-url">
+					<span>Link to your social media account:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="url"
+					name="social-media-link"
+					id="input-url"
+					required
+					autocomplete="url"
+					inputmode="url"
+					placeholder="E.g.: https://instagram.com/kingarthur"
+				/>
+
+				<input-error>It is standard procedura to view all your posts, including the ones from 15 years ago, please provide a link to your social madia
+					account.</input-error>
+				<input-success>Look what I found... Old photos!</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-file">
+					<span>Photo of your government ID:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="file"
+					name="government-id"
+					id="input-file"
+					required
+					accept=".jpg,.jpeg,.png,.gif"
+					aria-describedby="input-file-hint"
+				/>
+
+				<input-error>ID is required to verify your age.</input-error>
+				<input-success>Age verification passed.</input-success>
+
+				<input-hint id="input-file-hint">Formats accepted: JPEG, PNG, GIF. Maximum file size: 2mb</input-hint>
+				<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+			</input-wrapper>
+			<figure>
+				<figcaption>ID preview:</figcaption>
+				<output for="input-file" id="output-file" aria-live="off">&mdash;</output>
+			</figure>
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file'));
+				const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file'));
+
+				function updateOutput() {
+					const [file] = input.files ?? [];
+
+					if (!file) {
+						output.innerHTML = '&mdash;';
+						return;
+					}
+
+					if (!file.type.startsWith('image/')) {
+						output.innerHTML = '&mdash;';
+						return;
+					}
+
+					output.innerHTML = `<img alt="" src="${URL.createObjectURL(file)}" width="256" height="256" />`;
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+
+			<input-wrapper>
+				<label for="input-file-capture">
+					<span>Provide a selfie:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="file"
+					name="selfie"
+					id="input-file-capture"
+					required
+					accept=".jpg,.jpeg,.png,.gif"
+					capture
+					aria-describedby="input-file-capture-hint"
+				/>
+
+				<input-error>Selfie is required to verify your age.</input-error>
+				<input-success>Age verification passed.</input-success>
+
+				<input-hint id="input-file-capture-hint">Formats accepted: JPEG, PNG, GIF. Maximum file size: 2mb</input-hint>
+				<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+			</input-wrapper>
+			<figure>
+				<figcaption>Selfie preview:</figcaption>
+				<output for="input-file-capture" id="output-file-capture" aria-live="off">&mdash;</output>
+			</figure>
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-capture'));
+				const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file-capture'));
+
+				function updateOutput() {
+					const [file] = input.files ?? [];
+
+					if (!file) {
+						output.innerHTML = '&mdash;';
+						return;
+					}
+
+					if (!file.type.startsWith('image/')) {
+						output.innerHTML = '&mdash;';
+						return;
+					}
+
+					output.innerHTML = `<img alt="" src="${URL.createObjectURL(file)}" width="256" height="256" />`;
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+
+			<input-wrapper>
+				<label for="input-file-dir">
+					<span>A folder with your last 5 years of tax documents:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				{/* @ts-expect-error */}
+				<input
+					type="file"
+					name="tax-documents"
+					id="input-file-dir"
+					required
+					webkitdirectory
+				/>
+
+				<input-error>Tax documents are required to verify your age.</input-error>
+				<input-success>Age verification passed.</input-success>
+
+				<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+			</input-wrapper>
+			<figure>
+				<figcaption>Folder list preview:</figcaption>
+				<output for="input-file-dir" aria-live="off">
+					<ul id="output-file-dir"></ul>
+				</output>
+			</figure>
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-dir'));
+				const output = /** @type {HTMLUListElement} */ (document.querySelector('#output-file-dir'));
+
+				function updateOutput() {
+					if (!input.files || input.files.length === 0) {
+						output.innerHTML = '';
+						return;
+					}
+
+					output.innerHTML = '';
+
+					for (const file of input.files) {
+						const url = URL.createObjectURL(file);
+
+						output.insertAdjacentHTML(
+							'beforeend',
+							`<li><a href="${url}" targer="_blank">${file.webkitRelativePath}</a></li>`
+						);
+					}
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+
+			<input-wrapper>
+				<label for="input-file-multiple">
+					<span>A collection of photos and videos for training AI models:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="file"
+					name="ai-training-data"
+					id="input-file-multiple"
+					required
+					multiple
+					accept="image/*,video/*"
+				/>
+
+				<input-error>AI model training is mandatory.</input-error>
+				<input-success>Thank you, the slop will be sloppier with your contribution.</input-success>
+
+				<input-hint>This will be securely saved and never leeked in any major breaches or hacks. Pinky promise.</input-hint>
+			</input-wrapper>
+			<figure>
+				<figcaption>Training data preview:</figcaption>
+				<output for="input-file-multiple" aria-live="off">
+					<ul id="output-file-multiple"></ul>
+				</output>
+			</figure>
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-multiple'));
+				const output = /** @type {HTMLUListElement} */ (document.querySelector('#output-file-multiple'));
+
+				function updateOutput() {
+					if (!input.files || input.files.length === 0) {
+						output.innerHTML = '';
+						return;
+					}
+
+					output.innerHTML = '';
+
+					for (const file of input.files) {
+						const url = URL.createObjectURL(file);
+						let result = `<li><a href="${url}" targer="_blank">${file.name ?? 'Untitled'}</a></li>`;
+
+						if (file.type.startsWith('image/')) {
+							result = `<img alt="" src="${url}" width="256" height="256" />`;
+						} else if (file.type.startsWith('video/')) {
+							result = `<video controls playsinline src="${url}" width="256" height="256"></video>`;
+						}
+
+						output.insertAdjacentHTML('beforeend', result);
+					}
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+
+			<input-wrapper>
+				<label for="input-password">
+					<span>A secure password for your subscription:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="password"
+					name="password"
+					id="input-password"
+					required
+					minlength="16"
+					aria-describedby="input-password-hint"
+					placeholder="E.g.: correct horse battery staple"
+				/>
+
+				<input-error>
+					<p>Password must include:</p>
+					<ul>
+						<li>An upper case character</li>
+						<li>A lower case character</li>
+						<li>A prime number</li>
+						<li>An emoji</li>
+						<li>Your Social Security Number</li>
+						<li>Your mother's maiden name</li>
+					</ul>
+				</input-error>
+				<input-success id="input-password-success"></input-success>
+				<input-hint id="input-password-hint"><strong>Important:</strong> The password is rerquired for any changes in the future.</input-hint>
+				<input-hint>
+					<label for="password-strength">Password Strength:</label>
+					<output for="input-password" aria-live="off">
+						<meter
+							id="password-strength"
+							min="0"
+							low="26"
+							high="51"
+							optimum="76"
+							max="100"
+							value="0"
+						>
+							&mdash;
+						</meter>
+					</output>
+				</input-hint>
+			</input-wrapper>
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-password'));
+				const output = /** @type {HTMLMeterElement} */ (document.querySelector('#password-strength'));
+				const inputSuccess = /** @type {HTMLElement} */ (document.querySelector('#input-password-success'));
+
+				function updateOutput() {
+					if (input.value.length === 0) {
+						output.value = 0;
+						output.innerHTML = '&mdash;';
+					} else if (input.value.length <= 16) {
+						output.value = 25;
+						output.innerHTML = 'Poor';
+					} else if (input.value.length <= 24) {
+						output.value = 50;
+						output.innerHTML = 'Good';
+					} else if (input.value.length <= 32) {
+						output.value = 75;
+						output.innerHTML = 'Great';
+					} else {
+						output.value = 100;
+						output.innerHTML = 'Excellent';
+					}
+
+					inputSuccess.textContent = input.value;
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+
+			<input-wrapper>
+				<label for="input-range">
+					<span>Number of emails to receive per hour:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input-wrapper>
+					<input
+						type="range"
+						name="emails-per-hour"
+						id="input-range"
+						required
+						min="100"
+						max="10000"
+						step="1"
+						value="8580"
+					/>
+
+					<input-infix>
+						<output for="input-range" id="output-range" aria-live="polite">8580</output>
+						<sr-only>Emails per hour</sr-only>
+					</input-infix>
+				</input-wrapper>
+
+				<input-error>Please provide a reasonable amount of span yo uare expected to receive per hour.</input-error>
+				<input-success>Spam on the way.</input-success>
+			</input-wrapper>
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-range'));
+				const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-range'));
+
+				function updateOutput() {
+					output.textContent = input.value;
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+
+			<input-wrapper>
+				<label for="input-email-multiple">
+					<span>Friends to invite to our newsletter:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<input
+					type="email"
+					name="spam-email"
+					id="input-email-multiple"
+					inputmode="email"
+					multiple
+					required
+					placeholder="E.g.: lancelot@camelot.com, galahad@camelot.com"
+				/>
+
+				<input-error>Don't you have any friends? Hand over their emails.</input-error>
+				<input-success>Friendship is magic.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="select-multiple">
+					<span>Select from the list below which of our partners you would like to share your data:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+
+				<select
+					name="share-partners"
+					id="select-multiple"
+					multiple
+					required
+				>
+					<optgroup label="Data Harvesting">
+						<option selected>YourData.com</option>
+						<option selected>Meta-Data</option>
+						<option selected>Alphabetical</option>
+						<option selected>Visage Livre</option>
+						<option selected>Astronomically Large Number</option>
+					</optgroup>
+					<hr />
+					<optgroup label="Advertizing">
+						<option selected>ClickRate</option>
+						<option selected>Ad2Click</option>
+						<option selected>Ads4You</option>
+						<option selected>AdsSquared</option>
+					</optgroup>
+				</select>
+
+				<input-error>Our partners need your data as much as we do, please share your data with them.</input-error>
+				<input-success>Sharing is caring.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<input-wrapper>
+					<input
+						type="checkbox"
+						name="tos-accepted"
+						id="input-checkbox"
+						required
+						aria-describedby="input-checkbox-hint"
+					/>
+					<label for="input-checkbox">
+						<span>I hereby unconditinally accept all terms and conditions</span>
+						<input-required><strong>(Required)</strong></input-required>
+					</label>
+				</input-wrapper>
+
+				<input-error>You have not given us your consent, even though it is mandatory we still need it.</input-error>
+				<input-success>This checkbox is legally binding.</input-success>
+				<input-hint id="input-checkbox-hint">
+					<strong>Note:</strong>
+					<span>Reading the Terms and Conditions is optional.</span>
+					<span>Accepting them is <em>mandatory</em>.</span>
+				</input-hint>
+			</input-wrapper>
+		</fieldset>
+
+		<fieldset>
+			<legend>Miss Universe Acceptance Sppech</legend>
+
+			<p>Please write a 700 word essay on why you deserve and are worth to be crowned Miss Universe.</p>
+
+			<input-wrapper>
+				<label for="input-textarea">
+					<span>Your speech:</span>
+					<input-required><strong>(Required)</strong></input-required>
+				</label>
+				<textarea
+					name="acceptance-speech"
+					id="input-textarea"
+					rows="10"
+					cols="20"
+					autocapitalize="sentences"
+					autocorrect="on"
+					spellcheck="true"
+					wrap="soft"
+					required
+					placeholder="E.g.: I personally believe, that US Americans are unable to do so because some people out there, in our nation, don't have maps. And I believe that our education, like, such as in South Africa and Iraq, everywhere like, such as, and I believe that they should... Our education, over here in the US, should help the US, or should help South Africa, and should help Iraq and the Asian countries. So we will be able to build up our future for our children."
+				></textarea>
+
+				<input-error>Don't leave your fans waiting, please writa a deep and thought provoking speech.</input-error>
+				<input-success>Wow, so deep, much powerfull, quite inspiring!</input-success>
+			</input-wrapper>
+			<p>
+				<label for="word-count">Word count:</label>
+				<output for="input-textarea" aria-live="off">
+					<progress
+						id="word-count"
+						max="700"
+						value="0"
+					>
+						&mdash;
+					</progress>
+					<span id="word-count-text">&mdash;</span>
+				</output>
+			</p>
+
+			<script type="module" is:inline>
+				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-textarea'));
+				const output = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count'));
+				const outputText = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count-text'));
+				const segmenter = new Intl.Segmenter(navigator.languages, { granularity: 'word' });
+
+				function updateOutput() {
+					const wordCount = [...segmenter.segment(input.value)].filter((segment) => segment.isWordLike).length;
+
+					output.value = wordCount;
+					output.max = Math.max(700, wordCount);
+					output.innerHTML = wordCount === 0 ? '&mdash;' : `${wordCount} words`;
+					outputText.innerHTML = output.innerHTML;
+				}
+
+				input.addEventListener('input', updateOutput);
+				input.addEventListener('change', updateOutput);
+			</script>
+		</fieldset>
+
+		<fieldset>
+			<legend>Magic Elements</legend>
+
+			<input-wrapper>
+				<label for="input-hidden">Security code, please take note:</label>
+				<input type="hidden" name="hidden" id="input-hidden" value="password" />
+			</input-wrapper>
+
+			<input-wrapper>
+				<input type="checkbox" name="maybe" id="input-intermediate" value="maybe" />
+				<label for="input-intermediate">It's checked, maybe.</label>
+				<script type="module" is:inline>
+					const intermediateCheckbox = /** @type {HTMLInputElement} */ (document.querySelector('#input-intermediate'));
+
+					intermediateCheckbox.indeterminate = true;
+				</script>
+			</input-wrapper>
+		</fieldset>
+
+		<footer>
+			<button type="submit">Submit</button>
+			<input type="submit" value="Submit, but input" />
+			<input
+				type="image"
+				src="/assets/images/test/fancy-submit.svg"
+				alt="Submit, but fancier"
+				height="32"
+			/>
+			<hr />
+			<button type="reset">Reset</button>
+			<input type="reset" value="Reset, but input" />
+			<hr />
+			<button type="button" id="button-button">Button</button>
+			<input type="button" id="input-button" value="Button, but input" />
+
+			<script type="module" is:inline>
+				document.querySelector('#button-button')?.addEventListener(
+					'click',
+					() => alert('Bada bing, bada button clicked.')
+				);
+				document.querySelector('#input-button')?.addEventListener('click', () => alert('Bada bing, bada input clicked.'));
+			</script>
+		</footer>
+	</form>
+</details>

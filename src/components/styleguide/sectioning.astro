@@ -1,0 +1,74 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<details open>
+	<summary>
+		<h2>Sectioning Elements</h2>
+	</summary>
+
+	<section>
+		<h3>Address</h3>
+
+		<address>
+			123 M.A.D. Way<br />
+			Fieldstown, Interwebs<br />
+			<a href="mailto:me@madcampos.dev">me@madcampos.dev</a>
+		</address>
+	</section>
+
+	<section>
+		<h3>Headings</h3>
+
+		<h1>I'm Important</h1>
+		<h2>I'm less important</h2>
+		<h3>I'm even less important</h3>
+		<h4>I'm ridiculously less important</h4>
+		<h5>I'm not important at all</h5>
+		<h6>Why even bother?</h6>
+	</section>
+
+	<section>
+		<h3>Heading Group</h3>
+
+		<hgroup>
+			<h1>Main Title & Co.</h1>
+			<p>Or: how to group a title and a subtitle together semantically, and stylistically.</p>
+		</hgroup>
+	</section>
+
+	<section>
+		<h3>Search</h3>
+
+		<search>
+			<form action="#" method="get">
+				<input-wrapper>
+					<label for="search-input">Thine inquiry:</label>
+					<input type="search" id="search-input" name="q" placeholder="Inquire away..." />
+				</input-wrapper>
+				<button type="submit">
+					<sr-only>Inquire</sr-only>
+					<Icon name="mingcute:crystal-ball-line" aria-hidden="true" />
+				</button>
+			</form>
+		</search>
+	</section>
+
+	<section>
+		<h3>Other sectioning elements</h3>
+
+		<p>Other sectioning elements are not represented directly, as they are used in conjunction with other elements as building blocks.</p>
+
+		<p>The elements are:</p>
+
+		<ul>
+			<li><code>&lt;article&gt;</code></li>
+			<li><code>&lt;aside&gt;</code></li>
+			<li><code>&lt;footer&gt;</code></li>
+			<li><code>&lt;header&gt;</code></li>
+			<li><code>&lt;main&gt;</code></li>
+			<li><code>&lt;nav&gt;</code></li>
+			<li><code>&lt;section&gt;</code></li>
+		</ul>
+	</section>
+</details>

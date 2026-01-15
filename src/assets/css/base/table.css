@@ -1,0 +1,77 @@
+@layer base {
+	table-wrapper {
+		overflow: auto;
+		display: block;
+		inline-size: 100%;
+		max-inline-size: 100%;
+		margin-inline: auto;
+		max-block-size: 70vh;
+
+		&:focus-visible {
+			outline: var(--focus-outline);
+			outline-offset: var(--size-1);
+			border-radius: var(--border-radius);
+			background-color: var(--surface-1);
+			color: var(--text-1);
+		}
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		caption-side: bottom;
+		min-inline-size: var(--size-content-2);
+		inline-size: 100%;
+
+		caption {
+			font-weight: bold;
+			font-style: italic;
+			font-size: var(--font-size-0);
+
+			width: fit-content;
+			margin-inline: auto;
+			margin-block-start: var(--size-3);
+		}
+
+		tr:nth-child(odd) { background-color: var(--table-rows-odd); }
+		tr:nth-child(even) { background-color: var(--table-rows-even); }
+		tr:hover { background-color: var(--table-rows-hover); }
+
+		:is(th, td) { padding: var(--size-1) var(--size-2); }
+
+		thead {
+			border-block-end: var(--table-header-border);
+
+			:is(th, td) {
+				background-color: var(--table-header-bg);
+				color: var(--table-header-color);
+			}
+
+			th[aria-sort] {
+				span {
+					display: flex;
+					align-items: center;
+
+					label { flex-grow: 1; }
+					button { margin: 0; }
+				}
+
+				:is(svg, use) {
+					min-inline-size: var(--size-2);
+					min-block-size: var(--size-2);
+					inline-size: var(--size-3);
+					block-size: var(--size-3);
+				}
+			}
+		}
+
+		tfoot {
+			border-block-start: var(--table-footer-border);
+
+			:is(th, td) {
+				color: var(--table-footer-color);
+				background-color: var(--table-footer-bg);
+			}
+		}
+	}
+}

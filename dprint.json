@@ -1,4 +1,6 @@
 {
+	"$schema": "https://dprint.dev/schemas/v0.json",
+	"incremental": true,
 	"lineWidth": 180,
 	"indentWidth": 4,
 	"newLineKind": "lf",
@@ -6,6 +8,7 @@
 	"typescript": {
 		"semiColons": "always",
 		"quoteStyle": "preferSingle",
+		"jsx.quoteStyle": "preferDouble",
 		"quoteProps": "consistent",
 		"useBraces": "always",
 		"bracePosition": "sameLine",
@@ -19,7 +22,7 @@
 		"binaryExpression.linePerExpression": false,
 		"jsx.bracketPosition": "nextLine",
 		"jsx.forceNewLinesSurroundingContent": false,
-		"jsx.multiLineParens": "always",
+		"jsx.multiLineParens": "prefer",
 		"memberExpression.linePerExpression": false,
 		"typeLiteral.separatorKind": "comma",
 		"enumDeclaration.memberSpacing": "newLine",
@@ -53,7 +56,9 @@
 		"module.sortImportDeclarations": "caseInsensitive",
 		"module.sortExportDeclarations": "caseInsensitive",
 		"exportDeclaration.sortNamedExports": "caseInsensitive",
+		"exportDeclaration.sortTypeOnlyExports": "first",
 		"importDeclaration.sortNamedImports": "caseInsensitive",
+		"importDeclaration.sortTypeOnlyImports": "first",
 		"ignoreNodeCommentText": "dprint-ignore-line",
 		"ignoreFileCommentText": "dprint-ignore",
 		"exportDeclaration.forceSingleLine": false,
@@ -69,8 +74,6 @@
 		"ignoreNodeCommentText": "dprint-ignore-line"
 	},
 	"malva": {
-		"printWidth": 180,
-		"lineBreak": "lf",
 		"hexCase": "lower",
 		"hexColorLength": "long",
 		"quotes": "preferSingle",
@@ -78,14 +81,19 @@
 		"blockSelectorLinebreak": "consistent",
 		"omitNumberLeadingZero": false,
 		"trailingComma": false,
-		"formatComments": false,
+		"formatComments": true,
 		"alignComments": true,
 		"linebreakInPseudoParens": false,
-		"declarationOrder": "concentric",
+		"declarationOrder": null,
 		"declarationOrderGroupBy": "nonDeclarationAndEmptyLine",
 		"singleLineBlockThreshold": 1,
+		"keyframeSelectorNotation": null,
 		"attrValueQuotes": "always",
-		"ignoreCommentDirective": "dprint-ignore"
+		"preferSingleLine": false,
+		"singleLineTopLevelDeclarations": false,
+		"selectorOverrideCommentDirective": "dprint-ignore-line",
+		"ignoreCommentDirective": "dprint-ignore",
+		"ignoreFileCommentDirective": "dprint-ignore-file"
 	},
 	"markdown": {
 		"textWrap": "maintain",
@@ -97,16 +105,15 @@
 		"ignoreEndDirective": "dprint-ignore-end"
 	},
 	"markup": {
-		"printWidth": 180,
-		"lineBreak": "lf",
 		"quotes": "double",
-		"formatComments": false,
+		"formatComments": true,
 		"scriptIndent": true,
 		"styleIndent": true,
 		"closingBracketSameLine": false,
 		"closingTagLineBreakForEmpty": "fit",
 		"maxAttrsPerLine": null,
 		"preferAttrsSingleLine": false,
+		"singleAttrSameLine": true,
 		"html.normal.selfClosing": false,
 		"html.void.selfClosing": true,
 		"component.selfClosing": true,
@@ -120,14 +127,18 @@
 		"vForDelimiterStyle": "of",
 		"vSlotStyle": "short",
 		"vBindSameNameShortHand": false,
+		"vueComponentCase": "pascalCase",
+		"strictSvelteAttr": false,
+		"svelteAttrShorthand": true,
+		"svelteDirectiveShorthand": true,
 		"astroAttrShorthand": true,
+		"angularNextControlFlowSameLine": true,
+		"scriptFormatter": "dprint",
 		"ignoreCommentDirective": "dprint-ignore",
 		"ignoreFileCommentDirective": "dprint-ignore-file"
 	},
 	"yaml": {
-		"printWidth": 180,
 		"indentWidth": 2,
-		"lineBreak": "lf",
 		"quotes": "preferDouble",
 		"trailingComma": true,
 		"formatComments": false,
@@ -135,6 +146,7 @@
 		"braceSpacing": true,
 		"bracketSpacing": false,
 		"dashSpacing": "oneSpace",
+		"preferSingleLine": false,
 		"trimTrailingWhitespaces": true,
 		"trimTrailingZero": false,
 		"ignoreCommentDirective": "dprint-ignore"
@@ -143,19 +155,22 @@
 		"indentWidth": 4,
 		"useTabs": true,
 		"newLineKind": "lf",
-		"comment.forceLeadingSpace": true
+		"comment.forceLeadingSpace": true,
+		"cargo.applyConventions": true
 	},
 	"excludes": [
 		"dist/**",
 		"**/node_modules",
-		"**/*-lock.json"
+		"**/*-lock.json",
+		"**/pnpm-lock.yaml",
+		"src/content/.obsidian/**"
 	],
 	"plugins": [
-		"https://plugins.dprint.dev/typescript-0.95.7.wasm",
+		"https://plugins.dprint.dev/typescript-0.95.11.wasm",
 		"https://plugins.dprint.dev/json-0.20.0.wasm",
-		"https://plugins.dprint.dev/g-plane/malva-v0.12.1.wasm",
-		"https://plugins.dprint.dev/g-plane/markup_fmt-v0.21.0.wasm",
-		"https://plugins.dprint.dev/markdown-0.18.0.wasm",
+		"https://plugins.dprint.dev/g-plane/malva-v0.14.3.wasm",
+		"https://plugins.dprint.dev/g-plane/markup_fmt-v0.23.4.wasm",
+		"https://plugins.dprint.dev/markdown-0.19.0.wasm",
 		"https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm",
 		"https://plugins.dprint.dev/toml-0.7.0.wasm"
 	]

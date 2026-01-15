@@ -1,0 +1,482 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import avatar from '../../assets/images/me.jpg';
+import { inlineMarkdownRender } from '../../utils/markdown.ts';
+import { listAllPosts } from '../../utils/post.ts';
+import { listAllProjects } from '../../utils/projects.ts';
+import Card from '../Card.astro';
+import OldStyleButtons from '../OldStyleButtons.astro';
+import Pagination from '../Pagination.astro';
+import PromptInjection from '../PromptInjection.astro';
+import SiteNav from '../SiteNav.astro';
+import Webrings from '../Webrings.astro';
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const project = (await listAllProjects())[0]!;
+const ProjectContent = (await project.render()).Content;
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const post = (await listAllPosts())[0]!;
+---
+<details open>
+	<summary>
+		<h2>Components</h2>
+	</summary>
+
+	<section>
+		<h3>Author Card</h3>
+
+		<author-card>
+			<aside itemprop="author" itemscope itemtype="https://schema.org/Person">
+				<a href="https://madcampos.dev/">
+					<m-avatar>
+						<picture
+							class="user-avatar"
+							itemprop="image"
+							itemscope
+							itemtype="https://schema.org/ImageObject"
+						>
+							<Image
+								class="u-photo photo"
+								itemprop="contentUrl"
+								src={avatar}
+								alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
+								loading="lazy"
+								widths={/* eslint-disable-line @typescript-eslint/no-magic-numbers */ [128, 256, 512, 768, 1024]}
+								width={512}
+								sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+								quality={75}
+							/>
+						</picture>
+					</m-avatar>
+				</a>
+
+				<a class="p-author h-card author-name" rel="author" itemprop="url" href="https://madcampos.dev/">
+					<h2 itemprop="name">Marco Campos</h2>
+				</a>
+
+				<p>
+					Marco is a Staff developer with over 15 years of experience, ranging from front-end to back-end development, and as he likes to put it: "When I started layouts
+					were done with tables and Flash was still a thing." He has a passion for accessibility and PWAs and loves to teach and share his knowledge with others. He
+					strongly believe that technology and specially the web should be open and available to eveyone, and that's why he's always looking for ways to make the web a
+					better place and contribute to open source projects.
+				</p>
+			</aside>
+		</author-card>
+	</section>
+
+	<section>
+		<h3>Avatar</h3>
+
+		<m-avatar>
+			<picture
+				class="user-avatar"
+				itemprop="image"
+				itemscope
+				itemtype="https://schema.org/ImageObject"
+			>
+				<Image
+					class="u-photo photo"
+					itemprop="contentUrl"
+					src={avatar}
+					alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
+					loading="lazy"
+					widths={/* eslint-disable-line @typescript-eslint/no-magic-numbers */ [128, 256, 512, 768, 1024]}
+					width={512}
+					sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+					quality={75}
+				/>
+			</picture>
+		</m-avatar>
+	</section>
+
+	<section>
+		<h3>Baseline Info</h3>
+
+		<baseline-info feature="conic-gradients"></baseline-info>
+		<baseline-info feature="declarative-shadow-dom"></baseline-info>
+		<baseline-info feature="network-information"></baseline-info>
+		<baseline-info feature="foo-bar-baz"></baseline-info>
+	</section>
+
+	<section>
+		<h3>Card</h3>
+
+		<Card
+			url={project.data.url}
+			draft={project.data.draft}
+			itemtype="http://schema.org/WebApplication"
+			image={project.data.image}
+			imageAlt={project.data.imageAlt ?? ''}
+			themeImages={project.data.themeImages}
+			extraClass="project-card"
+		>
+			<Fragment slot="meta">
+				<meta itemprop="operatingSystem" content="https://schema.org/AllOperatingSystem" />
+				<meta itemprop="browserRequirements" content="https://schema.org/GenericWebPlatform" />
+				<meta itemprop="applicationCategory" content="BrowserApplication" />
+				<div itemprop="offers" itemscope itemtype="https://schema.org/Offer" hidden>
+					<meta itemprop="availability" content="https://schema.org/InStock" />
+					<meta itemprop="price" content="0" />
+					<meta itemprop="priceCurrency" content="USD" />
+				</div>
+				<meta itemprop="isAccessibleForFree" content="True" />
+			</Fragment>
+			<h2 slot="title">
+				{/* eslint-disable-next-line astro/no-set-html-directive */}
+				<Fragment set:html={inlineMarkdownRender(project.data.title)} />
+			</h2>
+
+			<Fragment slot="subtitle">
+				<draft-tag data-status={project.data.status}>
+					<Icon name={project.data.status === 'ongoing' ? 'mingcute:time-line' : 'mingcute:check-circle-line'} title="Project status" /> {
+						project.data.status === 'ongoing' ? 'Ongoing' : 'Finished'
+					}
+				</draft-tag>
+				<span>
+					<Icon name="mingcute:calendar-2-line" title="Date started" />
+					<time datetime={project.data.createdAt.toISOString()} itemprop="dateCreated">{formatter.format(project.data.createdAt)}</time>
+					{
+						project.data.updatedAt && (
+							<span>&mdash; <time datetime={project.data.updatedAt.toISOString()} itemprop="dateModified">{formatter.format(project.data.updatedAt)}</time></span>
+						)
+					}
+				</span>
+				<span itemprop="softwareVersion">
+					<Icon name="mingcute:package-2-line" title="Current version" /> {project.data.version}
+				</span>
+			</Fragment>
+
+			<ProjectContent />
+
+			<Fragment slot="links">
+				{
+					project.data.url && (
+						<a href={project.data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
+							<Icon name="mingcute:link-2-line" aria-hidden="true" />
+							View Project
+						</a>
+					)
+				}
+				&nbsp;
+				{
+					project.data.repository && (
+						<a href={project.data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
+							<Icon name="mingcute:github-line" aria-hidden="true" />
+							View Repository
+						</a>
+					)
+				}
+			</Fragment>
+
+			<details slot="footer">
+				<summary>
+					<span>
+						<Icon name="mingcute:tool-line" aria-hidden="true" />
+						Technologies used
+					</span>
+				</summary>
+
+				<tag-list>
+					<ul>
+						{project.data.techStack?.map((tech) => <li><tag-item><span>{tech}</span></tag-item></li>)}
+					</ul>
+				</tag-list>
+			</details>
+		</Card>
+	</section>
+
+	<section>
+		<h3>CSS Naked Day Info</h3>
+
+		<p>This component is in the header of most pages, but only shows when CSS is disabled.</p>
+
+		<p><a href="/styleguide/?css=disabled">Reload Page with CSS off</a></p>
+		<p><a href="/styleguide/?css=">Reload Page with CSS back to default</a></p>
+	</section>
+
+	<section>
+		<h3>Draft Tag</h3>
+
+		<p>Marks when a post or other entry is a "draft".</p>
+		<p>This is a <draft-tag>Draft</draft-tag></p>
+	</section>
+
+	<section>
+		<h3>In-App Browser Escape</h3>
+
+		<p>For various reasons, In-App Browsers are a curse. This JS componet loads when you are in one of those.</p>
+		<p>To test the component click on the link below:</p>
+		<p><a href="/styleguide/?iabEscape=true">Reload Page with IAB debugging enabled</a></p>
+	</section>
+
+	<section>
+		<h3>Image Lightbox</h3>
+
+		<p>This enables extra features to images when they are inside a <code>&lt;img-lightbox&gt;</code> component.</p>
+
+		<img-lightbox>
+			<img
+				src="/assets/images/test/good-parts.webp"
+				alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
+				loading="lazy"
+				width="512"
+			/>
+		</img-lightbox>
+	</section>
+
+	<section>
+		<h3>Logo</h3>
+
+		<p><a href="/brand/">For logo information, see the brand page</a></p>
+	</section>
+
+	<section>
+		<h3>Notes</h3>
+
+		<m-note data-type="success">
+			<Icon name="mingcute:check-circle-line" aira-hidden="true" />
+			<rendered-content>
+				<p>You have been <strong>succeeded</strong>.</p>
+			</rendered-content>
+		</m-note>
+
+		<m-note data-type="error">
+			<Icon name="mingcute:alert-octagon-line" aira-hidden="true" />
+			<rendered-content>
+				<p>You have been <strong>errorred</strong>.</p>
+			</rendered-content>
+		</m-note>
+
+		<m-note data-type="warning">
+			<Icon name="mingcute:alert-line" aira-hidden="true" />
+			<rendered-content>
+				<p>You have been <strong>warned</strong>.</p>
+			</rendered-content>
+		</m-note>
+
+		<m-note data-type="alert">
+			<Icon name="mingcute:alert-diamond-line" aira-hidden="true" />
+			<rendered-content>
+				<p>You have been <strong>alerted</strong>.</p>
+			</rendered-content>
+		</m-note>
+
+		<m-note data-type="info">
+			<Icon name="mingcute:information-line" aira-hidden="true" />
+			<rendered-content>
+				<p>You have been <strong>informed</strong>.</p>
+			</rendered-content>
+		</m-note>
+
+		<m-note data-type="debug">
+			<Icon name="mingcute:question-line" aira-hidden="true" />
+			<rendered-content>
+				<p>You have been <strong>debugged</strong>.</p>
+			</rendered-content>
+		</m-note>
+	</section>
+
+	<section>
+		<h3>Old Style Buttons</h3>
+
+		<OldStyleButtons />
+	</section>
+
+	<section>
+		<h3>Pagination</h3>
+
+		<Pagination
+			baseUrl="/err/"
+			currentPage={2}
+			lastPage={5}
+			start={9}
+			end={19}
+			total={47}
+			size={10}
+		/>
+	</section>
+
+	<section>
+		<h3>Post Header</h3>
+
+		<post-header>
+			<header>
+				{post.data.draft && <draft-tag>Draft</draft-tag>}
+				<a class="u-uid u-url" href={Astro.url.pathname}>
+					{/* eslint-disable-next-line astro/no-set-html-directive */}
+					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(post.data.title)} /></h1>
+				</a>
+
+				{
+					post.data.image && (
+						<figure>
+							<Image
+								src={post.data.image}
+								alt={post.data.imageAlt ?? ''}
+								itemprop="image"
+								loading="eager"
+							/>
+							{/* eslint-disable-next-line astro/no-set-html-directive */}
+							{post.data.imageRights && <figcaption><Fragment set:html={inlineMarkdownRender(post.data.imageRights)} /></figcaption>}
+						</figure>
+					)
+				}
+
+				<blockquote class="p-summary" itemprop="description">
+					{/* eslint-disable-next-line astro/no-set-html-directive */}
+					<p><Fragment set:html={inlineMarkdownRender(post.data.summary)} /></p>
+				</blockquote>
+
+				<post-metadata>
+					<aside>
+						<span>
+							Published on <time itemprop="datePublished" class="dt-published" datetime={post.data.createdAt.toISOString()}>{
+								formatter.format(post.data.createdAt)
+							}</time>.
+						</span>
+
+						{
+							post.data.updatedAt && (
+								<span>
+									Updated on <time itemprop="dateModified" class="dt-updated" datetime={post.data.updatedAt.toISOString()}>{
+										formatter.format(post.data.updatedAt)
+									}</time>.
+								</span>
+							)
+						}
+
+						{
+							post.readingTime && (
+								<span>
+									<time itemprop="timeRequired" class="dt-duration" datetime={`PT${post.readingTime}M`}>
+										{post.readingTime} minute read
+									</time>
+									{post.wordCount && <span> &mdash; {post.wordCount} words</span>}
+								</span>
+							)
+						}
+					</aside>
+				</post-metadata>
+
+				<share-options></share-options>
+			</header>
+		</post-header>
+	</section>
+
+	<section>
+		<h3>Prompt Injection</h3>
+
+		<PromptInjection />
+	</section>
+
+	<section>
+		<h3>Related Posts</h3>
+
+		<related-posts>
+			<nav>
+				<ul>
+					{
+						post.relatedPosts.map((relatedPost) => (
+							<li>
+								<Card
+									url={`/blog/${relatedPost.url}/`}
+									itemtype="https://schema.org/BlogPosting"
+									image={relatedPost.image}
+									imageAlt={relatedPost.imageAlt ?? ''}
+								>
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
+									<Fragment slot="title" set:html={inlineMarkdownRender(relatedPost.title)} />
+
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
+									<Fragment set:html={inlineMarkdownRender(relatedPost.summary)} />
+								</Card>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+		</related-posts>
+	</section>
+
+	<section>
+		<h3>Scroll to Top</h3>
+
+		<p>Will be visible overlaying the content.</p>
+
+		<scroll-to-top>
+			<a href="#page-top">
+				<Icon name="mingcute:arrow-to-up-line" aria-hidden="true" />
+				<span>Scroll to top</span>
+				<Icon name="mingcute:arrow-to-up-line" aria-hidden="true" />
+			</a>
+		</scroll-to-top>
+	</section>
+
+	<section>
+		<h3>Share Options</h3>
+
+		<share-options></share-options>
+	</section>
+
+	<section>
+		<h3>Site Nav</h3>
+
+		<SiteNav />
+	</section>
+
+	<section>
+		<h3>Skip to Main Content</h3>
+
+		<p>This is the first element, will be visible when focused.</p>
+		<button type="button" id="focus-skip-link">Focus skip link</button>
+		<script type="module" is:inline>
+			document.querySelector('#focus-skip-link')?.addEventListener('click', () => {
+				(/** @type {HTMLAnchorElement} */ (document.querySelector('skip-to-content a')))?.focus({
+					preventScroll: false,
+					// @ts-expect-error
+					focusVisible: true
+				});
+			});
+		</script>
+	</section>
+
+	<section>
+		<h3>Screen Reader Only</h3>
+
+		<p>The text below will not be visible.</p>
+		<sr-only>This text will only be read by screen readers.</sr-only>
+	</section>
+
+	<section>
+		<h3>Tag List</h3>
+
+		<tag-list>
+			<ul>
+				{
+					post.data.tags?.map((tag) => (
+						<li class="p-category">
+							<tag-item>
+								<a href={`/blog/tags/${tag}/`}>{tag}</a>
+							</tag-item>
+						</li>
+					))
+				}
+			</ul>
+		</tag-list>
+	</section>
+
+	<section>
+		<h3>Theme Switcher</h3>
+
+		<theme-switcher></theme-switcher>
+	</section>
+
+	<section>
+		<h3>Web Rings</h3>
+
+		<Webrings />
+	</section>
+</details>

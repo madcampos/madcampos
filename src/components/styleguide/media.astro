@@ -1,0 +1,121 @@
+---
+
+---
+<details open>
+	<summary>
+		<h2>Media Elements</h2>
+	</summary>
+
+	<section>
+		<h3>Image & Picture</h3>
+
+		<p>An image:</p>
+
+		<img
+			src="/assets/images/test/same-meme-clean.webp"
+			alt="A meme from The Office with two panels, on the top two squares, one has the text &quot;img&quot;, and the other has the text &quot;picture&quot;. Below them a caption reads &quot;Corporate needs you to find the difference between this picture and this picture.&quot;. The panel below has Pam staring at the camera with a smirk and the caption &quot;They're the same picture.&quot;"
+			loading="lazy"
+			width="512"
+		/>
+
+		<p>A <em>picture</em>:</p>
+
+		<picture>
+			<source srcset="/assets/images/test/same-meme.jxl" type="image/jxl" />
+			<source srcset="/assets/images/test/same-meme.avif" type="image/avif" />
+			<source srcset="/assets/images/test/same-meme.webp" type="image/webp" />
+			<source srcset="/assets/images/test/same-meme.png" type="image/png" />
+			<source srcset="/assets/images/test/same-meme.gif" type="image/gif" />
+			<img
+				src="/assets/images/test/same-meme.jpg"
+				alt="A meme from The Office with two panels, on the top two squares, one has the text &quot;img&quot;, and the other has the text &quot;picture&quot;. Below them a caption reads &quot;Corporate needs you to find the difference between this picture and this picture.&quot;. The panel below has Pam staring at the camera with a smirk and the caption &quot;They're the same picture.&quot;"
+				loading="lazy"
+				width="512"
+			/>
+		</picture>
+
+		<p>An error image:</p>
+
+		<img
+			src="x-err-protocol://error"
+			alt="Error loading image"
+			loading="lazy"
+			width="512"
+			data-load-error
+		/>
+	</section>
+
+	<section>
+		<h3>Area & Map</h3>
+
+		<map name="click-here">
+			<area shape="rect" coords="0,3,200,200" href="#click" alt="Click" />
+			<area shape="rect" coords="200,0,400,200" href="#here" alt="Here" />
+			<img
+				src="/assets/images/test/click-here.svg"
+				alt="A teal background with black text on top saying &quot;Click Here&quot;."
+				width="400"
+				usemap="#click-here"
+			/>
+		</map>
+	</section>
+
+	<section>
+		<h3>Audio</h3>
+
+		<p>Regular audio:</p>
+		<audio
+			src="/assets/audio/bourbon-blues.mp3"
+			controls
+			preload="auto"
+			playsinline
+		>
+			<a href="/assets/audio/bourbon-blues.mp3" download>Download the audio file</a>
+		</audio>
+
+		<p>Error audio:</p>
+
+		<audio
+			src="x-err-protocol://error"
+			controls
+			preload="auto"
+			playsinline
+			data-load-error
+		>
+		</audio>
+	</section>
+
+	<section>
+		<h3>Video</h3>
+
+		<p>Regular video:</p>
+		<video controls playsinline>
+			<source src="/assets/video/test/big-buck-bunny.webm" type="video/webm" />
+			<source src="/assets/video/test/big-buck-bunny.mp4" type="video/mp4" />
+			<track kind="subtitles" default label="Test Subtitles" src="/assets/video/test/subtitles.vtt" />
+			<track kind="captions" label="Test Captions" src="/assets/video/test/captions.vtt" />
+			<track kind="descriptions" label="Test Descriptions" src="/assets/video/test/descriptions.vtt" />
+			<track kind="chapters" label="Test Chapters" src="/assets/video/test/chapters.vtt" />
+		</video>
+
+		<details>
+			<summary>Video Description</summary>
+
+			<p>
+				The video contains the first 10 seconds of "<cite><a href="https://peach.blender.org/" target="_blank" rel="noopener noreferrer">Big Buck Bunny</a></cite>" with no
+				audio.
+			</p>
+
+			<p>In the background there is a lush forest with dense trees.</p>
+			<p>In the foreground a small grassy hill with a thick tree on top of it and some rocks scattered around.</p>
+			<p>On that hill there is a round opening to a hole.</p>
+			<p>The camera slowly closes in to the hole.</p>
+		</details>
+
+		<p>Error video:</p>
+
+		<video controls playsinline data-load-error>
+			<source src="x-err-protocol://error" type="appliaction/x-error" />
+		</video>
+	</section>
+</details>

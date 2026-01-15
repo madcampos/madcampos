@@ -1,0 +1,44 @@
+@keyframes js {
+	from { --opacity: 1; }
+	to { --opacity: 0; }
+}
+
+button { animation: 3s steps(2) infinite; }
+button #button-base { fill: tan; }
+button text {
+	font-weight: bold;
+	font-size: 7px;
+	font-family: var(--button-font-didone);
+}
+
+button tspan:nth-child(1) {
+	fill: brown;
+	font-size: 10px;
+	font-family: var(--button-font-slab);
+}
+
+button #button-warning-icon { opacity: var(--opacity); }
+
+button:hover #button-base { fill: peru; }
+
+button:active #button-base { fill: maroon; }
+button:active text { fill: tan; }
+button:active tspan:nth-child(1) { fill: white; }
+
+@media not (prefers-reduced-motion) { button { animation-name: js; } }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button { animation-name: none; }
+	button #button-base { fill: var(--theme-color); }
+	button text { fill: var(--surface-2); }
+	button tspan:nth-child(1) { fill: var(--surface-1); }
+
+	button #button-warning-icon > path:nth-child(1) { fill: var(--text-1); }
+	button #button-warning-icon > path:nth-child(2) { fill: var(--accent-color); }
+	button #button-warning-icon > g { stroke: var(--surface-2); }
+
+	button:hover #button-base { fill: var(--accent-color); }
+
+	button:active #button-base { fill: var(--text-1); }
+	button:active :is(text, tspan:nth-child(1)) { fill: var(--surface-1); }
+}

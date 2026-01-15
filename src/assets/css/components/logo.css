@@ -1,0 +1,224 @@
+@layer components {
+	m-logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		container-name: logo;
+		container-type: inline-size;
+		margin-inline: auto;
+		inline-size: clamp(var(--size-header-0), 70vmin, var(--size-header-4));
+
+		.logo-part {
+			fill: var(--logo-part-color);
+			stroke: var(--logo-part-stroke);
+			stroke-width: var(--logo-part-stroke-width);
+		}
+
+		.logo-extras {
+			fill: var(--logo-extras-color);
+			stroke: var(--logo-extras-stroke);
+			stroke-width: var(--logo-extras-stroke-width);
+		}
+
+		.logo-text {
+			fill: var(--logo-text-color);
+			stroke: var(--logo-text-stroke);
+			stroke-width: var(--logo-text-stroke-width);
+			font-weight: var(--logo-font-weight);
+			font-family: var(--logo-font);
+		}
+
+		:where(.noise-logo, .overlay-logo, .pixelated-logo) { fill: transparent; }
+
+		svg {
+			paint-order: stroke;
+			inline-size: 100%;
+			block-size: 100%;
+			object-fit: contain;
+		}
+
+		[data-theme] { visibility: hidden; }
+
+		[data-theme='system'] {
+			&:where([data-size='full']) { visibility: visible; }
+
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
+
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
+
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='system'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			height: 10rem;
+
+			@container logo (max-width: 15rem) { height: 7rem; }
+
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='system'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			height: 15rem;
+
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='system'][data-size='micro']) { visibility: visible; }
+
+			@container logo (max-width: 15rem) { height: 10rem; }
+		}
+
+		&[glitch] svg {
+			image-rendering: pixelated;
+
+			@media not (prefers-reduced-motion) {
+				.pixelated-logo {
+					filter: url('#pixelate-filter');
+					fill: var(--logo-pixel-color);
+				}
+
+				.logo-part { /* filter: url("#glitch-filter"); */ filter: url('#animated-glitch-filter'); }
+
+				.overlay-logo {
+					opacity: 0.6;
+					mix-blend-mode: overlay;
+					fill: var(--logo-overlay-color);
+				}
+
+				.noise-logo {
+					filter: url('#noise-filter');
+					fill: var(--logo-noise-color);
+				}
+			}
+		}
+
+		a {
+			display: block;
+			inline-size: 100%;
+			block-size: 100%;
+
+			&:focus-visible {
+				.logo-part {
+					--logo-part-color: var(--logo-part-focus-color);
+					--logo-part-stroke: var(--logo-part-focus-stroke);
+				}
+
+				.logo-text {
+					--logo-text-color: var(--logo-text-focus-color);
+					--logo-text-stroke: var(--logo-text-focus-stroke);
+				}
+
+				.logo-extras {
+					--logo-extras-color: var(--logo-extras-focus-color);
+					--logo-extras-stroke: var(--logo-extras-focus-stroke);
+				}
+			}
+
+			&:hover {
+				.logo-part {
+					--logo-part-color: var(--logo-part-hover-color);
+					--logo-part-stroke: var(--logo-part-hover-stroke);
+				}
+
+				.logo-text {
+					--logo-text-color: var(--logo-text-hover-color);
+					--logo-text-stroke: var(--logo-text-hover-stroke);
+				}
+
+				.logo-extras {
+					--logo-extras-color: var(--logo-extras-hover-color);
+					--logo-extras-stroke: var(--logo-extras-hover-stroke);
+				}
+			}
+
+			&:active {
+				.logo-part {
+					--logo-part-color: var(--logo-part-active-color);
+					--logo-part-stroke: var(--logo-part-active-stroke);
+				}
+
+				.logo-text {
+					--logo-text-color: var(--logo-text-active-color);
+					--logo-text-stroke: var(--logo-text-active-stroke);
+				}
+
+				.logo-extras {
+					--logo-extras-color: var(--logo-extras-active-color);
+					--logo-extras-stroke: var(--logo-extras-active-stroke);
+				}
+			}
+		}
+
+		/* Micro Logo text dashes */
+		text[data-size='micro']:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+		text[data-size='micro']:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+		text[data-size='micro']:has(tspan:nth-child(9 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+		text[data-size='micro']:not(:has(.logo-text-content)) { visibility: hidden; }
+
+		/* Mini logo text dashes */
+		text[data-size='mini']:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+		text[data-size='mini']:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-end),
+		text[data-size='mini']:has(tspan:nth-child(9 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-end),
+		text[data-size='mini']:has(tspan:nth-child(10 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(11 of .logo-text-content)) tspan:nth-child(8 of .logo-text-padding-start),
+		text[data-size='mini']:has(tspan:nth-child(12 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+		text[data-size='mini']:not(:has(.logo-text-content)) { visibility: hidden; }
+
+		/* Full logo text dashes */
+		text[data-size='full']:has(tspan:nth-child(1 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(2 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(3 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(4 of .logo-text-content)) tspan:nth-child(4 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(5 of .logo-text-content)) tspan:nth-child(5 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(6 of .logo-text-content)) tspan:nth-child(6 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(7 of .logo-text-content)) tspan:nth-child(7 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(8 of .logo-text-content)) tspan:nth-child(8 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(9 of .logo-text-content)) tspan:nth-child(9 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(10 of .logo-text-content)) tspan:nth-child(10 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(11 of .logo-text-content)) tspan:nth-child(11 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(12 of .logo-text-content)) tspan:nth-child(12 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(13 of .logo-text-content)) tspan:nth-child(13 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(14 of .logo-text-content)) tspan:nth-child(14 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(15 of .logo-text-content)) tspan:nth-child(1 of .logo-text-padding-end),
+		text[data-size='full']:has(tspan:nth-child(16 of .logo-text-content)) tspan:nth-child(2 of .logo-text-padding-end),
+		text[data-size='full']:has(tspan:nth-child(17 of .logo-text-content)) tspan:nth-child(15 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(18 of .logo-text-content)) tspan:nth-child(16 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(19 of .logo-text-content)) tspan:nth-child(3 of .logo-text-padding-end),
+		text[data-size='full']:has(tspan:nth-child(20 of .logo-text-content)) tspan:nth-child(17 of .logo-text-padding-start),
+		text[data-size='full']:has(tspan:nth-child(21 of .logo-text-content)) :is(.logo-text-padding-start, .logo-text-padding-end),
+		text[data-size='full']:not(:has(.logo-text-content)) { visibility: hidden; }
+
+		dialog {
+			text-align: start;
+			inline-size: fit-content;
+			block-size: fit-content;
+
+			ul {
+				list-style: none;
+				padding-inline-start: 0;
+			}
+
+			hr {
+				max-inline-size: var(--size-content-1);
+				margin-inline: 0;
+				margin-block-start: var(--size-3);
+			}
+		}
+	}
+}

@@ -1,0 +1,139 @@
+@layer page {
+	:is(dt, li):has(entry-title) {
+		display: grid;
+		grid-template-columns: 1fr var(--size-7) auto;
+		grid-template-rows: repeat(2, auto);
+		grid-template-areas:
+			'title . date'
+			'subtitle . location';
+		justify-content: space-between;
+		align-items: start;
+		color: var(--secondary-color);
+		margin-block-start: var(--size-7);
+
+		&:has(svg[data-icon]) {
+			grid-template-columns: auto var(--size-1) 1fr var(--size-7) auto;
+			grid-template-areas:
+				'icon . title . date'
+				'icon . subtitle . location';
+		}
+
+		svg[data-icon] {
+			grid-area: icon;
+			align-self: center;
+			justify-self: center;
+			inline-size: var(--size-6);
+			block-size: auto;
+			color: var(--theme-color);
+		}
+
+		entry-title {
+			grid-area: title;
+			font-family: var(--headers-font-family);
+			font-size: var(--font-size-3);
+			color: var(--accent-color);
+			font-weight: bold;
+		}
+
+		entry-subtitle {
+			grid-area: subtitle;
+			font-family: var(--headers-font-family);
+			font-size: var(--font-size-1);
+
+			small {
+				font-size: var(--font-size-0);
+
+				&::before { content: '('; }
+				&::after { content: ')'; }
+			}
+		}
+
+		entry-date {
+			grid-area: date;
+			text-transform: uppercase;
+			font-size: var(--font-size-0);
+			text-align: end;
+		}
+
+		entry-location {
+			grid-area: location;
+			font-size: var(--font-size-0);
+			text-align: end;
+		}
+	}
+
+	/* Hide older experiences from printed resume */
+	:is(dt, li):has([data-old-entry]):nth-child(n+2) {
+		& + dd { @media print { display: none; } }
+
+		@media print { display: none; }
+	}
+
+	header details {
+		ul {
+			display: flex;
+			list-style: none;
+			padding-inline-start: 0;
+			gap: var(--size-7);
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		@media print { display: none; }
+	}
+
+	hgroup {
+		font-size: var(--font-size-4);
+		font-family: var(--code-font-family);
+
+		h1 { font-size: var(--font-size-8); }
+	}
+
+	hr {
+		width: 100%;
+		max-width: var(--size-content-2);
+		margin-block-start: var(--size-7);
+	}
+
+	blockquote {
+		font-style: italic;
+		max-width: var(--size-content-3);
+		font-size: var(--font-size-2);
+	}
+
+	main { @media print { padding-inline: var(--size-4); } }
+
+	#links {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--size-3);
+		list-style: none;
+		padding-inline-start: 0;
+
+		@media print {
+			display: block;
+			list-style: none;
+		}
+	}
+
+	#skill-list {
+		columns: var(--size-content-1) auto;
+		list-style-position: inside;
+		padding-inline-start: 0;
+	}
+
+	#awards {
+		ul { padding-inline-start: 0; }
+
+		@media print { display: none; }
+	}
+
+	#projects { @media print { display: none; } }
+	#experience {
+		@media print {
+			break-before: always;
+			break-inside: avoid;
+		}
+	}
+}

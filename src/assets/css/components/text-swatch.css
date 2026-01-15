@@ -1,0 +1,35 @@
+@layer components {
+	text-swatch {
+		display: contents;
+
+		figure {
+			background: var(--surface-2);
+			border: var(--border-size) var(--border-style) var(--theme-color);
+			border-radius: var(--border-radius);
+			padding: var(--size-1);
+
+			article {
+				display: grid;
+				place-content: center;
+				font-family: var(--swatch-font, var(--text-font-family));
+				text-align: center;
+				padding: var(--size-2);
+
+				background: var(--surface-1);
+				color: var(--text-1);
+				min-inline-size: 7rem;
+				max-inline-size: 30rem;
+				inline-size: 100%;
+
+				p:nth-of-type(1) { font-size: var(--font-size-5); }
+				p:nth-of-type(2) { font-size: var(--font-size-1); }
+				p:nth-of-type(3) { font-size: var(--font-size-0); }
+			}
+
+			figcaption {
+				font-weight: bold;
+				font-style: italic;
+			}
+		}
+	}
+}

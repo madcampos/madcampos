@@ -1,0 +1,17 @@
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - "web-features"
+  - "wrangler"
+  - "workerd"
+  - "miniflare"
+  - "@cloudflare/*"
+trustPolicy: "no-downgrade"
+trustPolicyExclude:
+  - "chokidar@4.0.3"
+  - "vite@6.4.1"
+preferFrozenLockfile: true
+ignoreScripts: true
+ignoreDepScripts: true
+strictDepBuilds: true
+engineStrict: true
+ignorePnpmfile: true

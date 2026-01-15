@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+import LogoSvg from './LogoSvg.astro';
+
+type LogoThemes = 'all' | 'hacker' | 'system' | 'uwu' | 'y2k';
+type LogoSizes = 'all' | 'full' | 'micro' | 'mini';
+
+interface Props {
+	title: string;
+	subtitle: string;
+	shortSubtitle: string;
+	url?: URL | string;
+
+	micro?: boolean;
+	mini?: boolean;
+	full?: boolean;
+	glitch?: boolean;
+	theme?: LogoThemes;
+	setSvgSize?: boolean;
+}
+
+function generateUniqueId() {
+	return Math.trunc(Math.random() * 1000000).toString(16);
+}
+
+const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch, theme, setSvgSize = false } = Astro.props;
+
+const logoLabelId = generateUniqueId();
+
+let svgSize: LogoSizes = 'all';
+
+if (setSvgSize && full) {
+	svgSize = 'full';
+} else if (setSvgSize && mini) {
+	svgSize = 'mini';
+} else if (setSvgSize && micro) {
+	svgSize = 'micro';
+}
+---
+<m-logo {micro} {mini} {full} {glitch}>
+	<a href={url ?? Astro.url.pathname} class="u-url url">
+		<LogoSvg {url} {title} {subtitle} {shortSubtitle} {theme} size={svgSize} />
+	</a>
+	<dialog popover="manual" closedby="closerequest" id={`logo-menu-${logoLabelId}`}>
+		<header>
+			<h2>Logo Menu</h2>
+			<button type="button" popovertarget={`logo-menu-${logoLabelId}`} popovertargetaction="hide">
+				<sr-only>Close Menu</sr-only>
+				<Icon name="mingcute:close-line" aria-hidden="true" />
+			</button>
+		</header>
+		<dialog-content>
+			<nav>
+				<ul>
+					<li><a download="full.svg">Download the "Full Logo"</a></li>
+					<li><a download="mini.svg">Download the "Mini Logo"</a></li>
+					<li><a download="micro.svg">Download the "Micro Logo"</a></li>
+					<li><hr /></li>
+					<li><a href="/data/logo.zip">Download all logos</a></li>
+					<li><a href="/brand/">Go to the Brand Page</a></li>
+					<li><hr /></li>
+					<li><a href={url ?? Astro.url.pathname}>Go to "{title}"</a></li>
+				</ul>
+			</nav>
+		</dialog-content>
+	</dialog>
+</m-logo>

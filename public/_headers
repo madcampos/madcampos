@@ -1,0 +1,6 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+
+/.well-known/webfinger
+  Content-Type: application/jrd+json

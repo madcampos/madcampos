@@ -1,0 +1,48 @@
+@layer pages {
+	body {
+		display: flex;
+		flex-direction: column;
+		justify-content: stretch;
+		align-items: stretch;
+		background: var(--surface-1);
+		color: var(--text-1);
+	}
+
+	body > header {
+		display: flex;
+		flex-direction: column;
+		place-items: center stretch;
+		gap: var(--size-3);
+	}
+
+	h1 {
+		hyphenate-character: '-';
+		hyphenate-limit-chars: 8 3 2;
+		padding: var(--size-3);
+		-webkit-hyphens: auto;
+		hyphens: auto;
+		line-break: loose;
+		overflow-wrap: break-word;
+		text-wrap: balance;
+		word-break: break-word;
+	}
+
+	body > main {
+		flex-grow: 1;
+		inline-size: 100%;
+		max-inline-size: var(--size-content-4);
+		margin-inline: auto;
+		padding-inline: clamp(var(--size-3), 10vw, var(--size-10));
+	}
+
+	body > footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		align-items: stretch;
+		gap: var(--size-2);
+		margin-inline: auto;
+		padding: var(--size-3);
+		inline-size: clamp(var(--size-content-1), 80vw, var(--size-content-4));
+	}
+}

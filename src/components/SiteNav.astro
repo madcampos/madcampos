@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+<site-nav>
+	<nav aria-labelledby="site-nav-label">
+		<sr-only id="site-nav-label">Main Links</sr-only>
+		<ul>
+			<li>
+				<a href="/">
+					<Icon name="mingcute:home-3-line" aria-hidden="true" />
+					Home
+				</a>
+			</li>
+			<li>
+				<a href="/blog/">
+					<Icon name="mingcute:edit-4-line" aria-hidden="true" />
+					Blog
+				</a>
+			</li>
+			<li>
+				<a href="/projects/">
+					<Icon name="mingcute:flask-line" aria-hidden="true" />
+					Projects
+				</a>
+			</li>
+			<li>
+				<a href="/talks/">
+					<Icon name="mingcute:drawing-board-line" aria-hidden="true" />
+					Talks
+				</a>
+			</li>
+			<li>
+				<a href="/accessibility/">
+					<Icon name="mingcute:disabled-2-line" aria-hidden="true" />
+					Accessibility
+				</a>
+			</li>
+			<li>
+				<a href="/license/">
+					<Icon name="mingcute:award-line" aria-hidden="true" />
+					License
+				</a>
+			</li>
+			<li>
+				<theme-switcher></theme-switcher>
+			</li>
+		</ul>
+	</nav>
+</site-nav>

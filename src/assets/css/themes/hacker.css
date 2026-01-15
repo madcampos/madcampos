@@ -1,216 +1,294 @@
 @layer theme {
 	[data-theme='hacker'] {
 		/* Border */
-		--border-width: medium;
+		--border-size: medium;
 		--border-style: none;
 		--link-underline: solid;
 		--border-radius: 0;
+		--focus-outline: var(--border-size) dotted var(--green-3);
+
 		/* Theme colors */
-		--theme-color: lime;
-		--secondary-color: seagreen;
-		--accent-color: seagreen;
-		--complementary-color: seagreen;
+		--theme-color: var(--lime-5);
+		--secondary-color: var(--green-8);
+		--accent-color: var(--green-8);
+		--complementary-color: var(--green-8);
+
 		/* Base colors */
-		--text-color: lime;
-		--bg-color: black;
-		--dark-bg-color: black;
-		--border-color: seagreen;
-		--scrollbar-bg: rgba(255, 255, 255, 0.1);
-		/* Tag colors */
-		--tag-bg: var(--theme-color);
-		--tag-color: var(--dark-bg-color);
+		--text-1: var(--lime-8);
+		--text-2: var(--camo-9);
+		--surface-1: black;
+		--surface-2: black;
+		--surface-3: var(--green-8);
+
 		/* Link colors */
-		--link-color: lime;
-		--link-visited-color: seagreen;
-		--link-hover-color: var(--accent-color);
-		--link-active-color: var(--complementary-color);
+		--link-color: var(--camo-4);
+		--link-visited-color: var(--camo-9);
+		--link-hover-color: var(--camo-2);
+		--link-active-color: var(--camo-0);
+
 		/* Code colors */
-		--diff-add-color: limegreen;
-		--diff-add-bg: rgba(0, 100, 0, 0.3);
-		--diff-remove-color: red;
-		--diff-remove-bg: rgba(193, 0, 0, 0.3);
-		--highlight-color: silver;
-		--highlight-default-bg: rgba(192, 192, 192, 0.2);
-		--highlight-error-color: tomato;
-		--highlight-error-bg: rgba(255, 99, 71, 0.2);
-		--highlight-warning-color: yellow;
-		--highlight-warning-bg: rgba(218, 165, 32, 0.2);
+		--diff-add-color: var(--lime-3);
+		--diff-add-bg: var(--green-12);
+		--diff-remove-color: var(--red-5);
+		--diff-remove-bg: var(--red-11);
+		--highlight-color: var(--gray-3);
+		--highlight-default-bg: var(--gray-8);
+		--highlight-error-color: var(--red-9);
+		--highlight-error-bg: var(--red-12);
+		--highlight-warning-color: var(--yellow-9);
+		--highlight-warning-bg: var(--yellow-12);
+
+		/* Table styles */
+		--table-header-bg: var(--lime-12);
+		--table-header-color: var(--lime-2);
+		--table-header-border: solid var(--border-size) var(--lime-2);
+
+		--table-rows-odd: var(--camo-12);
+		--table-rows-even: var(--camo-10);
+		--table-rows-hover: var(--green-11);
+
+		--table-footer-bg: var(--green-12);
+		--table-footer-color: var(--green-3);
+		--table-footer-border: solid var(--border-size) var(--lime-2);
+
+		/* Input styles */
+		--input-bg: black;
+		--input-color: var(--green-3);
+		--input-border: solid var(--border-size) var(--green-3);
+		--input-thumb-color: var(--green-3);
+
+		--input-placeholder-color: var(--green-9);
+
+		--input-valid-bg: var(--camo-12);
+		--input-valid-color: var(--camo-8);
+		--input-invalid-bg: var(--red-12);
+		--input-invalid-color: var(--red-8);
+		--input-hover-bg: var(--green-12);
+		--input-hover-color: var(--green-1);
+		--input-hover-border-color: var(--green-1);
+		--input-focus-bg: black;
+		--input-focus-color: var(--lime-1);
+		--input-disabled-bg: var(--gray-11);
+		--input-disabled-color: var(--gray-3);
+		--input-readonly-bg: var(--gray-11);
+		--input-readonly-color: var(--green-10);
+
+		--select-option-bg: black;
+		--select-option-color: var(--green-3);
+		--select-option-selected-bg: var(--green-3);
+		--select-option-selected-color: black;
+
+		--fieldset-border: solid var(--border-size) var(--green-9);
+
+		/* Button styles */
+		--button-bg: var(--camo-10);
+		--button-color: var(--camo-0);
+		--button-border: solid var(--border-size) var(--camo-0);
+		--button-hover-bg: var(--camo-9);
+		--button-hover-color: var(--camo-0);
+		--button-hover-border-color: var(--camo-9);
+		--button-focus-bg: black;
+		--button-focus-color: var(--green-1);
+		--button-focus-border-color: var(--green-1);
+		--button-active-bg: var(--lime-1);
+		--button-active-color: var(--lime-9);
+		--button-active-border-color: var(--lime-9);
+		--button-disabled-bg: var(--gray-11);
+		--button-disabled-color: var(--gray-3);
+		--button-disabled-border-color: var(--gray-3);
+
+		/* Progress styles */
+		--progress-bg: var(--camo-12);
+		--progress-color: var(--camo-8);
+		--progress-border: solid var(--border-size) var(--camo-8);
+		--progress-hover-bg: black;
+		--progress-hover-color: var(--theme-color);
+		--progress-hover-border-color: var(--theme-color);
+
+		/* Meter styles */
+		--meter-background: var(--camo-12);
+		--meter-optimal-color: var(--green-4);
+		--meter-suboptimal-color: var(--yellow-5);
+		--meter-subsuboptimal-color: var(--red-7);
+		--meter-size-adjust: 5px;
+		--meter-border: solid var(--border-size) var(--camo-8);
+
+		/* Note styles */
+		--note-success-bg: var(--camo-12);
+		--note-success-color: var(--camo-2);
+		--note-error-bg: var(--red-12);
+		--note-error-color: var(--red-2);
+		--note-warning-bg: var(--yellow-12);
+		--note-warning-color: var(--yellow-2);
+		--note-alert-bg: var(--teal-12);
+		--note-alert-color: var(--teal-2);
+		--note-info-bg: var(--blue-12);
+		--note-info-color: var(--blue-2);
+		--note-debug-bg: var(--purple-12);
+		--note-debug-color: var(--violet-2);
+
 		/* Baseline colors */
-		--baseline-high-color: limegreen;
-		--baseline-high-bg: darkgreen;
-		--baseline-low-color: limegreen;
-		--baseline-low-bg: darkgreen;
-		--baseline-limited-color: limegreen;
-		--baseline-limited-bg: darkgreen;
-		--baseline-no-data-color: darkgreen;
-		--baseline-no-data-bg: darkgreen;
-		--baseline-supported-color: limegreen;
-		--baseline-supported-bg: black;
-		--baseline-unsupported-color: limegreen;
-		--baseline-unsupported-bg: black;
+		--baseline-high-color: var(--green-9);
+		--baseline-high-bg: var(--green-12);
+		--baseline-low-color: var(--blue-5);
+		--baseline-low-bg: var(--blue-12);
+		--baseline-limited-color: var(--yellow-7);
+		--baseline-limited-bg: var(--gray-8);
+		--baseline-no-data-color: var(--gray-4);
+		--baseline-no-data-bg: var(--gray-8);
+
+		/* Tag list colors */
+		--tag-bg: black;
+		--tag-color: var(--green-3);
+		--tag-hover-bg: black;
+		--tag-hover-color: var(--camo-9);
+		--tag-focus-bg: black;
+		--tag-focus-color: var(--lime-4);
+
+		/* Logo styles */
+		--logo-part-color: var(--theme-color);
+		--logo-part-stroke: transparent;
+		--logo-part-stroke-width: 0;
+		--logo-extras-color: transparent;
+		--logo-extras-stroke: transparent;
+		--logo-extras-stroke-width: 0;
+		--logo-text-color: var(--accent-color);
+		--logo-text-stroke: transparent;
+		--logo-text-stroke-width: 0;
+		--logo-font: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
+		--logo-font-weight: normal;
+
+		--logo-pixel-color: var(--green-3);
+		--logo-overlay-color: var(--camo-2);
+		--logo-noise-color: var(--lime-1);
+
+		--logo-part-hover-color: var(--link-hover-color);
+		--logo-part-hover-stroke: transparent;
+		--logo-extras-hover-color: transparent;
+		--logo-extras-hover-stroke: transparent;
+		--logo-text-hover-color: var(--link-hover-color);
+		--logo-text-hover-stroke: transparent;
+
+		--logo-part-focus-color: var(--accent-color);
+		--logo-part-focus-stroke: transparent;
+		--logo-extras-focus-color: transparent;
+		--logo-extras-focus-stroke: transparent;
+		--logo-text-focus-color: var(--accent-color);
+		--logo-text-focus-stroke: transparent;
+
+		--logo-part-active-color: var(--link-active-color);
+		--logo-part-active-stroke: transparent;
+		--logo-extras-active-color: transparent;
+		--logo-extras-active-stroke: transparent;
+		--logo-text-active-color: var(--link-active-color);
+		--logo-text-active-stroke: transparent;
+
+		/* Avatar styles */
+		--avatar-overlay: none;
+		--avatary-overlay-opacity: 0;
+		--avatary-overlay-blend-mode: normal;
+
 		/* Old Buttons */
-		--old-button-border: var(--border-color) solid var(--border-width);
+		--old-button-border: var(--surface-3) solid var(--border-size);
 		--old-button-border-visibility: hidden;
 		--old-button-tint: color-mix(in srgb, darkgreen, transparent 35%);
 		--old-button-blend-mode: color;
 		--old-button-border-radius: var(--border-radius);
+
 		/* Icons */
-		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M15.54 11.29L9.88 5.64a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l4.95 5L8.46 17a1 1 0 0 0 0 1.41a1 1 0 0 0 .71.3a1 1 0 0 0 .71-.3l5.66-5.65a1 1 0 0 0 0-1.47'/%3E%3C/svg%3E");
-		--external-link-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M18 10.82a1 1 0 0 0-1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7.18a1 1 0 0 0 0-2H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-7.18a1 1 0 0 0-1-1m3.92-8.2a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59L8.29 14.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38'/%3E%3C/svg%3E");
+		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 		--hr-decoration-icon: none;
+
 		/* Fonts */
 		--headers-font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--text-font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
+
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: dark;
 	}
 
-	[data-theme='hacker'] body { background-repeat: no-repeat; }
-
-	[data-theme='hacker'] :focus-visible { outline-style: solid; }
-
-	[data-theme='hacker'] .user-avatar {
-		filter: url('#small-pixelate-filter');
+	[data-theme='hacker'] m-avatar,
+	m-avatar[data-theme='hacker'] {
 		border-radius: 0;
+
+		picture { filter: url('#small-pixelate-filter'); }
+
+		img {
+			filter: grayscale(1);
+			image-rendering: pixelated;
+		}
+
+		@media not (prefers-reduced-motion) { filter: url('#animated-glitch-filter'); }
 	}
 
-	[data-theme='hacker'] .user-avatar img {
-		filter: grayscale(1);
-		image-rendering: auto;
+	:is([data-theme='hacker'] m-card, m-card[data-theme='hacker']) {
+		border: solid currentColor var(--border-size);
+
+		&.project-card article > picture {
+			mask: none;
+			filter: url('#small-pixelate-filter');
+			border: solid currentColor var(--border-size);
+
+			img {
+				display: none;
+
+				&[data-theme-image='hacker'] { display: block; }
+			}
+
+			&::after {
+				display: block;
+				position: absolute;
+				opacity: 0.8;
+				mix-blend-mode: color;
+				inset: 0;
+				background: radial-gradient(ellipse at center, var(--theme-color), var(--accent-color));
+				inline-size: 100%;
+				block-size: 100%;
+				content: '';
+			}
+		}
 	}
 
-	[data-theme='hacker'] .user-avatar::after {
-		opacity: 0.8;
-		mix-blend-mode: color;
+	[data-theme='hacker'] m-logo,
+	m-logo[data-theme='hacker'] {
+		[data-theme] { visibility: hidden; }
+
+		[data-theme='hacker'] {
+			&:where([data-size='full']) { visibility: visible; }
+
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
+
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
+
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='hacker'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='hacker'][data-size='micro']) { visibility: visible; }
+		}
 	}
 
-	[data-theme='hacker'] .user-avatar:hover::after { opacity: 0.8; }
+	:is([data-theme='hacker'] code-wrapper, code-wrapper[data-theme='hacker']) pre {
+		--code-bg: var(--surface-1);
+		--code-color: var(--text-1);
 
-	[data-theme='hacker'] input {
-		border-style: solid;
-		border-color: var(--theme-color);
-		border-radius: 0;
-		background-color: var(--secondary-color);
-		color: var(--bg-color);
+		span {
+			--code-color: var(--text-1);
+			--code-font-style: var(--shiki-contrast-font-style, normal);
+			--code-font-weight: var(--shiki-contrast-font-weight, normal);
+			--code-text-decoration: var(--shiki-contrast-text-decoration, none);
+		}
 	}
-
-	[data-theme='hacker'] hr { padding: 0; }
-
-	[data-theme='hacker'] input::placeholder { color: var(--bg-color); }
-
-	[data-theme='hacker'] #site-nav a {
-		padding: var(--spacing-small) var(--spacing-medium);
-		height: var(--button-size);
-		color: var(--text-color);
-	}
-
-	[data-theme='hacker'] button {
-		border-style: solid;
-		border-color: var(--theme-color);
-		border-radius: 0;
-		background-color: transparent;
-		color: var(--text-color);
-	}
-
-	[data-theme='hacker'] :is(#site-nav a, button):focus-visible {
-		border-color: var(--text-color);
-		background-color: var(--text-color);
-		color: var(--bg-color);
-	}
-
-	[data-theme='hacker'] :is(#site-nav a, button):hover {
-		outline-color: var(--accent-color);
-		border-color: var(--accent-color);
-		background-color: var(--accent-color);
-		color: var(--bg-color);
-	}
-
-	[data-theme='hacker'] :is(#site-nav a, button):active {
-		outline-color: var(--theme- color);
-		border-color: var(--accent-color);
-		background-color: var(--accent-color);
-		color: var(--theme-color);
-	}
-
-	[data-theme='hacker'] .tag {
-		background-color: var(--tag-bg);
-		padding-inline-start: var(--spacing-medium);
-	}
-
-	[data-theme='hacker'] .tag:focus-within { outline-style: dotted; }
-	[data-theme='hacker'] .tag a:focus-visible { outline: none; }
-
-	[data-theme='hacker'] .tag::before {
-		clip-path: none;
-		mask: none;
-		content: none;
-	}
-
-	[data-theme='hacker'] .card { border: solid currentColor var(--border-width); }
-
-	[data-theme='hacker'] .card picture { filter: url('#small-pixelate-filter'); }
-
-	[data-theme='hacker'] .project-card picture {
-		display: grid;
-		position: relative;
-		place-items: center;
-		mask: none;
-		border: solid currentColor var(--border-width);
-	}
-
-	[data-theme='hacker'] .project-card picture::after {
-		display: block;
-		position: absolute;
-		opacity: 0.8;
-		mix-blend-mode: color;
-		inset: 0;
-		background: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
-		width: 100%;
-		height: 100%;
-		content: '';
-	}
-
-	[data-theme='hacker'] .project-card picture img { display: none; }
-	[data-theme='hacker'] .project-card picture img[data-theme-image='hacker'] { display: block; }
-
-	[data-theme='hacker'] .logo-part { fill: var(--theme-color); }
-
-	[data-theme='hacker'] .logo-text {
-		fill: var(--accent-color);
-		font-weight: normal;
-		font-size: 6rem;
-		font-family: 'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
-	}
-
-	[data-theme='hacker'] #logo-graphics [data-theme] { visibility: hidden; }
-	[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='full']) { visibility: visible; }
-
-	[data-theme='hacker'] a:focus-visible [data-theme='hacker'] .logo-part { fill: var(--accent-color); }
-	[data-theme='hacker'] a:focus-visible [data-theme='hacker'] .logo-text { fill: var(--theme-color); }
-
-	[data-theme='hacker'] a:hover [data-theme='hacker'] .logo-part { fill: var(--link-hover-color); }
-	[data-theme='hacker'] a:hover [data-theme='hacker'] .logo-text { fill: var(--link-hover-color); }
-
-	[data-theme='hacker'] a:active [data-theme='hacker'] .logo-part { stroke: var(--link-active-color); }
-	[data-theme='hacker'] a:active [data-theme='hacker'] .logo-text { fill: var(--link-active-color); }
-
-	[data-theme='hacker'] pre span {
-		color: var(--text-color);
-		font-style: var(--shiki-contrast-font-style, normal);
-		font-weight: var(--shiki-contrast-font-weight, normal);
-		text-decoration: var(--shiki-contrast-text-decoration, none);
-	}
-
-	@container logo (max-width: 25rem) {
-		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
-		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='mini']) { visibility: visible; }
-	}
-
-	@container logo (max-width: 15rem) {
-		[data-theme='hacker'] #logo-graphics [data-theme='hacker'] { visibility: hidden; }
-		[data-theme='hacker'] #logo-graphics [data-theme='hacker']:where([data-size='micro']) { visibility: visible; }
-	}
-
-	@media not (prefers-reduced-motion) { [data-theme='hacker'] :is(#logo-graphics, .user-avatar) { filter: url('#animated-glitch-filter'); } }
 }

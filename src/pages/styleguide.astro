@@ -1,62 +1,74 @@
 ---
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants.js';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import '../assets/css/pages/styleguide.css';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+
+import BlockLevelElements from '../components/styleguide/block.astro';
+import CanvasElement from '../components/styleguide/canvas.astro';
+import Components from '../components/styleguide/components.astro';
+import EmbedElements from '../components/styleguide/embed.astro';
+import FormElements from '../components/styleguide/forms.astro';
+import InlineLevelElements from '../components/styleguide/inline.astro';
+import InteractiveElements from '../components/styleguide/interactive.astro';
+import MediaElements from '../components/styleguide/media.astro';
+import ObsoleteElements from '../components/styleguide/obsolete.astro';
+import SectioningElements from '../components/styleguide/sectioning.astro';
+import SvgAndMathElements from '../components/styleguide/svg-and-math.astro';
+import TableElement from '../components/styleguide/tables.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Style Guide', ...GLOBALS.title]}
-	title="Madcampos Style Guide"
-	description="Style Guide for my personal website."
-	url="/styleguide/"
-	tags={['css', 'html', 'meta', 'style', 'styleguide', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Style Guide"
-		shortSubtitle="Style"
-		url="/styleguide/"
-		urlTitle="Style Guide"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Madcampos Style Guide"
+		description="Style Guide for my personal website."
+		tags={['css', 'html', 'meta', 'style', 'styleguide']}
 	/>
-	<Fragment slot="header">Style Guide</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<!-- Colors -->
-	<!-- Fonts -->
-	<!-- Icons -->
-	<!-- Themes (as iframes?) -->
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<!-- html elements -->
-	<!-- TODO: should those be separate pages in a directory structure with all only those things? -->
-	<!-- sectioning: address, article, aside, footer, header, h1-h6, hgroup, main, nav, section, search -->
-	<!-- block text content: blockquote, dd, div, dl, dt, figcaption, figure, hr, li, menu, ol, p, pre, ul -->
-	<!-- inline text content: a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kbd, mark, q, rp, rt, ruby, s, samp, small, span,strong, sub, sup, time, u, var, wbr -->
-	<!-- image and media: area, audio, img, map, track, video -->
-	<!-- mebedded content: embed, fencedframe, iframe, object, picture, portal, source -->
-	<!-- svg and math: svg, math -->
-	<!-- scripting: canvas, noscript, script -->
-	<!-- edits: del, ins -->
-	<!-- tables: caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr -->
-	<!-- forms: button, datalist, fieldset, form, input, label, legend, meter, optgroup, option, output, progress, select, textarea -->
-	<!-- interactive elements: details, dialog, summary -->
-	<!-- web components: slot, template -->
-	<!--
-		obsolete: acronym, big, center, content, dir, font, frame, frameset, image, marquee, menuitem, nobr, noembed, noframes, param, plaintext, rb, rtc, shadow, strike, tt, xmp
-	-->
+		<SiteNav />
 
-	<!--
-		Another potential structure:
-		- Sectioning
-		- Block text
-		- Lists
-		- Inline text
-		- Images, media, and embedding (figure, picture, canvas, svg, etc)
-		- Tables
-		- Forms
-		- Interactive
-		- Web components (include styles for componetns not loaded yet)
-		- Math
-		- Ruby
-		- Obsolete
-	-->
-	<!-- Ref: https://alexandersandberg.github.io/html5-elements-tester/ -->
-</InternalPageLayout>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header id="page-top">
+			<Logo
+				subtitle="Style Guide"
+				shortSubtitle="Style"
+				title="Style Guide"
+			/>
+			<h1>Style Guide</h1>
+		</header>
+
+		<main id="main">
+			<SectioningElements />
+			<BlockLevelElements />
+			<InlineLevelElements />
+			<MediaElements />
+			<EmbedElements />
+			<SvgAndMathElements />
+			<CanvasElement />
+			<TableElement />
+			<FormElements />
+			<InteractiveElements />
+			<Components />
+			<ObsoleteElements />
+		</main>
+
+		<footer></footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+		<script src="../assets/js/pages/styleguide.ts"></script>
+	</body>
+</html>

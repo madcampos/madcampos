@@ -1,0 +1,8 @@
+@layer components {
+	old-style-buttons div {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		inline-size: 100%;
+	}
+}

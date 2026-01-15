@@ -1,0 +1,41 @@
+@layer base {
+	address { font-style: italic; }
+
+	:is(h1, h2, h3, h4, h5, h6, summary) {
+		color: var(--theme-color);
+		font-weight: bold;
+		line-height: var(--font-lineheight-0);
+		font-family: var(--headers-font-family);
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) {
+		margin-block: var(--size-relative-3);
+		text-wrap: balance;
+	}
+
+	h1 {
+		margin-inline: auto;
+		margin-block: 0;
+		color: var(--theme-color);
+		font-size: var(--font-size-7);
+		text-align: center;
+	}
+
+	h2 { font-size: var(--font-size-5); }
+	h3 { font-size: var(--font-size-4); }
+	h4 { font-size: var(--font-size-3); }
+	h5 { font-size: var(--font-size-2); }
+	h6 { font-size: var(--font-size-1); }
+
+	hgroup {
+		text-align: center;
+
+		p { font-style: italic; }
+	}
+
+	search form {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

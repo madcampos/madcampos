@@ -1,39 +1,63 @@
 ---
 import '../assets/css/pages/home.css';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import avatar from '../assets/images/me.jpg';
-import Avatar from '../components/Avatar/Avatar.astro';
-import Logo from '../components/Logo/Logo.astro';
-import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
-import ThemeSwitcher from '../components/ThemeSwitcher/ThemeSwitcher.astro';
-import Webrings from '../components/Webrings/Webrings.astro';
-import { BLOG, GLOBALS, PROJECTS, TALKS } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldButtons from '../components/OldStyleButtons.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-<BaseLayout
-	htmlTitle={[...GLOBALS.title, 'Senior Web Developer']}
-	title={GLOBALS.titleString}
-	description={GLOBALS.description}
-	url={GLOBALS.url}
-	tags={GLOBALS.tags}
-	pageSchema="ProfilePage"
->
-	<div class="h-card vcard">
-		<h1>
-			<Logo
-				subtitle=""
-				shortSubtitle=""
-				url="/"
-				urlTitle="Home page"
-			/>
-		</h1>
-		<article id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
-			<aside>
-				<Avatar
-					image={avatar}
-					imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
-					loading="eager"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/ProfilePage">
+	<HtmlHead
+		title="Marco Campos — Staff Developer"
+		description="Tech Stack: Vue.js, Node.js, TypeScript, JavaScript"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<h1>
+				<Logo
+					subtitle=""
+					shortSubtitle=""
+					title="Home page"
 				/>
+			</h1>
+		</header>
+
+		<main class="h-card vcard" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
+			<aside>
+				<m-avatar>
+					<picture
+						class="user-avatar"
+						itemprop="image"
+						itemscope
+						itemtype="https://schema.org/ImageObject"
+					>
+						<Image
+							class="u-photo photo"
+							itemprop="contentUrl"
+							src={avatar}
+							alt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+							loading="eager"
+							widths={/* eslint-disable-line @typescript-eslint/no-magic-numbers */ [128, 256, 512, 768, 1024]}
+							width={512}
+							sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+							quality={75}
+						/>
+					</picture>
+				</m-avatar>
 			</aside>
 			<div>
 				<div class="p-note note" itemprop="description">
@@ -42,7 +66,7 @@ import BaseLayout from '../layouts/Base.astro';
 							<span class="p-family-name family-name" itemprop="familyName">Campos</span></em>. I go by <em>@</em>
 						<em class="p-nickname nickname" itemprop="alternateName">madcampos</em> on most social networks and my pronouns are he/him!
 						<br />
-						I'm a <span class="p-category category p-job-title" itemprop="jobTitle">Senior Web Developer</span> based in <span
+						I'm a <span class="p-category category p-job-title" itemprop="jobTitle">Staff Developer</span> based in <span
 							class="p-adr adr"
 							itemprop="address"
 							itemscope
@@ -58,54 +82,59 @@ import BaseLayout from '../layouts/Base.astro';
 				<nav>
 					<ul>
 						<li>
-							<a href={BLOG.url}>
-								<Icon name="uil:file-edit-alt" title="" role="presentation" />
-								My Blog
+							<a href="/blog/">
+								<Icon name="mingcute:edit-4-line" aria-hidden="true" />
+								<span>My Blog</span>
 							</a>
 						</li>
 						<li>
-							<a href={PROJECTS.url}>
-								<Icon name="uil:flask" title="" role="presentation" />
-								Project Highlights
+							<a href="/projects/">
+								<Icon name="mingcute:flask-line" aria-hidden="true" />
+								<span>Project Highlights</span>
 							</a>
 						</li>
 						<li>
-							<a href={TALKS.url}>
-								<Icon name="uil:presentation-check" title="" role="presentation" />
-								Talks I've given
+							<a href="/talks/">
+								<Icon name="mingcute:drawing-board-line" aria-hidden="true" />
+								<span>Talks I've given</span>
 							</a>
 						</li>
 						<li>
 							<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="uil:github-alt" title="" role="presentation" />
-								GitHub
+								<Icon name="mingcute:github-line" aria-hidden="true" />
+								<span>GitHub</span>
 							</a>
 						</li>
 						<li>
 							<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="brandico:codepen" title="" role="presentation" />
-								CodePen
+								<Icon name="mingcute:codepen-line" aria-hidden="true" />
+								<span>CodePen</span>
 							</a>
 						</li>
 						<li>
 							<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="uil:linkedin-alt" title="" role="presentation" />
-								LinkedIn
+								<Icon name="mingcute:linkedin-line" aria-hidden="true" />
+								<span>LinkedIn</span>
 							</a>
 						</li>
 						<li>
 							<a href="mailto:me@madcampos.dev" rel="me">
-								<Icon name="uil:envelope" title="" role="presentation" />
+								<Icon name="mingcute:mail-line" aria-hidden="true" />
 								<span class="u-email email" itemprop="email">me@madcampos.dev</span>
 							</a>
 						</li>
 					</ul>
 				</nav>
 			</div>
-		</article>
-	</div>
+		</main>
 
-	<OldButtons slot="footer" />
-	<Webrings slot="footer" />
-	<ThemeSwitcher slot="footer" />
-</BaseLayout>
+		<footer>
+			<OldButtons />
+			<Webrings />
+			<theme-switcher></theme-switcher>
+		</footer>
+
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

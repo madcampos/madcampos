@@ -1,0 +1,153 @@
+---
+import '../assets/css/pages/projects.css';
+import { Icon } from 'astro-icon/components';
+import Card from '../components/Card.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
+import { inlineMarkdownRender } from '../utils/markdown.js';
+import { listAllProjects } from '../utils/projects.js';
+
+const projects = await Promise.all((await listAllProjects()).map(async (project) => {
+	const { Content } = await project.render();
+
+	return {
+		data: project.data,
+		Content
+	};
+}));
+
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/ItemList">
+	<HtmlHead
+		title="Project Highlight | Marco Campos"
+		description="A list of projects I've worked on, or am currently working on. Mostly web development"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Projects"
+				shortSubtitle="Proj."
+				title="Projects Page"
+			/>
+			<h1>Project Highlight</h1>
+		</header>
+
+		<main id="main">
+			{
+				projects.map(({ Content, data }) => (
+					<Card
+						url={data.url}
+						draft={data.draft}
+						itemtype="http://schema.org/WebApplication"
+						image={data.image}
+						imageAlt={data.imageAlt ?? ''}
+						themeImages={data.themeImages}
+						extraClass="project-card"
+					>
+						<Fragment slot="meta">
+							<meta itemprop="operatingSystem" content="https://schema.org/AllOperatingSystem" />
+							<meta itemprop="browserRequirements" content="https://schema.org/GenericWebPlatform" />
+							<meta itemprop="applicationCategory" content="BrowserApplication" />
+							<div itemprop="offers" itemscope itemtype="https://schema.org/Offer" hidden>
+								<meta itemprop="availability" content="https://schema.org/InStock" />
+								<meta itemprop="price" content="0" />
+								<meta itemprop="priceCurrency" content="USD" />
+							</div>
+							<meta itemprop="isAccessibleForFree" content="True" />
+						</Fragment>
+						<h2 slot="title">
+							{/* eslint-disable-next-line astro/no-set-html-directive */}
+							<Fragment set:html={inlineMarkdownRender(data.title)} />
+						</h2>
+
+						<Fragment slot="subtitle">
+							<draft-tag data-status={data.status}>
+								<Icon name={data.status === 'ongoing' ? 'mingcute:time-line' : 'mingcute:check-circle-line'} title="Project status" /> {
+									data.status === 'ongoing' ? 'Ongoing' : 'Finished'
+								}
+							</draft-tag>
+							<span>
+								<Icon name="mingcute:calendar-2-line" title="Date started" />
+								<time datetime={data.createdAt.toISOString()} itemprop="dateCreated">{formatter.format(data.createdAt)}</time>
+								{
+									data.updatedAt && (
+										<span>&mdash; <time datetime={data.updatedAt.toISOString()} itemprop="dateModified">{formatter.format(data.updatedAt)}</time></span>
+									)
+								}
+							</span>
+							<span itemprop="softwareVersion">
+								<Icon name="mingcute:package-2-line" title="Current version" /> {data.version}
+							</span>
+						</Fragment>
+
+						<Content />
+
+						<Fragment slot="links">
+							{
+								data.url && (
+									<a href={data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
+										<Icon name="mingcute:link-2-line" aria-hidden="true" />
+										View Project
+									</a>
+								)
+							}
+							&nbsp;
+							{
+								data.repository && (
+									<a href={data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
+										<Icon name="mingcute:github-line" aria-hidden="true" />
+										View Repository
+									</a>
+								)
+							}
+						</Fragment>
+
+						<details slot="footer">
+							<summary>
+								<span>
+									<Icon name="mingcute:tool-line" aria-hidden="true" />
+									Technologies used
+								</span>
+							</summary>
+
+							<tag-list>
+								<ul>
+									{data.techStack?.map((tech) => <li><tag-item><span>{tech}</span></tag-item></li>)}
+								</ul>
+							</tag-list>
+						</details>
+					</Card>
+				))
+			}
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

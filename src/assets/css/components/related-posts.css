@@ -1,0 +1,34 @@
+@layer componets {
+	related-posts {
+		display: block;
+		margin-inline: auto;
+		inline-size: 100%;
+		max-inline-size: var(--size-content-3);
+		overflow-x: auto;
+
+		ul {
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: start;
+			align-items: start;
+			gap: var(--size-3);
+			margin: 0;
+			padding: 0;
+			inline-size: fit-content;
+			scroll-behavior: smooth;
+			scroll-snap-type: x mandatory;
+			list-style-type: none;
+		}
+
+		li {
+			inline-size: var(--size-13);
+			scroll-margin: var(--size-3);
+			scroll-snap-align: center;
+			scroll-snap-stop: always;
+
+			@media (max-width: 25rem) { inline-size: var(--size-12); }
+		}
+
+		img { min-inline-size: 0; }
+	}
+}

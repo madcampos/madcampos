@@ -358,4 +358,4 @@ The keyboard navigation is handled by the `keydown` event listener. It will filt
 
 You can check out the full code on CodePen: https://codepen.io/madcampos/pen/NWEzogQ
 
-::codepen[Tabs Web Component]{#NWEzogQ username=madcampos}
+<codepen-embed title="Tabs Web Component" href="https://codepen.io/madcampos/pen/NWEzogQ"></codepen-embed>

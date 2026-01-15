@@ -9,7 +9,7 @@ updates:
     changes: Added an image to the post.
 summary: Summary of the experience and hurdles of coding this blog.
 image: ./assets/new-waters.jpg
-imageAlt: 'A painting of a boat bursting bow first from the waves with a rainbow on the background.'
+imageAlt: "A painting of a boat bursting bow first from the waves with a rainbow on the background."
 tags:
   - BuildInTheOpen
   - BuildingInPublic

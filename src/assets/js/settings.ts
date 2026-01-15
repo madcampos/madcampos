@@ -1,7 +1,8 @@
+type SettingEnabledDisabled = 'disabled' | 'enabled';
+
 export class SiteSettings {
-	static get #settingsAvailable() {
-		return ['debug', 'css', 'js', 'enableIab', 'theme', 'pwa'] as const;
-	}
+	static AVAILABLE_SETTINGS = ['debug', 'css', 'js', 'iabEscape', 'theme', 'pwa', 'updateUrl'] as const;
+	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape'] as const;
 
 	static #searchParams?: URLSearchParams;
 
@@ -12,24 +13,27 @@ export class SiteSettings {
 
 		SiteSettings.#searchParams = new URLSearchParams(document.location.search);
 
-		for (const setting of SiteSettings.#settingsAvailable) {
+		for (const setting of SiteSettings.AVAILABLE_SETTINGS) {
 			SiteSettings.#updateSetting(setting, SiteSettings[setting]?.toString());
 		}
 	}
 
-	static #getSetting(setting: string) {
+	static #getSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
 		SiteSettings.#initializeSettings();
 
 		return SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined;
 	}
 
-	static #updateSetting(setting: string, value: string | undefined) {
+	static #updateSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number], value: string | undefined) {
 		SiteSettings.#initializeSettings();
 
 		if (value) {
 			document.documentElement.dataset[setting] = value;
 			SiteSettings.#searchParams?.set(setting, value);
-			localStorage.setItem(setting, value);
+
+			if (!SiteSettings.VOLATILE_SETTINGS.includes(setting)) {
+				localStorage.setItem(setting, value);
+			}
 		} else {
 			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete document.documentElement.dataset[setting];
@@ -37,7 +41,8 @@ export class SiteSettings {
 			localStorage.removeItem(setting);
 		}
 
-		const shouldUpdateUrl = SiteSettings.debug || SiteSettings.shouldShareSettings;
+		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+		const shouldUpdateUrl = SiteSettings.debug || SiteSettings.updateUrl;
 		const hasSearchParams = SiteSettings.#searchParams !== undefined && SiteSettings.#searchParams.size > 0;
 
 		if (shouldUpdateUrl && hasSearchParams) {
@@ -48,61 +53,85 @@ export class SiteSettings {
 		}
 	}
 
-	static get shouldShareSettings() {
-		return SiteSettings.#getSetting('shareSettings') === 'true';
+	static get updateUrl() {
+		const setting = SiteSettings.#getSetting('updateUrl');
+
+		if (setting === undefined) {
+			return undefined;
+		}
+
+		return setting === 'true';
 	}
 
-	static set shouldShareSettings(value: boolean) {
-		SiteSettings.#updateSetting('shareSettings', value ? 'true' : 'false');
+	static set updateUrl(value) {
+		SiteSettings.#updateSetting('updateUrl', value ? 'true' : 'false');
 	}
 
 	static get debug() {
-		return SiteSettings.#getSetting('debug') === 'true';
+		const setting = SiteSettings.#getSetting('debug');
+
+		if (setting === undefined) {
+			return undefined;
+		}
+
+		return setting === 'true';
 	}
 
-	static set debug(value: boolean) {
+	static set debug(value) {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
 	}
 
 	static get css() {
-		return SiteSettings.#getSetting('css');
+		return SiteSettings.#getSetting('css') as SettingEnabledDisabled | undefined;
 	}
 
-	static set css(value: string | undefined) {
+	static set css(value) {
 		SiteSettings.#updateSetting('css', value);
 	}
 
 	// eslint-disable-next-line id-length
 	static get js() {
-		return SiteSettings.#getSetting('js');
+		return SiteSettings.#getSetting('js') as SettingEnabledDisabled | undefined;
 	}
 
 	// eslint-disable-next-line id-length
-	static set js(value: string | undefined) {
+	static set js(value) {
 		SiteSettings.#updateSetting('js', value);
 	}
 
-	static get enableIab() {
-		return SiteSettings.#getSetting('enableIab') === 'true';
+	static get iabEscape() {
+		const setting = SiteSettings.#getSetting('iabEscape');
+
+		if (setting === undefined) {
+			return undefined;
+		}
+
+		return setting === 'true';
 	}
 
-	static set enableIab(value: boolean | undefined) {
-		SiteSettings.#updateSetting('enableIab', value ? 'true' : 'false');
+	static set iabEscape(value) {
+		SiteSettings.#updateSetting('iabEscape', value ? 'true' : 'false');
 	}
 
 	static get theme() {
 		return SiteSettings.#getSetting('theme');
 	}
 
-	static set theme(value: string | undefined) {
+	static set theme(value) {
 		SiteSettings.#updateSetting('theme', value);
 	}
 
 	static get pwa() {
-		return SiteSettings.#getSetting('pwa');
+		const setting = SiteSettings.#getSetting('pwa');
+
+		if (setting === undefined) {
+			return undefined;
+		}
+
+		return setting === 'true';
 	}
 
-	static set pwa(value: string | undefined) {
-		SiteSettings.#updateSetting('pwa', value);
+	static set pwa(value) {
+		SiteSettings.#updateSetting('pwa', value ? 'true' : 'false');
 	}
 }

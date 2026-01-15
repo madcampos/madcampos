@@ -1,0 +1,18 @@
+@layer components {
+	draft-tag {
+		display: inline-block;
+		margin: var(--size-1);
+		border-radius: var(--border-radius);
+		background-color: var(--accent-color);
+		padding: var(--size-1) var(--size-2);
+		color: var(--surface-1);
+		font-weight: bold;
+		text-transform: uppercase;
+
+		@media (forced-colors: active) {
+			background-color: transparent;
+			color: var(--theme-color);
+			border: var(--border-style) var(--border-size) var(--theme-color);
+		}
+	}
+}

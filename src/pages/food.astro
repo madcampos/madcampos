@@ -1,98 +1,113 @@
 ---
-import Logo from '../components/Logo/Logo.astro';
-import WheelOfFortune from '../components/WheelOfFortune/WheelOfFortune.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
-
-const items = [
-	'Tim Hortons',
-	'Subway',
-	'A&W',
-	'Ice Cream',
-	'Pizza',
-	'Pasta',
-	'Pastel'
-];
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Food order', ...GLOBALS.title]}
-	title="Food order"
-	description="What food to order at different places."
-	url="/food/"
-	tags={['food', 'order', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Food Order"
-		shortSubtitle="Food"
-		url="/food/"
-		urlTitle="Food Order page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Food order | Marco Campos"
+		description="What food to order at different places."
 	/>
-	<Fragment slot="header">Food Order</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<WheelOfFortune {items} />
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<details>
-		<summary>Tim Hortons</summary>
+		<SiteNav />
 
-		<strong>Coffee</strong>
-		<ul>
-			<li>Medium French Vanilla</li>
-		</ul>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
 
-		<strong>Savory food</strong>
-		<ul>
-			<li>Herb and garlic pastry</li>
-			<li>Red peppers and Swiss cheese pastry</li>
-		</ul>
+		<header>
+			<Logo
+				subtitle="Food Order"
+				shortSubtitle="Food"
+				title="Food Order page"
+			/>
+			<h1>Food Order</h1>
+		</header>
 
-		<strong>Sweets</strong>
-		<ul>
-			<li>Boston cream doughnut</li>
-			<li>Wild blueberry muffin</li>
-		</ul>
-	</details>
+		<main id="main">
+			<details>
+				<summary>Tim Hortons</summary>
 
-	<details>
-		<summary>Subway</summary>
+				<strong>Coffee</strong>
+				<ul>
+					<li>Medium French Vanilla</li>
+				</ul>
 
-		<ol>
-			<li>Any bread, 6 inches</li>
-			<li>Cheddar cheese</li>
-			<li>Lettuce, onions, olives, green bell peppers</li>
-			<li>Honey mustard sauce</li>
-		</ol>
-	</details>
+				<strong>Savory food</strong>
+				<ul>
+					<li>Herb and garlic pastry</li>
+					<li>Red peppers and Swiss cheese pastry</li>
+				</ul>
 
-	<details>
-		<summary>A&W</summary>
+				<strong>Sweets</strong>
+				<ul>
+					<li>Boston cream doughnut</li>
+					<li>Wild blueberry muffin</li>
+				</ul>
+			</details>
 
-		<p>Beyond meet combo, with onion rings, and root beer.</p>
-	</details>
+			<details>
+				<summary>Subway</summary>
 
-	<details>
-		<summary>Ice Cream flavors</summary>
+				<ol>
+					<li>Any bread, 6 inches</li>
+					<li>Cheddar cheese</li>
+					<li>Lettuce, onions, olives, green bell peppers</li>
+					<li>Honey mustard sauce</li>
+				</ol>
+			</details>
 
-		<ol>
-			<li>Mint chocolate chips</li>
-			<li>Cookies and cream</li>
-			<li>Salty caramel</li>
-			<li>Chocolate</li>
-		</ol>
-	</details>
+			<details>
+				<summary>A&W</summary>
 
-	<details>
-		<summary>Pizza flavors</summary>
+				<p>Beyond meet combo, with onion rings, and root beer.</p>
+			</details>
 
-		<p>Any vegetarian pizza will do, but preffered toppings are:</p>
+			<details>
+				<summary>Ice Cream flavors</summary>
 
-		<ul>
-			<li>Olives</li>
-			<li>Bell peppers</li>
-			<li>Mushrooms</li>
-			<li>Sun dried tomatoes</li>
-			<li>Onions</li>
-		</ul>
-	</details>
-</InternalPageLayout>
+				<ol>
+					<li>Mint chocolate chips</li>
+					<li>Cookies and cream</li>
+					<li>Salty caramel</li>
+					<li>Chocolate</li>
+				</ol>
+			</details>
+
+			<details>
+				<summary>Pizza flavors</summary>
+
+				<p>Any vegetarian pizza will do, but preffered toppings are:</p>
+
+				<ul>
+					<li>Olives</li>
+					<li>Bell peppers</li>
+					<li>Mushrooms</li>
+					<li>Sun dried tomatoes</li>
+					<li>Onions</li>
+				</ul>
+			</details>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

@@ -1,0 +1,74 @@
+@layer components {
+	baseline-info:not(:defined) { display: none; }
+
+	baseline-info:defined {
+		--icon-size: var(--size-7);
+		--browser-icon-size: var(--size-3);
+
+		margin-inline: auto;
+		margin-block: var(--size-3);
+		max-inline-size: var(--size-content-3);
+		display: grid;
+		grid-template-columns: var(--icon-size) 1fr;
+		grid-template-rows: repeat(2, auto);
+		gap: var(--size-2);
+		grid-template-areas:
+			'icon title'
+			'details details';
+		align-items: center;
+		border: var(--border-style) var(--border-size) var(--theme-color);
+		border-radius: var(--border-radius);
+		background-color: var(--surface-2);
+		padding: var(--size-2);
+
+		baseline-icon {
+			grid-area: icon;
+			display: flex;
+
+			svg {
+				inline-size: var(--icon-size);
+				block-size: auto;
+			}
+		}
+
+		hgroup {
+			grid-area: title;
+
+			baseline-heading {
+				font-weight: bold;
+				font-size: var(--font-size-4);
+
+				&[data-baseline='high'] { color: var(--baseline-high-color); }
+				&[data-baseline='low'] { color: var(--baseline-low-color); }
+				&[data-baseline='false'] { color: var(--baseline-limited-color); }
+				&[data-baseline='no-data'] { color: var(--baseline-no-data-color); }
+			}
+
+			p { margin: 0; }
+		}
+		details { grid-area: details; }
+
+		table {
+			border: var(--border-style) var(--surface-3) var(--border-size);
+			border-collapse: collapse;
+		}
+		table thead tr { background-color: var(--surface-1); }
+		table :is(td, th) {
+			border: var(--border-style) var(--surface-3) var(--border-size);
+			padding: var(--size-2);
+			text-align: center;
+		}
+		table tbody tr:nth-of-type(odd) { background: var(--surface-2); }
+		table tbody tr:nth-of-type(even) { background: var(--surface-1); }
+
+		baseline-browser-icon {
+			display: inline-flex;
+			vertical-align: middle;
+
+			svg {
+				inline-size: var(--browser-icon-size);
+				block-size: auto;
+			}
+		}
+	}
+}

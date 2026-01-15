@@ -1,25 +1,53 @@
 ---
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Privacy', ...GLOBALS.title]}
-	title="Privacy"
-	description="Privacy Statement."
-	url="/privacy/"
-	tags={['privacy', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Privacy"
-		shortSubtitle="Priv."
-		url="/privacy/"
-		urlTitle="Privacy page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Privacy | Marco Campos"
+		description="Privacy Statement."
 	/>
-	<Fragment slot="header">Privacy</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<p>This website (<a href="https://madcampos.dev">https://madcampos.dev</a>) does not perform web tracking of any kind.</p>
-	<p>That's it.</p>
-</InternalPageLayout>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Privacy"
+				shortSubtitle="Priv."
+				title="Privacy page"
+			/>
+			<h1>Privacy</h1>
+		</header>
+
+		<main id="main">
+			<p>This website (<a href="https://madcampos.dev">https://madcampos.dev</a>) does not perform web tracking of any kind.</p>
+			<p>That's it.</p>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

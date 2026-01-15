@@ -1,0 +1,114 @@
+@layer components {
+	m-card {
+		display: block;
+		container-name: card;
+		container-type: inline-size;
+
+		article {
+			--image-size: var(--size-header-2);
+
+			display: grid;
+			grid-template-rows: auto 1fr auto auto;
+			grid-template-columns: var(--image-size) 1fr;
+			grid-template-areas:
+				'header header'
+				'picture content'
+				'picture links'
+				'footer footer';
+			gap: var(--size-3);
+			margin: var(--size-3) 0;
+			border: var(--border-style) var(--surface-4) var(--border-size);
+			border-radius: var(--border-radius);
+			background-color: var(--surface-2);
+			padding: var(--size-3);
+
+			&:not(:has(picture)) {
+				grid-template-rows: auto 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'header'
+					'content'
+					'links'
+					'footer';
+
+				picture { display: none; }
+			}
+
+			header {
+				grid-area: header;
+
+				& > div {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					gap: var(--size-2);
+
+					:is(h2, h3, h4, h5, h6) { margin-block: 0; }
+					a { flex-grow: 1; }
+
+					@container (max-width: 25rem) {
+						text-align: center;
+						justify-content: center;
+					}
+				}
+
+				& > aside {
+					margin-block-start: var(--size-2);
+					color: var(--text-2);
+					font-style: italic;
+					font-size: var(--font-size-0);
+				}
+			}
+
+			picture {
+				display: block;
+				grid-area: picture;
+				place-self: start center;
+				border-radius: var(--border-radius);
+
+				img {
+					inline-size: 100%;
+					block-size: 100%;
+					object-fit: contain;
+					object-position: center;
+				}
+
+				:where(img[data-theme-image]) { display: none; }
+
+				@container card (max-width: 30rem) { align-self: center; }
+			}
+
+			rendered-content {
+				grid-area: content;
+
+				& > *:first-child { margin-block-start: 0; }
+				& > *:last-child { margin-block-end: 0; }
+			}
+
+			& > aside {
+				grid-area: links;
+
+				&:empty { display: none; }
+			}
+
+			footer {
+				grid-area: footer;
+
+				&:empty { display: none; }
+			}
+
+			@container card (max-width: 30rem) {
+				grid-template-rows: auto fit-content 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'header'
+					'picture'
+					'content'
+					'links'
+					'footer';
+			}
+
+			@container card (max-width: 15rem) { grid-template-rows: auto 1fr auto auto auto; }
+		}
+	}
+}

@@ -1,3 +1,4 @@
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import {
 	transformerMetaHighlight,
@@ -7,34 +8,39 @@ import {
 	transformerNotationFocus,
 	transformerNotationHighlight,
 	transformerNotationWordHighlight,
+	transformerRemoveNotationEscape,
 	transformerRenderWhitespace
 } from '@shikijs/transformers';
 import { transformerTwoslash } from '@shikijs/twoslash';
 import astroIcon from 'astro-icon';
 import { defineConfig } from 'astro/config';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
-import remarkBehead from 'remark-behead';
 import remarkBreaks from 'remark-breaks';
-import remarkDirective from 'remark-directive';
 import remarkHighlight from 'remark-flexible-markers';
 import remarkIns from 'remark-ins';
-
-import { baselineInfo, codepenEmbed, youtubeEmbed } from './src/utils/markdown.js';
-
 import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
+import { rehypePlugin as rehypeCode } from './src/utils/markdown-options/code.ts';
+import { settings as externalLinkSettings } from './src/utils/markdown-options/external-links.ts';
+import { settings as footnotesSettings } from './src/utils/markdown-options/footnotes.ts';
+import { rehypePlugin as rehypeImages } from './src/utils/markdown-options/images.ts';
+import { rehypePlugin as rehypeTables } from './src/utils/markdown-options/tables.ts';
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
-// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-const siteUrl = process.env['SITE_URL'] || 'https://madcampos.dev/';
 
 export default defineConfig({
-	site: siteUrl,
+	output: 'static',
+	site: 'https://madcampos.dev/',
 	base: '/',
+	redirects: mode !== 'production'
+		? { '/api/': 'https://localhost:4242/api/' }
+		: {},
 	trailingSlash: 'ignore',
 	devToolbar: { enabled: false },
 	compressHTML: true,
 	build: {
-		format: 'directory'
+		format: 'directory',
+		assets: 'assets/build'
 	},
 	server: {
 		host: 'localhost',
@@ -63,6 +69,7 @@ export default defineConfig({
 			defaultColor: false,
 			wrap: true,
 			transformers: [
+				transformerRemoveNotationEscape(),
 				transformerTwoslash({
 					explicitTrigger: true,
 					rendererRich: { errorRendering: 'hover' }
@@ -78,16 +85,22 @@ export default defineConfig({
 			]
 		},
 		remarkPlugins: [
-			[remarkBehead, { minDepth: 2 }],
 			remarkBreaks,
 			remarkIns,
-			[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }],
-			remarkDirective,
-			youtubeEmbed,
-			codepenEmbed,
-			baselineInfo
+			[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }]
 		],
-		rehypePlugins: [[rehypeExternalLinks, { rel: ['external', 'noopener', 'noreferrer'], referrerpolicy: 'no-referrer' }]]
+		rehypePlugins: [
+			rehypeHeadingIds,
+			[rehypeAutolinkHeadings, { behavior: 'wrap' }],
+			[rehypeExternalLinks, externalLinkSettings],
+			rehypeTables,
+			rehypeCode,
+			rehypeImages
+		],
+		remarkRehype: {
+			allowDangerousHtml: true,
+			...footnotesSettings
+		}
 	},
 	integrations: [
 		sitemap({

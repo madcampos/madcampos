@@ -1,9 +1,0 @@
-@layer pages {
-	.card .card-subtitle {
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
-		align-items: start;
-		gap: var(--spacing-small);
-	}
-}

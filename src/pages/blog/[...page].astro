@@ -1,8 +1,6 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
-import Logo from '../../components/Logo/Logo.astro';
-import { BLOG } from '../../constants.js';
-import BlogPostsLayout from '../../layouts/BlogPosts.astro';
+import BlogPosts from '../../components/BlogPosts.astro';
 import { listAllPosts, MAX_POSTS_PER_PAGE } from '../../utils/post.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -18,7 +16,6 @@ export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction
 
 const {
 	data: posts,
-	url,
 	currentPage,
 	lastPage,
 	start,
@@ -27,29 +24,13 @@ const {
 	size
 } = Astro.props.page;
 ---
-
-<BlogPostsLayout
+<BlogPosts
+	baseUrl="/blog/"
 	{posts}
-	baseUrl={BLOG.url}
-	currentUrl={url.current}
 	{currentPage}
 	{lastPage}
-	prevUrl={url.prev}
-	nextUrl={url.next}
 	{start}
 	{end}
 	{total}
 	{size}
->
-	<Logo
-		slot="logo"
-		subtitle="Blog"
-		shortSubtitle="Blog"
-		url={BLOG.url}
-		urlTitle="Blog"
-	/>
-
-	<Fragment slot="header">
-		{BLOG.titleString}
-	</Fragment>
-</BlogPostsLayout>
+/>

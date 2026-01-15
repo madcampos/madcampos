@@ -1,0 +1,43 @@
+@layer components {
+	color-swatch-group {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	color-swatch {
+		--swatch-size: 15ch;
+
+		display: contents;
+
+		figure {
+			display: block;
+			margin: var(--size-2);
+
+			background: var(--surface-2);
+			border: var(--border-size) var(--border-style) var(--theme-color);
+			border-radius: var(--border-radius);
+			padding: var(--size-1);
+
+			article {
+				display: grid;
+				place-content: center;
+				inline-size: var(--swatch-size);
+				block-size: var(--swatch-size);
+				background-color: var(--swatch-color, black);
+				text-align: center;
+			}
+
+			data {
+				font-weight: bold;
+				font-style: italic;
+			}
+
+			code {
+				margin-block: var(--size-1);
+				user-select: all;
+				font-size: 0.8em;
+			}
+		}
+	}
+}

@@ -1,0 +1,138 @@
+---
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import type { Post } from '../utils/post.js';
+import Card from './Card.astro';
+import HtmlHead from './HtmlHead.astro';
+import Logo from './Logo.astro';
+import OldStyleButtons from './OldStyleButtons.astro';
+import Pagination from './Pagination.astro';
+import SiteNav from './SiteNav.astro';
+import SvgDefs from './SvgDefs.astro';
+import Webrings from './Webrings.astro';
+
+interface Props {
+	posts: Post[];
+	title?: string;
+	baseUrl: string;
+	currentPage: number;
+	lastPage: number;
+	start: number;
+	end: number;
+	total: number;
+	size: number;
+}
+
+const {
+	title = '',
+	posts,
+	baseUrl,
+	currentPage,
+	lastPage,
+	start,
+	end,
+	total,
+	size
+} = Astro.props;
+
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/Blog">
+	<HtmlHead
+		title={`${title ? `${title} | ` : ''}Marco Campos' Blog`}
+		description="A space where I talk about web development and other programming related (or not) things"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Blog"
+				shortSubtitle="Blog"
+				url="/blog/"
+				title="Blog"
+			/>
+			<h1>{title ? title : "Marco Campos' Blog"}</h1>
+		</header>
+
+		<main id="main">
+			{
+				posts.map((post) => (
+					<Card
+						url={`/blog/${post.url}`}
+						itemtype="https://schema.org/BlogPosting"
+						draft={post.data.draft}
+						image={post.data.image}
+						imageAlt={post.data.imageAlt ?? ''}
+					>
+						<h2 slot="title">
+							{/* eslint-disable-next-line astro/no-set-html-directive */}
+							<Fragment set:html={inlineMarkdownRender(post.data.title)} />
+						</h2>
+						<small slot="subtitle">
+							<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
+						</small>
+
+						{/* eslint-disable-next-line astro/no-set-html-directive */}
+						<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
+
+						<a slot="links" href={`/blog/${post.url}`}>
+							<span>Read more</span>
+							<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
+							<span>...</span>
+						</a>
+						{
+							post.data.tags && post.data.tags.length > 0 && (
+								<details slot="footer">
+									<summary>Tags</summary>
+									<tag-list>
+										<ul>
+											{
+												post.data.tags.map((tag) => (
+													<li class="p-category">
+														<tag-item>
+															<a href={`/blog/tags/${tag}/`}>{tag}</a>
+														</tag-item>
+													</li>
+												))
+											}
+										</ul>
+									</tag-list>
+								</details>
+							)
+						}
+					</Card>
+				))
+			}
+		</main>
+
+		<footer>
+			<Pagination
+				{baseUrl}
+				{currentPage}
+				{lastPage}
+				{start}
+				{end}
+				{total}
+				{size}
+			/>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

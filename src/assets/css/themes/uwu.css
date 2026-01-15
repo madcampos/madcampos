@@ -1,228 +1,382 @@
 @layer theme {
 	[data-theme='uwu'] {
 		/* Border */
-		--border-width: medium;
-		--border-radius: 0.5rem;
+		--border-size: medium;
+		--border-radius: var(--size-2);
+		--link-underline: dashed;
 		--border-style: dashed;
+		--focus-outline: var(--theme-color) var(--border-style) var(--border-size);
+
 		/* Theme colors */
-		--theme-color: dodgerblue;
-		--secondary-color: lightblue;
-		--accent-color: darkorchid;
-		--complementary-color: deeppink;
+		--theme-0: #1e90ff;
+		--theme-1: #2c97fd;
+		--theme-2: #399efa;
+		--theme-3: #46a4f8;
+		--theme-4: #52aaf6;
+		--theme-5: #5eb0f4;
+		--theme-6: #6ab6f2;
+		--theme-7: #76bcf0;
+		--theme-8: #81c2ee;
+		--theme-9: #8cc7ec;
+		--theme-10: #97cdea;
+		--theme-11: #a2d3e8;
+		--theme-12: #add8e6;
+
+		--accent-0: #9932cc;
+		--accent-1: #a430c7;
+		--accent-2: #ae2fc2;
+		--accent-3: #b72dbe;
+		--accent-4: #c02bb9;
+		--accent-5: #c929b4;
+		--accent-6: #d127af;
+		--accent-7: #d924ab;
+		--accent-8: #e122a6;
+		--accent-9: #e91fa1;
+		--accent-10: #f01c9d;
+		--accent-11: #f81898;
+		--accent-12: #ff1493;
+
+		--secondary-0: #dda0dd;
+		--secondary-1: #e0a2db;
+		--secondary-2: #e3a4d8;
+		--secondary-3: #e6a5d6;
+		--secondary-4: #e9a7d4;
+		--secondary-5: #eca9d1;
+		--secondary-6: #efabcf;
+		--secondary-7: #f2adcd;
+		--secondary-8: #f4afca;
+		--secondary-9: #f7b0c8;
+		--secondary-10: #fab2c6;
+		--secondary-11: #fcb4c3;
+		--secondary-12: #ffb6c1;
+
+		--theme-color: var(--theme-0);
+		--secondary-color: var(--theme-12);
+		--accent-color: var(--accent-0);
+		--complementary-color: var(--accent-12);
+
 		/* Base colors */
-		--text-color: black;
-		--bg-color: lightpink;
-		--dark-bg-color: plum;
-		--border-color: deeppink;
-		--highlight-border-color: transparent;
-		--scrollbar-bg: rgba(255, 255, 255, 0.1);
-		/* Tag colors */
-		--tag-bg: var(--secondary-color);
-		--tag-color: var(--text-color);
+		--text-1: black;
+		--text-2: var(--pink-10);
+		--surface-1: var(--secondary-12);
+		--surface-2: var(--secondary-0);
+		--surface-3: var(--accent-12);
+		--surface-4: transparent;
+
 		/* Link colors */
-		--link-color: navy;
-		--link-visited-color: darkorchid;
-		--link-hover-color: deeppink;
-		--link-active-color: hotpink;
+		--link-color: color-mix(in oklch, var(--theme-0), black 80%);
+		--link-visited-color: var(--accent-0);
+		--link-hover-color: var(--accent-11);
+		--link-active-color: var(--theme-1);
+
 		/* Code colors */
-		--diff-add-color: darkgreen;
-		--diff-add-bg: rgba(0, 194, 0, 0.3);
-		--diff-remove-color: maroon;
-		--diff-remove-bg: rgba(255, 68, 68, 0.3);
-		--highlight-color: dimgray;
-		--highlight-default-bg: rgba(105, 105, 105, 0.35);
-		--highlight-error-color: maroon;
-		--highlight-error-bg: rgba(255, 99, 71, 0.3);
-		--highlight-warning-color: goldenrod;
-		--highlight-warning-bg: rgba(218, 165, 32, 0.3);
+		--diff-add-color: var(--lime-10);
+		--diff-add-bg: color-mix(in srgb, var(--green-2), transparent);
+		--diff-remove-color: var(--red-10);
+		--diff-remove-bg: color-mix(in srgb, var(--red-2), transparent);
+		--highlight-color: var(--gray-7);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+		--highlight-error-color: var(--red-12);
+		--highlight-error-bg: color-mix(in srgb, var(--red-1), transparent);
+		--highlight-warning-color: var(--yellow-7);
+		--highlight-warning-bg: color-mix(in srgb, var(--yellow-2), transparent);
+
+		/* Table styles */
+		--table-header-bg: var(--accent-0);
+		--table-header-color: var(--theme-12);
+		--table-header-border: var(--border-size) var(--border-style) var(--theme-12);
+
+		--table-rows-odd: var(--secondary-0);
+		--table-rows-even: var(--secondary-12);
+		--table-rows-hover: var(--accent-10);
+
+		--table-footer-bg: var(--accent-4);
+		--table-footer-color: var(--gray-11);
+		--table-footer-border: var(--border-size) var(--border-style) var(--gray-11);
+
+		/* Input styles */
+		--input-bg: var(--secondary-10);
+		--input-color: var(--accent-10);
+		--input-border: solid medium var(--accent-5);
+		--input-thumb-color: var(--accent-5);
+
+		--input-placeholder-color: var(--accent-5);
+
+		--input-valid-bg: var(--lime-0);
+		--input-valid-color: var(--lime-10);
+		--input-invalid-bg: var(--red-1);
+		--input-invalid-color: var(--red-7);
+		--input-hover-bg: var(--theme-10);
+		--input-hover-color: var(--accent-0);
+		--input-hover-border-color: var(--accent-0);
+		--input-focus-bg: var(--theme-12);
+		--input-focus-color: var(--accent-12);
+		--input-disabled-bg: var(--surface-1);
+		--input-disabled-color: var(--text-2);
+		--input-readonly-bg: var(--surface-1);
+		--input-readonly-color: var(--text-1);
+
+		--select-option-bg: var(--input-bg);
+		--select-option-color: var(--text-1);
+		--select-option-selected-bg: var(--surface-1);
+		--select-option-selected-color: var(--theme-color);
+
+		--fieldset-border: var(--border-style) var(--border-size) var(--accent-5);
+
+		/* Button styles */
+		--button-bg: var(--secondary-0);
+		--button-color: var(--accent-0);
+		--button-border: var(--border-style) var(--border-size) var(--accent-0);
+		--button-hover-bg: var(--accent-12);
+		--button-hover-color: var(--theme-12);
+		--button-hover-border-color: var(--theme-12);
+		--button-focus-bg: var(--theme-0);
+		--button-focus-color: var(--surface-1);
+		--button-focus-border-color: var(--surface-1);
+		--button-active-bg: var(--accent-color);
+		--button-active-color: var(--accent-12);
+		--button-active-border-color: var(--accent-12);
+		--button-disabled-bg: var(--gray-5);
+		--button-disabled-color: var(--gray-10);
+		--button-disabled-border-color: var(--gray-10);
+
+		/* Progress styles */
+		--progress-bg: var(--secondary-10);
+		--progress-color: var(--accent-5);
+		--progress-border: var(--accent-10);
+		--progress-hover-bg: var(--secondary-0);
+		--progress-hover-color: var(--accent-12);
+		--progress-hover-border-color: var(--accent-12);
+
+		/* Meter styles */
+		--meter-background: var(--secondary-10);
+		--meter-optimal-color: var(--green-3);
+		--meter-suboptimal-color: var(--yellow-3);
+		--meter-subsuboptimal-color: var(--red-3);
+		--meter-size-adjust: calc(var(--border-size) * 2);
+		--meter-border: var(--border-size) solid var(--accent-10);
+
+		/* Note styles */
+		--note-success-bg: var(--green-2);
+		--note-success-color: var(--lime-12);
+		--note-error-bg: var(--red-1);
+		--note-error-color: var(--red-12);
+		--note-warning-bg: var(--yellow-2);
+		--note-warning-color: var(--brown-12);
+		--note-alert-bg: var(--teal-2);
+		--note-alert-color: var(--teal-11);
+		--note-info-bg: var(--blue-2);
+		--note-info-color: var(--blue-12);
+		--note-debug-bg: var(--violet-2);
+		--note-debug-color: var(--purple-12);
+
 		/* Baseline colors */
-		--baseline-high-color: lightseagreen;
-		--baseline-high-bg: lightgreen;
-		--baseline-low-color: dodgerblue;
-		--baseline-low-bg: royalblue;
-		--baseline-limited-color: orangered;
-		--baseline-limited-bg: orange;
-		--baseline-no-data-color: dimgray;
-		--baseline-no-data-bg: dimgray;
-		--baseline-supported-color: darkgreen;
-		--baseline-supported-bg: color-mix(in srgb, lightseagreen, transparent 80%);
-		--baseline-unsupported-color: darkgoldenrod;
-		--baseline-unsupported-bg: color-mix(in srgb, yellow, transparent 80%);
+		--baseline-high-color: var(--green-10);
+		--baseline-high-bg: var(--lime-2);
+		--baseline-low-color: var(--blue-8);
+		--baseline-low-bg: var(--blue-2);
+		--baseline-limited-color: var(--orange-8);
+		--baseline-limited-bg: var(--gray-3);
+		--baseline-no-data-color: var(--gray-8);
+		--baseline-no-data-bg: var(--gray-3);
+
+		/* Tag list colors */
+		--tag-bg: var(--surface-2);
+		--tag-color: var(--text-2);
+		--tag-hover-bg: var(--accent-color);
+		--tag-hover-color: var(--surface-1);
+		--tag-focus-bg: var(--surface-2);
+		--tag-focus-color: var(--theme-color);
+
+		/* Logo styles */
+		--logo-part-color: var(--theme-0);
+		--logo-part-stroke: var(--secondary-12);
+		--logo-part-stroke-width: 5rem;
+		--logo-extras-color: var(--pink-0);
+		--logo-extras-stroke: var(--accent-0);
+		--logo-extras-stroke-width: 1rem;
+		--logo-text-color: var(--accent-color);
+		--logo-text-stroke: transparent;
+		--logo-text-stroke-width: 0;
+		--logo-font: var(--text-font-family);
+		--logo-font-weight: 700;
+
+		--logo-pixel-color: var(--surface-1);
+		--logo-overlay-color: var(--complementary-color);
+		--logo-noise-color: var(--theme-color);
+
+		--logo-part-hover-color: white;
+		--logo-part-hover-stroke: var(--link-hover-color);
+		--logo-extras-hover-color: var(--accent-0);
+		--logo-extras-hover-stroke: var(--secondary-12);
+		--logo-text-hover-color: var(--theme-0);
+		--logo-text-hover-stroke: transparent;
+
+		--logo-part-focus-color: var(--secondary-12);
+		--logo-part-focus-stroke: white;
+		--logo-extras-focus-color: white;
+		--logo-extras-focus-stroke: var(--accent-0);
+		--logo-text-focus-color: var(--theme-0);
+		--logo-text-focus-stroke: transparent;
+
+		--logo-part-active-color: var(--link-active-color);
+		--logo-part-active-stroke: white;
+		--logo-extras-active-color: var(--link-active-color);
+		--logo-extras-active-stroke: white;
+		--logo-text-active-color: var(--link-active-color);
+		--logo-text-active-stroke: transparent;
+
+		/* Avatar styles */
+		--avatar-overlay: radial-gradient(circle at bottom, var(--accent-color), var(--surface-1));
+		--avatary-overlay-opacity: 1;
+		--avatary-overlay-blend-mode: hard-light;
+
 		/* Old Buttons */
-		--old-button-border: var(--border-color) solid var(--border-width);
+		--old-button-border: var(--surface-3) solid var(--border-size);
 		--old-button-border-visibility: hidden;
 		--old-button-tint: color-mix(in srgb, hotpink, transparent 65%);
 		--old-button-blend-mode: color;
 		--old-button-border-radius: 0.5rem;
-		/* Icons */
-		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='deeppink' d='M15.54 11.29L9.88 5.64a1 1 0 0 0-1.42 0a1 1 0 0 0 0 1.41l4.95 5L8.46 17a1 1 0 0 0 0 1.41a1 1 0 0 0 .71.3a1 1 0 0 0 .71-.3l5.66-5.65a1 1 0 0 0 0-1.47'/%3E%3C/svg%3E");
-		--external-link-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Cpath fill='deeppink' d='M18 10.82a1 1 0 0 0-1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h7.18a1 1 0 0 0 0-2H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-7.18a1 1 0 0 0-1-1m3.92-8.2a1 1 0 0 0-.54-.54A1 1 0 0 0 21 2h-6a1 1 0 0 0 0 2h3.59L8.29 14.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0L20 5.41V9a1 1 0 0 0 2 0V3a1 1 0 0 0-.08-.38'/%3E%3C/svg%3E");
-		--hr-decoration-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 32 32'%3E%3Cpath fill='deeppink' d='M11.108 10.27c1.083-1.875.16-4.442-2.06-5.724a5.248 5.248 0 0 0-2.615-.72c-1.46 0-2.72.672-3.373 1.8c-.545.944-.608 2.077-.176 3.188C3.287 9.85 4.08 10.75 5.12 11.35a5.242 5.242 0 0 0 2.616.723c.673 0 1.3-.15 1.85-.414l2.4 1.385c1.582.914.56 3.86 5.918 6.955C23.26 23.094 29.4 21.535 29.4 21.535L10.75 10.767c.132-.156.255-.318.358-.496zm-1.733-1c-.506.88-2.033 1.056-3.255.348c-.646-.373-1.134-.916-1.37-1.528c-.21-.535-.194-1.055.042-1.464c.293-.51.892-.8 1.64-.8c.543 0 1.102.156 1.616.453c1.243.716 1.85 2.086 1.327 2.99zm7.87 6.522c0 .483-.39.875-.874.875c-.036 0-.067-.017-.103-.02l.667-1.512a.86.86 0 0 1 .312.657zm-.874-.875c.038 0 .07.017.105.02l-.666 1.51a.851.851 0 0 1-.313-.655c0-.483.39-.875.874-.875m13.03-4.45s-6.14-1.56-11.496 1.535c-.537.31-.995.618-1.415.924l4.325 2.497zm-16.23 6.63c-.35.85-.574 1.508-1.186 1.86l-2.4 1.385a4.235 4.235 0 0 0-1.85-.414c-.893 0-1.797.25-2.615.72c-2.22 1.283-3.144 3.852-2.06 5.727c.65 1.127 1.91 1.8 3.372 1.8c.894 0 1.8-.25 2.616-.72c1.04-.602 1.833-1.502 2.236-2.537c.432-1.112.368-2.245-.178-3.19a3.436 3.436 0 0 0-.356-.493l3.982-2.3a9.7 9.7 0 0 1-1.56-1.838zm-3.75 7.095c-.238.612-.725 1.155-1.37 1.528c-1.222.706-2.75.532-3.258-.347c-.522-.903.086-2.274 1.328-2.992a3.254 3.254 0 0 1 1.615-.452c.75 0 1.346.29 1.64.8c.237.41.253.93.045 1.464z'/%3E%3C/svg%3E");
+
 		/* Fonts */
 		--headers-font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
 		--text-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+
+		/* Icons */
+		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='deeppink' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
+		--select-icon: ;
+
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: light;
+
+		body {
+			animation: 1s steps(5) infinite uwu-cursor-normal;
+			cursor: url('./uwu/cursors/normal/1.svg'), auto;
+			background-image: linear-gradient(
+				to right,
+				mistyrose var(--size-1),
+				lavenderblush var(--size-1)
+			);
+			background-size: calc(var(--size-1) * 2);
+			background-repeat: repeat;
+			background-color: var(--surface-1);
+		}
 	}
 
-	[data-theme='uwu'] body {
-		animation: 1s steps(5) infinite uwu-cursor-normal;
-		cursor: url('./uwu/cursors/normal/1.svg'), auto;
-		background-image: linear-gradient(
-			to right,
-			mistyrose var(--spacing-small),
-			lavenderblush var(--spacing-small)
-		);
-		background-size: calc(var(--spacing-small) * 2);
-		background-repeat: repeat;
-		background-color: var(--bg-color);
-	}
-
-	[data-theme='uwu'] .user-avatar::after {
-		opacity: 1;
-		mix-blend-mode: hard-light;
-		background: radial-gradient(circle at bottom, var(--accent-color), var(--bg-color));
-	}
-
-	[data-theme='uwu'] :is(a, button, input, select) {
-		animation: 1s steps(5) infinite uwu-cursor-hand;
-		cursor: url('./uwu/cursors/hand/1.svg'), auto;
-	}
-
-	[data-theme='uwu'] .logo-part {
-		fill: var(--theme-color, dodgerblue);
-		paint-order: stroke;
-		stroke: var(--bg-color, lightpink);
-		stroke-width: 5rem;
-	}
-
-	[data-theme='uwu'] .logo-extras {
-		fill: lavenderblush;
-		paint-order: stroke;
-		stroke: var(--accent-color, darkorchid);
-		stroke-width: 1rem;
-	}
-
-	[data-theme='uwu'] .logo-text {
-		fill: var(--accent-color, darkorchid);
-		font-weight: 700;
-		font-family: var(--text-font-family);
-	}
-
-	[data-theme='uwu'] #logo-graphics [data-theme] { visibility: hidden; }
-	[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='full']) { visibility: visible; }
-
-	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-part {
-		fill: var(--bg-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-extras {
-		fill: white;
-		stroke: var(--dark-bg-color);
-	}
-
-	[data-theme='uwu'] a:focus-visible [data-theme='uwu'] .logo-text { fill: var(--theme-color); }
-
-	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-part {
-		fill: white;
-		stroke: var(--link-hover-color);
-	}
-
-	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-extras {
-		fill: var(--accent-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:hover [data-theme='uwu'] .logo-text { fill: var(--theme-color); }
-
-	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-part {
-		fill: var(--link-active-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-extras {
-		fill: var(--link-active-color);
-		stroke: white;
-	}
-
-	[data-theme='uwu'] a:active [data-theme='uwu'] .logo-text { fill: var(--link-active-color); }
-
-	[data-theme='uwu'] ul { list-style: '💖 '; }
-	[data-theme='uwu'] ul ul { list-style: '🦋 '; }
-	[data-theme='uwu'] ul ul ul { list-style: '🦄 '; }
-
-	[data-theme='uwu'] #site-nav {
+	:is([data-theme='uwu'] site-nav, site-nav[data-theme='uwu']) nav {
 		--edge-size: 3rem;
+
 		background: url('/src/assets/css/themes/uwu/border.svg'), linear-gradient(to top, lightpink, lightpink);
 		background-position: center bottom, center top;
 		background-size: auto var(--edge-size), auto calc(100% - var(--edge-size));
 		background-repeat: repeat no-repeat;
 		padding-block-end: var(--edge-size);
-		max-width: 100%;
+		max-inline-size: 100%;
+
+		ul { list-style: none; }
 	}
 
-	[data-theme='uwu'] #site-nav ul { list-style: none; }
+	[data-theme='uwu'] ul, ul[data-theme='uwu'] {
+		list-style: '💖 ';
 
-	[data-theme='uwu'] .card { position: relative; }
-	[data-theme='uwu'] .card::after {
-		--details-size: 5rem;
-		display: block;
-		position: absolute;
-		background-position: center;
-		background-size: contain;
-		background-repeat: no-repeat;
-		width: var(--details-size);
-		height: var(--details-size);
-		pointer-events: none;
+		ul {
+			list-style: '🦋 ';
+
+			ul { list-style: '🦄 '; }
+		}
 	}
 
-	[data-theme='uwu'] .card-container:nth-of-type(2n) .card::after {
-		inset-block-start: calc(var(--details-size) * 0.3 * -1);
-		inset-inline-end: calc(var(--details-size) * 0.3 * -1);
-		background-image: url('./uwu/details1.svg');
-		content: '';
+	:is([data-theme='uwu'] tag-list, tag-list[data-theme='uwu']) ul { list-style: none; }
+
+	[data-theme='uwu'] :is(a, button, input, select), :is(a, button, input, select)[data-theme='uwu'] {
+		animation: 1s steps(5) infinite uwu-cursor-hand;
+		cursor: url('./uwu/cursors/hand/1.svg'), auto;
 	}
 
-	[data-theme='uwu'] .card-container:nth-of-type(3n) .card::after {
-		inset: auto;
-		inset-block-end: calc(var(--details-size) * 0.4 * -1);
-		inset-inline-start: calc(var(--details-size) * 0.3 * -1);
-		background-image: url('./uwu/details2.svg');
-		content: '';
+	:is([data-theme='uwu'] m-card, m-card[data-theme='uwu']) {
+		article {
+			position: relative;
+
+			&::after {
+				--details-size: 5rem;
+				display: block;
+				position: absolute;
+				background-position: center;
+				background-size: contain;
+				background-repeat: no-repeat;
+				inline-size: var(--details-size);
+				block-size: var(--details-size);
+				pointer-events: none;
+			}
+		}
+
+		&:nth-of-type(2n) article::after {
+			inset-block-start: calc(var(--details-size) * 0.3 * -1);
+			inset-inline-end: calc(var(--details-size) * 0.3 * -1);
+			background-image: url('./uwu/details1.svg');
+			content: '';
+		}
+
+		&:nth-of-type(3n) article::after {
+			inset: auto;
+			inset-block-end: calc(var(--details-size) * 0.4 * -1);
+			inset-inline-start: calc(var(--details-size) * 0.3 * -1);
+			background-image: url('./uwu/details2.svg');
+			content: '';
+		}
+
+		&.project-card picture {
+			position: relative;
+			mask: none;
+			overflow: visible;
+
+			img { border-radius: var(--radius-round); }
+
+			&::after {
+				display: block;
+				position: absolute;
+				inset: 0;
+				inset-block-end: -20%;
+				inset-inline-end: -20%;
+				background-image: url('./uwu/mask.svg');
+				background-position: top left;
+				background-size: contain;
+				background-repeat: no-repeat;
+				pointer-events: none;
+				content: '';
+			}
+		}
 	}
 
-	[data-theme='uwu'] .project-card picture {
-		position: relative;
-		mask: none;
-		overflow: visible;
-	}
+	[data-theme='uwu'] m-logo,
+	m-logo[data-theme='uwu'] {
+		[data-theme] { visibility: hidden; }
 
-	[data-theme='uwu'] .project-card picture img { border-radius: 100vmax; }
+		[data-theme='uwu'] {
+			&:where([data-size='full']) { visibility: visible; }
 
-	[data-theme='uwu'] .project-card picture::after {
-		display: block;
-		position: absolute;
-		inset: 0;
-		inset-block-end: -20%;
-		inset-inline-end: -20%;
-		background-image: url('./uwu/mask.svg');
-		background-position: top left;
-		background-size: contain;
-		background-repeat: no-repeat;
-		pointer-events: none;
-		content: '';
-	}
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
 
-	@container logo (max-width: 25rem) {
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='mini']) { visibility: visible; }
-	}
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
 
-	@container logo (max-width: 15rem) {
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu'] { visibility: hidden; }
-		[data-theme='uwu'] #logo-graphics [data-theme='uwu']:where([data-size='micro']) { visibility: visible; }
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='uwu'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='uwu'][data-size='micro']) { visibility: visible; }
+		}
 	}
 
 	@keyframes uwu-cursor-normal {

@@ -1,6 +1,6 @@
 ---
 title: Web Components for fun and profit
-summary: An intermediary level quick talk about Web Components. Starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility.
+summary: An intermediate level quick talk about Web Components. Starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility.
 image: ./assets/tojs-web-components.jpg
 imageAlt: AI Generated image of person riding a winged dog with a background of planets, stars and a rainbow.
 event: "JS Tech Talk: Web Fonts, Web Components, Svelte!"
@@ -24,7 +24,7 @@ relatedContent:
 
 ![A photo of me presenting to an audience. I'm on the background holding a microphone next to a projector with large windows behind me showing a great view of Toronto's summer. On the foreground there is a group of people viewed from the back turned at the presentation on the background.](./assets/web-components-talk.jpg)
 
-An intermediary level quick talk about Web Components, starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility.
+An intermediate level quick talk about Web Components, starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility.
 
 The starting point is the motivation on _why_ web components are useful and we should use them. The main argument is reducing complexity and dependencies.
 

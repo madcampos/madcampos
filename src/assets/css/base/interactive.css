@@ -1,0 +1,100 @@
+@layer base {
+	summary {
+		display: flex;
+		align-items: center;
+		gap: var(--size-1);
+		list-style: none;
+
+		&::-webkit-details-marker {
+			display: none;
+
+			@media (forced-colors: active) { display: revert; }
+		}
+		&::marker {
+			display: none;
+
+			@media (forced-colors: active) { display: revert; }
+		}
+
+		&::before {
+			display: inline-block;
+			background-image: var(--details-icon);
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			inline-size: 1.5em;
+			block-size: 1.5em;
+			vertical-align: -0.2em;
+			content: '';
+			flex-shrink: 0;
+
+			@media (forced-colors: active) {
+				background-image: none;
+				content: '▷' / '';
+				vertical-align: middle;
+			}
+		}
+
+		& > :where(h1, h2, h3, h4, h5, h6) { margin: 0; }
+
+		&:focus-visible {
+			outline: var(--focus-outline);
+			outline-offset: var(--size-1);
+			background-color: var(--surface-1);
+		}
+	}
+
+	details[open] > summary::before { transform: rotate(90deg); }
+
+	dialog {
+		flex-direction: column;
+		justify-content: center;
+		align-items: start;
+		padding: var(--size-3);
+		gap: var(--size-2);
+		border: var(--surface-3) var(--border-style) var(--border-size);
+		border-radius: var(--border-radius);
+		background-color: var(--surface-2);
+		inline-size: clamp(var(--size-content-0), 70vw, var(--size-content-3));
+		block-size: clamp(var(--size-content-0), 70vh, var(--size-content-3));
+		overscroll-behavior: contain;
+		font-size: var(--font-size-1);
+
+		&:where([open], :popover-open) { display: flex; }
+
+		&::backdrop {
+			backdrop-filter: blur(var(--size-3));
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		& > form { display: contents; }
+
+		& > header, & > form > header {
+			display: flex;
+			align-items: center;
+			inline-size: 100%;
+
+			button { flex-shrink: 0; }
+			:is(h1, h2, h3, h4, h5, h6) {
+				flex-grow: 1;
+				margin: 0;
+			}
+		}
+
+		& > footer, & > form > footer {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			inline-size: 100%;
+			gap: var(--size-2);
+
+			button { flex-shrink: 0; }
+		}
+
+		& > dialog-content, & > form > dialog-content {
+			flex-grow: 1;
+			overflow: auto;
+			inline-size: 100%;
+		}
+	}
+}

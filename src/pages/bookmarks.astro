@@ -1,25 +1,31 @@
 ---
+/* eslint-disable max-lines */
+
 import { Icon } from 'astro-icon/components';
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.ts';
 
 const ICON_MAP = {
-	article: 'uil:edit',
-	guidelines: 'uil:book-open',
-	podcast: 'uil:microphone',
-	reference: 'uil:books',
-	tutorial: 'uil:notes',
-	video: 'uil:clapper-board',
-	website: 'uil:globe'
+	article: 'mingcute:edit-4-line',
+	guidelines: 'mingcute:book-6-line',
+	podcast: 'mingcute:mic-line',
+	reference: 'mingcute:book-5-line',
+	tutorial: 'mingcute:list-check-2-line',
+	video: 'mingcute:clapperboard-line',
+	website: 'mingcute:world-2-line'
 } as const;
 
 interface BookmarkLink {
 	url: string;
 	title: string;
 	description: string;
-	type: 'article' | 'video' | 'podcast' | 'website' | 'tutorial' | 'reference' | 'guidelines';
+	type: 'article' | 'guidelines' | 'podcast' | 'reference' | 'tutorial' | 'video' | 'website';
+	note?: string;
 }
 
 interface BookmarkSection {
@@ -106,6 +112,30 @@ const links: BookmarkSection[] = [
 				title: 'WCAG in Plain English',
 				description: 'The WCAG but in plain english.',
 				type: 'reference'
+			},
+			{
+				url: 'https://cdpn.io/pen/debug/ByoMebv',
+				title: 'Screen Reader HTML Support – Lookup',
+				description: 'A reference of how screen readers support each HTML element and some common attribute presence/combos.',
+				type: 'reference'
+			},
+			{
+				url: 'https://tab-able.co.uk/video-without-vision/',
+				title: 'Video Without Vision',
+				description: 'Guidelines to provide videos that are accessible to a blind audience.',
+				type: 'guidelines'
+			},
+			{
+				url: 'https://ashleemboyer.com/blog',
+				title: 'Ashlee Boyer Blog',
+				description: 'Nice articles about accessibility.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.whocanuse.com/',
+				title: 'Who can use',
+				description: 'A tool to check color contrast for different vision impairments.',
+				type: 'reference'
 			}
 		]
 	},
@@ -117,6 +147,12 @@ const links: BookmarkSection[] = [
 				url: 'https://heydonworks.com/article/the-blockquote-element/',
 				title: 'The Blockquote Element',
 				description: 'An article on the `<blockquote>` element and how to use it.',
+				type: 'article'
+			},
+			{
+				url: 'https://benmyers.dev/blog/on-the-dl/',
+				title: 'On the `<dl>`',
+				description: 'Article on the `<dl>` element and use cases for it.',
 				type: 'article'
 			},
 			{
@@ -136,6 +172,60 @@ const links: BookmarkSection[] = [
 				title: 'Custom Element Best Practices',
 				description: 'A set of best practices for building web components with explanations as to _why_ to follow them.',
 				type: 'guidelines'
+			},
+			{
+				url: 'https://height.app/blog/guide-to-build-context-menus',
+				title: "Building like it's 1984: A comprehensive guide to creating intuitive context menus",
+				description: 'A guide on the considerations and how to build context menus.',
+				type: 'reference'
+			},
+			{
+				url: 'https://height.app/blog/scrollbars-in-web-applications',
+				title: "Building like it's 1984: Scrollbars in web applications",
+				description: 'A guide on the considerations and how to build custom scrollbars.',
+				type: 'reference'
+			},
+			{
+				url: 'https://reasonunderpressure.com/blog/posts/your-images-are-probably-oversized',
+				title: 'Your Images Are (Probably) Oversized',
+				description: 'An article on image optimization and how to make images better sized.',
+				type: 'article'
+			},
+			{
+				url: 'https://justinfagnani.com/2025/06/30/what-should-a-dom-templating-api-look-like',
+				title: 'What should a native DOM templating API look like?',
+				description: 'An opinion piece on how HTML templating should be implemented natively.',
+				type: 'article'
+			},
+			{
+				url: 'http://nativeformelements.com/',
+				title: 'Native form elements',
+				description: 'A page with form elements, without styling.',
+				type: 'reference'
+			},
+			{
+				url: 'https://demo.agektmr.com/datalist/',
+				title: 'Datalist Experiment',
+				description: 'Examples of the `<datalist>` element in use.',
+				type: 'reference'
+			},
+			{
+				url: 'https://whatwebcando.today/',
+				title: 'What web can do today?',
+				description: 'A reference of various capabilities of web apps.',
+				type: 'reference'
+			},
+			{
+				url: 'https://whatpwacando.today/',
+				title: 'What PWA can do today?',
+				description: 'A reference of various capabilities of web apps.',
+				type: 'reference'
+			},
+			{
+				url: 'https://pikaday.dbushell.com/',
+				title: 'Pikaday',
+				description: 'A reference of date pickers and patterns to use for selecting dates.',
+				type: 'reference'
 			}
 		]
 	},
@@ -184,6 +274,24 @@ const links: BookmarkSection[] = [
 				title: 'A Friendly Introduction to SVG',
 				description: 'Very visual and beginner level intro to how SVG works and how to write it by hand.',
 				type: 'tutorial'
+			},
+			{
+				url: 'https://frontendmasters.com/blog/the-coyier-css-starter/',
+				title: 'The Coyier CSS Starter',
+				description: 'Chris Coyer\'s 2025 re-take on "CSS resets". It explains _why_ each option is choosen.',
+				type: 'reference'
+			},
+			{
+				url: 'https://rtlstyling.com/posts/rtl-styling/',
+				title: 'RTL Styling 101',
+				description: 'A guide on how to style pages for Right-to-Left (RTL) languages.',
+				type: 'guidelines'
+			},
+			{
+				url: 'https://modernfontstacks.com/',
+				title: 'Modern Font Stacks',
+				description: 'List of font families that are "Modern" and nice, while also providing broad OS support.',
+				type: 'reference'
 			}
 		]
 	},
@@ -209,6 +317,12 @@ const links: BookmarkSection[] = [
 				description:
 					'How to debounce and throttle events for when using [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame) is not enough.',
 				type: 'reference'
+			},
+			{
+				url: 'https://frontendmasters.com/blog/vanilla-javascript-reactivity/#the-many-ways-to-achieve-reactivity',
+				title: 'Patterns for Reactivity with Modern Vanilla JavaScript',
+				description: 'A list of patterns for reactivity using vanilla JS, without any libraries.',
+				type: 'reference'
 			}
 		]
 	},
@@ -227,6 +341,12 @@ const links: BookmarkSection[] = [
 				title: 'UX Myths',
 				description: 'A list of myths regarding UX with articles explaining why they are myths.',
 				type: 'website'
+			},
+			{
+				url: 'https://www.qualtrics.com/articles/customer-experience/ux-design-glossary/',
+				title: 'User Experience (UX) Design Glossary: Improving Your Customer Experience With a Good UX',
+				description: 'A glossary of common UX terms. Helpful to build a shared definition and understanding of concepts.',
+				type: 'reference'
 			},
 			{
 				url: 'https://alistapart.com/article/the-illusion-of-control-in-web-design/',
@@ -253,10 +373,22 @@ const links: BookmarkSection[] = [
 				type: 'article'
 			},
 			{
-				url: 'https://www.dimensions.com/',
-				title: 'Dimensions',
-				description: 'Measuerements for things.',
+				url: 'https://component.gallery/',
+				title: 'The Component Gallery',
+				description: 'A gallery of UI patterns and some design systems they show up.',
+				type: 'reference'
+			},
+			{
+				url: 'https://gka.github.io/palettes/',
+				title: 'Chroma.js Color Palette Helper',
+				description: 'Tool to generate color scales',
 				type: 'website'
+			},
+			{
+				url: 'https://infobeans.ai/why-design-systems-fail/',
+				title: 'Why Design Systems Fail',
+				description: 'Reflection on the causes for design systems to not work.',
+				type: 'article'
 			}
 		]
 	},
@@ -293,6 +425,12 @@ const links: BookmarkSection[] = [
 				title: 'Commit Signing - GitHub Guide',
 				description: 'Important, please do it. Here is a tutorial.',
 				type: 'tutorial'
+			},
+			{
+				url: 'https://drew.silcock.dev/blog/artisanal-git/',
+				title: 'Artisanal Handcrafted Git Repositories',
+				description: 'How to make a git repo from scratch, vegan and gluten-free.',
+				type: 'article'
 			}
 		]
 	},
@@ -346,6 +484,30 @@ const links: BookmarkSection[] = [
 				url: 'https://www.seangoedecke.com/invalid-states/',
 				title: "'Make invalid states unrepresentable' considered harmful",
 				description: 'Why we should make our systems flexible and design thinking about rules that will be broken.',
+				type: 'article'
+			},
+			{
+				url: 'https://emschwartz.me/subtleties-of-sqlite-indexes/',
+				title: 'Subtleties of SQLite Indexes',
+				description: 'Details about SQL indexes and how to optimize them for the best outcome.',
+				type: 'article'
+			},
+			{
+				url: 'https://cedardb.com/blog/pagination/',
+				title: 'Offset Considered Harmful or: The Surprising Complexity of Pagination in SQL',
+				description: 'A deep dive into pagination in SQL and problems with duplicated entries when listing items.',
+				type: 'article'
+			},
+			{
+				url: 'https://shkspr.mobi/blog/2025/10/how-to-actually-test-your-readme/',
+				title: 'How to *actually* test your readme',
+				description: 'An argument that you should test your build steps and dependencies in a clean virtual machine so everything works and is reproductible.',
+				type: 'article'
+			},
+			{
+				url: 'https://jvns.ca/blog/brag-documents/',
+				title: 'Get your work recognized: write a brag document',
+				description: 'Why you should brag about the things you do.',
 				type: 'article'
 			}
 		]
@@ -421,49 +583,196 @@ const links: BookmarkSection[] = [
 				type: 'article'
 			},
 			{
-				url: 'https://drew.silcock.dev/blog/artisanal-git/',
-				title: 'Artisanal Handcrafted Git Repositories',
-				description: 'How to make a git repo from scratch, vegan and gluten-free.',
+				url: 'https://kunststube.net/encoding/',
+				title: 'What every programmer absolutely, positively needs to know about encodings and character sets to work with text',
+				description: 'The name says it all.',
 				type: 'article'
+			},
+			{
+				url: 'https://www.benjoffe.com/smoitus',
+				title: 'The Smoital System — A method of timekeeping on Mars based on UTC',
+				description: 'A way to keep track of time in Mars and keeping compatibility with UTC.',
+				type: 'article'
+			}
+		]
+	},
+	{
+		title: 'Lego',
+		description: 'Websites with instructions, databases on sets and parts, and other related things.',
+		links: [
+			{
+				url: 'https://bricksfortheblind.org/',
+				title: 'Bricks for the Blind',
+				description: 'Text based building instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.lego.com/en-us/service/building-instructions',
+				title: 'Lego Building Instructions',
+				description: 'Official website for building instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.bricklink.com/',
+				title: 'Bricklink',
+				description: 'Database and marketplace for Lego parts.',
+				type: 'website'
+			},
+			{
+				url: 'https://rebrickable.com/',
+				title: 'Rebrickable',
+				description: 'Database of MoCs, instructions, and sets.',
+				type: 'website'
+			},
+			{
+				url: 'https://brickset.com/',
+				title: 'Brickset',
+				description: 'Database of sets, specially useful for older sets.',
+				type: 'website'
+			},
+			{
+				url: 'https://letsbuilditagain.com/index.php',
+				title: "Let's Build it Again",
+				description: 'Database of old instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://instructabrick.com/',
+				title: 'Instruct-a-brick',
+				description: 'Database of old instructions.',
+				type: 'website'
+			},
+			{
+				url: 'https://brickinstructions.com/',
+				title: 'Brick Instructions',
+				description: 'Database of old instructions.',
+				type: 'website'
+			}
+		]
+	},
+	{
+		title: 'Video Games & Board Games',
+		description: 'Resources related to games, both physical and digital',
+		links: [
+			{
+				url: 'https://isthereanydeal.com/',
+				title: 'Is There any Deal?',
+				description: 'Market tracker for games, includding multiple stores and bundle sites. Good for scavanging discounts.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.steamgriddb.com/',
+				title: 'Steam Grid DB',
+				description: 'Database for icons, banners, and other related resources to make your Steam library pretty.',
+				type: 'website'
+			},
+			{
+				url: 'https://steambanners.booru.org/index.php',
+				title: 'Steam Banners',
+				description: 'Another Database for Steam banners to make your library pretty.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.myabandonware.com/',
+				title: 'My Abandonware',
+				description: 'Download old and abandoned games. Some of them have links and resources on how to run on modern hardware.',
+				type: 'website'
+			},
+			{
+				url: 'https://oldgamesdownload.com/',
+				title: 'Old Games Download',
+				description: 'Archive of old and abandoned games.',
+				type: 'website'
+			},
+			{
+				url: 'https://www.boardgameoracle.com/',
+				title: 'Board Game Oracle',
+				description: 'Market tracker for board game prices.',
+				type: 'website'
+			},
+			{
+				url: 'https://opengameart.org/',
+				title: 'Open Game Art',
+				description: 'Free game assets.',
+				type: 'website'
 			}
 		]
 	}
 ];
 ---
-
-<InternalPageLayout
-	htmlTitle={['Bookmarks', ...GLOBALS.title]}
-	title="Bookmarks"
-	description="List of resources I reference often."
-	url="/bookmarks/"
-	tags={['bookmarks', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Bookmarks"
-		shortSubtitle="BM."
-		url="/bookmarks/"
-		urlTitle="Bookmark page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Bookmarks | Marco Campos"
+		description="List of resources I reference often."
 	/>
-	<Fragment slot="header">Bookmarks</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	{
-		links.map((section) => (
-			<h2>{section.title}</h2>
-			<p>{section.description}</p>
-			<dl>
-				{
-					section.links.map((bookmark) => (
-						<dt class="h-entry">
-							<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
-							<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
-						</dt>
-						<dd>
-							<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
-						</dd>
-					))
-				}
-			</dl>
-		))
-	}
-</InternalPageLayout>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Bookmarks"
+				shortSubtitle="BM."
+				title="Bookmark page"
+			/>
+			<h1>Bookmarks</h1>
+		</header>
+
+		<main id="main">
+			{
+				links.map((section) => (
+					<hgroup>
+						<h2>{section.title}</h2>
+						<p>{section.description}</p>
+					</hgroup>
+					<dl>
+						{
+							section.links.map((bookmark) => (
+								<dt class="h-entry">
+									<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
+									<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
+								</dt>
+								<dd>
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
+									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
+									{
+										bookmark.note && (
+											<m-note data-type="info">
+												<Icon name="mingcute:information-line" aira-hidden="true" />
+												<rendered-content>
+													{/* eslint-disable-next-line astro/no-set-html-directive */}
+													<Fragment set:html={inlineMarkdownRender(bookmark.note)} />
+												</rendered-content>
+											</m-note>
+										)
+									}
+								</dd>
+							))
+						}
+					</dl>
+				))
+			}
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

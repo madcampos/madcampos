@@ -1,5 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+// TODO: reimplement wheel of fortune
+// Ref: https://stackoverflow.com/questions/33850201/how-to-draw-a-wheel-of-fortune
 class WheelOffortune extends HTMLElement {
-	static observedAttributes = ['display'] as const;
+	static observedAttributes = ['display'];
 	static DISPLAY_TYPES = ['wheel', 'list'] as const;
 
 	#internals?: ElementInternals;

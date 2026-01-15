@@ -1,18 +1,15 @@
 @layer print {
 	@media print {
 		:root {
-			--body-text: 12pt;
-			--headers-font-family: monospace;
-			--text-font-family: sans-serif;
+			--base-font-size: 12pt;
+
 			/* Base colors */
-			--text-color: black;
-			--bg-color: white;
-			--dark-bg-color: white;
-			--border-color: black;
-			--scrollbar-bg: transparent;
-			/* Tag colors */
-			--tag-bg: var(--secondary-color);
-			--tag-color: var(--text-color);
+			--text-1: black;
+			--text-2: black;
+			--surface-1: white;
+			--surface-2: white;
+			--surface-3: black;
+
 			/* Link colors */
 			--link-color: #065bd1;
 			--link-visited-color: #4c2c92;
@@ -24,8 +21,8 @@
 		}
 
 		@page {
-			margin-inline: 1.5rem;
-			margin-block: 3rem;
+			margin-inline: var(--size-5);
+			margin-block: var(--size-8);
 		}
 
 		h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
@@ -34,32 +31,30 @@
 
 		a { text-decoration: underline; }
 
-		/* dprint-ignore */
-		a:not(:has( > :is(img, picture)))[href]::after {
+		a:not(:has(> :is(img, picture)))[href]::after {
 			content: '\00a0(' attr(href) ')';
 			font-size: smaller;
 		}
-
-		a#logo-container::after { display: none; }
 
 		a[rel~='external']::after {
 			display: inline;
 			vertical-align: baseline;
 			background: none;
-			width: fit-content;
+			inline-size: fit-content;
 		}
 
+		related-posts ul { flex-wrap: wrap !important; }
+
+		/* Hide content that doesn't make sense in print media */
 		a[href^='#']::after { display: none; }
 		a[data-footnote-backref] { display: none; }
-		iframe { display: none; }
-		#post-share { display: none; }
-		#site-nav { display: none; }
-		#old-buttons { display: none; }
-		#webrings { display: none; }
-		#theme-switcher { display: none; }
-
-		#related-posts ul { flex-wrap: wrap; }
-
-		#post-contents p > img:only-child { --image-size: 10rem; }
+		share-options { display: none; }
+		site-nav { display: none; }
+		old-style-buttons { display: none; }
+		m-webrings { display: none; }
+		theme-switcher { display: none; }
+		scroll-to-top { display: none; }
+		a:has(m-avatar)::after { display: none; }
+		m-logo a::after { display: none; }
 	}
 }

@@ -1,48 +1,76 @@
 ---
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants.js';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Accessibility Statement', ...GLOBALS.title]}
-	title="Accessibility Statement"
-	description="Accesibility Statement for Marco Campos website."
-	url="/accessibility/"
-	tags={['accessibility', 'a11y', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Accessibility"
-		shortSubtitle="A11y"
-		url="/accessibility/"
-		urlTitle="Accessibility Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Accessibility Statement | Marco Campos"
+		description="Accesibility Statement for Marco Campos website."
 	/>
-	<Fragment slot="header">Accessibility Statement</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<p>
-		This site is made for people. As such I try my best to be at least AA compliant with the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/"
-		>Web Content Accessibility Guidelines (WCAG)</a> and make the web more accessible and inclusive.
-	</p>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<p>That said, I'm not perfect and I'm always learning and improving the website.</p>
-	<p>I run automated testing and manual testing for accessibility issues regularly using the following tools:</p>
-	<ul>
-		<li><a href="https://wave.webaim.org/">WAVE</a> for automated testing</li>
-		<li>
-			<a href="https://www.microsoft.com/en-us/edge/">Edge</a> on <a href="https://www.microsoft.com/en-us/windows/windows-11">Windows 11</a> and <a
-				href="https://www.nvaccess.org/about-nvda/"
-			>NVDA</a>
-		</li>
-		<li>
-			<a href="https://play.google.com/store/apps/details?id=com.microsoft.emmx">Edge</a> on <a href="https://www.android.com/">Android</a> and <a
-				href="https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback"
-			>TalkBack</a>
-		</li>
-		<li>Edge on Windows 11 and Android with 200% zoom</li>
-	</ul>
+		<SiteNav />
 
-	<p>If you have any issues with the site, please feel free to contact me at <em><a href="mailto:me@madcampos.dev">me@madcampos.dev</a></em>.</p>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
 
-	<p>If you have the technical knowledge and would like to, feel free to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
-</InternalPageLayout>
+		<header>
+			<Logo
+				subtitle="Accessibility"
+				shortSubtitle="A11y"
+				title="Accessibility Page"
+			/>
+			<h1>Accessibility Statement</h1>
+		</header>
+
+		<main id="main">
+			<p>
+				This site is made for people. As such I try my best to be at least AA compliant with the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/"
+				>Web Content Accessibility Guidelines (WCAG)</a> and make the web more accessible and inclusive.
+			</p>
+
+			<p>That said, I'm not perfect and I'm always learning and improving the website.</p>
+			<p>I run automated testing and manual testing for accessibility issues regularly using the following tools:</p>
+			<ul>
+				<li><a href="https://wave.webaim.org/">WAVE</a> for automated testing</li>
+				<li>
+					<a href="https://www.microsoft.com/en-us/edge/">Edge</a> on <a href="https://www.microsoft.com/en-us/windows/windows-11">Windows 11</a> and <a
+						href="https://www.nvaccess.org/about-nvda/"
+					>NVDA</a>
+				</li>
+				<li>
+					<a href="https://play.google.com/store/apps/details?id=com.microsoft.emmx">Edge</a> on <a href="https://www.android.com/">Android</a> and <a
+						href="https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback"
+					>TalkBack</a>
+				</li>
+				<li>Edge on Windows 11 and Android with 200% zoom</li>
+			</ul>
+
+			<p>If you have any issues with the site, please feel free to contact me at <em><a href="mailto:me@madcampos.dev">me@madcampos.dev</a></em>.</p>
+
+			<p>If you have the technical knowledge and would like to, feel free to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+@layer components {
+	site-nav nav {
+		display: flex;
+		margin-inline: auto;
+		border-block-end: var(--border-style) var(--surface-4) var(--border-size);
+		border-end-start-radius: var(--border-radius);
+		border-end-end-radius: var(--border-radius);
+		background-color: var(--surface-2);
+		inline-size: 100%;
+		max-inline-size: var(--size-content-4);
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: var(--size-3);
+			margin: var(--size-3) auto;
+			padding: 0 var(--size-3);
+			inline-size: 100%;
+			list-style-type: none;
+		}
+
+		button { margin: 0; }
+	}
+}

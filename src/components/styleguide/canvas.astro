@@ -1,0 +1,36 @@
+---
+
+---
+<details open>
+	<summary>
+		<h2>Canvas</h2>
+	</summary>
+
+	<section>
+		<h3>2D Canvas</h3>
+		<canvas width="320" height="240" id="canvas-2d"></canvas>
+		<script type="module" is:inline>
+			const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d'));
+			const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
+			const { width, height } = canvas.getBoundingClientRect();
+
+			canvas.width = Math.floor(width);
+			canvas.height = Math.floor(height);
+
+			canvas.style.width = `${canvas.width}px`;
+			canvas.style.height = `${canvas.height}px`;
+
+			ctx.canvas.width = canvas.width;
+			ctx.canvas.height = canvas.height;
+
+			ctx.fillStyle = 'teal';
+			ctx.fillRect(Math.floor(canvas.width / 2) - 50, Math.floor(canvas.height / 2) - 50, 100, 100);
+		</script>
+	</section>
+
+	<section>
+		<h3>3D Canvas</h3>
+		<canvas width="320" height="240" id="canvas-3d"></canvas>
+		<script src="../../assets/js/test/webgl-cube.ts"></script>
+	</section>
+</details>

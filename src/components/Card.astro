@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import { inlineMarkdownStrip } from '../utils/markdown.ts';
+
+interface Props {
+	itemtype: string;
+	url?: string;
+	draft?: boolean;
+	image?: ImageMetadata;
+	imageAlt?: string;
+	themeImages?: Record<string, ImageMetadata>;
+	extraClass?: string;
+}
+
+const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro.props;
+
+// eslint-disable-next-line @typescript-eslint/no-magic-numbers
+const IMAGE_WIDTHS = [64, 128, 256, 512];
+---
+<m-card class:list={[extraClass]}>
+	<article itemscope {itemtype}>
+		<div hidden>
+			<meta itemprop="url" content={url} />
+			<slot name="metadata"></slot>
+		</div>
+
+		{
+			image && (
+				<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+					<Image
+						itemprop="contentUrl"
+						src={image}
+						alt={inlineMarkdownStrip(imageAlt ?? '')}
+						loading="lazy"
+						widths={IMAGE_WIDTHS}
+						width={256}
+						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
+						quality={75}
+					/>
+					{
+						Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
+							<Image
+								itemprop="contentUrl"
+								data-theme-image={theme}
+								src={themeImage}
+								alt={inlineMarkdownStrip(imageAlt ?? '')}
+								loading="lazy"
+								widths={IMAGE_WIDTHS}
+								width={256}
+								sizes="(max-width: 360px) 64px, (max-width: 720px) 128px, (max-width: 1280px) 256px, 512px"
+								quality={75}
+								hidden
+							/>
+						))
+					}
+				</picture>
+			)
+		}
+
+		<header>
+			<div>
+				{draft && <draft-tag>Draft</draft-tag>}
+				<a href={url ?? null} itemprop="name">
+					<slot name="title"></slot>
+				</a>
+			</div>
+
+			<aside>
+				<slot name="subtitle"></slot>
+			</aside>
+		</header>
+
+		<rendered-content itemprop="description">
+			<slot></slot>
+		</rendered-content>
+
+		<aside>
+			<slot name="links"></slot>
+		</aside>
+
+		<footer>
+			<slot name="footer"></slot>
+		</footer>
+	</article>
+</m-card>

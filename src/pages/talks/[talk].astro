@@ -1,12 +1,14 @@
 ---
-import '../../assets/css/pages/talk.css';
-import '../../assets/css/code.css';
+import '../../assets/css/components/content.css';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
-import Logo from '../../components/Logo/Logo.astro';
-import { TALKS } from '../../constants.js';
-import InternalPageLayout from '../../layouts/InternalPage.astro';
-import { join } from '../../utils/path.js';
+import HtmlHead from '../../components/HtmlHead.astro';
+import Logo from '../../components/Logo.astro';
+import OldStyleButtons from '../../components/OldStyleButtons.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SvgDefs from '../../components/SvgDefs.astro';
+import Webrings from '../../components/Webrings.astro';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllTalks } from '../../utils/talks.js';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -20,7 +22,6 @@ export const getStaticPaths = (async () =>
 		props: talk
 	}))) satisfies GetStaticPaths;
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const {
 	render,
 	data: {
@@ -42,154 +43,187 @@ const {
 		techStack
 	}
 } = Astro.props;
-const { talk: talkId } = Astro.params;
 const { Content } = await render();
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
 ---
-<InternalPageLayout
-	htmlTitle={[title, ...TALKS.title]}
-	{title}
-	description={summary}
-	url={join([TALKS.url, talkId])}
-	tags={TALKS.tags}
-	image={image?.src}
-	{imageAlt}
-	createdAt={date}
-	pageSchema="Event"
->
-	<Logo
-		subtitle="Talks"
-		shortSubtitle="Talks"
-		url={TALKS.url}
-		urlTitle="Talks Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/Event">
+	<HtmlHead
+		title={`${inlineMarkdownStrip(title)} | Marco Campos`}
+		description={inlineMarkdownStrip(summary)}
+		image={image?.src}
+		{imageAlt}
+		createdAt={date}
 	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	{draft && <span slot="header" id="talk-draft-tag">Draft</span>}
-	<Fragment slot="header" itemprop="name">
-		{title}
-	</Fragment>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<Content />
+		<SiteNav />
 
-	<h2>
-		<Icon name="uil:info-circle" title="" role="presentation" />
-		Talk info
-	</h2>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
 
-	<div itemprop="location" itemscope itemtype={isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
-		<meta itemprop={isOnline ? 'url' : 'address'} content={isOnline ? eventUrl : address} />
-		<meta itemprop="eventAttendanceMode" content={isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'} />
-		<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
-	</div>
+		<header>
+			<Logo
+				subtitle="Talks"
+				shortSubtitle="Talks"
+				url="/talks/"
+				title="Talks Page"
+			/>
+			<h1 itemprop="name">
+				{draft && <draft-tag>Draft</draft-tag>}
+				{/* eslint-disable-next-line astro/no-set-html-directive */}
+				<Fragment set:html={inlineMarkdownRender(title)} />
+			</h1>
+		</header>
 
-	<ul id="talk-info">
-		{
-			event && (
+		<main id="main">
+			<h2>
+				<Icon name="mingcute:information-line" aria-hidden="true" />
+				Talk info
+			</h2>
+
+			<div itemprop="location" itemscope itemtype={isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+				<meta itemprop={isOnline ? 'url' : 'address'} content={isOnline ? eventUrl : address} />
+				<meta itemprop="eventAttendanceMode" content={isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'} />
+				<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
+			</div>
+
+			<ul>
+				{
+					event && (
+						<li>
+							<strong>
+								<Icon name="mingcute:calendar-2-line" aria-hidden="true" />
+								Event:
+							</strong>
+							<span>
+								<a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">
+									{/* eslint-disable-next-line astro/no-set-html-directive */}
+									<Fragment set:html={inlineMarkdownRender(event)} />
+								</a>
+							</span>
+						</li>
+					)
+				}
+
 				<li>
 					<strong>
-						<Icon name="uil:presentation-play" title="" role="presentation" />
-						Event:
+						<Icon name="mingcute:calendar-2-line" aria-hidden="true" />
+						Date:
 					</strong>
-					<span>
-						{eventUrl ? <a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">{event}</a> : event}
-					</span>
+					<meta itemprop="startDate" content={date ? date.toISOString() : '0000-01-01T00:00:00.000Z'} />
+					{date ? <time datetime={date.toISOString()}>{formatter.format(date)}</time> : <span>&mdash;</span>}
 				</li>
-			)
-		}
 
-		<li>
-			<strong>
-				<Icon name="uil:calendar-alt" title="" role="presentation" />
-				Date:
-			</strong>
-			<meta itemprop="startDate" content={date ? date.toISOString() : '0000-01-01T00:00:00.000Z'} />
-			{date ? <time datetime={date.toISOString()}>{formatter.format(date)}</time> : <span>&mdash;</span>}
-		</li>
+				{
+					slides && (
+						<li>
+							<strong>
+								<Icon name="mingcute:clapperboard-line" aria-hidden="true" />
+								Slides:
+							</strong>
+							<a href={slides} rel="noopener noreferrer" referrerpolicy="no-referrer">{slides}</a>
+						</li>
+					)
+				}
 
-		{
-			slides && (
-				<li>
-					<strong>
-						<Icon name="uil:clapper-board" title="" role="presentation" />
-						Slides:
-					</strong>
-					<a href={slides} rel="noopener noreferrer" referrerpolicy="no-referrer">{slides}</a>
-				</li>
-			)
-		}
+				{
+					video && (
+						<li>
+							<strong>
+								<Icon name="mingcute:video-line" aria-hidden="true" />
+								Video:
+							</strong>
+							<a href={video} rel="noopener noreferrer" referrerpolicy="no-referrer">{video}</a>
+						</li>
+					)
+				}
 
-		{
-			video && (
-				<li>
-					<strong>
-						<Icon name="uil:video" title="" role="presentation" />
-						Video:
-					</strong>
-					<a href={video} rel="noopener noreferrer" referrerpolicy="no-referrer">{video}</a>
-				</li>
-			)
-		}
+				{
+					code && (
+						<li>
+							<strong>
+								<Icon name="mingcute:code-line" aria-hidden="true" />
+								Code:
+							</strong>
+							<a href={code} rel="noopener noreferrer" referrerpolicy="no-referrer">{code}</a>
+						</li>
+					)
+				}
+			</ul>
 
-		{
-			code && (
-				<li>
-					<strong>
-						<Icon name="uil:brackets-curly" title="" role="presentation" />
-						Code:
-					</strong>
-					<a href={code} rel="noopener noreferrer" referrerpolicy="no-referrer">{code}</a>
-				</li>
-			)
-		}
-	</ul>
+			<rendered-content>
+				<Content />
+			</rendered-content>
 
-	{
-		relatedContent && (
-			<Fragment>
-				<h2>
-					<Icon name="uil:file-share-alt" title="" role="presentation" />
-					Related content
-				</h2>
-				<ul id="related-content">
-					{
-						relatedContent?.map(({ url: contentUrl, title: contentTitle }) => (
-							<li>
-								<a href={contentUrl} rel="noopener noreferrer" referrerpolicy="no-referrer">{contentTitle}</a>
-							</li>
-						))
-					}
+			{
+				demo && (
+					<Fragment>
+						<h2>
+							<Icon name="mingcute:test-tube-line" aria-hidden="true" />
+							Demo
+						</h2>
+
+						<iframe
+							src={demo}
+							loading="lazy"
+							referrerpolicy="no-referrer"
+							sandbox="allow-forms allow-scripts allow-same-origin"
+							title={`Demo for ${title}`}
+						>
+							A local running demo of the project.
+						</iframe>
+					</Fragment>
+				)
+			}
+
+			{
+				relatedContent && (
+					<Fragment>
+						<h2>
+							<Icon name="mingcute:share-2-line" aria-hidden="true" />
+							Related content
+						</h2>
+						<ul>
+							{
+								relatedContent?.map(({ url: contentUrl, title: contentTitle }) => (
+									<li>
+										<a href={contentUrl} rel="noopener noreferrer" referrerpolicy="no-referrer">{contentTitle}</a>
+									</li>
+								))
+							}
+						</ul>
+					</Fragment>
+				)
+			}
+
+			<h2>
+				<Icon name="mingcute:tool-line" aria-hidden="true" />
+				Technologies used
+			</h2>
+
+			<tag-list>
+				<ul>
+					{techStack?.map((tech) => <li><tag-item><span>{tech}</span></tag-item></li>)}
 				</ul>
-			</Fragment>
-		)
-	}
+			</tag-list>
+		</main>
 
-	<h2>
-		<Icon name="uil:cog" title="" role="presentation" />
-		Technologies used
-	</h2>
-	<ul id="technology-tags">
-		{techStack?.map((tech) => <li class="tag">{tech}</li>)}
-	</ul>
-
-	{
-		demo && (
-			<Fragment>
-				<h2>
-					<Icon name="uil:flask" title="" role="presentation" />
-					Demo
-				</h2>
-
-				<iframe
-					src={demo}
-					loading="lazy"
-					referrerpolicy="no-referrer"
-					sandbox="allow-forms allow-scripts allow-same-origin"
-					title={`Demo for ${title}`}
-				>
-					A local running demo of the project.
-				</iframe>
-			</Fragment>
-		)
-	}
-</InternalPageLayout>
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

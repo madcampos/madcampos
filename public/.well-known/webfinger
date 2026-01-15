@@ -1,0 +1,20 @@
+{
+	"subject": "acct:madcampos@madcampos.dev",
+	"aliases": [
+		"me@madcampos.dev",
+		"madcampos@madcampos.dev",
+		"https://madcampos.dev/@madcampos/"
+	],
+	"links": [
+		{
+			"rel": "http://webfinger.net/rel/profile-page",
+			"type": "text/html",
+			"href": "https://madcampos.dev/@madcampos/"
+		},
+		{
+			"rel": "http://webfinger.net/rel/avatar",
+			"type": "image/jpeg",
+			"href": "https://madcampos.dev/assets/images/me.jpg"
+		}
+	]
+}

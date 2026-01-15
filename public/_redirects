@@ -2,14 +2,6 @@
 /sdrlog https://sdrlog.madcampos.dev 308
 /sdrlog/ https://sdrlog.madcampos.dev 308
 
-# Retired
-/tojs-styleguide /410 410
-/tojs-styleguide/ /410 410
-
-# Wrong url, never existed
-/blog/2023/06/07/tabs-web-component /410 410
-/blog/2023/06/07/tabs-web-component/ /410 410
-
 # Permanent redirects
 /accessibility /accessibility/ 308
 
@@ -20,3 +12,14 @@
 
 # Test url, doesn't exist anymore, should redirect
 /blog/tags/:tag/1/ /blog/tags/:tag/ 308
+
+# Bots maze
+/*.gz /yapping
+/*.sql /yapping
+/*.php /yapping
+/*.php7 /yapping
+/*.jar /yapping
+/*/wlwmanifest.xml /yapping
+/wp-* /yapping
+/wp/* /yapping
+/wordpress/* /yapping

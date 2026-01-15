@@ -1,0 +1,57 @@
+@layer components {
+	m-note {
+		background-color: var(--surface-2);
+		color: var(--text-2);
+		padding: var(--size-2);
+		margin: var(--size-2);
+		border: var(--border-size) var(--border-style) currentColor;
+		border-radius: var(--border-radius);
+		display: flex;
+		gap: var(--size-2);
+		justify-content: start;
+		align-items: start;
+
+		&[data-type='success'] {
+			color: var(--note-success-color);
+			background-color: var(--note-success-bg);
+		}
+
+		&[data-type='error'] {
+			color: var(--note-error-color);
+			background-color: var(--note-error-bg);
+		}
+
+		&[data-type='warning'] {
+			color: var(--note-warning-color);
+			background-color: var(--note-warning-bg);
+		}
+
+		&[data-type='alert'] {
+			color: var(--note-alert-color);
+			background-color: var(--note-alert-bg);
+		}
+
+		&[data-type='info'] {
+			color: var(--note-info-color);
+			background-color: var(--note-info-bg);
+		}
+
+		&[data-type='debug'] {
+			color: var(--note-debug-color);
+			background-color: var(--note-debug-bg);
+		}
+
+		& > rendered-content {
+			flex-grow: 1;
+
+			& > *:first-child { margin-block-start: 0; }
+			& > *:last-child { margin-block-end: 0; }
+		}
+
+		& > svg[data-icon] {
+			flex-shrink: 0;
+			inline-size: var(--size-5);
+			block-size: var(--size-5);
+		}
+	}
+}

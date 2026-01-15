@@ -8,6 +8,7 @@ tags:
   - protip
   - SystemsDesign
 ---
+
 So... I was reading [this article](https://43081j.com/2025/09/bloat-of-edge-case-libraries) and the gist of it resonated with something I have got into arguments at work before:
 
 > A well designed library \[or internal system] would assume the right **data types** have been passed in, but may validate that the **values** make sense.
@@ -42,7 +43,7 @@ The problem we have here is that data is _very_ inconsistent. How can we minimiz
 This is the most important part and avoids checking over and over for the same conditions. This helps with performance making the application be fast while still ensuring things work in a predictable manner despite the chaotic third-parties.
 
 You may be asking "what it looks in practice"? And the design is very simple.
-Every API request passes the returned data to different `normalize...`  functions.
+Every API request passes the returned data to different `normalize...` functions.
 
 Every request to third party services already require some "low level" things to be done, like include an authorization token or some headers that are, well, required by the API. So this is wrapped in a function to do the actual HTTP request and return a response.
 
@@ -93,6 +94,5 @@ If it is too frequent keep in the normalization, if it is somewhat straightforwa
 The main point is:
 
 > Avoid checks for "what if..." everywhere by normalizing things at the data source.
-
 
 [^1]: By "enum" I mean actual typescript `enum`, types with a fixed set of values, or anything that resembled a defined list of options.

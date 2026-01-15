@@ -1,0 +1,23 @@
+button #button-base { fill: #ffd479; }
+button text {
+	font-weight: bold;
+	font-size: 7px;
+	text-anchor: start;
+}
+
+button:hover #button-base { fill: goldenrod; }
+
+button:active #button-base { fill: darkgoldenrod; }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+	button text { fill: var(--text-1); }
+
+	button #icon-w3c > path:first-child { fill: var(--surface-1); }
+	button #icon-w3c g path { fill: var(--text-1); }
+
+	button #button-base { fill: var(--surface-1); }
+	button:hover #button-base { fill: var(--surface-2); }
+
+	button:active #button-base { fill: var(--text-1); }
+	button:active text { fill: var(--surface-2); }
+}

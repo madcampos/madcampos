@@ -1,0 +1,72 @@
+@layer components {
+	img-lightbox {
+		--image-size: 35vw;
+
+		inline-size: clamp(var(--size-content-0), var(--image-size), var(--size-content-3));
+		margin-inline: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--size-2);
+		isolation: isolate;
+
+		& > img {
+			display: block;
+			max-inline-size: var(--size-content-3);
+			max-block-size: var(--size-content-3);
+			block-size: auto;
+			inline-size: 100%;
+			min-inline-size: var(--size-content-0);
+			min-block-size: var(--size-content-0);
+		}
+
+		img-lightbox-controls {
+			display: flex;
+			justify-content: center;
+
+			& > button {
+				margin: var(--size-1);
+
+				:is(svg[data-icon], use) {
+					min-inline-size: var(--size-2);
+					min-block-size: var(--size-2);
+					inline-size: var(--size-3);
+					block-size: var(--size-3);
+				}
+			}
+		}
+
+		dialog {
+			form:fullscreen {
+				background: var(--surface-2);
+				display: flex;
+				flex-direction: column;
+				block-size: 100dvb;
+				inline-size: 100dvi;
+				padding: var(--size-3);
+
+				button[popovertarget] { display: none; }
+			}
+
+			dialog-content:has(img) {
+				display: grid;
+				place-items: center;
+				inline-size: 100%;
+				block-size: 100%;
+
+				img {
+					min-inline-size: initial;
+					max-inline-size: initial;
+					inline-size: auto;
+					block-size: auto;
+					max-block-size: initial;
+					min-block-size: initial;
+				}
+			}
+
+			input-wrapper { margin: 0; }
+			hr { border: none; }
+		}
+	}
+}

@@ -1,30 +1,58 @@
 ---
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants.js';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['Now', ...GLOBALS.title]}
-	title="What I'm doing now"
-	description="What I'm doing now, my current focus and priorities."
-	url="/now/"
-	tags={['now', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="Now"
-		shortSubtitle="Now"
-		url="/now/"
-		urlTitle="Now Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="What I'm doing now"
+		description="What I'm doing now, my current focus and priorities."
 	/>
-	<Fragment slot="header">What I'm doing now?</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<p>Here’s what I’m currently focused on, in no particular order:</p>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<ul>
-		<li>Helping on the toronto JS community (Take a look at the <a href="https://github.com/orgs/torontojs/projects/6/views/1">Community Hub Project</a>).</li>
-		<li>Working on this site to make it more "<a href="https://indieweb.org/">IndieWeb</a>-ified".</li>
-		<li>Saving to buy boardgames.</li>
-	</ul>
-</InternalPageLayout>
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Now"
+				shortSubtitle="Now"
+				title="Now Page"
+			/>
+			<h1>What am I doing now?</h1>
+		</header>
+
+		<main id="main">
+			<p>Here’s what I’m currently focused on, in no particular order:</p>
+
+			<ul>
+				<li>Rebuilding the static site generator used for this website</li>
+				<li>Working on this site to make it more "<a href="https://indieweb.org/">IndieWeb</a>-ified".</li>
+				<li>Saving to buy boardgames and Lego.</li>
+			</ul>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

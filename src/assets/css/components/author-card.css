@@ -1,0 +1,59 @@
+@layer components {
+	author-card {
+		container-name: author-card;
+		container-type: inline-size;
+		display: block;
+
+		aside {
+			display: grid;
+			grid-template-rows: auto auto;
+			grid-template-columns: 1fr auto;
+			grid-template-areas:
+				'avatar name'
+				'avatar bio';
+			place-items: center;
+			gap: var(--size-3);
+			margin: var(--size-3) 0;
+			padding-inline: var(--size-3);
+
+			@container author-card (max-width: 35rem) {
+				grid-template-rows: 1fr auto auto;
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'avatar'
+					'name'
+					'bio';
+			}
+		}
+
+		a:has(> m-avatar) {
+			grid-area: avatar;
+			align-self: start;
+
+			@container author-card (max-width: 35rem) {
+				place-self: center center;
+				min-inline-size: 100%;
+			}
+		}
+
+		a:has(> h2) {
+			grid-area: name;
+			justify-self: start;
+
+			h2 { margin: 0; }
+
+			@container author-card (max-width: 35rem) {
+				justify-self: center;
+				text-align: center;
+			}
+		}
+
+		p {
+			grid-area: bio;
+			font-size: var(--font-size-0);
+			align-self: start;
+			margin: 0;
+			color: var(--text-2);
+		}
+	}
+}

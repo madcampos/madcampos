@@ -1,0 +1,135 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+<svg-defs aria-hidden="true">
+	<!-- Table icons -->
+	<Icon name="mingcute:line-height-line" id="table-sort-icon-none" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:sort-ascending-line" id="table-sort-icon-descending" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:sort-descending-line" id="table-sort-icon-ascending" aria-hidden="true" role="none" width="1" height="1" />
+
+	<!-- Image lightbox icons -->
+	<Icon name="mingcute:information-line" id="img-lightbox-icon-info" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:external-link-line" id="img-lightbox-icon-open" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:close-line" id="img-lightbox-icon-close" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:refresh-anticlockwise-1-line" id="img-lightbox-icon-reset-zoom" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:fullscreen-line" id="img-lightbox-icon-enter-fullscreen" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:fullscreen-exit-line" id="img-lightbox-icon-exit-fullscreen" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:download-2-line" id="img-lightbox-icon-download" aria-hidden="true" role="none" width="1" height="1" />
+
+	<!-- Share options icons -->
+	<Icon name="mingcute:share-forward-line" id="share-icon-share" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:copy-line" id="share-icon-copy" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:mail-send-line" id="share-icon-email" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:message-4-line" id="share-icon-sms" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:print-line" id="share-icon-print" aria-hidden="true" role="none" width="1" height="1" />
+
+	<!-- Theme switcher icons -->
+	<Icon name="mingcute:palette-3-line" id="theme-switcher-icon" aria-hidden="true" role="none" width="1" height="1" />
+	<Icon name="mingcute:alert-line" id="theme-switcher-icon-warning" aria-hidden="true" role="none" width="1" height="1" />
+	<svg viewBox="0 0 24 24" id="theme-switcher-icon-close" aria-hidden="true" role="none" width="1" height="1">
+		<use href="#img-lightbox-icon-close" width="24" height="24" />
+	</svg>
+
+	<!-- Footnotes icons -->
+	<Icon name="mingcute:arrow-to-up-line" id="footnote-icon-back" aria-hidden="true" role="none" width="1" height="1" />
+
+	<!-- Link icons -->
+	<Icon name="mingcute:external-link-line" id="link-icon-external" aria-hidden="true" role="none" width="1" height="1" />
+
+	<!-- Logo Effects -->
+	<svg viewBox="0 0 100 100" aria-hidden="true" role="none" width="1" height="1">
+		<defs>
+			<linearGradient id="sunset" x1="0" x2="0" y1="0" y2="100%">
+				<stop offset="5%" stop-color="royalblue" />
+				<stop offset="45%" stop-color="lightskyblue" />
+				<stop offset="50%" stop-color="white" />
+				<stop offset="50%" stop-color="purple" />
+				<stop offset="80%" stop-color="hotpink" />
+				<stop offset="95%" stop-color="white" />
+			</linearGradient>
+
+			<linearGradient id="rainbow" x1="0" x2="100%" y1="0" y2="100%">
+				<stop offset="0%" stop-color="firebrick" />
+				<stop offset="15%" stop-color="orangered" />
+				<stop offset="30%" stop-color="yellow" />
+				<stop offset="45%" stop-color="seagreen" />
+				<stop offset="60%" stop-color="dodgerblue" />
+				<stop offset="75%" stop-color="magenta" />
+				<stop offset="100%" stop-color="pink" />
+			</linearGradient>
+		</defs>
+	</svg>
+
+	<!-- Glitch Filter -->
+	<svg viewBox="0 0 10 10" aria-hidden="true" role="none" width="1" height="1">
+		<defs>
+			<filter id="small-pixelate-filter">
+				<feGaussianBlur result="blurred-image" stdDeviation="1" />
+				<feImage
+					href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAIAAAACDbGyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAWSURBVAgdY1ywgOEDAwKxgJhIgFQ+AP/vCNK2s+8LAAAAAElFTkSuQmCC"
+					width="3"
+					height="3"
+				/>
+				<feTile result="displacement-map" />
+				<feDisplacementMap
+					in="blurred-image"
+					in2="displacement-map"
+					result="pixelated-image"
+					scale="8"
+					xChannelSelector="R"
+					yChannelSelector="G"
+				/>
+			</filter>
+			<filter id="glitch-filter">
+				<feTurbulence baseFrequency="0 1.01" numOctaves="32" seed="2" />
+				<feMorphology operator="dilate" radius="8" result="glitch-lines" />
+				<feDisplacementMap in="SourceGraphic" in2="glitch-lines" scale="32" xChannelSelector="R" yChannelSelector="R" />
+				<feOffset dy="-2" />
+			</filter>
+			<filter id="animated-glitch-filter">
+				<feTurbulence baseFrequency="0 2" numOctaves="32">
+					<animate attributeName="numOctaves" dur="16s" repeatCount="indefinite" values="8;2;16;2;8;32;8;2;8;16;32;4;2;8;16;64" />
+					<animate attributeName="baseFrequency" dur="30s" repeatCount="indefinite" values="0 0.001; 0 0.002" />
+					<animate
+						additive="sum"
+						attributeName="baseFrequency"
+						calcMode="discrete"
+						dur="60s"
+						repeatCount="indefinite"
+						values="0 0.001;0 2;0 3;0 0.001;0 0.001;0.001 5;0 2;0 3;0 2;0 0.001;0.5 2;1 0.05;0 0.001;0 0.001;0 4;0 0.001;0.001 3;0 0.1;0 0.001;0 2;0 6;0 2;0 0.001;0.001 1;0 0.001;0 0.001;0 2;0 0.001;"
+					/>
+					<animate attributeName="seed" calcMode="discrete" dur="120s" repeatCount="indefinite" values="1;2;3;4;5" />
+				</feTurbulence>
+				<feMorphology operator="dilate" radius="8" result="glitch-lines" />
+				<feDisplacementMap in="SourceGraphic" in2="glitch-lines" scale="32" xChannelSelector="R" yChannelSelector="R" />
+			</filter>
+			<filter id="pixelate-filter">
+				<feGaussianBlur result="blurred-image" stdDeviation="8" />
+				<feImage
+					href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAIAAAACDbGyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAWSURBVAgdY1ywgOEDAwKxgJhIgFQ+AP/vCNK2s+8LAAAAAElFTkSuQmCC"
+					width="15"
+					height="15"
+				/>
+				<feTile result="displacement-map" />
+				<feDisplacementMap
+					in="blurred-image"
+					in2="displacement-map"
+					result="pixelated-image"
+					scale="50"
+					xChannelSelector="R"
+					yChannelSelector="G"
+				/>
+				<feOffset dx="-12" dy="-12" />
+			</filter>
+			<filter id="noise-filter">
+				<feGaussianBlur result="blurred-image" stdDeviation="16" />
+				<feTurbulence baseFrequency="1.2" numOctaves="10" stitchTiles="stitch" type="fractalNoise" />
+				<feColorMatrix type="saturate" values="0" />
+				<feComposite in2="blurred-image" operator="in" />
+				<feComponentTransfer>
+					<feFuncA slope=".7" type="linear" />
+				</feComponentTransfer>
+			</filter>
+		</defs>
+	</svg>
+</svg-defs>

@@ -1,58 +1,74 @@
 ---
-import '../../../assets/css/pages/internal-page.css';
-import '../../../assets/css/pages/tags.css';
-import blogSocialImage from '../../../assets/images/social/social-blog.png';
-import Logo from '../../../components/Logo/Logo.astro';
-import OldButtons from '../../../components/OldStyleButtons/OldStyleButtons.astro';
-import PageHeader from '../../../components/PageHeader/PageHeader.astro';
-import Webrings from '../../../components/Webrings/Webrings.astro';
-import { BLOG, BLOG_TAGS } from '../../../constants.js';
-import BaseLayout from '../../../layouts/Base.astro';
-import { join } from '../../../utils/path.js';
+import HtmlHead from '../../../components/HtmlHead.astro';
+import Logo from '../../../components/Logo.astro';
+import OldStyleButtons from '../../../components/OldStyleButtons.astro';
+import SiteNav from '../../../components/SiteNav.astro';
+import SvgDefs from '../../../components/SvgDefs.astro';
+import Webrings from '../../../components/Webrings.astro';
 import { listPostsByTag } from '../../../utils/post';
 
 const tags = Object.keys(await listPostsByTag());
 ---
-<BaseLayout
-	htmlTitle={BLOG_TAGS.title}
-	title={BLOG_TAGS.titleString}
-	description={BLOG_TAGS.description}
-	url={BLOG_TAGS.url}
-	tags={BLOG_TAGS.tags}
-	hasFeed={true}
-	pageSchema="ItemList"
-	image={blogSocialImage.src}
-	imageAlt="The letter &quot;m&quot; on a monospaced font, in blue, between curly braces.Below it, a subtext of &quot;Blog&quot; in orange on the lower right corner."
->
-	<meta itemprop="name" content={BLOG_TAGS.titleString} />
-	<link itemprop="itemListOrder" href="https://schema.org/ItemListUnordered" />
-	<meta itemprop="numberOfItems" content={tags.length.toString()} />
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/ItemList">
+	<HtmlHead
+		title="Tags | Marco Campos' Blog"
+		description="Tags for Marco Campos' blog"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<PageHeader slot="header">
-		<Logo
-			subtitle="Blog"
-			shortSubtitle="Blog"
-			url={BLOG.url}
-			urlTitle="Blog"
-			slot="logo"
-		/>
-		{BLOG_TAGS.titleString}
-	</PageHeader>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<div id="contents">
-		<ul id="tag-list">
-			{
-				tags.map((tag) => (
-					<li class="tag">
-						<a href={join([BLOG_TAGS.url, tag])} itemprop="url">
-							<span itemprop="itemListElement">{tag}</span>
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</div>
+		<SiteNav />
 
-	<OldButtons slot="footer" />
-	<Webrings slot="footer" />
-</BaseLayout>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Blog"
+				shortSubtitle="Blog"
+				url="/blog/"
+				title="Blog"
+			/>
+			<h1>Tags for Marco Campos' blog</h1>
+		</header>
+
+		<main id="main">
+			<meta itemprop="name" content="Tags for Marco Campos' blog" />
+			<link itemprop="itemListOrder" href="https://schema.org/ItemListUnordered" />
+			<meta itemprop="numberOfItems" content={tags.length.toString()} />
+
+			<tag-list>
+				<ul>
+					{
+						tags.map((tag) => (
+							<li>
+								<tag-item>
+									<a href={`/blog/tags/${tag}`} itemprop="url">
+										<span itemprop="itemListElement">{tag}</span>
+									</a>
+								</tag-item>
+							</li>
+						))
+					}
+				</ul>
+			</tag-list>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

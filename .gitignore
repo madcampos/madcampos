@@ -4,9 +4,11 @@ dev-dist/
 
 # generated types
 .astro/
+server/env.d.ts
 
 # dependencies
 node_modules/
+.wrangler/
 
 # logs
 npm-debug.log*

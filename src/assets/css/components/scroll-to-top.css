@@ -1,0 +1,45 @@
+@layer components {
+	html {
+		container-name: body-scroller;
+		container-type: scroll-state;
+	}
+
+	scroll-to-top a {
+		display: flex;
+		position: fixed;
+		justify-content: center;
+		align-items: center;
+		gap: var(--size-2);
+		translate: 0 200%;
+		z-index: calc(1 * infinity);
+		margin-inline: auto;
+		inset-block-end: var(--size-2);
+		inset-inline: var(--size-2);
+		border: var(--border-style) var(--surface-4) var(--border-size);
+		background-color: var(--surface-2);
+		padding: var(--size-2) var(--size-3);
+		color: var(--theme-color);
+		text-align: center;
+		max-inline-size: var(--size-content-4);
+
+		&:focus-visible {
+			background-color: var(--text-1);
+			color: var(--surface-1);
+		}
+
+		&:hover {
+			background-color: var(--theme-color);
+			color: var(--surface-1);
+		}
+
+		&:active {
+			background-color: var(--accent-color);
+			color: var(--surface-1);
+		}
+
+		@media not (prefers-reduced-motion) { transition: 0.4s translate; }
+		@container body-scroller scroll-state(scrollable: top) { translate: 0 0; }
+	}
+}
+
+@layer pages { body > footer { padding-block-end: var(--size-10); } }

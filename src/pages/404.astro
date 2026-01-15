@@ -1,31 +1,49 @@
 ---
-import '../assets/css/pages/404.css';
-import GlitchLogo from '../components/GlitchLogo/GlitchLogo.astro';
-import SiteNav from '../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import { ERROR } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
+import '../assets/css/pages/error.css';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
 ---
-<BaseLayout
-	htmlTitle={ERROR.title}
-	title={ERROR.titleString}
-	description={ERROR.description}
-	url={ERROR.url}
-	tags={ERROR.tags}
->
-	<SkipToContent slot="header" />
-	<header slot="header">
-		<SiteNav />
-		<div>
-			<GlitchLogo />
-		</div>
-		<h1>404 - Not found</h1>
-	</header>
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="404 | Marco Campos"
+		description="404 - Not Found"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<div id="contents">
-		<p>Looks like you hit a dead end.</p>
-		<p>
-			<a href="/">Go back home</a>
-		</p>
-	</div>
-</BaseLayout>
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Page Not Found"
+				shortSubtitle="404"
+				url="/"
+				title="Home Page"
+				micro
+				glitch
+			/>
+			<h1>404 - Not Found</h1>
+		</header>
+
+		<main>
+			<p>Looks like you hit a dead end.</p>
+			<p>
+				<a href="/">Go back home</a>
+			</p>
+		</main>
+
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

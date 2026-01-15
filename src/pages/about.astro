@@ -1,48 +1,111 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import picture from '../assets/images/me-old-avatar.jpg';
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['About me', ...GLOBALS.title]}
-	title="About me"
-	description="More about myself."
-	url="/about/"
-	tags={['about', 'me', 'personal', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="About"
-		shortSubtitle="Me"
-		url="/about/"
-		urlTitle="About page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="About | Marco Campos"
+		description="More about myself."
 	/>
-	<Fragment slot="header">About me</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<p>
-		Hey! Name is <strong>Marco</strong>, best known online by the moniker &ldquo;<em>madcampos</em>&rdquo;.
-	</p>
-	<p>I work as a programmer and like to build things, be it digitally with websites or physically with Legos, crochet, or cardboard.</p>
-	<p>
-		I like challanges and interesting stuff to just create and have fun. To me some of the best ideas come from moments when we say
-		<q>what if we did this...</q> or <q>wouldn't it be interesting to do that...?</q>
-	</p>
-	<p>
-		Ah, yes, I do enjoy geeking about web standards as well, like reading proposals and talking about them. <em>don't</em> say the magic words <q>web components</q> near me or
-		I'll talk non stop for hours.
-	</p>
-	<p>Lastly, here is a picture of me:</p>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<figure>
-		<Image
-			src={picture}
-			alt="A close shot of myself. A white man with short black hair, wearing thick framed glases and a dark green shirt. I'm making a face with my brows frowned and my tongue sticking out to the side."
-			width={512}
-			height={512}
-		/>
-		<figcaption>Me making a face</figcaption>
-	</figure>
-</InternalPageLayout>
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="About"
+				shortSubtitle="me"
+				title="About Page"
+			/>
+			<h1>About Me</h1>
+		</header>
+
+		<main id="main" class="h-card vcard" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
+			<div class="p-note note" itemprop="description">
+				<p>
+					Hey! Name is <strong class="p-name fn n" itemprop="name">Marco</strong>, best known online by the moniker &ldquo;<em
+						class="p-nickname nickname"
+						itemprop="alternateName"
+					>madcampos</em>&rdquo;.
+				</p>
+				<p>I work as a programmer and like to build things, be it digitally with websites or physically with Legos, crochet, or cardboard.</p>
+				<p>
+					I like challanges and interesting stuff to just create and have fun. To me some of the best ideas come from moments when we say
+					<q>what if we did this...</q> or <q>wouldn't it be interesting to do that...?</q>
+				</p>
+				<p>
+					Ah, yes, I do enjoy geeking about web standards as well, like reading proposals and talking about them. <em>don't</em> say the magic words <q>web components</q>
+					near me or I'll talk non stop for hours.
+				</p>
+			</div>
+
+			<p>Here is a picture if yo uare a visual person:</p>
+
+			<figure>
+				<Image
+					src={picture}
+					alt="A close shot of myself. A white man with short black hair, wearing thick framed glases and a dark green shirt. I'm making a face with my brows frowned and my tongue sticking out to the side."
+					width={512}
+					height={512}
+				/>
+				<figcaption>Me making a face</figcaption>
+			</figure>
+
+			<h2>Contact</h2>
+
+			<p>Here are ways to contact me:</p>
+
+			<ul>
+				<li>
+					<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
+						<Icon name="mingcute:linkedin-line" aria-hidden="true" />
+						<sr-only>LinkedIn:</sr-only>
+						<span>madcampos</span>
+					</a>
+				</li>
+				<li>
+					<a href="mailto:me@madcampos.dev" rel="me">
+						<Icon name="mingcute:mail-line" aria-hidden="true" />
+						<sr-only>Email:</sr-only>
+						<span class="u-email email" itemprop="email">me@madcampos.dev</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.instagram.com/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer">
+						<Icon name="mingcute:instagram-line" aria-hidden="true" />
+						<sr-only>Instagram:</sr-only>
+						<span>@madcampos</span>
+					</a>
+				</li>
+			</ul>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

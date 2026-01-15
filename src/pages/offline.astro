@@ -1,39 +1,57 @@
 ---
-import '../assets/css/pages/404.css';
-import GlitchLogo from '../components/GlitchLogo/GlitchLogo.astro';
-import SiteNav from '../components/SiteNav/SiteNav.astro';
-import SkipToContent from '../components/SkipToContent/SkipToContent.astro';
-import { OFFLINE } from '../constants.js';
-import BaseLayout from '../layouts/Base.astro';
+import '../assets/css/pages/error.css';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
 ---
-<BaseLayout
-	htmlTitle={OFFLINE.title}
-	title={OFFLINE.titleString}
-	url={OFFLINE.url}
-	description={OFFLINE.description}
-	tags={OFFLINE.tags}
->
-	<SkipToContent slot="header" />
-	<header slot="header">
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Offline | Marco Campos"
+		description="Offline Page"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
 		<SiteNav />
-		<div>
-			<GlitchLogo />
-		</div>
-		<h1>404 - Not found</h1>
-	</header>
 
-	<div id="contents">
-		<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
 
-		<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
-		<p>If you are completely offline, you won't be able to see or use:</p>
-		<ul>
-			<li>Images from pages not visited before.</li>
-			<li>Some dynamic content, like adding comments.</li>
-		</ul>
+		<header>
+			<Logo
+				subtitle="Offline"
+				shortSubtitle="Off."
+				url="/"
+				title="Home Page"
+				micro
+				glitch
+			/>
+			<h1>Dead (or offline) end</h1>
+		</header>
 
-		<p>
-			<a href="/">Go back home</a>
-		</p>
-	</div>
-</BaseLayout>
+		<main>
+			<p>Looks like you hit a dead-end. It seems though the site is downloaded <em>or</em> you are offline.</p>
+
+			<p>All pages are still navegable and you should have <strong>no problems</strong> visiting most pages.</p>
+			<p>If you are completely offline, you won't be able to see or use:</p>
+			<ul>
+				<li>Images from pages not visited before.</li>
+				<li>Some dynamic content, like adding comments.</li>
+			</ul>
+
+			<p>
+				<a href="/">Go back home</a>
+			</p>
+		</main>
+
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

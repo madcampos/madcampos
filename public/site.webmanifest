@@ -1,0 +1,402 @@
+{
+	"id": "/?id=a51d10e1-ffc3-4214-b4bd-b33691d1cdb1",
+	"scope": "/?utm_source=pwa&utm_medium=install&utm_campaign=web_app_manifest",
+	"start_url": "/?utm_source=pwa&utm_medium=start_url&utm_campaign=web_app_manifest",
+	"scope_extensions": [{ "origin": "https://madcampos.dev/" }],
+	"name": "Marco Campos",
+	"short_name": "MADCampos",
+	"lang": "en-US",
+	"dir": "ltr",
+	"description": "Marco Campos — Staff Web Developer — Vue.js, Node.js, TypeScript, JavaScript",
+	"categories": ["development", "tools", "utilities"],
+	"display": "minimal-ui",
+	"orientation": "any",
+	"background_color": "#252525",
+	"theme_color": "#0080ff",
+	"prefer_related_applications": false,
+	"icons": [
+		{
+			"src": "/assets/icons/icon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-1024x1024.png",
+			"sizes": "1024x1024",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-64x64.png",
+			"sizes": "64x64",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-mask.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/assets/icons/icon-mask-1024x1024.png",
+			"sizes": "1024x1024",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/assets/icons/icon-mask-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/assets/icons/icon-mask-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/assets/icons/icon-mask-64x64.png",
+			"sizes": "64x64",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+
+		{
+			"src": "/assets/icons/icon-mono.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mono-1024x1024.png",
+			"sizes": "1024x1024",
+			"type": "image/png",
+			"purpose": "monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mono-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mono-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mono-64x64.png",
+			"sizes": "64x64",
+			"type": "image/png",
+			"purpose": "monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mask-mono.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "maskable monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mask-mono-1024x1024.png",
+			"sizes": "1024x1024",
+			"type": "image/png",
+			"purpose": "maskable monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mask-mono-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mask-mono-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable monochrome"
+		},
+		{
+			"src": "/assets/icons/icon-mask-mono-64x64.png",
+			"sizes": "64x64",
+			"type": "image/png",
+			"purpose": "maskable monochrome"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Marco Campos' Blog",
+			"short_name": "Blog",
+			"description": "Visit Marco Campos' Blog",
+			"url": "/blog/?utm_source=pwa&utm_medium=shortcut&utm_campaign=blog",
+			"icons": [
+				{
+					"src": "/assets/shortcuts/icon-blog.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-blog-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-blog-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-blog.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-blog-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-blog-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-blog.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-blog-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-blog-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-blog.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "maskable monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-blog-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "maskable monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-blog-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "maskable monochrome"
+				}
+			]
+		},
+		{
+			"name": "Project Highlights",
+			"short_name": "Projects",
+			"description": "A list of projects I've worked on",
+			"url": "/projects?utm_source=pwa&utm_medium=shortcut&utm_campaign=projects",
+			"icons": [
+				{
+					"src": "/assets/shortcuts/icon-proj.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-proj-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-proj-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-proj.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-proj-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-proj-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-proj.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-proj-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-proj-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-proj.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "maskable monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-proj-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "maskable monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-proj-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "maskable monochrome"
+				}
+			]
+		},
+		{
+			"name": "Talks and Presentations",
+			"short_name": "Talks",
+			"description": "A list of talks and presentations I've given",
+			"url": "/talks?utm_source=pwa&utm_medium=shortcut&utm_campaign=talks",
+			"icons": [
+				{
+					"src": "/assets/shortcuts/icon-talks.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-talks-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-talks-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "any"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-talks.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-talks-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-talks-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "maskable"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-talks.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-talks-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mono-blog-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-talks.svg",
+					"sizes": "any",
+					"type": "image/svg+xml",
+					"purpose": "maskable monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-talks-512x512.png",
+					"sizes": "512x512",
+					"type": "image/png",
+					"purpose": "maskable monochrome"
+				},
+				{
+					"src": "/assets/shortcuts/icon-mask-mono-talks-96x96.png",
+					"sizes": "96x96",
+					"type": "image/png",
+					"purpose": "maskable monochrome"
+				}
+			]
+		}
+	],
+	"handle_links": "preffered",
+	"launch_handler": { "client_mode": "auto" },
+	"protocol_handlers": [
+		{
+			"protocol": "web+madcampos",
+			"url": "/?utm_source=pwa&utm_medium=protocol_handler&utm_campaign=web+madcampos&url=%s"
+		}
+	],
+	"edge_side_panel": {
+		"preffer_width": 460
+	},
+	"changelog": {
+		"version": "3.4.0",
+		"history": [
+			{
+				"url": "/changelog.xml?utm_source=pwa&utm_medium=changelog&utm_campaign=changelog",
+				"type": "application/atom+xml"
+			}
+		]
+	}
+}

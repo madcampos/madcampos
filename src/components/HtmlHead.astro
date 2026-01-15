@@ -1,0 +1,132 @@
+---
+import baseStyles from '../assets/css/index.css?url';
+import printStylesheet from '../assets/css/print.css?url';
+import defaultSocialImage from '../assets/images/social/social.png';
+
+interface Props {
+	title: string;
+	description: string;
+	tags?: string[];
+	image?: string;
+	imageAlt?: string;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
+
+const {
+	title,
+	description,
+	tags,
+
+	image,
+	imageAlt,
+
+	createdAt: publishedDate,
+	updatedAt: updatedDate
+} = Astro.props;
+
+const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(Astro.url.pathname);
+const isResumeUrl = Astro.url.pathname.startsWith('/resume');
+---
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+	<title>{title}</title>
+
+	<!-- Prefetch speculation rules -->
+	<!-- dprint-ignore -->
+	<script type="speculationrules" is:inline>
+		{
+			"prefetch": [{
+				"where": { "and": [{ "selector_matches": "a" }, {"href_matches": "/*" }] },
+				"eagerness": "moderate",
+				"requires": ["anonymous-client-ip-when-cross-origin"]
+			}]
+		}
+	</script>
+
+	<!-- Root styles -->
+	<link rel="stylesheet" type="text/css" href={baseStyles} />
+
+	<!-- Print Stylesheet -->
+	<link rel="stylesheet" type="text/css" href={printStylesheet} media="print" />
+
+	<!-- Main JS -->
+	{!isResumeUrl && <script src="../assets/js/index.ts"></script>}
+
+	<!-- URLs -->
+	<link rel="canonical" href={Astro.url.href} />
+	<link rel="author" href="/humans.txt" />
+	<link rel="sitemap" href="/sitemap.xml" />
+	<link rel="alternate" type="application/atom+xml" href="/blog/feed.atom.xml" title="Marco Campos' Blog" />
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed.rss.xml" title="Marco Campos' Blog" />
+
+	{
+		isBlogPostUrl && (
+			<link rel="alternate" type="application/json+oembed" href={`${Astro.url.href}oembed.json`} title="oEmbed (JSON)" />
+			<link rel="alternate" type="text/xml+oembed" href={`${Astro.url.href}oembed.xml`} title="oEmbed (XML)" />
+			<link rel="alternate" type="text/plain" href={`${Astro.url.href}txt`} title="Plain Text Version" />
+			<link rel="alternate" type="text/markdown" href={`${Astro.url.href}md`} title="Markdown Version" />
+		)
+	}
+
+	<!-- App Metadata -->
+	<link rel="icon" href="/assets/icons/icon.svg" sizes="any" type="image/svg+xml" />
+	<link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />
+	<link rel="manifest" href="/site.webmanifest" />
+	<link rel="license" href="/license/" />
+
+	<!-- Social metadata -->
+	<meta property="og:title" name="twitter:title" itemprop="name" content={title} />
+
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+
+	<meta property="og:locale" itemprop="inLanguage" content="en_US" />
+	<meta property="og:url" itemprop="url" content={Astro.url.href} />
+
+	<meta property="og:description" name="description" itemprop="abstract" content={description} />
+	<meta name="twitter:description" content={description} />
+
+	<meta property="og:image" name="twitter:image" itemprop="image" content={`${Astro.site?.href ?? ''}${image ?? defaultSocialImage.src}`} />
+	<meta property="og:image:alt" name="twitter:image:alt" content={imageAlt ?? 'The letter "m" on a monospaced font, in blue, between curly braces.'} />
+
+	<meta property="article:author" name="author" content="Marco Campos" />
+	<meta name="twitter:creator" content="@madcampos" />
+
+	<meta name="twitter:dnt" content="on" />
+	<meta name="twitter:widgets:csp" content="on" />
+	<meta name="twitter:widgets:autoload" content="off" />
+	<meta name="twitter:widgets:theme" content="dark" />
+
+	<meta
+		name="keywords"
+		itemprop="keywords"
+		property="article:tag"
+		content={(tags ?? ['Staff developer', 'Senior web developer', 'web developer', 'full stack developer', 'node.js', 'javascript', 'typescript', 'webdev']).join(', ')}
+	/>
+	{
+		publishedDate && (
+			<meta property="article:published_time" content={publishedDate.toISOString()} />
+			<meta name="publish_date" property="og:publish_date" content={publishedDate.toISOString()} />
+		)
+	}
+	{
+		updatedDate && (
+			<meta property="article:modified_time" content={updatedDate.toISOString()} />
+			<meta name="updated_date" property="og:updated_date" content={updatedDate.toISOString()} />
+		)
+	}
+
+	<!-- Webmention -->
+	<link rel="webmention" href="https://webmention.io/madcampos.dev/webmention" />
+	<link rel="pingback" href="https://webmention.io/madcampos.dev/xmlrpc" />
+
+	<!-- Changelog -->
+	<link rel="alternate" type="application/atom+xml" href="/changelog.xml" title="Changelog (Version History)" />
+
+	<!-- Apple Metadata -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>

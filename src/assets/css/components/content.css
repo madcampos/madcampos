@@ -1,0 +1,25 @@
+@layer components {
+	rendered-content {
+		sup svg {
+			inline-size: 1em;
+			block-size: 1em;
+		}
+
+		:is(h1, h2, h3, h4, h5, h6):has(a) a { color: inherit; }
+
+		:target {
+			background-color: var(--surface-2);
+			color: var(--accent-color);
+		}
+
+		[data-footnotes] a[data-footnote-backref] { text-decoration: none; }
+
+		img {
+			display: inline;
+			min-inline-size: revert;
+			min-block-size: revert;
+			inline-size: revert;
+			block-size: revert;
+		}
+	}
+}

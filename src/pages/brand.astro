@@ -1,0 +1,379 @@
+---
+import '../assets/css/pages/brand.css';
+import ColorSwatch from '../components/ColorSwatch.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import TextSwatch from '../components/TextSwatch.astro';
+import Webrings from '../components/Webrings.astro';
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Brand | Marco Campos"
+		description="Logo and Brand for Marco Campos website."
+		tags={['brand', 'logo']}
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Branding"
+				shortSubtitle="Brand"
+				title="Branding"
+			/>
+			<h1>Brand & Logo</h1>
+		</header>
+
+		<main id="main">
+			<h2 id="general">General Info</h2>
+
+			<p>The idea is to just have fun while using some nice colours and styles.</p>
+			<p>Keeping everything as accessible and consistent as possible is paramount.</p>
+			<p>That's it, nothing much to be said...</p>
+			<p>I mean, it is a personal brand for a developer, so it has to be techy and "modern" as well I suppose.</p>
+
+			<h2 id="colours">Colours</h2>
+
+			<color-swatch-group>
+				<ColorSwatch color="#0080ff" name="Blissful Blue" />
+				<ColorSwatch color="#ff8000" name="Zany Orange" />
+				<ColorSwatch color="#00309b" name="Slumbering Blue" />
+				<ColorSwatch color="#f03e3e" name="Whacky Red" />
+			</color-swatch-group>
+
+			<h2 id="fonts">Fonts</h2>
+
+			<TextSwatch font="Mecano" fontFamily="'Mecano-Light', 'Mecano', monospace" />
+			<TextSwatch font="Selawik" fontFamily="'Selawik Variable', 'Selawik', 'Segoe UI', 'Roboto', 'Open Sans', 'Arial', system-ui, sans-serif" />
+			<TextSwatch font="Cascadia Code" fontFamily="'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace" />
+
+			<h2 id="icons">Icons</h2>
+
+			<p>Icons are from the <a href="https://www.mingcute.com/" target="_blank" rel="noopener noreferrer">MingCute</a> icon library, with the <em>line</em> style.</p>
+
+			<h2 id="logo">Logo</h2>
+
+			<p>The logo is available on the following sizes and styles:</p>
+
+			<dl>
+				<dt>Full Size</dt>
+				<dd>
+					Contains the full moniker, "madcampos", composed of all the initials of my name and the full last name, with extra details depending on the style. The default
+					extra is a pair of curly braces.
+				</dd>
+
+				<dt>Mini Size</dt>
+				<dd>
+					Is an abbreviation of the moniker to only the initials of the name, "madc", with extra details depending on the style. The default extra is a pair of curly
+					braces.
+				</dd>
+
+				<dt>Micro Size</dt>
+				<dd>Only an "m", with extras, depending on the style. The default is extra is a pair of curly braces.</dd>
+
+				<dt>Glitch Style</dt>
+				<dd>An style applied to the logo to add a glitch annimation to it. This is the style used on the error pages.</dd>
+
+				<dt>Themes</dt>
+				<dd>All themes include a customized logo in all sizes.</dd>
+			</dl>
+
+			<h3>Logo Gallery</h3>
+
+			<m-note data-type="info">
+				<p>
+					<strong>Note:</strong> The logos may be affected by accessibility settings.
+				</p>
+			</m-note>
+
+			<details open>
+				<summary>Default Logo</summary>
+
+				<article class="logo-container" data-theme="system">
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						full
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						mini
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						glitch
+						theme="system"
+					/>
+				</article>
+			</details>
+
+			<details>
+				<summary>High Contrast Logo</summary>
+
+				<article class="logo-container" data-theme="high-contrast">
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						full
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						mini
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						glitch
+						theme="system"
+					/>
+				</article>
+			</details>
+
+			<details>
+				<summary>Low contrast Logo</summary>
+
+				<article class="logo-container" data-theme="low-contrast">
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						full
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						mini
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						theme="system"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						glitch
+						theme="system"
+					/>
+				</article>
+			</details>
+
+			<details>
+				<summary>UwU Logo</summary>
+
+				<article class="logo-container" data-theme="uwu">
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						full
+						theme="uwu"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						mini
+						theme="uwu"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						theme="uwu"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						glitch
+						theme="uwu"
+					/>
+				</article>
+			</details>
+
+			<details>
+				<summary>Y2K Logo</summary>
+
+				<article class="logo-container" data-theme="y2k">
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						full
+						theme="y2k"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						mini
+						theme="y2k"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						theme="y2k"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						glitch
+						theme="y2k"
+					/>
+				</article>
+			</details>
+
+			<details>
+				<summary>Hacker Logo</summary>
+
+				<article class="logo-container" data-theme="hacker">
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						full
+						theme="hacker"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						mini
+						theme="hacker"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						theme="hacker"
+					/>
+					<Logo
+						title="Branding"
+						subtitle="Branding"
+						shortSubtitle="Brand"
+						url={Astro.url.pathname}
+						setSvgSize
+						micro
+						glitch
+						theme="hacker"
+					/>
+				</article>
+			</details>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

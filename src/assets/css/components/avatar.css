@@ -1,0 +1,58 @@
+@layer components {
+	m-avatar {
+		display: block;
+		position: relative;
+		border: var(--theme-color) var(--border-style) var(--border-size);
+		border-radius: var(--radius-round);
+		inline-size: var(--size-13);
+		block-size: var(--size-13);
+		overflow: hidden;
+
+		img {
+			inline-size: 100%;
+			block-size: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		&::after {
+			display: block;
+			position: absolute;
+			opacity: var(--avatary-overlay-opacity);
+			transition: all 0.2s ease-in-out;
+			inset: 0;
+			background: var(--avatar-overlay);
+			inline-size: 100%;
+			block-size: 100%;
+			content: '';
+			mix-blend-mode: var(--avatary-overlay-blend-mode);
+
+			@media (prefers-contrast: more) {
+				opacity: 0.4;
+				backdrop-filter: contrast(200%);
+				background: radial-gradient(circle at bottom, transparent, var(--theme-color));
+			}
+
+			@media (forced-colors: active) {
+				opacity: 0;
+				backdrop-filter: none;
+				background: none;
+			}
+
+			@media (prefers-reduced-transparency: reduce) {
+				opacity: 0;
+				backdrop-filter: none;
+				background: none;
+			}
+		}
+
+		&:hover::after { opacity: 0.4; }
+
+		@media (max-width: 25rem) {
+			inline-size: var(--size-12);
+			block-size: var(--size-12);
+		}
+
+		@media (forced-colors: active) { filter: grayscale(1) contrast(120%) brightness(110%); }
+	}
+}

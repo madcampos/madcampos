@@ -1,0 +1,170 @@
+@layer components {
+	@property --rotate {
+		inherits: true;
+		initial-value: 0deg;
+		syntax: '<angle>';
+	}
+
+	@keyframes rainbow {
+		0% {
+			--rainbow-color: red;
+			--rainbow-text-color: white;
+		}
+		16.66% {
+			--rainbow-color: orange;
+			--rainbow-text-color: black;
+		}
+		33.33% {
+			--rainbow-color: yellow;
+			--rainbow-text-color: black;
+		}
+		50% {
+			--rainbow-color: green;
+			--rainbow-text-color: white;
+		}
+		66.66% {
+			--rainbow-color: blue;
+			--rainbow-text-color: white;
+		}
+		83.33% {
+			--rainbow-color: indigo;
+			--rainbow-text-color: white;
+		}
+		100% {
+			--rainbow-color: red;
+			--rainbow-text-color: white;
+		}
+	}
+
+	@keyframes swing {
+		20% { --rotate: 10deg; }
+
+		40% { --rotate: -10deg; }
+
+		60% { --rotate: 5deg; }
+
+		80% { --rotate: -5deg; }
+
+		100% { --rotate: 0deg; }
+	}
+
+	:host { display: block; }
+
+	button {
+		--button-font-oldstyle: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+		--button-font-sans: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+		--button-font-didone: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
+		--button-font-hand: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, cursive;
+		--button-font-papyrus: 'Papyrus', cursive;
+		--button-font-slab: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+		--button-font-humanist: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+		--button-font-ui: system-ui, sans-serif;
+
+		display: inline-flex;
+		position: relative;
+		cursor: pointer;
+		margin: var(--size-1);
+		border: var(--old-button-border, none);
+		border-radius: var(--old-button-border-radius, 0.2rem);
+		background: none;
+		padding: 0;
+		inline-size: fit-content;
+		block-size: fit-content;
+		overflow: hidden;
+
+		&::after {
+			display: block;
+			position: absolute;
+			mix-blend-mode: var(--old-button-blend-mode, none);
+			inset: 0;
+			background: var(--old-button-tint, none);
+			content: '';
+		}
+
+		text {
+			font-size: 8px;
+			font-family: var(--button-font-humanist);
+			text-anchor: middle;
+		}
+
+		.hidden-text {
+			fill: none;
+			pointer-events: none;
+			font-size: 1px;
+			stroke: none;
+			user-select: none;
+		}
+
+		.button-badge-bg { fill: red; }
+		.button-badge-text {
+			fill: white;
+			font-weight: 900;
+			font-size: 7px;
+			font-family: var(--button-font-humanist);
+			text-anchor: start;
+			transform: rotate(-90deg);
+			transform-origin: top left;
+		}
+
+		.emphasis-text {
+			fill: red;
+			paint-order: stroke;
+			font-weight: bold;
+			font-size: 9px;
+			font-family: var(--button-font-hand);
+			stroke: #d3d3d3;
+		}
+
+		svg {
+			aspect-ratio: 88 / 31;
+			block-size: 2rem;
+		}
+
+		#button-text-path {
+			stroke-dasharray: 0 7 16 100;
+			stroke-dashoffset: 2;
+			transform: translate(0.5px, 1.5px);
+		}
+
+		#button-base { fill: #d3d3d3; }
+		:is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility, hidden); }
+		:is(#button-border-up, #button-border-left) { fill: white; }
+		:is(#button-border-down, #button-border-right) { fill: black; }
+
+		&:focus-visible {
+			outline: var(--focus-outline);
+			outline-offset: var(--size-1);
+			border-radius: var(--border-radius);
+			background-color: var(--surface-1);
+			color: var(--text-1);
+		}
+
+		&:hover {
+			#button-base { fill: silver; }
+			.emphasis-text { stroke: silver; }
+		}
+
+		&:active {
+			:is(#button-border-up, #button-border-left) { fill: black; }
+			:is(#button-border-down, #button-border-right) { fill: white; }
+		}
+
+		@media (prefers-contrast: more), (forced-colors: active) {
+			text { fill: var(--text-1); }
+			#button-base { fill: var(--surface-1); }
+			#button-text-path { stroke: var(--theme-color); }
+			.button-badge-bg { fill: var(--text-1); }
+			.button-badge-text { fill: var(--surface-1); }
+
+			.emphasis-text {
+				fill: var(--theme-color);
+				stroke: var(--surface-1);
+			}
+
+			&:hover {
+				#button-base { fill: var(--surface-2); }
+				.emphasis-text { stroke: var(--surface-2); }
+			}
+		}
+	}
+}

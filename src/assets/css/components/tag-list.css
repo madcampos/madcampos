@@ -1,0 +1,66 @@
+@layer components {
+	tag-list ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: start;
+		gap: var(--size-2);
+		padding: 0;
+		list-style-type: none;
+
+		@media (prefers-contrast: more) { font-weight: bolder; }
+	}
+
+	tag-item {
+		--tag-width: var(--size-2);
+		--tag-height: var(--size-2);
+
+		display: inline-block;
+		position: relative;
+		margin: var(--size-1);
+		padding: var(--size-1) var(--size-2);
+		padding-inline-start: calc(var(--tag-width) + var(--size-2));
+		overflow: visible;
+		color: var(--tag-color);
+		font-size: var(--font-size-0);
+
+		* {
+			position: relative;
+			outline: none;
+			background-color: transparent;
+			color: inherit;
+			text-decoration: none;
+		}
+
+		&::before {
+			position: absolute;
+			clip-path: polygon(var(--tag-width) 0, 100% 0, 100% 100%, var(--tag-width) 100%, 0 calc(50% + var(--tag-height) * 0.5), 0 calc(50% - var(--tag-height) * 0.5));
+			mask: radial-gradient(circle at calc(var(--tag-width) * 0.7) center, transparent 0, transparent calc(var(--tag-height) * 0.3), black calc(var(--tag-height) * 0.3));
+			inset: 0;
+			background-color: var(--tag-bg);
+			content: '';
+		}
+
+		&:focus-within {
+			outline: var(--focus-outline);
+			outline-offset: var(--size-1);
+			border-radius: var(--border-radius);
+			color: var(--tag-focus-color);
+
+			&::before { background-color: var(--tag-focus-bg); }
+		}
+
+		&:has(a):hover {
+			outline-color: var(--tag-hover-color);
+			color: var(--tag-hover-color);
+
+			&::before { background-color: var(--tag-hover-bg); }
+		}
+
+		@media (prefers-contrast: more), (forced-colors: active) {
+			border: var(--border-style) currentcolor var(--border-size);
+			padding-inline-start: var(--size-2);
+
+			&::before { display: none; }
+		}
+	}
+}

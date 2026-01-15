@@ -1,0 +1,97 @@
+@layer base {
+	a {
+		color: var(--link-color);
+		text-decoration-style: var(--link-underline);
+		text-decoration-thickness: 0.11em;
+		text-decoration-skip-ink: auto;
+		text-underline-offset: 0.2em;
+		word-break: break-word;
+		overflow-wrap: break-word;
+
+		&:visited { color: var(--link-visited-color); }
+		&:focus-visible {
+			color: var(--text-1);
+			outline: var(--focus-outline);
+			outline-offset: var(--size-1);
+			background-color: var(--surface-1);
+		}
+
+		&:hover {
+			outline-color: var(--link-hover-color);
+			color: var(--link-hover-color);
+		}
+
+		&:active {
+			outline-color: var(--link-active-color);
+			color: var(--link-active-color);
+		}
+
+		&:has(img) {
+			display: inline-flex;
+
+			&:focus-visible { background-color: var(--surface-1); }
+		}
+	}
+
+	:is(dfn, cite, q) {
+		font-style: italic;
+		color: var(--text-2);
+	}
+
+	:is(abbr, u, s, ins, del) {
+		text-decoration: underline;
+		text-decoration-style: var(--link-underline);
+		text-decoration-thickness: 0.11em;
+		text-decoration-skip-ink: auto;
+		text-underline-offset: 0.2em;
+	}
+
+	:is(strong, b) { font-weight: 900; }
+	:is(em, i) { font-style: italic; }
+
+	small { font-size: var(--font-size-0); }
+
+	:is(sub, sup) {
+		font-size: 0.8em;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+
+	sub { inset-block-end: -0.25em; }
+	sup { inset-block-start: -0.5em; }
+
+	mark {
+		color: var(--surface-1);
+		background-color: var(--accent-color);
+	}
+
+	:is(s, del) { text-decoration-line: line-through; }
+
+	ins {
+		color: var(--diff-add-color);
+		background-color: var(--diff-add-bg);
+	}
+
+	del {
+		color: var(--diff-remove-color);
+		background-color: var(--diff-remove-bg);
+	}
+
+	:is(code, kbd, samp) {
+		font-family: var(--code-font-family);
+		display: inline-block;
+		background-color: var(--surface-2);
+		padding-inline: var(--size-1);
+	}
+
+	kbd {
+		border: var(--border-size) outset var(--surface-3);
+		border-radius: var(--border-radius);
+	}
+
+	var {
+		font-style: italic;
+		font-family: var(--code-font-family);
+	}
+}

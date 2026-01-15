@@ -1,0 +1,16 @@
+@layer components {
+	sr-only {
+		border: 0;
+		clip: rect(0, 0, 0, 0);
+		position: absolute;
+		opacity: 0;
+		z-index: -1;
+		margin: 0;
+		padding: 0;
+		inline-size: 1px;
+		block-size: 1px;
+		overflow: hidden;
+		pointer-events: none;
+		user-select: none;
+	}
+}

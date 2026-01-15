@@ -1,0 +1,7 @@
+@layer components {
+	css-naked-day {
+		display: none;
+		padding: var(--size-3);
+		margin: var(--size-3);
+	}
+}

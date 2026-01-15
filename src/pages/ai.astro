@@ -1,47 +1,75 @@
 ---
-import Logo from '../components/Logo/Logo.astro';
-import { GLOBALS } from '../constants';
-import InternalPageLayout from '../layouts/InternalPage.astro';
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
 ---
-
-<InternalPageLayout
-	htmlTitle={['AI Use Statement', ...GLOBALS.title]}
-	title="AI Use Statement"
-	description="AI Use Statement for Marco Campos website."
-	url="/ai/"
-	tags={['ai', 'robots', ...GLOBALS.tags]}
->
-	<Logo
-		subtitle="AI Use"
-		shortSubtitle="AI"
-		url="/ai/"
-		urlTitle="Ai Use Page"
-		slot="logo"
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="AI Use Statement"
+		description="AI Use Statement for Marco Campos website."
 	/>
-	<Fragment slot="header">AI Use Statement</Fragment>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
 
-	<p>I do use AI tools to generate some of the content published on this website. Below are places and situations where AI is used, and those where it is not.</p>
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
 
-	<h2>AI <em>is</em> used</h2>
+		<SiteNav />
 
-	<ul>
-		<li>Hero images for posts</li>
-		<li>Internal images on some posts</li>
-		<li>Audio/song version of the website license</li>
-	</ul>
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
 
-	<h2>AI <em>is not</em> used</h2>
+		<header>
+			<Logo
+				subtitle="AI Use"
+				shortSubtitle="AI"
+				title="Ai Use Page"
+			/>
+			<h1>AI Use Statement</h1>
+		</header>
 
-	<ul>
-		<li>Generating or writing code for the website</li>
-		<li>Writing content for the website</li>
-		<li>Designs for the website</li>
-	</ul>
+		<main id="main">
+			<p>I do use AI tools to generate some of the content published on this website. Below are places and situations where AI is used, and those where it is not.</p>
 
-	<h2>Is your art stolen?</h2>
+			<h2>AI <em>is</em> used for</h2>
 
-	<p>If you feel like your art have been stolen or scraped by AI, first I'm sorry.</p>
-	<p>Although I cannot remove your art from the datasets used to train these AI models, I <em>can</em> remove the results from my website.</p>
-	<p>If you would like me to do so, please contact me at <em><a href="mailto:me@madcampos.dev">me@madcampos.dev</a></em>.</p>
-	<p>If you have the technical knowledge, feel free to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
-</InternalPageLayout>
+			<ul>
+				<li>Hero images for posts</li>
+				<li>Internal images on some posts</li>
+				<li>Audio/song version of the website license</li>
+			</ul>
+
+			<h2>AI <em>is not</em> used for</h2>
+
+			<ul>
+				<li>Generating or writing code for the website</li>
+				<li>Writing content for the website</li>
+				<li>Designs for the website</li>
+			</ul>
+
+			<h2>Is your art misused or stolen?</h2>
+
+			<p>If you feel like your art have been stolen or scraped by AI, first I'm sorry.</p>
+			<p>Although I cannot remove your art from the datasets used to train these AI models, what I <em>can</em> do is remove the results from my website.</p>
+			<p>If you would like me to do so, please contact me at <em><a href="mailto:me@madcampos.dev">me@madcampos.dev</a></em>.</p>
+			<p>If you have the technical knowledge, an alternative is to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>
