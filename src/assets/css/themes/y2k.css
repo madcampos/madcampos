@@ -209,7 +209,7 @@
 	}
 
 	[data-theme='y2k'] body {
-		cursor: url('./y2k/arrow.svg'), auto;
+		cursor: url('./y2k/arrow.svg') 2 3, auto;
 		background-image: url('./y2k/bg.svg');
 		background-size: 5rem;
 		background-repeat: repeat;
@@ -220,7 +220,7 @@
 	[data-theme='y2k'] input[type='file']::file-selector-button,
 	:is(a, button, input:is([type='submit'], [type='reset'], [type='button']))[data-theme='y2k'],
 	input[type='file'][data-theme='y2k']::file-selector-button {
-		cursor: url('./y2k/link.svg'), pointer;
+		cursor: url('./y2k/link.svg') 7 1, pointer;
 		border-radius: 0;
 	}
 
