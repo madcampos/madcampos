@@ -26,12 +26,16 @@
 		font-family: inherit;
 	}
 
-	html, body {
+	html {
 		inline-size: 100%;
 		block-size: 100%;
 	}
 
-	body { margin: 0; }
+	body {
+		margin: 0;
+		inline-size: 100%;
+		block-size: fit-content;
+	}
 
 	:target {
 		scroll-margin: var(--size-3);
