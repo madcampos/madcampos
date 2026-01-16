@@ -4,13 +4,8 @@
 	"version": "4.0.0",
 	"license": "MIT",
 	"type": "module",
-	"engines": {
-		"node": ">=24.11.1",
-		"pnpm": ">=10.24.0"
-	},
-	"volta": {
-		"node": "24.11.1"
-	},
+	"engines": { "node": ">=24" },
+	"volta": { "node": "24.13.0" },
 	"scripts": {
 		"bootstrap:astro": "astro sync",
 		"bootstrap:types": "wrangler types server/env.d.ts",
