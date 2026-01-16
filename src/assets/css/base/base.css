@@ -34,7 +34,8 @@
 	body {
 		margin: 0;
 		inline-size: 100%;
-		block-size: fit-content;
+		block-size: 100%;
+		min-block-size: fit-content;
 	}
 
 	:target {
