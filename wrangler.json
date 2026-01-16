@@ -34,11 +34,7 @@
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page"
 	},
-	"vars": {
-		"NODE_ENV": "production",
-		"PNPM_VERSION": "10.26.2",
-		"NODE_VERSION": "24.13.0"
-	},
+	"vars": { "NODE_ENV": "production" },
 	"env": {
 		"local": {
 			"assets": {
