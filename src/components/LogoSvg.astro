@@ -36,11 +36,11 @@ function generateUniqueId() {
 }
 
 function generateSubtitle(paddingStart: number, paddingEnd: number, subtitleString: string) {
-	return [
-		...new Array(paddingStart).fill(0).map(() => `<tspan class="logo-text-padding-start">-</tspan>`),
-		...[...subtitleString].map((char) => `<tspan class="logo-text-content">${char}</tspan>`),
-		...new Array(paddingEnd).fill(0).map(() => `<tspan class="logo-text-padding-end">-</tspan>`)
-	].join('');
+	const padStartSvg = `<tspan class="logo-text-padding-start">${new Array(paddingStart).fill('<tspan>-</tspan>').join('')}</tspan>`;
+	const padEndSvg = `<tspan class="logo-text-padding-end">${new Array(paddingEnd).fill('<tspan>-</tspan>').join('')}</tspan>`;
+	const subtitleSvg = [...subtitleString].map((char) => `<tspan>${char}</tspan>`).join('');
+
+	return `${padStartSvg}<tspan class="logo-text-content">${subtitleSvg}</tspan>${padEndSvg}`;
 }
 
 const logoLabelId = generateUniqueId();
