@@ -252,7 +252,7 @@
 
 		body {
 			animation: 1s steps(5) infinite uwu-cursor-normal;
-			cursor: url('./uwu/cursors/normal/1.svg') 7 1, auto;
+			cursor: url('./uwu/cursors/normal/1.svg') 2 2, auto;
 			background-image: linear-gradient(
 				to right,
 				mistyrose var(--size-1),
@@ -291,7 +291,7 @@
 
 	[data-theme='uwu'] :is(a, button, input, select), :is(a, button, input, select)[data-theme='uwu'] {
 		animation: 1s steps(5) infinite uwu-cursor-hand;
-		cursor: url('./uwu/cursors/hand/1.svg'), auto;
+		cursor: url('./uwu/cursors/hand/1.svg') 4 2, pointer;
 	}
 
 	:is([data-theme='uwu'] m-card, m-card[data-theme='uwu']) {
@@ -380,20 +380,20 @@
 	}
 
 	@keyframes uwu-cursor-normal {
-		0% { cursor: url('./uwu/cursors/normal/1.svg') 2 3, auto; }
-		20% { cursor: url('./uwu/cursors/normal/2.svg') 2 3, auto; }
-		40% { cursor: url('./uwu/cursors/normal/3.svg') 2 3, auto; }
-		60% { cursor: url('./uwu/cursors/normal/4.svg') 2 3, auto; }
-		80% { cursor: url('./uwu/cursors/normal/5.svg') 2 3, auto; }
-		100% { cursor: url('./uwu/cursors/normal/1.svg') 2 3, auto; }
+		0% { cursor: url('./uwu/cursors/normal/1.svg') 2 2, auto; }
+		20% { cursor: url('./uwu/cursors/normal/2.svg') 2 2, auto; }
+		40% { cursor: url('./uwu/cursors/normal/3.svg') 2 2, auto; }
+		60% { cursor: url('./uwu/cursors/normal/4.svg') 2 2, auto; }
+		80% { cursor: url('./uwu/cursors/normal/5.svg') 2 2, auto; }
+		100% { cursor: url('./uwu/cursors/normal/1.svg') 2 2, auto; }
 	}
 
 	@keyframes uwu-cursor-hand {
-		0% { cursor: url('./uwu/cursors/hand/1.svg') 7 1, auto; }
-		20% { cursor: url('./uwu/cursors/hand/2.svg') 7 1, auto; }
-		40% { cursor: url('./uwu/cursors/hand/3.svg') 7 1, auto; }
-		60% { cursor: url('./uwu/cursors/hand/4.svg') 7 1, auto; }
-		80% { cursor: url('./uwu/cursors/hand/5.svg') 7 1, auto; }
-		100% { cursor: url('./uwu/cursors/hand/1.svg') 7 1, auto; }
+		0% { cursor: url('./uwu/cursors/hand/1.svg') 4 2, pointer; }
+		20% { cursor: url('./uwu/cursors/hand/2.svg') 4 2, pointer; }
+		40% { cursor: url('./uwu/cursors/hand/3.svg') 4 2, pointer; }
+		60% { cursor: url('./uwu/cursors/hand/4.svg') 4 2, pointer; }
+		80% { cursor: url('./uwu/cursors/hand/5.svg') 4 2, pointer; }
+		100% { cursor: url('./uwu/cursors/hand/1.svg') 4 2, pointer; }
 	}
 }
