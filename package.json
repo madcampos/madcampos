@@ -4,7 +4,7 @@
 	"version": "4.0.0",
 	"license": "MIT",
 	"type": "module",
-	"engines": { "node": ">=24" },
+	"engines": { "node": ">=24.13.0", "pnpm": ">=10.26.2" },
 	"volta": { "node": "24.13.0" },
 	"scripts": {
 		"bootstrap:astro": "astro sync",

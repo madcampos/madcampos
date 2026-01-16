@@ -36,8 +36,8 @@
 	},
 	"vars": {
 		"NODE_ENV": "production",
-		"PNPM_VERSION": "10.24.0",
-		"NODE_VERSION": "24.11.1"
+		"PNPM_VERSION": "10.26.2",
+		"NODE_VERSION": "24.13.0"
 	},
 	"env": {
 		"local": {
