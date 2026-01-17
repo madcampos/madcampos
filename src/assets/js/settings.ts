@@ -53,6 +53,10 @@ export class SiteSettings {
 		}
 	}
 
+	static get apiUrl() {
+		return new URL(import.meta.env.DEV ? 'https://localhost:4242/' : '/', document.location.href).href;
+	}
+
 	static get updateUrl() {
 		const setting = SiteSettings.#getSetting('updateUrl');
 
