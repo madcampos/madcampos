@@ -8,4 +8,3 @@ import './components/logo.ts';
 import './components/iab-escape.ts';
 import './components/old-style-buttons.ts';
 import './components/theme-switcher.ts';
-import './components/num-count.ts';
