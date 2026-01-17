@@ -1,3 +1,13 @@
+import { env } from 'cloudflare:workers';
+
+const DEFAULT_HEADERS = {
+	'Access-Control-Allow-Origin': env.NODE_ENV === 'production' ? 'https://madcampos.dev' : '*',
+	'Access-Control-Allow-Methods': 'OPTIONS, GET, PUT',
+	'Access-Control-Allow-Headers': '*',
+	'Access-Control-Expose-Headers': '*',
+	'Access-Control-Max-Age': '86400'
+};
+
 interface HitRecord {
 	id: number;
 	url: string;
@@ -12,18 +22,6 @@ interface CountResult {
 	uniqueVisitors: number;
 }
 
-// TODO: allow dev urls
-
-function getDefaultHeaders(request?: Request) {
-	return {
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Methods': 'GET, OPTIONS, PUT',
-		'Access-Control-Allow-Headers': request?.headers.get('Access-Control-Request-Headers') ?? 'Content-Type',
-		'Access-Control-Expose-Headers': [...(request?.headers.keys() ?? [])].join(', ') ?? '',
-		'Access-Control-Max-Age': '86400'
-	};
-}
-
 class ErrorResponse extends Response {
 	constructor(message: string, status = 400) {
 		super(
@@ -34,7 +32,7 @@ class ErrorResponse extends Response {
 			{
 				status,
 				headers: {
-					...getDefaultHeaders(),
+					...DEFAULT_HEADERS,
 					'Content-Type': 'application/json'
 				}
 			}
@@ -95,8 +93,8 @@ function parseUrl(request: Request) {
 	return url;
 }
 
-export function visitorCountOptions(request: Request) {
-	return new Response(null, { status: 200, headers: getDefaultHeaders(request) });
+export function visitorCountOptions() {
+	return new Response(null, { status: 200, headers: DEFAULT_HEADERS });
 }
 
 export async function getVisitorCount(request: Request<unknown, CfProperties<unknown>>, env: Env) {
@@ -145,7 +143,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 			}),
 			{
 				headers: {
-					...getDefaultHeaders(request),
+					...DEFAULT_HEADERS,
 					'Content-Type': 'application/json'
 				}
 			}
@@ -192,7 +190,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 
 		return new Response(JSON.stringify({ success, error }), {
 			headers: {
-				...getDefaultHeaders(request),
+				...DEFAULT_HEADERS,
 				'Content-Type': 'application/json'
 			}
 		});

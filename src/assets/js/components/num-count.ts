@@ -1,12 +1,13 @@
 import { SiteSettings } from '../settings.ts';
 
-const HIT_COUNTER_URL = `${import.meta.env.DEV ? 'https://localhost:4242' : ''}/api/counter/`;
+const HIT_COUNTER_URL = new URL(`${import.meta.env.DEV ? 'https://localhost:4242' : ''}/api/counter/`, document.location.href).href;
 
 export class HitCounter extends HTMLElement implements CustomElement {
 	async render() {
-		const url = new URL(HIT_COUNTER_URL, import.meta.url);
+		const url = new URL(HIT_COUNTER_URL);
 
 		url.searchParams.set('url', document.location.href);
+
 		const response = await fetch(url);
 		const json = await response.json();
 
