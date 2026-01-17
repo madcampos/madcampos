@@ -33,7 +33,7 @@ export default defineConfig({
 	site: 'https://madcampos.dev/',
 	base: '/',
 	redirects: mode !== 'production'
-		? { '/api/': 'https://localhost:4242/api/' }
+		? { '/yapping/[...params]': 'https://localhost:4242/yapping/' }
 		: {},
 	trailingSlash: 'ignore',
 	devToolbar: { enabled: false },

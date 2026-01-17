@@ -29,7 +29,9 @@
 			"/tojs-styleguide",
 			"/tojs-styleguide/",
 			"/blog/2023/06/07/tabs-web-component",
-			"/blog/2023/06/07/tabs-web-component/"
+			"/blog/2023/06/07/tabs-web-component/",
+			"/yapping",
+			"/yapping/*"
 		],
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page"
@@ -39,7 +41,7 @@
 			"binding": "HitCounterDb",
 			"database_name": "hit-counter",
 			"database_id": "f0efbad9-f79e-4e49-af08-435ac56eb623",
-			"preview_database_id": "hit-counter-preview",
+			"preview_database_id": "hit-counter",
 			"migrations_dir": "db/migrations",
 			"migrations_table": "migrations"
 		}
@@ -55,7 +57,9 @@
 					"/tojs-styleguide",
 					"/tojs-styleguide/",
 					"/blog/2023/06/07/tabs-web-component",
-					"/blog/2023/06/07/tabs-web-component/"
+					"/blog/2023/06/07/tabs-web-component/",
+					"/yapping",
+					"/yapping/*"
 				],
 				"html_handling": "auto-trailing-slash",
 				"not_found_handling": "404-page"
@@ -63,9 +67,9 @@
 			"d1_databases": [
 				{
 					"binding": "HitCounterDb",
-					"database_name": "hit-counter-local",
+					"database_name": "hit-counter",
 					"database_id": "hit-counter-local",
-					"preview_database_id": "hit-counter-local",
+					"preview_database_id": "hit-counter",
 					"migrations_dir": "db/migrations",
 					"migrations_table": "migrations"
 				}

@@ -25,7 +25,8 @@
 		"typecheck": "tsc --noEmit",
 		"lint:js": "eslint --fix",
 		"lint:md": "astro check",
-		"lint": "pnpm run typecheck && pnpm run lint:js && pnpm run lint:md"
+		"lint": "pnpm run typecheck && pnpm run lint:js && pnpm run lint:md",
+		"db:migrations": "wrangler d1 migrations apply hit-counter"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.5",

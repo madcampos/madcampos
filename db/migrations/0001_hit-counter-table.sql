@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS hit_counter (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   url TEXT NOT NULL,
   visitor_id TEXT NOT NULL,
-  timestamp DATETIME NOT NULL DEFAULT (datetime('now', 'utc')),
+  timestamp DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now', 'utc')),
   country TEXT NOT NULL,
   user_agent TEXT NOT NULL
 );
