@@ -27,7 +27,10 @@ async function generateVisitorId(request: Request<unknown, CfProperties<unknown>
 		lattitude: request.cf?.latitude,
 		longitude: request.cf?.longitude,
 		ipAddress: request.headers.get('CF-Connecting-IP') || '0.0.0.0',
-		userAgent: request.headers.get('User-Agent') || 'Unknown/0.0.0'
+		userAgent: request.headers.get('User-Agent') || 'Unknown/0.0.0',
+		accept: request.headers.get('Accept'),
+		acceptLanguage: request.headers.get('Accept-Language'),
+		acceptEncoding: request.headers.get('Accept-Encoding')
 	});
 	const encoder = new TextEncoder();
 	const dataBuffer = encoder.encode(data);
