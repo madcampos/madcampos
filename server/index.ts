@@ -1,15 +1,18 @@
 import { Router } from './router.ts';
 import { nonExistentPages } from './routes/410.ts';
+import { getVisitorCount, incrementVisitorCount } from './routes/hit-counter.ts';
 import { yapper } from './routes/yapper/index.ts';
 
 const router = new Router({
 	routes: {
-		'/tojs-styleguide': nonExistentPages,
-		'/tojs-styleguide/': nonExistentPages,
-		'/blog/2023/06/07/tabs-web-component': nonExistentPages,
-		'/blog/2023/06/07/tabs-web-component/': nonExistentPages,
-		'/yapping': yapper,
-		'/yapping/*': yapper
+		'GET /tojs-styleguide': nonExistentPages,
+		'GET /tojs-styleguide/': nonExistentPages,
+		'GET /blog/2023/06/07/tabs-web-component': nonExistentPages,
+		'GET /blog/2023/06/07/tabs-web-component/': nonExistentPages,
+		'GET /yapping': yapper,
+		'GET /yapping/*': yapper,
+		'GET /api/counter/': getVisitorCount,
+		'PUT /api/counter/': incrementVisitorCount
 	}
 });
 
