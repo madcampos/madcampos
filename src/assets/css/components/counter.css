@@ -1,0 +1,27 @@
+@layer components {
+	hit-counter {
+		display: flex;
+		width: fit-content;
+		flex-direction: column;
+		gap: var(--size-1);
+		align-items: center;
+		height: fit-content;
+		margin: var(--size-2);
+		padding: var(--size-1);
+		border: var(--border-size) var(--border-style) var(--theme-color);
+		border-radius: var(--border-radius);
+		color: var(--theme-color);
+		background-color: var(--surface-1);
+
+		svg {
+			background-color: var(--surface-2);
+			inline-size: 8ch;
+			block-size: 2ch;
+		}
+
+		text {
+			fill: currentColor;
+			font-family: var(--code-font-family);
+		}
+	}
+}

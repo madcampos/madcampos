@@ -11,7 +11,7 @@ const router = new Router({
 		'GET /blog/2023/06/07/tabs-web-component/': nonExistentPages,
 		'GET /yapping': yapper,
 		'GET /yapping/*': yapper,
-		'OPTIONS /api/counter': visitorCountOptions,
+		'OPTIONS /api/counter/': visitorCountOptions,
 		'GET /api/counter/': getVisitorCount,
 		'PUT /api/counter/': incrementVisitorCount
 	}

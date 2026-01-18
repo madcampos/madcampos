@@ -22,6 +22,16 @@ interface CountResult {
 	uniqueVisitors: number;
 }
 
+export interface HitCountResponse extends CountResult {
+	url: string;
+	visitTimeAvgInSec: number;
+}
+
+export interface StatusResponse {
+	success: boolean;
+	message: string;
+}
+
 class ErrorResponse extends Response {
 	constructor(message: string, status = 400) {
 		super(
@@ -82,7 +92,7 @@ function parseUrl(request: Request) {
 	const requestUrl = new URL(request.url);
 	const parsedUrl = new URL(url, requestUrl);
 
-	if (requestUrl.host !== parsedUrl.host) {
+	if (requestUrl.host !== parsedUrl.host && env.NODE_ENV === 'production') {
 		throw new ErrorResponse('Invalid host for "url" parameter');
 	}
 
@@ -117,7 +127,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 			LIMIT 10
 		`).bind(url).all<Pick<HitRecord, 'timestamp'>>();
 
-		let averageTimeBetweenVisitsInSeconds = 0;
+		let visitTimeAvgInSec = 0;
 
 		if (recentHits.results && recentHits.results.length >= 2) {
 			const timestamps = recentHits.results.map((r) => new Date(r.timestamp)).reverse();
@@ -131,16 +141,18 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 			}
 
 			const avgMs = intervals.reduce((a, b) => a + b, 0) / intervals.length;
-			averageTimeBetweenVisitsInSeconds = Math.round(avgMs / 1000);
+			visitTimeAvgInSec = Math.round(avgMs / 1000);
 		}
 
 		return new Response(
-			JSON.stringify({
-				url,
-				totalVisitors,
-				uniqueVisitors,
-				averageSecondsBetweenVisits: averageTimeBetweenVisitsInSeconds
-			}),
+			JSON.stringify(
+				{
+					url,
+					totalVisitors,
+					uniqueVisitors,
+					visitTimeAvgInSec
+				} satisfies HitCountResponse
+			),
 			{
 				headers: {
 					...DEFAULT_HEADERS,
@@ -189,6 +201,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 		`).bind(url, visitorId, country, userAgent).run();
 
 		return new Response(JSON.stringify({ success, error }), {
+			status: 200,
 			headers: {
 				...DEFAULT_HEADERS,
 				'Content-Type': 'application/json'
