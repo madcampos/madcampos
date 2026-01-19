@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import { SiteSettings } from '../settings.ts';
 
 export class ImageLightbox extends HTMLElement implements CustomElement {
@@ -10,9 +8,13 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 	#fullscreenIconElement?: SVGUseElement;
 
 	#updateZoom(newValue: string) {
-		this.#inputElement!.value = newValue;
-		this.#outputElement!.value = `${this.#inputElement!.value}%`;
-		this.#imgZoomElement!.style.zoom = `${this.#inputElement!.value}%`;
+		if (!this.#inputElement || !this.#outputElement || !this.#imgZoomElement) {
+			return;
+		}
+
+		this.#inputElement.value = newValue;
+		this.#outputElement.value = `${this.#inputElement.value}%`;
+		this.#imgZoomElement.style.zoom = `${this.#inputElement.value}%`;
 	}
 
 	async #toggleFullscreen() {
@@ -32,7 +34,6 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 		const id = Math.trunc(Math.random() * 100000).toString(16);
 		const fullscreenButton = document.fullscreenEnabled
 			? `
@@ -131,11 +132,11 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 			`
 		);
 
-		this.#inputElement = this.querySelector<HTMLInputElement>(`#lightbox-zoom-dialog-${id} input[type="range"]`)!;
-		this.#outputElement = this.querySelector<HTMLOutputElement>(`#lightbox-zoom-dialog-${id} output`)!;
-		this.#imgZoomElement = this.querySelector<HTMLElement>(`#lightbox-zoom-dialog-${id} dialog-content`)!;
-		this.#fullscreenIconElement = this.querySelector<SVGUseElement>(`#lightbox-fullscreen-button-${id} use`)!;
-		this.#fullscreenElement = this.querySelector<HTMLElement>(`#lightbox-zoom-dialog-${id} form`)!;
+		this.#inputElement = this.querySelector(`#lightbox-zoom-dialog-${id} input[type="range"]`) as HTMLInputElement;
+		this.#outputElement = this.querySelector(`#lightbox-zoom-dialog-${id} output`) as HTMLOutputElement;
+		this.#imgZoomElement = this.querySelector(`#lightbox-zoom-dialog-${id} dialog-content`) as HTMLElement;
+		this.#fullscreenIconElement = this.querySelector(`#lightbox-fullscreen-button-${id} use`) as SVGUseElement;
+		this.#fullscreenElement = this.querySelector(`#lightbox-zoom-dialog-${id} form`) as HTMLElement;
 
 		this.querySelector<HTMLDialogElement>(`#lightbox-zoom-dialog-${id}`)?.addEventListener('toggle', (evt) => {
 			if (evt.newState === 'closed') {

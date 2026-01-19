@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+/* eslint-disable */
 // @ts-nocheck
 // TODO: reimplement wheel of fortune
 // Ref: https://stackoverflow.com/questions/33850201/how-to-draw-a-wheel-of-fortune
@@ -60,9 +60,9 @@ class WheelOffortune extends HTMLElement {
 		}
 
 		// TODO: figure out math to stop on a specific section
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
 		const wheel = this.#shadow.querySelector<HTMLOListElement>('#items-list')!;
-		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
+
 		const randomDeg = Math.trunc(Math.random() * 1000) + 1800;
 		const newEndDeg = this.#prevEndDeg + randomDeg;
 
@@ -85,7 +85,6 @@ class WheelOffortune extends HTMLElement {
 	}
 
 	#spinList() {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const wheel = this.#shadow.querySelector<HTMLOListElement>('#items-list')!;
 		const sections = wheel.querySelectorAll('li').length;
 		const randomItem = Math.trunc(Math.random() * sections);
@@ -95,7 +94,6 @@ class WheelOffortune extends HTMLElement {
 	}
 
 	#updateItems() {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const slot = this.#shadow.querySelector('slot')!;
 		const children = [...slot.assignedElements()];
 

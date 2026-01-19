@@ -60,7 +60,6 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 							<header>
 								<h2>
 									{draft && <draft-tag>Draft</draft-tag>}
-									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={title} />
 								</h2>
 								<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>

@@ -78,7 +78,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
 							<meta itemprop="isAccessibleForFree" content="True" />
 						</Fragment>
 						<h2 slot="title">
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							<Fragment set:html={inlineMarkdownRender(data.title)} />
 						</h2>
 

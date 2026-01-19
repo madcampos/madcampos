@@ -26,6 +26,8 @@ const baselineStatus = new Map<BaselineHighLow | false | undefined, string>([
 	[undefined, '<strong>No data on this feature</strong>']
 ]);
 
+const MAX_HEADING_LEVEL = 6;
+
 export class BaselineInfo extends HTMLElement implements CustomElement {
 	static observedAttributes: ['feature'];
 
@@ -51,8 +53,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 
 		if (previousHeading) {
 			const level = Number.parseInt(previousHeading.tagName.substring(1));
-			// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-			return Math.min(level + 1, 6).toString();
+			return Math.min(level + 1, MAX_HEADING_LEVEL).toString();
 		}
 
 		return '2';

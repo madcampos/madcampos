@@ -1,6 +1,14 @@
 ---
 /* eslint-disable max-lines */
+
 import logoBaseCss from '../assets/css/components/logo-base.css?raw';
+
+const MICRO_START_PADDING = 7;
+const MICRO_END_PADDING = 2;
+const MINI_START_PADDING = 8;
+const MINI_END_PADDING = 4;
+const FULL_START_PADDING = 17;
+const FULL_END_PADDING = 4;
 
 type LogoThemes = 'all' | 'hacker' | 'system' | 'uwu' | 'y2k';
 type LogoSizes = 'all' | 'full' | 'micro' | 'mini';
@@ -80,7 +88,6 @@ switch (size) {
 	shape-rendering="geometricPrecision"
 >
 	<title id={`logo-label-${logoLabelId}`}>Marco Campos' Logo{url ? `, to ${title ?? ''}` : ''}</title>
-	{/* eslint-disable-next-line astro/no-set-html-directive */}
 	{theme !== 'all' && <style is:inline set:html={logoBaseCss}></style>}
 
 	<!-- Text -->
@@ -98,8 +105,7 @@ switch (size) {
 					text-rendering="optimizeLegibility"
 					data-size="micro"
 				>
-					{/* eslint-disable-next-line astro/no-set-html-directive, @typescript-eslint/no-magic-numbers */}
-					<Fragment set:html={generateSubtitle(7, 2, shortSubtitle)} />
+					<Fragment set:html={generateSubtitle(MICRO_START_PADDING, MICRO_END_PADDING, shortSubtitle)} />
 				</text>
 			)
 		}
@@ -116,8 +122,7 @@ switch (size) {
 					text-rendering="optimizeLegibility"
 					data-size="mini"
 				>
-					{/* eslint-disable-next-line astro/no-set-html-directive, @typescript-eslint/no-magic-numbers */}
-					<Fragment set:html={generateSubtitle(8, 4, shortSubtitle)} />
+					<Fragment set:html={generateSubtitle(MINI_START_PADDING, MINI_END_PADDING, shortSubtitle)} />
 				</text>
 			)
 		}
@@ -134,8 +139,7 @@ switch (size) {
 					text-rendering="optimizeLegibility"
 					data-size="full"
 				>
-					{/* eslint-disable-next-line astro/no-set-html-directive, @typescript-eslint/no-magic-numbers */}
-					<Fragment set:html={generateSubtitle(17, 4, subtitle)} />
+					<Fragment set:html={generateSubtitle(FULL_START_PADDING, FULL_END_PADDING, subtitle)} />
 				</text>
 			)
 		}

@@ -70,8 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	document.querySelectorAll('label:has( + ul)').forEach((label) => {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const input = label.querySelector<HTMLInputElement>('input[type="checkbox"]')!;
+		const input = label.querySelector('input[type="checkbox"]') as HTMLInputElement;
 		const childInputs = [...label.nextElementSibling?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]') ?? []];
 		const checkedInputs = childInputs.filter(({ checked }) => checked).length;
 

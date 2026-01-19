@@ -747,14 +747,12 @@ const links: BookmarkSection[] = [
 									<a class="u-bookmark-of h-cite" href={bookmark.url}>{bookmark.title}</a>
 								</dt>
 								<dd>
-									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
 									{
 										bookmark.note && (
 											<m-note data-type="info">
 												<Icon name="mingcute:information-line" aira-hidden="true" />
 												<rendered-content>
-													{/* eslint-disable-next-line astro/no-set-html-directive */}
 													<Fragment set:html={inlineMarkdownRender(bookmark.note)} />
 												</rendered-content>
 											</m-note>

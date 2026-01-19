@@ -61,8 +61,6 @@ const framesetHtml = `
 	<section>
 		<h3>Frameset & Frame Elements</h3>
 		<p><strong>Note:</strong> Use <code>&lt;iframe&gt;</code> instead.</p>
-
-		{/* eslint-disable-next-line astro/no-set-html-directive */}
 		<Fragment set:html={framesetHtml} />
 	</section>
 
@@ -70,7 +68,7 @@ const framesetHtml = `
 		<h3>Image Element</h3>
 		<p><strong>Note:</strong> Use <code>&lt;img&gt;</code> instead.</p>
 
-		{/* @ts-expect-error */}
+		{/* @ts-expect-error - Astro considers an error using the src attribute. */}
 		<image
 			src="/assets/images/test/good-parts.webp"
 			alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"

@@ -1,13 +1,6 @@
 export type ResponseHandler = (request: Request, env: Env, context: ExecutionContext) => Promise<Response> | Response;
 
-export type HTTPMethod =
-	| 'GET'
-	| 'HEAD'
-	| 'POST'
-	| 'PUT'
-	| 'DELETE'
-	| 'OPTIONS'
-	| 'PATCH';
+export type HTTPMethod = 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT';
 
 interface StaticSiteHandlerOptions {
 	routes: Record<string, ResponseHandler>;
@@ -30,7 +23,7 @@ export class Router {
 		this.#fallbackRoute = fallbackRoute ?? (() => new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain' } }));
 
 		Object.entries(routes).forEach(([methodAndPath, route]) => {
-			const { method = 'get', path = '' } = methodAndPath.match(/^(?:(?<method>[a-z]+) )?(?<path>.+?)$/iu)?.groups ?? {};
+			const { method = 'get', path = '' } = (/^(?:(?<method>[a-z]+) )?(?<path>.+?)$/iu.exec(methodAndPath))?.groups ?? {};
 
 			const methodRoutes = this.#routes[method.toUpperCase() as HTTPMethod];
 

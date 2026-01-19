@@ -205,7 +205,6 @@ const tasks: Task[] = [
 			</p>
 
 			<ul id="todo-list">
-				{/* eslint-disable-next-line astro/no-set-html-directive */}
 				<Fragment set:html={tasks.map((task) => renderTask(task)).join('\n')} />
 			</ul>
 

@@ -1,5 +1,7 @@
 import type { RemarkRehype } from '@astrojs/markdown-remark';
 
+const ASCII_OFFSET = 95;
+
 export const settings: Partial<RemarkRehype> = {
 	clobberPrefix: '',
 	footnoteBackContent: (referenceIndex, rereferenceIndex) => {
@@ -45,7 +47,7 @@ export const settings: Partial<RemarkRehype> = {
 			type: 'element',
 			tagName: 'sup',
 			properties: {},
-			children: [{ type: 'text', value: String.fromCharCode(95 + rereferenceIndex) }]
+			children: [{ type: 'text', value: String.fromCharCode(ASCII_OFFSET + rereferenceIndex) }]
 		}];
 	},
 	footnoteBackLabel: () => '',

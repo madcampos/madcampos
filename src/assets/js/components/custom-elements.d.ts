@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-
 /**
  * Adapted from: https://github.com/jsxtools/typed-custom-elements
  */

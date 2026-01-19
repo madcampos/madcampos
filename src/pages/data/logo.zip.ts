@@ -2,7 +2,6 @@ import { BlobWriter, ZipWriter } from '@zip.js/zip.js';
 import type { APIRoute } from 'astro';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 
-// @ts-expect-error
 import LogoSvg from '../../components/LogoSvg.astro';
 
 type LogoThemes = 'hacker' | 'system' | 'uwu' | 'y2k';
@@ -75,7 +74,6 @@ async function createZipFile(files: File[]) {
 	});
 
 	for (const file of files) {
-		// eslint-disable-next-line no-await-in-loop
 		await zipWriter.add(file.name, file.stream());
 	}
 
@@ -104,8 +102,6 @@ export const GET: APIRoute = async () => {
 	];
 
 	const zipFile = await createZipFile(logos);
-
-	console.log(zipFile);
 
 	return new Response(zipFile, {
 		status: 200,

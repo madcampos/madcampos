@@ -79,14 +79,12 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						imageAlt={post.data.imageAlt ?? ''}
 					>
 						<h2 slot="title">
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							<Fragment set:html={inlineMarkdownRender(post.data.title)} />
 						</h2>
 						<small slot="subtitle">
 							<time datetime={post.data.createdAt.toISOString()}>{formatter.format(post.data.createdAt)}</time>
 						</small>
 
-						{/* eslint-disable-next-line astro/no-set-html-directive */}
 						<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
 
 						<a slot="links" href={`/blog/${post.url}`}>

@@ -44,7 +44,7 @@ const post = (await listAllPosts())[0]!;
 								src={avatar}
 								alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
 								loading="lazy"
-								widths={/* eslint-disable-line @typescript-eslint/no-magic-numbers */ [128, 256, 512, 768, 1024]}
+								widths={[128, 256, 512, 768, 1024]}
 								width={512}
 								sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
 								quality={75}
@@ -83,7 +83,7 @@ const post = (await listAllPosts())[0]!;
 					src={avatar}
 					alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
 					loading="lazy"
-					widths={/* eslint-disable-line @typescript-eslint/no-magic-numbers */ [128, 256, 512, 768, 1024]}
+					widths={[128, 256, 512, 768, 1024]}
 					width={512}
 					sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
 					quality={75}
@@ -125,7 +125,6 @@ const post = (await listAllPosts())[0]!;
 				<meta itemprop="isAccessibleForFree" content="True" />
 			</Fragment>
 			<h2 slot="title">
-				{/* eslint-disable-next-line astro/no-set-html-directive */}
 				<Fragment set:html={inlineMarkdownRender(project.data.title)} />
 			</h2>
 
@@ -306,7 +305,6 @@ const post = (await listAllPosts())[0]!;
 			<header>
 				{post.data.draft && <draft-tag>Draft</draft-tag>}
 				<a class="u-uid u-url" href={Astro.url.pathname}>
-					{/* eslint-disable-next-line astro/no-set-html-directive */}
 					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(post.data.title)} /></h1>
 				</a>
 
@@ -319,14 +317,12 @@ const post = (await listAllPosts())[0]!;
 								itemprop="image"
 								loading="eager"
 							/>
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							{post.data.imageRights && <figcaption><Fragment set:html={inlineMarkdownRender(post.data.imageRights)} /></figcaption>}
 						</figure>
 					)
 				}
 
 				<blockquote class="p-summary" itemprop="description">
-					{/* eslint-disable-next-line astro/no-set-html-directive */}
 					<p><Fragment set:html={inlineMarkdownRender(post.data.summary)} /></p>
 				</blockquote>
 
@@ -387,10 +383,7 @@ const post = (await listAllPosts())[0]!;
 									image={relatedPost.image}
 									imageAlt={relatedPost.imageAlt ?? ''}
 								>
-									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment slot="title" set:html={inlineMarkdownRender(relatedPost.title)} />
-
-									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={inlineMarkdownRender(relatedPost.summary)} />
 								</Card>
 							</li>
@@ -436,7 +429,7 @@ const post = (await listAllPosts())[0]!;
 			document.querySelector('#focus-skip-link')?.addEventListener('click', () => {
 				(/** @type {HTMLAnchorElement} */ (document.querySelector('skip-to-content a')))?.focus({
 					preventScroll: false,
-					// @ts-expect-error
+					// @ts-expect-error - Experimental
 					focusVisible: true
 				});
 			});

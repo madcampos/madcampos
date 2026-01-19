@@ -15,9 +15,6 @@ import Webrings from '../../../../../components/Webrings.astro';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../../../../../utils/markdown.js';
 import { listAllPosts } from '../../../../../utils/post.js';
 
-// eslint-disable-next-line @typescript-eslint/no-use-before-define
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 export const getStaticPaths = (async () =>
 	(await listAllPosts()).map((post) => ({
 		params: {
@@ -28,6 +25,8 @@ export const getStaticPaths = (async () =>
 		},
 		props: post
 	}))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const {
 	render,
@@ -81,7 +80,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			<header>
 				{draft && <draft-tag>Draft</draft-tag>}
 				<a class="u-uid u-url" href={Astro.url.pathname}>
-					{/* eslint-disable-next-line astro/no-set-html-directive */}
 					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(title)} /></h1>
 				</a>
 
@@ -94,14 +92,12 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 								itemprop="image"
 								loading="eager"
 							/>
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							{imageRights && <figcaption><Fragment set:html={inlineMarkdownRender(imageRights)} /></figcaption>}
 						</figure>
 					)
 				}
 
 				<blockquote class="p-summary" itemprop="description">
-					{/* eslint-disable-next-line astro/no-set-html-directive */}
 					<p><Fragment set:html={inlineMarkdownRender(summary)} /></p>
 				</blockquote>
 
@@ -152,7 +148,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 											</time>
 										</dt>
 										<dd>
-											{/* eslint-disable-next-line astro/no-set-html-directive */}
 											<p><Fragment set:html={inlineMarkdownRender(update.changes)} /></p>
 										</dd>
 									))
@@ -196,7 +191,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 									src={avatar}
 									alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
 									loading="lazy"
-									widths={/* eslint-disable-line @typescript-eslint/no-magic-numbers */ [128, 256, 512, 768, 1024]}
+									widths={[128, 256, 512, 768, 1024]}
 									width={512}
 									sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
 									quality={75}
@@ -275,10 +270,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 													image={post.image}
 													imageAlt={post.imageAlt ?? ''}
 												>
-													{/* eslint-disable-next-line astro/no-set-html-directive */}
 													<Fragment slot="title" set:html={inlineMarkdownRender(post.title)} />
-
-													{/* eslint-disable-next-line astro/no-set-html-directive */}
 													<Fragment set:html={inlineMarkdownRender(post.summary)} />
 												</Card>
 											</li>

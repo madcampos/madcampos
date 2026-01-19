@@ -67,7 +67,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							</div>
 						</Fragment>
 						<h2 slot="title">
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							<Fragment set:html={inlineMarkdownRender(talk.data.title)} />
 						</h2>
 
@@ -100,7 +99,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 										<Icon name="mingcute:calendar-2-line" title="Event name" />
 										<span>
-											{/* eslint-disable-next-line astro/no-set-html-directive */}
 											<Fragment set:html={inlineMarkdownRender(talk.data.event)} />
 										</span>
 									</span>
@@ -108,7 +106,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							}
 						</Fragment>
 
-						{/* eslint-disable-next-line astro/no-set-html-directive */}
 						<Fragment set:html={inlineMarkdownRender(talk.data.summary)} />
 
 						<Fragment slot="links">
@@ -117,7 +114,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 								<span>View Talk Info</span>
 								<sr-only>
 									for
-									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={talk.data.title} />
 								</sr-only>
 							</a>

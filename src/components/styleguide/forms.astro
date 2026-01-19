@@ -498,7 +498,7 @@
 					<span>A folder with your last 5 years of tax documents:</span>
 					<input-required><strong>(Required)</strong></input-required>
 				</label>
-				{/* @ts-expect-error */}
+				{/* @ts-expect-error - Astro's JSX doesn't know about webkitdirectory */}
 				<input
 					type="file"
 					name="tax-documents"

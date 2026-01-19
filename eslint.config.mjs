@@ -35,7 +35,19 @@ const rules = {
 		min: 3,
 		max: 50,
 		properties: 'never',
-		exceptions: ['i', 'j', 'n', 'w', 'x', 'y', 'z', 'id', 'fs', 'up', '_', 't']
+		// dprint-ignore-line
+		exceptions: [
+			// Iteration related
+			'i', 'j', 'k', 'm', 'n',
+			// Geometry related
+			'h', 'w', 'x', 'y', 'z',
+			// Ignore unused variables
+			'_',
+			// Time related
+			't',
+			// Conventions
+			'id', 'fs', 'up', 'js', 'cb',
+		]
 	}],
 	'id-match': 'off',
 	'init-declarations': 'off',
@@ -53,7 +65,7 @@ const rules = {
 	'no-alert': 'error',
 	'no-array-constructor': 'off',
 	'no-async-promise-executor': 'error',
-	'no-await-in-loop': 'error',
+	'no-await-in-loop': 'off',
 	'no-bitwise': 'error',
 	'no-caller': 'error',
 	'no-case-declarations': 'error',
@@ -147,7 +159,7 @@ const rules = {
 	'no-self-compare': 'error',
 	'no-sequences': 'error',
 	'no-setter-return': 'error',
-	'no-shadow-restricted-names': 'error',
+	'no-shadow-restricted-names': ['error', { reportGlobalThis: true }],
 	'no-shadow': 'off',
 	'no-sparse-arrays': 'error',
 	'no-template-curly-in-string': 'warn',
@@ -334,7 +346,18 @@ const rules = {
 		enforceConst: true,
 		ignoreDefaultValues: true,
 		ignoreArrayIndexes: true,
-		ignore: [-1, 0, 1, 16, 1000000, '-1n', '0n', '1n'],
+		// dprint-ignore-line
+		ignore: [
+			// Common math operations
+			-1, 0, 1,
+			'-1n', '0n', '1n',
+			// Hex/Base 2 exponent related
+			2, 4, 8, 16, 32, 64, 128, 256, 512, 768, 1024,
+			// Decimal places related
+			10, 100, 1000, 100000, 1000000,
+			// Time related
+			30, 60, 24,
+		],
 		ignoreEnums: true,
 		ignoreNumericLiteralTypes: true,
 		ignoreReadonlyClassProperties: true
@@ -375,11 +398,11 @@ const rules = {
 		]
 	}],
 	'@typescript-eslint/no-shadow': ['warn', {
-		builtinGlobals: true,
-		hoist: 'all',
-		allow: ['name', 'status', 'event', 'prompt', 'alert', 'top', 'origin', 'self', 'length', 'close', 'open', 'stop', 'focus', 'blur', 'Image', 'location'],
+		builtinGlobals: false,
+		hoist: 'functions-and-types',
+		allow: [],
 		ignoreTypeValueShadow: true,
-		ignoreFunctionTypeParameterNameValueShadow: false
+		ignoreFunctionTypeParameterNameValueShadow: true
 	}],
 	'@typescript-eslint/no-this-alias': ['error', { allowDestructuring: false, allowedNames: [] }],
 	'@typescript-eslint/no-type-alias': 'off',
@@ -452,8 +475,8 @@ const rules = {
 	'astro/no-deprecated-astro-fetchcontent': 'error',
 	'astro/no-deprecated-astro-resolve': 'error',
 	'astro/no-deprecated-getentrybyslug': 'error',
-	'astro/no-set-html-directive': 'error',
-	'astro/no-set-text-directive': 'error',
+	'astro/no-set-html-directive': 'off',
+	'astro/no-set-text-directive': 'off',
 	'astro/no-unused-css-selector': 'warn',
 	'astro/no-unused-define-vars-in-style': 'error',
 	'astro/prefer-class-list-directive': 'warn',
@@ -502,7 +525,7 @@ const astroLanguageOptions = {
 	}
 };
 
-const ignores = ['node_modules/**/*', 'dist/**/*', 'public/**/*', 'dev-dist/**/*', 'src/content/**/*', '.astro/**/*', '.wrangler/**/*'];
+const ignores = ['node_modules/**/*', 'dist/**/*', 'public/**/*', 'dev-dist/**/*', 'src/content/**/*', '.astro/**/*', '.wrangler/**/*', 'server/**/*'];
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Plugins} */
 const plugins = {
@@ -516,6 +539,14 @@ export default [
 		name: 'Default TS config',
 		files: ['src/**/*.{js,mjs,cjs,ts,cts,mts}'],
 		ignores,
+		languageOptions,
+		plugins,
+		rules
+	},
+	{
+		name: 'Server TS config',
+		files: ['server/**/*.{js,mjs,cjs,ts,cts,mts}'],
+		ignores: [],
 		languageOptions,
 		plugins,
 		rules

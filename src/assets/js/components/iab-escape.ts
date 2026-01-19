@@ -1,5 +1,5 @@
 // Ref: https://frontendmasters.com/blog/the-pitfalls-of-in-app-browsers/
-import InAppSpy, { SFSVCExperimental } from 'inapp-spy';
+import inAppSpy, { SFSVCExperimental as sFSVCExperimental } from 'inapp-spy';
 import { SiteSettings } from '../settings.ts';
 
 class IabEscape extends HTMLElement implements CustomElement {
@@ -28,10 +28,8 @@ class IabEscape extends HTMLElement implements CustomElement {
 	}
 
 	async connectedCallback() {
-		// eslint-disable-next-line new-cap
-		const { isInApp } = InAppSpy();
-		// eslint-disable-next-line new-cap
-		const isSFSVC = await SFSVCExperimental();
+		const { isInApp } = inAppSpy();
+		const isSFSVC = await sFSVCExperimental();
 
 		const url = window.location.href;
 

@@ -1,17 +1,26 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
+interface HitCountResponse {
+	totalVisitors: number;
+	uniqueVisitors: number;
+	url: string;
+	visitTimeAvgInSec: number;
+}
 
-import type { HitCountResponse, StatusResponse } from '../../../../server/routes/hit-counter.ts';
+interface StatusResponse {
+	success: boolean;
+	message: string;
+}
+
 import { SiteSettings } from '../settings.ts';
 
 const HIT_COUNTER_URL = new URL('/api/counter/', SiteSettings.apiUrl).href;
 
 export class HitCounter extends HTMLElement implements CustomElement {
-	#MAX_LENGTH = 5;
-	#MAX_RETRIES = 3;
+	readonly #MAX_LENGTH = 5;
+	readonly #MAX_RETRIES = 3;
 	// 1 hour
-	#MIN_CHECK_INTERVAL_SEC = 60 * 60;
+	readonly #MIN_CHECK_INTERVAL_SEC = 60 * 60;
 	// 30 minutes
-	#MIN_INCREMENT_TIME_DELTA_SEC = 30 * 60;
+	readonly #MIN_INCREMENT_TIME_DELTA_SEC = 30 * 60;
 
 	#lastChecked = new Date();
 	#visitData: HitCountResponse = {
@@ -21,7 +30,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 		visitTimeAvgInSec: 0
 	};
 	#retryCount = 0;
-	#updateCallbackRef?: number = undefined;
+	#updateCallbackRef?: NodeJS.Timeout | number = undefined;
 
 	async #fetchVisits() {
 		if (this.#retryCount <= this.#MAX_RETRIES) {
@@ -31,7 +40,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 				url.searchParams.set('url', document.location.pathname);
 
 				const response = await fetch(url);
-				const json = await response.json<HitCountResponse>();
+				const json: HitCountResponse = await response.json();
 
 				return json;
 			} catch (err) {
@@ -61,7 +70,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 			url.searchParams.set('url', document.location.pathname);
 
 			const response = await fetch(url, { method: 'PUT' });
-			const json = await response.json<StatusResponse>();
+			const json: StatusResponse = await response.json();
 
 			if (!response.ok || !json.success) {
 				throw new Error(json?.message ?? 'Request failed.');
@@ -104,7 +113,6 @@ export class HitCounter extends HTMLElement implements CustomElement {
 				? this.#MIN_CHECK_INTERVAL_SEC
 				: this.#visitData.visitTimeAvgInSec
 		) * 1000;
-		// @ts-expect-error
 		this.#updateCallbackRef = setInterval(async () => this.#checkVisitUpdates(), intervalTimeMs);
 
 		const savedLastIncrement = localStorage.getItem(`visit-${document.location.pathname}`);

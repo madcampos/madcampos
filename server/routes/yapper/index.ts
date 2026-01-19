@@ -6,7 +6,7 @@ function randomHex() {
 
 export function yapper(request: Request) {
 	const url = new URL(request.url);
-	const [lastPathPart] = url.pathname.replace(/\/$/, '').replace(/^\//, '').split('/').reverse();
+	const [lastPathPart] = url.pathname.replace(/\/$/iu, '').replace(/^\//iu, '').split('/').reverse();
 
 	const entry = data[lastPathPart as keyof typeof data] ?? data[Object.keys(data).at(Math.trunc(Math.random() * 100)) as keyof typeof data];
 

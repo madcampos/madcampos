@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import logoBaseCss from '../../css/components/logo-base.css?raw';
 
 function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
@@ -44,9 +42,11 @@ if (document.querySelector('m-logo')) {
 	const microLogoUrl = createLogoUrl('micro');
 
 	document.querySelectorAll('m-logo dialog').forEach((dialog) => {
+		/* eslint-disable @typescript-eslint/no-non-null-assertion */
 		dialog.querySelector<HTMLAnchorElement>('a[download="full.svg"]')!.href = fullLogoUrl;
 		dialog.querySelector<HTMLAnchorElement>('a[download="mini.svg"]')!.href = miniLogoUrl;
 		dialog.querySelector<HTMLAnchorElement>('a[download="micro.svg"]')!.href = microLogoUrl;
+		/* eslint-enable @typescript-eslint/no-non-null-assertion */
 	});
 
 	document.addEventListener('contextmenu', (evt) => {

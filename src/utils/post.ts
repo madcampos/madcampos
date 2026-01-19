@@ -42,9 +42,7 @@ function sortPostsByDate(first: Post, second: Post, sorting: PostSorting) {
 function getPostDate(post: CollectionEntry<'blog'>) {
 	const postDate = new Date(post.data.createdAt);
 	const year = postDate.getFullYear().toString();
-	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	const month = (postDate.getMonth() + 1).toString().padStart(2, '0');
-	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	const day = postDate.getDate().toString().padStart(2, '0');
 
 	return {

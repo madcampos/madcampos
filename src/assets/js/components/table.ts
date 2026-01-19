@@ -11,8 +11,6 @@ document.querySelectorAll<HTMLTableCellElement>('table thead th[aria-sort]').for
 		</button>
 	`;
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-	// @ts-ignore
 	span.querySelector('label')?.append(...thCell.childNodes);
 	thCell.appendChild(span);
 });

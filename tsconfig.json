@@ -1,6 +1,6 @@
 {
-	"include": ["astro.config.ts", ".astro/**/*", "build/**/*", "src/**/*", "server/**/*"],
-	"exclude": ["node_modules/**/*", "dist/**/*"],
+	"include": ["astro.config.ts", ".astro/**/*", "build/**/*", "src/**/*"],
+	"exclude": ["node_modules/**/*", "dist/**/*", "server/**/*"],
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"allowJs": true,
@@ -17,6 +17,7 @@
 		"incremental": true,
 		"isolatedModules": true,
 		"isolatedDeclarations": false,
+		"jsx": "preserve",
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
 		"module": "ESNext",
 		"moduleResolution": "bundler",

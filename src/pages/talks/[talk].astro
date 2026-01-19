@@ -11,9 +11,6 @@ import Webrings from '../../components/Webrings.astro';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllTalks } from '../../utils/talks.js';
 
-// eslint-disable-next-line @typescript-eslint/no-use-before-define
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 export const getStaticPaths = (async () =>
 	(await listAllTalks()).map((talk) => ({
 		params: {
@@ -21,6 +18,8 @@ export const getStaticPaths = (async () =>
 		},
 		props: talk
 	}))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const {
 	render,
@@ -81,7 +80,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			/>
 			<h1 itemprop="name">
 				{draft && <draft-tag>Draft</draft-tag>}
-				{/* eslint-disable-next-line astro/no-set-html-directive */}
 				<Fragment set:html={inlineMarkdownRender(title)} />
 			</h1>
 		</header>
@@ -108,7 +106,6 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							</strong>
 							<span>
 								<a href={eventUrl} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="url">
-									{/* eslint-disable-next-line astro/no-set-html-directive */}
 									<Fragment set:html={inlineMarkdownRender(event)} />
 								</a>
 							</span>

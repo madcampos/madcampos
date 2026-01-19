@@ -4,7 +4,14 @@ import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
 import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllPosts, MAX_POSTS_PER_PAGE } from '../../utils/post.js';
 
-// eslint-disable-next-line @typescript-eslint/no-use-before-define
+export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {
+	const postsList = await listAllPosts();
+
+	return paginate(postsList, {
+		pageSize: MAX_POSTS_PER_PAGE
+	});
+}) satisfies GetStaticPaths;
+
 type APIProps = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const GET: APIRoute<APIProps> = async ({ props, site }) => {
@@ -77,11 +84,3 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 		}
 	});
 };
-
-export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {
-	const postsList = await listAllPosts();
-
-	return paginate(postsList, {
-		pageSize: MAX_POSTS_PER_PAGE
-	});
-}) satisfies GetStaticPaths;

@@ -41,8 +41,7 @@ export class SiteSettings {
 			localStorage.removeItem(setting);
 		}
 
-		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-		const shouldUpdateUrl = SiteSettings.debug || SiteSettings.updateUrl;
+		const shouldUpdateUrl = (SiteSettings.debug ?? false) || (SiteSettings.updateUrl ?? false);
 		const hasSearchParams = SiteSettings.#searchParams !== undefined && SiteSettings.#searchParams.size > 0;
 
 		if (shouldUpdateUrl && hasSearchParams) {
@@ -93,12 +92,10 @@ export class SiteSettings {
 		SiteSettings.#updateSetting('css', value);
 	}
 
-	// eslint-disable-next-line id-length
 	static get js() {
 		return SiteSettings.#getSetting('js') as SettingEnabledDisabled | undefined;
 	}
 
-	// eslint-disable-next-line id-length
 	static set js(value) {
 		SiteSettings.#updateSetting('js', value);
 	}

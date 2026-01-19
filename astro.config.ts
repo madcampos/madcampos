@@ -63,7 +63,7 @@ export default defineConfig({
 			themes: {
 				light: 'light-plus',
 				dark: 'dark-plus',
-				// @ts-ignore - Astro is fussy about custom theme
+				// @ts-expect-error - Astro is fussy about custom theme
 				contrast: hcShikiTheme
 			},
 			defaultColor: false,

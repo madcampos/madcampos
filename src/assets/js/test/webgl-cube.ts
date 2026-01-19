@@ -1,7 +1,7 @@
 /**
  * Based on: https://www.geeksforgeeks.org/javascript/how-to-load-3d-models-in-webgl/
  */
-/* eslint-disable no-bitwise, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-magic-numbers */
+/* eslint-disable no-bitwise, @typescript-eslint/no-magic-numbers */
 
 import { mat4 } from 'gl-matrix';
 
@@ -195,7 +195,7 @@ function drawScene(glContext: WebGLRenderingContext, programInfo: ProgramInfo, b
 }
 
 function main() {
-	const canvas = document.querySelector<HTMLCanvasElement>('#canvas-3d')!;
+	const canvas = document.querySelector('#canvas-3d') as HTMLCanvasElement;
 	const glContext = (canvas.getContext('webgl') ?? canvas.getContext('experimental-webgl')) as WebGLRenderingContext | null;
 
 	if (!glContext) {
@@ -261,6 +261,7 @@ function main() {
 
 		then = nowPlusEpsilon;
 
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		drawScene(glContext!, programInfo, buffers, deltaTime);
 
 		requestAnimationFrame(render);

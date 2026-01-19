@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/only-throw-error, @typescript-eslint/prefer-nullish-coalescing */
+
 import { env } from 'cloudflare:workers';
 
 const DEFAULT_HEADERS = {
@@ -7,6 +9,13 @@ const DEFAULT_HEADERS = {
 	'Access-Control-Expose-Headers': '*',
 	'Access-Control-Max-Age': '86400'
 };
+
+const MIN_HIT_RESULTS = 2;
+const TOTAL_HIT_RESULTS = 10;
+
+const STATUS_OK = 200;
+const STATUS_BAD_REQUEST = 400;
+const STATUS_CONFLICT = 409;
 
 interface HitRecord {
 	id: number;
@@ -22,23 +31,25 @@ interface CountResult {
 	uniqueVisitors: number;
 }
 
-export interface HitCountResponse extends CountResult {
+interface HitCountResponse extends CountResult {
 	url: string;
 	visitTimeAvgInSec: number;
 }
 
-export interface StatusResponse {
+interface StatusResponse {
 	success: boolean;
 	message: string;
 }
 
 class ErrorResponse extends Response {
-	constructor(message: string, status = 400) {
+	constructor(message: string, status = STATUS_BAD_REQUEST) {
 		super(
-			JSON.stringify({
-				success: false,
-				message
-			}),
+			JSON.stringify(
+				{
+					success: false,
+					message
+				} satisfies StatusResponse
+			),
 			{
 				status,
 				headers: {
@@ -50,7 +61,7 @@ class ErrorResponse extends Response {
 	}
 }
 
-async function generateVisitorId(request: Request<unknown, CfProperties<unknown>>) {
+async function generateVisitorId(request: Request<unknown, CfProperties>) {
 	const data = JSON.stringify({
 		postalCode: request.cf?.postalCode,
 		city: request.cf?.city,
@@ -104,10 +115,10 @@ function parseUrl(request: Request) {
 }
 
 export function visitorCountOptions() {
-	return new Response(null, { status: 200, headers: DEFAULT_HEADERS });
+	return new Response(null, { status: STATUS_OK, headers: DEFAULT_HEADERS });
 }
 
-export async function getVisitorCount(request: Request<unknown, CfProperties<unknown>>, env: Env) {
+export async function getVisitorCount(request: Request<unknown, CfProperties>) {
 	try {
 		const url = parseUrl(request);
 
@@ -124,13 +135,13 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 			FROM hit_counter
 			WHERE url = ?
 			ORDER BY timestamp DESC
-			LIMIT 10
+			LIMIT ${TOTAL_HIT_RESULTS}
 		`).bind(url).all<Pick<HitRecord, 'timestamp'>>();
 
 		let visitTimeAvgInSec = 0;
 
-		if (recentHits.results && recentHits.results.length >= 2) {
-			const timestamps = recentHits.results.map((r) => new Date(r.timestamp)).reverse();
+		if (recentHits.results && recentHits.results.length >= MIN_HIT_RESULTS) {
+			const timestamps = recentHits.results.map((result) => new Date(result.timestamp)).reverse();
 			const intervals: number[] = [];
 
 			for (let i = 1; i < timestamps.length; i++) {
@@ -140,7 +151,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 				intervals.push(curTime - prevTime);
 			}
 
-			const avgMs = intervals.reduce((a, b) => a + b, 0) / intervals.length;
+			const avgMs = intervals.reduce((first, last) => first + last, 0) / intervals.length;
 			visitTimeAvgInSec = Math.round(avgMs / 1000);
 		}
 
@@ -154,6 +165,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 				} satisfies HitCountResponse
 			),
 			{
+				status: STATUS_OK,
 				headers: {
 					...DEFAULT_HEADERS,
 					'Content-Type': 'application/json'
@@ -171,7 +183,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties<unk
 	}
 }
 
-export async function incrementVisitorCount(request: Request<unknown, CfProperties<unknown>>, env: Env) {
+export async function incrementVisitorCount(request: Request<unknown, CfProperties>) {
 	try {
 		const url = parseUrl(request);
 		const visitorId = await generateVisitorId(request);
@@ -190,7 +202,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 		`).bind(url, visitorId).first<Pick<HitRecord, 'id' | 'timestamp'>>();
 
 		if (recentVisit) {
-			return new ErrorResponse(`Only one visit allowd every 30 minutes. Last visit: ${recentVisit.timestamp}`, 409);
+			return new ErrorResponse(`Only one visit allowd every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
 
 		const { success, error } = await env.HitCounterDb.prepare(`
@@ -200,8 +212,8 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 				(?, ?, ?, ?)
 		`).bind(url, visitorId, country, userAgent).run();
 
-		return new Response(JSON.stringify({ success, error }), {
-			status: 200,
+		return new Response(JSON.stringify({ success, message: error ?? '' } satisfies StatusResponse), {
+			status: STATUS_OK,
 			headers: {
 				...DEFAULT_HEADERS,
 				'Content-Type': 'application/json'

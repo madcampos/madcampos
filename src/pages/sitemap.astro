@@ -108,13 +108,11 @@ const blogPages = await listPostsByYearAndMonth();
 					aboutPages.map(({ url, title, description, hidden, wip }) => (
 						<dt data-hidden={hidden ?? null}>
 							<a href={url}>
-								{/* eslint-disable-next-line astro/no-set-html-directive */}
 								<Fragment set:html={inlineMarkdownRender(title)} />
 								{wip && <draft-tag>WIP</draft-tag>}
 							</a>
 						</dt>
 						<dd>
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							<Fragment set:html={inlineMarkdownRender(description)} />
 						</dd>
 					))
@@ -126,13 +124,11 @@ const blogPages = await listPostsByYearAndMonth();
 					coolPages.map(({ url, title, description, hidden, wip }) => (
 						<dt data-hidden={hidden ?? null}>
 							<a href={url}>
-								{/* eslint-disable-next-line astro/no-set-html-directive */}
 								<Fragment set:html={inlineMarkdownRender(title)} />
 								{wip && <draft-tag>WIP</draft-tag>}
 							</a>
 						</dt>
 						<dd>
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							<Fragment set:html={inlineMarkdownRender(description)} />
 						</dd>
 					))
@@ -146,13 +142,11 @@ const blogPages = await listPostsByYearAndMonth();
 					talkPages.map(({ url, title, description, hidden, wip }) => (
 						<dt data-hidden={hidden ?? null}>
 							<a href={url}>
-								{/* eslint-disable-next-line astro/no-set-html-directive */}
 								<Fragment set:html={inlineMarkdownRender(title)} />
 								{wip && <draft-tag>WIP</draft-tag>}
 							</a>
 						</dt>
 						<dd>
-							{/* eslint-disable-next-line astro/no-set-html-directive */}
 							<Fragment set:html={inlineMarkdownRender(description)} />
 						</dd>
 					))
@@ -177,13 +171,11 @@ const blogPages = await listPostsByYearAndMonth();
 													posts.map(({ url, data: { title, summary, draft } }) => (
 														<dt>
 															<a href={`/blog/${url}/`}>
-																{/* eslint-disable-next-line astro/no-set-html-directive */}
 																<Fragment set:html={inlineMarkdownRender(title)} />
 																{draft && <draft-tag>Draft</draft-tag>}
 															</a>
 														</dt>
 														<dd>
-															{/* eslint-disable-next-line astro/no-set-html-directive */}
 															<Fragment set:html={inlineMarkdownRender(summary)} />
 														</dd>
 													))
