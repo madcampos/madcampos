@@ -26,6 +26,7 @@ document.addEventListener('selectionchange', () => {
 		overlay.style.height = `${height}px`;
 		overlay.hidden = false;
 
+		// TODO: complete component
 		// 2. Provide url to share as text fragment
 		// 3. Write to a canvas to generate a nicely formatted quote.
 	} else {
