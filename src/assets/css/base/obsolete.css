@@ -1,1 +1,4 @@
-@layer base { :is(acronym, big, center, dir, font, frame, frameset, marquee, menuitem, nobr, noembed, param, rtc, rb, strike, tt, xmp) { outline: red dotted thick; } }
+@layer base {
+	:is(acronym, big, center, dir, font, frame, frameset, marquee, menuitem, nobr, noembed, param, rtc, rb, strike, tt, xmp) { outline: red dotted thick; }
+	marquee { max-inline-size: 100%; }
+}

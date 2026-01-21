@@ -6,6 +6,7 @@
 		max-inline-size: 100%;
 		margin-inline: auto;
 		max-block-size: 70vh;
+		contain: content;
 
 		&:focus-visible {
 			outline: var(--focus-outline);
