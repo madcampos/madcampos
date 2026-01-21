@@ -33,14 +33,13 @@
 			inline-size: var(--overlay-width);
 			block-size: var(--overlay-height);
 			anchor-name: --share-overlay;
-			outline: solid red thin;
 			pointer-events: none;
 		}
 
 		& > button {
 			position: absolute;
 			position-anchor: --share-overlay;
-			position-area: block-end span-all;
+			position-area: block-start span-all;
 			position-try-fallbacks: flip-block;
 			margin-block-start: var(--size-3);
 
@@ -52,9 +51,13 @@
 		}
 
 		dialog-content canvas {
-			inline-size: 100%;
-			block-size: 100%;
+			inline-size: auto;
+			block-size: 40vh;
 			object-fit: contain;
+			aspect-ratio: 1 / 1;
+			image-rendering: optimizeQuality;
 		}
+
+		footer { justify-content: center; }
 	}
 }
