@@ -2,39 +2,44 @@
 import { Icon } from 'astro-icon/components';
 ---
 <svg-defs aria-hidden="true">
-	<!-- Table icons -->
-	<Icon name="mingcute:line-height-line" id="table-sort-icon-none" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:sort-ascending-line" id="table-sort-icon-descending" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:sort-descending-line" id="table-sort-icon-ascending" aria-hidden="true" role="none" width="1" height="1" />
+	<svg aria-hidden="true" role="none" width="1" height="1">
+		<!-- Table icons -->
+		<Icon name="mingcute:line-height-line" id="table-sort-icon-none" />
+		<Icon name="mingcute:sort-ascending-line" id="table-sort-icon-descending" />
+		<Icon name="mingcute:sort-descending-line" id="table-sort-icon-ascending" />
 
-	<!-- Image lightbox icons -->
-	<Icon name="mingcute:information-line" id="img-lightbox-icon-info" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:external-link-line" id="img-lightbox-icon-open" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:close-line" id="img-lightbox-icon-close" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:refresh-anticlockwise-1-line" id="img-lightbox-icon-reset-zoom" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:fullscreen-line" id="img-lightbox-icon-enter-fullscreen" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:fullscreen-exit-line" id="img-lightbox-icon-exit-fullscreen" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:download-2-line" id="img-lightbox-icon-download" aria-hidden="true" role="none" width="1" height="1" />
+		<!-- Image lightbox icons -->
+		<Icon name="mingcute:information-line" id="img-lightbox-icon-info" />
+		<Icon name="mingcute:external-link-line" id="img-lightbox-icon-open" />
+		<Icon name="mingcute:close-line" id="img-lightbox-icon-close" />
+		<Icon name="mingcute:refresh-anticlockwise-1-line" id="img-lightbox-icon-reset-zoom" />
+		<Icon name="mingcute:fullscreen-line" id="img-lightbox-icon-enter-fullscreen" />
+		<Icon name="mingcute:fullscreen-exit-line" id="img-lightbox-icon-exit-fullscreen" />
+		<Icon name="mingcute:download-2-line" id="img-lightbox-icon-download" />
 
-	<!-- Share options icons -->
-	<Icon name="mingcute:share-forward-line" id="share-icon-share" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:copy-line" id="share-icon-copy" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:mail-send-line" id="share-icon-email" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:message-4-line" id="share-icon-sms" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:print-line" id="share-icon-print" aria-hidden="true" role="none" width="1" height="1" />
+		<!-- Share options icons -->
+		<Icon name="mingcute:share-forward-line" id="share-icon-share" />
+		<Icon name="mingcute:copy-line" id="share-icon-copy" />
+		<Icon name="mingcute:mail-send-line" id="share-icon-email" />
+		<Icon name="mingcute:message-4-line" id="share-icon-sms" />
+		<Icon name="mingcute:print-line" id="share-icon-print" />
+		<svg viewBox="0 0 24 24" id="share-icon-close">
+			<use href="#img-lightbox-icon-close" width="24" height="24" />
+		</svg>
 
-	<!-- Theme switcher icons -->
-	<Icon name="mingcute:palette-3-line" id="theme-switcher-icon" aria-hidden="true" role="none" width="1" height="1" />
-	<Icon name="mingcute:alert-line" id="theme-switcher-icon-warning" aria-hidden="true" role="none" width="1" height="1" />
-	<svg viewBox="0 0 24 24" id="theme-switcher-icon-close" aria-hidden="true" role="none" width="1" height="1">
-		<use href="#img-lightbox-icon-close" width="24" height="24" />
+		<!-- Theme switcher icons -->
+		<Icon name="mingcute:palette-3-line" id="theme-switcher-icon" />
+		<Icon name="mingcute:alert-line" id="theme-switcher-icon-warning" />
+		<svg viewBox="0 0 24 24" id="theme-switcher-icon-close">
+			<use href="#img-lightbox-icon-close" width="24" height="24" />
+		</svg>
+
+		<!-- Footnotes icons -->
+		<Icon name="mingcute:arrow-to-up-line" id="footnote-icon-back" />
+
+		<!-- Link icons -->
+		<Icon name="mingcute:external-link-line" id="link-icon-external" />
 	</svg>
-
-	<!-- Footnotes icons -->
-	<Icon name="mingcute:arrow-to-up-line" id="footnote-icon-back" aria-hidden="true" role="none" width="1" height="1" />
-
-	<!-- Link icons -->
-	<Icon name="mingcute:external-link-line" id="link-icon-external" aria-hidden="true" role="none" width="1" height="1" />
 
 	<!-- Logo Effects -->
 	<svg viewBox="0 0 100 100" aria-hidden="true" role="none" width="1" height="1">
