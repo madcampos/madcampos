@@ -1,0 +1,59 @@
+@property --overlay-top {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --overlay-left {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --overlay-width {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --overlay-height {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@layer components {
+	inline-share {
+		anchor-scope: --share-overlay;
+
+		share-overlay {
+			position: absolute;
+			inset-block-start: var(--overlay-top);
+			inset-inline-start: var(--overlay-left);
+			inline-size: var(--overlay-width);
+			block-size: var(--overlay-height);
+			anchor-name: --share-overlay;
+			outline: solid red thin;
+			pointer-events: none;
+		}
+
+		& > button {
+			position: absolute;
+			position-anchor: --share-overlay;
+			position-area: block-end span-all;
+			margin-block-start: var(--size-3);
+
+			svg {
+				block-size: 100%;
+				inline-size: auto;
+				margin-inline-end: var(--size-1);
+			}
+		}
+
+		dialog-content canvas {
+			inline-size: 100%;
+			block-size: 100%;
+			object-fit: contain;
+		}
+	}
+}
