@@ -50,12 +50,19 @@
 			}
 		}
 
-		dialog-content canvas {
-			inline-size: auto;
-			block-size: 40vh;
-			object-fit: contain;
-			aspect-ratio: 1 / 1;
-			image-rendering: optimizeQuality;
+		dialog-content {
+			:is(canvas, svg) {
+				inline-size: auto;
+				block-size: 40vh;
+				object-fit: contain;
+				aspect-ratio: 1 / 1;
+				image-rendering: optimizeQuality;
+
+				&[hidden] { display: none; }
+			}
+
+			/* INFO: remove the inheriting font famliy and set the correct one here. */
+			svg text { font-family: 'Mecano-Light', 'Mecano', monospace; }
 		}
 
 		footer { justify-content: center; }

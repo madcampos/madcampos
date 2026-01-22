@@ -1,20 +1,9 @@
 import { SiteSettings } from '../settings.ts';
 
-interface DrawTextFontStyle {
-	color?: string;
-	alignment?: CanvasTextAlign;
-	fontFamily?: string;
-	style?: 'bold' | 'italic' | 'normal';
-	size?: number;
-}
-
 export class InlineShare extends HTMLElement implements CustomElement {
 	readonly #MIN_WORDS_FOR_SHARING = 3;
 	readonly #MAX_WORDS_FOR_SHARING = 30;
-
-	// TODO: calculate sizes as percentage to the total size
-	readonly #TEXT_BOX_WIDTH = 950;
-	readonly #TEXT_BOX_TOP_OFFSET = 120;
+	readonly #TEXT_BOX_WIDTH = 700;
 
 	#id: string;
 
@@ -22,6 +11,10 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	#overlay: HTMLElement;
 	#canvas: HTMLCanvasElement;
 	#canvasContext: CanvasRenderingContext2D;
+	#svgQuoteText: SVGTextElement;
+	#svgTitleText: SVGTextElement;
+	#svgTestText: SVGTextElement;
+	#quoteSvg: SVGElement;
 
 	constructor() {
 		super();
@@ -48,28 +41,71 @@ export class InlineShare extends HTMLElement implements CustomElement {
 					</button>
 				</header>
 				<dialog-content>
-					<canvas></canvas>
+					<canvas hidden></canvas>
+					<svg
+						viewBox="0 0 1024 1024"
+						class="inline-share-quote-svg"
+						width="1024"
+						height="1024"
+					>
+						<defs>
+							<linearGradient id="bg-gradient-${this.#id}" x1="100%" x2="80%" y2="100%">
+								<stop offset="50%" stop-color="#0080ff" />
+								<stop offset="100%" stop-color="#ff8000" />
+							</linearGradient>
+						</defs>
+						<rect x="0" y="0" width="100%" height="100%" rx="20" fill="url(#bg-gradient-${this.#id})" />
+						<text fill="transparent" class="inline-share-test-text"></text>
+						<text
+							x="50%"
+							y="10%"
+							text-anchor="middle"
+							font-family="'Mecano', monospace"
+							font-size="45"
+							fill="white"
+							class="inline-share-quote-text"
+						></text>
+						<text
+							x="10%"
+							y="80%"
+							text-anchor="start"
+							font-family="'Mecano', monospace"
+							font-size="35"
+							font-style="italic"
+							fill="color-mix(in srgb, white, transparent 20%)"
+						>&mdash; Marco Campos</text>
+						<text
+							x="10%"
+							y="82%"
+							text-anchor="start"
+							font-family="'Mecano', monospace"
+							font-size="25"
+							font-style="italic"
+							fill="color-mix(in srgb, white, transparent 20%)"
+							class="inline-share-title-text"
+						></text>
+					</svg>
 				</dialog-content>
 				<footer>
-					<button type="button" class="share-os-link">
-						<sr-only>Share Link to Quote</sr-only>
+					<button type="button" class="inline-share-os">
+						<sr-only>Share Quote</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 							<use href="#share-icon-share" width="24" height="24" />
 						</svg>
 					</button>
-					<button type="button" class="share-copy">
+					<button type="button" class="inline-share-copy">
 						<sr-only>Copy Link to Quote</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 							<use href="#share-icon-copy" width="24" height="24" />
 						</svg>
 					</button>
-					<button type="button" class="share-email">
+					<button type="button" class="inline-share-email">
 						<sr-only>Share via Email</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 							<use href="#share-icon-email" width="24" height="24" />
 						</svg>
 					</button>
-					<button type="button" class="share-download">
+					<button type="button" class="inline-share-download">
 						<sr-only>Download quote</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 							<use href="#share-icon-download" width="24" height="24" />
@@ -79,17 +115,24 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			</dialog>
 		`;
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		/* eslint-disable @typescript-eslint/no-non-null-assertion */
 		this.#overlay = this.querySelector('share-overlay')!;
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.#canvas = this.querySelector('canvas')!;
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.#canvasContext = this.#canvas.getContext('2d')!;
 
-		this.#canvasContext.imageSmoothingEnabled = true;
-		this.#canvasContext.imageSmoothingQuality = 'high';
+		this.#quoteSvg = this.querySelector('svg.inline-share-quote-svg')!;
+		this.#svgQuoteText = this.querySelector('text.inline-share-quote-text')!;
+		this.#svgTitleText = this.querySelector('text.inline-share-title-text')!;
+		this.#svgTestText = this.querySelector('text.inline-share-test-text')!;
+		/* eslint-enable @typescript-eslint/no-non-null-assertion */
 
-		this.#resizeCanvas(1024, 1024);
+		if (!('share' in navigator)) {
+			this.querySelector('button.inline-share-os')?.toggleAttribute('hidden', true);
+		}
+
+		if (!('fragmentDirective' in document)) {
+			this.querySelector('button.inline-share-copy')?.toggleAttribute('hidden', true);
+		}
 	}
 
 	#resizeCanvas(width: number, height: number) {
@@ -97,26 +140,18 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		this.#canvas.height = height * window.devicePixelRatio;
 	}
 
-	#drawBackground() {
-		const gradient = this.#canvasContext.createLinearGradient(0, 0, this.#canvas.width, this.#canvas.height);
-		gradient.addColorStop(0, '#0080ff');
-		gradient.addColorStop(1, 'black');
-
-		this.#canvasContext.fillStyle = gradient;
-		this.#canvasContext.fillRect(0, 0, this.#canvas.width, this.#canvas.height);
-	}
-
-	#drawText(
-		text: string,
-		x = this.#canvas.width / 2,
-		y = this.#TEXT_BOX_TOP_OFFSET,
-		{ fontFamily = "Mecano-Light', 'Mecano', monospace", size = 50, alignment = 'center', color = 'white', style = 'italic' }: DrawTextFontStyle = {}
-	) {
-		this.#canvasContext.font = `${style} ${size}px ${fontFamily}`;
-		this.#canvasContext.textAlign = alignment;
-		this.#canvasContext.fillStyle = color;
-
+	#drawText(text: string, textElement: SVGTextElement) {
 		const segments = Array.from(this.#segmenter.segment(text));
+
+		this.#svgTestText.textContent = '';
+		textElement.textContent = '';
+
+		this.#svgTestText.setAttribute('text-anchor', textElement.getAttribute('text-anchor') ?? 'start');
+		this.#svgTestText.setAttribute('font-family', textElement.getAttribute('font-family') ?? 'sans-serif');
+		this.#svgTestText.setAttribute('font-size', textElement.getAttribute('font-size') ?? '45');
+		this.#svgTestText.setAttribute('font-weight', textElement.getAttribute('font-weight') ?? 'normal');
+		this.#svgTestText.setAttribute('font-style', textElement.getAttribute('font-style') ?? 'normal');
+
 		const lines: string[] = [];
 		let currentLine = '';
 		let currentWidth = 0;
@@ -137,7 +172,9 @@ export class InlineShare extends HTMLElement implements CustomElement {
 				currentLine = '';
 				currentWidth = 0;
 			} else {
-				const wordWidth = this.#canvasContext.measureText(segment.segment).width;
+				this.#svgTestText.textContent = segment.segment;
+
+				const wordWidth = this.#svgTestText.getComputedTextLength();
 
 				if (currentWidth + wordWidth >= this.#TEXT_BOX_WIDTH) {
 					lines.push(currentLine.trim());
@@ -154,24 +191,30 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			lines.push(currentLine.trim());
 		}
 
-		const { actualBoundingBoxAscent: ascent, actualBoundingBoxDescent: descent } = this.#canvasContext.measureText('EM');
-		const lineHeight = ascent + descent;
-
-		let currentY = y;
+		const x = textElement.getAttribute('x') ?? '0';
 		for (const line of lines) {
-			this.#canvasContext.fillText(line, x, currentY);
-			currentY += lineHeight;
+			textElement.insertAdjacentHTML('beforeend', `<tspan dy="1lh" x="${x}">${line}</tspan>`);
 		}
 	}
 
 	#renderToCanvas(text: string) {
-		this.#drawBackground();
+		this.#quoteSvg.toggleAttribute('hidden', false);
+		this.#canvas.hidden = true;
 
-		// TODO: improve styling.
-		this.#drawText('Marco Campos', this.#canvas.width - 10, this.#canvas.height - 50, { color: 'red', alignment: 'right', size: 20 });
-		this.#drawText(document.title, this.#canvas.width - 10, this.#canvas.height - 20, { color: 'red', alignment: 'right', size: 20 });
+		this.#drawText(text, this.#svgQuoteText);
+		this.#drawText(document.querySelector('h1')?.textContent ?? '', this.#svgTitleText);
 
-		this.#drawText(text);
+		const img = new Image();
+
+		img.onload = () => {
+			this.#canvasContext.drawImage(img, 0, 0, this.#canvas.width, this.#canvas.height);
+			this.#quoteSvg.toggleAttribute('hidden', true);
+			this.#canvas.hidden = false;
+		};
+
+		const svgData = new XMLSerializer().serializeToString(this.#quoteSvg);
+		const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+		img.src = URL.createObjectURL(svgBlob);
 	}
 
 	#resizeOverlay(range: Range) {
@@ -217,9 +260,9 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		if (Array.from(this.#segmenter.segment(selection.toString())).length >= this.#MIN_WORDS_FOR_SHARING) {
+		const words = Array.from(this.#segmenter.segment(range.toString())).filter(({ isWordLike }) => isWordLike);
+		if (words.length >= this.#MIN_WORDS_FOR_SHARING) {
 			this.#resizeOverlay(range);
-			this.#renderToCanvas(selection.toString());
 
 			this.hidden = false;
 		} else {
@@ -227,22 +270,132 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		}
 	}
 
+	#handleDialogToggle(evt: ToggleEvent) {
+		if (evt.newState === 'open') {
+			const selection = document.getSelection();
+			const range = selection?.getRangeAt(0);
+
+			this.#canvasContext.imageSmoothingEnabled = true;
+			this.#canvasContext.imageSmoothingQuality = 'high';
+
+			this.#resizeCanvas(1024, 1024);
+
+			this.#renderToCanvas(range?.toString() ?? '');
+		}
+	}
+
+	async #getCanvasBlob() {
+		return new Promise<Blob>((resolve, reject) => {
+			this.#canvas.toBlob(
+				(blob) => {
+					if (!blob) {
+						reject(new Error('Unable to create blob from canvas'));
+						return;
+					}
+
+					resolve(blob);
+				},
+				'image/jpeg',
+				1
+			);
+		});
+	}
+
+	async #handleButtonClick(evt: MouseEvent) {
+		const target = evt.target as HTMLElement;
+
+		if (!target.matches('button')) {
+			return;
+		}
+
+		const url = window.location.href;
+		const title = document.querySelector<HTMLElement>('h1')?.innerText ?? '';
+		const description = document.getSelection()?.getRangeAt(0).toString() ?? document.querySelector<HTMLElement>('meta[name="description"]')?.getAttribute('content') ??
+			'Check out this page!';
+		const file = new File([await this.#getCanvasBlob()], 'quote.jpg', { type: 'image/jpeg' });
+
+		switch (target.className) {
+			case 'inline-share-os':
+				await navigator.share({
+					url,
+					title,
+					text: description,
+					files: [file]
+				});
+				break;
+			case 'inline-share-copy':
+				{
+					const selection = document.getSelection()?.getRangeAt(0).toString();
+
+					if (selection) {
+						const textUrl = new URL(document.location.href);
+						const segments = Array.from(this.#segmenter.segment(selection));
+						const textStart = segments.slice(0, 3);
+						const textEnd = segments.slice(-3);
+
+						debugger;
+
+						await navigator.clipboard.writeText(textUrl.href);
+					}
+				}
+				break;
+			case 'inline-share-email':
+				{
+					const subject = encodeURIComponent(title);
+					const body = encodeURIComponent(`${description}\n${url}`);
+
+					window.open(`mailto:?subject=${subject}&body=${body}`);
+				}
+				break;
+			case 'inline-share-download':
+				{
+					const link = document.createElement('a');
+
+					link.href = URL.createObjectURL(file);
+					link.download = 'quote.jpg';
+
+					document.body.appendChild(link);
+					link.click();
+
+					link.remove();
+				}
+				break;
+			default:
+		}
+	}
+
 	handleEvent(evt: Event) {
-		// TODO: add button click events
 		if (evt.type === 'selectionchange') {
 			this.#handleSelectionChange();
+			return;
+		}
+
+		if (evt instanceof ToggleEvent) {
+			this.#handleDialogToggle(evt);
+			return;
+		}
+
+		if (evt instanceof MouseEvent) {
+			void this.#handleButtonClick(evt);
 		}
 	}
 
 	connectedCallback() {
 		document.addEventListener('selectionchange', this);
+		this.querySelector('dialog')?.addEventListener('toggle', this);
+		this.addEventListener('click', this);
 	}
 
 	disconnectedCallback() {
 		document.removeEventListener('selectionchange', this);
+		this.querySelector('dialog')?.removeEventListener('toggle', this);
+		this.addEventListener('click', this);
 	}
 }
 
-if (SiteSettings.js !== 'disabled' && !customElements.get('inline-share')) {
+const isCssAnchorSupported = CSS.supports('anchor-name: --share-overlay');
+const isJsenabled = SiteSettings.js !== 'disabled';
+const isComponentDefined = Boolean(customElements.get('inline-share'));
+if (isCssAnchorSupported && isJsenabled && !isComponentDefined) {
 	customElements.define('inline-share', InlineShare);
 }

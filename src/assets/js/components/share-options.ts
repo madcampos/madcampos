@@ -39,6 +39,10 @@ class ShareOptions extends HTMLElement implements CustomElement {
 				</button>
 			</aside>
 		`;
+
+		if (!('share' in navigator)) {
+			this.querySelector('button.share-os-link')?.toggleAttribute('hidden', true);
+		}
 	}
 
 	connectedCallback() {
