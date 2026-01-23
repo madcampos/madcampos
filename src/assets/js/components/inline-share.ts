@@ -4,6 +4,9 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	readonly #MIN_WORDS_FOR_SHARING = 3;
 	readonly #MAX_WORDS_FOR_SHARING = 30;
 	readonly #TEXT_BOX_WIDTH = 700;
+	readonly #WORDS_FOR_FRAGMENT_PART = 3;
+	readonly #MIN_WORDS_FOR_FRAGMENT_SPLIT = 45;
+	readonly #MAX_WORDS_FOR_FRAGMENT_INFIX = 15;
 
 	#id: string;
 
@@ -301,6 +304,49 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		});
 	}
 
+	#generateTextFragmentFromSelection(range: Range) {
+		const textUrl = new URL(document.location.href);
+		const selectionText = range.toString();
+		const segments = Array.from(this.#segmenter.segment(selectionText)).map(({ segment }) => segment);
+
+		if (segments.length <= this.#MAX_WORDS_FOR_FRAGMENT_INFIX) {
+			const ancestor = range.commonAncestorContainer;
+			const fullText = ancestor.textContent ?? '';
+			const selectionStart = fullText.indexOf(selectionText);
+			const textBefore = fullText.substring(0, selectionStart);
+			const textAfter = fullText.substring(selectionStart + selectionText.length);
+
+			const prefixSegments = Array.from(this.#segmenter.segment(textBefore))
+				.slice(-this.#WORDS_FOR_FRAGMENT_PART)
+				.map(({ segment }) => segment);
+
+			const suffixSegments = Array.from(this.#segmenter.segment(textAfter))
+				.slice(0, this.#WORDS_FOR_FRAGMENT_PART)
+				.map(({ segment }) => segment);
+
+			const encodedPrefix = prefixSegments.length > 0
+				? `${encodeURIComponent(prefixSegments.join('').trim()).replaceAll('-', '%2D')}-,`
+				: '';
+			const encodedSuffix = suffixSegments.length > 0
+				? `,-${encodeURIComponent(suffixSegments.join('').trim()).replaceAll('-', '%2D')}`
+				: '';
+			const encodedSegments = encodeURIComponent(segments.join('').trim()).replaceAll('-', '%2D');
+			textUrl.hash = `#:~:text=${encodedPrefix}${encodedSegments}${encodedSuffix}`;
+		} else if (segments.length >= this.#MIN_WORDS_FOR_FRAGMENT_SPLIT) {
+			const startSegments = segments.slice(0, this.#WORDS_FOR_FRAGMENT_PART);
+			const endSegments = segments.slice(-this.#WORDS_FOR_FRAGMENT_PART);
+			const encodedStart = encodeURIComponent(startSegments.join('').trim()).replaceAll('-', '%2D');
+			const encodedEnd = encodeURIComponent(endSegments.join('').trim()).replaceAll('-', '%2D');
+
+			textUrl.hash = `#:~:text=${encodedStart},${encodedEnd}`;
+		} else {
+			const encodedSegments = encodeURIComponent(segments.join('').trim()).replaceAll('-', '%2D');
+			textUrl.hash = `#:~:text=${encodedSegments}`;
+		}
+
+		return textUrl;
+	}
+
 	async #handleButtonClick(evt: MouseEvent) {
 		const target = evt.target as HTMLElement;
 
@@ -325,16 +371,10 @@ export class InlineShare extends HTMLElement implements CustomElement {
 				break;
 			case 'inline-share-copy':
 				{
-					const selection = document.getSelection()?.getRangeAt(0).toString();
+					const selection = document.getSelection()?.getRangeAt(0);
 
 					if (selection) {
-						const textUrl = new URL(document.location.href);
-						const segments = Array.from(this.#segmenter.segment(selection));
-						const textStart = segments.slice(0, 3);
-						const textEnd = segments.slice(-3);
-
-						debugger;
-
+						const textUrl = this.#generateTextFragmentFromSelection(selection);
 						await navigator.clipboard.writeText(textUrl.href);
 					}
 				}
