@@ -202,6 +202,8 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 		`).bind(url, visitorId).first<Pick<HitRecord, 'id' | 'timestamp'>>();
 
 		if (recentVisit) {
+			// eslint-disable-next-line no-console
+			console.log({ visitorId, recentVisit });
 			return new ErrorResponse(`Only one visit allowd every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
 
@@ -211,6 +213,9 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 			VALUES
 				(?, ?, ?, ?)
 		`).bind(url, visitorId, country, userAgent).run();
+
+		// eslint-disable-next-line no-console
+		console.log({ visitorId });
 
 		return new Response(JSON.stringify({ success, message: error ?? '+1' } satisfies StatusResponse), {
 			status: STATUS_OK,
