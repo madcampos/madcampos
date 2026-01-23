@@ -7,7 +7,7 @@ import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
 
-const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'UTC' });
 const changelogs = await listAllChangelogs();
 const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) => {
 	const { Content } = await changelog.render();

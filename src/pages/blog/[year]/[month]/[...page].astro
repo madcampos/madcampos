@@ -31,10 +31,10 @@ const {
 	size
 } = Astro.props.page;
 const { year, month } = Astro.params;
-const formatter = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' });
+const formatter = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 <BlogPosts
-	title={`Posts from: "${formatter.format(new Date(`${year}-${month}-01T00:00:00`))}"`}
+	title={`Posts from: "${formatter.format(new Date(`${year}-${month}-01T00:00:00Z`))}"`}
 	baseUrl={`/blog/${year}/${month}/`}
 	{posts}
 	{currentPage}

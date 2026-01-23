@@ -2,7 +2,7 @@ import type { APIRoute, GetStaticPathsResult } from 'astro';
 import { listAllPosts } from '../../../../../utils/post.ts';
 
 export const GET: APIRoute<Awaited<ReturnType<typeof listAllPosts>>[number]> = ({ props }) => {
-	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
+	const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long', timeZone: 'UTC' });
 	const text = `${props.data.title}
 ${formatter.format(props.data.createdAt)}
 

@@ -75,7 +75,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		}
 
 		const baselineDate = data?.status?.baseline_high_date ?? data?.status?.baseline_low_date;
-		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '&mdash;';
 
 		this.innerHTML = `

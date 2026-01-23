@@ -43,7 +43,7 @@ const {
 	}
 } = Astro.props;
 const { Content } = await render();
-const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long' });
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'long', timeZone: 'UTC' });
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/Event">

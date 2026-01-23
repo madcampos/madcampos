@@ -15,7 +15,7 @@ import Webrings from '../Webrings.astro';
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const project = (await listAllProjects())[0]!;
 const ProjectContent = (await project.render()).Content;
-const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
+const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' });
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const post = (await listAllPosts())[0]!;
