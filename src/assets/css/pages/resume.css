@@ -10,6 +10,7 @@
 		align-items: start;
 		color: var(--secondary-color);
 		margin-block-start: var(--size-7);
+		text-decoration: none;
 
 		&:has(svg[data-icon]) {
 			grid-template-columns: auto var(--size-1) 1fr var(--size-7) auto;
@@ -39,6 +40,7 @@
 			grid-area: subtitle;
 			font-family: var(--headers-font-family);
 			font-size: var(--font-size-1);
+			color: var(--theme-color);
 
 			small {
 				font-size: var(--font-size-0);
@@ -59,6 +61,30 @@
 			grid-area: location;
 			font-size: var(--font-size-0);
 			text-align: end;
+		}
+
+		@media (max-width: 50rem) {
+			grid-template-columns: auto;
+			grid-template-rows: repeat(2, auto) var(--size-3) repeat(2, auto);
+			grid-template-areas:
+				'title'
+				'subtitle'
+				'.'
+				'date'
+				'location';
+
+			&:has(svg[data-icon]) {
+				grid-template-columns: auto var(--size-1) auto;
+				grid-template-rows: repeat(2, auto) var(--size-3) repeat(2, auto);
+				grid-template-areas:
+					'icon . title'
+					'subtitle subtitle subtitle'
+					'. . .'
+					'date date date'
+					'location location location';
+			}
+
+			:is(entry-date, entry-location) { text-align: start; }
 		}
 	}
 
@@ -87,6 +113,7 @@
 		font-family: var(--code-font-family);
 
 		h1 { font-size: var(--font-size-8); }
+		p { padding-inline: var(--size-2); }
 	}
 
 	hr {
@@ -107,9 +134,12 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		justify-content: center;
 		gap: var(--size-3);
 		list-style: none;
-		padding-inline-start: 0;
+		padding-inline: var(--size-4);
+
+		@media (max-width: 30rem) { flex-direction: column; }
 
 		@media print {
 			display: block;

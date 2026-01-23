@@ -43,11 +43,21 @@
 	],
 	"work": [
 		{
+			"name": "Saris AI",
+			"position": "Staff Developer — Full Stack",
+			"description": "AI FinTech",
+			"location": "Toronto, Canada (Remote)",
+			"startDate": "2026-01",
+			"summary": "Work creating automation tools for financial institutions to improve backoffice speed.",
+			"highlights": []
+		},
+		{
 			"name": "Tenstorrent",
 			"position": "Staff Developer — Full Stack",
 			"description": "AI Hardware Manufacturer",
 			"location": "Toronto, Canada (Hybrid)",
 			"startDate": "2024-01",
+			"endDate": "2026-01",
 			"summary": "Worked on data visualization tools for analyzing large performance datasets.",
 			"highlights": [
 				"Improved performance of data heavy react app from 1 minute to under 3 seconds.",

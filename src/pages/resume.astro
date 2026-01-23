@@ -5,7 +5,7 @@ import type { Icon as IconName } from 'virtual:astro-icon';
 import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
 import HtmlHead from '../components/HtmlHead.astro';
 
-const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric' });
+const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 const langNameFormatter = new Intl.DisplayNames('en-CA', { type: 'language' });
 const collator = new Intl.Collator('en', { usage: 'sort' });
 const projectsMap: Record<string, IconName> = {
