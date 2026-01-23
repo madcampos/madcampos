@@ -204,11 +204,8 @@ const post = (await listAllPosts())[0]!;
 	</section>
 
 	<section>
-		<h3>In-App Browser Escape</h3>
-
-		<p>For various reasons, In-App Browsers are a curse. This JS componet loads when you are in one of those.</p>
-		<p>To test the component click on the link below:</p>
-		<p><a href="/styleguide/?iabEscape=true">Reload Page with IAB debugging enabled</a></p>
+		<h3>Hit Counter</h3>
+		<hit-counter></hit-counter>
 	</section>
 
 	<section>
@@ -224,6 +221,41 @@ const post = (await listAllPosts())[0]!;
 				width="512"
 			/>
 		</img-lightbox>
+	</section>
+
+	<section>
+		<h3>Inline Share</h3>
+
+		<rendered-content>
+			<p>Select this text to show the inline share options.</p>
+			<blockquote>
+				<p>
+					Moonlit whispers drift across a stage where kings pace in troubled circles, pondering crowns that weigh heavier than iron. Ghosts linger just beyond the
+					torchlight, offering riddles no mortal truly wishes to solve. Lovers trade vows beneath tangled branches, certain their passion can outwit fate, unaware that
+					destiny has already sharpened its quill.
+				</p>
+				<p>
+					In distant courts, fools speak truths disguised as jests, while courtiers bow so deeply they forget the shape of their own spines. Storms gather on the horizon,
+					muttering in thunderous iambs, promising to scatter illusions like leaves in a winter gale. Somewhere, a schemer plots with a smile too polished to trust,
+					convinced that ambition alone can bend the world to his will.
+				</p>
+				<p>
+					Yet amid the chaos, a quiet truth persists: every heart, whether noble or common, beats with the same fragile hope that tomorrow’s tale might end in harmony
+					rather than tragedy.
+				</p>
+				<p>If you want a version that leans more comedic, more tragic, more mystical, or more Macbeth‑y, I can conjure another.</p>
+			</blockquote>
+
+			<inline-share></inline-share>
+		</rendered-content>
+	</section>
+
+	<section>
+		<h3>In-App Browser Escape</h3>
+
+		<p>For various reasons, In-App Browsers are a curse. This JS componet loads when you are in one of those.</p>
+		<p>To test the component click on the link below:</p>
+		<p><a href="/styleguide/?iabEscape=true">Reload Page with IAB debugging enabled</a></p>
 	</section>
 
 	<section>
