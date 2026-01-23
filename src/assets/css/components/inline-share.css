@@ -23,7 +23,9 @@
 }
 
 @layer components {
-	inline-share {
+	inline-share:not(:defined) { display: none; }
+
+	inline-share:defined {
 		anchor-scope: --share-overlay;
 
 		share-overlay {
@@ -57,8 +59,14 @@
 				object-fit: contain;
 				aspect-ratio: 1 / 1;
 				image-rendering: optimizeQuality;
+				border: none;
 
 				&[hidden] { display: none; }
+
+				@media (max-width: 40rem) {
+					inline-size: 100%;
+					block-size: auto;
+				}
 			}
 
 			/* INFO: remove the inheriting font famliy and set the correct one here. */

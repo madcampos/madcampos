@@ -1,19 +1,4 @@
-document.querySelectorAll<HTMLTableCellElement>('table thead th[aria-sort]').forEach((thCell) => {
-	const span = document.createElement('span');
-	const id = Math.trunc(Math.random() * 1000000).toString(16);
-
-	span.innerHTML = `
-		<label for="sort-button-${id}" id="sort-button-${id}-label"></label>
-		<button type="button" id="sort-button-${id}">
-			<sr-only>Sort table by</sr-only>
-			<sr-only aria-labelledby="sort-button-${id}-label"></sr-only>
-			<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon><use href="#table-sort-icon-none" width="24" height="24" /></svg>
-		</button>
-	`;
-
-	span.querySelector('label')?.append(...thCell.childNodes);
-	thCell.appendChild(span);
-});
+import { SiteSettings } from '../settings.ts';
 
 function sortTable(button: HTMLButtonElement) {
 	const tableBody = button.closest<HTMLTableSectionElement>('table')?.querySelector('tbody');
@@ -55,12 +40,31 @@ function sortTable(button: HTMLButtonElement) {
 	}).forEach((row) => tableBody?.appendChild(row));
 }
 
-document.body.addEventListener('click', (evt) => {
-	const target = evt.target as HTMLButtonElement;
+if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
+	document.querySelectorAll<HTMLTableCellElement>('table thead th[aria-sort]').forEach((thCell) => {
+		const span = document.createElement('span');
+		const id = Math.trunc(Math.random() * 1000000).toString(16);
 
-	if (!target.matches('table thead button')) {
-		return;
-	}
+		span.innerHTML = `
+			<label for="sort-button-${id}" id="sort-button-${id}-label"></label>
+			<button type="button" id="sort-button-${id}">
+				<sr-only>Sort table by</sr-only>
+				<sr-only aria-labelledby="sort-button-${id}-label"></sr-only>
+				<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon><use href="#table-sort-icon-none" width="24" height="24" /></svg>
+			</button>
+		`;
 
-	sortTable(target);
-});
+		span.querySelector('label')?.append(...thCell.childNodes);
+		thCell.appendChild(span);
+	});
+
+	document.body.addEventListener('click', (evt) => {
+		const target = evt.target as HTMLButtonElement;
+
+		if (!target.matches('table thead th[aria-sort] button')) {
+			return;
+		}
+
+		sortTable(target);
+	});
+}

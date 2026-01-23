@@ -230,6 +230,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		this.#overlay.style.setProperty('--overlay-height', `${height}px`);
 	}
 
+	// eslint-disable-next-line complexity
 	#handleSelectionChange() {
 		if (this.querySelector('dialog')?.matches(':popover-open')) {
 			return;
@@ -237,22 +238,25 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 		this.hidden = true;
 
-		const selection = document.getSelection();
+		const range = document.getSelection()?.getRangeAt(0);
 
-		if (!selection) {
+		if (!range) {
 			return;
 		}
 
-		if (selection.rangeCount < 1) {
-			return;
-		}
-
-		const range = selection.getRangeAt(0);
 		const ancestor = range.commonAncestorContainer;
 		const isRenderedContent = (ancestor as Element)?.matches?.('rendered-content') ?? false;
 		const isInsideRenderedContent = Boolean(ancestor.parentElement?.closest('rendered-content'));
 
 		if (!isRenderedContent && !isInsideRenderedContent) {
+			return;
+		}
+
+		if (isRenderedContent && ancestor !== this.closest('rendered-content')) {
+			return;
+		}
+
+		if (isInsideRenderedContent && ancestor.parentElement?.closest('rendered-content') !== this.closest('rendered-content')) {
 			return;
 		}
 

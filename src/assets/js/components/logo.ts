@@ -1,8 +1,9 @@
 import logoBaseCss from '../../css/components/logo-base.css?raw';
+import { SiteSettings } from '../settings.ts';
 
-function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
+function createLogoUrl(logoelement: HTMLElement, size: 'full' | 'micro' | 'mini', theme = 'system') {
 	const serializer = new XMLSerializer();
-	const logoClone = document.querySelector('m-logo svg.u-logo')?.cloneNode(true) as SVGElement;
+	const logoClone = logoelement.cloneNode(true) as SVGElement;
 	logoClone.querySelectorAll(`[data-theme]:not([data-theme="${theme}"], .pixelated-logo, .noise-logo, .overlay-logo)`).forEach((node) => node.remove());
 
 	logoClone.querySelector('title')?.insertAdjacentHTML(
@@ -36,29 +37,28 @@ function createLogoUrl(size: 'full' | 'micro' | 'mini', theme = 'system') {
 	return logoUrl;
 }
 
-if (document.querySelector('m-logo')) {
-	const fullLogoUrl = createLogoUrl('full');
-	const miniLogoUrl = createLogoUrl('mini');
-	const microLogoUrl = createLogoUrl('micro');
+if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
+	document.querySelectorAll<HTMLElement>('m-logo').forEach((logoElement) => {
+		const fullLogoUrl = createLogoUrl(logoElement, 'full');
+		const miniLogoUrl = createLogoUrl(logoElement, 'mini');
+		const microLogoUrl = createLogoUrl(logoElement, 'micro');
 
-	document.querySelectorAll('m-logo dialog').forEach((dialog) => {
 		/* eslint-disable @typescript-eslint/no-non-null-assertion */
+		const dialog = logoElement.querySelector('dialog')!;
 		dialog.querySelector<HTMLAnchorElement>('a[download="full.svg"]')!.href = fullLogoUrl;
 		dialog.querySelector<HTMLAnchorElement>('a[download="mini.svg"]')!.href = miniLogoUrl;
 		dialog.querySelector<HTMLAnchorElement>('a[download="micro.svg"]')!.href = microLogoUrl;
 		/* eslint-enable @typescript-eslint/no-non-null-assertion */
-	});
 
-	document.addEventListener('contextmenu', (evt) => {
-		const target = evt.target as HTMLElement;
+		logoElement.addEventListener('contextmenu', (evt) => {
+			const target = evt.target as HTMLElement;
 
-		if (target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
-			const dialog = target.closest('m-logo')?.querySelector('dialog');
-
-			if (dialog) {
-				evt.preventDefault();
-				dialog.showPopover();
+			if (target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
+				if (dialog) {
+					evt.preventDefault();
+					dialog.showPopover();
+				}
 			}
-		}
-	}, { capture: false });
+		}, { capture: false });
+	});
 }

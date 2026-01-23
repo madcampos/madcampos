@@ -1,5 +1,7 @@
 @layer components {
-	hit-counter {
+	hit-counter:not(:defined) { display: none; }
+
+	hit-counter:defined {
 		display: flex;
 		width: fit-content;
 		flex-direction: column;
@@ -12,6 +14,7 @@
 		border-radius: var(--border-radius);
 		color: var(--theme-color);
 		background-color: var(--surface-1);
+		margin-inline: auto;
 
 		svg {
 			background-color: var(--surface-2);

@@ -90,7 +90,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 
 		this.innerHTML = `
 			<small>Page Visitors</small>
-			<svg viewBox="0 0 100 20" width="100" height="20">
+			<svg viewBox="0 0 100 20" width="100" height="20" role="none">
 				<text
 					x="50%"
 					y="60%"

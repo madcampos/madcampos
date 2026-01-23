@@ -123,7 +123,7 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 						</form>
 					</dialog>
 					<button type="button" id="lightbox-download-button-${id}">
-						<sr-only>Download Image image</sr-only>
+						<sr-only>Download Image</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
 							<use href="#img-lightbox-icon-download" width="24" height="24" />
 						</svg>

@@ -1,5 +1,7 @@
 @layer components {
-	theme-switcher {
+	theme-switcher:not(:defined) { display: none; }
+
+	theme-switcher:defined {
 		/* INFO: fix for safari */
 		display: inline-block;
 		align-self: center;

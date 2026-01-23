@@ -1,5 +1,7 @@
 @layer components {
-	share-options aside {
+	share-options:not(:defined) { display: none; }
+
+	share-options:defined aside {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
