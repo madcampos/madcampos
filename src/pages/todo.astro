@@ -12,6 +12,7 @@ interface Task {
 	isDone: boolean;
 	text: string;
 	children?: Task[];
+	removed?: string;
 }
 
 function renderTask(task: Task) {
@@ -35,8 +36,10 @@ function renderTask(task: Task) {
 					name="${taskId}"
 					aria-labelledby="label-${taskId}"
 					${task.isDone ? 'checked' : ''}
+					${task.removed ? 'disabled' : ''}
 				/>
 				<span>${inlineMarkdownRender(task.text)}</span>
+				${task.removed ? `<m-note data-type="info"><small>${task.removed}</small></m-note>` : ''}
 			</label>
 			${childTasks}
 		</li>
@@ -102,62 +105,66 @@ const tasks: Task[] = [
 			{ isDone: false, text: 'Add guestbook as webmentions' }
 		]
 	},
-	{ isDone: true, text: 'Add "about" page (based on [slash pages](https://slashpages.net/))' },
-	{ isDone: true, text: 'Add "ai" page (based on [slash pages](https://slashpages.net/))' },
-	{ isDone: false, text: 'Add "blogroll" page (based on [slash pages](https://slashpages.net/))' },
-	{ isDone: false, text: 'Add "carry" page (based on [slash pages](https://slashpages.net/))' },
-	{ isDone: true, text: 'Add "changelog" page (based on [slash pages](https://slashpages.net/))' },
-	{ isDone: true, text: 'Add noop "change password" page' },
-	{ isDone: true, text: 'Add `dnt` and `dnt-policy`' },
+	{ isDone: true, text: 'Add "[about](/about/)" page (based on [slash pages](https://slashpages.net/))' },
+	{ isDone: true, text: 'Add "[ai](/ai/)" page (based on [slash pages](https://slashpages.net/))' },
+	{ isDone: true, text: 'Add "[blogroll](/bookmarks/#blogroll)" page (based on [slash pages](https://slashpages.net/))' },
+	{ isDone: false, text: 'Add "carry" page (based on [slash pages](https://slashpages.net/))', removed: "I'm not going around much, so defeats the purpose." },
+	{ isDone: true, text: 'Add "[changelog](/changelog/)" page (based on [slash pages](https://slashpages.net/))' },
+	{ isDone: true, text: 'Add noop "[change password](/.well-known/change-password)" page' },
+	{ isDone: true, text: 'Add [`dnt`](/.well-known/dnt) and [`dnt-policy`](/.well-known/dnt-policy.txt)' },
 	{ isDone: false, text: 'Add ko-fi donation page' },
-	{ isDone: false, text: 'Add feeds page listing all available feeds' },
-	{ isDone: false, text: 'Make projects and talks available as feeds' },
-	{ isDone: true, text: 'Improve rss styles' },
-	{ isDone: true, text: 'Add humans.txt' },
-	{ isDone: false, text: 'Add indieweb.txt' },
-	{ isDone: false, text: 'Add pgp key?' },
+	{ isDone: true, text: 'Add [feeds](/feeds/) page listing all available feeds' },
+	{ isDone: true, text: 'Make projects and talks available as feeds' },
+	{ isDone: true, text: 'Improve rss styles', removed: 'XSLT is deprecated and will be removed from browsers' },
+	{ isDone: true, text: 'Add [humans.txt](/humans.txt)' },
+	{ isDone: true, text: 'Add [indieweb.txt](/indieweb.txt)' },
+	{ isDone: false, text: 'Add pgp key?', removed: 'Tooling and moving it around is a PITA' },
 	{
-		isDone: false,
-		text: 'Add Resume',
+		isDone: true,
+		text: 'Add [Resume](/resume/)',
 		children: [
 			{ isDone: true, text: '[JSON resume format](https://jsonresume.org/schema/)' },
-			{ isDone: true, text: 'HTML format' },
-			{ isDone: true, text: 'PDF Format' },
-			{ isDone: true, text: '[DOCX](https://www.npmjs.com/package/docx) [format](https://www.npmjs.com/package/docxtemplater)' }
+			{ isDone: true, text: '[HTML format](/resume/)' },
+			{ isDone: true, text: '[PDF Format](/assets/document/resume.pdf)' },
+			{
+				isDone: true,
+				text: '[DOCX](https://www.npmjs.com/package/docx) [format](https://www.npmjs.com/package/docxtemplater)',
+				removed: 'No one is using doc resumes anymore.'
+			}
 		]
 	},
 	{
 		isDone: true,
-		text: 'Add Roadmap page',
+		text: 'Add [Roadmap/TODO](/todo/) page',
 		children: [
 			{ isDone: true, text: 'Make items tooglable' },
 			{ isDone: true, text: 'Save to local storage' }
 		]
 	},
 	{ isDone: false, text: 'Add [search functionality](https://pagefind.app/docs/)' },
-	{ isDone: false, text: 'Add security.txt' },
+	{ isDone: true, text: 'Add [security.txt](/.wuell-known/security.txt)' },
 	{ isDone: false, text: 'Add stats board' },
-	{ isDone: false, text: 'Add styleguide page' },
+	{ isDone: true, text: 'Add [styleguide page](/styleguide/)' },
 	{
 		isDone: true,
 		text: 'Add debug mode',
 		children: [
 			{ isDone: true, text: 'Make debug css togglable' },
 			{ isDone: false, text: 'Add JS report for issues (?)' }
-		]
+		],
+		removed: 'Too much work for too little return. Also, styleguide page provides better solution.'
 	},
 	{ isDone: false, text: 'Add [webauthn](https://webauthn.io/) (?)' },
 	{ isDone: false, text: 'Add [web monetization](https://webmonetization.org/docs/) (?)' },
-	{ isDone: false, text: 'Add a "uses" page' },
-	{ isDone: true, text: 'Add webfinger endpoint' },
+	{ isDone: true, text: 'Add a "[uses](/colophon/)" page' },
+	{ isDone: true, text: 'Add [webfinger](/.well-known/webfinger) endpoint' },
 	{
 		isDone: false,
 		text: 'Add [webrings](https://brisray.com/web/webring-list.htm)',
 		children: [
-			{ isDone: false, text: '[Queer Coded](https://isaacfish.neocities.org/webring/)' },
+			{ isDone: false, text: '[Queer Coded](https://isaacfish.neocities.org/webring/)', removed: 'Seems to be overloaded with applications 😭' },
 			{ isDone: false, text: '[CSS Joy](https://cs.sjoy.lol/)' },
-			{ isDone: false, text: '[Bucketfish](https://webring.bucketfish.me/)' },
-			{ isDone: false, text: '[Indieweb](https://indieweb.org/webring)' }
+			{ isDone: false, text: '[Bucketfish](https://webring.bucketfish.me/)' }
 		]
 	},
 	{ isDone: true, text: 'Add a [CSS Naked day](https://css-naked-day.github.io/)' },

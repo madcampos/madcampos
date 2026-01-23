@@ -1,0 +1,137 @@
+---
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Guestbook | Marco Campos"
+		description="Guestbook"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Guestbook"
+				shortSubtitle="Book"
+				title="guestbook"
+			/>
+			<h1>Guestbook</h1>
+		</header>
+
+		<main id="main">
+			<fieldset>
+				<legend>Sign Guestbook</legend>
+
+				<form action="" method="post">
+					<input-wrapper>
+						<label for="name-input">Name</label>
+						<input
+							type="text"
+							name="name"
+							id="name-input"
+							maxlength="120"
+							autocomplete="name"
+							required
+						/>
+						<input-error>Your name is required.</input-error>
+					</input-wrapper>
+					<input-wrapper>
+						<label for="message-input">Message</label>
+						<textarea
+							name="message"
+							id="message-input"
+							rows="10"
+							cols="20"
+							autocapitalize="sentences"
+							autocorrect="on"
+							spellcheck="true"
+							wrap="soft"
+							required
+							maxlength="750"
+						></textarea>
+						<input-error>Message is required.</input-error>
+					</input-wrapper>
+					<p>
+						<label for="word-count">Character count:</label>
+						<output for="message-input" aria-live="off">
+							<progress
+								id="word-count"
+								max="750"
+								value="0"
+							>
+								&mdash;
+							</progress>
+							<span id="word-count-text">&mdash;</span>
+						</output>
+					</p>
+
+					<script type="module" is:inline>
+						const input = /** @type {HTMLTextAreaElement} */ (document.querySelector('#message-input'));
+						const output = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count'));
+						const outputText = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count-text'));
+
+						function updateOutput() {
+							output.value = input.value.length;
+							output.textContent = input.value.length === 0 ? '—' : `${input.value.length} characters`;
+							outputText.textContent = output.textContent;
+						}
+
+						input.addEventListener('input', updateOutput);
+						input.addEventListener('change', updateOutput);
+					</script>
+
+					<input-wrapper>
+						<div
+							class="cf-turnstile"
+							data-sitekey="0x4AAAAAABhvDBhr_iqDTR0H"
+							data-response-field="true"
+							data-response-field-name="check-token"
+						>
+						</div>
+					</input-wrapper>
+
+					<footer>
+						<button type="submit">Submit</button>
+						<hr />
+						<button type="reset">Reset</button>
+					</footer>
+				</form>
+			</fieldset>
+
+			<fieldset>
+				<legend>Messages</legend>
+
+				<progress></progress>
+			</fieldset>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+			<hit-counter></hit-counter>
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	</body>
+</html>

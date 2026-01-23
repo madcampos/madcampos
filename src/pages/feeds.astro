@@ -9,15 +9,11 @@ import Webrings from '../components/Webrings.astro';
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
-		title="What I'm doing now?"
-		description="What I'm doing now, my current focus and priorities."
+		title="Feeds | Marco Campos"
+		description="Feeds List Page"
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
-
-		<skip-to-content>
-			<a href="#main">Skip to main content</a>
-		</skip-to-content>
 
 		<SiteNav />
 
@@ -31,20 +27,30 @@ import Webrings from '../components/Webrings.astro';
 
 		<header>
 			<Logo
-				subtitle="Now"
-				shortSubtitle="Now"
-				title="Now Page"
+				subtitle="Feeds List"
+				shortSubtitle="Feeds"
+				title="Feeds List Page"
 			/>
-			<h1>What am I doing now?</h1>
+			<h1>Feeds List</h1>
 		</header>
 
-		<main id="main">
-			<p>Here’s what I’m currently focused on, in no particular order:</p>
+		<main>
+			<dl>
+				<dt><a href="/blog/feed.atom.xml">Blog ATOM Feed</a></dt>
+				<dd>Feed for blog posts, in ATOM format.</dd>
 
-			<ul>
-				<li>Adding more cool goodies to the website</li>
-				<li>Always: Saving to buy boardgames and Lego.</li>
-			</ul>
+				<dt><a href="/blog/feed.rss.xml">Blog RSS Feed</a></dt>
+				<dd>Feed for blog posts in RSS format.</dd>
+
+				<dt><a href="/changelog.xml">Changelog</a></dt>
+				<dd>Feed for changelog (site updates), in ATOM format only.</dd>
+
+				<dt><a href="/projects.xml">Projects</a></dt>
+				<dd>Feed for project list, in ATOM format only.</dd>
+
+				<dt><a href="/talks.xml">Talks</a></dt>
+				<dd>Feed for talks list, in ATOM format only.</dd>
+			</dl>
 		</main>
 
 		<footer>

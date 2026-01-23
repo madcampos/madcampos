@@ -1,0 +1,55 @@
+---
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Blank | Marco Campos"
+		description="Blank Page"
+	/>
+	<body>
+		<style>
+			main {
+				display: flex;
+				align-items: end;
+				padding-block-end: var(--size-5);
+			}
+
+			samp {
+				margin-inline: auto;
+				inline-size: fit-content;
+				display: block;
+			}
+		</style>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Blank"
+				shortSubtitle="Blank"
+				title="Blank Page"
+			/>
+			<h1>Blank</h1>
+		</header>
+
+		<main>
+			<samp>[This page is left intentinally blank]</samp>
+		</main>
+
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>

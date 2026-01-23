@@ -37,13 +37,16 @@ const aboutPages: PageMetadata[] = [
 	{ title: 'Home', url: '/', description: "The website's home page." },
 	{ title: 'About', url: '/about/', description: 'More information about me.' },
 	{ title: 'Resume', url: '/resume/', description: 'My professional work history.' },
+	{ title: 'Hello', url: '/hello/', description: 'Ways to reach me.' },
 	{ title: '@madcampos (Social Profile)', url: '/@madcampos/', description: 'A social profile with aggregated posts.', wip: true }
 ];
 
 const metaPages: PageMetadata[] = [
 	{ title: 'Accessibility Statement', url: '/accessibility/', description: 'Statement about accessibility on the website.' },
 	{ title: 'AI Statement', url: '/ai/', description: 'Statement about the use of AI on the webstie and AI derivative work.' },
-	{ title: 'Changelog', url: '/changelog/', description: 'List of changes for the website.', wip: true },
+	{ title: 'Changelog', url: '/changelog/', description: 'List of changes for the website.' },
+	{ title: 'Colophon', url: '/colophon/', description: 'How the site is made and governing principles principles.' },
+	{ title: 'Feeds', url: '/feeds/', description: 'All website feeds in one place.' },
 	{ title: 'License & Disclaimer', url: '/license/', description: "Legal jargon for the license of this website's content." },
 	{ title: 'Offline Page', url: '/offline/', description: 'The page that shows when you go offline and the Service Worker is working properly.' },
 	{ title: 'Privacy Statement', url: '/privacy/', description: 'Statement about privacy and that this site does not use tracking.' },
@@ -53,17 +56,17 @@ const metaPages: PageMetadata[] = [
 ];
 
 const coolPages: PageMetadata[] = [
-	{ title: 'Bookmarks', url: '/bookmarks/', description: 'A list of bookmars that I send people to.', wip: true },
+	{ title: 'Blank', url: '/ai/', description: 'A blank page.' },
+	{ title: 'Bookmarks', url: '/bookmarks/', description: 'A list of bookmars that I send people to.' },
 	{ title: 'Food', url: '/food/', description: 'Reference for food orders at different places. 😉' },
-	{ title: 'Now', url: '/now/', description: "What I'm doing right now.", wip: true },
-	{ title: 'Projects', url: '/projects/', description: "A list of personal projects I'm working on.", wip: true },
+	{ title: 'Now', url: '/now/', description: "What I'm doing right now." },
+	{ title: 'Projects', url: '/projects/', description: "A list of personal projects I'm working on." },
 	{
 		title: 'Styleguide',
 		url: '/styleguide/',
-		description: "A reference for the website style, all it's components and different parts of the CSS.",
-		wip: true
+		description: "A reference for the website style, all it's components and different parts of the CSS."
 	},
-	{ title: 'Brand', url: '/brand/', description: 'A reference on the logo and brand.', wip: true },
+	{ title: 'Brand', url: '/brand/', description: 'A reference on the logo and brand.' },
 	{ title: 'Pyramid Scheme', url: '/triangle/', description: 'Join this cool club, you will not regret it!', hidden: true }
 ];
 
@@ -156,7 +159,7 @@ const blogPages = await listPostsByYearAndMonth();
 					))
 				}
 			</dl>
-			<h2>Talks Pages</h2>
+			<h2>Talk Pages</h2>
 			<dl>
 				<dt><a href="/talks/">Talks Home</a></dt>
 				<dd>A list of talks that I've presented before.</dd>

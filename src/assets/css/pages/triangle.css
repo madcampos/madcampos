@@ -25,31 +25,7 @@
 
 	h2 { text-align: center; }
 
-	form {
-		input {
-			display: block;
-			margin: var(--size-2) auto;
-			border: var(--border-style) var(--theme-color) var(--border-size);
-			border-radius: var(--size-3);
-			background-color: var(--surface-2);
-			padding: var(--size-1) var(--size-2);
-			inline-size: calc(100% - var(--size-3) * 2);
-			color: var(--text-1);
-			font-size: inherit;
-		}
-
-		button {
-			border: var(--border-style) transparent var(--border-size);
-			background-color: var(--accent-color);
-			color: var(--surface-1);
-			margin-inline: auto;
-
-			&:active {
-				background-color: var(--text-1);
-				color: var(--theme-color);
-			}
-		}
-	}
+	button { margin-inline: auto; }
 
 	#hero {
 		display: grid;
@@ -75,7 +51,10 @@
 			padding: 0 var(--size-3);
 		}
 
-		form { grid-area: form; }
+		form {
+			grid-area: form;
+			margin: var(--size-3);
+		}
 
 		@media (max-width: 40rem) {
 			grid-template-rows: auto auto auto;

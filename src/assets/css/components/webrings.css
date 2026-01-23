@@ -1,6 +1,7 @@
 @layer components {
 	m-webrings {
 		article {
+			h3 { text-align: center; }
 			blockquote {
 				margin: 0;
 				font-style: italic;

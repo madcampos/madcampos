@@ -1,0 +1,68 @@
+---
+import HtmlHead from '../components/HtmlHead.astro';
+import Logo from '../components/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Webrings from '../components/Webrings.astro';
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Colophon | Marco Campos"
+		description="Colophon"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<SiteNav />
+
+		<css-naked-day>
+			<hr />
+			<h2>Why this website looks so weird?</h2>
+			<p>We are celebrating CSS Naked Day!</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<hr />
+		</css-naked-day>
+
+		<header>
+			<Logo
+				subtitle="Colophon"
+				shortSubtitle="Colo."
+				title="Home Page"
+			/>
+			<h1>Colophon</h1>
+		</header>
+
+		<main>
+			<h2>WTF Is a "colophon"?</h2>
+
+			<p>The term comes from publishing, it basically a page on a book telling what tools were used to mek the book.</p>
+
+			<h2>How the site is made?</h2>
+
+			<p>The tools used are:</p>
+			<ul>
+				<li><a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a> as the build tool.</li>
+				<li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">visual Studio Code</a> as the editor.</li>
+				<li>The code for the website is available on <a href="https://github.com/madcampos/madcampos/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+				<li>The site is hosted on <a href="https://cloudflare.com/" target="_blank" rel="noopener noreferrer">Cloudflare</a></li>
+			</ul>
+
+			<p>There is more about the styles in the <a href="/styleguide/">styleguide</a> and <a href="/brand/">brand</a> pages.</p>
+
+			<h2>Principles</h2>
+
+			<p>The main principle for the website is to have a space to express my ideas and try out things.</p>
+			<p>The blog is there as sort of a "note keeping" space, where I write to remember and have a better understanding on the things I learn.</p>
+		</main>
+
+		<footer>
+			<OldStyleButtons />
+			<Webrings />
+			<hit-counter></hit-counter>
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+	</body>
+</html>
