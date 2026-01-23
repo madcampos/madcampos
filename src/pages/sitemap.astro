@@ -36,13 +36,19 @@ interface PageMetadata {
 const aboutPages: PageMetadata[] = [
 	{ title: 'Home', url: '/', description: "The website's home page." },
 	{ title: 'About', url: '/about/', description: 'More information about me.' },
-	{ title: '@madcampos (Social Profile)', url: '/@madcampos/', description: 'A social profile with aggregated posts.', wip: true },
+	{ title: 'Resume', url: '/resume/', description: 'My professional work history.' },
+	{ title: '@madcampos (Social Profile)', url: '/@madcampos/', description: 'A social profile with aggregated posts.', wip: true }
+];
+
+const metaPages: PageMetadata[] = [
 	{ title: 'Accessibility Statement', url: '/accessibility/', description: 'Statement about accessibility on the website.' },
 	{ title: 'AI Statement', url: '/ai/', description: 'Statement about the use of AI on the webstie and AI derivative work.' },
 	{ title: 'Changelog', url: '/changelog/', description: 'List of changes for the website.', wip: true },
 	{ title: 'License & Disclaimer', url: '/license/', description: "Legal jargon for the license of this website's content." },
 	{ title: 'Offline Page', url: '/offline/', description: 'The page that shows when you go offline and the Service Worker is working properly.' },
+	{ title: 'Privacy Statement', url: '/privacy/', description: 'Statement about privacy and that this site does not use tracking.' },
 	{ title: 'Sitemap', url: '/sitemap/', description: 'This page.' },
+	{ title: 'TODO', url: '/todo/', description: 'The list of things to do on the website', wip: true },
 	{ title: '404', url: '/404/', description: 'The error page that you get when something is not found.' }
 ];
 
@@ -118,6 +124,22 @@ const blogPages = await listPostsByYearAndMonth();
 					))
 				}
 			</dl>
+			<h2>Pages related to the website</h2>
+			<dl>
+				{
+					metaPages.map(({ url, title, description, hidden, wip }) => (
+						<dt data-hidden={hidden ?? null}>
+							<a href={url}>
+								<Fragment set:html={inlineMarkdownRender(title)} />
+								{wip && <draft-tag>WIP</draft-tag>}
+							</a>
+						</dt>
+						<dd>
+							<Fragment set:html={inlineMarkdownRender(description)} />
+						</dd>
+					))
+				}
+			</dl>
 			<h2>Cool Pages</h2>
 			<dl>
 				{
@@ -157,33 +179,15 @@ const blogPages = await listPostsByYearAndMonth();
 				<dt><a href="/blog/">Blog Home</a></dt>
 				<dd>The blog main page.</dd>
 
+				<dt><a href="/blog/tags/">Blog tags</a></dt>
+				<dd>List of tags used in the blog.</dd>
+
 				{
 					blogPages.entries().map(([year, months]) => (
 						<dt><a href={`/blog/${year}/`}>{year}</a></dt>
 						<dd>
 							<dl>
-								{
-									months.entries().map(([month, posts]) => (
-										<dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>
-										<dd>
-											<dl>
-												{
-													posts.map(({ url, data: { title, summary, draft } }) => (
-														<dt>
-															<a href={`/blog/${url}/`}>
-																<Fragment set:html={inlineMarkdownRender(title)} />
-																{draft && <draft-tag>Draft</draft-tag>}
-															</a>
-														</dt>
-														<dd>
-															<Fragment set:html={inlineMarkdownRender(summary)} />
-														</dd>
-													))
-												}
-											</dl>
-										</dd>
-									))
-								}
+								{months.entries().map(([month]) => <dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>)}
 							</dl>
 						</dd>
 					))
