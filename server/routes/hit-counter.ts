@@ -212,7 +212,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 				(?, ?, ?, ?)
 		`).bind(url, visitorId, country, userAgent).run();
 
-		return new Response(JSON.stringify({ success, message: error ?? '' } satisfies StatusResponse), {
+		return new Response(JSON.stringify({ success, message: error ?? '+1' } satisfies StatusResponse), {
 			status: STATUS_OK,
 			headers: {
 				...DEFAULT_HEADERS,

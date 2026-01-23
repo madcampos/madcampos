@@ -19,14 +19,15 @@
 		"build": "astro build",
 		"prepreview": "pnpm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
-		"predeploy": "pnpm run build",
+		"predeploy": "pnpm run build && pnpm run db:migrations:remote",
 		"deploy": "wrangler deploy --minify --env=\"\"",
 		"format": "dprint fmt --staged",
 		"typecheck": "tsc --noEmit",
 		"lint:js": "eslint --fix",
 		"lint:md": "astro check",
 		"lint": "pnpm run typecheck && pnpm run lint:js && pnpm run lint:md",
-		"db:migrations": "wrangler d1 migrations apply hit-counter"
+		"db:migrations:local": "wrangler d1 migrations apply hit-counter",
+		"db:migrations:remote": "wrangler d1 migrations apply hit-counter --remote"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.5",
