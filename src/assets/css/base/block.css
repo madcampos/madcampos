@@ -71,5 +71,7 @@
 		padding: var(--size-1);
 		gap: var(--size-2);
 		background: var(--surface-2);
+
+		@media (max-width: 30rem) { flex-direction: column; }
 	}
 }

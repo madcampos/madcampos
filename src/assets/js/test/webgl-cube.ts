@@ -23,9 +23,15 @@ interface Buffers {
 	indices: WebGLBuffer;
 }
 
+const canvas = document.querySelector('#canvas-3d') as HTMLCanvasElement;
+const glContext = (canvas.getContext('webgl') ?? canvas.getContext('experimental-webgl')) as WebGLRenderingContext;
+
+let curWidth = 0;
+let curHeight = 0;
+
 let cubeRotation = 0.0;
 
-function loadShader(glContext: WebGLRenderingContext, type: WebGLRenderingContext['FRAGMENT_SHADER'] | WebGLRenderingContext['VERTEX_SHADER'], source: string) {
+function loadShader(type: WebGLRenderingContext['FRAGMENT_SHADER'] | WebGLRenderingContext['VERTEX_SHADER'], source: string) {
 	const shader = glContext.createShader(type);
 
 	if (!shader) {
@@ -47,9 +53,9 @@ function loadShader(glContext: WebGLRenderingContext, type: WebGLRenderingContex
 	return shader;
 }
 
-function initShaderProgram(glContext: WebGLRenderingContext, vsSource: string, fsSource: string) {
-	const vertexShader = loadShader(glContext, glContext.VERTEX_SHADER, vsSource);
-	const fragmentShader = loadShader(glContext, glContext.FRAGMENT_SHADER, fsSource);
+function initShaderProgram(vsSource: string, fsSource: string) {
+	const vertexShader = loadShader(glContext.VERTEX_SHADER, vsSource);
+	const fragmentShader = loadShader(glContext.FRAGMENT_SHADER, fsSource);
 
 	if (!vertexShader || !fragmentShader) {
 		return;
@@ -68,7 +74,8 @@ function initShaderProgram(glContext: WebGLRenderingContext, vsSource: string, f
 
 	return shaderProgram;
 }
-function initBuffers(glContext: WebGLRenderingContext) {
+
+function initBuffers() {
 	const positionBuffer = glContext.createBuffer();
 	glContext.bindBuffer(glContext.ARRAY_BUFFER, positionBuffer);
 
@@ -100,7 +107,7 @@ function initBuffers(glContext: WebGLRenderingContext) {
 	glContext.bindBuffer(glContext.ELEMENT_ARRAY_BUFFER, indexBuffer);
 
 	// dprint-ignore-line
-	const indices = [ 0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 11, 12, 13, 14, 12, 14, 15, 16, 17, 18, 16, 18, 19, 20, 21, 22, 20, 22, 23];
+	const indices = [0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 11, 12, 13, 14, 12, 14, 15, 16, 17, 18, 16, 18, 19, 20, 21, 22, 20, 22, 23];
 
 	glContext.bufferData(glContext.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), glContext.STATIC_DRAW);
 
@@ -111,7 +118,7 @@ function initBuffers(glContext: WebGLRenderingContext) {
 	};
 }
 
-function drawScene(glContext: WebGLRenderingContext, programInfo: ProgramInfo, buffers: Buffers, deltaTime: number) {
+function drawScene(programInfo: ProgramInfo, buffers: Buffers, deltaTime: number) {
 	glContext.clearColor(0.2, 0.35, 0.15, 1.0);
 	glContext.clearDepth(1.0);
 	glContext.enable(glContext.DEPTH_TEST);
@@ -119,14 +126,12 @@ function drawScene(glContext: WebGLRenderingContext, programInfo: ProgramInfo, b
 	glContext.clear(glContext.COLOR_BUFFER_BIT | glContext.DEPTH_BUFFER_BIT);
 
 	const fieldOfView = (45 * Math.PI) / 180;
-	const aspect = (glContext.canvas as HTMLCanvasElement).clientWidth / (glContext.canvas as HTMLCanvasElement).clientHeight;
-	const zNear = 0.1;
-	const zFar = 100.0;
+	const aspect = (glContext.canvas as HTMLCanvasElement).width / (glContext.canvas as HTMLCanvasElement).height;
 	const projectionMatrix = mat4.create();
-	mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+	mat4.perspective(projectionMatrix, fieldOfView, aspect, 1, Infinity);
 
 	const modelViewMatrix = mat4.create();
-	mat4.translate(modelViewMatrix, modelViewMatrix, [-3.7, -1.0, -16.0]);
+	mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -10.0]);
 	mat4.rotate(modelViewMatrix, modelViewMatrix, cubeRotation, [0, 1, 0]);
 	mat4.rotate(modelViewMatrix, modelViewMatrix, cubeRotation * 0.7, [1, 0, 0]);
 
@@ -193,25 +198,17 @@ function drawScene(glContext: WebGLRenderingContext, programInfo: ProgramInfo, b
 
 	cubeRotation += deltaTime;
 }
+function resizeCanvas(width: number, height: number) {
+	canvas.width = width;
+	canvas.height = height;
+
+	glContext.viewport(0, 0, width, height);
+}
 
 function main() {
-	const canvas = document.querySelector('#canvas-3d') as HTMLCanvasElement;
-	const glContext = (canvas.getContext('webgl') ?? canvas.getContext('experimental-webgl')) as WebGLRenderingContext | null;
-
 	if (!glContext) {
 		return;
 	}
-
-	const { width, height } = canvas.getBoundingClientRect();
-
-	canvas.width = Math.floor(width);
-	canvas.height = Math.floor(height);
-
-	canvas.style.width = `${canvas.width}px`;
-	canvas.style.height = `${canvas.height}px`;
-
-	glContext.canvas.width = canvas.width;
-	glContext.canvas.height = canvas.height;
 
 	const vsSource = `
         attribute vec4 aVertexPosition;
@@ -233,7 +230,7 @@ function main() {
         }
     `;
 
-	const shaderProgram = initShaderProgram(glContext, vsSource, fsSource);
+	const shaderProgram = initShaderProgram(vsSource, fsSource);
 
 	if (!shaderProgram) {
 		return;
@@ -251,7 +248,7 @@ function main() {
 		}
 	};
 
-	const buffers = initBuffers(glContext);
+	const buffers = initBuffers();
 
 	let then = 0;
 
@@ -261,13 +258,27 @@ function main() {
 
 		then = nowPlusEpsilon;
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		drawScene(glContext!, programInfo, buffers, deltaTime);
+		drawScene(programInfo, buffers, deltaTime);
 
 		requestAnimationFrame(render);
 	}
 
-	requestAnimationFrame(render);
+	const resizeObserver = new ResizeObserver((entries) => {
+		for (const entry of entries) {
+			const newWidth = Math.floor((entry.borderBoxSize[0]?.inlineSize ?? 0) * window.devicePixelRatio);
+			const newHeight = Math.floor((entry.borderBoxSize[0]?.blockSize ?? 0) * window.devicePixelRatio);
+
+			if (curHeight !== newHeight || curWidth !== newWidth) {
+				curWidth = newWidth;
+				curHeight = newHeight;
+
+				resizeCanvas(newWidth, newHeight);
+				requestAnimationFrame(render);
+			}
+		}
+	});
+
+	resizeObserver.observe(canvas);
 }
 
 main();
