@@ -1,9 +1,18 @@
 ---
+/* eslint-disable max-lines */
+
 import '../assets/css/pages/resume.css';
+
 import { Icon } from 'astro-icon/components';
 import type { Icon as IconName } from 'virtual:astro-icon';
 import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
 import HtmlHead from '../components/HtmlHead.astro';
+import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+
+const MAX_EXPERIENCE_PRINT = 3;
+const MAX_CLIENTS_PRINT = 2;
+const MAX_VOLUNTEERING_PRINT = 1;
+const MAX_EDUCATION_PRINT = 2;
 
 const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 const langNameFormatter = new Intl.DisplayNames('en-CA', { type: 'language' });
@@ -41,8 +50,8 @@ function dateSorter(
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
-		title="Resume | Marco Campos"
-		description="Resume"
+		title="Marco Campos - Staff Developer"
+		description={inlineMarkdownStrip(resume.basics.summary)}
 	/>
 	<body
 		class="h-resume"
@@ -56,17 +65,21 @@ function dateSorter(
 				<p class="p-job-title" itemprop="jobTitle">{resume.basics.label}</p>
 			</hgroup>
 
-			<details>
-				<summary>Alternative File Formats</summary>
+			<details open>
+				<summary>Other File Formats</summary>
 
 				<ul>
-					<li><a href="/assets/documents/resume.pdf" download><abbr title="Portable Document File">PDF</abbr></a></li>
-					<li><a href="/assets/documents/resume.json" download><abbr title="JavaScript Object Notation">JSON</abbr></a></li>
+					<li><a href="/assets/documents/resume.pdf" download="Marco Campos - Staff Developer.pdf"><abbr title="Portable Document File">PDF</abbr></a></li>
+					<li><a href="/assets/documents/resume.json" download="Marco Campos - Staff Developer.json"><abbr title="JavaScript Object Notation">JSON</abbr></a></li>
 				</ul>
 			</details>
 
 			<aside class="p-contact h-card">
 				<ul id="links">
+					<li>
+						<Icon name="mingcute:location-line" aria-hidden="true" />
+						<span itemprop="email" class="u-email">{resume.basics.location.city}, {resume.basics.location.countryCode}</span>
+					</li>
 					<li>
 						<Icon name="mingcute:mail-line" aria-hidden="true" />
 						<a
@@ -121,10 +134,10 @@ function dateSorter(
 				</ul>
 			</aside>
 
-			<blockquote class="p-summary">{resume.basics.summary}</blockquote>
+			<blockquote class="p-summary">
+				<Fragment set:html={inlineMarkdownRender(resume.basics.summary)} />
+			</blockquote>
 		</header>
-
-		<hr />
 
 		<main>
 			<section>
@@ -156,8 +169,6 @@ function dateSorter(
 						))
 					}
 				</ul>
-
-				<hr />
 			</section>
 
 			<section id="experience">
@@ -166,13 +177,15 @@ function dateSorter(
 				<dl>
 					{
 						resume.work.toSorted(dateSorter).map((
-							{ name, position, description, highlights, location, startDate, endDate, summary }
+							{ name, position, description, highlights, location, startDate, endDate, summary, clients },
+							index
 						) => (
 							<div
 								class="h-event"
 								itemprop="hasOccupation"
 								itemscope
 								itemtype="https://schema.org/Role"
+								data-old-entry={index >= MAX_EXPERIENCE_PRINT ? '' : null}
 							>
 								<dt>
 									<entry-title class="p-name" itemprop="name">{position}</entry-title>
@@ -215,13 +228,68 @@ function dateSorter(
 									<ul>
 										{highlights.map((highlight) => <li>{highlight}</li>)}
 									</ul>
+									{
+										clients && (
+											<h3>Clients</h3>
+											<dl>
+												{
+													clients.toSorted(dateSorter).map((client, clientIndex) => (
+														<div
+															class="h-event"
+															itemprop="hasOccupation"
+															itemscope
+															itemtype="https://schema.org/Role"
+															data-old-entry={clientIndex >= MAX_CLIENTS_PRINT ? '' : null}
+														>
+															<dt>
+																<entry-subtitle
+																	class="h-card"
+																	itemprop="owner"
+																	itemscope
+																	itemtype="https://schema.org/Organization"
+																>
+																	<span class="p-name" itemprop="name">{client.name}</span>
+																	<small class="p-description" itemprop="description">{client.description}</small>
+																</entry-subtitle>
+																<entry-date>
+																	<time
+																		datetime={new Date(client.startDate).toISOString()}
+																		class="dt-start"
+																		itemprop="startDate"
+																	>{formatter.format(new Date(client.startDate))}</time>
+																	<span>&mdash;</span>
+																	{
+																		client.endDate
+																			? (
+																			<time
+																				data-enddate
+																				datetime={new Date(client.endDate).toISOString()}
+																				class="dt-end"
+																				itemprop="endDate"
+																			>{formatter.format(new Date(client.endDate))}</time>
+																		)
+																		: <span>Present</span>
+																	}
+																</entry-date>
+															</dt>
+															<dd class="p-summary" itemprop="description">
+																<p>{client.summary}</p>
+
+																<ul>
+																	{client.highlights.map((highlight) => <li>{highlight}</li>)}
+																</ul>
+															</dd>
+														</div>
+													))
+												}
+											</dl>
+										)
+									}
 								</dd>
 							</div>
 						))
 					}
 				</dl>
-
-				<hr />
 			</section>
 
 			<section>
@@ -229,13 +297,15 @@ function dateSorter(
 				<dl>
 					{
 						resume.volunteer.toSorted(dateSorter).map((
-							{ position, highlights, startDate, endDate, summary, organization, url }
+							{ position, highlights, startDate, endDate, summary, organization, url },
+							index
 						) => (
 							<div
 								class="h-event"
 								itemprop="hasOccupation"
 								itemscope
 								itemtype="https://schema.org/Role"
+								data-old-entry={index >= MAX_VOLUNTEERING_PRINT ? '' : null}
 							>
 								<dt>
 									<entry-title class="p-name" itemprop="name">{position}</entry-title>
@@ -286,23 +356,22 @@ function dateSorter(
 						))
 					}
 				</dl>
-
-				<hr />
 			</section>
 
 			<section>
 				<h2>Education</h2>
-
 				<dl>
 					{
 						resume.education.toSorted(dateSorter).map((
-							{ startDate, endDate, url, institution, area, studyType, highlights }
+							{ startDate, endDate, institution, area, studyType, highlights, location },
+							index
 						) => (
 							<div
 								class="h-event"
 								itemprop="hasCredential"
 								itemscope
 								itemtype="https://schema.org/EducationalOccupationalCredential"
+								data-old-entry={index >= MAX_EDUCATION_PRINT ? '' : null}
 							>
 								<dt>
 									<entry-title class="p-name" itemprop="educationalLevel">{studyType} {area}</entry-title>
@@ -312,14 +381,7 @@ function dateSorter(
 										itemscope
 										itemtype="https://schema.org/Organization"
 									>
-										<meta class="p-name" itemprop="name" content={institution} />
-										<a
-											href={url}
-											target="_blank"
-											rel="noopener noreferrer"
-											referrerpolicy="no-referrer"
-											itemprop="sameAs"
-										>{institution}</a>
+										<span class="p-name" itemprop="name">{institution}</span>
 									</entry-subtitle>
 									<entry-date>
 										<meta itemprop="temporalCoverage" content={`${startDate} — ${endDate ?? 'Present'}`} />
@@ -331,6 +393,9 @@ function dateSorter(
 											: <span>Present</span>
 										}
 									</entry-date>
+									<entry-location>
+										<address class="p-location">{location}</address>
+									</entry-location>
 								</dt>
 								<dd class="p-summary" itemprop="description">
 									<ul>
@@ -341,8 +406,6 @@ function dateSorter(
 						))
 					}
 				</dl>
-
-				<hr />
 			</section>
 
 			<section id="projects">
@@ -413,8 +476,6 @@ function dateSorter(
 						))
 					}
 				</dl>
-
-				<hr />
 			</section>
 
 			<section id="awards">
@@ -462,11 +523,9 @@ function dateSorter(
 						))
 					}
 				</ul>
-
-				<hr />
 			</section>
 
-			<section>
+			<section id="interests">
 				<h2>Interests</h2>
 
 				<ul>

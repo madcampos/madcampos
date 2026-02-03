@@ -21,8 +21,8 @@
 		}
 
 		@page {
-			margin-inline: var(--size-5);
-			margin-block: var(--size-8);
+			margin-inline: 10mm;
+			margin-block: 12mm;
 		}
 
 		h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }

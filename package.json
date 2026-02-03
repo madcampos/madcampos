@@ -4,12 +4,18 @@
 	"version": "5.0.0",
 	"license": "MIT",
 	"type": "module",
-	"engines": { "node": ">=24.13.0", "pnpm": ">=10.26.2" },
-	"volta": { "node": "24.13.0" },
+	"engines": {
+		"node": ">=24.13.0",
+		"pnpm": ">=10.26.2"
+	},
+	"volta": {
+		"node": "24.13.0"
+	},
 	"scripts": {
 		"bootstrap:astro": "astro sync",
 		"bootstrap:types": "wrangler types server/env.d.ts",
 		"bootstrap:certs": "mkdir certs && mkcert -key-file='./certs/server.key' -cert-file='./certs/server.crt' 'localhost'",
+		"bootstrap:puppeteer": "puppeteer browsers install chrome",
 		"bootstrap": "pnpm run bootstrap:types && pnpm run bootstrap:astro",
 		"prestart:api": "pnpm run bootstrap:types",
 		"start:api": "wrangler dev --env=local --https-cert-path certs/server.crt --https-key-path certs/server.key",
@@ -17,6 +23,7 @@
 		"start": "astro dev --site=https://localhost:3000/",
 		"prebuild": "pnpm run bootstrap",
 		"build": "astro build",
+		"build:resume": "node --experimental-strip-types ./build/save-resume-pdf.ts",
 		"prepreview": "pnpm run build",
 		"preview": "astro preview --site=https://localhost:3000/",
 		"predeploy": "pnpm run build && pnpm run db:migrations:remote",
@@ -51,6 +58,7 @@
 		"eslint-plugin-astro": "^1.5.0",
 		"globals": "^16.5.0",
 		"mdast-util-directive": "^3.1.0",
+		"puppeteer": "24.36.0",
 		"rehype-autolink-headings": "^7.1.0",
 		"rehype-external-links": "^3.0.0",
 		"remark-breaks": "^4.0.0",

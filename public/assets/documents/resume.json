@@ -16,7 +16,7 @@
 			"region": "Ontario",
 			"countryCode": "CA"
 		},
-		"summary": "Strong understanding of JavaScript and its basis with 15+ years of experience working with node.js and web technologies.\nGood team and leadership experience by managing a full team of developers, working as a scrum master for 3 years, and menthoring other developers.",
+		"summary": "Full stack developer with **15+ years** of experience working with **TypeScript**, **JavaScript**, **node.js**, **React**, and web technologies.\nStrong expertise in finance and AI industries.\nSolid team and leadership experience for over 3 years, including managing a full team of developers, working as a Scrum Master, and menthoring other developers.",
 		"profiles": [
 			{
 				"network": "LinkedIn",
@@ -43,39 +43,43 @@
 	],
 	"work": [
 		{
-			"name": "Saris AI",
-			"position": "Staff Developer — Full Stack",
-			"description": "AI FinTech",
-			"location": "Toronto, Canada (Remote)",
-			"startDate": "2026-01",
-			"summary": "Work creating automation tools for financial institutions to improve backoffice speed.",
-			"highlights": []
-		},
-		{
-			"name": "Tenstorrent",
-			"position": "Staff Developer — Full Stack",
-			"description": "AI Hardware Manufacturer",
-			"location": "Toronto, Canada (Hybrid)",
-			"startDate": "2024-01",
-			"endDate": "2026-01",
-			"summary": "Worked on data visualization tools for analyzing large performance datasets.",
-			"highlights": [
-				"Improved performance of data heavy react app from 1 minute to under 3 seconds.",
-				"Implemented UI and logic for loading app data via SSH.",
-				"Forked a Google and added features to it while maintaining more than 95% compatibility.",
-				"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes."
-			]
-		},
-		{
 			"name": "Lights On Software",
 			"position": "Staff Developer — Full Stack",
 			"description": "Software Agency",
 			"location": "Toronto, Canada (Hybrid)",
 			"startDate": "2024-01",
-			"summary": "Worked on projects for clients long term, providing full stack skills and knowhow.",
+			"summary": "Work on projects for clients long term, providing full stack skills, input on architecture decisions, and knowhow on development.",
 			"highlights": [
-				"Maintained a good relationship with clients, with always positive feedback.",
-				"Delivered new features and bug fixes swiftly."
+				"Maintain a good relationship with clients, with always positive feedback.",
+				"Deliver new features and bug fixes swiftly."
+			],
+			"clients": [
+				{
+					"name": "Saris AI",
+					"position": "Staff Developer — Full Stack",
+					"description": "AI FinTech",
+					"location": "Toronto, Canada (Remote)",
+					"startDate": "2026-01",
+					"summary": "Work creating automation tools for financial institutions to improve backoffice speed.",
+					"highlights": [
+						"Delivered a new feature in the second week of work."
+					]
+				},
+				{
+					"name": "Tenstorrent",
+					"position": "Staff Developer — Full Stack",
+					"description": "AI Hardware Manufacturer",
+					"location": "Toronto, Canada (Hybrid)",
+					"startDate": "2024-01",
+					"endDate": "2026-01",
+					"summary": "Worked on data visualization tools for analyzing large performance datasets.",
+					"highlights": [
+						"Improved performance of data heavy react app from 1 minute to under 3 seconds.",
+						"Implemented UI and logic for loading app data via SSH.",
+						"Forked a Google and added features to it while maintaining more than 95% compatibility.",
+						"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes."
+					]
+				}
 			]
 		},
 		{
@@ -211,7 +215,7 @@
 			"institution": "Unicesumar",
 			"studyType": "Post-Graduation",
 			"area": "Agile Methodologies",
-			"url": "https://www.unicesumar.edu.br/",
+			"location": "Brazil",
 			"startDate": "2020",
 			"endDate": "2021",
 			"highlights": [
@@ -222,13 +226,12 @@
 			"institution": "Universidade de Cuiabá",
 			"studyType": "B.Sc.",
 			"area": "Computer Science",
-			"url": "https://www.unic.com.br/",
+			"location": "Brazil",
 			"startDate": "2016",
 			"endDate": "2019",
 			"highlights": [
 				"Worked in academic research on usability, accessibility, and user experience.",
-				"Published 3 research papers.",
-				"Was elected president of the student union for 4 years."
+				"Published 3 research papers."
 			]
 		}
 	],
@@ -324,7 +327,7 @@
 		{ "name": "Scrum", "level": "5 years" },
 		{ "name": "React", "level": "4 years" },
 		{ "name": "Angular", "level": "4 years" },
-		{ "name": "Python", "level": "1 years" },
+		{ "name": "Python", "level": "1 year" },
 		{ "name": "Git", "level": "10 years" }
 	]
 }

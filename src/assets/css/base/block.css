@@ -47,6 +47,8 @@
 	ol { list-style: decimal-leading-zero; }
 
 	:is(ol, ul) {
+		padding-inline-start: var(--size-7);
+
 		ul { list-style: '◇ '; }
 		ol { list-style: lower-latin; }
 
