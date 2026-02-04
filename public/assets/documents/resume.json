@@ -76,7 +76,7 @@
 					"highlights": [
 						"Improved performance of data heavy react app from 1 minute to under 3 seconds.",
 						"Implemented UI and logic for loading app data via SSH.",
-						"Forked a Google and added features to it while maintaining more than 95% compatibility.",
+						"Forked a Google project and added features to it while maintaining more than 95% compatibility.",
 						"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes."
 					]
 				}
