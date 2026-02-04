@@ -162,7 +162,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									</input-hint>
 									<input-hint hidden>
 										<p>
-											<strong>Note:</strong> This is automatically disabled during <a href="/blog/2025/04/css-naked-day-2025">CSS Naked Week</a>
+											<strong>Note:</strong> This is automatically disabled during <a href="/blog/2025/04/css-naked-day-2025/">CSS Naked Week</a>
 										</p>
 									</input-hint>
 								</input-wrapper>
@@ -179,7 +179,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									</input-hint>
 									<input-hint hidden>
 										<p>
-											<strong>Note:</strong> This is automatically disabled during <a href="/blog/2025/04/css-naked-day-2025">JS Naked Week</a>
+											<strong>Note:</strong> This is automatically disabled during <a href="/blog/2025/04/css-naked-day-2025/">JS Naked Week</a>
 										</p>
 									</input-hint>
 								</input-wrapper>

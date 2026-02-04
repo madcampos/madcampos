@@ -10,7 +10,7 @@
 		<h3>Links</h3>
 
 		<p>Visited link: <a href="/styleguide/">This Page</a></p>
-		<p>Not visited link: <a href="#" id="random-link">Random Error Page</a></p>
+		<p>Not visited link: <a href="#" id="random-link" rel="nofollow">Random Error Page</a></p>
 		<script type="module" is:inline>
 			(/** @type {HTMLAnchorElement} */ (document.querySelector('#random-link'))).href = crypto.randomUUID();
 		</script>

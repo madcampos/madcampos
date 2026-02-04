@@ -1,12 +1,14 @@
 ---
 title: "Hello, World!"
 createdAt: 2023-05-05T01:59:12.000-04:00
-updatedAt: 2024-02-02T03:21:00.000-05:00
+updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:
   - date: 2023-06-05T18:48:45.000-04:00
     changes: Formatted post after proof reading.
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed Github URL.
 summary: Summary of the experience and hurdles of coding this blog.
 image: ./assets/new-waters.jpg
 imageAlt: "A painting of a boat bursting bow first from the waves with a rainbow on the background."
@@ -105,7 +107,7 @@ So, the "plugin" does the following steps:
 
 The result is this blog that you, dear reader, is reading right now. It is not perfect, but it is a good MVP to be up and running and improve as I go.
 
-The code can be viewed on GitHub on the [`blog/index.ts`](https://github.com/madcampos/madcampos/blob/main/build/blog/index.ts) file.
+The code can be viewed on GitHub on the [`blog/index.ts`](https://github.com/madcampos/madcampos/blob/9f3ada31848ab387e2d4ac3faa53f02779e13eff/build/blog/index.ts) file.
 
 ## Next Steps
 

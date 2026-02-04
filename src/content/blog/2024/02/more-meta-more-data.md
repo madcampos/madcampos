@@ -4,6 +4,10 @@ summary: An adenda about using metadata with react and other frameworks.
 image: ./assets/distiling-the-eye.jpg
 imageAlt: AI generated image of a collection of chemistry flasks with a bubbling blue liquid inside. The flaks are connected to a computer keyboard and behind them is a large CRT monitor with the image of an eye. The eye is magnified by a round flask, making it the focal point of the image.
 createdAt: 2024-02-27T01:06:43+00:00
+updatedAt: 2026-02-04T15:18:34.000-05:00
+updates:
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed Github URL.
 tags:
   - BuildingInPublic
   - BuildInTheOpen
@@ -79,7 +83,7 @@ Here is an example of the app shell on an app from one of my [personal projects]
 		<meta property="og:image" name="twitter:image" itemprop="image" content="icons/transparent/manifest-icon-512.png" />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en_US" />
-		<meta property="og:url" content="https://madcampos.dev/sdrlog" />
+		<meta property="og:url" content="https://sdrlog.madcampos.dev/" />
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:dnt" content="on">
 

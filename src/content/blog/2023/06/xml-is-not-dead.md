@@ -1,12 +1,14 @@
 ---
 title: XML Is Surprisingly Not Dead
 createdAt: 2023-06-30T01:59:24.000-04:00
-updatedAt: 2024-02-02T03:21:00.000-05:00
+updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:
   - date: 2024-01-14T15:16:13.000-05:00
     changes: Fixed link to feed.xml and added a link to the RSS feeds.
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed feed URL.
 summary: A quick post about styling XML feeds and other uses for XML.
 image: ./assets/arcane-c-incantations.jpg
 imageAlt: 'AI generated image for the prompt: "an arcane incantation on an old manuscript with C++ code"'
@@ -78,4 +80,4 @@ Which outputs:
 
 It is cool that we can do something like this and it Just Works™ in browsers. But it is not something I would use to build the core of my website.
 
-If you want to check it out go to: https://madcampos.dev/blog/feed.xml
+If you want to check it out go to: https://madcampos.dev/blog/feed.atom.xml

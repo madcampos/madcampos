@@ -2,6 +2,12 @@
 title: SVG quirks and adaptative images
 summary: Or how I learned to be unhinged and write SVGs by hand
 createdAt: 2025-02-16T23:32:49.000-04:00
+updatedAt: 2026-02-04T15:18:34.000-05:00
+updates:
+  - date: 2025-02-18T00:58:32.000-04:00
+    changes: Added demos, code examples, and images.
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed Github URLs.
 tags:
   - SVG
   - html
@@ -9,9 +15,6 @@ tags:
   - cool
   - design
   - web
-updates:
-  - date: 2025-02-18T00:58:32.000-04:00
-    changes: Added demos, code examples, and images.
 image: ./assets/logo-studies-2.png
 imageAlt: A screenshot of all of the logo designs for the website, laid out in a matrix on an image editing program.
 ---
@@ -71,7 +74,7 @@ For the visual readers, there is what it looks like:
 
 <codepen-embed title="SVG - inline example" href="https://codepen.io/madcampos/pen/WbNQYvE"></codepen-embed>
 
-That super power is the reason the [logos on this website](https://github.com/madcampos/madcampos/blob/main/src/components/Logo/index.astro#L28) are inlined to the HTML instead of image files. It allows the logo to change color and style based on the theme and be interactive as other elements in the page, having hover and active styles, for example.
+That super power is the reason the [logos on this website](https://github.com/madcampos/madcampos/blob/ce381ef543830558b7cda3cb9b243e2386cafa76/src/components/Logo/index.astro#L28) are inlined to the HTML instead of image files. It allows the logo to change color and style based on the theme and be interactive as other elements in the page, having hover and active styles, for example.
 
 To make my life a little bit easier and not have to repeat the same wall of SVG text every time[^2], I've wrapped it in an Astro component to make using the logo as easy as referencing it.
 
@@ -204,7 +207,7 @@ My excitement could not be contained to words or a blog post, I shouted!
 
 So, after a long, long exploration on how SVGs work and how to make cool things with it things magically worked and I got cool logos to accompany cool themes! There was still some cleanup to do, and some more details to how to make all of that be nice and tidy in one single SVG, but that is the boring part.
 
-You can check out the [logo source](https://github.com/madcampos/madcampos/blob/main/src/components/Logo/index.astro#L28), I encourage to do so and investigate all of it's details.
+You can check out the [logo source](https://github.com/madcampos/madcampos/blob/ce381ef543830558b7cda3cb9b243e2386cafa76/src/components/Logo/index.astro#L28), I encourage to do so and investigate all of it's details.
 
 Thank you for coming with me in this journey and I hope you have learned something along the way.
 

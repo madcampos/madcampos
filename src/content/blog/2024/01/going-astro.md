@@ -1,10 +1,12 @@
 ---
 title: Going astro 🚀
 createdAt: 2024-01-14T11:45:00.000-05:00
-updatedAt: 2024-03-24T10:46:00.000-05:00
+updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:
   - date: 2024-03-24T10:46:00.000-05:00
     changes: Added a conclusion to the RSS image size validation and how it was propperly fixed.
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed Github URL.
 summary: A tale of how I went from a vite site to an astro site and the hurdles along the way.
 image: ./assets/astro-corgi.jpg
 imageAlt: AI generated image of a corgi on a red rocket costume flying through space with planets and rainbows on the background.
@@ -80,7 +82,7 @@ But the problem was still in the back of my head.
 
 ## RSS Wars: The Feed Strikes Back
 
-My final solution was pretty hacky. Here is the code if you are curious: https://github.com/madcampos/madcampos/blob/main/src/pages/blog/feed.xml.ts#L27-L38
+My final solution was pretty hacky. Here is the code if you are curious: https://github.com/madcampos/madcampos/blob/05a4b97/src/pages/blog/feed.xml.ts#L27-L38
 
 In the end I had to still use the `fs.stat` call, but have to do some processing on the file path so it can point to the correct place where the file is and be found.
 

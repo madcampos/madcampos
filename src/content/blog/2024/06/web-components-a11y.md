@@ -4,6 +4,10 @@ summary: A summary of what tools and accessibility there is for web components
 image: ./assets/sunglass-tree.jpg
 imageAlt: A tree made out of circuit lines, in some branches there are colorful sunglasses.
 createdAt: 2024-06-11T19:00:08
+updatedat: 2026-02-04T15:18:34.000-05:00
+updates:
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed Github URL.
 tags:
   - a11y
   - Accessibility
@@ -147,6 +151,6 @@ The TL;DR version is: web components can be made accessible, but they don't brea
 
 [^1]: That [baseline](https://web.dev/baseline) status means since March 2023 it is available on all major browsers and can be used by the majority of users. If your users are on updated browsers you are good to go, but a polyfill may still be required.
 
-[^2]: The key part here is "if well implemented", that is hard and requires a lot. Here is an example of a reimplementation of the HTML input, it is not accessible, just exposes the validation and form API: https://github.com/madcampos/sdrlog/blob/main/src/components/SdrEditBox/index.ts
+[^2]: The key part here is "if well implemented", that is hard and requires a lot. Here is an example of a reimplementation of the HTML input, it is not accessible, just exposes the validation and form API: https://github.com/madcampos/sdrlog/blob/75fa678df520716af27fe14c60d29e94598aa3d3/src/components/SdrEditBox/index.ts
 
 [^3]: Both are correct plural forms of "focus" in English, you can say "focuses" and no one will care, but if you use the more formal form of "foci" people will probably take note on how annoying you are.

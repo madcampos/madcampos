@@ -28,7 +28,7 @@ const tags = Object.keys(await listPostsByTag());
 			<hr />
 			<h2>Why this website looks so weird?</h2>
 			<p>We are celebrating CSS Naked Day!</p>
-			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025">this blog post</a>.</p>
+			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025/">this blog post</a>.</p>
 			<hr />
 		</css-naked-day>
 
@@ -53,7 +53,7 @@ const tags = Object.keys(await listPostsByTag());
 						tags.map((tag) => (
 							<li>
 								<tag-item>
-									<a href={`/blog/tags/${tag}`} itemprop="url">
+									<a href={`/blog/tags/${tag}/`} itemprop="url">
 										<span itemprop="itemListElement">{tag}</span>
 									</a>
 								</tag-item>

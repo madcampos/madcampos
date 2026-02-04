@@ -1,12 +1,14 @@
 ---
 title: The Semantics of Blogging
 createdAt: 2023-06-05T20:54:23.000-04:00
-updatedAt: 2024-02-02T03:21:00.000-05:00
+updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:
   - date: 2023-06-07T19:39:00.000-04:00
     changes: Slight review of the content.
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
+  - date: 2026-02-04T15:18:34.000-05:00
+    changes: Fixed Github URL.
 summary: A dive into the semantic html of a blog.
 image: ./assets/arcane-writings.jpg
 imageAlt: "A close up of a parghement with a hand holding a quill writing on it. The writings are all undecipherable runes."
@@ -32,7 +34,7 @@ The problem with HTML tags and, by extension the problem with language in genera
 
 ## Anatomy of an Article Page
 
-Let's start with the full markup for the article page and then break it down to it's parts. I'm only showing the `body` here for brevity, but you can see the full template in the [GitHub repo](https://github.com/madcampos/madcampos/blob/main/src/templates/post.html).
+Let's start with the full markup for the article page and then break it down to it's parts. I'm only showing the `body` here for brevity, but you can see the full template in the [GitHub repo](https://github.com/madcampos/madcampos/blob/9f3ada31848ab387e2d4ac3faa53f02779e13eff/src/templates/blog/post.html).
 
 ```html
 <body>
