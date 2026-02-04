@@ -1,8 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-	if (!document.body.classList.contains('js-enabled')) {
-		return;
-	}
+import { SiteSettings } from '../settings.ts';
 
+if (SiteSettings.js === 'enabled') {
 	document.addEventListener('submit', (evt) => {
 		evt.preventDefault();
 		evt.stopPropagation();
@@ -10,4 +8,4 @@ document.addEventListener('DOMContentLoaded', () => {
 		// eslint-disable-next-line no-alert
 		alert('ALL YOUR BASE ARE BELONG TO US!!!');
 	});
-});
+}

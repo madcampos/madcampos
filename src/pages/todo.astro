@@ -16,7 +16,7 @@ interface Task {
 }
 
 function renderTask(task: Task) {
-	const taskId = crypto.randomUUID();
+	const taskId = `todo-${Math.trunc(Math.random() * 1000000).toString(16)}`;
 	let childTasks = '';
 
 	if (task.children) {

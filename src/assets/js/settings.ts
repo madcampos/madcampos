@@ -6,6 +6,9 @@ export class SiteSettings {
 
 	static #searchParams?: URLSearchParams;
 
+	static #isCssNakedDay = false;
+	static #isJsNakedDay = false;
+
 	static #initializeSettings() {
 		if (SiteSettings.#searchParams) {
 			return;
@@ -16,6 +19,9 @@ export class SiteSettings {
 		for (const setting of SiteSettings.AVAILABLE_SETTINGS) {
 			SiteSettings.#updateSetting(setting, SiteSettings[setting]?.toString());
 		}
+
+		this.#isCssNakedDay = this.#checkCssNakedDay();
+		this.#isJsNakedDay = this.#checkJsNakedDay();
 	}
 
 	static #getSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
@@ -52,6 +58,57 @@ export class SiteSettings {
 		}
 	}
 
+	static #checkCssNakedDay() {
+		const CSS_NAKED_MONTH = 3;
+		const CSS_NAKED_DAY = 9;
+		const DAYS_IN_WEEK_COUNT = 6;
+
+		const currentDate = new Date();
+
+		if (currentDate.getMonth() === CSS_NAKED_MONTH) {
+			const cssNakedDay = new Date();
+			cssNakedDay.setDate(CSS_NAKED_DAY);
+
+			const cssNakedWeekBegin = new Date();
+			const cssNakedWeekEnd = new Date();
+
+			// Slides the week window based on the day of the week that CSS naked day happens.
+			cssNakedWeekBegin.setDate(cssNakedDay.getDate() - cssNakedDay.getDay());
+			cssNakedWeekEnd.setDate(cssNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - cssNakedDay.getDay()));
+
+			if ((currentDate.getDate() >= cssNakedWeekBegin.getDate() && currentDate.getDate() <= cssNakedWeekEnd.getDate())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	static #checkJsNakedDay() {
+		const JS_NAKED_MONTH = 3;
+		const JS_NAKED_DAY = 24;
+		const DAYS_IN_WEEK_COUNT = 6;
+
+		const currentDate = new Date();
+		if (currentDate.getMonth() === JS_NAKED_MONTH) {
+			const jsNakedDay = new Date();
+			jsNakedDay.setDate(JS_NAKED_DAY);
+
+			const jsNakedWeekBegin = new Date();
+			const jsNakedWeekEnd = new Date();
+
+			// Slides the week window based on the day of the week that js naked day happens.
+			jsNakedWeekBegin.setDate(jsNakedDay.getDate() - jsNakedDay.getDay());
+			jsNakedWeekEnd.setDate(jsNakedDay.getDate() + (DAYS_IN_WEEK_COUNT - jsNakedDay.getDay()));
+
+			if (currentDate.getDate() >= jsNakedWeekBegin.getDate() && currentDate.getDate() <= jsNakedWeekEnd.getDate()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	static get apiUrl() {
 		return new URL(import.meta.env.DEV ? 'https://localhost:4242/' : '/', document.location.href).href;
 	}
@@ -84,16 +141,48 @@ export class SiteSettings {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
 	}
 
+	static get isCssNakedDay() {
+		SiteSettings.#initializeSettings();
+
+		return this.#isCssNakedDay;
+	}
+
 	static get css() {
-		return SiteSettings.#getSetting('css') as SettingEnabledDisabled | undefined;
+		const cssSetting = SiteSettings.#getSetting('css') as SettingEnabledDisabled | undefined;
+
+		if (cssSetting !== undefined) {
+			return cssSetting;
+		}
+
+		if (this.#isCssNakedDay) {
+			return 'disabled';
+		}
+
+		return 'enabled';
 	}
 
 	static set css(value) {
 		SiteSettings.#updateSetting('css', value);
 	}
 
+	static get isJsNakedDay() {
+		SiteSettings.#initializeSettings();
+
+		return this.#isJsNakedDay;
+	}
+
 	static get js() {
-		return SiteSettings.#getSetting('js') as SettingEnabledDisabled | undefined;
+		const jsSetting = SiteSettings.#getSetting('js') as SettingEnabledDisabled | undefined;
+
+		if (jsSetting !== undefined) {
+			return jsSetting;
+		}
+
+		if (this.#isJsNakedDay) {
+			return 'disabled';
+		}
+
+		return 'enabled';
 	}
 
 	static set js(value) {
