@@ -151,11 +151,11 @@
 			--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='goldenrod' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 
 			color-scheme: dark;
-			line-height: 1.4;
+			line-height: calc(1.4 * var(--line-height-adjust, 1));
 			letter-spacing: 0.07em;
 		}
 
-		p { line-height: 1.7; }
+		p { line-height: calc(1.7 * var(--line-height-adjust, 1)); }
 
 		code-wrapper pre {
 			--code-bg: var(--shiki-contrast-bg, var(--surface-1));

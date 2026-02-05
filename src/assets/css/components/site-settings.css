@@ -1,0 +1,86 @@
+@layer components {
+	site-settings:not(:defined) { display: none; }
+
+	site-settings:defined {
+		/* INFO: fix for safari */
+		display: inline-block;
+		align-self: center;
+
+		theme-list, font-list {
+			display: flex;
+			flex-grow: 1;
+			flex-wrap: wrap;
+			justify-content: center;
+			container-name: theme-list;
+			container-type: inline-size;
+			inline-size: 100%;
+			block-size: fit-content;
+
+			label {
+				display: flex;
+				position: relative;
+				flex-direction: column;
+				justify-content: start;
+				align-items: center;
+				margin: var(--size-2);
+				border: transparent var(--border-size) var(--border-style);
+				padding: var(--size-2);
+				inline-size: calc(50% - var(--size-5));
+				max-inline-size: var(--size-content-2);
+				block-size: fit-content;
+				text-align: center;
+
+				svg {
+					inline-size: 100%;
+					block-size: auto;
+
+					&[data-dual-theme] use { display: block; }
+
+					text:nth-of-type(1) { font-family: var(--headers-font-family); }
+					text:nth-of-type(2) { font-family: var(--text-font-family); }
+				}
+
+				small:not([hidden]) {
+					display: block;
+
+					svg { inline-size: 1em; }
+				}
+
+				input[type='radio'] {
+					position: absolute;
+					opacity: 0;
+					inline-size: 100%;
+					block-size: 100%;
+				}
+
+				&:has(input[type='radio']:checked) {
+					border-color: var(--theme-color);
+					background-color: var(--surface-1);
+					color: var(--theme-color);
+				}
+
+				&:is(:hover, :focus-within) {
+					border-color: var(--accent-color);
+					background-color: var(--text-1);
+					color: var(--surface-1);
+
+					@media (forced-colors: active) { :is(strong, small) { forced-color-adjust: none; } }
+				}
+
+				@container theme-list (max-width: 25rem) { inline-size: 100%; }
+			}
+		}
+
+		font-list label {
+			text-swatch {
+				figure { inline-size: 100%; }
+				figcaption { color: var(--text-1); }
+				span { font-size: var(--font-size-0); }
+
+				&:nth-of-type(1) article { --swatch-font: var(--text-font-family); }
+				&:nth-of-type(2) article { --swatch-font: var(--headers-font-family); }
+				&:nth-of-type(3) article { --swatch-font: var(--code-font-family); }
+			}
+		}
+	}
+}

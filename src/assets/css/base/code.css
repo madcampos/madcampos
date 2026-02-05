@@ -41,7 +41,7 @@
 			tab-size: 2;
 			counter-reset: step;
 			counter-increment: step 0;
-			line-height: 1.2;
+			line-height: calc(1.2 * var(--line-height-adjust, 1));
 			white-space: normal;
 			word-break: break-word;
 			overflow-wrap: break-word;

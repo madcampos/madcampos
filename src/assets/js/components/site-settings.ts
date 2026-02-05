@@ -1,7 +1,7 @@
-import { SiteSettings } from '../settings.ts';
+import { type FontSetting, type FontSizeSetting, type LetterSpacingSetting, type LineHeightSetting, type ThemeSetting, SiteSettings } from '../settings.ts';
 
 interface SiteTheme {
-	id: string;
+	id: ThemeSetting;
 	name: string;
 	description: string;
 	accessible?: boolean;
@@ -67,11 +67,180 @@ const themes: SiteTheme[] = [
 	// },
 ];
 
+interface SiteFontSet {
+	id: FontSetting;
+	name: string;
+	description: string;
+}
+
+const fonts: SiteFontSet[] = [
+	{
+		id: 'default',
+		name: 'Theme Default',
+		description: 'Uses the default fonts for the selected theme.'
+	},
+	{
+		id: 'browser',
+		name: 'Browser Defaults',
+		description: "The browser's default fonts."
+	},
+	{
+		id: 'legibility',
+		name: 'Increased Legibility',
+		description: 'A set of fonts that have increased general legibility.'
+	},
+	{
+		id: 'comic-sans',
+		name: 'Comic Sans',
+		description: 'The name says it all.'
+	}
+];
+
 class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	#id = Math.trunc(Math.random() * 1000000).toString(16);
-	constructor() {
-		super();
 
+	#renderThemes() {
+		const themeList = this.querySelector<HTMLElement>('theme-list');
+
+		if (!themeList) {
+			return;
+		}
+
+		themeList.innerHTML = '';
+		themes.forEach((theme) => {
+			themeList.insertAdjacentHTML(
+				'beforeend',
+				`
+					<label for="theme-input-${theme.id}-${this.#id}" id="theme-label-${theme.id}-${this.#id}">
+						<input
+							type="radio"
+							name="theme"
+							value="${theme.id}"
+							id="theme-input-${theme.id}-${this.#id}"
+						/>
+						<svg
+							viewBox="0 0 100 70"
+							data-theme="${theme.id === 'system' ? 'light' : theme.id}"
+							role="presentation"
+							aria-hidden="true"
+							width="100"
+							height="70"
+							${theme.dual ? 'data-dual-theme' : ''}
+						>
+							<g id="theme-image-${theme.id}-${this.#id}">
+								<rect x="5" y="2.5" rx="3" width="90" height="30" fill="var(--surface-1)" stroke="var(--surface-3)" />
+								<text x="10" y="27" font-size="30" fill="var(--text-1)">Aa</text>
+
+								<circle cx="70" cy="10" r="5" fill="var(--theme-color)" />
+								<circle cx="85" cy="10" r="5" fill="var(--secondary-color)" />
+								<circle cx="70" cy="25" r="5" fill="var(--accent-color)" />
+								<circle cx="85" cy="25" r="5" fill="var(--complementary-color)" />
+
+
+								<rect x="5" y="35" rx="3" width="90" height="30" fill="var(--surface-2)" stroke="var(--surface-4)" />
+								<text x="10" y="60" font-size="30" fill="var(--text-2)">Aa</text>
+
+								<circle cx="70" cy="42.5" r="5" fill="var(--theme-color)" />
+								<circle cx="85" cy="42.5" r="5" fill="var(--secondary-color)" />
+								<circle cx="70" cy="57.5" r="5" fill="var(--accent-color)" />
+								<circle cx="85" cy="57.5" r="5" fill="var(--complementary-color)" />
+							</g>
+							<clipPath id="theme-preview-system-mask-${this.#id}">
+								<polygon points="0,70 100,0 100,70" />
+							</clipPath>
+							<use
+								data-theme="dark"
+								clip-path="url(#theme-preview-system-mask-${this.#id})"
+								href="#theme-image-${theme.id}-${this.#id}"
+								display="none"
+							/>
+						</svg>
+						<strong>${theme.name}</strong>
+						<small><em>${theme.description}</em></small>
+						<small ${theme.accessible ? 'hidden' : ''}>
+							<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+								<use href="#site-settings-icon-warning" width="24" height="24" />
+							</svg>
+							<strong>Warning: Theme is not fully accessible</strong>
+						</small>
+					</label>
+				`
+			);
+		});
+	}
+
+	#renderFonts() {
+		const fontList = this.querySelector<HTMLElement>('font-list');
+
+		if (!fontList) {
+			return;
+		}
+
+		fontList.innerHTML = '';
+		fonts.forEach((font) => {
+			fontList.insertAdjacentHTML(
+				'beforeend',
+				`
+					<label for="font-input-${font.id}-${this.#id}" id="font-label-${font.id}-${this.#id}">
+						<input
+							type="radio"
+							name="font"
+							value="${font.id}"
+							id="theme-input-${font.id}-${this.#id}"
+						/>
+						<strong>${font.name}</strong>
+						<small><em>${font.description}</em></small>
+						<text-swatch aria-hidden="true">
+							<figure>
+								<article data-font="${font.id}">
+									<span>The quick brown fox jumped over the lazy dog.</span>
+								</article>
+								<figcaption>Body Text font</figcaption>
+							</figure>
+						</text-swatch>
+
+						<text-swatch aria-hidden="true"">
+							<figure>
+								<article data-font="${font.id}">
+									<span>The quick brown fox jumped over the lazy dog.</span>
+								</article>
+								<figcaption>Headers font</figcaption>
+							</figure>
+						</text-swatch>
+
+						<text-swatch aria-hidden="true">
+							<figure>
+								<article data-font="${font.id}">
+									<span>The quick brown fox jumped over the lazy dog.</span>
+								</article>
+								<figcaption>Code font</figcaption>
+							</figure>
+						</text-swatch>
+					</label>
+				`
+			);
+		});
+	}
+
+	#initializeSettings() {
+		this.querySelector<HTMLInputElement>(`theme-list input[type="radio"][value="${SiteSettings.theme}"]`)?.toggleAttribute('checked', true);
+		this.querySelector<HTMLInputElement>(`font-list input[type="radio"][value="${SiteSettings.font}"]`)?.toggleAttribute('checked', true);
+		this.querySelector<HTMLOptionElement>(`#font-size-input-${this.#id} option[value="${SiteSettings.fontSize}"]`)?.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#line-height-input-${this.#id} option[value="${SiteSettings.lineHeight}"]`)?.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#letter-spacing-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)?.toggleAttribute('selected', true);
+	}
+
+	#updateSettings(form: HTMLFormElement) {
+		const formData = new FormData(form);
+
+		SiteSettings.theme = formData.get('theme') as ThemeSetting;
+		SiteSettings.font = formData.get('font') as FontSetting;
+		SiteSettings.fontSize = formData.get('font-size') as FontSizeSetting;
+		SiteSettings.lineHeight = formData.get('line-height') as LineHeightSetting;
+		SiteSettings.letterSpacing = formData.get('letter-spacing') as LetterSpacingSetting;
+	}
+
+	render() {
 		this.innerHTML = `
 			<aside>
 				<button
@@ -101,94 +270,118 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 					</header>
 					<form action="./" method="get">
 						<dialog-content>
-							<fieldset>
-								<legend>Fonts</legend>
-								<!-- TODO: text font -->
-								<!-- TODO: headers font -->
-								<!-- TODO: code font -->
+							<details name="settings-group" open>
+								<summary><h3>Themes</h3></summary>
 
-								<!-- Font: https://en.wikipedia.org/wiki/Atkinson_Hyperlegible -->
-								<!-- Font: https://en.wikipedia.org/wiki/OpenDyslexic -->
-								<!-- Font: https://en.wikipedia.org/wiki/Andika_(typeface) -->
-								<!-- Font: https://en.wikipedia.org/wiki/Comic_Neue -->
-							</fieldset>
+								<theme-list id="theme-list-${this.#id}"></theme-list>
+							</details>
 
-							<fieldset>
-								<legend>Text Adjusts</legend>
-								<!-- TODO: font size -->
-								<!-- TODO: line spacing (height) -->
-								<!-- TODO: letter spacing (space btween letters) -->
-							</fieldset>
+							<details name="settings-group">
+								<summary><h3>Fonts</h3></summary>
 
-							<fieldset>
-								<legend>Motion & Transparency</legend>
+								<font-list id="font-list-${this.#id}"></font-list>
+							</details>
+
+							<details name="settings-group">
+								<summary><h3>Text Adjusts</h3></summary>
+
+								<input-wrapper>
+									<label for="font-size-input-${this.#id}">Font size adjust</label>
+									<select
+										name="font-size"
+										id="font-size-input-${this.#id}"
+									>
+										<option value="x-small">Extra Small</option>
+										<option value="small">Small</option>
+										<option value="normal" selected>Normal</option>
+										<option value="large">Large</option>
+										<option value="x-large">Extra Large</option>
+									</select>
+								</input-wrapper>
+
+								<input-wrapper>
+									<label for="line-height-input-${this.#id}">Line spacing adjust</label>
+									<select
+										name="line-height"
+										id="line-height-input-${this.#id}"
+									>
+										<option value="tight">Tight</option>
+										<option value="normal" selected>Normal</option>
+										<option value="wide">Wide</option>
+										<option value="wider">Wider</option>
+									</select>
+								</input-wrapper>
+
+								<input-wrapper>
+									<label for="letter-spacing-input-${this.#id}">Letter spacing adjust</label>
+									<select
+										name="letter-spacing"
+										id="letter-spacing-input-${this.#id}"
+									>
+										<option value="tighter">Tighter</option>
+										<option value="tight">Tight</option>
+										<option value="normal" selected>Normal</option>
+										<option value="wide">Wide</option>
+										<option value="wider">Wider</option>
+									</select>
+								</input-wrapper>
+							</details>
+
+							<details name="settings-group">
+								<summary><h3>Motion & Transparency</h3></summary>
+
+								<m-note data-type="alert">
+									<p>Under development</p>
+								</m-note>
+
 								<!-- TODO: reduced motion/animations -->
 								<!-- TODO: reduced transparency -->
 								<!-- TODO: border styles -->
 								<!-- TODO: underline styles -->
 								<!-- TODO: border width -->
-							</fieldset>
+							</details>
 
-							<fieldset>
-								<legend>Themes</legend>
+							<details name="settings-group">
+								<summary><h3>Controller Support</h3></summary>
 
-								<div id="theme-list-${this.#id}"></div>
-							</fieldset>
+								<m-note data-type="alert">
+									<p>Under development</p>
+								</m-note>
 
-							<fieldset>
-								<legend>Controller Support</legend>
 								<!-- TODO: disable custom controller actions -->
 								<!-- TODO: controller mapping -->
-							</fieldset>
+							</details>
 
-							<fieldset>
-								<legend>Sound</legend>
-								<!-- TODO: mute all sounds -->
-								<!-- TODO: volume control -->
-							</fieldset>
-
-							<fieldset>
-								<legend>Debug/Test</legend>
+							<details name="settings-group" ${!SiteSettings.debug ? 'hidden' : ''}>
+								<summary><h3>Debug/Test</h3></summary>
 
 								<input-wrapper>
-									<input
-										type="checkbox"
-										name="css"
-										id="css-input-${this.#id}"
-									/>
-									<label for="css-input-${this.#id}">Disable CSS</label>
-									<input-hint>
-										<p>This disables the CSS site-wide. All pages will show using the default browser CSS.</p>
-									</input-hint>
-									<input-hint hidden>
-										<p>
-											<strong>Note:</strong> This is automatically disabled during <a href="/blog/2025/04/css-naked-day-2025/">CSS Naked Week</a>
-										</p>
-									</input-hint>
+									<input-wrapper>
+										<input
+											type="checkbox"
+											name="css"
+											id="css-input-${this.#id}"
+										/>
+										<label for="css-input-${this.#id}">Disable CSS</label>
+									</input-wrapper>
 								</input-wrapper>
 
 								<input-wrapper>
-									<input
-										type="checkbox"
-										name="js"
-										id="js-input-${this.#id}"
-									/>
-									<label for="js-input-${this.#id}">Disable JS</label>
-									<input-hint>
-										<p>This disables the JS site-wide. All pages will continue to work, but some functionality will be disabled.</p>
-									</input-hint>
-									<input-hint hidden>
-										<p>
-											<strong>Note:</strong> This is automatically disabled during <a href="/blog/2025/04/css-naked-day-2025/">JS Naked Week</a>
-										</p>
-									</input-hint>
+									<input-wrapper>
+										<input
+											type="checkbox"
+											name="js"
+											id="js-input-${this.#id}"
+										/>
+										<label for="js-input-${this.#id}">Disable JS</label>
+									</input-wrapper>
 								</input-wrapper>
 
 								<!-- TODO: trigger iab escape -->
 								<!-- TODO: disable logo context menu -->
 								<!-- TODO: PWA clean cache -->
 								<!-- TODO: PWA trigger install -->
-							</fieldset>
+							</details>
 						</dialog-content>
 
 						<footer>
@@ -196,7 +389,9 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 								type="submit"
 								popovertarget="site-settings-dialog-${this.#id}"
 								popovertargetaction="hide"
-							>Apply theme</button>
+							>Apply settings</button>
+
+							<!-- TODO: add reset to defaults button -->
 						</footer>
 					</form>
 				</dialog>
@@ -205,85 +400,23 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
-		this.querySelector(`#theme-list-${this.#id}`)?.insertAdjacentHTML(
-			'afterbegin',
-			themes.map((theme) => `
-				<label for="theme-input-${theme.id}-${this.#id}" id="theme-label-${theme.id}-${this.#id}">
-					<input
-						type="radio"
-						name="theme"
-						value="${theme.id}"
-						id="theme-input-${theme.id}-${this.#id}"
-					/>
-					<svg
-						viewBox="0 0 100 70"
-						data-theme="${theme.id === 'system' ? 'light' : theme.id}"
-						role="presentation"
-						aria-hidden="true"
-						width="100"
-						height="70"
-						${theme.dual ? 'data-dual-theme' : ''}
-					>
-						<g id="theme-image-${theme.id}-${this.#id}">
-							<rect x="5" y="2.5" rx="3" width="90" height="30" fill="var(--surface-1)" stroke="var(--surface-3)" />
-							<text x="10" y="27" font-size="30" fill="var(--text-1)">Aa</text>
+		this.render();
 
-							<circle cx="70" cy="10" r="5" fill="var(--theme-color)" />
-							<circle cx="85" cy="10" r="5" fill="var(--secondary-color)" />
-							<circle cx="70" cy="25" r="5" fill="var(--accent-color)" />
-							<circle cx="85" cy="25" r="5" fill="var(--complementary-color)" />
+		this.#renderThemes();
+		this.#renderFonts();
 
-
-							<rect x="5" y="35" rx="3" width="90" height="30" fill="var(--surface-2)" stroke="var(--surface-4)" />
-							<text x="10" y="60" font-size="30" fill="var(--text-2)">Aa</text>
-
-							<circle cx="70" cy="42.5" r="5" fill="var(--theme-color)" />
-							<circle cx="85" cy="42.5" r="5" fill="var(--secondary-color)" />
-							<circle cx="70" cy="57.5" r="5" fill="var(--accent-color)" />
-							<circle cx="85" cy="57.5" r="5" fill="var(--complementary-color)" />
-						</g>
-						<clipPath id="theme-preview-system-mask-${this.#id}">
-							<polygon points="0,70 100,0 100,70" />
-						</clipPath>
-						<use
-							data-theme="dark"
-							clip-path="url(#theme-preview-system-mask-${this.#id})"
-							href="#theme-image-${theme.id}-${this.#id}"
-							display="none"
-						/>
-					</svg>
-					<strong>${theme.name}</strong>
-					<small><em>${theme.description}</em></small>
-					<small ${theme.accessible ? 'hidden' : ''}>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#site-settings-icon-warning" width="24" height="24" />
-						</svg>
-						<strong>Warning: Theme is not fully accessible</strong>
-					</small>
-				</label>
-			`).join('')
-		);
-
-		if (SiteSettings.theme) {
-			const themeInput = this.querySelector<HTMLInputElement>(`input[type="radio"][value="${SiteSettings.theme}"]`);
-
-			if (themeInput) {
-				themeInput.checked = true;
-			}
-		}
+		this.#initializeSettings();
 
 		this.querySelector('form')?.addEventListener('submit', (evt) => {
 			evt.preventDefault();
 			evt.stopPropagation();
 			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
 
-			const theme = new FormData(evt.target as HTMLFormElement).get('theme') as string;
-
-			SiteSettings.theme = theme;
+			this.#updateSettings(evt.target as HTMLFormElement);
 		});
 	}
 }
 
-if (SiteSettings.js !== 'disabled' && !customElements.get('site-switcher')) {
-	customElements.define('site-switcher', SiteDisplaySettings);
+if (SiteSettings.js !== 'disabled' && !customElements.get('site-settings')) {
+	customElements.define('site-settings', SiteDisplaySettings);
 }

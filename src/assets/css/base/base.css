@@ -7,7 +7,7 @@
 		hanging-punctuation: first allow-end last;
 		color-scheme: light dark;
 		font-size: var(--base-font-size);
-		line-height: var(--font-lineheight-3);
+		line-height: calc(var(--font-lineheight-3) * var(--line-height-adjust, 1));
 		font-family: var(--text-font-family);
 		word-break: break-word;
 		tab-size: 4;

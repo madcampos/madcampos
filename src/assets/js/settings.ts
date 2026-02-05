@@ -1,8 +1,13 @@
-type SettingEnabledDisabled = 'disabled' | 'enabled';
+export type SettingEnabledDisabled = 'disabled' | 'enabled';
+export type ThemeSetting = 'dark' | 'hacker' | 'high-contrast' | 'light' | 'low-contrast' | 'system' | 'uwu' | 'y2k';
+export type FontSetting = 'browser' | 'comic-sans' | 'default' | 'legibility';
+export type FontSizeSetting = 'large' | 'normal' | 'small' | 'x-large' | 'x-small';
+export type LineHeightSetting = 'normal' | 'tight' | 'wide' | 'wider';
+export type LetterSpacingSetting = 'normal' | 'tight' | 'tighter' | 'wide' | 'wider';
 
 export class SiteSettings {
-	static AVAILABLE_SETTINGS = ['debug', 'css', 'js', 'iabEscape', 'theme', 'pwa', 'updateUrl'] as const;
-	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape'] as const;
+	static AVAILABLE_SETTINGS = ['debug', 'css', 'js', 'iabEscape', 'theme', 'pwaBanner', 'updateUrl', 'font', 'fontSize', 'lineHeight', 'letterSpacing'] as const;
+	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape', 'pwaBanner', 'updateUrl'] as const;
 
 	static #searchParams?: URLSearchParams;
 
@@ -24,10 +29,10 @@ export class SiteSettings {
 		this.#isJsNakedDay = this.#checkJsNakedDay();
 	}
 
-	static #getSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
+	static #getSetting<T extends string>(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
 		SiteSettings.#initializeSettings();
 
-		return SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined;
+		return (SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined) as T | undefined;
 	}
 
 	static #updateSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number], value: string | undefined) {
@@ -113,31 +118,19 @@ export class SiteSettings {
 		return new URL(import.meta.env.DEV ? 'https://localhost:4242/' : '/', document.location.href).href;
 	}
 
-	static get updateUrl() {
-		const setting = SiteSettings.#getSetting('updateUrl');
-
-		if (setting === undefined) {
-			return undefined;
-		}
-
-		return setting === 'true';
+	static get updateUrl(): boolean {
+		return SiteSettings.#getSetting('updateUrl') === 'true';
 	}
 
-	static set updateUrl(value) {
+	static set updateUrl(value: boolean | undefined) {
 		SiteSettings.#updateSetting('updateUrl', value ? 'true' : 'false');
 	}
 
-	static get debug() {
-		const setting = SiteSettings.#getSetting('debug');
-
-		if (setting === undefined) {
-			return undefined;
-		}
-
-		return setting === 'true';
+	static get debug(): boolean {
+		return SiteSettings.#getSetting('debug') === 'true';
 	}
 
-	static set debug(value) {
+	static set debug(value: boolean | undefined) {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
 	}
 
@@ -148,7 +141,7 @@ export class SiteSettings {
 	}
 
 	static get css() {
-		const cssSetting = SiteSettings.#getSetting('css') as SettingEnabledDisabled | undefined;
+		const cssSetting = SiteSettings.#getSetting<SettingEnabledDisabled>('css');
 
 		if (cssSetting !== undefined) {
 			return cssSetting;
@@ -172,7 +165,7 @@ export class SiteSettings {
 	}
 
 	static get js() {
-		const jsSetting = SiteSettings.#getSetting('js') as SettingEnabledDisabled | undefined;
+		const jsSetting = SiteSettings.#getSetting<SettingEnabledDisabled>('js');
 
 		if (jsSetting !== undefined) {
 			return jsSetting;
@@ -189,39 +182,59 @@ export class SiteSettings {
 		SiteSettings.#updateSetting('js', value);
 	}
 
-	static get iabEscape() {
-		const setting = SiteSettings.#getSetting('iabEscape');
-
-		if (setting === undefined) {
-			return undefined;
-		}
-
-		return setting === 'true';
+	static get iabEscape(): boolean {
+		return SiteSettings.#getSetting('iabEscape') === 'true';
 	}
 
-	static set iabEscape(value) {
+	static set iabEscape(value: boolean | undefined) {
 		SiteSettings.#updateSetting('iabEscape', value ? 'true' : 'false');
 	}
 
-	static get theme() {
-		return SiteSettings.#getSetting('theme');
+	static get theme(): ThemeSetting {
+		return SiteSettings.#getSetting<ThemeSetting>('theme') ?? 'system';
 	}
 
-	static set theme(value) {
+	static set theme(value: ThemeSetting | undefined) {
 		SiteSettings.#updateSetting('theme', value);
 	}
 
-	static get pwa() {
-		const setting = SiteSettings.#getSetting('pwa');
-
-		if (setting === undefined) {
-			return undefined;
-		}
-
-		return setting === 'true';
+	static get font(): FontSetting {
+		return SiteSettings.#getSetting<FontSetting>('font') ?? 'default';
 	}
 
-	static set pwa(value) {
-		SiteSettings.#updateSetting('pwa', value ? 'true' : 'false');
+	static set font(value: FontSetting | undefined) {
+		SiteSettings.#updateSetting('font', value);
+	}
+
+	static get fontSize(): FontSizeSetting {
+		return SiteSettings.#getSetting<FontSizeSetting>('fontSize') ?? 'normal';
+	}
+
+	static set fontSize(value: FontSizeSetting | undefined) {
+		SiteSettings.#updateSetting('fontSize', value);
+	}
+
+	static get letterSpacing(): LetterSpacingSetting {
+		return SiteSettings.#getSetting<LetterSpacingSetting>('letterSpacing') ?? 'normal';
+	}
+
+	static set letterSpacing(value: LetterSpacingSetting | undefined) {
+		SiteSettings.#updateSetting('letterSpacing', value);
+	}
+
+	static get lineHeight(): LineHeightSetting {
+		return SiteSettings.#getSetting<LineHeightSetting>('lineHeight') ?? 'normal';
+	}
+
+	static set lineHeight(value: LineHeightSetting | undefined) {
+		SiteSettings.#updateSetting('lineHeight', value);
+	}
+
+	static get pwaBanner(): boolean {
+		return SiteSettings.#getSetting('pwaBanner') === 'true';
+	}
+
+	static set pwaBanner(value: boolean | undefined) {
+		SiteSettings.#updateSetting('pwaBanner', value ? 'true' : 'false');
 	}
 }

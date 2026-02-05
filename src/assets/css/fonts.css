@@ -47,3 +47,59 @@
 		font-variant-ligatures: common-ligatures;
 	}
 }
+
+@layer accessible {
+	[data-font='browser'] {
+		--headers-font-family: ui-serif, serif;
+		--code-font-family: ui-monospace, monospace;
+		--text-font-family: ui-sans-serif, sans-serif;
+	}
+
+	[data-font='legibility'] {
+		--text-font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+		--headers-font-family: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+		--code-font-family: 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+	}
+
+	[data-font='comic-sans'] {
+		--headers-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		--code-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		--text-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+	}
+
+	[data-font-size='x-small'] { --base-font-size: 1rem; }
+	[data-font-size='small'] { --base-font-size: 1.12rem; }
+	[data-font-size='normal'] { --base-font-size: 1.25rem; }
+	[data-font-size='large'] { --base-font-size: 1.7rem; }
+	[data-font-size='x-large'] { --base-font-size: 2.2rem; }
+
+	[data-line-height='tight'] { --line-height-adjust: 0.8; }
+	[data-line-height='normal'] { --line-height-adjust: 1; }
+	[data-line-height='wide'] { --line-height-adjust: 1.2; }
+	[data-line-height='wider'] { --line-height-adjust: 1.5; }
+
+	[data-letter-spacing='tighter'] {
+		letter-spacing: -0.05em;
+		word-spacing: -0.1rem;
+	}
+
+	[data-letter-spacing='tight'] {
+		letter-spacing: -0.01em;
+		word-spacing: -0.05rem;
+	}
+
+	[data-letter-spacing='normal'] {
+		letter-spacing: normal;
+		word-spacing: normal;
+	}
+
+	[data-letter-spacing='wide'] {
+		letter-spacing: 0.1em;
+		word-spacing: 0.2rem;
+	}
+
+	[data-letter-spacing='wider'] {
+		letter-spacing: 0.2em;
+		word-spacing: 0.4rem;
+	}
+}

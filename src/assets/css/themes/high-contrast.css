@@ -206,7 +206,7 @@
 		/* Global settings */
 		accent-color: var(--theme-color);
 		color-scheme: dark;
-		line-height: 1.4;
+		line-height: calc(1.4 * var(--line-height-adjust, 1));
 		letter-spacing: 0.07em;
 	}
 
@@ -219,7 +219,7 @@
 	:is([data-theme='high-contrast'] tag-list, tag-list[data-theme='high-contrast']) tag-item::before { display: none; }
 
 	[data-theme='high-contrast'] p,
-	p[data-theme='high-contrast'] { line-height: 1.7; }
+	p[data-theme='high-contrast'] { line-height: calc(1.7 * var(--line-height-adjust, 1)); }
 
 	:is([data-theme='high-contrast'] code-wrapper, code-wrapper[data-theme='high-contrast']) pre {
 		--code-bg: var(--shiki-contrast-bg, var(--surface-1));
