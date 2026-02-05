@@ -104,6 +104,8 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	}
 
 	async connectedCallback() {
+		this.render();
+
 		this.#lastChecked = new Date();
 		this.#visitData = await this.#fetchVisits();
 		this.render();
