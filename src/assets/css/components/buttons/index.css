@@ -1,53 +1,53 @@
+@property --rotate {
+	inherits: true;
+	initial-value: 0deg;
+	syntax: '<angle>';
+}
+
+@keyframes rainbow {
+	0% {
+		--rainbow-color: red;
+		--rainbow-text-color: white;
+	}
+	16.66% {
+		--rainbow-color: orange;
+		--rainbow-text-color: black;
+	}
+	33.33% {
+		--rainbow-color: yellow;
+		--rainbow-text-color: black;
+	}
+	50% {
+		--rainbow-color: green;
+		--rainbow-text-color: white;
+	}
+	66.66% {
+		--rainbow-color: blue;
+		--rainbow-text-color: white;
+	}
+	83.33% {
+		--rainbow-color: indigo;
+		--rainbow-text-color: white;
+	}
+	100% {
+		--rainbow-color: red;
+		--rainbow-text-color: white;
+	}
+}
+
+@keyframes swing {
+	20% { --rotate: 10deg; }
+
+	40% { --rotate: -10deg; }
+
+	60% { --rotate: 5deg; }
+
+	80% { --rotate: -5deg; }
+
+	100% { --rotate: 0deg; }
+}
+
 @layer components {
-	@property --rotate {
-		inherits: true;
-		initial-value: 0deg;
-		syntax: '<angle>';
-	}
-
-	@keyframes rainbow {
-		0% {
-			--rainbow-color: red;
-			--rainbow-text-color: white;
-		}
-		16.66% {
-			--rainbow-color: orange;
-			--rainbow-text-color: black;
-		}
-		33.33% {
-			--rainbow-color: yellow;
-			--rainbow-text-color: black;
-		}
-		50% {
-			--rainbow-color: green;
-			--rainbow-text-color: white;
-		}
-		66.66% {
-			--rainbow-color: blue;
-			--rainbow-text-color: white;
-		}
-		83.33% {
-			--rainbow-color: indigo;
-			--rainbow-text-color: white;
-		}
-		100% {
-			--rainbow-color: red;
-			--rainbow-text-color: white;
-		}
-	}
-
-	@keyframes swing {
-		20% { --rotate: 10deg; }
-
-		40% { --rotate: -10deg; }
-
-		60% { --rotate: 5deg; }
-
-		80% { --rotate: -5deg; }
-
-		100% { --rotate: 0deg; }
-	}
-
 	:host { display: block; }
 
 	button {
@@ -64,8 +64,8 @@
 		position: relative;
 		cursor: pointer;
 		margin: var(--size-1);
-		border: var(--old-button-border, none);
-		border-radius: var(--old-button-border-radius, 0.2rem);
+		border: var(--old-button-border);
+		border-radius: var(--old-button-border-radius);
 		background: none;
 		padding: 0;
 		inline-size: fit-content;
@@ -75,9 +75,9 @@
 		&::after {
 			display: block;
 			position: absolute;
-			mix-blend-mode: var(--old-button-blend-mode, none);
+			mix-blend-mode: var(--old-button-blend-mode);
 			inset: 0;
-			background: var(--old-button-tint, none);
+			background: var(--old-button-tint);
 			content: '';
 		}
 
@@ -127,7 +127,7 @@
 		}
 
 		#button-base { fill: #d3d3d3; }
-		:is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility, hidden); }
+		:is(#button-border-up, #button-border-left, #button-border-down, #button-border-right) { visibility: var(--old-button-border-visibility); }
 		:is(#button-border-up, #button-border-left) { fill: white; }
 		:is(#button-border-down, #button-border-right) { fill: black; }
 

@@ -147,6 +147,13 @@
 			--tag-focus-bg: var(--surface-1);
 			--tag-focus-color: var(--theme-color);
 
+			/* Old Buttons */
+			--old-button-border: var(--surface-3) var(--border-style) var(--border-size);
+			--old-button-border-visibility: hidden;
+			--old-button-tint: darkgoldenrod;
+			--old-button-blend-mode: hue;
+			--old-button-border-radius: var(--border-radius);
+
 			/* Icons */
 			--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='goldenrod' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 
@@ -317,6 +324,13 @@
 			--tag-focus-bg: var(--surface-2);
 			--tag-focus-color: var(--theme-color);
 
+			/* Old Buttons */
+			--old-button-border: none;
+			--old-button-border-visibility: hidden;
+			--old-button-tint: none;
+			--old-button-blend-mode: normal;
+			--old-button-border-radius: 0.2rem;
+
 			color-scheme: light;
 		}
 
@@ -357,6 +371,13 @@
 			/* Border */
 			--border-style: solid;
 			--link-underline: solid;
+
+			/* Old Buttons */
+			--old-button-border: var(--surface-3) var(--border-style) var(--border-size);
+			--old-button-border-visibility: hidden;
+			--old-button-tint: none;
+			--old-button-blend-mode: none;
+			--old-button-border-radius: var(--border-radius);
 		}
 
 		code-wrapper pre {

@@ -2,21 +2,18 @@ button {
 	--rainbow-color: deeppink;
 	--rainbow-text-color: white;
 	animation: 6s steps(6) infinite;
+	animation-name: var(--button-animation-rainbow);
+
+	text { font-weight: bold; }
+
+	#button-text-path {
+		stroke: var(--rainbow-color);
+		stroke-dasharray: 0 6 28 100;
+	}
+
+	.button-badge-bg { fill: var(--rainbow-color); }
+	.button-badge-text { fill: var(--rainbow-text-color); }
+	.emphasis-text { fill: var(--rainbow-color); }
+
+	@media (forced-colors: active) { #button-text-path, .button-badge-bg, .emphasis-text, #pride-icon { filter: grayscale(1); } }
 }
-
-button text { font-weight: bold; }
-
-button #button-text-path {
-	stroke: var(--rainbow-color);
-	stroke-dasharray: 0 6 28 100;
-}
-
-button .button-badge-bg { fill: var(--rainbow-color); }
-button .button-badge-text { fill: var(--rainbow-text-color); }
-button .emphasis-text { fill: var(--rainbow-color); }
-
-@media not (prefers-reduced-motion) { button { animation-name: rainbow; } }
-
-@media (prefers-contrast: more) { button { animation-name: none; } }
-
-@media (forced-colors: active) { button { animation-name: none; } }

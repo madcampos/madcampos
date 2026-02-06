@@ -1,31 +1,47 @@
-button text {
-	font-weight: bold;
-	font-size: 7px;
-}
+button {
+	text {
+		font-weight: bold;
+		font-size: 7px;
 
-button text tspan:nth-child(2) {
-	fill: darkorchid;
-	font-size: 12px;
-	font-family: var(--button-font-oldstyle);
-}
+		tspan:nth-child(2) {
+			fill: darkorchid;
+			font-size: 12px;
+			font-family: var(--button-font-oldstyle);
+		}
+	}
 
-button #button-base { fill: whitesmoke; }
+	#button-base { fill: whitesmoke; }
 
-button:hover #button-base { fill: darkorchid; }
-button:hover text { fill: pink; }
-button:hover text tspan:nth-child(2) { fill: white; }
+	&:hover {
+		#button-base { fill: darkorchid; }
 
-button:active #button-base { fill: dimgray; }
-button:active text { fill: white; }
-button:active text tspan:nth-child(2) { fill: hotpink; }
+		text {
+			fill: pink;
+			tspan:nth-child(2) { fill: white; }
+		}
+	}
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button :is(text, text tspan:nth-child(2)) { fill: var(--surface-1); }
-	button #button-base { fill: var(--text-1); }
+	&:active {
+		#button-base { fill: dimgray; }
 
-	button:hover #button-base { fill: var(--surface-1); }
-	button:hover :is(text, text tspan:nth-child(2)) { fill: var(--text-1); }
+		text {
+			fill: white;
+			tspan:nth-child(2) { fill: hotpink; }
+		}
+	}
 
-	button:active #button-base { fill: var(--surface-2); }
-	button:active :is(text, text tspan:nth-child(2)) { fill: var(--theme-color); }
+	@media (prefers-contrast: more), (forced-colors: active) {
+		:is(text, text tspan:nth-child(2)) { fill: var(--surface-1); }
+		#button-base { fill: var(--text-1); }
+
+		&:hover {
+			#button-base { fill: var(--surface-1); }
+			:is(text, text tspan:nth-child(2)) { fill: var(--text-1); }
+		}
+
+		&:active {
+			#button-base { fill: var(--surface-2); }
+			:is(text, text tspan:nth-child(2)) { fill: var(--theme-color); }
+		}
+	}
 }

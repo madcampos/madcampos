@@ -3,42 +3,49 @@
 	to { --opacity: 0; }
 }
 
-button { animation: 3s steps(2) infinite; }
-button #button-base { fill: tan; }
-button text {
-	font-weight: bold;
-	font-size: 7px;
-	font-family: var(--button-font-didone);
-}
+button {
+	animation: 3s steps(2) infinite;
+	animation-name: var(--button-animation-js);
 
-button tspan:nth-child(1) {
-	fill: brown;
-	font-size: 10px;
-	font-family: var(--button-font-slab);
-}
+	#button-base { fill: tan; }
+	text {
+		font-weight: bold;
+		font-size: 7px;
+		font-family: var(--button-font-didone);
+	}
 
-button #button-warning-icon { opacity: var(--opacity); }
+	tspan:nth-child(1) {
+		fill: brown;
+		font-size: 10px;
+		font-family: var(--button-font-slab);
+	}
 
-button:hover #button-base { fill: peru; }
+	#button-warning-icon { opacity: var(--opacity); }
 
-button:active #button-base { fill: maroon; }
-button:active text { fill: tan; }
-button:active tspan:nth-child(1) { fill: white; }
+	&:hover #button-base { fill: peru; }
 
-@media not (prefers-reduced-motion) { button { animation-name: js; } }
+	&:active {
+		#button-base { fill: maroon; }
+		text { fill: tan; }
+		tspan:nth-child(1) { fill: white; }
+	}
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button { animation-name: none; }
-	button #button-base { fill: var(--theme-color); }
-	button text { fill: var(--surface-2); }
-	button tspan:nth-child(1) { fill: var(--surface-1); }
+	@media (prefers-contrast: more), (forced-colors: active) {
+		#button-base { fill: var(--theme-color); }
+		text { fill: var(--surface-2); }
+		tspan:nth-child(1) { fill: var(--surface-1); }
 
-	button #button-warning-icon > path:nth-child(1) { fill: var(--text-1); }
-	button #button-warning-icon > path:nth-child(2) { fill: var(--accent-color); }
-	button #button-warning-icon > g { stroke: var(--surface-2); }
+		#button-warning-icon {
+			& > path:nth-child(1) { fill: var(--text-1); }
+			& > path:nth-child(2) { fill: var(--accent-color); }
+			& > g { stroke: var(--surface-2); }
+		}
 
-	button:hover #button-base { fill: var(--accent-color); }
+		&:hover #button-base { fill: var(--accent-color); }
 
-	button:active #button-base { fill: var(--text-1); }
-	button:active :is(text, tspan:nth-child(1)) { fill: var(--surface-1); }
+		&:active {
+			#button-base { fill: var(--text-1); }
+			:is(text, tspan:nth-child(1)) { fill: var(--surface-1); }
+		}
+	}
 }

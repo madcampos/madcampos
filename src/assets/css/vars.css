@@ -234,6 +234,13 @@
 		--avatary-overlay-opacity: 0.2;
 		--avatary-overlay-blend-mode: normal;
 
+		/* Old Buttons */
+		--old-button-border: none;
+		--old-button-border-visibility: hidden;
+		--old-button-tint: none;
+		--old-button-blend-mode: normal;
+		--old-button-border-radius: 0.2rem;
+
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--code-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;

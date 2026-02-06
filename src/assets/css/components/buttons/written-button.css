@@ -1,12 +1,27 @@
-button #button-base { fill: white; }
-button text {
-	dominant-baseline: hanging;
-	font-family: var(--button-font-ui);
-	text-anchor: start;
+button {
+	#button-base { fill: white; }
+
+	text {
+		dominant-baseline: hanging;
+		font-family: var(--button-font-ui);
+		text-anchor: start;
+	}
+
+	&:hover {
+		#button-base { fill: dimgray; }
+		text { fill: white; }
+	}
+
+	&:active {
+		#button-base { fill: black; }
+		text { fill: white; }
+	}
+
+	@media (prefers-contrast: more), (forced-colors: active) {
+		#button-base { fill: var(--surface-1); }
+		&:hover #button-base { fill: var(--surface-1); }
+		&:active #button-base { fill: var(--surface-1); }
+	}
+
+	@media (forced-colors: active) { #icon-office, #button-written-footer { filter: grayscale(1); } }
 }
-
-button:hover #button-base { fill: dimgray; }
-button:hover text { fill: white; }
-
-button:active #button-base { fill: black; }
-button:active text { fill: white; }

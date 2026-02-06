@@ -1,24 +1,31 @@
-button #button-base { fill: #ffd479; }
-button text {
-	font-weight: bold;
-	font-size: 11px;
-	text-anchor: start;
-}
+button {
+	#button-base { fill: #ffd479; }
 
-button:hover #button-base { fill: goldenrod; }
+	text {
+		font-weight: bold;
+		font-size: 11px;
+		text-anchor: start;
+	}
 
-button:active #button-base { fill: darkgoldenrod; }
+	button:hover #button-base { fill: goldenrod; }
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button text { fill: var(--text-1); }
-	button #checkmark { fill: var(--text-1); }
+	button:active #button-base { fill: darkgoldenrod; }
 
-	button #icon-w3c > path:first-child { fill: var(--surface-1); }
-	button #icon-w3c g path { fill: var(--text-1); }
+	@media (prefers-contrast: more), (forced-colors: active) {
+		text { fill: var(--text-1); }
+		#checkmark { fill: var(--text-1); }
 
-	button #button-base { fill: var(--surface-1); }
-	button:hover #button-base { fill: var(--surface-2); }
+		#icon-w3c {
+			& > path:first-child { fill: var(--surface-1); }
+			g path { fill: var(--text-1); }
+		}
 
-	button:active #button-base { fill: var(--text-1); }
-	button:active text { fill: var(--surface-2); }
+		#button-base { fill: var(--surface-1); }
+		&:hover #button-base { fill: var(--surface-2); }
+
+		&:active {
+			#button-base { fill: var(--text-1); }
+			text { fill: var(--surface-2); }
+		}
+	}
 }

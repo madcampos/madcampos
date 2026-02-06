@@ -1,17 +1,20 @@
 button {
 	--rainbow-color: lime;
+
 	animation: 3s steps(6) infinite;
-}
-button #button-base { fill: url(#graphic-design-gradient); }
-button text {
-	fill: var(--rainbow-color);
-	font-family: var(--button-font-papyrus);
-}
+	animation-name: var(--button-animation-rainbow);
 
-@media not (prefers-reduced-motion) { button { animation-name: rainbow; } }
+	#button-base { fill: url(#graphic-design-gradient); }
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button { animation-name: none; }
-	button #button-base { fill: var(--accent-color); }
-	button text { fill: var(--surface-2); }
+	text {
+		fill: var(--rainbow-color);
+		font-family: var(--button-font-papyrus);
+	}
+
+	@media (prefers-contrast: more), (forced-colors: active) {
+		#button-base { fill: var(--accent-color); }
+		text { fill: var(--surface-2); }
+	}
+
+	@media (forced-colors: active) { use { filter: grayscale(1); } }
 }

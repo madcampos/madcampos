@@ -1,16 +1,23 @@
-button #button-base { fill: url(#button-css-gradient); }
-button text {
-	font-style: italic;
-	font-family: var(--button-font-oldstyle);
-}
+button {
+	#button-base { fill: url(#button-css-gradient); }
 
-button:hover #button-css-gradient stop:nth-child(1) { stop-color: white; }
-button:hover #button-css-gradient stop:nth-child(2) { stop-color: dodgerblue; }
+	text {
+		font-style: italic;
+		font-family: var(--button-font-oldstyle);
+	}
 
-button:active #button-css-gradient stop:nth-child(1) { stop-color: dodgerblue; }
-button:active #button-css-gradient stop:nth-child(2) { stop-color: deepskyblue; }
+	button:hover #button-css-gradient {
+		stop:nth-child(1) { stop-color: white; }
+		stop:nth-child(2) { stop-color: dodgerblue; }
+	}
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button #button-base { fill: var(--surface-1); }
-	button #adobe-logo { fill: var(--theme-color); }
+	button:active #button-css-gradient {
+		stop:nth-child(1) { stop-color: dodgerblue; }
+		stop:nth-child(2) { stop-color: deepskyblue; }
+	}
+
+	@media (prefers-contrast: more), (forced-colors: active) {
+		#button-base { fill: var(--surface-1); }
+		#adobe-logo { fill: var(--theme-color); }
+	}
 }

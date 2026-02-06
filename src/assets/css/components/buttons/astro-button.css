@@ -1,23 +1,26 @@
-button #button-text-path {
-	stroke: deeppink;
-	stroke-dasharray: 0 6 28 100;
-}
+button {
+	#button-text-path {
+		stroke: deeppink;
+		stroke-dasharray: 0 6 28 100;
+	}
 
-button .emphasis-text {
-	fill: deeppink;
-	font-size: 11px;
-}
+	.emphasis-text {
+		fill: deeppink;
+		font-size: 11px;
+	}
 
-button #button-astro-icon-square { fill: url(#netscape-gradient); }
+	#button-astro-icon-square { fill: url(#netscape-gradient); }
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button #button-text-path { stroke: var(--theme-color); }
-	button .emphasis-text { fill: var(--theme-color); }
-	button #netscape-gradient stop { stop-color: var(--theme-color); }
-	button #astro-icon-fire stop { stop-color: var(--text-1); }
-	button #astro-icon path:last-child { fill: var(--surface-2); }
-	button circle {
-		fill: var(--surface-1);
-		stroke: var(--text-1);
+	@media (prefers-contrast: more), (forced-colors: active) {
+		#button-text-path { stroke: var(--theme-color); }
+		.emphasis-text { fill: var(--theme-color); }
+		#netscape-gradient stop { stop-color: var(--theme-color); }
+		#astro-icon-fire stop { stop-color: var(--text-1); }
+		#astro-icon path:last-child { fill: var(--surface-2); }
+
+		circle {
+			fill: var(--surface-1);
+			stroke: var(--text-1);
+		}
 	}
 }

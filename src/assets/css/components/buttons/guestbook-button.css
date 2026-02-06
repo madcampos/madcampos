@@ -1,36 +1,40 @@
-button { animation: 3s ease-in-out infinite; }
-button text {
-	fill: black;
-	font-weight: bold;
-	font-size: 9px;
-}
+button {
+	animation: 3s ease-in-out infinite;
+	animation-name: var(--button-animation-swing);
 
-button .emphasis-text {
-	fill: dodgerblue;
-	transform: rotate(var(--rotate));
-	transform-origin: 50% 50%;
-	font-size: 10px;
-}
+	text {
+		fill: black;
+		font-weight: bold;
+		font-size: 9px;
+	}
 
-button svg { fill: dodgerblue; }
+	.emphasis-text {
+		fill: dodgerblue;
+		transform: rotate(var(--rotate));
+		transform-origin: 50% 50%;
+		font-size: 10px;
+	}
 
-button:hover .emphasis-text { fill: orangered; }
-button:hover svg { fill: orangered; }
+	svg { fill: dodgerblue; }
 
-button:active .emphasis-text { fill: magenta; }
-button:active svg { fill: magenta; }
+	&:hover {
+		.emphasis-text { fill: orangered; }
+		svg { fill: orangered; }
+	}
 
-@media not (prefers-reduced-motion) { button { animation-name: swing; } }
+	&:active {
+		.emphasis-text { fill: magenta; }
+		svg { fill: magenta; }
+	}
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button { animation-name: none; }
-	button text { fill: var(--text-1); }
-	button .emphasis-text { fill: var(--theme-color); }
-	button svg { fill: var(--theme-color); }
+	@media (prefers-contrast: more), (forced-colors: active) {
+		text { fill: var(--text-1); }
+		.emphasis-text { fill: var(--theme-color); }
+		svg { fill: var(--theme-color); }
 
-	button:hover .emphasis-text { fill: var(--accent-color); }
-	button:hover svg { fill: var(--accent-color); }
-
-	button:active .emphasis-text { fill: var(--accent-color); }
-	button:active svg { fill: var(--accent-color); }
+		&:is(:hover, :active) {
+			.emphasis-text { fill: var(--accent-color); }
+			svg { fill: var(--accent-color); }
+		}
+	}
 }

@@ -1,26 +1,36 @@
-button #button-text-path { stroke: red; }
-button .emphasis-text { fill: red; }
-button .button-badge-bg { fill: red; }
+button {
+	#button-text-path { stroke: red; }
+	.emphasis-text { fill: red; }
+	.button-badge-bg { fill: red; }
 
-button:hover #button-text-path { stroke: green; }
-button:hover .emphasis-text { fill: green; }
-button:hover .button-badge-bg { fill: green; }
+	&:hover {
+		#button-text-path { stroke: green; }
+		.emphasis-text { fill: green; }
+		.button-badge-bg { fill: green; }
+	}
 
-button:active #button-text-path { stroke: blue; }
-button:active .emphasis-text { fill: blue; }
-button:active .button-badge-bg { fill: blue; }
+	&:active {
+		#button-text-path { stroke: blue; }
+		.emphasis-text { fill: blue; }
+		.button-badge-bg { fill: blue; }
+	}
 
-@media (prefers-contrast: more), (forced-colors: active) {
-	button #ie-logo { fill: var(--theme-color); }
-	button #button-text-path { stroke: var(--theme-color); }
-	button .emphasis-text { fill: var(--theme-color); }
-	button .button-badge-bg { fill: var(--theme-color); }
+	@media (prefers-contrast: more), (forced-colors: active) {
+		#ie-logo { fill: var(--theme-color); }
+		#button-text-path { stroke: var(--theme-color); }
+		.emphasis-text { fill: var(--theme-color); }
+		.button-badge-bg { fill: var(--theme-color); }
 
-	button:hover #button-text-path { stroke: var(--text-1); }
-	button:hover .emphasis-text { fill: var(--text-1); }
-	button:hover .button-badge-bg { fill: var(--text-1); }
+		&:hover {
+			#button-text-path { stroke: var(--text-1); }
+			.emphasis-text { fill: var(--text-1); }
+			.button-badge-bg { fill: var(--text-1); }
+		}
 
-	button:active #button-text-path { stroke: var(--accent-color); }
-	button:active .emphasis-text { fill: var(--accent-color); }
-	button:active .button-badge-bg { fill: var(--accent-color); }
+		&:active {
+			#button-text-path { stroke: var(--accent-color); }
+			.emphasis-text { fill: var(--accent-color); }
+			.button-badge-bg { fill: var(--accent-color); }
+		}
+	}
 }
