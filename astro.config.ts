@@ -46,16 +46,16 @@ export default defineConfig({
 		host: 'localhost',
 		port: 3000
 	},
-	...(mode !== 'production' && {
-		vite: {
-			server: {
+	vite: {
+		server: {
+			...(mode !== 'production' && {
 				https: {
 					cert: './certs/server.crt',
 					key: './certs/server.key'
 				}
-			}
+			})
 		}
-	}),
+	},
 	markdown: {
 		syntaxHighlight: 'shiki',
 		shikiConfig: {
