@@ -82,5 +82,12 @@
 				&:nth-of-type(3) article { --swatch-font: var(--code-font-family); }
 			}
 		}
+
+		@media (max-width: 40rem) {
+			dialog {
+				header h2 { font-size: var(--font-size-4); }
+				footer hr { display: none; }
+			}
+		}
 	}
 }

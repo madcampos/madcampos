@@ -89,8 +89,6 @@
 			gap: var(--size-2);
 
 			button { flex-shrink: 0; }
-
-			@media (max-width: 40rem) { flex-direction: column-reverse; }
 		}
 
 		& > dialog-content, & > form > dialog-content {
