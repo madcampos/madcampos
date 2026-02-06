@@ -1,4 +1,6 @@
 ---
+/* eslint-disable max-lines */
+
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../assets/images/me.jpg';
@@ -503,9 +505,9 @@ const post = (await listAllPosts())[0]!;
 	</section>
 
 	<section>
-		<h3>Theme Switcher</h3>
+		<h3>Site Setting</h3>
 
-		<theme-switcher></theme-switcher>
+		<site-settings></site-settings>
 	</section>
 
 	<section>

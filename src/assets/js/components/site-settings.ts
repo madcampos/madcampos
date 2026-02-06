@@ -120,7 +120,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 			themeList.insertAdjacentHTML(
 				'beforeend',
 				`
-					<label for="theme-input-${theme.id}-${this.#id}" id="theme-label-${theme.id}-${this.#id}">
+					<label for="theme-input-${theme.id}-${this.#id}">
 						<input
 							type="radio"
 							name="theme"
@@ -190,12 +190,12 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 			fontList.insertAdjacentHTML(
 				'beforeend',
 				`
-					<label for="font-input-${font.id}-${this.#id}" id="font-label-${font.id}-${this.#id}">
+					<label for="font-input-${font.id}-${this.#id}">
 						<input
 							type="radio"
 							name="font"
 							value="${font.id}"
-							id="theme-input-${font.id}-${this.#id}"
+							id="font-input-${font.id}-${this.#id}"
 						/>
 						<strong>${font.name}</strong>
 						<small><em>${font.description}</em></small>
@@ -240,19 +240,19 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		SiteSettings.isReducedMotion = undefined;
 		SiteSettings.hasSolidBorders = undefined;
 		SiteSettings.borderWidth = undefined;
+
+		this.#initializeSettings();
 	}
 
 	#initializeSettings() {
-		/* eslint-disable @typescript-eslint/no-non-null-assertion */
-		this.querySelector<HTMLInputElement>(`theme-list input[type="radio"][value="${SiteSettings.theme}"]`)!.toggleAttribute('checked', true);
-		this.querySelector<HTMLInputElement>(`font-list input[type="radio"][value="${SiteSettings.font}"]`)!.toggleAttribute('checked', true);
-		this.querySelector<HTMLOptionElement>(`#font-size-input-${this.#id} option[value="${SiteSettings.fontSize}"]`)!.toggleAttribute('selected', true);
-		this.querySelector<HTMLOptionElement>(`#line-height-input-${this.#id} option[value="${SiteSettings.lineHeight}"]`)!.toggleAttribute('selected', true);
-		this.querySelector<HTMLOptionElement>(`#letter-spacing-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)!.toggleAttribute('selected', true);
-		this.querySelector<HTMLOptionElement>(`#reduced-motion-input-${this.#id}`)!.toggleAttribute('checked', SiteSettings.isReducedMotion === 'enabled');
-		this.querySelector<HTMLOptionElement>(`#solid-borders-input-${this.#id}`)!.toggleAttribute('checked', SiteSettings.hasSolidBorders === 'enabled');
-		this.querySelector<HTMLOptionElement>(`#border-width-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)!.toggleAttribute('selected', true);
-		/* eslint-enable @typescript-eslint/no-non-null-assertion */
+		this.querySelector<HTMLInputElement>(`theme-list input[type="radio"][value="${SiteSettings.theme}"]`)?.toggleAttribute('checked', true);
+		this.querySelector<HTMLInputElement>(`font-list input[type="radio"][value="${SiteSettings.font}"]`)?.toggleAttribute('checked', true);
+		this.querySelector<HTMLOptionElement>(`#font-size-input-${this.#id} option[value="${SiteSettings.fontSize}"]`)?.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#line-height-input-${this.#id} option[value="${SiteSettings.lineHeight}"]`)?.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#letter-spacing-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)?.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#reduced-motion-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.isReducedMotion === 'enabled');
+		this.querySelector<HTMLOptionElement>(`#solid-borders-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.hasSolidBorders === 'enabled');
+		this.querySelector<HTMLOptionElement>(`#border-width-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)?.toggleAttribute('selected', true);
 	}
 
 	#updateSettings(form: HTMLFormElement) {
@@ -443,7 +443,9 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 								popovertargetaction="hide"
 							>Apply settings</button>
 
-							<!-- TODO: add reset to defaults button -->
+							<hr />
+
+							<button type="reset">Reset settings</button>
 						</footer>
 					</form>
 				</dialog>
@@ -466,6 +468,8 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 
 			this.#updateSettings(evt.target as HTMLFormElement);
 		});
+
+		this.querySelector('form')?.addEventListener('reset', () => this.#resetSettings());
 	}
 }
 
