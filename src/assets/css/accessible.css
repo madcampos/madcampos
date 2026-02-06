@@ -398,6 +398,56 @@
 			/* Border */
 			--border-style: solid;
 			--link-underline: solid;
+
+			/* Animations */
+			--transition-in-time: 0s;
+			--transition-out-time: 0s;
+			--interpolation: numeric-only;
+			--scroll-behavior: auto;
+
+			/* Button animations */
+			--button-animation-swing: none;
+			--button-animation-rainbow: none;
+			--button-animation-js: none;
+
+			/* Filters */
+			--filter-pixelate: none;
+			--filter-small-pixelate: none;
+			--filter-glitch: none;
+			--filter-noise: none;
 		}
 	}
+
+	[data-is-reduced-motion='enabled'] {
+		/* Border */
+		--border-style: solid;
+		--link-underline: solid;
+
+		/* Animations */
+		--transition-in-time: 0s;
+		--transition-out-time: 0s;
+		--interpolation: numeric-only;
+		--scroll-behavior: auto;
+
+		/* Button animations */
+		--button-animation-swing: none;
+		--button-animation-rainbow: none;
+		--button-animation-js: none;
+
+		/* Filters */
+		--filter-pixelate: none;
+		--filter-small-pixelate: none;
+		--filter-glitch: none;
+		--filter-noise: none;
+	}
+
+	[data-has-solid-borders='enabled'] {
+		--border-style: solid;
+		--link-underline: solid;
+	}
+
+	[data-border-width='none'] { --border-size: 0; }
+	[data-border-width='thin'] { --border-size: var(--border-size-1); }
+	[data-border-width='thick'] { --border-size: var(--border-size-3); }
+	[data-border-width='thicker'] { --border-size: var(--border-size-4); }
 }

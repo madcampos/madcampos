@@ -1,8 +1,8 @@
 @layer pages {
 	@view-transition { navigation: auto; }
 
-	::view-transition-old(root) { animation: old-page-animation 0s ease-in-out both; }
-	::view-transition-new(root) { animation: new-page-animation 0s ease-in-out both; }
+	::view-transition-old(root) { animation: old-page-animation var(--transition-out-time) ease-in-out both; }
+	::view-transition-new(root) { animation: new-page-animation var(--transition-in-time) ease-in-out both; }
 
 	@keyframes new-page-animation {
 		from {
@@ -26,10 +26,5 @@
 			filter: sepia(1) blur(var(--size-3));
 			opacity: 0;
 		}
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		::view-transition-old(root) { animation-duration: 0.2s; }
-		::view-transition-new(root) { animation-duration: 0.4s; }
 	}
 }

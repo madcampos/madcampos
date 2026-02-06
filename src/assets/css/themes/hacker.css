@@ -212,14 +212,14 @@
 	m-avatar[data-theme='hacker'] {
 		border-radius: 0;
 
-		picture { filter: url('#small-pixelate-filter'); }
+		picture { filter: var(--filter-small-pixelate); }
 
 		img {
 			filter: grayscale(1);
 			image-rendering: pixelated;
 		}
 
-		@media not (prefers-reduced-motion) { filter: url('#animated-glitch-filter'); }
+		filter: var(--filter-glitch);
 	}
 
 	:is([data-theme='hacker'] m-card, m-card[data-theme='hacker']) {
@@ -227,7 +227,7 @@
 
 		&.project-card article > picture {
 			mask: none;
-			filter: url('#small-pixelate-filter');
+			filter: var(--filter-small-pixelate);
 			border: solid currentColor var(--border-size);
 
 			img {

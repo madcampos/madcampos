@@ -69,12 +69,10 @@
 
 	[data-font-size='x-small'] { --base-font-size: 1rem; }
 	[data-font-size='small'] { --base-font-size: 1.12rem; }
-	[data-font-size='normal'] { --base-font-size: 1.25rem; }
 	[data-font-size='large'] { --base-font-size: 1.7rem; }
 	[data-font-size='x-large'] { --base-font-size: 2.2rem; }
 
 	[data-line-height='tight'] { --line-height-adjust: 0.8; }
-	[data-line-height='normal'] { --line-height-adjust: 1; }
 	[data-line-height='wide'] { --line-height-adjust: 1.2; }
 	[data-line-height='wider'] { --line-height-adjust: 1.5; }
 
@@ -86,11 +84,6 @@
 	[data-letter-spacing='tight'] {
 		letter-spacing: -0.01em;
 		word-spacing: -0.05rem;
-	}
-
-	[data-letter-spacing='normal'] {
-		letter-spacing: normal;
-		word-spacing: normal;
 	}
 
 	[data-letter-spacing='wide'] {

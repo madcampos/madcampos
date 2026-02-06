@@ -21,6 +21,7 @@
 		color: var(--theme-color);
 		text-align: center;
 		max-inline-size: var(--size-content-4);
+		transition: var(--transition-in-time) translate;
 
 		&:focus-visible {
 			background-color: var(--text-1);
@@ -37,7 +38,6 @@
 			color: var(--surface-1);
 		}
 
-		@media not (prefers-reduced-motion) { transition: 0.4s translate; }
 		@container body-scroller scroll-state(scrollable: top) { translate: 0 0; }
 	}
 }

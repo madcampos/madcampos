@@ -77,24 +77,22 @@
 		&[glitch] svg {
 			image-rendering: pixelated;
 
-			@media not (prefers-reduced-motion) {
-				.pixelated-logo {
-					filter: url('#pixelate-filter');
-					fill: var(--logo-pixel-color);
-				}
+			.pixelated-logo {
+				filter: var(--filter-pixelate);
+				fill: var(--logo-pixel-color);
+			}
 
-				.logo-part { /* filter: url("#glitch-filter"); */ filter: url('#animated-glitch-filter'); }
+			.logo-part { filter: var(--filter-glitch); }
 
-				.overlay-logo {
-					opacity: 0.6;
-					mix-blend-mode: overlay;
-					fill: var(--logo-overlay-color);
-				}
+			.overlay-logo {
+				opacity: 0.6;
+				mix-blend-mode: overlay;
+				fill: var(--logo-overlay-color);
+			}
 
-				.noise-logo {
-					filter: url('#noise-filter');
-					fill: var(--logo-noise-color);
-				}
+			.noise-logo {
+				filter: var(--filter-noise);
+				fill: var(--logo-noise-color);
 			}
 		}
 

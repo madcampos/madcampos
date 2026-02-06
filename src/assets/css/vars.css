@@ -24,6 +24,23 @@
 		--border-radius: 0;
 		--focus-outline: var(--theme-color) var(--border-style) var(--border-size);
 
+		/* Animations */
+		--transition-in-time: 0.4s;
+		--transition-out-time: 0.2s;
+		--interpolation: allow-keywords;
+		--scroll-behavior: smooth;
+
+		/* Button animations */
+		--button-animation-swing: swing;
+		--button-animation-rainbow: rainbow;
+		--button-animation-js: js;
+
+		/* Filters */
+		--filter-pixelate: url('#pixelate-filter');
+		--filter-small-pixelate: url('#small-pixelate-filter');
+		--filter-glitch: url('#animated-glitch-filter'); /* url("#glitch-filter") */
+		--filter-noise: url('#noise-filter');
+
 		/* Theme colors */
 		--theme-0: #bff6ff;
 		--theme-1: #a6dfff;

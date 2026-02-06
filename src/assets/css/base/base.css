@@ -13,12 +13,9 @@
 		tab-size: 4;
 		-webkit-tap-highlight-color: transparent;
 		accent-color: var(--theme-color);
+		interpolate-size: var(--interpolation);
 
-		@media (prefers-reduced-motion: no-preference) {
-			interpolate-size: allow-keywords;
-
-			&:focus-within { scroll-behavior: smooth; }
-		}
+		&:focus-within { scroll-behavior: var(--scroll-behavior); }
 	}
 
 	:where(*, *::after, *::before) {

@@ -1,4 +1,13 @@
-import { type FontSetting, type FontSizeSetting, type LetterSpacingSetting, type LineHeightSetting, type ThemeSetting, SiteSettings } from '../settings.ts';
+import {
+	type BorderWidthSetting,
+	type EnabledDisabledSetting,
+	type FontSetting,
+	type FontSizeSetting,
+	type LetterSpacingSetting,
+	type LineHeightSetting,
+	type ThemeSetting,
+	SiteSettings
+} from '../settings.ts';
 
 interface SiteTheme {
 	id: ThemeSetting;
@@ -222,12 +231,28 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		});
 	}
 
+	#resetSettings() {
+		SiteSettings.theme = undefined;
+		SiteSettings.font = undefined;
+		SiteSettings.fontSize = undefined;
+		SiteSettings.lineHeight = undefined;
+		SiteSettings.letterSpacing = undefined;
+		SiteSettings.isReducedMotion = undefined;
+		SiteSettings.hasSolidBorders = undefined;
+		SiteSettings.borderWidth = undefined;
+	}
+
 	#initializeSettings() {
-		this.querySelector<HTMLInputElement>(`theme-list input[type="radio"][value="${SiteSettings.theme}"]`)?.toggleAttribute('checked', true);
-		this.querySelector<HTMLInputElement>(`font-list input[type="radio"][value="${SiteSettings.font}"]`)?.toggleAttribute('checked', true);
-		this.querySelector<HTMLOptionElement>(`#font-size-input-${this.#id} option[value="${SiteSettings.fontSize}"]`)?.toggleAttribute('selected', true);
-		this.querySelector<HTMLOptionElement>(`#line-height-input-${this.#id} option[value="${SiteSettings.lineHeight}"]`)?.toggleAttribute('selected', true);
-		this.querySelector<HTMLOptionElement>(`#letter-spacing-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)?.toggleAttribute('selected', true);
+		/* eslint-disable @typescript-eslint/no-non-null-assertion */
+		this.querySelector<HTMLInputElement>(`theme-list input[type="radio"][value="${SiteSettings.theme}"]`)!.toggleAttribute('checked', true);
+		this.querySelector<HTMLInputElement>(`font-list input[type="radio"][value="${SiteSettings.font}"]`)!.toggleAttribute('checked', true);
+		this.querySelector<HTMLOptionElement>(`#font-size-input-${this.#id} option[value="${SiteSettings.fontSize}"]`)!.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#line-height-input-${this.#id} option[value="${SiteSettings.lineHeight}"]`)!.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#letter-spacing-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)!.toggleAttribute('selected', true);
+		this.querySelector<HTMLOptionElement>(`#reduced-motion-input-${this.#id}`)!.toggleAttribute('checked', SiteSettings.isReducedMotion === 'enabled');
+		this.querySelector<HTMLOptionElement>(`#solid-borders-input-${this.#id}`)!.toggleAttribute('checked', SiteSettings.hasSolidBorders === 'enabled');
+		this.querySelector<HTMLOptionElement>(`#border-width-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)!.toggleAttribute('selected', true);
+		/* eslint-enable @typescript-eslint/no-non-null-assertion */
 	}
 
 	#updateSettings(form: HTMLFormElement) {
@@ -238,6 +263,9 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		SiteSettings.fontSize = formData.get('font-size') as FontSizeSetting;
 		SiteSettings.lineHeight = formData.get('line-height') as LineHeightSetting;
 		SiteSettings.letterSpacing = formData.get('letter-spacing') as LetterSpacingSetting;
+		SiteSettings.isReducedMotion = formData.get('reduced-motion') as EnabledDisabledSetting;
+		SiteSettings.hasSolidBorders = formData.get('solid-borders') as EnabledDisabledSetting;
+		SiteSettings.borderWidth = formData.get('border-width') as BorderWidthSetting;
 	}
 
 	render() {
@@ -293,7 +321,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									>
 										<option value="x-small">Extra Small</option>
 										<option value="small">Small</option>
-										<option value="normal" selected>Normal</option>
+										<option value="medium" selected>Medium</option>
 										<option value="large">Large</option>
 										<option value="x-large">Extra Large</option>
 									</select>
@@ -306,7 +334,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 										id="line-height-input-${this.#id}"
 									>
 										<option value="tight">Tight</option>
-										<option value="normal" selected>Normal</option>
+										<option value="medium" selected>Medium</option>
 										<option value="wide">Wide</option>
 										<option value="wider">Wider</option>
 									</select>
@@ -320,7 +348,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									>
 										<option value="tighter">Tighter</option>
 										<option value="tight">Tight</option>
-										<option value="normal" selected>Normal</option>
+										<option value="medium" selected>Medium</option>
 										<option value="wide">Wide</option>
 										<option value="wider">Wider</option>
 									</select>
@@ -328,17 +356,39 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 							</details>
 
 							<details name="settings-group">
-								<summary><h3>Motion & Transparency</h3></summary>
+								<summary><h3>Borders & Motion</h3></summary>
 
-								<m-note data-type="alert">
-									<p>Under development</p>
-								</m-note>
+								<input-wrapper>
+									<input
+										type="checkbox"
+										name="reduced-motion"
+										id="reduced-motion-input-${this.#id}"
+									/>
+									<label for="reduced-motion-input-${this.#id}">Disable Animations</label>
+								</input-wrapper>
 
-								<!-- TODO: reduced motion/animations -->
-								<!-- TODO: reduced transparency -->
-								<!-- TODO: border styles -->
-								<!-- TODO: underline styles -->
-								<!-- TODO: border width -->
+								<input-wrapper>
+									<input
+										type="checkbox"
+										name="solid-borders"
+										id="solid-borders-input-${this.#id}"
+									/>
+									<label for="solid-borders-input-${this.#id}">Make underlines and borders solid</label>
+								</input-wrapper>
+
+								<input-wrapper>
+									<label for="border-width-input-${this.#id}">Border thickness</label>
+									<select
+										name="border-width"
+										id="border-width-input-${this.#id}"
+									>
+										<option value="none">No Border</option>
+										<option value="thin">Thin</option>
+										<option value="medium" selected>Medium</option>
+										<option value="thick">Thick</option>
+										<option value="thicker">Thicker</option>
+									</select>
+								</input-wrapper>
 							</details>
 
 							<details name="settings-group">

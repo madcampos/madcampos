@@ -1,12 +1,28 @@
-export type SettingEnabledDisabled = 'disabled' | 'enabled';
+export type EnabledDisabledSetting = 'disabled' | 'enabled';
 export type ThemeSetting = 'dark' | 'hacker' | 'high-contrast' | 'light' | 'low-contrast' | 'system' | 'uwu' | 'y2k';
 export type FontSetting = 'browser' | 'comic-sans' | 'default' | 'legibility';
-export type FontSizeSetting = 'large' | 'normal' | 'small' | 'x-large' | 'x-small';
-export type LineHeightSetting = 'normal' | 'tight' | 'wide' | 'wider';
-export type LetterSpacingSetting = 'normal' | 'tight' | 'tighter' | 'wide' | 'wider';
+export type FontSizeSetting = 'large' | 'medium' | 'small' | 'x-large' | 'x-small';
+export type LineHeightSetting = 'medium' | 'tight' | 'wide' | 'wider';
+export type LetterSpacingSetting = 'medium' | 'tight' | 'tighter' | 'wide' | 'wider';
+export type BorderWidthSetting = 'medium' | 'none' | 'thick' | 'thicker' | 'thin';
 
 export class SiteSettings {
-	static AVAILABLE_SETTINGS = ['debug', 'css', 'js', 'iabEscape', 'theme', 'pwaBanner', 'updateUrl', 'font', 'fontSize', 'lineHeight', 'letterSpacing'] as const;
+	static AVAILABLE_SETTINGS = [
+		'debug',
+		'css',
+		'js',
+		'iabEscape',
+		'theme',
+		'pwaBanner',
+		'updateUrl',
+		'font',
+		'fontSize',
+		'lineHeight',
+		'letterSpacing',
+		'isReducedMotion',
+		'hasSolidBorders',
+		'borderWidth'
+	] as const;
 	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape', 'pwaBanner', 'updateUrl'] as const;
 
 	static #searchParams?: URLSearchParams;
@@ -140,11 +156,11 @@ export class SiteSettings {
 		return this.#isCssNakedDay;
 	}
 
-	static get css() {
-		const cssSetting = SiteSettings.#getSetting<SettingEnabledDisabled>('css');
+	static get css(): EnabledDisabledSetting {
+		const setting = SiteSettings.#getSetting<EnabledDisabledSetting>('css');
 
-		if (cssSetting !== undefined) {
-			return cssSetting;
+		if (setting !== undefined) {
+			return setting;
 		}
 
 		if (this.#isCssNakedDay) {
@@ -154,7 +170,7 @@ export class SiteSettings {
 		return 'enabled';
 	}
 
-	static set css(value) {
+	static set css(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('css', value);
 	}
 
@@ -164,11 +180,11 @@ export class SiteSettings {
 		return this.#isJsNakedDay;
 	}
 
-	static get js() {
-		const jsSetting = SiteSettings.#getSetting<SettingEnabledDisabled>('js');
+	static get js(): EnabledDisabledSetting {
+		const setting = SiteSettings.#getSetting<EnabledDisabledSetting>('js');
 
-		if (jsSetting !== undefined) {
-			return jsSetting;
+		if (setting !== undefined) {
+			return setting;
 		}
 
 		if (this.#isJsNakedDay) {
@@ -178,7 +194,7 @@ export class SiteSettings {
 		return 'enabled';
 	}
 
-	static set js(value) {
+	static set js(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('js', value);
 	}
 
@@ -207,7 +223,7 @@ export class SiteSettings {
 	}
 
 	static get fontSize(): FontSizeSetting {
-		return SiteSettings.#getSetting<FontSizeSetting>('fontSize') ?? 'normal';
+		return SiteSettings.#getSetting<FontSizeSetting>('fontSize') ?? 'medium';
 	}
 
 	static set fontSize(value: FontSizeSetting | undefined) {
@@ -215,7 +231,7 @@ export class SiteSettings {
 	}
 
 	static get letterSpacing(): LetterSpacingSetting {
-		return SiteSettings.#getSetting<LetterSpacingSetting>('letterSpacing') ?? 'normal';
+		return SiteSettings.#getSetting<LetterSpacingSetting>('letterSpacing') ?? 'medium';
 	}
 
 	static set letterSpacing(value: LetterSpacingSetting | undefined) {
@@ -223,7 +239,7 @@ export class SiteSettings {
 	}
 
 	static get lineHeight(): LineHeightSetting {
-		return SiteSettings.#getSetting<LineHeightSetting>('lineHeight') ?? 'normal';
+		return SiteSettings.#getSetting<LineHeightSetting>('lineHeight') ?? 'medium';
 	}
 
 	static set lineHeight(value: LineHeightSetting | undefined) {
@@ -236,5 +252,47 @@ export class SiteSettings {
 
 	static set pwaBanner(value: boolean | undefined) {
 		SiteSettings.#updateSetting('pwaBanner', value ? 'true' : 'false');
+	}
+
+	static get isReducedMotion(): EnabledDisabledSetting {
+		const setting = SiteSettings.#getSetting<EnabledDisabledSetting>('isReducedMotion');
+
+		if (setting !== undefined) {
+			return setting;
+		}
+
+		return 'disabled';
+	}
+
+	static set isReducedMotion(value: EnabledDisabledSetting | undefined) {
+		SiteSettings.#updateSetting('isReducedMotion', value);
+	}
+
+	static get hasSolidBorders(): EnabledDisabledSetting {
+		const setting = SiteSettings.#getSetting<EnabledDisabledSetting>('hasSolidBorders');
+
+		if (setting !== undefined) {
+			return setting;
+		}
+
+		return 'disabled';
+	}
+
+	static set hasSolidBorders(value: EnabledDisabledSetting | undefined) {
+		SiteSettings.#updateSetting('hasSolidBorders', value);
+	}
+
+	static get borderWidth(): BorderWidthSetting {
+		const setting = SiteSettings.#getSetting<BorderWidthSetting>('borderWidth');
+
+		if (setting !== undefined) {
+			return setting;
+		}
+
+		return 'medium';
+	}
+
+	static set borderWidth(value: BorderWidthSetting | undefined) {
+		SiteSettings.#updateSetting('borderWidth', value);
 	}
 }
