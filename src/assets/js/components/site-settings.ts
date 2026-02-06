@@ -362,6 +362,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									<input
 										type="checkbox"
 										name="reduced-motion"
+										value="enabled"
 										id="reduced-motion-input-${this.#id}"
 									/>
 									<label for="reduced-motion-input-${this.#id}">Disable Animations</label>
@@ -371,6 +372,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									<input
 										type="checkbox"
 										name="solid-borders"
+										value="enabled"
 										id="solid-borders-input-${this.#id}"
 									/>
 									<label for="solid-borders-input-${this.#id}">Make underlines and borders solid</label>
