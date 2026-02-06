@@ -190,11 +190,11 @@
 		--avatary-overlay-blend-mode: normal;
 
 		/* Old Buttons */
-		--old-button-border: var(--surface-3) var(--border-style) var(--border-size);
+		--old-button-border: none;
 		--old-button-border-visibility: hidden;
-		--old-button-tint: darkgoldenrod;
-		--old-button-blend-mode: color;
-		--old-button-border-radius: var(--border-radius);
+		--old-button-tint: none;
+		--old-button-blend-mode: normal;
+		--old-button-border-radius: 0.2rem;
 
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;

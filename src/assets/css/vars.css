@@ -311,6 +311,12 @@
 			--table-footer-color: var(--text-2);
 			--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
 
+			/* Input styles */
+			--input-valid-bg: var(--lime-12);
+			--input-valid-color: var(--green-2);
+			--input-invalid-bg: var(--red-12);
+			--input-invalid-color: var(--red-1);
+
 			/* Note styles */
 			--note-success-bg: var(--green-11);
 			--note-success-color: var(--lime-2);
