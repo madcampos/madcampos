@@ -9,9 +9,9 @@
 	<section>
 		<h3>Iframe Element</h3>
 
-		<p>Simple iframe:</p>
+		<p>Simple iframe (html document):</p>
 		<iframe
-			src="/"
+			src="/assets/documents/test/embed.html"
 			title="Home page"
 			width="320"
 			height="240"
@@ -36,10 +36,22 @@
 			loading="lazy"
 			data-load-error
 		>Unable to load iframe</iframe>
+
+		<m-note data-type="info">
+			<span>The previous <code>&lt;iframe&gt;</code> element will porpusefully fail to load the file.</span>
+		</m-note>
 	</section>
 
 	<section>
 		<h3>Embed element</h3>
+
+		<p>HTML document:</p>
+		<embed
+			src="/assets/documents/test/embed.html"
+			type="text/html"
+			width="320"
+			height="240"
+		/>
 
 		<p>PDF file:</p>
 		<embed
@@ -65,10 +77,24 @@
 			height="240"
 			data-load-error
 		/>
+
+		<m-note data-type="info">
+			<span>The previous <code>&lt;embed&gt;</code> element will porpusefully fail to load the file.</span>
+		</m-note>
 	</section>
 
 	<section>
 		<h3>Object Element</h3>
+
+		<p>HTML document:</p>
+		<object
+			data="/assets/documents/test/embed.html"
+			type="text/html"
+			width="320"
+			height="240"
+		>
+			<p>The html file did not load.</p>
+		</object>
 
 		<p>PDF file:</p>
 		<object
@@ -100,5 +126,9 @@
 		>
 			<p>Unable to load</p>
 		</object>
+
+		<m-note data-type="info">
+			<span>The previous <code>&lt;object&gt;</code> element will porpusefully fail to load the file.</span>
+		</m-note>
 	</section>
 </details>

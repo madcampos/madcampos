@@ -190,7 +190,9 @@ const post = (await listAllPosts())[0]!;
 	<section>
 		<h3>CSS Naked Day Info</h3>
 
-		<p>This component is in the header of most pages, but only shows when CSS is disabled.</p>
+		<m-note data-type="info">
+			<span><strong>Note</strong>: This component is in the header of most pages, but only shows when CSS is <em>disabled</em>.</span>
+		</m-note>
 
 		<p><a href="/styleguide/?css=disabled">Reload Page with CSS off</a></p>
 		<p><a href="/styleguide/?css=">Reload Page with CSS back to default</a></p>
@@ -252,8 +254,10 @@ const post = (await listAllPosts())[0]!;
 
 	<section>
 		<h3>In-App Browser Escape</h3>
+		<m-note data-type="info">
+			<span>For various reasons, In-App Browsers are a <strong>curse</strong>. This JS componet loads when you are in one of those.</span>
+		</m-note>
 
-		<p>For various reasons, In-App Browsers are a curse. This JS componet loads when you are in one of those.</p>
 		<p>To test the component click on the link below:</p>
 		<p><a href="/styleguide/?iabEscape=true" rel="nofollow">Reload Page with IAB debugging enabled</a></p>
 	</section>
@@ -429,7 +433,11 @@ const post = (await listAllPosts())[0]!;
 	<section>
 		<h3>Scroll to Top</h3>
 
-		<p>Will be visible overlaying the content.</p>
+		<p>This will be visible overlaying the content as a link to the top of the page.</p>
+
+		<m-note data-type="info">
+			<span><strong>Note</strong>: this component will show on the bottom of the page and not in the middle of it.</span>
+		</m-note>
 
 		<scroll-to-top>
 			<a href="#page-top">
@@ -455,7 +463,8 @@ const post = (await listAllPosts())[0]!;
 	<section>
 		<h3>Skip to Main Content</h3>
 
-		<p>This is the first element, will be visible when focused.</p>
+		<p>This is the first element, and will be visible only when focused.</p>
+
 		<button type="button" id="focus-skip-link">Focus skip link</button>
 		<script type="module" is:inline>
 			document.querySelector('#focus-skip-link')?.addEventListener('click', () => {
@@ -471,7 +480,7 @@ const post = (await listAllPosts())[0]!;
 	<section>
 		<h3>Screen Reader Only</h3>
 
-		<p>The text below will not be visible.</p>
+		<p>The text below will not be rendered visibly, but will still be available to screen readers.</p>
 		<sr-only>This text will only be read by screen readers.</sr-only>
 	</section>
 

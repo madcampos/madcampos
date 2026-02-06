@@ -19,7 +19,7 @@
 
 		<p>Exclusive accordion:</p>
 
-		<details name="exclusive-accordion">
+		<details name="exclusive-accordion" open>
 			<summary>The Good</summary>
 
 			<p>Some good content.</p>
@@ -42,6 +42,9 @@
 		<p>Regular dialog:</p>
 		<button type="button" id="dialog-regular-open">Open Sesame</button>
 		<dialog id="dialog-regular">
+			<header>
+				<h2>Regular popover</h2>
+			</header>
 			<dialog-content>
 				<p>Hi, I'm Sesame, you can close me now.</p>
 			</dialog-content>
@@ -92,7 +95,11 @@
 		<dialog id="dialog-popover" closedby="any" popover>
 			<header>
 				<h2>Popover dialog</h2>
-
+			</header>
+			<dialog-content>
+				<p>Hi, I'm Sesame Pop, you can close me now.</p>
+			</dialog-content>
+			<footer>
 				<button
 					type="button"
 					id="dialog-popover-close"
@@ -101,10 +108,7 @@
 				>
 					Close Sesame Pop
 				</button>
-			</header>
-			<dialog-content>
-				<p>Hi, I'm Sesame Pop, you can close me now.</p>
-			</dialog-content>
+			</footer>
 		</dialog>
 	</section>
 </details>

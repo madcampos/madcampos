@@ -29,7 +29,15 @@
 
 				const rectSize = 100 * window.devicePixelRatio;
 
-				ctx.fillStyle = '#0080ff';
+				ctx.fillStyle = 'deeppink';
+				ctx.strokeStyle = 'white';
+				ctx.lineWidth = 20;
+				ctx.strokeRect(
+					Math.floor(canvas.width / 2) - (rectSize / 2),
+					Math.floor(canvas.height / 2) - (rectSize / 2),
+					rectSize,
+					rectSize
+				);
 				ctx.fillRect(
 					Math.floor(canvas.width / 2) - (rectSize / 2),
 					Math.floor(canvas.height / 2) - (rectSize / 2),

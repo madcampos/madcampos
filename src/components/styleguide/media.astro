@@ -43,10 +43,22 @@
 			width="512"
 			data-load-error
 		/>
+
+		<m-note data-type="info">
+			<span>The previous <code>&lt;img&gt;</code> element will porpusefully fail to load the file.</span>
+		</m-note>
 	</section>
 
 	<section>
 		<h3>Area & Map</h3>
+
+		<m-note data-type="info">
+			<span>
+				<span><strong>Note:</strong> The <code>&lt;area&gt;</code> and <code>&lt;map&gt;</code> elements are not responsive.</span>
+				<br />
+				<span>Resizing the image, or event adjusting it's size with CSS can cause breakage.</span>
+			</span>
+		</m-note>
 
 		<map name="click-here">
 			<area shape="rect" coords="0,3,200,200" href="#click" alt="Click" />
@@ -83,6 +95,10 @@
 			data-load-error
 		>
 		</audio>
+
+		<m-note data-type="info">
+			<span>The previous <code>&lt;audio&gt;</code> element will porpusefully fail to load the file.</span>
+		</m-note>
 	</section>
 
 	<section>
@@ -117,5 +133,9 @@
 		<video controls playsinline data-load-error>
 			<source src="x-err-protocol://error" type="appliaction/x-error" />
 		</video>
+
+		<m-note data-type="info">
+			<span>The previous <code>&lt;video&gt;</code> element will porpusefully fail to load the file.</span>
+		</m-note>
 	</section>
 </details>

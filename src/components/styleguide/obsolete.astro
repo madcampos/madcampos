@@ -15,28 +15,42 @@ const framesetHtml = `
 
 	<section>
 		<h3>Acronym Element</h3>
-		<p><strong>Note:</strong> Use <code>&lt;abbr&gt;</code> instead.</p>
-		<p><acronym title="Abreviation">ABBR</acronym></p>
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>&lt;abbr&gt;</code> element instead.</span>
+		</m-note>
+
+		<p><acronym title="Thank God It is Friday">TGIF</acronym></p>
 	</section>
 
 	<section>
 		<h3>Big Text Element</h3>
-		<p><strong>Note:</strong> Use <code>font-size</code> in CSS instead.</p>
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the CSS <code>font-size</code> property instead.</span>
+		</m-note>
+
 		<p><big>Large Boi</big></p>
 	</section>
 
 	<section>
 		<h3>Text Centering Element</h3>
-		<p><strong>Note:</strong> Use CSS instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use CSS for this instead.</span>
+		</m-note>
+
 		<center><p>This will be centered, apparently.</p></center>
 	</section>
 
 	<section>
 		<h3>Directory Listing Element</h3>
-		<p>
-			<strong>Note:</strong> Use <code>&lt;abbr&gt;</code> for simple lists, or the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/">Tree View</a>
-			pattern instead.
-		</p>
+
+		<m-note data-type="warning">
+			<span>
+				<span><strong>Note:</strong> Use the <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> elements for simple lists.</span>
+				<br />
+				<span>Or use the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/">Tree View</a> pattern instead.</span>
+			</span>
+		</m-note>
 
 		<dir>
 			<li>..</li>
@@ -53,20 +67,38 @@ const framesetHtml = `
 
 	<section>
 		<h3>Font Element</h3>
-		<p><strong>Note:</strong> Use CSS instead.</p>
 
-		<p><font color="deeppink" face="Comic Sans MS, cursive">I'm pretty</font></p>
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use CSS instead.</span>
+		</m-note>
+
+		<p><font color="deeppink" face="'Comic Sans MS', cursive">I'm pretty</font></p>
 	</section>
 
 	<section>
 		<h3>Frameset & Frame Elements</h3>
-		<p><strong>Note:</strong> Use <code>&lt;iframe&gt;</code> instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>&lt;iframe&gt;</code> element instead.</span>
+		</m-note>
+
+		<m-note data-type="info">
+			<span><strong>Note:</strong> These elements should not render on modern browsers and may actually be removed from the DOM tree altogether.</span>
+		</m-note>
+
 		<Fragment set:html={framesetHtml} />
 	</section>
 
 	<section>
 		<h3>Image Element</h3>
-		<p><strong>Note:</strong> Use <code>&lt;img&gt;</code> instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>&lt;img&gt;</code> element instead.</span>
+		</m-note>
+
+		<m-note data-type="info">
+			<span><strong>Note:</strong> On modern browsers, this element may get converted to an <code>&lt;img&gt;</code> element.</span>
+		</m-note>
 
 		{/* @ts-expect-error - Astro considers an error using the src attribute. */}
 		<image
@@ -78,7 +110,14 @@ const framesetHtml = `
 
 	<section>
 		<h3>Marquee Element</h3>
-		<p><strong>Note:</strong> Use CSS instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use CSS instead.</span>
+		</m-note>
+
+		<m-note data-type="info">
+			<span><strong>Note:</strong> The <code>&lt;marquee&gt;</code> element is bad for accessibility as it does not provide a way to control it's animation.</span>
+		</m-note>
 
 		<marquee direction="up" behavior="alternate" width="640" height="480">
 			<marquee behavior="alternate">
@@ -89,16 +128,24 @@ const framesetHtml = `
 
 	<section>
 		<h3>Menu Item Element</h3>
-		<p>
-			<strong>Note:</strong> Use the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/">Menu Bar</a> or <a href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/"
-			>Menu Button</a> patterns instead.
-		</p>
-		<p>There is no example on this one.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/">Menu Bar</a> or <a
+					href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/"
+				>Menu Button</a> patterns instead.</span>
+		</m-note>
+
+		<m-note data-type="info">
+			<span>There is no example on this element.</span>
+		</m-note>
 	</section>
 
 	<section>
 		<h3>Non-Breaking Text Element</h3>
-		<p><strong>Note:</strong> Use <code>white-space</code> in CSS instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>white-space</code> CSS property instead.</span>
+		</m-note>
 
 		<p style="max-inline-size: var(--size-content-0); outline: solid thin var(--theme-color); overflow: auto">
 			<nobr>pneumonoultramicroscopicsilicovolcanoconiosis</nobr>
@@ -107,7 +154,14 @@ const framesetHtml = `
 
 	<section>
 		<h3>No Embed Element</h3>
-		<p><strong>Note:</strong> Use <code>&lt;object&gt;</code> or <code>&lt;iframe&gt;</code> instead.</p>
+
+		<m-note data-type="warning">
+			<span>
+				<span><strong>Note:</strong> The <code>&lt;embed&gt;</code> element does not provide a fallback option automatically.</span>
+				<br />
+				<span>Use the <code>&lt;object&gt;</code> or <code>&lt;iframe&gt;</code> elements instead if this functionality is needed.</span>
+			</span>
+		</m-note>
 
 		<p>Show fallback content if the <code>&lt;embed&gt;</code> element is not supported:</p>
 		<noembed>No embed for you.</noembed>
@@ -115,7 +169,10 @@ const framesetHtml = `
 
 	<section>
 		<h3>No Frames Element</h3>
-		<p><strong>Note:</strong> Use <code>&lt;iframe&gt;</code> instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>&lt;object&gt;</code> or <code>&lt;iframe&gt;</code> elements instead if this functionality is needed.</span>
+		</m-note>
 
 		<p>Show fallback content if the <code>&lt;frame&gt;</code> element is not supported:</p>
 		<noframes>No frame for you.</noframes>
@@ -123,7 +180,10 @@ const framesetHtml = `
 
 	<section>
 		<h3>Object Parameter Element</h3>
-		<p><strong>Note:</strong> Use <code>data-*</code> attributes instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Plugind are unsupported in modern browsers. If you need to pass data to an element use the <code>data-*</code> attributes instead.</span>
+		</m-note>
 
 		<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
 		<object
@@ -137,15 +197,30 @@ const framesetHtml = `
 			<param name="bgcolor" value="#fff" />
 			<p>The flash file did not load.</p>
 		</object>
+
+		<m-note data-type="info">
+			<span>This file will not load as flash is not supported anymore, regardless.</span>
+		</m-note>
 	</section>
 
 	<section>
 		<h3>Plain Text Element</h3>
-		<p><strong>Note:</strong> <strong><em>DON'T USE THIS ELEMENT.</em></strong></p>
-		<p><strong>I repeat:</strong> <strong><em>DON'T USE THIS ELEMENT.</em></strong></p>
-		<p><strong>For good measure:</strong> <strong><em>DON'T USE THIS ELEMENT.</em></strong></p>
 
-		<p><strong>Note:</strong> Use <code>&lt;pre&gt;</code> instead.</p>
+		<m-note data-type="alert">
+			<span><strong>Note: <em>DON'T USE THIS ELEMENT.</em></strong></span>
+		</m-note>
+
+		<m-note data-type="warning">
+			<span><strong>I repeat: <em>DON'T USE THIS ELEMENT.</em></strong></span>
+		</m-note>
+
+		<m-note data-type="error">
+			<span><strong>For good measure: <em>DON'T USE THIS ELEMENT.</em></strong></span>
+		</m-note>
+
+		<m-note data-type="info">
+			<span><strong>Note:</strong> Use the <code>&lt;pre&gt;</code> element instead.</span>
+		</m-note>
 
 		<p>This element will make <strong><em>EVERYTHING</em></strong> after it to render as plain text.</p>
 
@@ -158,7 +233,10 @@ const framesetHtml = `
 
 	<section>
 		<h3>Ruby Base & Ruby Text Container Elements</h3>
-		<p><strong>Note:</strong> Use just the text inside a <code>&lt;ruby&gt;</code> element instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use just the text inside a <code>&lt;ruby&gt;</code> element instead.</span>
+		</m-note>
 
 		<p>
 			<ruby lang="ja">
@@ -177,17 +255,23 @@ const framesetHtml = `
 
 	<section>
 		<h3>Strikethrough Element</h3>
-		<p><strong>Note:</strong> Use <code>&lt;s&gt;</code> instead.</p>
+
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>&lt;s&gt;</code> element instead.</span>
+		</m-note>
 
 		<p>This text is <strike>stirked</strike>.</p>
 	</section>
 
 	<section>
 		<h3>Teletype Text Element</h3>
-		<p>
-			<strong>Note:</strong> Use <code>&lt;code&gt;</code>, <code>&lt;kbd&gt;</code>, <code>&lt;samp&gt;</code>, <code>&lt;pre&gt;</code>, or <code>&lt;var&gt;</code>
-			instead.
-		</p>
+
+		<m-note data-type="warning">
+			<span>
+				<strong>Note:</strong> Use one of the <code>&lt;code&gt;</code>, <code>&lt;kbd&gt;</code>, <code>&lt;samp&gt;</code>, <code>&lt;pre&gt;</code>, or <code
+				>&lt;var&gt;</code> elements instead.
+			</span>
+		</m-note>
 
 		<p><tt>shutdown -t 0 -r</tt></p>
 	</section>
@@ -195,10 +279,13 @@ const framesetHtml = `
 	<section>
 		<h3><code>&lt;xmp&gt;</code></h3>
 
-		<p><strong>Note:</strong> Use <code>&lt;pre&gt;</code> instead.</p>
+		<m-note data-type="warning">
+			<span><strong>Note:</strong> Use the <code>&lt;pre&gt;</code> element instead.</span>
+		</m-note>
 
-		<p>This element ignores HTML tags inside of it, making it tricky to work with.</p>
-
+		<m-note data-type="info">
+			<span><strong>Note:</strong> This element ignores HTML tags inside of it, making it error prone.</span>
+		</m-note>
 		<iframe
 			src="/assets/documents/test/xmp.html"
 			loading="lazy"
