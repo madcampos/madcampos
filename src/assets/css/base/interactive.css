@@ -89,12 +89,19 @@
 			gap: var(--size-2);
 
 			button { flex-shrink: 0; }
+
+			@media (max-width: 40rem) { flex-direction: column-reverse; }
 		}
 
 		& > dialog-content, & > form > dialog-content {
 			flex-grow: 1;
 			overflow: auto;
 			inline-size: 100%;
+		}
+
+		@media (max-width: 40rem) {
+			inline-size: 100dvi;
+			block-size: 100dvb;
 		}
 	}
 }

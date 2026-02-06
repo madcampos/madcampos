@@ -52,7 +52,7 @@
 		site-nav { display: none; }
 		old-style-buttons { display: none; }
 		m-webrings { display: none; }
-		theme-switcher { display: none; }
+		site-settings { display: none; }
 		scroll-to-top { display: none; }
 		a:has(m-avatar)::after { display: none; }
 		m-logo a::after { display: none; }

@@ -157,8 +157,14 @@
 		--button-active-color: var(--text-1);
 		--button-active-border-color: var(--text-1);
 		--button-disabled-bg: var(--gray-5);
-		--button-disabled-color: var(--gray-10);
-		--button-disabled-border-color: var(--gray-10);
+		--button-disabled-color: var(--gray-7);
+		--button-disabled-border-color: var(--gray-7);
+		--button-primary-bg: var(--theme-9);
+		--button-primary-color: var(--theme-0);
+		--button-primary-border-color: var(--theme-0);
+		--button-secondary-bg: var(--surface-2);
+		--button-secondary-color: var(--secondary-color);
+		--button-secondary-border-color: var(--secondary-color);
 
 		/* Progress styles */
 		--progress-bg: var(--surface-2);
@@ -310,6 +316,17 @@
 			--table-footer-bg: var(--theme-12);
 			--table-footer-color: var(--text-2);
 			--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
+
+			/* Button styles */
+			--button-disabled-bg: var(--gray-10);
+			--button-disabled-color: var(--gray-6);
+			--button-disabled-border-color: var(--gray-6);
+			--button-primary-bg: var(--theme-color);
+			--button-primary-color: var(--text-1);
+			--button-primary-border-color: var(--text-1);
+			--button-secondary-bg: var(--surface-2);
+			--button-secondary-color: var(--secondary-color);
+			--button-secondary-border-color: var(--secondary-color);
 
 			/* Input styles */
 			--input-valid-bg: var(--lime-12);

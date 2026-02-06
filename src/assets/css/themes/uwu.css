@@ -139,6 +139,12 @@
 		--button-disabled-bg: var(--gray-5);
 		--button-disabled-color: var(--gray-10);
 		--button-disabled-border-color: var(--gray-10);
+		--button-primary-bg: var(--theme-color);
+		--button-primary-color: var(--text-1);
+		--button-primary-border-color: var(--text-1);
+		--button-secondary-bg: var(--secondary-color);
+		--button-secondary-color: var(--accent-color);
+		--button-secondary-border-color: var(--accent-color);
 
 		/* Progress styles */
 		--progress-bg: var(--secondary-10);

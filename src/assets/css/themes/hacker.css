@@ -96,6 +96,12 @@
 		--button-disabled-bg: var(--gray-11);
 		--button-disabled-color: var(--gray-3);
 		--button-disabled-border-color: var(--gray-3);
+		--button-primary-bg: var(--theme-color);
+		--button-primary-color: var(--surface-1);
+		--button-primary-border-color: var(--secondary-color);
+		--button-secondary-bg: var(--surface-2);
+		--button-secondary-color: var(--secondary-color);
+		--button-secondary-border-color: var(--secondary-color);
 
 		/* Progress styles */
 		--progress-bg: var(--camo-12);

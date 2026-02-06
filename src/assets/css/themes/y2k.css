@@ -96,6 +96,12 @@
 		--button-disabled-bg: dimgray;
 		--button-disabled-color: darkgray;
 		--button-disabled-border-color: darkgray;
+		--button-primary-bg: aqua;
+		--button-primary-color: black;
+		--button-primary-border-color: aqua;
+		--button-secondary-bg: darkslategray;
+		--button-secondary-color: silver;
+		--button-secondary-border-color: slategray;
 
 		/* Progress styles */
 		--progress-bg: lightgray;

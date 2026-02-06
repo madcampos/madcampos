@@ -152,6 +152,20 @@
 		}
 	}
 
+	:is(input, button):is([type='submit'], [data-primary]) {
+		outline-color: var(--button-primary-border-color);
+		border-color: var(--button-primary-border-color);
+		background-color: var(--button-primary-bg);
+		color: var(--button-primary-color);
+	}
+
+	:is(input, button):is([type='reset'], [data-secondary]) {
+		outline-color: var(--button-secondary-border-color);
+		border-color: var(--button-secondary-border-color);
+		background-color: var(--button-secondary-bg);
+		color: var(--button-secondary-color);
+	}
+
 	/* Image input */
 
 	input[type='image'] {

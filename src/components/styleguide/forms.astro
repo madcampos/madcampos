@@ -868,21 +868,34 @@
 			</input-wrapper>
 		</fieldset>
 
+		<fieldset>
+			<legend>Disabled Elements</legend>
+			<!-- TODO: add disabled elements -->
+		</fieldset>
+
 		<footer>
-			<button type="submit">Submit</button>
-			<input type="submit" value="Submit, but input" />
-			<input
-				type="image"
-				src="/assets/images/test/fancy-submit.svg"
-				alt="Submit, but fancier"
-				height="32"
-			/>
-			<hr />
-			<button type="reset">Reset</button>
-			<input type="reset" value="Reset, but input" />
-			<hr />
-			<button type="button" id="button-button">Button</button>
-			<input type="button" id="input-button" value="Button, but input" />
+			<p>
+				<button type="submit">Submit</button>
+				<input type="submit" value="Submit, but input" />
+				<input
+					type="image"
+					src="/assets/images/test/fancy-submit.svg"
+					alt="Submit, but fancier"
+					height="32"
+				/>
+			</p>
+			<p>
+				<button type="reset">Reset</button>
+				<input type="reset" value="Reset, but input" />
+			</p>
+			<p>
+				<button type="button" id="button-button">Button</button>
+				<input type="button" id="input-button" value="Button, but input" />
+			</p>
+			<p>
+				<button type="button" id="button-button" disabled>Disabled</button>
+				<input type="button" id="input-button" disabled value="Button, but disabled input" />
+			</p>
 
 			<script type="module" is:inline>
 				document.querySelector('#button-button')?.addEventListener(
