@@ -87,14 +87,6 @@
 			text-anchor: middle;
 		}
 
-		.hidden-text {
-			fill: none;
-			pointer-events: none;
-			font-size: 1px;
-			stroke: none;
-			user-select: none;
-		}
-
 		.button-badge-bg { fill: red; }
 		.button-badge-text {
 			fill: white;
