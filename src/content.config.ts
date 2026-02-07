@@ -1,6 +1,8 @@
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { defineCollection } from 'astro:content';
 import { blogSchema } from './schemas/blog.ts';
+import { blogrollSchema } from './schemas/blogroll.ts';
+import { bookmarksSchema } from './schemas/bookmarks.ts';
 import { changelogSchema } from './schemas/changelog.ts';
 import { projectsSchema } from './schemas/projects.ts';
 import { talksSchema } from './schemas/talks.ts';
@@ -29,9 +31,21 @@ const talksCollection = defineCollection({
 	schema: talksSchema
 });
 
+const bookmarksCollection = defineCollection({
+	loader: file('./src/content/bookmarks.json'),
+	schema: bookmarksSchema
+});
+
+const blogrollCollection = defineCollection({
+	loader: file('./src/content/blogroll.json'),
+	schema: blogrollSchema
+});
+
 export const collections = {
 	blog: blogCollection,
 	changelog: changelogCollection,
 	projects: projectsCollection,
-	talks: talksCollection
+	talks: talksCollection,
+	bookmarks: bookmarksCollection,
+	blogroll: blogrollCollection
 };

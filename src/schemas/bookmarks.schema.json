@@ -1,0 +1,57 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"$schema": { "type": "string" },
+		"items": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "The section title."
+					},
+					"description": {
+						"type": "string",
+						"description": "The section description."
+					},
+					"links": {
+						"type": "array",
+						"description": "The links for this section.",
+						"items": {
+							"type": "object",
+							"properties": {
+								"url": {
+									"type": "string",
+									"format": "uri",
+									"description": "The link for the bookmark."
+								},
+								"title": {
+									"type": "string",
+									"description": "The bookmark title."
+								},
+								"description": {
+									"type": "string",
+									"description": "The bookmark description"
+								},
+								"type": {
+									"type": "string",
+									"enum": ["article", "guidelines", "podcast", "reference", "tutorial", "video", "website"],
+									"description": "The type of link this bookmark is."
+								},
+								"note": {
+									"type": "string",
+									"description": "A note about this item."
+								}
+							},
+							"required": ["url", "title", "description", "type"]
+						}
+					}
+				},
+				"required": ["title", "description", "links"]
+			}
+		}
+	},
+	"required": ["$schema", "items"]
+}

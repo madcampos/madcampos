@@ -1,0 +1,24 @@
+{
+	"$schema": "../schemas/blogroll.schema.json",
+	"items": [
+		{ "title": "Adrian Roselli's Blog", "url": "https://adrianroselli.com/posts" },
+		{ "title": "Oddbird", "url": "https://www.oddbird.net/blog/" },
+		{ "title": "Josh Comeau", "url": "https://www.joshwcomeau.com/" },
+		{ "title": "Read the Tea Leaves", "url": "https://nolanlawson.com/" },
+		{ "title": "Lea Verou", "url": "https://lea.verou.me/blog/" },
+		{ "title": "CSS Wizardry", "url": "https://csswizardry.com/blog/" },
+		{ "title": "Adam Argyle", "url": "https://nerdy.dev/" },
+		{ "title": "Léonie Watson", "url": "https://tink.uk/" },
+		{ "title": "Go Make things", "url": "https://gomakethings.com/articles/" },
+		{ "title": "Jake Archibald", "url": "https://jakearchibald.com/" },
+		{ "title": "Hixie's Natural Log", "url": "https://ln.hixie.ch/" },
+		{ "title": "Rachel Andrew", "url": "https://rachelandrew.co.uk/archives/" },
+		{ "title": "Bram.us", "url": "https://www.bram.us/" },
+		{ "title": "Ben Myers", "url": "https://benmyers.dev/" },
+		{ "title": "Erik Kroes", "url": "https://www.erikkroes.nl/blog/" },
+		{ "title": "HeydonWorks", "url": "https://heydonworks.com/latest/" },
+		{ "title": "Una Kravets", "url": "https://una.im/blog" },
+		{ "title": "Ashlee M Boyer", "url": "https://ashleemboyer.com/blog" },
+		{ "title": "Smashing Magazine", "url": "https://www.smashingmagazine.com/articles/" }
+	]
+}

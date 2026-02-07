@@ -1,0 +1,26 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"$schema": { "type": "string" },
+		"items": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "The blog title."
+					},
+					"url": {
+						"type": "string",
+						"format": "uri",
+						"description": "The URL for the blog."
+					}
+				},
+				"required": ["title", "url"]
+			}
+		}
+	},
+	"required": ["$schema", "items"]
+}
