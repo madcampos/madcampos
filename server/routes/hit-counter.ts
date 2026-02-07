@@ -1,21 +1,10 @@
 /* eslint-disable @typescript-eslint/only-throw-error, @typescript-eslint/prefer-nullish-coalescing */
 
 import { env } from 'cloudflare:workers';
-
-const DEFAULT_HEADERS = {
-	'Access-Control-Allow-Origin': env.NODE_ENV === 'production' ? 'https://madcampos.dev' : '*',
-	'Access-Control-Allow-Methods': 'OPTIONS, GET, PUT',
-	'Access-Control-Allow-Headers': '*',
-	'Access-Control-Expose-Headers': '*',
-	'Access-Control-Max-Age': '86400'
-};
+import { type StatusResponse, DEFAULT_HEADERS, ErrorResponse, generateVisitorId, STATUS_CONFLICT, STATUS_OK } from '../utils/index.ts';
 
 const MIN_HIT_RESULTS = 2;
 const TOTAL_HIT_RESULTS = 10;
-
-const STATUS_OK = 200;
-const STATUS_BAD_REQUEST = 400;
-const STATUS_CONFLICT = 409;
 
 interface HitRecord {
 	id: number;
@@ -34,59 +23,6 @@ interface CountResult {
 interface HitCountResponse extends CountResult {
 	url: string;
 	visitTimeAvgInSec: number;
-}
-
-interface StatusResponse {
-	success: boolean;
-	message: string;
-}
-
-class ErrorResponse extends Response {
-	constructor(message: string, status = STATUS_BAD_REQUEST) {
-		super(
-			JSON.stringify(
-				{
-					success: false,
-					message
-				} satisfies StatusResponse
-			),
-			{
-				status,
-				headers: {
-					...DEFAULT_HEADERS,
-					'Content-Type': 'application/json'
-				}
-			}
-		);
-	}
-}
-
-async function generateVisitorId(request: Request<unknown, CfProperties>) {
-	const data = JSON.stringify({
-		postalCode: request.cf?.postalCode,
-		city: request.cf?.city,
-		metroCode: request.cf?.metroCode,
-		region: request.cf?.region,
-		regionCode: request.cf?.regionCode,
-		country: request.cf?.country || 'AQ',
-		colo: request.cf?.colo,
-		continent: request.cf?.continent,
-		asn: request.cf?.asn,
-		timezone: request.cf?.timezone,
-		lattitude: request.cf?.latitude,
-		longitude: request.cf?.longitude,
-		ipAddress: request.headers.get('CF-Connecting-IP') || '0.0.0.0',
-		userAgent: request.headers.get('User-Agent') || 'Unknown/0.0.0',
-		accept: request.headers.get('Accept'),
-		acceptLanguage: request.headers.get('Accept-Language'),
-		acceptEncoding: request.headers.get('Accept-Encoding')
-	});
-	const encoder = new TextEncoder();
-	const dataBuffer = encoder.encode(data);
-	const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
-
-	// @ts-expect-error - Typescript is missing the string conversion method
-	return new Uint8Array(hashBuffer).toHex() as string;
 }
 
 function parseUrl(request: Request) {
@@ -114,15 +50,11 @@ function parseUrl(request: Request) {
 	return url;
 }
 
-export function visitorCountOptions() {
-	return new Response(null, { status: STATUS_OK, headers: DEFAULT_HEADERS });
-}
-
 export async function getVisitorCount(request: Request<unknown, CfProperties>) {
 	try {
 		const url = parseUrl(request);
 
-		const { totalVisitors = 0, uniqueVisitors = 0 } = (await env.HitCounterDb.prepare(`
+		const { totalVisitors = 0, uniqueVisitors = 0 } = (await env.Database.prepare(`
 			SELECT
 				COUNT(*) as totalVisitors,
 				COUNT(DISTINCT visitor_id) as uniqueVisitors
@@ -130,7 +62,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties>) {
 			WHERE url = ?
 		`).bind(url).first<CountResult>()) ?? {};
 
-		const recentHits = await env.HitCounterDb.prepare(`
+		const recentHits = await env.Database.prepare(`
 			SELECT timestamp
 			FROM hit_counter
 			WHERE url = ?
@@ -190,7 +122,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 		const country = request.cf?.country as string || 'AQ';
 		const userAgent = request.headers.get('User-Agent') || 'Unknown/0.0.0';
 
-		const recentVisit = await env.HitCounterDb.prepare(`
+		const recentVisit = await env.Database.prepare(`
 			SELECT id, timestamp
 			FROM hit_counter
 			WHERE
@@ -207,7 +139,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 			return new ErrorResponse(`Only one visit allowd every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
 
-		const { success, error } = await env.HitCounterDb.prepare(`
+		const { success, error } = await env.Database.prepare(`
 			INSERT INTO hit_counter
 				(url, visitor_id, country, user_agent)
 			VALUES

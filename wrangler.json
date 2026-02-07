@@ -38,10 +38,10 @@
 	},
 	"d1_databases": [
 		{
-			"binding": "HitCounterDb",
-			"database_name": "hit-counter",
-			"database_id": "f0efbad9-f79e-4e49-af08-435ac56eb623",
-			"preview_database_id": "hit-counter",
+			"binding": "Database",
+			"database_name": "madcampos-site-db",
+			"database_id": "1c7c0bcb-6434-4d49-b3fc-6b4417566da5",
+			"preview_database_id": "madcampos-site-db",
 			"migrations_dir": "db/migrations",
 			"migrations_table": "migrations"
 		}
@@ -66,10 +66,10 @@
 			},
 			"d1_databases": [
 				{
-					"binding": "HitCounterDb",
-					"database_name": "hit-counter",
-					"database_id": "hit-counter-local",
-					"preview_database_id": "hit-counter",
+					"binding": "Database",
+					"database_name": "madcampos-site-db",
+					"database_id": "madcampos-site-db-local",
+					"preview_database_id": "madcampos-site-db",
 					"migrations_dir": "db/migrations",
 					"migrations_table": "migrations"
 				}

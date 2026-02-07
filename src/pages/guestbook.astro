@@ -1,10 +1,14 @@
 ---
+import '../assets/css/pages/guestbook.css';
+
 import HtmlHead from '../components/HtmlHead.astro';
 import Logo from '../components/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
+
+const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAAAABhvDBhr_iqDTR0H';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -39,17 +43,16 @@ import Webrings from '../components/Webrings.astro';
 		</header>
 
 		<main id="main">
-			<fieldset>
-				<legend>Sign Guestbook</legend>
-
-				<form action="" method="post">
+			<form action="" method="post">
+				<fieldset>
+					<legend>Sign Guestbook</legend>
 					<input-wrapper>
 						<label for="name-input">Name</label>
 						<input
 							type="text"
 							name="name"
 							id="name-input"
-							maxlength="120"
+							maxlength="128"
 							autocomplete="name"
 							required
 						/>
@@ -67,7 +70,7 @@ import Webrings from '../components/Webrings.astro';
 							spellcheck="true"
 							wrap="soft"
 							required
-							maxlength="750"
+							maxlength="512"
 						></textarea>
 						<input-error>Message is required.</input-error>
 					</input-wrapper>
@@ -76,7 +79,7 @@ import Webrings from '../components/Webrings.astro';
 						<output for="message-input" aria-live="off">
 							<progress
 								id="word-count"
-								max="750"
+								max="512"
 								value="0"
 							>
 								&mdash;
@@ -103,9 +106,10 @@ import Webrings from '../components/Webrings.astro';
 					<input-wrapper>
 						<div
 							class="cf-turnstile"
-							data-sitekey="0x4AAAAAABhvDBhr_iqDTR0H"
+							data-sitekey={turnstileKey}
 							data-response-field="true"
-							data-response-field-name="check-token"
+							data-response-field-name="token"
+							data-size="compact"
 						>
 						</div>
 					</input-wrapper>
@@ -115,8 +119,8 @@ import Webrings from '../components/Webrings.astro';
 						<hr />
 						<button type="reset">Reset</button>
 					</footer>
-				</form>
-			</fieldset>
+				</fieldset>
+			</form>
 
 			<fieldset>
 				<legend>Messages</legend>
@@ -132,6 +136,6 @@ import Webrings from '../components/Webrings.astro';
 		</footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
-		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" type="module" is:inline></script>
 	</body>
 </html>

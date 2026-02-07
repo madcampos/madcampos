@@ -1,0 +1,24 @@
+@layer pages {
+	form {
+		inline-size: fit-content;
+		max-inline-size: 100%;
+		margin-inline: auto;
+
+		output {
+			display: flex;
+			align-items: center;
+			gap: var(--size-3);
+		}
+
+		footer {
+			display: flex;
+
+			hr {
+				border: none;
+				flex-shrink: 1;
+			}
+		}
+	}
+
+	.cf-turnstile { margin-inline: auto; }
+}
