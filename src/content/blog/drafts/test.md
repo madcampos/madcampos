@@ -50,7 +50,7 @@ Here is an image:
 
 ![Alt text](./assets/test.png)
 
-Here is an inline image: ![](./assets/icon-64x64.png)
+Here is an inline image: ![site favicon](./assets/icon-64x64.png)
 
 ## Paragraphs
 

@@ -62,8 +62,8 @@
 	sup { inset-block-start: -0.5em; }
 
 	mark {
-		color: var(--surface-1);
-		background-color: var(--accent-color);
+		color: var(--highlight-mark-color);
+		background-color: var(--highlight-mark-bg);
 	}
 
 	:is(s, del) { text-decoration-line: line-through; }

@@ -102,30 +102,28 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				</blockquote>
 
 				<post-metadata>
-					<aside>
-						<span>
-							Published on <time itemprop="datePublished" class="dt-published" datetime={createdAt.toISOString()}>{formatter.format(createdAt)}</time>.
-						</span>
+					<span>
+						Published on <time itemprop="datePublished" class="dt-published" datetime={createdAt.toISOString()}>{formatter.format(createdAt)}</time>.
+					</span>
 
-						{
-							updatedAt && (
-								<span>
-									Updated on <time itemprop="dateModified" class="dt-updated" datetime={updatedAt.toISOString()}>{formatter.format(updatedAt)}</time>.
-								</span>
-							)
-						}
+					{
+						updatedAt && (
+							<span>
+								Updated on <time itemprop="dateModified" class="dt-updated" datetime={updatedAt.toISOString()}>{formatter.format(updatedAt)}</time>.
+							</span>
+						)
+					}
 
-						{
-							readingTime && (
-								<span>
-									<time itemprop="timeRequired" class="dt-duration" datetime={`PT${readingTime}M`}>
-										{readingTime} minute read
-									</time>
-									{wordCount && <span> &mdash; {wordCount} words</span>}
-								</span>
-							)
-						}
-					</aside>
+					{
+						readingTime && (
+							<span>
+								<time itemprop="timeRequired" class="dt-duration" datetime={`PT${readingTime}M`}>
+									{readingTime} minute read
+								</time>
+								{wordCount && <span> &mdash; {wordCount} words</span>}
+							</span>
+						)
+					}
 				</post-metadata>
 
 				<share-options></share-options>
@@ -135,27 +133,23 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		<main id="main">
 			{
 				updates && (
-					<aside>
-						<hr />
-						<details>
-							<summary>Update History</summary>
-							<dl>
-								{
-									updates.map((update) => (
-										<dt>
-											<time datetime={update.date.toISOString()}>
-												{formatter.format(update.date)}
-											</time>
-										</dt>
-										<dd>
-											<p><Fragment set:html={inlineMarkdownRender(update.changes)} /></p>
-										</dd>
-									))
-								}
-							</dl>
-						</details>
-						<hr />
-					</aside>
+					<details>
+						<summary>Update History</summary>
+						<dl>
+							{
+								updates.map((update) => (
+									<dt>
+										<time datetime={update.date.toISOString()}>
+											{formatter.format(update.date)}
+										</time>
+									</dt>
+									<dd>
+										<p><Fragment set:html={inlineMarkdownRender(update.changes)} /></p>
+									</dd>
+								))
+							}
+						</dl>
+					</details>
 				)
 			}
 
@@ -176,7 +170,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 		<footer>
 			<author-card>
-				<aside itemprop="author" itemscope itemtype="https://schema.org/Person">
+				<div itemprop="author" itemscope itemtype="https://schema.org/Person">
 					<a href="https://madcampos.dev/">
 						<m-avatar>
 							<picture
@@ -210,27 +204,23 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						others. He strongly believe that technology and specially the web should be open and available to eveyone, and that's why he's always looking for ways to
 						make the web a better place and contribute to open source projects.
 					</p>
-				</aside>
+				</div>
 			</author-card>
 
 			<!--
-				<aside>
-					<details>
-						<summary>This post in other platforms</summary>
-						<ul>
-							<li>
-								<a class="u-syndication u-as-downstream-duplicate u-alternate" rel="syndication" href="">...</a>
-							</li>
-						</ul>
-					</details>
-				</aside>
+				<details>
+					<summary>This post in other platforms</summary>
+					<ul>
+						<li>
+							<a class="u-syndication u-as-downstream-duplicate u-alternate" rel="syndication" href="">...</a>
+						</li>
+					</ul>
+				</details>
 			-->
 			<!--
-				<aside>
-					<details>
-						<summary>Comments and mentions</summary>
-					</details>
-				</aside>
+				<details>
+					<summary>Comments and mentions</summary>
+				</details>
 			-->
 
 			{
@@ -265,7 +255,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 										relatedPosts.map((post) => (
 											<li>
 												<Card
-													url={`/blog/${post.url}/`}
+													url={`/blog/${post.url}`}
 													itemtype="https://schema.org/BlogPosting"
 													image={post.image}
 													imageAlt={post.imageAlt ?? ''}
@@ -283,7 +273,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				)
 			}
 
-			<aside id="post-license">
+			<div id="post-license">
 				<details open>
 					<summary>License</summary>
 					<p>
@@ -293,7 +283,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				</details>
 
 				<PromptInjection />
-			</aside>
+			</div>
 
 			<OldStyleButtons />
 			<Webrings />

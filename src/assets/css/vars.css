@@ -72,14 +72,14 @@
 
 		--theme-color: var(--theme-6);
 		--secondary-color: var(--theme-10);
-		--accent-color: var(--accent-5);
+		--accent-color: var(--accent-6);
 		--complementary-color: var(--red-7);
 
 		/* Base colors */
 		--text-1: var(--gray-11);
 		--text-2: var(--gray-9);
 		--surface-1: color-mix(in oklch increasing hue, var(--gray-0) 85%, var(--theme-0));
-		--surface-2: color-mix(in oklch increasing hue, var(--gray-3) 80%, var(--theme-3));
+		--surface-2: color-mix(in oklch increasing hue, var(--gray-1) 80%, var(--theme-2));
 		--surface-3: color-mix(in oklch increasing hue, var(--gray-6) 80%, var(--theme-6));
 		--surface-4: transparent;
 
@@ -91,15 +91,17 @@
 
 		/* Code colors */
 		--diff-add-color: var(--green-12);
-		--diff-add-bg: color-mix(in srgb, var(--green-3), transparent);
+		--diff-add-bg: color-mix(in srgb, var(--green-3), transparent 80%);
 		--diff-remove-color: var(--red-12);
-		--diff-remove-bg: color-mix(in srgb, var(--red-3), transparent);
+		--diff-remove-bg: color-mix(in srgb, var(--red-3), transparent 80%);
 		--highlight-color: var(--gray-7);
 		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
 		--highlight-error-color: var(--red-12);
 		--highlight-error-bg: color-mix(in srgb, var(--red-2), transparent);
 		--highlight-warning-color: var(--yellow-7);
 		--highlight-warning-bg: color-mix(in srgb, var(--choco-7), transparent);
+		--highlight-mark-bg: var(--accent-5);
+		--highlight-mark-color: var(--gray-10);
 
 		/* Table styles */
 		--table-header-bg: var(--theme-2);
@@ -144,9 +146,9 @@
 		--fieldset-border: var(--border-style) var(--border-size) var(--theme-color);
 
 		/* Button styles */
-		--button-bg: var(--surface-2);
-		--button-color: var(--theme-color);
-		--button-border: var(--border-style) var(--border-size) var(--theme-color);
+		--button-bg: white;
+		--button-color: var(--theme-8);
+		--button-border: var(--border-style) var(--border-size) var(--theme-8);
 		--button-hover-bg: var(--surface-2);
 		--button-hover-color: var(--accent-color);
 		--button-hover-border-color: var(--accent-color);
@@ -197,14 +199,14 @@
 		--note-debug-color: var(--purple-12);
 
 		/* Baseline colors */
-		--baseline-high-color: #1ea446;
-		--baseline-high-bg: #c4eed0;
-		--baseline-low-color: #1b6ef3;
-		--baseline-low-bg: #a8c7fa;
-		--baseline-limited-color: #dd7308;
-		--baseline-limited-bg: silver;
-		--baseline-no-data-color: dimgray;
-		--baseline-no-data-bg: dimgray;
+		--baseline-high-color: var(--green-9);
+		--baseline-high-bg: var(--green-4);
+		--baseline-low-color: var(--blue-9);
+		--baseline-low-bg: var(--blue-4);
+		--baseline-limited-color: var(--orange-9);
+		--baseline-limited-bg: var(--gray-5);
+		--baseline-no-data-color: var(--gray-7);
+		--baseline-no-data-bg: var(--gray-7);
 
 		/* Tag list colors */
 		--tag-bg: var(--surface-2);
@@ -276,6 +278,7 @@
 
 	@media screen and (prefers-color-scheme: dark) {
 		:root {
+			--accent-color: var(--accent-5);
 			--secondary-color: var(--theme-1);
 
 			/* Base colors */
@@ -294,9 +297,9 @@
 
 			/* Code colors */
 			--diff-add-color: var(--lime-4);
-			--diff-add-bg: color-mix(in srgb, var(--green-10), transparent);
-			--diff-remove-color: var(--red-8);
-			--diff-remove-bg: color-mix(in srgb, var(--red-11), transparent);
+			--diff-add-bg: color-mix(in srgb, var(--green-10), transparent 80%);
+			--diff-remove-color: var(--red-4);
+			--diff-remove-bg: color-mix(in srgb, var(--red-11), transparent 80%);
 			--highlight-color: var(--gray-5);
 			--highlight-default-bg: color-mix(in srgb, var(--gray-7), transparent);
 			--highlight-error-color: var(--red-6);
@@ -318,12 +321,15 @@
 			--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
 
 			/* Button styles */
+			--button-bg: var(--gray-10);
+			--button-color: var(--theme-color);
+			--button-border: var(--border-style) var(--border-size) var(--theme-color);
 			--button-disabled-bg: var(--gray-10);
 			--button-disabled-color: var(--gray-6);
 			--button-disabled-border-color: var(--gray-6);
-			--button-primary-bg: var(--theme-color);
-			--button-primary-color: var(--text-1);
-			--button-primary-border-color: var(--text-1);
+			--button-primary-bg: var(--theme-4);
+			--button-primary-color: var(--gray-12);
+			--button-primary-border-color: var(--gray-12);
 			--button-secondary-bg: var(--surface-2);
 			--button-secondary-color: var(--secondary-color);
 			--button-secondary-border-color: var(--secondary-color);
@@ -339,14 +345,24 @@
 			--note-success-color: var(--lime-2);
 			--note-error-bg: var(--red-11);
 			--note-error-color: var(--red-2);
-			--note-warning-bg: var(--yellow-11);
-			--note-warning-color: var(--brown-1);
+			--note-warning-bg: var(--yellow-12);
+			--note-warning-color: var(--yellow-2);
 			--note-alert-bg: var(--teal-10);
 			--note-alert-color: var(--jungle-2);
 			--note-info-bg: var(--blue-12);
 			--note-info-color: var(--blue-2);
 			--note-debug-bg: var(--purple-10);
 			--note-debug-color: var(--violet-2);
+
+			/* Baseline colors */
+			--baseline-high-color: var(--green-6);
+			--baseline-high-bg: var(--green-10);
+			--baseline-low-color: var(--blue-5);
+			--baseline-low-bg: var(--blue-9);
+			--baseline-limited-color: var(--orange-6);
+			--baseline-limited-bg: var(--gray-7);
+			--baseline-no-data-color: var(--gray-5);
+			--baseline-no-data-bg: var(--gray-5);
 		}
 	}
 }

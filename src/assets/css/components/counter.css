@@ -12,7 +12,7 @@
 		padding: var(--size-1);
 		border: var(--border-size) var(--border-style) var(--theme-color);
 		border-radius: var(--border-radius);
-		color: var(--theme-color);
+		color: var(--text-2);
 		background-color: var(--surface-1);
 		margin-inline: auto;
 
@@ -23,7 +23,7 @@
 		}
 
 		text {
-			fill: currentColor;
+			fill: var(--theme-color);
 			font-family: var(--code-font-family);
 		}
 	}

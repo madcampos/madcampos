@@ -1,6 +1,6 @@
 @layer pages {
 	m-card {
-		header aside draft-tag {
+		header draft-tag {
 			font-weight: 600;
 
 			&[data-status='finished'] { background-color: limegreen; }

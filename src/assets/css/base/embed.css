@@ -24,6 +24,7 @@
 			place-items: center;
 			border-color: var(--note-error-color);
 			background: var(--note-error-bg);
+			color: var(--note-error-color);
 		}
 	}
 }

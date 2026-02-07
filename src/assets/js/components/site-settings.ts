@@ -270,186 +270,184 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 
 	render() {
 		this.innerHTML = `
-			<aside>
-				<button
-					type="button"
-					popovertarget="site-settings-dialog-${this.#id}"
-					popoveraction="show-modal"
-				>
-					<sr-only>Open Settings</sr-only>
-					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-						<use href="#site-settings-icon" width="24" height="24" />
-					</svg>
-				</button>
+			<button
+				type="button"
+				popovertarget="site-settings-dialog-${this.#id}"
+				popoveraction="show-modal"
+			>
+				<sr-only>Open Settings</sr-only>
+				<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+					<use href="#site-settings-icon" width="24" height="24" />
+				</svg>
+			</button>
 
-				<dialog id="site-settings-dialog-${this.#id}" popover>
-					<header>
-						<h2>Site Settings</h2>
+			<dialog id="site-settings-dialog-${this.#id}" popover>
+				<header>
+					<h2>Site Settings</h2>
+					<button
+						type="button"
+						popovertarget="site-settings-dialog-${this.#id}"
+						popovertargetaction="hide"
+					>
+						<sr-only>Close Settings</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#site-settings-icon-close" width="24" height="24" />
+						</svg>
+					</button>
+				</header>
+				<form action="./" method="get">
+					<dialog-content>
+						<details name="settings-group" open>
+							<summary><h3>Themes</h3></summary>
+
+							<theme-list id="theme-list-${this.#id}"></theme-list>
+						</details>
+
+						<details name="settings-group">
+							<summary><h3>Fonts</h3></summary>
+
+							<font-list id="font-list-${this.#id}"></font-list>
+						</details>
+
+						<details name="settings-group">
+							<summary><h3>Text Adjusts</h3></summary>
+
+							<input-wrapper>
+								<label for="font-size-input-${this.#id}">Font size adjust</label>
+								<select
+									name="font-size"
+									id="font-size-input-${this.#id}"
+								>
+									<option value="x-small">Extra Small</option>
+									<option value="small">Small</option>
+									<option value="medium" selected>Medium</option>
+									<option value="large">Large</option>
+									<option value="x-large">Extra Large</option>
+								</select>
+							</input-wrapper>
+
+							<input-wrapper>
+								<label for="line-height-input-${this.#id}">Line spacing adjust</label>
+								<select
+									name="line-height"
+									id="line-height-input-${this.#id}"
+								>
+									<option value="tight">Tight</option>
+									<option value="medium" selected>Medium</option>
+									<option value="wide">Wide</option>
+									<option value="wider">Wider</option>
+								</select>
+							</input-wrapper>
+
+							<input-wrapper>
+								<label for="letter-spacing-input-${this.#id}">Letter spacing adjust</label>
+								<select
+									name="letter-spacing"
+									id="letter-spacing-input-${this.#id}"
+								>
+									<option value="tighter">Tighter</option>
+									<option value="tight">Tight</option>
+									<option value="medium" selected>Medium</option>
+									<option value="wide">Wide</option>
+									<option value="wider">Wider</option>
+								</select>
+							</input-wrapper>
+						</details>
+
+						<details name="settings-group">
+							<summary><h3>Borders & Motion</h3></summary>
+
+							<input-wrapper>
+								<input
+									type="checkbox"
+									name="reduced-motion"
+									value="enabled"
+									id="reduced-motion-input-${this.#id}"
+								/>
+								<label for="reduced-motion-input-${this.#id}">Disable Animations</label>
+							</input-wrapper>
+
+							<input-wrapper>
+								<input
+									type="checkbox"
+									name="solid-borders"
+									value="enabled"
+									id="solid-borders-input-${this.#id}"
+								/>
+								<label for="solid-borders-input-${this.#id}">Make underlines and borders solid</label>
+							</input-wrapper>
+
+							<input-wrapper>
+								<label for="border-width-input-${this.#id}">Border thickness</label>
+								<select
+									name="border-width"
+									id="border-width-input-${this.#id}"
+								>
+									<option value="none">No Border</option>
+									<option value="thin">Thin</option>
+									<option value="medium" selected>Medium</option>
+									<option value="thick">Thick</option>
+									<option value="thicker">Thicker</option>
+								</select>
+							</input-wrapper>
+						</details>
+
+						<details name="settings-group">
+							<summary><h3>Controller Support</h3></summary>
+
+							<m-note data-type="alert">
+								<p>Under development</p>
+							</m-note>
+
+							<!-- TODO: disable custom controller actions -->
+							<!-- TODO: controller mapping -->
+						</details>
+
+						<details name="settings-group" ${!SiteSettings.debug ? 'hidden' : ''}>
+							<summary><h3>Debug/Test</h3></summary>
+
+							<input-wrapper>
+								<input-wrapper>
+									<input
+										type="checkbox"
+										name="css"
+										id="css-input-${this.#id}"
+									/>
+									<label for="css-input-${this.#id}">Disable CSS</label>
+								</input-wrapper>
+							</input-wrapper>
+
+							<input-wrapper>
+								<input-wrapper>
+									<input
+										type="checkbox"
+										name="js"
+										id="js-input-${this.#id}"
+									/>
+									<label for="js-input-${this.#id}">Disable JS</label>
+								</input-wrapper>
+							</input-wrapper>
+
+							<!-- TODO: trigger iab escape -->
+							<!-- TODO: disable logo context menu -->
+							<!-- TODO: PWA clean cache -->
+							<!-- TODO: PWA trigger install -->
+						</details>
+					</dialog-content>
+
+					<footer>
 						<button
-							type="button"
+							type="submit"
 							popovertarget="site-settings-dialog-${this.#id}"
 							popovertargetaction="hide"
-						>
-							<sr-only>Close Settings</sr-only>
-							<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-								<use href="#site-settings-icon-close" width="24" height="24" />
-							</svg>
-						</button>
-					</header>
-					<form action="./" method="get">
-						<dialog-content>
-							<details name="settings-group" open>
-								<summary><h3>Themes</h3></summary>
+						>Apply settings</button>
 
-								<theme-list id="theme-list-${this.#id}"></theme-list>
-							</details>
+						<hr />
 
-							<details name="settings-group">
-								<summary><h3>Fonts</h3></summary>
-
-								<font-list id="font-list-${this.#id}"></font-list>
-							</details>
-
-							<details name="settings-group">
-								<summary><h3>Text Adjusts</h3></summary>
-
-								<input-wrapper>
-									<label for="font-size-input-${this.#id}">Font size adjust</label>
-									<select
-										name="font-size"
-										id="font-size-input-${this.#id}"
-									>
-										<option value="x-small">Extra Small</option>
-										<option value="small">Small</option>
-										<option value="medium" selected>Medium</option>
-										<option value="large">Large</option>
-										<option value="x-large">Extra Large</option>
-									</select>
-								</input-wrapper>
-
-								<input-wrapper>
-									<label for="line-height-input-${this.#id}">Line spacing adjust</label>
-									<select
-										name="line-height"
-										id="line-height-input-${this.#id}"
-									>
-										<option value="tight">Tight</option>
-										<option value="medium" selected>Medium</option>
-										<option value="wide">Wide</option>
-										<option value="wider">Wider</option>
-									</select>
-								</input-wrapper>
-
-								<input-wrapper>
-									<label for="letter-spacing-input-${this.#id}">Letter spacing adjust</label>
-									<select
-										name="letter-spacing"
-										id="letter-spacing-input-${this.#id}"
-									>
-										<option value="tighter">Tighter</option>
-										<option value="tight">Tight</option>
-										<option value="medium" selected>Medium</option>
-										<option value="wide">Wide</option>
-										<option value="wider">Wider</option>
-									</select>
-								</input-wrapper>
-							</details>
-
-							<details name="settings-group">
-								<summary><h3>Borders & Motion</h3></summary>
-
-								<input-wrapper>
-									<input
-										type="checkbox"
-										name="reduced-motion"
-										value="enabled"
-										id="reduced-motion-input-${this.#id}"
-									/>
-									<label for="reduced-motion-input-${this.#id}">Disable Animations</label>
-								</input-wrapper>
-
-								<input-wrapper>
-									<input
-										type="checkbox"
-										name="solid-borders"
-										value="enabled"
-										id="solid-borders-input-${this.#id}"
-									/>
-									<label for="solid-borders-input-${this.#id}">Make underlines and borders solid</label>
-								</input-wrapper>
-
-								<input-wrapper>
-									<label for="border-width-input-${this.#id}">Border thickness</label>
-									<select
-										name="border-width"
-										id="border-width-input-${this.#id}"
-									>
-										<option value="none">No Border</option>
-										<option value="thin">Thin</option>
-										<option value="medium" selected>Medium</option>
-										<option value="thick">Thick</option>
-										<option value="thicker">Thicker</option>
-									</select>
-								</input-wrapper>
-							</details>
-
-							<details name="settings-group">
-								<summary><h3>Controller Support</h3></summary>
-
-								<m-note data-type="alert">
-									<p>Under development</p>
-								</m-note>
-
-								<!-- TODO: disable custom controller actions -->
-								<!-- TODO: controller mapping -->
-							</details>
-
-							<details name="settings-group" ${!SiteSettings.debug ? 'hidden' : ''}>
-								<summary><h3>Debug/Test</h3></summary>
-
-								<input-wrapper>
-									<input-wrapper>
-										<input
-											type="checkbox"
-											name="css"
-											id="css-input-${this.#id}"
-										/>
-										<label for="css-input-${this.#id}">Disable CSS</label>
-									</input-wrapper>
-								</input-wrapper>
-
-								<input-wrapper>
-									<input-wrapper>
-										<input
-											type="checkbox"
-											name="js"
-											id="js-input-${this.#id}"
-										/>
-										<label for="js-input-${this.#id}">Disable JS</label>
-									</input-wrapper>
-								</input-wrapper>
-
-								<!-- TODO: trigger iab escape -->
-								<!-- TODO: disable logo context menu -->
-								<!-- TODO: PWA clean cache -->
-								<!-- TODO: PWA trigger install -->
-							</details>
-						</dialog-content>
-
-						<footer>
-							<button
-								type="submit"
-								popovertarget="site-settings-dialog-${this.#id}"
-								popovertargetaction="hide"
-							>Apply settings</button>
-
-							<hr />
-
-							<button type="reset">Reset settings</button>
-						</footer>
-					</form>
-				</dialog>
-			</aside>
+						<button type="reset">Reset settings</button>
+					</footer>
+				</form>
+			</dialog>
 		`;
 	}
 

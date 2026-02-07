@@ -37,6 +37,8 @@
 		--highlight-error-bg: maroon;
 		--highlight-warning-color: yellow;
 		--highlight-warning-bg: olive;
+		--highlight-mark-bg: yellow;
+		--highlight-mark-color: black;
 
 		/* Table styles */
 		--table-header-bg: royalblue;

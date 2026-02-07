@@ -30,7 +30,7 @@
 		/* Code colors */
 		--diff-add-color: var(--lime-5);
 		--diff-add-bg: color-mix(in srgb, var(--green-10), transparent);
-		--diff-remove-color: var(--red-8);
+		--diff-remove-color: var(--red-2);
 		--diff-remove-bg: color-mix(in srgb, var(--red-10), transparent);
 		--highlight-color: var(--gray-5);
 		--highlight-default-bg: color-mix(in srgb, var(--gray-10), transparent);
@@ -38,6 +38,8 @@
 		--highlight-error-bg: color-mix(in srgb, var(--red-10), transparent);
 		--highlight-warning-color: var(--yellow-6);
 		--highlight-warning-bg: color-mix(in srgb, var(--yellow-6), transparent);
+		--highlight-mark-bg: var(--accent-color);
+		--highlight-mark-color: var(--surface-1);
 
 		/* Table styles */
 		--table-header-bg: var(--text-2);
@@ -124,7 +126,7 @@
 		--note-success-bg: color-mix(in srgb, var(--green-10), transparent);
 		--note-success-color: var(--lime-5);
 		--note-error-bg: color-mix(in srgb, var(--red-10), transparent 60%);
-		--note-error-color: var(--red-8);
+		--note-error-color: var(--red-4);
 		--note-warning-bg: color-mix(in srgb, var(--yellow-3), transparent 80%);
 		--note-warning-color: var(--yellow-3);
 		--note-alert-bg: color-mix(in srgb, var(--teal-10), transparent);

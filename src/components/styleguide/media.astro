@@ -38,7 +38,7 @@
 
 		<img
 			src="x-err-protocol://error"
-			alt="Error loading image"
+			alt="[Placeholder message for image that does not load]"
 			loading="lazy"
 			width="512"
 			data-load-error
@@ -85,6 +85,11 @@
 			<a href="/assets/audio/bourbon-blues.mp3" download>Download the audio file</a>
 		</audio>
 
+		<details>
+			<summary>Audio Description</summary>
+			<p>An upbeat Jazz tune, with a "Big Band" old school upbeat style.</p>
+		</details>
+
 		<p>Error audio:</p>
 
 		<audio
@@ -94,6 +99,7 @@
 			playsinline
 			data-load-error
 		>
+			[Fallback content for audio]
 		</audio>
 
 		<m-note data-type="info">
@@ -132,6 +138,7 @@
 
 		<video controls playsinline data-load-error>
 			<source src="x-err-protocol://error" type="appliaction/x-error" />
+			[Fallback content for video]
 		</video>
 
 		<m-note data-type="info">

@@ -37,29 +37,27 @@ import Webrings from '../components/Webrings.astro';
 		</header>
 
 		<main class="h-card vcard" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
-			<aside>
-				<m-avatar>
-					<picture
-						class="user-avatar"
-						itemprop="image"
-						itemscope
-						itemtype="https://schema.org/ImageObject"
-					>
-						<Image
-							class="u-photo photo"
-							itemprop="contentUrl"
-							src={avatar}
-							alt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
-							loading="eager"
-							fetchpriority="high"
-							widths={[128, 256, 512, 768, 1024]}
-							width={512}
-							sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
-							quality={75}
-						/>
-					</picture>
-				</m-avatar>
-			</aside>
+			<m-avatar>
+				<picture
+					class="user-avatar"
+					itemprop="image"
+					itemscope
+					itemtype="https://schema.org/ImageObject"
+				>
+					<Image
+						class="u-photo photo"
+						itemprop="contentUrl"
+						src={avatar}
+						alt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+						loading="eager"
+						fetchpriority="high"
+						widths={[128, 256, 512, 768, 1024]}
+						width={512}
+						sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
+						quality={75}
+					/>
+				</picture>
+			</m-avatar>
 			<div>
 				<div class="p-note note" itemprop="description">
 					<p>

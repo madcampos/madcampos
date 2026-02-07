@@ -31,7 +31,7 @@ const post = (await listAllPosts())[0]!;
 		<h3>Author Card</h3>
 
 		<author-card>
-			<aside itemprop="author" itemscope itemtype="https://schema.org/Person">
+			<div itemprop="author" itemscope itemtype="https://schema.org/Person">
 				<a href="https://madcampos.dev/">
 					<m-avatar>
 						<picture
@@ -65,7 +65,7 @@ const post = (await listAllPosts())[0]!;
 					strongly believe that technology and specially the web should be open and available to eveyone, and that's why he's always looking for ways to make the web a
 					better place and contribute to open source projects.
 				</p>
-			</aside>
+			</div>
 		</author-card>
 	</section>
 
@@ -365,34 +365,32 @@ const post = (await listAllPosts())[0]!;
 				</blockquote>
 
 				<post-metadata>
-					<aside>
-						<span>
-							Published on <time itemprop="datePublished" class="dt-published" datetime={post.data.createdAt.toISOString()}>{
-								formatter.format(post.data.createdAt)
-							}</time>.
-						</span>
+					<span>
+						Published on <time itemprop="datePublished" class="dt-published" datetime={post.data.createdAt.toISOString()}>{
+							formatter.format(post.data.createdAt)
+						}</time>.
+					</span>
 
-						{
-							post.data.updatedAt && (
-								<span>
-									Updated on <time itemprop="dateModified" class="dt-updated" datetime={post.data.updatedAt.toISOString()}>{
-										formatter.format(post.data.updatedAt)
-									}</time>.
-								</span>
-							)
-						}
+					{
+						post.data.updatedAt && (
+							<span>
+								Updated on <time itemprop="dateModified" class="dt-updated" datetime={post.data.updatedAt.toISOString()}>{
+									formatter.format(post.data.updatedAt)
+								}</time>.
+							</span>
+						)
+					}
 
-						{
-							post.readingTime && (
-								<span>
-									<time itemprop="timeRequired" class="dt-duration" datetime={`PT${post.readingTime}M`}>
-										{post.readingTime} minute read
-									</time>
-									{post.wordCount && <span> &mdash; {post.wordCount} words</span>}
-								</span>
-							)
-						}
-					</aside>
+					{
+						post.readingTime && (
+							<span>
+								<time itemprop="timeRequired" class="dt-duration" datetime={`PT${post.readingTime}M`}>
+									{post.readingTime} minute read
+								</time>
+								{post.wordCount && <span> &mdash; {post.wordCount} words</span>}
+							</span>
+						)
+					}
 				</post-metadata>
 
 				<share-options></share-options>
@@ -416,7 +414,7 @@ const post = (await listAllPosts())[0]!;
 						post.relatedPosts.map((relatedPost) => (
 							<li>
 								<Card
-									url={`/blog/${relatedPost.url}/`}
+									url={`/blog/${relatedPost.url}`}
 									itemtype="https://schema.org/BlogPosting"
 									image={relatedPost.image}
 									imageAlt={relatedPost.imageAlt ?? ''}

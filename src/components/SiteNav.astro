@@ -1,9 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
+
+const id = Math.trunc(Math.random() * 1000000).toString(16);
 ---
 <site-nav>
-	<nav aria-labelledby="site-nav-label">
-		<sr-only id="site-nav-label">Main Links</sr-only>
+	<nav aria-labelledby={`site-nav-label-${id}`}>
+		<sr-only id={`site-nav-label-${id}`}>Main Links</sr-only>
 		<ul>
 			<li>
 				<a href="/">

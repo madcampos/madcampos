@@ -37,6 +37,8 @@
 		--highlight-error-bg: var(--red-12);
 		--highlight-warning-color: var(--yellow-9);
 		--highlight-warning-bg: var(--yellow-12);
+		--highlight-mark-bg: var(--lime-5);
+		--highlight-mark-color: var(--gray-11);
 
 		/* Table styles */
 		--table-header-bg: var(--lime-12);

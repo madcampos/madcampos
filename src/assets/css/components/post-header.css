@@ -57,15 +57,12 @@
 
 			post-metadata {
 				grid-area: metadata;
-
-				aside {
-					display: flex;
-					flex-flow: column wrap;
-					justify-content: center;
-					gap: var(--size-2);
-					inline-size: 100%;
-					text-align: center;
-				}
+				display: flex;
+				flex-flow: column wrap;
+				justify-content: center;
+				gap: var(--size-2);
+				inline-size: 100%;
+				text-align: center;
 			}
 
 			share-options { grid-area: share; }

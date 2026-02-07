@@ -80,6 +80,8 @@
 		--highlight-error-bg: color-mix(in srgb, var(--red-1), transparent);
 		--highlight-warning-color: var(--yellow-7);
 		--highlight-warning-bg: color-mix(in srgb, var(--yellow-2), transparent);
+		--highlight-mark-bg: var(--yellow-5);
+		--highlight-mark-color: var(--gray-10);
 
 		/* Table styles */
 		--table-header-bg: var(--accent-0);
