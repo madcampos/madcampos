@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS guestbook (
   user_agent TEXT NOT NULL
 );
 
-CREATE INDEX IF NOT EXISTS idx_guestbook_visitor_id ON guestbook(visitor_id, url);
+CREATE INDEX IF NOT EXISTS idx_guestbook_visitor_id ON guestbook(visitor_id);
 CREATE INDEX IF NOT EXISTS idx_guestbook_timestamp ON guestbook(timestamp DESC);
