@@ -28,10 +28,14 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 		</summary>
 
 		<div>
+			<style is:inline>
+				old-style-button:not(:defined) { display: none; }
+			</style>
+
 			<old-style-button dest="https://en.wikipedia.org/wiki/Browser_wars">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={ieStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={ieStyles} />
 
 					<button aria-label="Best viewed on any browser">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -71,8 +75,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://creativecommons.org/licenses/by-nc-sa/4.0/">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={ccStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={ccStyles} />
 					<button aria-label="Page under: CC BY-NC-SA. Free to share">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
 							<path id="button-base" d="M0 0h88v31H0z" />
@@ -94,8 +98,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://astro.build/">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={astroStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={astroStyles} />
 
 					<button aria-label="Built with: Astro!">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -157,8 +161,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="/blog/feed.atom.xml">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={feedStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={feedStyles} />
 
 					<button aria-label="Feed: Subscribe Now!">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -232,8 +236,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/CSS">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={cssStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={cssStyles} />
 
 					<button aria-label="Powered by SVG & CSS">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -266,8 +270,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={jsStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={jsStyles} />
 
 					<button aria-label="Warning: Contains JavaScript!">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -304,8 +308,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://developer.mozilla.org/en-US/docs/Web/HTML">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={htmlStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={htmlStyles} />
 
 					<button aria-label="W3C Validator: HTML 5 - Pass">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -343,8 +347,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://www.w3.org/WAI/standards-guidelines/wcag/">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={ariaStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={ariaStyles} />
 
 					<button aria-label="W3C Validator: WAI-AA - WCAG 2.2">
 						<svg viewBox="0 0 88 31" aria-hidden="true" aria-hidden="true">
@@ -377,8 +381,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://workers.cloudflare.com/">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={poweredStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={poweredStyles} />
 
 					<button aria-label="Powered by: Cloudflare Workers (CFW)">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -421,8 +425,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://obsidian.md/">
 				<template shadowrootmode="open" aria-hidden="true">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={writtenStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={writtenStyles} />
 
 					<button aria-label="Written on Obsidian Markdown">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -476,8 +480,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://www.the519.org/support-the-519/donate/">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={prideStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={prideStyles} />
 
 					<button aria-label="This site is LGBTQ+">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -532,8 +536,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button dest="https://code.visualstudio.com/">
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={codeStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={codeStyles} />
 
 					<button aria-label="Created with Visual Studio Code">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -569,8 +573,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button>
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={graphicDesignStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={graphicDesignStyles} />
 
 					<button aria-label="Graphic Design is my passion">
 						<svg viewBox="0 0 88 31" aria-hidden="true">
@@ -608,8 +612,8 @@ import writtenStyles from '../assets/css/components/buttons/written-button.css?u
 
 			<old-style-button>
 				<template shadowrootmode="open">
-					<link rel="stylesheet" href={baseStyles} />
-					<link rel="stylesheet" href={guestbookStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={baseStyles} />
+					<link rel="stylesheet" fetchpriority="low" href={guestbookStyles} />
 
 					<button aria-label="Sign my Guestbook!">
 						<svg viewBox="0 0 88 31" aria-hidden="true">

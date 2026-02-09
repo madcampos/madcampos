@@ -8,9 +8,10 @@ button {
 	animation-name: var(--button-animation-js);
 
 	#button-base { fill: tan; }
+
 	text {
 		font-weight: bold;
-		font-size: 7px;
+		font-size: 6px;
 		font-family: var(--button-font-didone);
 	}
 

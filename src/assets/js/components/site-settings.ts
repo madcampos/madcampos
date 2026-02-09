@@ -9,6 +9,8 @@ import {
 	SiteSettings
 } from '../settings.ts';
 
+import themesStyles from '../../css/themes/index.css?url';
+
 interface SiteTheme {
 	id: ThemeSetting;
 	name: string;
@@ -451,23 +453,29 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		`;
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		try {
+			const themeStyles = await fetch(themesStyles);
 
-		this.#renderThemes();
-		this.#renderFonts();
+			this.render();
 
-		this.#initializeSettings();
+			this.#renderThemes();
+			this.#renderFonts();
 
-		this.querySelector('form')?.addEventListener('submit', (evt) => {
-			evt.preventDefault();
-			evt.stopPropagation();
-			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
+			this.#initializeSettings();
 
-			this.#updateSettings(evt.target as HTMLFormElement);
-		});
+			this.querySelector('form')?.addEventListener('submit', (evt) => {
+				evt.preventDefault();
+				evt.stopPropagation();
+				this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
 
-		this.querySelector('form')?.addEventListener('reset', () => this.#resetSettings());
+				this.#updateSettings(evt.target as HTMLFormElement);
+			});
+
+			this.querySelector('form')?.addEventListener('reset', () => this.#resetSettings());
+		} catch (err) {
+			console.error(err);
+		}
 	}
 }
 
