@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/only-throw-error, @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable @typescript-eslint/only-throw-error */
 
 import { env } from 'cloudflare:workers';
-import { type StatusResponse, DEFAULT_HEADERS, ErrorResponse, generateVisitorId, STATUS_CONFLICT, STATUS_OK } from '../utils/index.ts';
+import { type StatusResponse, DEFAULT_HEADERS, ErrorResponse, generateVisitorId, parseRequestMetadata, STATUS_CONFLICT, STATUS_OK } from '../utils/index.ts';
 
 const MIN_HIT_RESULTS = 2;
 const TOTAL_HIT_RESULTS = 10;
@@ -118,9 +118,8 @@ export async function getVisitorCount(request: Request<unknown, CfProperties>) {
 export async function incrementVisitorCount(request: Request<unknown, CfProperties>) {
 	try {
 		const url = parseUrl(request);
-		const visitorId = await generateVisitorId(request);
-		const country = request.cf?.country as string || 'AQ';
-		const userAgent = request.headers.get('User-Agent') || 'Unknown/0.0.0';
+		const requestMetadata = parseRequestMetadata(request);
+		const visitorId = await generateVisitorId(requestMetadata);
 
 		const recentVisit = await env.Database.prepare(`
 			SELECT id, timestamp
@@ -136,7 +135,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 		if (recentVisit) {
 			// eslint-disable-next-line no-console
 			console.log({ visitorId, recentVisit });
-			return new ErrorResponse(`Only one visit allowd every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
+			return new ErrorResponse(`Only one visit allowed every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
 
 		const { success, error } = await env.Database.prepare(`
@@ -144,7 +143,7 @@ export async function incrementVisitorCount(request: Request<unknown, CfProperti
 				(url, visitor_id, country, user_agent)
 			VALUES
 				(?, ?, ?, ?)
-		`).bind(url, visitorId, country, userAgent).run();
+		`).bind(url, visitorId, requestMetadata.country, requestMetadata.userAgent).run();
 
 		// eslint-disable-next-line no-console
 		console.log({ visitorId });
