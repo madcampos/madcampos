@@ -94,7 +94,13 @@ const blogs = await listBlogroll();
 				<p>A list of blogs I follow</p>
 			</hgroup>
 
-			<ul>
+			<style is:global>
+				#blogroll-items {
+					columns: var(--size-content-1) auto;
+					column-gap: var(--size-3);
+				}
+			</style>
+			<ul id="blogroll-items">
 				{
 					blogs.map(({ url, title }) => (
 						<li>
