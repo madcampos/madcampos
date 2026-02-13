@@ -108,23 +108,23 @@ if (SiteSettings.js === 'enabled') {
 	});
 
 	// FIXME: first load is not working
-	// document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach((input) => {
-	// 	const inputState = getInputState(input);
+	document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach((input) => {
+		const inputState = getInputState(input);
 
-	// 	switch (inputState) {
-	// 		case 'false':
-	// 			input.checked = false;
-	// 			break;
-	// 		case 'indeterminate':
-	// 			input.indeterminate = true;
-	// 			break;
-	// 		case 'true':
-	// 			input.checked = true;
-	// 			break;
-	// 		default:
-	// 	}
+		switch (inputState) {
+			case 'false':
+				input.checked = false;
+				break;
+			case 'indeterminate':
+				input.indeterminate = true;
+				break;
+			case 'true':
+				input.checked = true;
+				break;
+			default:
+		}
 
-	// 	setChildInputState(input);
-	// 	setInputState(input);
-	// });
+		setChildInputState(input);
+		setInputState(input);
+	});
 }

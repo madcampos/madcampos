@@ -71,7 +71,6 @@ const blogs = await listBlogroll();
 									</a>
 								</dt>
 								<dd>
-									{/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
 									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
 									{
 										bookmark.note && (

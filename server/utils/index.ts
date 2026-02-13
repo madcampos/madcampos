@@ -15,7 +15,7 @@ export const DEFAULT_HEADERS = {
 	'Access-Control-Max-Age': '86400'
 };
 
-export interface PaginatedResponse<T = any> {
+export interface PaginatedResponse<T = unknown> {
 	/** array containing the page’s slice of data that you passed to the paginate() function */
 	data: T[];
 	/** metadata */
