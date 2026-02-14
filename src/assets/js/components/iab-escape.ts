@@ -2,7 +2,7 @@
 import inAppSpy, { SFSVCExperimental as sFSVCExperimental } from 'inapp-spy';
 import { SiteSettings } from '../settings.ts';
 
-class IabEscape extends HTMLElement implements CustomElement {
+export class IabEscape extends HTMLElement implements CustomElement {
 	constructor() {
 		super();
 
@@ -27,21 +27,25 @@ class IabEscape extends HTMLElement implements CustomElement {
 		`;
 	}
 
+	open() {
+		const url = window.location.href;
+
+		let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
+
+		if (navigator.userAgent.includes('Android')) {
+			link = `intent:${url}#Intent;end`;
+		}
+
+		this.querySelector<HTMLDialogElement>('a')?.setAttribute('href', link);
+		this.querySelector<HTMLDialogElement>('dialog')?.showModal();
+	}
+
 	async connectedCallback() {
 		const { isInApp } = inAppSpy();
 		const isSFSVC = await sFSVCExperimental();
 
-		const url = window.location.href;
-
 		if (isInApp || isSFSVC || SiteSettings.iabEscape) {
-			let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
-
-			if (navigator.userAgent.includes('Android')) {
-				link = `intent:${url}#Intent;end`;
-			}
-
-			this.querySelector<HTMLDialogElement>('a')?.setAttribute('href', link);
-			this.querySelector<HTMLDialogElement>('dialog')?.showModal();
+			this.open();
 		}
 	}
 }

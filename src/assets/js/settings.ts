@@ -14,6 +14,7 @@ export class SiteSettings {
 		'iabEscape',
 		'theme',
 		'pwaBanner',
+		'logoContextMenu',
 		'updateUrl',
 		'font',
 		'fontSize',
@@ -252,6 +253,14 @@ export class SiteSettings {
 
 	static set pwaBanner(value: boolean | undefined) {
 		SiteSettings.#updateSetting('pwaBanner', value ? 'true' : 'false');
+	}
+
+	static get logoContextMenu(): EnabledDisabledSetting {
+		return SiteSettings.#getSetting('logoContextMenu') ?? 'enabled';
+	}
+
+	static set logoContextMenu(value: EnabledDisabledSetting | undefined) {
+		SiteSettings.#updateSetting('logoContextMenu', value);
 	}
 
 	static get isReducedMotion(): EnabledDisabledSetting {

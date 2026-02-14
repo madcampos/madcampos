@@ -54,7 +54,7 @@ if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
 			const target = evt.target as HTMLElement;
 
 			if (target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
-				if (dialog) {
+				if (dialog && SiteSettings.logoContextMenu !== 'disabled') {
 					evt.preventDefault();
 					dialog.showPopover();
 				}

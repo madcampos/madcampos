@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import {
 	type BorderWidthSetting,
 	type EnabledDisabledSetting,
@@ -8,6 +10,8 @@ import {
 	type ThemeSetting,
 	SiteSettings
 } from '../settings.ts';
+import type { IabEscape } from './iab-escape.ts';
+import type { PWABanner } from './pwa-banner.ts';
 
 interface SiteTheme {
 	id: ThemeSetting;
@@ -241,6 +245,14 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		SiteSettings.hasSolidBorders = undefined;
 		SiteSettings.borderWidth = undefined;
 
+		if (SiteSettings.debug) {
+			SiteSettings.css = undefined;
+			SiteSettings.js = undefined;
+			SiteSettings.logoContextMenu = undefined;
+			SiteSettings.iabEscape = undefined;
+			SiteSettings.pwaBanner = undefined;
+		}
+
 		this.#initializeSettings();
 	}
 
@@ -253,6 +265,12 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		this.querySelector<HTMLOptionElement>(`#reduced-motion-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.isReducedMotion === 'enabled');
 		this.querySelector<HTMLOptionElement>(`#solid-borders-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.hasSolidBorders === 'enabled');
 		this.querySelector<HTMLOptionElement>(`#border-width-input-${this.#id} option[value="${SiteSettings.letterSpacing}"]`)?.toggleAttribute('selected', true);
+
+		if (SiteSettings.debug) {
+			this.querySelector<HTMLOptionElement>(`#css-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.css === 'disabled');
+			this.querySelector<HTMLOptionElement>(`#js-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.js === 'disabled');
+			this.querySelector<HTMLOptionElement>(`#logo-context-menu-input-${this.#id}`)?.toggleAttribute('checked', SiteSettings.logoContextMenu === 'disabled');
+		}
 	}
 
 	#updateSettings(form: HTMLFormElement) {
@@ -266,6 +284,12 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		SiteSettings.isReducedMotion = formData.get('reduced-motion') as EnabledDisabledSetting;
 		SiteSettings.hasSolidBorders = formData.get('solid-borders') as EnabledDisabledSetting;
 		SiteSettings.borderWidth = formData.get('border-width') as BorderWidthSetting;
+
+		if (SiteSettings.debug) {
+			SiteSettings.css = formData.get('css') as EnabledDisabledSetting ?? 'enabled';
+			SiteSettings.js = formData.get('js') as EnabledDisabledSetting ?? 'enabled';
+			SiteSettings.logoContextMenu = formData.get('logo-context-menu') as EnabledDisabledSetting ?? 'enabled';
+		}
 	}
 
 	render() {
@@ -412,6 +436,8 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 										type="checkbox"
 										name="css"
 										id="css-input-${this.#id}"
+										value="disabled"
+										${!SiteSettings.debug ? 'disabled' : ''}
 									/>
 									<label for="css-input-${this.#id}">Disable CSS</label>
 								</input-wrapper>
@@ -422,16 +448,32 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 									<input
 										type="checkbox"
 										name="js"
+										value="disabled"
 										id="js-input-${this.#id}"
+										${!SiteSettings.debug ? 'disabled' : ''}
 									/>
 									<label for="js-input-${this.#id}">Disable JS</label>
 								</input-wrapper>
 							</input-wrapper>
 
-							<!-- TODO: trigger iab escape -->
-							<!-- TODO: disable logo context menu -->
-							<!-- TODO: PWA clean cache -->
-							<!-- TODO: PWA trigger install -->
+							<input-wrapper>
+								<input-wrapper>
+									<input
+										type="checkbox"
+										name="logo-context-menu"
+										value="disabled"
+										id="logo-context-menu-input-${this.#id}"
+										${!SiteSettings.debug ? 'disabled' : ''}
+									/>
+									<label for="logo-context-menu-input-${this.#id}">Disable Logo Context Menu</label>
+								</input-wrapper>
+							</input-wrapper>
+
+							<div>
+								<button type="button" id="iab-escape-button-${this.#id}">Trigger IAB Escape</button>
+								<button type="button" id="pwa-banner-button-${this.#id}">Trigger PWA Banner</button>
+								<button type="button" id="clean-cache-button-${this.#id}">Clean Cache & Reload</button>
+							</div>
 						</details>
 					</dialog-content>
 
@@ -468,6 +510,22 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		});
 
 		this.querySelector('form')?.addEventListener('reset', () => this.#resetSettings());
+
+		this.querySelector(`#iab-escape-button-${this.#id}`)?.addEventListener('click', () => {
+			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
+			this.querySelector<IabEscape>('iab-escape')?.open();
+		});
+
+		this.querySelector(`#pwa-banner-button-${this.#id}`)?.addEventListener('click', () => {
+			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
+			this.querySelector<PWABanner>('pwa-banner')?.open();
+		});
+
+		this.querySelector(`#clear-cache-button-${this.#id}`)?.addEventListener('click', () => {
+			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
+			// TODO: clean cache and reset service worker
+			document.location.reload();
+		});
 	}
 }
 
