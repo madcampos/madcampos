@@ -165,6 +165,9 @@
 					>
 						<option value="" disabled selected hidden>Select a type of swallow</option>
 
+						<option disabled>What is a swallow?</option>
+						<hr />
+
 						<optgroup label="Africa">
 							<option>Pied-winged Swallow</option>
 							<option>Whire-tailed Swallow</option>
@@ -254,6 +257,17 @@
 			</script>
 
 			<input-wrapper>
+				<label for="input-date-disabled">Unix epoch:</label>
+				<input
+					type="date"
+					name="unix-epoch"
+					id="input-date-disabled"
+					disabled
+					value="1970-01-01"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
 				<label for="input-datetime">
 					<span>Your birth date and time (for your astrology birth chart):</span>
 					<input-required><strong>(Required)</strong></input-required>
@@ -268,6 +282,31 @@
 
 				<input-error>Astrology is really important and says a lot about us, please provide your birth date and time.</input-error>
 				<input-success>Thank you, your chart is coming soon...</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-datetime-disabled">The Go reference date:</label>
+				<input
+					type="datetime-local"
+					name="go-epoch"
+					id="input-datetime-disabled"
+					disabled
+					value="2006-01-02 15:04:05"
+				/>
+				<input-hint>
+					<p>This date is easy to remember with the mnemonic: <var>1 2 3 4 5 6 7</var></p>
+					<ul>
+						<li>Monday (?)</li>
+						<li>January (month)</li>
+						<li>2nd (day)</li>
+						<li>3 (hours)</li>
+						<li>4 (minutes)</li>
+						<li>5 (seconds)</li>
+						<li>2006 (year)</li>
+						<li>MST (UTC-7) (time zone)</li>
+					</ul>
+					<p>With that in mind you will never forget this date!</p>
+				</input-hint>
 			</input-wrapper>
 
 			<input-wrapper>
@@ -298,11 +337,36 @@
 			</script>
 
 			<input-wrapper>
+				<label for="input-month-disabled">When the bombs fell in Fallout:</label>
+				<input
+					type="month"
+					name="fallout-bombs-month"
+					id="input-month-disabled"
+					disabled
+					value="2077-10"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
 				<label for="input-time">What time to set an alarm for?</label>
 				<input
 					type="time"
 					name="alarm"
 					id="input-time"
+					min="08:00"
+					max="18:00"
+					step="1800"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-time-disabled">Hour of spiritual awakening:</label>
+				<input
+					type="time"
+					name="spirit-hour"
+					id="input-time-disabled"
+					disabled
+					value="03:33"
 				/>
 			</input-wrapper>
 
@@ -329,6 +393,17 @@
 				weekInput.min = `${now.getFullYear()}-W04`;
 				weekInput.max = `${now.getFullYear()}-W50`;
 			</script>
+
+			<input-wrapper>
+				<label for="input-week-disabled">Just some week for no reason besides testing the <code>disabled</code> attribute:</label>
+				<input
+					type="week"
+					name="some-week"
+					id="input-week-disabled"
+					disabled
+					value="3456-W12"
+				/>
+			</input-wrapper>
 		</fieldset>
 
 		<fieldset>
@@ -351,6 +426,22 @@
 
 				<input-error>Your email is very important to us.</input-error>
 				<input-success>Thank you, we won't send much spam.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-email-disabled">
+					<span>Email for important account communication:</span>
+				</label>
+				<input
+					type="email"
+					name="comms-email"
+					id="input-email-disabled"
+					disabled
+					value="eldritch@void.com"
+				/>
+				<input-hint>
+					You can always change your email by talking to one of our representatives.
+				</input-hint>
 			</input-wrapper>
 
 			<input-wrapper>
@@ -378,6 +469,17 @@
 			</input-wrapper>
 
 			<input-wrapper>
+				<label for="input-tel-disabled">Emergency contact phone</label>
+				<input
+					type="tel"
+					name="emergency-phone"
+					id="input-tel-disabled"
+					disabled
+					value="+12 34567890"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
 				<label for="input-url">
 					<span>Link to your social media account:</span>
 					<input-required><strong>(Required)</strong></input-required>
@@ -395,6 +497,17 @@
 				<input-error>It is standard procedura to view all your posts, including the ones from 15 years ago, please provide a link to your social madia
 					account.</input-error>
 				<input-success>Look what I found... Old photos!</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-url-disabled">Website to associate with your acount:</label>
+				<input
+					type="url"
+					name="account-website"
+					id="input-url-disabled"
+					disabled
+					value="http://hate-crime.com"
+				/>
 			</input-wrapper>
 
 			<input-wrapper>
@@ -601,6 +714,25 @@
 			</script>
 
 			<input-wrapper>
+				<label for="input-file-disabled">Extra files to be uploaded:</label>
+				<input
+					type="file"
+					name="extra-files"
+					id="input-file-disabled"
+					disabled
+					value="nudes.jpg"
+				/>
+			</input-wrapper>
+			<script is:inline>
+				const disabledFileInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-disabled'));
+				const dataTransfer = new DataTransfer();
+				const stubFile = new File([], 'spicy-photo.jpg');
+
+				dataTransfer.items.add(stubFile);
+				disabledFileInput.files = dataTransfer.files;
+			</script>
+
+			<input-wrapper>
 				<label for="input-password">
 					<span>A secure password for your subscription:</span>
 					<input-required><strong>(Required)</strong></input-required>
@@ -676,6 +808,18 @@
 			</script>
 
 			<input-wrapper>
+				<label for="input-password-disabled">Recovery code</label>
+				<input
+					type="password"
+					name="recovery-code"
+					id="input-password-disabled"
+					disabled
+					value="4444444444444"
+				/>
+				<input-hint>Please take note of this recovery code or else you cannot login to your account.</input-hint>
+			</input-wrapper>
+
+			<input-wrapper>
 				<label for="input-range">
 					<span>Number of emails to receive per hour:</span>
 					<input-required><strong>(Required)</strong></input-required>
@@ -712,6 +856,18 @@
 				input.addEventListener('input', updateOutput);
 				input.addEventListener('change', updateOutput);
 			</script>
+			<input-wrapper>
+				<label for="input-range-disabled">Ping messages per hour:</label>
+				<input
+					type="range"
+					name="ping-per-hour"
+					id="input-range-disabled"
+					min="0"
+					max="100"
+					value="100"
+					disabled
+				/>
+			</input-wrapper>
 
 			<input-wrapper>
 				<label for="input-email-multiple">
@@ -730,6 +886,18 @@
 
 				<input-error>Don't you have any friends? Hand over their emails.</input-error>
 				<input-success>Friendship is magic.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-email-disabled">Friends to never add to our newsletter:</label>
+				<input
+					type="email"
+					name="global-optout-emails"
+					id="input-email-disabled"
+					inputmode="email"
+					disabled
+					placeholder="E.g.: lancelot@camelot.com, galahad@camelot.com"
+				/>
 			</input-wrapper>
 
 			<input-wrapper>
@@ -753,15 +921,88 @@
 					</optgroup>
 					<hr />
 					<optgroup label="Advertizing">
-						<option selected>ClickRate</option>
+						<option selected disabled>ClickRate</option>
 						<option selected>Ad2Click</option>
 						<option selected>Ads4You</option>
 						<option selected>AdsSquared</option>
+					</optgroup>
+					<hr />
+					<optgroup label="Always enabled" disabled>
+						<option selected>Big.tech</option>
+						<option selected>Shaddy Co.</option>
+						<option selected>Crystal Ball</option>
 					</optgroup>
 				</select>
 
 				<input-error>Our partners need your data as much as we do, please share your data with them.</input-error>
 				<input-success>Sharing is caring.</input-success>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="select-disabled">
+					<span>Subscription option:</span>
+				</label>
+				<select name="select-disabled" id="select-disabled" disabled>
+					<option selected>Premium Pro+ Master Gold Diamond VIP</option>
+					<option>Looser</option>
+				</select>
+			</input-wrapper>
+
+			<fieldset disabled>
+				<legend>Contact options</legend>
+				<input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="contact-options"
+							id="contact-options-1"
+							value="contact-all"
+							checked
+						/>
+						<label for="contact-options-1">Contact by phone, email, mail, telegram, smoke signal, radio, and brain waves.</label>
+					</input-wrapper>
+					<input-wrapper>
+						<input
+							type="radio"
+							name="contact-options"
+							id="contact-options-2"
+							value="contact-phone"
+						/>
+						<label for="contact-options-2">Do not contact at all, ever.</label>
+					</input-wrapper>
+				</input-wrapper>
+			</fieldset>
+
+			<input-wrapper>
+				<label for="input-color-disabled">Personalization color:</label>
+				<input
+					type="color"
+					name="personalization-color"
+					id="input-color-disabled"
+					disabled
+					value="#0080ff"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<input
+					type="checkbox"
+					name="data-share-consent"
+					id="input-checkbox-disabled"
+					disabled
+					checked
+				/>
+				<label for="input-checkbox-disabled">I hereby give rights to all my data and access to third-parties, partners, affiliates, and the dark web, in general.</label>
+			</input-wrapper>
+
+			<input-wrapper>
+				<input
+					type="checkbox"
+					name="data-ads-optout"
+					id="input-checkbox-disabled-unchecked"
+					disabled
+				/>
+				<label for="input-checkbox-disabled-unchecked">Do not opt-out to block all advertisement and data sharing.</label>
 			</input-wrapper>
 
 			<input-wrapper>
@@ -869,8 +1110,189 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>Disabled Elements</legend>
-			<!-- TODO: add disabled elements -->
+			<legend>Serivce feedback</legend>
+
+			<input-wrapper>
+				<label for="input-text-disabled">
+					<span>Feedback for our services:</span>
+				</label>
+				<input
+					type="text"
+					name="text-disabled"
+					id="input-text-disabled"
+					disabled
+					value="This project is a dumpster fire!"
+				/>
+				<input-hint>
+					We take your feedback very seriously.
+				</input-hint>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="textarea-disabled">
+					<span>More feedback for our services:</span>
+				</label>
+				<textarea
+					name="textarea-disabled"
+					id="textarea-disabled"
+					rows="3"
+					cols="12"
+					disabled
+				>You know like a dumpster, and it is on fire? Yeah, that's like it, but worse. Much worse...</textarea>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-number-disabled">Ticket number</label>
+				<input-wrapper>
+					<input-infix>#</input-infix>
+					<input
+						type="number"
+						name="ticket-number"
+						id="input-number-disabled"
+						disabled
+						value="0987654321"
+					/>
+				</input-wrapper>
+			</input-wrapper>
+		</fieldset>
+
+		<fieldset disabled>
+			<legend>You can't change those settings</legend>
+
+			<input-wrapper>
+				<label for="input-text-in-fieldset">Can't touch this:</label>
+				<input
+					type="text"
+					name="cant-change-me"
+					id="input-text-in-fieldset"
+					value="Hammer Time!"
+				/>
+			</input-wrapper>
+		</fieldset>
+
+		<fieldset>
+			<legend>Read only options</legend>
+
+			<input-wrapper>
+				<label for="input-text-readonly">Read only text:</label>
+				<input
+					type="text"
+					name="text-readonly"
+					id="input-text-readonly"
+					readonly
+					value="Lorem Ipsum Rëadium Onlæy"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-tel-readonly">Read only phone number:</label>
+				<input
+					type="tel"
+					name="tel-readonly"
+					id="input-tel-readonly"
+					readonly
+					value="+12 34567890"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-email-readonly">Read only email:</label>
+				<input
+					type="email"
+					name="email-readonly"
+					id="input-email-readonly"
+					readonly
+					value="read@only.com"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-url-readonly">Read only url:</label>
+				<input
+					type="url"
+					name="url-readonly"
+					id="input-url-readonly"
+					readonly
+					value="https://example.com"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-password-readonly">Read only password:</label>
+				<input
+					type="password"
+					name="password-readonly"
+					id="input-password-readonly"
+					readonly
+					value="password"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-date-readonly">Read only date:</label>
+				<input
+					type="date"
+					name="date-readonly"
+					id="input-date-readonly"
+					readonly
+					value="2222-02-02"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-month-readonly">Read only month:</label>
+				<input
+					type="month"
+					name="month-readonly"
+					id="input-month-readonly"
+					readonly
+					value="0001-02"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-week-readonly">Read only week:</label>
+				<input
+					type="week"
+					name="week-readonly"
+					id="input-week-readonly"
+					readonly
+					value="1234-W05"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-time-readonly">Read only time:</label>
+				<input
+					type="time"
+					name="time-readonly"
+					id="input-time-readonly"
+					readonly
+					value="12:34"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-datetime-local-readonly">Read only date and time:</label>
+				<input
+					type="datetime-local"
+					name="datetime-local-readonly"
+					id="input-datetime-local-readonly"
+					readonly
+					value="2006-01-02T03:04:05"
+				/>
+			</input-wrapper>
+
+			<input-wrapper>
+				<label for="input-number-readonly">Read only number:</label>
+				<input
+					type="number"
+					name="number-readonly"
+					id="input-number-readonly"
+					readonly
+					value="42"
+				/>
+			</input-wrapper>
 		</fieldset>
 
 		<footer>
