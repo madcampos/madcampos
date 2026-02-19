@@ -1,8 +1,11 @@
 @layer components {
 	rendered-content {
-		sup svg {
-			inline-size: 1em;
-			block-size: 1em;
+		[data-external-link] svg {
+			inline-size: var(--font-size-0);
+			block-size: var(--font-size-0);
+
+			/* INFO: fixes inherited em based font-size */
+			font-size: 24px;
 		}
 
 		:is(h1, h2, h3, h4, h5, h6):has(a) a { color: inherit; }
