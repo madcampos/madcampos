@@ -41,9 +41,9 @@
 		& > button {
 			position: absolute;
 			position-anchor: --share-overlay;
-			position-area: block-start span-all;
+			position-area: block-end span-all;
 			position-try-fallbacks: flip-block;
-			margin-block-start: var(--size-3);
+			margin-block-end: var(--size-3);
 
 			svg {
 				block-size: 100%;
