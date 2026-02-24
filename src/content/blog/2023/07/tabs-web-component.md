@@ -6,8 +6,9 @@ updates:
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
 summary: A how to guide on building an accessible tab component using Web Components.
-image: ./assets/modern-day-mimic.jpg
-imageAlt: 'A drawing of a mimic, a monster from the game Dungeons and Dragons, disguised as a file cabinet. The mimic has big smiling teeth and googly eyes. The folders on top of the cabinet form a "hair" for the monster.'
+image: ./assets/wahid-khene-axXa-pSVaIY-unsplash.jpg
+imageAlt: "A photo of bright colored paper folders staggered one on top of the other in a semi circular way."
+imageRights: "Photo by [Wahid Khene](https://unsplash.com/@wahidkhene?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-bunch-of-different-colored-papers-on-a-table-axXa-pSVaIY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)."
 tags:
   - web-components
   - JavaScript

@@ -10,8 +10,9 @@ updates:
   - date: 2026-02-04T15:18:34.000-05:00
     changes: Fixed Github URL.
 summary: A dive into the semantic html of a blog.
-image: ./assets/arcane-writings.jpg
-imageAlt: "A close up of a parghement with a hand holding a quill writing on it. The writings are all undecipherable runes."
+image: ./assets/linear-a.jpg
+imageAlt: "A photo of a fragment of a clay tablet showing inscriptions in the Linear A script."
+imageRights: "Linear A tablet from the palace of Zakros, Archeological Museum of Sitia. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Sitia_Museum_Linear_A_02.jpg)"
 tags:
   - BuildInTheOpen
   - meta

@@ -10,8 +10,9 @@ updates:
   - date: 2026-02-04T15:18:34.000-05:00
     changes: Fixed Github URL.
 summary: Summary of the experience and hurdles of coding this blog.
-image: ./assets/new-waters.jpg
-imageAlt: "A painting of a boat bursting bow first from the waves with a rainbow on the background."
+image: ./assets/landscape-on-the-lower-st-lawrence.jpg
+imageAlt: A watercolor, from an overlook point of view, of the lower St. Lawerence river, on the horizon a sunset sky meets with mountains, on the front of the painting small bushes open to the view of the river below.
+imageRights: "[Landscape on the Lower St. Lawrence](https://collections.rom.on.ca/objects/162409/landscape-on-the-lower-st-lawrence) from the Royal Ontario Museum collection."
 tags:
   - BuildInTheOpen
   - BuildingInPublic

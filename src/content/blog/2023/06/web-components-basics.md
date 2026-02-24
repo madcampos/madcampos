@@ -10,8 +10,8 @@ updates:
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
 summary: A brief introduction to web components.
-image: ./assets/dad-jokes.jpg
-imageAlt: "A pop art style image of a guy dressed in a shirt with an orange tie, holding a microphone and laughing hard. The background is a brick wall with splatters of white and blue paint."
+image: ./assets/spongebob-crowd.gif
+imageAlt: "A gif from the cartoon Spongebob Squarepants of a crowd of fish sitting at tables on a restaurant. Every fish is staring directly at the viewer and has a frown on their face. One of the fishes in front has a blinking animation."
 tags:
   - web
   - web-components

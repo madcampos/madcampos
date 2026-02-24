@@ -10,8 +10,9 @@ updates:
   - date: 2026-02-04T15:18:34.000-05:00
     changes: Fixed feed URL.
 summary: A quick post about styling XML feeds and other uses for XML.
-image: ./assets/arcane-c-incantations.jpg
-imageAlt: 'AI generated image for the prompt: "an arcane incantation on an old manuscript with C++ code"'
+image: ./assets/copying-snippets-from-pages-made-in-2003.jpg
+imageAlt: A book cover mocking the O'Riley covers with a line art of a lobster andthe text "Copying snippets frompages made in 2003 - The definitive Guide"
+imageRights: "[O'RLY books](https://orlybooks.com/books/copying-snippets-from-pages-made-in-2003)"
 tags:
   - XML
   - web

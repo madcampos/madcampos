@@ -92,6 +92,6 @@
 
 	var {
 		font-style: italic;
-		font-family: var(--code-font-family);
+		font-family: 'Latin Modern Math', 'Cambria Math', 'Computer Modern', 'STIX Two Math', math;
 	}
 }

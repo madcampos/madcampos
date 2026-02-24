@@ -8,8 +8,9 @@ tags:
   - WebDevelopment
   - web
   - rant
-image: ./assets/rose-colored-glasses.jpg
-imageAlt: A close shot of a smiling man, he is wearing opaque rose colored glasses with the universal accessibility icon overlaid on each lens
+image: ./assets/naoki-suzuki-dX1cRBu2F8Y-unsplash.jpg
+imageAlt: A close shot of a cactus with a pair of stylish glasses on, the glasses have tiny beads on them representing googly eyes.
+imagerights: "Photo by [Naoki Suzuki](https://unsplash.com/@naopp?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-pair-of-red-glasses-sitting-on-top-of-a-cactus-dX1cRBu2F8Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)."
 ---
 
 If you don't know what an Accessibility overlay is here is a quick description from [Overlay Fact Sheet](https://overlayfactsheet.com/en/) :

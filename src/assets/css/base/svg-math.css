@@ -1,6 +1,8 @@
 @layer base {
 	:is(svg, math) { max-inline-size: 100%; }
 
+	math { font-family: 'Latin Modern Math', 'Cambria Math', 'Computer Modern', 'STIX Two Math', math; }
+
 	:where(svg[data-icon]) {
 		vertical-align: -0.32em;
 		min-inline-size: 1.3em;
