@@ -251,6 +251,7 @@ function main() {
 	const buffers = initBuffers();
 
 	let then = 0;
+	let rafReference: number;
 
 	function render(now: DOMHighResTimeStamp) {
 		const nowPlusEpsilon = now * 0.001;
@@ -260,7 +261,7 @@ function main() {
 
 		drawScene(programInfo, buffers, deltaTime);
 
-		requestAnimationFrame(render);
+		rafReference = requestAnimationFrame(render);
 	}
 
 	const resizeObserver = new ResizeObserver((entries) => {
@@ -273,7 +274,8 @@ function main() {
 				curHeight = newHeight;
 
 				resizeCanvas(newWidth, newHeight);
-				requestAnimationFrame(render);
+				cancelAnimationFrame(rafReference);
+				rafReference = requestAnimationFrame(render);
 			}
 		}
 	});

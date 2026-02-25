@@ -527,6 +527,10 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 			document.location.reload();
 		});
 	}
+
+	disconnectedCallback() {
+		// TODO: remove event listeners
+	}
 }
 
 if (SiteSettings.js !== 'disabled' && !customElements.get('site-settings')) {

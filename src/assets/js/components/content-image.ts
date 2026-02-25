@@ -182,6 +182,10 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 			link.remove();
 		});
 	}
+
+	disconnectedCallback() {
+		// TODO: add removeEventListener
+	}
 }
 
 if (SiteSettings.js !== 'disabled') {

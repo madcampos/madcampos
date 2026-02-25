@@ -1,20 +1,33 @@
 import { SiteSettings } from '../settings.ts';
 
-class OldStyleButton extends HTMLElement {
+class OldStyleButton extends HTMLElement implements CustomElement {
 	constructor() {
 		super();
 
 		const supportsDeclarative = Object.hasOwn(HTMLElement.prototype, 'attachInternals');
 		const internals = supportsDeclarative ? this.attachInternals() : undefined;
-		const shadow = internals?.shadowRoot ?? this.attachShadow({ mode: 'open' });
 
-		shadow.querySelector('button')?.addEventListener('click', () => {
+		if (!internals?.shadowRoot) {
+			this.attachShadow({ mode: 'open' });
+		}
+	}
+
+	handleEvent(evt: Event) {
+		if (evt.type === 'click') {
 			const dest = this.getAttribute('dest') ?? '';
 
 			if (dest) {
 				window.open(new URL(dest, import.meta.url).toString(), '_blank', 'noopener,noreferrer');
 			}
-		});
+		}
+	}
+
+	connectedCallback() {
+		this.shadowRoot?.querySelector('button')?.addEventListener('click', this);
+	}
+
+	disconnectedCallback() {
+		this.shadowRoot?.querySelector('button')?.removeEventListener('click', this);
 	}
 }
 

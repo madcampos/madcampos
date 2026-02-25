@@ -11,26 +11,28 @@ declare class CustomElement extends HTMLElement {
 	static formAssociated?: boolean;
 
 	/** Called when one of the element's observed attributes changes. */
-	attributeChangedCallback?(name: string, oldValue: string | null, newValue: string | null): void;
+	attributeChangedCallback?(name: string, oldValue: string | null, newValue: string | null): Promise<void> | void;
 
 	/** Called when the element is added to a document. */
-	connectedCallback?(): void;
+	connectedCallback?(): Promise<void> | void;
 
 	/** Called when the element is removed from a document. */
-	disconnectedCallback?(): void;
+	disconnectedCallback?(): Promise<void> | void;
 
 	/** Called when the element is associated or disassociated with a form. */
-
-	formAssociatedCallback?(form: HTMLFormElement | null): void;
+	formAssociatedCallback?(form: HTMLFormElement | null): Promise<void> | void;
 
 	/** Called when the disabled state of the element changes. */
-	formDisabledCallback?(isDisabled: boolean): void;
+	formDisabledCallback?(isDisabled: boolean): Promise<void> | void;
 
 	/** Called when the associated form is reset. */
-	formResetCallback?(): void;
+	formResetCallback?(): Promise<void> | void;
 
 	/** Called when the browser automatically fills out the element. */
-	formStateRestoreCallback?(state: File | FormData | string, reason: 'autocomplete' | 'restore'): void;
+	formStateRestoreCallback?(state: File | FormData | string, reason: 'autocomplete' | 'restore'): Promise<void> | void;
+
+	/** General event handler, allows for the pattern: `target.addEventListener('event-type', this)`. */
+	handleEvent?(event: Event): Promise<void> | void;
 }
 
 /** Constructor interface for custom elements. */
