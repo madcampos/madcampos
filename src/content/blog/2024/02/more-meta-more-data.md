@@ -1,8 +1,8 @@
 ---
 title: More Meta, More Data
 summary: An adenda about using metadata with react and other frameworks.
-image: ./assets/distiling-the-eye.jpg
-imageAlt: AI generated image of a collection of chemistry flasks with a bubbling blue liquid inside. The flaks are connected to a computer keyboard and behind them is a large CRT monitor with the image of an eye. The eye is magnified by a round flask, making it the focal point of the image.
+image: ./assets/think-tank.png
+imageAlt: "A screenshot of the Think Tank from Fallout: New Vegas' DLC Old World Blues. The image consists of a background with some big stairs and an industrial style catwalk platform, and in front of it five reflectors pointing towards floating robots. The robots all have a brain encased in glass and three CRT monitors in front of them, two showing eyes and one showing a mouth hanging slightly below the eyes."
 createdAt: 2024-02-27T01:06:43+00:00
 updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:

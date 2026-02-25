@@ -2,8 +2,9 @@
 title: Making colours more accessible
 createdAt: 2024-01-29T12:39:00.000-05:00
 summary: Sharing a problem I got at work and how I solved it
-image: ./assets/rainbow-eye.jpg
-imageAlt: AI generated image of an eye with a radial gradient of a rainbow on it's iris
+image: ./assets/Bohol.tarsier_jtlimphoto.jpg
+imageAlt: A picture of 3 Philippine Tarsiers, small round monkeys with huge eyes. Two of them are cureled on a branch while the other one, a little bit up from them is looking straight to the camera, it's big eyes of a glassy textrue shine in a golden yellow color.
+imageRights: "Philippine Tarsiers in Bohol. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Bohol.tarsier_jtlimphoto.JPG)"
 tags:
   - a11y
   - colors

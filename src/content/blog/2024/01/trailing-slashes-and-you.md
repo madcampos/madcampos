@@ -2,8 +2,8 @@
 title: Trailing Slashes and You!
 createdAt: 2024-01-22T15:51:00.000-05:00
 summary: Do we need trailing slashes on URLs? What is the difference between adding them or not? Find all out in this post!
-image: ./assets/slashing-samurai.jpg
-imageAlt: An AI generated image of a samurai holding a sword glowing with a blue light and cutting through a rainbow colored circuit board.
+image: ./assets/ginsu-2000.png
+imageAlt: 'A screen capture of an old VHS quality ad for the "Ginsu Knife". The image reads: Ginsu 1992 - World Class™'
 tags:
   - URL
   - HTTP

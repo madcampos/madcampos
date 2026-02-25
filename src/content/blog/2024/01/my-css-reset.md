@@ -6,8 +6,9 @@ updates:
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
 summary: A breakdown of my CSS reset file and why each piece is there.
-image: ./assets/pixel-unicorn.jpg
-imageAlt: An AI generated image of a pixel art of a white unicorn head looking to the left. It's mane turns into a rainbow of pixels flowing to the right. The background is dark blue with start.
+image: ./assets/justyn-warner-VH8w75u3LE0-unsplash.jpg
+imageAlt: A photo of a blank canvas on an easel.
+imageRights: "Photo by [Justyn Warner](https://unsplash.com/@justynwarner?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/brown-wooden-table-with-white-wall-VH8w75u3LE0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 tags:
   - CSS
   - html

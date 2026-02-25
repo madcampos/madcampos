@@ -5,8 +5,8 @@ updatedAt: 2024-04-04T07:28:00.000-04:00
 updates:
   - date: 2024-04-04T07:28:00.000-04:00
     changes: Added a new section about how web component have different philosophy than react.
-image: ./assets/8ball.jpg
-imageAlt: A close shot of a shiny billiard "8 ball" in a snow pile with northern lights in the background.
+image: ./assets/8ball.png
+imageAlt: A photo of a Magic 8 ball. A plastic ball resembling a billiard 8 ball, all black, with the number "8" in a white circle in the center.
 summary: A study on intermediate state checkboxes and how to handle state in react.
 tags:
   - BuildingInPublic

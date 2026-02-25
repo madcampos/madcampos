@@ -1,8 +1,10 @@
 ---
 title: Node has a module problem
 summary: How frustrating it is to work with node and it's module system.
-image: ./assets/spaghetti.jpg
-imageAlt: A metal bowl of spaghetti with square meatballs on top of a cutting board. Floating on top of the bowl is a pipe pouring more spaghetti in it.
+image: ./assets/diego-ramirez-OC3lZI9P6kU-unsplash.jpg
+imageAlt: A top view of a plate of spaghetti with meatballs and grated cheese, to garnish a leaf of basil.
+imageRights: Photo by [Diego Ramírez](https://unsplash.com/@natural_panoramic?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-white-plate-topped-with-spaghetti-and-meatballs-OC3lZI9P6kU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 createdAt: 2024-07-09T23:37:11
 tags:
   - node

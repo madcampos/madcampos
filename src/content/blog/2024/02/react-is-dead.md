@@ -2,8 +2,10 @@
 title: React is dead, long live react
 createdAt: 2024-02-01T01:40:00.000-05:00
 summary: My view on the current react situation and how it is just part of a cycle.
-image: ./assets/galaxy-crown.jpg
+image: ./assets/payton-tuttle-hVpFBq-PSgQ-unsplash.jpg
 imageAlt: AI generated image of a crown made up of galaxies and stars. The background is made of a city skyline in the vaporwave style. Lines move to the crown
+imageRights: Photo by [Payton Tuttle](https://unsplash.com/@paytonctuttle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-skull-with-a-crown-on-top-of-it-hVpFBq-PSgQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 tags:
   - web
   - react

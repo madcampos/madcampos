@@ -8,8 +8,9 @@ updates:
   - date: 2026-02-04T15:18:34.000-05:00
     changes: Fixed Github URL.
 summary: A tale of how I went from a vite site to an astro site and the hurdles along the way.
-image: ./assets/astro-corgi.jpg
-imageAlt: AI generated image of a corgi on a red rocket costume flying through space with planets and rainbows on the background.
+image: ./assets/sputnik1.jpg
+imageAlt: A picture of Sputnik, a metalic sphere, floating against a black background representing space. The sphere has four thin long metalic antenas, spreading from the sphere's side slightly outwards.
+imageRights: "Replica of Sputnik 1 in the Museum of Space and Missile Technology (Saint-Petersburg). Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg)"
 tags:
   - BuildInTheOpen
   - BuildingInPublic
@@ -64,7 +65,7 @@ Migrating the blog was a couple days of light work, not very hard to do and I wa
 
 ## There are always roadblocks
 
-![AI generated image of a long road leading to a city. The road has multiple police lines and some cars parked along the way creating a blocade.](./assets/road-block.jpeg)
+![A photo of an orange plastic net with a sign attached that reads: "Danger - Contruction Area - Keep Out"](./assets/john-cardamone-p_Q4pUuip6U-unsplash.jpg)[^1]
 
 I'm _extremely_ particular about my XMLs, [RSS](/blog/2023/06/xml-is-not-dead/) and [SVGs](https://codepen.io/madcampos/pen/NWRdOeW) and I'd like to keep it that way. One issue that kept me going in circles for a while was generating the post images for the RSS feeds.
 
@@ -103,3 +104,5 @@ It turns out the problem was in Astro's _validation_ that didn't allow for a `le
 All the changes, migrations and experiments were for the better in the end. It led to a simpler structure and easier to maintain code that works just the way I want and offers me opportunities to expand and extend it.
 
 But, not everything is without trouble and it is awful to be stuck with the same problem for some time. It is worth to have a working solution, take a step to get your head away from the problem and then come back to it with a fresh head.
+
+[^1]: Photo by [John Cardamone](https://unsplash.com/@john_cardamone?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/danger-construction-area-keep-out-sign-p_Q4pUuip6U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

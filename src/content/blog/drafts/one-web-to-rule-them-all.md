@@ -1,8 +1,6 @@
 ---
 title: One web to rule them all
 createdAt: 2024-02-11
-image: ./assets/weird-people.jpg
-imageAlt: Alt text for the article image
 summary: Ramblings on the web as a platform and how to write defensive and accessible code for it.
 draft: true
 tags:
