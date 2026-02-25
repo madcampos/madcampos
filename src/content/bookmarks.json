@@ -274,6 +274,12 @@
 					"title": "Patterns for Reactivity with Modern Vanilla JavaScript",
 					"description": "A list of patterns for reactivity using vanilla JS, without any libraries.",
 					"type": "reference"
+				},
+				{
+					"url": "https://stackinsight.dev/blog/memory-leak-empirical-study/",
+					"title": "Frontend Memory Leaks: A 500-Repository Static Analysis and Five-Scenario Benchmark Study",
+					"description": "It's in the title: study of memory leaks in frontend code.",
+					"type": "reference"
 				}
 			]
 		},
