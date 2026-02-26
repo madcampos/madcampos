@@ -2,8 +2,9 @@
 title: The font of youth
 summary: Quick tutorial on shrinking font sizes for variable fonts.
 createdAt: 2024-02-16T18:20:18.915-05:00
-image: ./assets/fountain-of-youth.jpg
-imageAlt: A close up shot of a goblet filled with gems and typewriter keys floating on a thick ink on the colours cyan, yellow, and magenta. On the background and out of focus are the mechanical parts of a typewriter.
+image: ./assets/828977-the-fall-of-the-sunwell.jpg
+imageAlt: A screen capture of the game World of Warcraft protraying the fall of the Sunwell. In it a massive beam of light emanates from the ground with smaller energy trails going around. A giant skeleton creature is in the center with heroes fighting it.
+imageRights: "[The Fall of the Sunwell](https://www.wowhead.com/quest=54096/the-fall-of-the-sunwell#screenshots:id=828977)"
 tags:
   - CSS
   - Fonts
@@ -24,7 +25,7 @@ Typography has never been so easy and fun, we have an influx of high quality, fr
 
 ## Variations on a theme
 
-From those, the better supported and most interesting are _variable fonts_. They provide us the means to have one single file that defines how to draw characters on the screen but also include variations to those. Like, how to draw everything from <span style="font-weight: 100;">regular and thin</span> to <span style="font-weight: 800;">bold and thick</span> text.
+From those, the better supported and most interesting are _variable fonts_. They provide us the means to have one single file that defines how to draw characters on the screen but also include variations to those. Like, how to draw everything from <span style="font-weight: 100;">light and thin</span> to <span style="font-weight: 800;">bold and thick</span> text.
 
 The problem is most web font generator kits online are a little bit old and don't support those new features. Some of them don't even support the much smaller and newer [`woff2`](https://caniuse.com/woff2) format, even though all browsers support it for quite a while.
 

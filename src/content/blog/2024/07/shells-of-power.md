@@ -1,8 +1,8 @@
 ---
 title: The Shells of Power
 summary: One shell to sudo them all, One shell to grep them, One shell to fork and in vt-100 display them
-image: ./assets/ring-of-power.jpg
-imageAlt: A low poly silver ring, burning with a volcano behind it. This image is inside an old TV set made up of a green wire mesh.
+image: ./assets/one-ring.avif
+imageAlt: A screen capture of the One Ring from the Lord of the Rings movies. It is a golden ring with inscriptions glowing from it. On the background a stormy red sky with a dark tower and a volcano.
 createdAt: 2024-07-25T17:46:16
 tags:
   - coding

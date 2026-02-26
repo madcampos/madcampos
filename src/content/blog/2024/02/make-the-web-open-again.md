@@ -2,8 +2,9 @@
 title: Make the web open again!
 createdAt: 2024-02-16T00:44:00.000-05:00
 summary: Thoughts on how the web should be open. It is also an ode to the IndieWeb movement and the breaking of silos.
-image: ./assets/punk-world.jpg
-imageAlt: An image of a boy with a purple mohawk pray painting a globe on a brick wall.
+image: ./assets/kyle-bushnell-yHjtJGP1aZM-unsplash.jpg
+imageAlt: A photo of a hand holding a protest sign up saying "Don't entertain authoritarism"
+imageRights: "Photo by [Kyle Bushnell](https://unsplash.com/@kylebushnell?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/person-holding-white-and-black-quote-board-yHjtJGP1aZM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 tags:
   - IndieWeb
   - HTML

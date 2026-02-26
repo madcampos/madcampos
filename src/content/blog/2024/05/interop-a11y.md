@@ -9,8 +9,9 @@ tags:
   - WebDevelopment
   - Interop
   - Accessibility
-image: ./assets/atlas.jpg
-imageAlt: An AI generated image of a marble statue of a man, sitting on a wheelchair leaning forward, he has his arms at his back, holding a stained glass globe.
+image: ./assets/MAN_Atlante_fronte_1040572.jpg
+imageAlt: A marble statue of the Greek titan Atlas holding the world on his back. The titan is naked, with his arms upwards holding the world globe and his head turned to the side, facing the camera. On one of his arms a long cloth hangs and reaches the floor. The globe is ornate with a ship, people and animals in high relief.
+imageRights: "_Farnese Atlas_ statue. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:MAN_Atlante_fronte_1040572.JPG)"
 ---
 
 > This is a post for National AccessAbility Week and a late post for Global Accessibility Awareness Day (GAAD).

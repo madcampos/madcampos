@@ -1,8 +1,9 @@
 ---
 title: Web Components Accessibility
 summary: A summary of what tools and accessibility there is for web components
-image: ./assets/sunglass-tree.jpg
-imageAlt: A tree made out of circuit lines, in some branches there are colorful sunglasses.
+image: ./assets/stopgap-ramp.jpg
+imageAlt: A photo of a bright red wood ramp on a smapp step. The ramp has stenciled in it "stopgap.ca".
+imagerights: A ramp from [stopgap.ca](https://stopgap.ca)
 createdAt: 2024-06-11T19:00:08
 updatedat: 2026-02-04T15:18:34.000-05:00
 updates:

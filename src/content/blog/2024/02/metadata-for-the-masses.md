@@ -2,8 +2,9 @@
 title: Metadata for the masses
 createdAt: 2024-02-12T03:22:18.915-05:00
 summary: A guide on tools and how to add metadata to your website.
-image: ./assets/web-pages.jpg
-imageAlt: AI generated image of a pile of books covered in spider webs with mountains shining on the horizon in the background.
+image: ./assets/tibor-pinter-jeLVaclNjKc-unsplash.jpg
+imageAlt: A photo of a spider web, with light reflecting on the trheads that make the web, creating a rainbow effect.
+imageRights: Photo by [Tibor Pinter](https://unsplash.com/@tribuletto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-close-up-of-a-light-jeLVaclNjKc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 tags:
   - BuildingInPublic
   - BuildInTheOpen
