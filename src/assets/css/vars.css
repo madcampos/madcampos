@@ -1,7 +1,8 @@
 @layer vars {
 	:root {
 		/* Default size for body text */
-		--base-font-size: 1.25rem;
+		/* INFO: set as a percentage to allow for OS level sizing */
+		--base-font-size: 125%;
 		--line-height-adjust: 1;
 
 		/* Size overrides */

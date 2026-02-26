@@ -67,10 +67,10 @@
 		--text-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 	}
 
-	[data-font-size='x-small'] { --base-font-size: 1rem; }
-	[data-font-size='small'] { --base-font-size: 1.12rem; }
-	[data-font-size='large'] { --base-font-size: 1.7rem; }
-	[data-font-size='x-large'] { --base-font-size: 2.2rem; }
+	[data-font-size='x-small'] { --base-font-size: 100%; }
+	[data-font-size='small'] { --base-font-size: 112%; }
+	[data-font-size='large'] { --base-font-size: 170%; }
+	[data-font-size='x-large'] { --base-font-size: 220%; }
 
 	[data-line-height='tight'] { --line-height-adjust: 0.8; }
 	[data-line-height='wide'] { --line-height-adjust: 1.2; }
