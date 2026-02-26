@@ -46,7 +46,7 @@ My initial idea was to make an Italian restaurant website. I guess I was hungry 
 
 I wanted to move away from the stereotypical red, white, and green. So I did some research of other things that are associated with Italian culture and found some pictures of gorgeous ceramics in yellow and blue colours.
 
-![A collection of plates, bowls and other ceramic utensils. All of them are ornate with swirly arabesques in blue, light green and yellow colors, with a glassy smooth finish. Some of them contain fruit motifs with oranges, peaches, pomegranates and grapes.](./assets/20250918133718.png)
+![A collection of plates, bowls and other ceramic utensils. All of them are ornate with swirly arabesques in blue, light green and yellow colors, with a glassy smooth finish. Some of them contain fruit motifs with oranges, peaches, pomegranates and grapes.](./assets/20250918133718.jpg)
 
 _Image from here: https://ca.pinterest.com/pin/298433912777986912/_
 
