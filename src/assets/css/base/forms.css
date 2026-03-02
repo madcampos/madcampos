@@ -254,11 +254,30 @@
 
 	:is(textarea, input)::placeholder { color: var(--input-placeholder-color); }
 
-	:is(textarea, input:not([type='color'], [type='range'], [type='button'], [type='reset'], [type='submit'], [type='image'], [type='file'])):not(:disabled):read-only {
+	:is(textarea, input:not([type='hidden'], [type='range'], [type='color'], [type='checkbox'], [type='radio'], [type='file'], [type='submit'], [type='image'], [type='reset'], [type='button'])):not(:disabled):read-only {
 		outline-color: var(--input-readonly-color);
 		border-color: var(--input-readonly-color);
 		color: var(--input-readonly-color);
 		background-color: var(--input-readonly-bg);
+	}
+
+	/* Form validation - general inputs */
+	form:not([novalidate]) {
+		:is(select, textarea, input:not([type='radio'], [type='checkbox'], [type='file'], [type='submit'], [type='reset'], [type='button'], [type='image'])):not([data-novalidate]) {
+			&:user-invalid {
+				outline-color: var(--input-invalid-color);
+				border-color: var(--input-invalid-color);
+				color: var(--input-invalid-color);
+				background-color: var(--input-invalid-bg);
+			}
+
+			&:user-valid {
+				outline-color: var(--input-valid-color);
+				border-color: var(--input-valid-color);
+				color: var(--input-valid-color);
+				background-color: var(--input-valid-bg);
+			}
+		}
 	}
 
 	:is(select, textarea, input:not([type='radio'], [type='checkbox'], [type='file'], [type='submit'], [type='reset'], [type='button'], [type='image'])) {
@@ -273,20 +292,6 @@
 		inline-size: 100%;
 		min-inline-size: var(--size-content-0);
 		max-inline-size: var(--size-content-2);
-
-		&:user-invalid {
-			outline-color: var(--input-invalid-color);
-			border-color: var(--input-invalid-color);
-			color: var(--input-invalid-color);
-			background-color: var(--input-invalid-bg);
-		}
-
-		&:user-valid {
-			outline-color: var(--input-valid-color);
-			border-color: var(--input-valid-color);
-			color: var(--input-valid-color);
-			background-color: var(--input-valid-bg);
-		}
 
 		&:focus-visible {
 			outline: var(--focus-outline);
@@ -371,6 +376,21 @@
 
 	/* Checkbox and radio */
 
+	/* Form validation - checkboxes and radio buttons */
+	form:not([novalidate]) {
+		input:is([type='radio'], [type='checkbox']):not([data-novalidate]) {
+			&:user-invalid { accent-color: var(--input-invalid-color); }
+			&:user-valid { accent-color: var(--input-valid-color); }
+		}
+
+		input-wrapper:has(> input:is([type='radio'], [type='checkbox']):not([data-novalidate]):user-invalid) {
+			background-color: var(--input-invalid-bg);
+			color: var(--input-invalid-color);
+		}
+
+		input-wrapper:has(> input:is([type='radio'], [type='checkbox']):not([data-novalidate]):user-valid) { color: var(--input-valid-color); }
+	}
+
 	input:is([type='radio'], [type='checkbox']) {
 		inline-size: var(--size-3);
 		block-size: var(--size-3);
@@ -378,16 +398,7 @@
 		&:focus-visible { outline: none; }
 
 		&:checked { accent-color: var(--select-option-selected-color); }
-		&:user-invalid { accent-color: var(--input-invalid-color); }
-		&:user-valid { accent-color: var(--input-valid-color); }
 	}
-
-	input-wrapper:has(> input:is([type='radio'], [type='checkbox']):user-invalid) {
-		background-color: var(--input-invalid-bg);
-		color: var(--input-invalid-color);
-	}
-
-	input-wrapper:has(> input:is([type='radio'], [type='checkbox']):user-valid) { color: var(--input-valid-color); }
 
 	input-wrapper:has(> input:is([type='radio'], [type='checkbox']):focus-visible) {
 		color: var(--input-focus-color);
