@@ -110,7 +110,13 @@ const fonts: SiteFontSet[] = [
 ];
 
 class SiteDisplaySettings extends HTMLElement implements CustomElement {
-	#id = Math.trunc(Math.random() * 1000000).toString(16);
+	readonly #id = Math.trunc(Math.random() * 1000000).toString(16);
+
+	#dialogElement?: HTMLDialogElement;
+
+	#iabEscapeButton?: HTMLButtonElement;
+	#pwaBannerButton?: HTMLButtonElement;
+	#cleanCacheButton?: HTMLButtonElement;
 
 	#renderThemes() {
 		const themeList = this.querySelector<HTMLElement>('theme-list');
@@ -289,6 +295,39 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 			SiteSettings.css = formData.get('css') as EnabledDisabledSetting ?? 'enabled';
 			SiteSettings.js = formData.get('js') as EnabledDisabledSetting ?? 'enabled';
 			SiteSettings.logoContextMenu = formData.get('logo-context-menu') as EnabledDisabledSetting ?? 'enabled';
+		}
+	}
+
+	async #cleanSiteStorageAndServiceWorkers() {
+		if ('caches' in window) {
+			const cacheNames = await caches.keys();
+			for (const cacheName of cacheNames) {
+				await caches.delete(cacheName);
+			}
+		}
+
+		if ('serviceWorker' in navigator) {
+			const registrations = await navigator.serviceWorker.getRegistrations();
+			for (const registration of registrations) {
+				await registration.unregister();
+			}
+		}
+
+		localStorage.clear();
+
+		if ('databases' in indexedDB) {
+			const idbs = await indexedDB.databases();
+
+			idbs.forEach((idb) => {
+				const deleteRequest = indexedDB.deleteDatabase(idb.name ?? '');
+
+				deleteRequest.onerror = (event) => {
+					console.error(`Error deleting database "${idb.name}":`, event);
+				};
+				deleteRequest.onblocked = () => {
+					console.warn(`Database "${idb.name}" deletion is blocked.`);
+				};
+			});
 		}
 	}
 
@@ -493,6 +532,35 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		`;
 	}
 
+	async handleEvent(evt: Event) {
+		switch (evt.type) {
+			case 'submit':
+				evt.preventDefault();
+				evt.stopPropagation();
+				this.#dialogElement?.hidePopover();
+
+				this.#updateSettings(evt.target as HTMLFormElement);
+				break;
+			case 'reset':
+				this.#resetSettings();
+				break;
+			case 'click':
+				if ((evt.target as HTMLElement).id === this.#iabEscapeButton?.id) {
+					this.#dialogElement?.hidePopover();
+					document.querySelector<IabEscape>('iab-escape')?.open();
+				} else if ((evt.target as HTMLElement).id === this.#pwaBannerButton?.id) {
+					this.#dialogElement?.hidePopover();
+					document.querySelector<PWABanner>('pwa-banner')?.open();
+				} else if ((evt.target as HTMLElement).id === this.#cleanCacheButton?.id) {
+					this.#dialogElement?.hidePopover();
+					await this.#cleanSiteStorageAndServiceWorkers();
+					document.location.reload();
+				}
+				break;
+			default:
+		}
+	}
+
 	connectedCallback() {
 		this.render();
 
@@ -501,35 +569,26 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 
 		this.#initializeSettings();
 
-		this.querySelector('form')?.addEventListener('submit', (evt) => {
-			evt.preventDefault();
-			evt.stopPropagation();
-			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
+		this.#dialogElement = this.querySelector(`#site-settings-dialog-${this.#id}`) as HTMLDialogElement;
+		this.#iabEscapeButton = this.querySelector(`#iab-escape-button-${this.#id}`) as HTMLButtonElement;
+		this.#pwaBannerButton = this.querySelector(`#pwa-banner-button-${this.#id}`) as HTMLButtonElement;
+		this.#cleanCacheButton = this.querySelector(`#clear-cache-button-${this.#id}`) as HTMLButtonElement;
 
-			this.#updateSettings(evt.target as HTMLFormElement);
-		});
+		this.querySelector('form')?.addEventListener('submit', this);
+		this.querySelector('form')?.addEventListener('reset', this);
 
-		this.querySelector('form')?.addEventListener('reset', () => this.#resetSettings());
-
-		this.querySelector(`#iab-escape-button-${this.#id}`)?.addEventListener('click', () => {
-			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
-			this.querySelector<IabEscape>('iab-escape')?.open();
-		});
-
-		this.querySelector(`#pwa-banner-button-${this.#id}`)?.addEventListener('click', () => {
-			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
-			this.querySelector<PWABanner>('pwa-banner')?.open();
-		});
-
-		this.querySelector(`#clear-cache-button-${this.#id}`)?.addEventListener('click', () => {
-			this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`)?.hidePopover();
-			// TODO: clean cache and reset service worker
-			document.location.reload();
-		});
+		this.#iabEscapeButton?.addEventListener('click', this);
+		this.#pwaBannerButton?.addEventListener('click', this);
+		this.#cleanCacheButton?.addEventListener('click', this);
 	}
 
 	disconnectedCallback() {
-		// TODO: remove event listeners
+		this.querySelector('form')?.removeEventListener('submit', this);
+		this.querySelector('form')?.removeEventListener('reset', this);
+
+		this.#iabEscapeButton?.removeEventListener('click', this);
+		this.#pwaBannerButton?.removeEventListener('click', this);
+		this.#cleanCacheButton?.removeEventListener('click', this);
 	}
 }
 
