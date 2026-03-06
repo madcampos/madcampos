@@ -22,7 +22,9 @@ export class SiteSettings {
 		'letterSpacing',
 		'isReducedMotion',
 		'hasSolidBorders',
-		'borderWidth'
+		'borderWidth',
+		'readingVoice',
+		'readingSpeed'
 	] as const;
 	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape', 'pwaBanner', 'updateUrl'] as const;
 
@@ -303,5 +305,21 @@ export class SiteSettings {
 
 	static set borderWidth(value: BorderWidthSetting | undefined) {
 		SiteSettings.#updateSetting('borderWidth', value);
+	}
+
+	static get readingVoice() {
+		return SiteSettings.#getSetting('readingVoice');
+	}
+
+	static set readingVoice(value) {
+		SiteSettings.#updateSetting('readingVoice', value);
+	}
+
+	static get readingSpeed(): number {
+		return Number.parseInt(SiteSettings.#getSetting('readingVoice') ?? '1');
+	}
+
+	static set readingSpeed(value: number | undefined) {
+		SiteSettings.#updateSetting('readingSpeed', value !== undefined ? value.toString() : undefined);
 	}
 }
