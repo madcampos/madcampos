@@ -14,26 +14,17 @@ import { SiteSettings } from '../settings.ts';
 
 interface WordReference {
 	element: HTMLElement;
-	word: string;
-	startIndex: number;
-	endIndex: number;
+	range: Range;
 }
 
 class ReadArticle extends HTMLElement implements CustomElement {
+	#id = Math.trunc(Math.random() * 100000).toString(16);
+
+	// TODO: set multiple utterances due to text size limit
 	#utterance = new SpeechSynthesisUtterance('');
 	#wordMap: WordReference[] = [];
 	#isReading = false;
 	#wordIndex = 0;
-
-	constructor() {
-		super();
-
-		if (!('speechSynthesis' in window)) {
-			return;
-		}
-
-		this.render();
-	}
 
 	#resetUtterance(text: string) {
 		speechSynthesis.cancel();
@@ -44,11 +35,15 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		this.#utterance.removeEventListener('resume', this);
 		this.#utterance.removeEventListener('start', this);
 
-		this.#utterance = new SpeechSynthesisUtterance('');
+		this.#utterance = new SpeechSynthesisUtterance(text);
 		this.#utterance.lang = document.documentElement.lang;
 		this.#utterance.rate = SiteSettings.readingSpeed;
 
-		// TODO: set voice
+		const selectedVoice = speechSynthesis.getVoices().find((voice) => voice.name === SiteSettings.readingVoice || voice.default);
+
+		if (selectedVoice) {
+			this.#utterance.voice = selectedVoice;
+		}
 
 		this.#utterance.addEventListener('boundary', this);
 		this.#utterance.addEventListener('end', this);
@@ -65,12 +60,49 @@ class ReadArticle extends HTMLElement implements CustomElement {
 	}
 
 	#listVoices() {
-		// TODO: get all voices
-		// TODO: group voices by language
-		// TODO: group languages by online/local
-		// TODO: sort all groups
-		// TODO: get default voice?
-		// TODO: return formatted select?
+		const displayNames = new Intl.DisplayNames('en-CA', { type: 'language', fallback: 'code' });
+		const collator = new Intl.Collator('en-CA', { usage: 'sort' });
+		const pageLocale = new Intl.Locale(document.documentElement.lang);
+
+		const voices = Object.fromEntries(
+			Object.entries(Object.groupBy(
+				speechSynthesis.getVoices()
+					.filter((voice) =>
+						voice.default ||
+						voice.name === SiteSettings.readingVoice ||
+						navigator.languages.includes(voice.lang) ||
+						new Intl.Locale(voice.lang).language === pageLocale.language
+					),
+				(voice) => displayNames.of(voice.lang) ?? voice.lang
+			))
+				.map(([lang, unsortedVoiceList]) => [
+					lang,
+					Object.fromEntries(
+						Object.entries(Object.groupBy(
+							unsortedVoiceList ?? [],
+							(voice) => voice.localService ? 'Local Voice' : 'Online Voice'
+						))
+							.map(([title, voiceList]) => [
+								title,
+								voiceList.sort(({ name: nameA }, { name: nameB }) => collator.compare(nameA, nameB))
+							])
+					)
+				])
+		);
+
+		return Object.entries(voices)
+			.map(([lang, voiceAvailabilityList]) => `
+				<optgroup label="${lang}">
+					${
+				Object.entries(voiceAvailabilityList).map(([availability, voiceList]) => `
+						<optgroup label="${availability}">
+							${voiceList.map((voice) => `<option ${SiteSettings.readingVoice === voice.name || voice.default ? 'selected' : ''}>${voice.name}</option>`).join('\n')}
+						</optgroup>
+					`).join('\n')
+			}
+				</optgroup>
+			`)
+			.join('\n');
 	}
 
 	#highlightWord() {
@@ -121,34 +153,51 @@ class ReadArticle extends HTMLElement implements CustomElement {
 				<legend>Reading options</legend>
 
 				<input-wrapper>
-					<label for="">Voice</label>
-					<select name="voice" id=""></select>
+					<label for="voice-list-${this.#id}">Voice</label>
+					<select name="voice" id="voice-list-${this.#id}">
+						${this.#listVoices()}
+					</select>
 				</input-wrapper>
 
 				<input-wrapper>
-					<label for="">Speed</label>
+					<label for="voice-speed-${this.#id}">Speed</label>
 					<input
 						name="voice-speed"
-						id=""
+						id="voice-speed-${this.#id}"
 						type="number"
 						min="0.5"
 						step="0.1"
 						max="3"
+						value="${SiteSettings.readingSpeed}"
 					/>
 				</input-wrapper>
 				<button type="button">Other options</button>
 			</fieldset>
 		`;
-
-		// TODO: call list voices
 	}
 
 	connectedCallback() {
 		if (!('speechSynthesis' in window)) {
+			return;
 		}
 
-		// TODO: hook up event listeners
+		speechSynthesis.addEventListener('voiceschanged', () => {
+			this.render();
+		});
+
+		// TODO: hook up button event listeners
+		// TODO: hook up input event listeners
 	}
 
-	// TODO: add event handling, setup, and cleanup
+	disconnectedCallback() {
+		this.#utterance.removeEventListener('boundary', this);
+		this.#utterance.removeEventListener('end', this);
+		this.#utterance.removeEventListener('pause', this);
+		this.#utterance.removeEventListener('resume', this);
+		this.#utterance.removeEventListener('start', this);
+	}
+}
+
+if (SiteSettings.js !== 'disabled' && !customElements.get('read-article')) {
+	customElements.define('read-article', ReadArticle);
 }
