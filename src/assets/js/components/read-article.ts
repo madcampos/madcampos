@@ -21,6 +21,7 @@ class ReadArticle extends HTMLElement implements CustomElement {
 	#id = Math.trunc(Math.random() * 100000).toString(16);
 
 	// TODO: set multiple utterances due to text size limit
+	// TODO: use weak set?
 	#utterance = new SpeechSynthesisUtterance('');
 	#wordMap: WordReference[] = [];
 	#isReading = false;
@@ -54,7 +55,6 @@ class ReadArticle extends HTMLElement implements CustomElement {
 
 	#buildWordMap() {
 		// TODO: gather all elements
-		// TODO: remove elements disabled on settings
 		// TODO: break text into words using segmenter api
 		// TODO: iterate over the elements creating a list of word ranges.
 	}
@@ -135,11 +135,22 @@ class ReadArticle extends HTMLElement implements CustomElement {
 				case 'boundary':
 					break;
 				case 'end':
+					// TODO: remove event listeners from utterance
+					// TODO: cleanup utterances
 					break;
 				case 'pause':
-					break;
 				case 'start':
 				case 'resume':
+					this.#toggleReading();
+					break;
+				case 'submit':
+					event.preventDefault();
+					event.stopPropagation();
+					break;
+				case 'click':
+					break;
+				case 'input':
+				case 'change':
 					break;
 				default:
 			}
@@ -148,31 +159,33 @@ class ReadArticle extends HTMLElement implements CustomElement {
 
 	render() {
 		this.innerHTML = `
-			<button type="button">Read article</button>
-			<fieldset>
-				<legend>Reading options</legend>
+			<form action="" method="post">
+				<button type="button" name="read-article">Read article</button>
+				<fieldset>
+					<legend>Reading options</legend>
 
-				<input-wrapper>
-					<label for="voice-list-${this.#id}">Voice</label>
-					<select name="voice" id="voice-list-${this.#id}">
-						${this.#listVoices()}
-					</select>
-				</input-wrapper>
+					<input-wrapper>
+						<label for="voice-list-${this.#id}">Voice</label>
+						<select name="voice" id="voice-list-${this.#id}">
+							${this.#listVoices()}
+						</select>
+					</input-wrapper>
 
-				<input-wrapper>
-					<label for="voice-speed-${this.#id}">Speed</label>
-					<input
-						name="voice-speed"
-						id="voice-speed-${this.#id}"
-						type="number"
-						min="0.5"
-						step="0.1"
-						max="3"
-						value="${SiteSettings.readingSpeed}"
-					/>
-				</input-wrapper>
-				<button type="button">Other options</button>
-			</fieldset>
+					<input-wrapper>
+						<label for="voice-speed-${this.#id}">Speed</label>
+						<input
+							name="voice-speed"
+							id="voice-speed-${this.#id}"
+							type="number"
+							min="0.5"
+							step="0.1"
+							max="3"
+							value="${SiteSettings.readingSpeed}"
+						/>
+					</input-wrapper>
+					<button type="button" name="reading-options">Other options</button>
+				</fieldset>
+			</form>
 		`;
 	}
 
@@ -180,6 +193,8 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		if (!('speechSynthesis' in window)) {
 			return;
 		}
+
+		// TODO: add loader
 
 		speechSynthesis.addEventListener('voiceschanged', () => {
 			this.render();
