@@ -98,6 +98,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 					text-anchor="middle"
 					textLength="80%"
 					lengthAdjust="spacingAndGlyphs"
+					font-variant="tabular-nums"
 				>${textSpans}</text>
 			</svg>
 		`;
