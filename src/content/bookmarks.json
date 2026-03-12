@@ -94,6 +94,12 @@
 					"title": "Who can use",
 					"description": "A tool to check color contrast for different vision impairments.",
 					"type": "reference"
+				},
+				{
+					"url": "https://piccalil.li/blog/accessible-faux-nested-interactive-controls/",
+					"title": "Accessible faux-nested interactive controls",
+					"description": "Suggestion of a pattern for providing _\"nested\"_ interactible elements.",
+					"type": "article"
 				}
 			]
 		},
@@ -676,6 +682,66 @@
 					"title": "Open Game Art",
 					"description": "Free game assets.",
 					"type": "website"
+				}
+			]
+		},
+		{
+			"title": "AI Criticism",
+			"description": "Criticisms on the whole AI hype cycle and other collected thoughts. Mostly _against_ or _heavily_ skeptic on AI.",
+			"links": [
+				{
+					"url": "https://www.youtube.com/watch?v=ShusuVq32hc",
+					"title": "Model Collapse Ends AI Hype",
+					"description": "Video from an AI researcher demistifying things that LLMs _are not_.",
+					"type": "video"
+				},
+				{
+					"url": "https://www.williamjbowman.com/blog/2026/03/05/against-vibes-when-is-a-generative-model-useful/",
+					"title": "Against Vibes: When is a Generative Model Useful",
+					"description": "Article asking the question \"when is a generatibe model measurably useful?\"",
+					"type": "article"
+				},
+				{
+					"url": "https://blog.katanaquant.com/p/your-llm-doesnt-write-correct-code",
+					"title": "Your LLM Doesn't Write Correct Code. It Writes Plausible Code.",
+					"description": "Article arguing that code that _reads_ plausible, most probably contain bugs and issues.",
+					"type": "article"
+				},
+				{
+					"url": "https://lr0.org/blog/p/gpt/",
+					"title": "I'm not consulting an LLM",
+					"description": "Argument that being instantly rewarded with an answer doesn't build intuition and hinders learning.",
+					"type": "article"
+				},
+				{
+					"url": "https://productpicnic.beehiiv.com/p/vibe-prototyping-isn-t-solving-any-problems-but-it-s-creating-many-new-ones",
+					"title": "Vibe prototyping isn't solving any problems. But it's creating many new ones.",
+					"description": "Article on how the homogenization created with AI makes designs worse off.",
+					"type": "article"
+				},
+				{
+					"url": "https://writings.hongminhee.org/2026/03/legal-vs-legitimate/",
+					"title": "Is legal the same as legitimate: AI reimplementation and the erosion of copyleft",
+					"description": "Article discussing the diferences between what is legal and what is ethical, or legitimate to do.",
+					"type": "article"
+				},
+				{
+					"url": "https://erikjohannes.no/posts/20260130-outsourcing-thinking/index.html",
+					"title": "Outsourcing thinking",
+					"description": "An argument that outsorcing thinking to an LLM erodes our cognition. And even for menial tasks, it is still harmful.",
+					"type": "article"
+				},
+				{
+					"url": "https://addyo.substack.com/p/the-80-problem-in-agentic-coding",
+					"title": "The 80% Problem in Agentic Coding",
+					"description": "Discussion on the problem that by using LLMs we stop building fundational understanding of what a project does and how it works.",
+					"type": "article"
+				},
+				{
+					"url": "https://atmoio.substack.com/p/after-two-years-of-vibecoding-im",
+					"title": "After two years of vibecoding, I'm back to writing by hand",
+					"description": "The story of how a developer went from vibe coding back to actually writing code because the LLM generated code is actually bad.",
+					"type": "article"
 				}
 			]
 		}
