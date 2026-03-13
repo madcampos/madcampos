@@ -1,0 +1,6 @@
+@layer components {
+	rendered-content::highlight(reading-highlight) {
+		background-color: var(--accent-color);
+		color: var(--surface-1);
+	}
+}

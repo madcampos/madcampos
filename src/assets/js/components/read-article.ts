@@ -10,54 +10,17 @@
 
 import { SiteSettings } from '../settings.ts';
 
-// TODO: add global settings for reading code, reading image alt text, etc.
-
-interface WordReference {
-	element: HTMLElement;
-	range: Range;
+interface SectionUtterance {
+	node: Node;
+	utterance: SpeechSynthesisUtterance;
 }
 
 class ReadArticle extends HTMLElement implements CustomElement {
 	#id = Math.trunc(Math.random() * 100000).toString(16);
 
-	// TODO: set multiple utterances due to text size limit
-	// TODO: use weak set?
-	#utterance = new SpeechSynthesisUtterance('');
-	#wordMap: WordReference[] = [];
-	#isReading = false;
-	#wordIndex = 0;
-
-	#resetUtterance(text: string) {
-		speechSynthesis.cancel();
-
-		this.#utterance.removeEventListener('boundary', this);
-		this.#utterance.removeEventListener('end', this);
-		this.#utterance.removeEventListener('pause', this);
-		this.#utterance.removeEventListener('resume', this);
-		this.#utterance.removeEventListener('start', this);
-
-		this.#utterance = new SpeechSynthesisUtterance(text);
-		this.#utterance.lang = document.documentElement.lang;
-		this.#utterance.rate = SiteSettings.readingSpeed;
-
-		const selectedVoice = speechSynthesis.getVoices().find((voice) => voice.name === SiteSettings.readingVoice || voice.default);
-
-		if (selectedVoice) {
-			this.#utterance.voice = selectedVoice;
-		}
-
-		this.#utterance.addEventListener('boundary', this);
-		this.#utterance.addEventListener('end', this);
-		this.#utterance.addEventListener('pause', this);
-		this.#utterance.addEventListener('resume', this);
-		this.#utterance.addEventListener('start', this);
-	}
-
-	#buildWordMap() {
-		// TODO: gather all elements
-		// TODO: break text into words using segmenter api
-		// TODO: iterate over the elements creating a list of word ranges.
-	}
+	#sections: SectionUtterance[] = [];
+	#highlight = new Highlight();
+	#currentSection = 0;
 
 	#listVoices() {
 		const displayNames = new Intl.DisplayNames('en-CA', { type: 'language', fallback: 'code' });
@@ -105,55 +68,191 @@ class ReadArticle extends HTMLElement implements CustomElement {
 			.join('\n');
 	}
 
-	#highlightWord() {
-		if (!('highlighs' in CSS)) {
+	#buildSections() {
+		const elementRoot = document.querySelector<HTMLElement>('main > rendered-content');
+
+		if (!elementRoot) {
 			return;
 		}
 
-		this.#wordIndex += 1;
+		const treeWalker = document.createTreeWalker(elementRoot, NodeFilter.SHOW_TEXT);
 
-		CSS.highlights.delete('reading-highlight');
-		// TODO: add new highlight
-	}
+		while (treeWalker.nextNode()) {
+			const { currentNode } = treeWalker;
+			const { textContent } = currentNode;
 
-	#toggleReading() {
-		if (this.#isReading) {
-			speechSynthesis.pause();
-			this.#isReading = false;
-		} else if (this.#wordIndex === 0) {
-			speechSynthesis.speak(this.#utterance);
-			this.#isReading = true;
-		} else {
-			speechSynthesis.resume();
-			this.#isReading = true;
+			if (!textContent?.trim()) {
+				continue;
+			}
+
+			if (currentNode.parentElement?.matches('sr-only')) {
+				continue;
+			}
+
+			const isImageLightboxChild = Boolean(currentNode.parentElement?.closest('img-lightbox'));
+			const isImageLightboxContent = Boolean(currentNode.parentElement?.closest('img-lightbox dialog-content'));
+			if (isImageLightboxChild && !isImageLightboxContent) {
+				continue;
+			}
+
+			this.#sections.push({
+				utterance: this.#newUtterance(currentNode),
+				node: currentNode
+			});
 		}
 	}
 
-	handleEvent(event: Event) {
-		if (event instanceof SpeechSynthesisEvent) {
-			switch (event.type) {
-				case 'boundary':
-					break;
-				case 'end':
-					// TODO: remove event listeners from utterance
-					// TODO: cleanup utterances
-					break;
-				case 'pause':
-				case 'start':
-				case 'resume':
-					this.#toggleReading();
-					break;
-				case 'submit':
-					event.preventDefault();
-					event.stopPropagation();
-					break;
-				case 'click':
-					break;
-				case 'input':
-				case 'change':
-					break;
-				default:
+	#newUtterance(node: Node) {
+		const utterance = new SpeechSynthesisUtterance(node.textContent ?? undefined);
+
+		utterance.lang = document.documentElement.lang;
+		// utterance.rate = SiteSettings.readingSpeed;
+
+		const voices = speechSynthesis.getVoices();
+		const selectedVoice = voices.find((voice) => voice.name === SiteSettings.readingVoice) ?? voices.find((voice) => voice.default);
+
+		if (selectedVoice) {
+			utterance.voice = selectedVoice;
+		}
+
+		utterance.addEventListener('boundary', this);
+		utterance.addEventListener('end', this);
+
+		return utterance;
+	}
+
+	#nextSection() {
+		if (this.#currentSection < this.#sections.length) {
+			this.#currentSection += 1;
+
+			const utterance = this.#sections[this.#currentSection]?.utterance;
+
+			if (utterance) {
+				speechSynthesis.speak(utterance);
 			}
+		} else {
+			this.#currentSection = 0;
+		}
+	}
+
+	#highlightWord(evt: SpeechSynthesisEvent) {
+		if (!('highlights' in CSS)) {
+			return;
+		}
+
+		if (evt.name !== 'word') {
+			return;
+		}
+
+		const currentNode = this.#sections[this.#currentSection]?.node;
+
+		if (!currentNode) {
+			return;
+		}
+
+		const range = new Range();
+
+		range.setStart(currentNode, evt.charIndex);
+		range.setEnd(currentNode, evt.charIndex + evt.charLength);
+		this.#highlight.clear();
+		this.#highlight.add(range);
+	}
+
+	#toggleReading() {
+		if (speechSynthesis.speaking) {
+			speechSynthesis.pause();
+		} else if (this.#currentSection === 0) {
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			speechSynthesis.speak(this.#sections[0]!.utterance);
+		} else {
+			speechSynthesis.resume();
+		}
+	}
+
+	#setVoice(newVoice: string) {
+		SiteSettings.readingVoice = newVoice;
+
+		const wasSpeeking = speechSynthesis.speaking;
+		if (wasSpeeking) {
+			speechSynthesis.pause();
+		}
+
+		const voices = speechSynthesis.getVoices();
+		const selectedVoice = voices.find((voice) => voice.name === SiteSettings.readingVoice) ?? voices.find((voice) => voice.default);
+
+		if (selectedVoice) {
+			this.#sections.forEach(({ utterance }) => {
+				utterance.voice = selectedVoice;
+			});
+		}
+
+		if (wasSpeeking) {
+			speechSynthesis.resume();
+		}
+	}
+
+	#setSpeed(newSpeed: number) {
+		if (Number.isNaN(newSpeed)) {
+			return;
+		}
+
+		SiteSettings.readingSpeed = newSpeed;
+
+		const wasSpeeking = speechSynthesis.speaking;
+		if (wasSpeeking) {
+			speechSynthesis.pause();
+		}
+
+		this.#sections.forEach(({ utterance }) => {
+			utterance.rate = newSpeed;
+		});
+
+		if (wasSpeeking) {
+			speechSynthesis.resume();
+		}
+	}
+
+	#updateSpeechSetting(evt: InputEvent) {
+		if (evt.target instanceof HTMLInputElement) {
+			this.#setSpeed(Number.parseFloat(evt.target.value));
+		} else if (evt.target instanceof HTMLSelectElement) {
+			this.#setVoice(evt.target.value);
+		}
+	}
+
+	#handleClick(evt: MouseEvent) {
+		if (!(evt.target instanceof HTMLButtonElement)) {
+			return;
+		}
+
+		switch (evt.target.name) {
+			case 'read-article':
+				this.#toggleReading();
+				break;
+			default:
+		}
+	}
+
+	handleEvent(evt: Event) {
+		switch (evt.type) {
+			case 'boundary':
+				this.#highlightWord(evt as SpeechSynthesisEvent);
+				break;
+			case 'end':
+				this.#nextSection();
+				break;
+			case 'submit':
+				evt.preventDefault();
+				evt.stopPropagation();
+				break;
+			case 'click':
+				this.#handleClick(evt as MouseEvent);
+				break;
+			case 'input':
+			case 'change':
+				this.#updateSpeechSetting(evt as unknown as InputEvent);
+				break;
+			default:
 		}
 	}
 
@@ -183,33 +282,41 @@ class ReadArticle extends HTMLElement implements CustomElement {
 							value="${SiteSettings.readingSpeed}"
 						/>
 					</input-wrapper>
-					<button type="button" name="reading-options">Other options</button>
 				</fieldset>
 			</form>
 		`;
 	}
 
 	connectedCallback() {
-		if (!('speechSynthesis' in window)) {
+		if (!('speechSynthesis' in window) || !('highlights' in CSS)) {
 			return;
 		}
 
-		// TODO: add loader
+		speechSynthesis.cancel();
 
 		speechSynthesis.addEventListener('voiceschanged', () => {
+			this.#buildSections();
 			this.render();
-		});
+		}, { once: true });
 
-		// TODO: hook up button event listeners
-		// TODO: hook up input event listeners
+		CSS.highlights.set('reading-highlight', this.#highlight);
+
+		this.addEventListener('input', this);
+		this.addEventListener('change', this);
+		this.addEventListener('click', this);
 	}
 
 	disconnectedCallback() {
-		this.#utterance.removeEventListener('boundary', this);
-		this.#utterance.removeEventListener('end', this);
-		this.#utterance.removeEventListener('pause', this);
-		this.#utterance.removeEventListener('resume', this);
-		this.#utterance.removeEventListener('start', this);
+		speechSynthesis.cancel();
+
+		this.#sections.forEach(({ utterance }) => {
+			utterance.removeEventListener('boundary', this);
+			utterance.removeEventListener('end', this);
+		});
+
+		this.removeEventListener('input', this);
+		this.removeEventListener('change', this);
+		this.removeEventListener('click', this);
 	}
 }
 
