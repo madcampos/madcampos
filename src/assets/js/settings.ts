@@ -33,10 +33,14 @@ export class SiteSettings {
 	static #isCssNakedDay = false;
 	static #isJsNakedDay = false;
 
-	static #initializeSettings() {
-		if (SiteSettings.#searchParams) {
+	static #isInitialized = false;
+
+	static initializeSettings() {
+		if (SiteSettings.#searchParams || SiteSettings.#isInitialized) {
 			return;
 		}
+
+		this.#isInitialized = true;
 
 		SiteSettings.#searchParams = new URLSearchParams(document.location.search);
 
@@ -49,13 +53,17 @@ export class SiteSettings {
 	}
 
 	static #getSetting<T extends string>(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
-		SiteSettings.#initializeSettings();
+		if (!this.#isInitialized) {
+			SiteSettings.initializeSettings();
+		}
 
 		return (SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined) as T | undefined;
 	}
 
 	static #updateSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number], value: string | undefined) {
-		SiteSettings.#initializeSettings();
+		if (!this.#isInitialized) {
+			SiteSettings.initializeSettings();
+		}
 
 		if (value) {
 			document.documentElement.dataset[setting] = value;
@@ -154,7 +162,9 @@ export class SiteSettings {
 	}
 
 	static get isCssNakedDay() {
-		SiteSettings.#initializeSettings();
+		if (!this.#isInitialized) {
+			SiteSettings.initializeSettings();
+		}
 
 		return this.#isCssNakedDay;
 	}
@@ -178,7 +188,9 @@ export class SiteSettings {
 	}
 
 	static get isJsNakedDay() {
-		SiteSettings.#initializeSettings();
+		if (!this.#isInitialized) {
+			SiteSettings.initializeSettings();
+		}
 
 		return this.#isJsNakedDay;
 	}
@@ -316,10 +328,12 @@ export class SiteSettings {
 	}
 
 	static get readingSpeed(): number {
-		return Number.parseInt(SiteSettings.#getSetting('readingVoice') ?? '1');
+		return Number.parseFloat(SiteSettings.#getSetting('readingSpeed') ?? '1');
 	}
 
 	static set readingSpeed(value: number | undefined) {
 		SiteSettings.#updateSetting('readingSpeed', value !== undefined ? value.toString() : undefined);
 	}
 }
+
+SiteSettings.initializeSettings();
