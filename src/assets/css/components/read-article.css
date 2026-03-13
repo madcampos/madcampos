@@ -1,4 +1,6 @@
 @layer components {
+	read-article { /* TODO: style component */ }
+
 	rendered-content::highlight(reading-highlight) {
 		background-color: var(--accent-color);
 		color: var(--surface-1);
