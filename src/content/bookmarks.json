@@ -484,6 +484,12 @@
 					"title": "On Cognitive Debt and the Care of the Habitat",
 					"description": "A shot intro with practical examples on \"cognitive debt\".",
 					"type": "article"
+				},
+				{
+					"url": "https://blog.information-superhighway.net/on-the-need-for-understanding",
+					"title": "On The Need For Understanding",
+					"description": "An argument that you have to get your hands dirty and dig through the code.",
+					"type": "article"
 				}
 			]
 		},
@@ -741,6 +747,24 @@
 					"url": "https://atmoio.substack.com/p/after-two-years-of-vibecoding-im",
 					"title": "After two years of vibecoding, I'm back to writing by hand",
 					"description": "The story of how a developer went from vibe coding back to actually writing code because the LLM generated code is actually bad.",
+					"type": "article"
+				},
+				{
+					"url": "https://andrewmurphy.io/blog/if-you-thought-the-speed-of-writing-code-was-your-problem-you-have-bigger-problems",
+					"title": "If you thought the speed of writing code was your problem - you have bigger problems",
+					"description": "Coding speed was never the problem, and \"shipping faster\" only makes thigns worse.",
+					"type": "article"
+				},
+				{
+					"url": "https://notes.visaint.space/ai-coding-is-gambling/",
+					"title": "AI Coding is Gambling",
+					"description": "How coding with AI is very similar to gambling.",
+					"type": "article"
+				},
+				{
+					"url": "https://addyosmani.com/blog/comprehension-debt/",
+					"title": "Comprehension Debt - the hidden cost of AI generated code",
+					"description": "The lack of understanding is the new debt to be aware of and to be strict about.",
 					"type": "article"
 				}
 			]
