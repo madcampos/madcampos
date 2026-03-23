@@ -138,10 +138,18 @@ const post = (await listAllPosts())[0]!;
 				</draft-tag>
 				<span>
 					<Icon name="mingcute:calendar-2-line" title="Date started" />
-					<time datetime={project.data.createdAt.toISOString()} itemprop="dateCreated">{formatter.format(project.data.createdAt)}</time>
+					<time
+						data-relative-time
+						datetime={project.data.createdAt.toISOString()}
+						itemprop="dateCreated"
+					>{formatter.format(project.data.createdAt)}</time>
 					{
 						project.data.updatedAt && (
-							<span>&mdash; <time datetime={project.data.updatedAt.toISOString()} itemprop="dateModified">{formatter.format(project.data.updatedAt)}</time></span>
+							<span>&mdash; <time
+									data-relative-time
+									datetime={project.data.updatedAt.toISOString()}
+									itemprop="dateModified"
+								>{formatter.format(project.data.updatedAt)}</time></span>
 						)
 					}
 				</span>
@@ -366,17 +374,23 @@ const post = (await listAllPosts())[0]!;
 
 				<post-metadata>
 					<span>
-						Published on <time itemprop="datePublished" class="dt-published" datetime={post.data.createdAt.toISOString()}>{
-							formatter.format(post.data.createdAt)
-						}</time>.
+						Published on <time
+							data-relative-time
+							itemprop="datePublished"
+							class="dt-published"
+							datetime={post.data.createdAt.toISOString()}
+						>{formatter.format(post.data.createdAt)}</time>.
 					</span>
 
 					{
 						post.data.updatedAt && (
 							<span>
-								Updated on <time itemprop="dateModified" class="dt-updated" datetime={post.data.updatedAt.toISOString()}>{
-									formatter.format(post.data.updatedAt)
-								}</time>.
+								Updated on <time
+									data-relative-time
+									itemprop="dateModified"
+									class="dt-updated"
+									datetime={post.data.updatedAt.toISOString()}
+								>{formatter.format(post.data.updatedAt)}</time>.
 							</span>
 						)
 					}
@@ -384,7 +398,11 @@ const post = (await listAllPosts())[0]!;
 					{
 						post.readingTime && (
 							<span>
-								<time itemprop="timeRequired" class="dt-duration" datetime={`PT${post.readingTime}M`}>
+								<time
+									itemprop="timeRequired"
+									class="dt-duration"
+									datetime={`PT${post.readingTime}M`}
+								>
 									{post.readingTime} minute read
 								</time>
 								{post.wordCount && <span> &mdash; {post.wordCount} words</span>}

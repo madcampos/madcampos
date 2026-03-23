@@ -89,10 +89,18 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone
 							</draft-tag>
 							<span>
 								<Icon name="mingcute:calendar-2-line" title="Date started" />
-								<time datetime={data.createdAt.toISOString()} itemprop="dateCreated">{formatter.format(data.createdAt)}</time>
+								<time
+									data-relative-time
+									datetime={data.createdAt.toISOString()}
+									itemprop="dateCreated"
+								>{formatter.format(data.createdAt)}</time>
 								{
 									data.updatedAt && (
-										<span>&mdash; <time datetime={data.updatedAt.toISOString()} itemprop="dateModified">{formatter.format(data.updatedAt)}</time></span>
+										<span>&mdash; <time
+												data-relative-time
+												datetime={data.updatedAt.toISOString()}
+												itemprop="dateModified"
+											>{formatter.format(data.updatedAt)}</time></span>
 									)
 								}
 							</span>

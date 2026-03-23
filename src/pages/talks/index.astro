@@ -78,7 +78,10 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 										{
 											talk.data.date ? (
 												<meta itemprop="startDate" content={talk.data.date.toISOString()} />
-												<time datetime={talk.data.date.toISOString()}>{formatter.format(talk.data.date)}</time>
+												<time
+													data-relative-time
+													datetime={talk.data.date.toISOString()}
+												>{formatter.format(talk.data.date)}</time>
 											) : <span>&mdash;</span>
 										}
 									</span>

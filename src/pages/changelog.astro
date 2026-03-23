@@ -62,7 +62,12 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 									{draft && <draft-tag>Draft</draft-tag>}
 									<Fragment set:html={title} />
 								</h2>
-								<p><time datetime={date.toISOString()}>{formatter.format(date)}</time></p>
+								<p>
+									<time
+										data-relative-time
+										datetime={date.toISOString()}
+									>{formatter.format(date)}</time>
+								</p>
 							</header>
 						</summary>
 						<article>
@@ -82,5 +87,6 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 		</footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
+		<script src="../assets/js/components/relative-time.ts"></script>
 	</body>
 </html>

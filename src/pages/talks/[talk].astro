@@ -119,7 +119,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						Date:
 					</strong>
 					<meta itemprop="startDate" content={date ? date.toISOString() : '0000-01-01T00:00:00.000Z'} />
-					{date ? <time datetime={date.toISOString()}>{formatter.format(date)}</time> : <span>&mdash;</span>}
+					{date ? <time data-relative-time datetime={date.toISOString()}>{formatter.format(date)}</time> : <span>&mdash;</span>}
 				</li>
 
 				{
