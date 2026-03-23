@@ -96,7 +96,7 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		const utterance = new SpeechSynthesisUtterance(node.textContent ?? undefined);
 
 		utterance.lang = document.documentElement.lang;
-		// utterance.rate = SiteSettings.readingSpeed;
+		utterance.rate = SiteSettings.readingSpeed;
 
 		const voices = speechSynthesis.getVoices();
 		const selectedVoice = voices.find((voice) => voice.name === SiteSettings.readingVoice) ?? voices.find((voice) => voice.default);
@@ -148,14 +148,17 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		this.#highlight.add(range);
 	}
 
-	#toggleReading() {
+	#toggleReading(button: HTMLButtonElement) {
 		if (speechSynthesis.speaking) {
 			speechSynthesis.pause();
+			button.textContent = 'Read Article';
 		} else if (this.#currentSection === 0) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			speechSynthesis.speak(this.#sections[0]!.utterance);
+			button.textContent = 'Pause Reading';
 		} else {
 			speechSynthesis.resume();
+			button.textContent = 'Pause Reading';
 		}
 	}
 
@@ -217,7 +220,7 @@ class ReadArticle extends HTMLElement implements CustomElement {
 
 		switch (evt.target.name) {
 			case 'read-article':
-				this.#toggleReading();
+				this.#toggleReading(evt.target);
 				break;
 			default:
 		}
@@ -247,33 +250,33 @@ class ReadArticle extends HTMLElement implements CustomElement {
 	}
 
 	render() {
-		// TODO: improve markup
 		this.innerHTML = `
 			<form action="" method="post">
-				<button type="button" name="read-article">Read article</button>
-				<fieldset>
-					<legend>Reading options</legend>
+				<details open>
+					<summary>Read Article</summary>
+					<div>
+						<input-wrapper>
+							<label for="voice-list-${this.#id}">Voice</label>
+							<select name="voice" id="voice-list-${this.#id}">
+								${this.#listVoices()}
+							</select>
+						</input-wrapper>
 
-					<input-wrapper>
-						<label for="voice-list-${this.#id}">Voice</label>
-						<select name="voice" id="voice-list-${this.#id}">
-							${this.#listVoices()}
-						</select>
-					</input-wrapper>
-
-					<input-wrapper>
-						<label for="voice-speed-${this.#id}">Speed</label>
-						<input
-							name="voice-speed"
-							id="voice-speed-${this.#id}"
-							type="number"
-							min="0.5"
-							step="0.1"
-							max="3"
-							value="${SiteSettings.readingSpeed}"
-						/>
-					</input-wrapper>
-				</fieldset>
+						<input-wrapper>
+							<label for="voice-speed-${this.#id}">Speed</label>
+							<input
+								name="voice-speed"
+								id="voice-speed-${this.#id}"
+								type="number"
+								min="0.5"
+								step="0.1"
+								max="3"
+								value="${SiteSettings.readingSpeed}"
+							/>
+						</input-wrapper>
+						<button type="button" name="read-article">Read article</button>
+					</div>
+				</details>
 			</form>
 		`;
 	}

@@ -1,5 +1,18 @@
 @layer components {
-	read-article { /* TODO: style component */ }
+	read-article {
+		grid-area: read;
+
+		details > div {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+		}
+
+		input-wrapper { margin-block: var(--size-2); }
+
+		input[type='number'] { max-inline-size: 5ch; }
+	}
 
 	rendered-content::highlight(reading-highlight) {
 		background-color: var(--accent-color);

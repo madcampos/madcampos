@@ -6,3 +6,4 @@ import '../components/table.ts';
 import '../components/share-options.ts';
 import '../components/youtube.ts';
 import '../components/relative-time.ts';
+import '../components/read-article.ts';

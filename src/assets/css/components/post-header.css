@@ -10,14 +10,15 @@
 
 		header {
 			display: grid;
-			grid-template-rows: auto 1fr repeat(3, auto);
+			grid-template-rows: auto 1fr repeat(4, auto);
 			grid-template-columns: repeat(2, 1fr);
 			grid-template-areas:
 				'draft hero-image'
 				'title hero-image'
 				'summary hero-image'
 				'metadata metadata'
-				'share share';
+				'share share'
+				'read read';
 			place-items: end center;
 			justify-self: stretch;
 			gap: var(--size-3);
@@ -28,13 +29,14 @@
 			padding: var(--size-3);
 
 			&:not(:has(figure)) {
-				grid-template-rows: auto 1fr repeat(3, auto);
+				grid-template-rows: auto 1fr repeat(4, auto);
 				grid-template-areas:
 					'draft draft'
 					'title title'
 					'summary summary'
 					'metadata metadata'
-					'share share';
+					'share share'
+					'read read';
 			}
 
 			draft-tag {
@@ -68,14 +70,15 @@
 			share-options { grid-area: share; }
 
 			@container post-header (max-width: 40rem) {
-				grid-template-rows: 1fr repeat(5, auto);
+				grid-template-rows: 1fr repeat(6, auto);
 				grid-template-areas:
 					'hero-image hero-image'
 					'draft draft'
 					'title title'
 					'summary summary'
 					'metadata metadata'
-					'share share';
+					'share share'
+					'read read';
 			}
 
 			@container post-header (max-width: 25rem) { margin-inline: 0; }

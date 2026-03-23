@@ -5,4 +5,5 @@ import '../components/inline-share.ts';
 import '../components/table.ts';
 import '../components/share-options.ts';
 import '../components/youtube.ts';
+import '../components/read-article.ts';
 import '../components/relative-time.ts';
