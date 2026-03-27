@@ -12,36 +12,57 @@ class ReadArticle extends HTMLElement implements CustomElement {
 	#highlight = new Highlight();
 	#currentSection = 0;
 
-	#listVoices() {
-		const displayNames = new Intl.DisplayNames('en-CA', { type: 'language', fallback: 'code' });
-		const collator = new Intl.Collator('en-CA', { usage: 'sort' });
-		const pageLocale = new Intl.Locale(document.documentElement.lang);
+	#voices?: Record<string, Record<string, SpeechSynthesisVoice[]>>;
 
-		const voices = Object.fromEntries(
-			Object.entries(Object.groupBy(
-				speechSynthesis.getVoices()
-					.filter((voice) =>
-						voice.default ||
-						voice.name === SiteSettings.readingVoice ||
-						navigator.languages.includes(voice.lang) ||
-						new Intl.Locale(voice.lang).language === pageLocale.language
-					),
-				(voice) => displayNames.of(voice.lang) ?? voice.lang
-			))
-				.map(([lang, unsortedVoiceList]) => [
+	#listVoices(force?: boolean) {
+		if (!this.#voices || force) {
+			const displayName = new Intl.DisplayNames('en-CA', { type: 'language', fallback: 'code' });
+			const collator = new Intl.Collator('en-CA', { usage: 'sort' });
+			const pageLocale = new Intl.Locale(document.documentElement.lang);
+			const languages = navigator.languages.map((lang) => new Intl.Locale(lang).language);
+
+			const allVoices = speechSynthesis.getVoices();
+			const filteredVoices = allVoices.filter((voice) => {
+				const thisLanguage = new Intl.Locale(voice.lang).language;
+
+				const isDefaultVoice = voice.default;
+				const isSavedVoice = voice.name === SiteSettings.readingVoice;
+				const isBrowserLanguage = languages.includes(thisLanguage);
+				const isPageLanguage = thisLanguage === pageLocale.language;
+
+				return isDefaultVoice || isSavedVoice || isBrowserLanguage || isPageLanguage;
+			});
+
+			if (!filteredVoices.length) {
+				return {};
+			}
+
+			const voices = Object.fromEntries(
+				Object.entries(Object.groupBy(
+					filteredVoices,
+					(voice) => displayName.of(voice.lang) ?? voice.lang
+				)).map(([lang, unsortedVoiceList]) => [
 					lang,
 					Object.fromEntries(
 						Object.entries(Object.groupBy(
 							unsortedVoiceList ?? [],
 							(voice) => voice.localService ? 'Local Voice' : 'Online Voice'
-						))
-							.map(([title, voiceList]) => [
-								title,
-								voiceList.sort(({ name: nameA }, { name: nameB }) => collator.compare(nameA, nameB))
-							])
+						)).map(([title, voiceList]) => [
+							title,
+							voiceList.sort(({ name: nameA }, { name: nameB }) => collator.compare(nameA, nameB))
+						])
 					)
 				])
-		);
+			);
+
+			this.#voices = voices;
+		}
+
+		return this.#voices;
+	}
+
+	#renderVoices() {
+		const voices = this.#listVoices();
 
 		return Object.entries(voices)
 			.map(([lang, voiceAvailabilityList]) => `
@@ -226,6 +247,33 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		}
 	}
 
+	#handleVoiceChange() {
+		const voiceCount = Object.values(this.#listVoices(true)).flatMap((item) => Object.values(item).flat()).length;
+
+		if (!voiceCount) {
+			this.#cleanup();
+
+			return;
+		}
+
+		this.#buildSections();
+		this.render();
+	}
+
+	#cleanup() {
+		speechSynthesis.cancel();
+		speechSynthesis.removeEventListener('voiceschanged', this);
+
+		this.removeEventListener('input', this);
+		this.removeEventListener('change', this);
+		this.removeEventListener('click', this);
+
+		this.#sections.forEach(({ utterance }) => {
+			utterance.removeEventListener('boundary', this);
+			utterance.removeEventListener('end', this);
+		});
+	}
+
 	handleEvent(evt: Event) {
 		switch (evt.type) {
 			case 'boundary':
@@ -245,6 +293,9 @@ class ReadArticle extends HTMLElement implements CustomElement {
 			case 'change':
 				this.#updateSpeechSetting(evt as unknown as InputEvent);
 				break;
+			case 'voiceschanged':
+				this.#handleVoiceChange();
+				break;
 			default:
 		}
 	}
@@ -258,7 +309,7 @@ class ReadArticle extends HTMLElement implements CustomElement {
 						<input-wrapper>
 							<label for="voice-list-${this.#id}">Voice</label>
 							<select name="voice" id="voice-list-${this.#id}">
-								${this.#listVoices()}
+								${this.#renderVoices()}
 							</select>
 						</input-wrapper>
 
@@ -287,30 +338,17 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		}
 
 		speechSynthesis.cancel();
-
-		speechSynthesis.addEventListener('voiceschanged', () => {
-			this.#buildSections();
-			this.render();
-		}, { once: true });
-
-		CSS.highlights.set('reading-highlight', this.#highlight);
+		speechSynthesis.addEventListener('voiceschanged', this);
 
 		this.addEventListener('input', this);
 		this.addEventListener('change', this);
 		this.addEventListener('click', this);
+
+		CSS.highlights.set('reading-highlight', this.#highlight);
 	}
 
 	disconnectedCallback() {
-		speechSynthesis.cancel();
-
-		this.#sections.forEach(({ utterance }) => {
-			utterance.removeEventListener('boundary', this);
-			utterance.removeEventListener('end', this);
-		});
-
-		this.removeEventListener('input', this);
-		this.removeEventListener('change', this);
-		this.removeEventListener('click', this);
+		this.#cleanup();
 	}
 }
 
