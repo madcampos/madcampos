@@ -766,6 +766,24 @@
 					"title": "Comprehension Debt - the hidden cost of AI generated code",
 					"description": "The lack of understanding is the new debt to be aware of and to be strict about.",
 					"type": "article"
+				},
+				{
+					"url": "https://shkspr.mobi/blog/2026/03/im-ok-being-left-behind-thanks/",
+					"title": "I'm OK being left behind, thanks!",
+					"description": "It is okay to not give in to FOMO.",
+					"type": "article"
+				},
+				{
+					"url": "https://lucumr.pocoo.org/2026/3/20/some-things-just-take-time/",
+					"title": "Some Things Just Take Time",
+					"description": "Things take time, and that is okay. Trying to pursue endless speed is a sysyphean task.",
+					"type": "article"
+				},
+				{
+					"url": "https://nelson.cloud/i-created-my-first-ai-assisted-pull-request-and-i-feel-like-a-fraud/",
+					"title": "I Created My First AI-assisted Pull Request and I Feel Like a Fraud",
+					"description": "Using AI is devoid of fun, joy, and feelings, it sucks out the soul of programming for the sake of profit.",
+					"type": "article"
 				}
 			]
 		}
