@@ -49,7 +49,6 @@ const post = (await listAllPosts())[0]!;
 								widths={[128, 256, 512, 768, 1024]}
 								width={512}
 								sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
-								quality={75}
 							/>
 						</picture>
 					</m-avatar>
@@ -88,7 +87,6 @@ const post = (await listAllPosts())[0]!;
 					widths={[128, 256, 512, 768, 1024]}
 					width={512}
 					sizes="(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px 1024px"
-					quality={75}
 				/>
 			</picture>
 		</m-avatar>
@@ -496,7 +494,6 @@ const post = (await listAllPosts())[0]!;
 			document.querySelector('#focus-skip-link')?.addEventListener('click', () => {
 				(/** @type {HTMLAnchorElement} */ (document.querySelector('skip-to-content a')))?.focus({
 					preventScroll: false,
-					// @ts-expect-error - Experimental
 					focusVisible: true
 				});
 			});

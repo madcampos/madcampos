@@ -56,6 +56,34 @@ export default defineConfig({
 			})
 		}
 	},
+	image: {
+		service: {
+			entrypoint: 'astro/assets/services/sharp',
+			config: {
+				limitInputPixels: false,
+				jpeg: { mozjpeg: true, progressive: true, quality: 75 },
+				avif: { quality: 75, effort: 9, chromaSubsampling: '4:2:0' },
+				webp: {
+					quality: 75,
+					alphaQuality: 80,
+					nearLossless: true,
+					smartSubsample: true,
+					smartDeblock: true,
+					effort: 6,
+					minSize: true,
+					mixed: true
+				},
+				png: {
+					progressive: true,
+					compressionLevel: 9,
+					adaptiveFiltering: true,
+					palette: true,
+					quality: 90,
+					effort: 10
+				}
+			}
+		}
+	},
 	markdown: {
 		syntaxHighlight: 'shiki',
 		shikiConfig: {

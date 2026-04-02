@@ -34,7 +34,6 @@ const IMAGE_WIDTHS = [64, 128, 256, 512];
 						widths={IMAGE_WIDTHS}
 						width={256}
 						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
-						quality={75}
 					/>
 					{
 						Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
@@ -47,7 +46,6 @@ const IMAGE_WIDTHS = [64, 128, 256, 512];
 								widths={IMAGE_WIDTHS}
 								width={256}
 								sizes="(max-width: 360px) 64px, (max-width: 720px) 128px, (max-width: 1280px) 256px, 512px"
-								quality={75}
 								hidden
 							/>
 						))
