@@ -50,7 +50,7 @@ function parseUrl(request: Request) {
 	return url;
 }
 
-export async function getVisitorCount(request: Request<unknown, CfProperties>) {
+export async function getVisitorCount(request: Request) {
 	try {
 		const url = parseUrl(request);
 
@@ -115,7 +115,7 @@ export async function getVisitorCount(request: Request<unknown, CfProperties>) {
 	}
 }
 
-export async function incrementVisitorCount(request: Request<unknown, CfProperties>) {
+export async function incrementVisitorCount(request: Request) {
 	try {
 		const url = parseUrl(request);
 		const requestMetadata = parseRequestMetadata(request);

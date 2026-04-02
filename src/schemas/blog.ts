@@ -1,4 +1,5 @@
-import { type SchemaContext, z as zod } from 'astro:content';
+import { z as zod } from 'astro/zod';
+import type { SchemaContext } from 'astro:content';
 
 export const blogSchema = ({ image }: SchemaContext) =>
 	zod.object({

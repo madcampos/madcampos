@@ -27,7 +27,7 @@ interface MessageRecord {
 	user_agent: string;
 }
 
-function parsePaginationData(request: Request<unknown, CfProperties>) {
+function parsePaginationData(request: Request) {
 	const url = new URL(request.url);
 	const [page] = url.pathname.replace(/\/$/iu, '').replace(/^\//iu, '').split('/').reverse();
 
@@ -35,7 +35,7 @@ function parsePaginationData(request: Request<unknown, CfProperties>) {
 		return 1;
 	}
 
-	const pageNumber = Number.parseInt(page);
+	const pageNumber = Number.parseInt(page, 10);
 	if (Number.isNaN(pageNumber)) {
 		return 1;
 	}
@@ -43,7 +43,7 @@ function parsePaginationData(request: Request<unknown, CfProperties>) {
 	return pageNumber;
 }
 
-export async function getMessages(request: Request<unknown, CfProperties>) {
+export async function getMessages(request: Request) {
 	try {
 		let pageNumber = parsePaginationData(request);
 
@@ -94,7 +94,7 @@ export async function getMessages(request: Request<unknown, CfProperties>) {
 	}
 }
 
-async function parseMessageRequestData(request: Request<unknown, CfProperties>) {
+async function parseMessageRequestData(request: Request) {
 	const body = await request.formData();
 	const data = {
 		name: body.get('name'),
@@ -137,7 +137,7 @@ async function parseMessageRequestData(request: Request<unknown, CfProperties>) 
 	return data as { name: string, message: string, token: string };
 }
 
-export async function sendMessage(request: Request<unknown, CfProperties>) {
+export async function sendMessage(request: Request) {
 	try {
 		const requestMetadata = parseRequestMetadata(request);
 		const data = await parseMessageRequestData(request);

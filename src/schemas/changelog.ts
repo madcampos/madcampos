@@ -1,4 +1,4 @@
-import { z as zod } from 'astro:content';
+import { z as zod } from 'astro/zod';
 
 export const changelogSchema = () =>
 	zod.object({

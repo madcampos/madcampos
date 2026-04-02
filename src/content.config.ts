@@ -1,3 +1,7 @@
+// @ts-expect-error - This is required so typescript can find zod
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { z as zod } from 'astro/zod';
+
 import { file, glob } from 'astro/loaders';
 import { defineCollection } from 'astro:content';
 import { blogSchema } from './schemas/blog.ts';

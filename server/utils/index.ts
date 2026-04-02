@@ -79,7 +79,7 @@ export interface RequestMetadata {
 	acceptEncoding: string;
 }
 
-export function parseRequestMetadata(request: Request<unknown, CfProperties>) {
+export function parseRequestMetadata(request: Request) {
 	const country = request.cf?.country as Iso3166Alpha2Code | 'T1' | null;
 	const userAgent = request.headers.get('User-Agent');
 	const ipAddress = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For');
@@ -144,7 +144,7 @@ export async function generateVisitorId({
 	const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
 
 	// @ts-expect-error - Typescript is missing the string conversion method
-	return new Uint8Array(hashBuffer).toHex() as string;
+	return new Uint8Array(hashBuffer).toHex();
 }
 
 export function simpleOptionsResponse() {

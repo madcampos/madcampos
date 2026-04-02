@@ -1,4 +1,4 @@
-import { z as zod } from 'astro:content';
+import { z as zod } from 'astro/zod';
 
 export const bookmarksSchema = () =>
 	zod.array(
@@ -6,7 +6,7 @@ export const bookmarksSchema = () =>
 			title: zod.string().describe('The section title.'),
 			description: zod.string().describe('The section description.'),
 			links: zod.array(zod.object({
-				url: zod.string().url().describe('The link for the bookmark.'),
+				url: zod.url().describe('The link for the bookmark.'),
 				title: zod.string().describe('The bookmark title.'),
 				description: zod.string().describe('The bookmark description'),
 				type: zod

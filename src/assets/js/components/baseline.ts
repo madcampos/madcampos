@@ -52,7 +52,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		const previousHeading = headings.findLast((heading) => this.compareDocumentPosition(heading) === Node.DOCUMENT_POSITION_PRECEDING);
 
 		if (previousHeading) {
-			const level = Number.parseInt(previousHeading.tagName.substring(1));
+			const level = Number.parseInt(previousHeading.tagName.substring(1), 10);
 			return Math.min(level + 1, MAX_HEADING_LEVEL).toString();
 		}
 
