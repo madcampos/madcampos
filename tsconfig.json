@@ -7,7 +7,6 @@
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
-		"baseUrl": ".",
 		"checkJs": true,
 		"composite": true,
 		"erasableSyntaxOnly": true,
