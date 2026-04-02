@@ -1,7 +1,7 @@
 import { SiteSettings } from '../settings.ts';
 
 export class ImageLightbox extends HTMLElement implements CustomElement {
-	readonly #id = Math.trunc(Math.random() * 100000).toString(16);
+	readonly #id = crypto.randomUUID();
 
 	#image?: HTMLImageElement;
 

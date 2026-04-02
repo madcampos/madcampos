@@ -6,7 +6,7 @@ interface SectionUtterance {
 }
 
 class ReadArticle extends HTMLElement implements CustomElement {
-	#id = Math.trunc(Math.random() * 100000).toString(16);
+	#id = crypto.randomUUID();
 
 	#sections: SectionUtterance[] = [];
 	#highlight = new Highlight();

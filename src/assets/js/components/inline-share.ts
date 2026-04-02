@@ -22,7 +22,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	constructor() {
 		super();
 
-		this.#id = Math.trunc(Math.random() * 100000).toString(16);
+		this.#id = crypto.randomUUID();
 		this.hidden = true;
 
 		this.innerHTML = `
@@ -433,7 +433,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	disconnectedCallback() {
 		document.removeEventListener('selectionchange', this);
 		this.querySelector('dialog')?.removeEventListener('toggle', this);
-		this.addEventListener('click', this);
+		this.removeEventListener('click', this);
 	}
 }
 

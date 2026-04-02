@@ -31,7 +31,7 @@ const MAX_HEADING_LEVEL = 6;
 export class BaselineInfo extends HTMLElement implements CustomElement {
 	static observedAttributes: ['feature'];
 
-	#id = Math.trunc(Math.random() * 1000000).toString(16);
+	#id = crypto.randomUUID();
 
 	get feature(): string {
 		return this.getAttribute('feature') ?? '';

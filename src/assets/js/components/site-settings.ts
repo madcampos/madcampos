@@ -110,7 +110,7 @@ const fonts: SiteFontSet[] = [
 ];
 
 class SiteDisplaySettings extends HTMLElement implements CustomElement {
-	readonly #id = Math.trunc(Math.random() * 1000000).toString(16);
+	readonly #id = crypto.randomUUID();
 
 	#dialogElement?: HTMLDialogElement;
 
@@ -572,7 +572,7 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		this.#dialogElement = this.querySelector(`#site-settings-dialog-${this.#id}`) as HTMLDialogElement;
 		this.#iabEscapeButton = this.querySelector(`#iab-escape-button-${this.#id}`) as HTMLButtonElement;
 		this.#pwaBannerButton = this.querySelector(`#pwa-banner-button-${this.#id}`) as HTMLButtonElement;
-		this.#cleanCacheButton = this.querySelector(`#clear-cache-button-${this.#id}`) as HTMLButtonElement;
+		this.#cleanCacheButton = this.querySelector(`#clean-cache-button-${this.#id}`) as HTMLButtonElement;
 
 		this.querySelector('form')?.addEventListener('submit', this);
 		this.querySelector('form')?.addEventListener('reset', this);
