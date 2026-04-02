@@ -14,7 +14,7 @@ interface Props {
 
 const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro.props;
 
-const IMAGE_WIDTHS = [64, 128, 256, 512];
+// TODO: optimize image sizes so they are smaller
 ---
 <m-card class:list={[extraClass]}>
 	<article itemscope {itemtype}>
@@ -31,9 +31,14 @@ const IMAGE_WIDTHS = [64, 128, 256, 512];
 						src={image}
 						alt={inlineMarkdownStrip(imageAlt ?? '')}
 						loading="lazy"
-						widths={IMAGE_WIDTHS}
+						widths={[64, 128, 256, 512]}
 						width={256}
-						sizes={`(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px ${image.width}px`}
+						sizes={`
+							(max-width: 360px) 64px,
+							(max-width: 720px) 128px,
+							(max-width: 1280px) 256px,
+							512px
+						`}
 					/>
 					{
 						Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
@@ -43,9 +48,14 @@ const IMAGE_WIDTHS = [64, 128, 256, 512];
 								src={themeImage}
 								alt={inlineMarkdownStrip(imageAlt ?? '')}
 								loading="lazy"
-								widths={IMAGE_WIDTHS}
+								widths={[64, 128, 256, 512]}
 								width={256}
-								sizes="(max-width: 360px) 64px, (max-width: 720px) 128px, (max-width: 1280px) 256px, 512px"
+								sizes={`
+									(max-width: 360px) 64px,
+									(max-width: 720px) 128px,
+									(max-width: 1280px) 256px,
+									512px
+								`}
 								hidden
 							/>
 						))

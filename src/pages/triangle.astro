@@ -11,8 +11,6 @@ import richHero from '../assets/images/piramid/rich1.png';
 import HtmlHead from '../components/HtmlHead.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs.astro';
-
-const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-width: 1280px) 512px, (max-width: 2160px) 768px';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -48,8 +46,15 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 					src={richHero}
 					alt="A man with a happy face and his mouth open, holding a fist in front of his body. He is confident, he is strong, he is making money baby!"
 					loading="lazy"
-					widths={[128, 256, 512, 768, richHero.width]}
-					sizes={`${imageSizes} ${richHero.width}px`}
+					widths={[128, 256, 512, 768, 1024]}
+					width={512}
+					sizes="
+						(max-width: 360px) 128px,
+						(max-width: 720px) 256px,
+						(max-width: 1280px) 512px,
+						(max-width: 2160px) 768px,
+						1024px
+					"
 				/>
 
 				<p>
@@ -146,8 +151,14 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 								src={customer}
 								alt=""
 								loading="lazy"
-								widths={[128, 256, 512, 768, customer.width]}
-								sizes={`${imageSizes} ${customer.width}px`}
+								widths={[64, 128, 256, 512]}
+								width={256}
+								sizes={`
+									(max-width: 360px) 64px,
+									(max-width: 720px) 128px,
+									(max-width: 1280px) 256px,
+									512px
+								`}
 							/>
 							<p>QuickRichClub changed my life! Now I have plenty of free time because everyone I know avoids me!</p>
 							<small>A Truly "Satisfied" Member</small>
@@ -159,8 +170,14 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 								src={ligMa}
 								alt=""
 								loading="lazy"
-								widths={[128, 256, 512, 768, ligMa.width]}
-								sizes={`${imageSizes} ${ligMa.width}px`}
+								widths={[64, 128, 256, 512]}
+								width={256}
+								sizes={`
+									(max-width: 360px) 64px,
+									(max-width: 720px) 128px,
+									(max-width: 1280px) 256px,
+									512px
+								`}
 							/>
 							<p>I was skeptical, but now I'm a full believer... in never falling for these schemes again!</p>
 							<small>Lig Ma B.</small>
@@ -172,8 +189,14 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 								src={eMusk}
 								alt=""
 								loading="lazy"
-								widths={[128, 256, 512, 768, eMusk.width]}
-								sizes={`${imageSizes} ${eMusk.width}px`}
+								widths={[64, 128, 256, 512]}
+								width={256}
+								sizes={`
+									(max-width: 360px) 64px,
+									(max-width: 720px) 128px,
+									(max-width: 1280px) 256px,
+									512px
+								`}
 							/>
 							<p>I've never had so many people call me about investment opportunities... mainly to tell me to stop calling them.</p>
 							<small>E. Musk</small>
@@ -185,8 +208,14 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 								src={mScott}
 								alt=""
 								loading="lazy"
-								widths={[128, 256, 512, 768, mScott.width]}
-								sizes={`${imageSizes} ${mScott.width}px`}
+								widths={[64, 128, 256, 512]}
+								width={256}
+								sizes={`
+									(max-width: 360px) 64px,
+									(max-width: 720px) 128px,
+									(max-width: 1280px) 256px,
+									512px
+								`}
 							/>
 							<p>This is totally <em>not</em> a pyramid scheme!</p>
 							<small>M. Scott</small>
@@ -198,8 +227,14 @@ const imageSizes = '(max-width: 360px) 128px, (max-width: 720px) 256px, (max-wid
 								src={mrCreature}
 								alt=""
 								loading="lazy"
-								widths={[128, 256, 512, 768, mrCreature.width]}
-								sizes={`${imageSizes} ${mrCreature.width}px`}
+								widths={[64, 128, 256, 512]}
+								width={256}
+								sizes={`
+									(max-width: 360px) 64px,
+									(max-width: 720px) 128px,
+									(max-width: 1280px) 256px,
+									512px
+								`}
 							/>
 							<p>Thanks to QuickRichClub, I learned a valuable lesson in financial caution. Also, my friends learned how to block numbers.</p>
 							<small>Mr. Creature</small>

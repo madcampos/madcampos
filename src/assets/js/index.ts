@@ -1,3 +1,5 @@
+// TODO: dynamic import all components
+
 // Global functionality
 import './components/embedded-content-errors.ts';
 import './components/js-naked-day.ts';

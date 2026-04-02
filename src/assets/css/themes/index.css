@@ -1,3 +1,4 @@
+/* TODO: dynamically load themes instead of bundling it with default css */
 @import url('./cork-board.css');
 @import url('./dark.css');
 @import url('./hacker.css');

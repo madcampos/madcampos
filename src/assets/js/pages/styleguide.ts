@@ -1,3 +1,5 @@
+// TODO: dynamic import all components
+
 import '../components/baseline.ts';
 import '../components/codepen.ts';
 import '../components/content-image.ts';

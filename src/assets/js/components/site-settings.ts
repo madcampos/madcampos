@@ -13,6 +13,8 @@ import {
 import type { IabEscape } from './iab-escape.ts';
 import type { PWABanner } from './pwa-banner.ts';
 
+// TODO: list theme stylesheets, import them dynamically, and add them to the cache
+
 interface SiteTheme {
 	id: ThemeSetting;
 	name: string;
