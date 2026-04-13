@@ -20,6 +20,7 @@
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
 		"libReplacement": false,
 		"module": "ESNext",
+		"moduleDetection": "force",
 		"moduleResolution": "bundler",
 		"newLine": "LF",
 		"noEmit": true,
