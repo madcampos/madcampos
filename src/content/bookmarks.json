@@ -190,6 +190,12 @@
 					"title": "Pikaday",
 					"description": "A reference of date pickers and patterns to use for selecting dates.",
 					"type": "reference"
+				},
+				{
+					"url": "https://spencermortensen.com/articles/email-obfuscation/",
+					"title": "Email address obfuscation: What works in 2026?",
+					"description": "An analysis of what techniques for email obfuscation work to help stop spam.",
+					"type": "guidelines"
 				}
 			]
 		},
@@ -286,6 +292,12 @@
 					"title": "Frontend Memory Leaks: A 500-Repository Static Analysis and Five-Scenario Benchmark Study",
 					"description": "It's in the title: study of memory leaks in frontend code.",
 					"type": "reference"
+				},
+				{
+					"url": "https://cekrem.github.io/posts/parse-dont-validate-typescript/",
+					"title": "Parse, Don't Validate — In a Language That Doesn't Want You To",
+					"description": "An argument for using branded types and why it is important to _parse_ things instead of scattering validation checks all over.",
+					"type": "article"
 				}
 			]
 		},
@@ -394,6 +406,12 @@
 					"title": "Artisanal Handcrafted Git Repositories",
 					"description": "How to make a git repo from scratch, vegan and gluten-free.",
 					"type": "article"
+				},
+				{
+					"url": "https://piechowski.io/post/git-commands-before-reading-code/",
+					"title": "The Git Commands I Run Before Reading Any Code",
+					"description": "Some `git` commands to run that can point you to look at important things when checking out a new repo.",
+					"type": "article"
 				}
 			]
 		},
@@ -489,6 +507,12 @@
 					"url": "https://blog.information-superhighway.net/on-the-need-for-understanding",
 					"title": "On The Need For Understanding",
 					"description": "An argument that you have to get your hands dirty and dig through the code.",
+					"type": "article"
+				},
+				{
+					"url": "https://yusufaytas.com/good-apis-age-slowly/",
+					"title": "Good APIs Age Slowly",
+					"description": "An argument on API design and why being boring is better than being magical on the long run.",
 					"type": "article"
 				}
 			]
@@ -783,6 +807,24 @@
 					"url": "https://nelson.cloud/i-created-my-first-ai-assisted-pull-request-and-i-feel-like-a-fraud/",
 					"title": "I Created My First AI-assisted Pull Request and I Feel Like a Fraud",
 					"description": "Using AI is devoid of fun, joy, and feelings, it sucks out the soul of programming for the sake of profit.",
+					"type": "article"
+				},
+				{
+					"url": "https://ergosphere.blog/posts/the-machines-are-fine/",
+					"title": "The machines are fine. I'm worried about us.",
+					"description": "A commentary of the use of AI in academia and how it shortcuts reasoning for short term results, and that causes a deterioration of science.",
+					"type": "article"
+				}
+			]
+		},
+		{
+			"title": "Other Random Stuff",
+			"description": "Other thigns that are not related to the topics above.",
+			"links": [
+				{
+					"url": "https://arjunpanickssery.substack.com/p/what-does-it-mean-to-write-like-you",
+					"title": "What Does It Mean to \"Write Like You Talk\"?",
+					"description": "An article on writing and analysis of what it means to \"write like you talk\".",
 					"type": "article"
 				}
 			]
