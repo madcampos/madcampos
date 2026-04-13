@@ -1,9 +1,9 @@
 import logoBaseCss from '../../css/components/logo-base.css?raw';
 import { SiteSettings } from '../settings.ts';
 
-function createLogoUrl(logoelement: HTMLElement, size: 'full' | 'micro' | 'mini', theme = 'system') {
+function createLogoUrl(logoElement: HTMLElement, size: 'full' | 'micro' | 'mini', theme = 'system') {
 	const serializer = new XMLSerializer();
-	const logoClone = logoelement.cloneNode(true) as SVGElement;
+	const logoClone = logoElement.cloneNode(true) as SVGElement;
 	logoClone.querySelectorAll(`[data-theme]:not([data-theme="${theme}"], .pixelated-logo, .noise-logo, .overlay-logo)`).forEach((node) => node.remove());
 
 	logoClone.querySelector('title')?.insertAdjacentHTML(
