@@ -8,6 +8,7 @@ import Logo from '../components/Logo.astro';
 import OldButtons from '../components/OldStyleButtons.astro';
 import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
+import { encodeEmail } from '../utils/email';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/ProfilePage">
@@ -92,46 +93,48 @@ import Webrings from '../components/Webrings.astro';
 							</a>
 						</li>
 						<li>
+							<Icon name="mingcute:flask-line" aria-hidden="true" />
 							<a href="/projects/">
-								<Icon name="mingcute:flask-line" aria-hidden="true" />
 								<span>Project Highlights</span>
 							</a>
 						</li>
 						<li>
+							<Icon name="mingcute:drawing-board-line" aria-hidden="true" />
 							<a href="/talks/">
-								<Icon name="mingcute:drawing-board-line" aria-hidden="true" />
 								<span>Talks I've given</span>
 							</a>
 						</li>
 						<li>
+							<Icon name="mingcute:github-line" aria-hidden="true" />
 							<a href="https://github.com/madcampos" rel="noreferrer noopener me authn" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="mingcute:github-line" aria-hidden="true" />
 								<span>GitHub</span>
 							</a>
 						</li>
 						<li>
+							<Icon name="mingcute:codepen-line" aria-hidden="true" />
 							<a href="https://codepen.io/madcampos" rel="noreferrer noopener me" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="mingcute:codepen-line" aria-hidden="true" />
 								<span>CodePen</span>
 							</a>
 						</li>
 						<li>
+							<Icon name="mingcute:linkedin-line" aria-hidden="true" />
 							<a href="https://www.linkedin.com/in/madcampos/" rel="noreferrer noopener" referrerpolicy="no-referrer" itemprop="sameAs">
-								<Icon name="mingcute:linkedin-line" aria-hidden="true" />
 								<span>LinkedIn</span>
 							</a>
 						</li>
 						<li>
+							<Icon name="mingcute:document-2-line" aria-hidden="true" />
 							<a href="/resume/" rel="me alternate">
-								<Icon name="mingcute:document-2-line" aria-hidden="true" />
 								<span>Resume</span>
 							</a>
 						</li>
 						<li>
-							<a href="mailto:me@madcampos.dev" rel="me">
-								<Icon name="mingcute:mail-line" aria-hidden="true" />
-								<span class="u-email email" itemprop="email">me@madcampos.dev</span>
-							</a>
+							<Icon name="mingcute:mail-line" aria-hidden="true" />
+							<Fragment
+								set:html={`<a href="mailto:${encodeEmail(true)}" rel="me">
+								<span class="u-email email" itemprop="email">${encodeEmail()}</span>
+							</a>`}
+							/>
 						</li>
 					</ul>
 				</nav>

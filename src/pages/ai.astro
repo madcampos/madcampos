@@ -5,6 +5,7 @@ import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
+import { encodeEmail } from '../utils/email';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -61,7 +62,7 @@ import Webrings from '../components/Webrings.astro';
 
 			<p>If you feel like your art have been stolen or scraped by AI, first I'm sorry.</p>
 			<p>Although I cannot remove your art from the datasets used to train these AI models, what I <em>can</em> do is remove the results from my website.</p>
-			<p>If you would like me to do so, please contact me at <em><a href="mailto:me@madcampos.dev">me@madcampos.dev</a></em>.</p>
+			<p>If you would like me to do so, please contact me at <em><Fragment set:html={`<a href="mailto:${encodeEmail(true)}">${encodeEmail()}</a>`} /></em>.</p>
 			<p>If you have the technical knowledge, an alternative is to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
 		</main>
 

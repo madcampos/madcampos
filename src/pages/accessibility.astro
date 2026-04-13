@@ -5,6 +5,7 @@ import OldStyleButtons from '../components/OldStyleButtons.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs.astro';
 import Webrings from '../components/Webrings.astro';
+import { encodeEmail } from '../utils/email';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -61,7 +62,11 @@ import Webrings from '../components/Webrings.astro';
 				<li>Edge on Windows 11 and Android with 400% page zoom.</li>
 			</ul>
 
-			<p>If you have any issues with the site, please feel free to contact me at <em><a href="mailto:me@madcampos.dev">me@madcampos.dev</a></em>.</p>
+			<p>
+				If you have any issues with the site, please feel free to contact me at <em><Fragment
+						set:html={`<a href="mailto:${encodeEmail(true)}">${encodeEmail()}</a>`}
+					/></em>.
+			</p>
 
 			<p>If you have the technical knowledge and would like to, feel free to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
 		</main>

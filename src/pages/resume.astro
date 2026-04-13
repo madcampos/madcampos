@@ -7,6 +7,7 @@ import { Icon } from 'astro-icon/components';
 import type { Icon as IconName } from 'virtual:astro-icon';
 import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
 import HtmlHead from '../components/HtmlHead.astro';
+import { encodeEmail } from '../utils/email';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 
 const MAX_EXPERIENCE_PRINT = 3;
@@ -78,18 +79,20 @@ function dateSorter(
 				<ul id="links">
 					<li>
 						<Icon name="mingcute:location-line" aria-hidden="true" />
-						<span itemprop="email" class="u-email">{resume.basics.location.city}, {resume.basics.location.countryCode}</span>
+						<span>{resume.basics.location.city}, {resume.basics.location.countryCode}</span>
 					</li>
 					<li>
 						<Icon name="mingcute:mail-line" aria-hidden="true" />
-						<a
-							href={`mailto:${resume.basics.email}`}
+						<Fragment
+							set:html={`<a
+							href="mailto:${encodeEmail(true, resume.basics.email)}"
 							target="_blank"
 							rel="noopener noreferrer me"
 							referrerpolicy="no-referrer"
 							itemprop="email"
 							class="u-email"
-						>{resume.basics.email}</a>
+						>${encodeEmail(false, resume.basics.email)}</a>`}
+						/>
 					</li>
 					<!-- INFO: phone not added for privacy reasons -->
 					<!--

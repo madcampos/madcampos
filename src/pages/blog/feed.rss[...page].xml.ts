@@ -1,6 +1,7 @@
 import type { APIRoute, GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
 import { getImage } from 'astro:assets';
 import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
+import { encodeEmail } from '../../utils/email.js';
 import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllPosts, MAX_POSTS_PER_PAGE } from '../../utils/post.js';
 
@@ -72,7 +73,7 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 				<lastBuildDate>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toUTCString()}</lastBuildDate>
 				<generator>Astro</generator>
 				<image>${escapeHtmlTags(new URL(blogImage.src, baseUrl).href)}</image>
-				<managingEditor>me@madcampos.dev (Marco Campos)</managingEditor>
+				<managingEditor>${encodeEmail(true)} (Marco Campos)</managingEditor>
 				${items.join('\n')}
 			</channel>
 		</rss>

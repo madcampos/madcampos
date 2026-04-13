@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { encodeEmail } from '../../utils/email';
 ---
 
 <details open>
@@ -13,7 +14,7 @@ import { Icon } from 'astro-icon/components';
 		<address>
 			123 M.A.D. Way<br />
 			Fieldstown, Interwebs<br />
-			<a href="mailto:me@madcampos.dev">me@madcampos.dev</a>
+			<Fragment set:html={`<a href="mailto:${encodeEmail(true)}">${encodeEmail()}</a>`} />
 		</address>
 	</section>
 

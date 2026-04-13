@@ -33,7 +33,6 @@ export const GET: APIRoute = async (context) => {
 			<icon>${new URL(siteImage.src, context.url).href}</icon>
 			<author>
 				<name>Marco Campos</name>
-				<email>me@madcampos.dev</email>
 				<uri>https://madcampos.dev/</uri>
 			</author>
 			${items.join('\n')}

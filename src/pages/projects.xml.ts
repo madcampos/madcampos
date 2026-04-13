@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
 import defaultImage from '../assets/images/logo/logo-micro.png';
+import { encodeEmail } from '../utils/email.ts';
 import { listAllProjects } from '../utils/projects.ts';
 
 export const GET: APIRoute = async (context) => {
@@ -33,7 +34,7 @@ export const GET: APIRoute = async (context) => {
 			<icon>${new URL(siteImage.src, context.url).href}</icon>
 			<author>
 				<name>Marco Campos</name>
-				<email>me@madcampos.dev</email>
+				<email>${encodeEmail(true)}</email>
 				<uri>https://madcampos.dev/</uri>
 			</author>
 			${items.join('\n')}
