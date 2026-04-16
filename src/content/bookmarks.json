@@ -256,6 +256,12 @@
 					"title": "Modern Font Stacks",
 					"description": "List of font families that are \"Modern\" and nice, while also providing broad OS support.",
 					"type": "reference"
+				},
+				{
+					"url": "https://www.fontself.app/",
+					"title": "FontSelf",
+					"description": "A list of fonts and instructions to self host them.   ",
+					"type": "website"
 				}
 			]
 		},
