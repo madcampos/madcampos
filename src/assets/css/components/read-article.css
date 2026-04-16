@@ -5,7 +5,7 @@
 		details > div {
 			display: flex;
 			flex-wrap: wrap;
-			align-items: center;
+			align-items: end;
 			justify-content: center;
 		}
 

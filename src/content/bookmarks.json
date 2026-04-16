@@ -732,6 +732,12 @@
 					"type": "article"
 				},
 				{
+					"url": "https://stackoverflow.blog/2026/04/15/why-ai-hasn-t-replaced-human-expertise/",
+					"title": "Why AI hasn't replaced human expertise—and what that means for your SaaS stack",
+					"description": "Article from StackOverflow analyzing results of recent trends on the website and how context and more than just flat answers is very important for the harder questions.",
+					"type": "article"
+				},
+				{
 					"url": "https://blog.katanaquant.com/p/your-llm-doesnt-write-correct-code",
 					"title": "Your LLM Doesn't Write Correct Code. It Writes Plausible Code.",
 					"description": "Article arguing that code that _reads_ plausible, most probably contain bugs and issues.",

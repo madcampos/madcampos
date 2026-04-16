@@ -167,6 +167,14 @@ class ReadArticle extends HTMLElement implements CustomElement {
 		range.setEnd(currentNode, evt.charIndex + evt.charLength);
 		this.#highlight.clear();
 		this.#highlight.add(range);
+
+		const container = range.commonAncestorContainer;
+		const containingElement = container.nodeType === Node.ELEMENT_NODE
+			? container as HTMLElement
+			: container.parentElement;
+
+		// TODO: check if element is in viewport before scrolling
+		containingElement?.scrollIntoView({ block: 'center', behavior: 'auto' });
 	}
 
 	#toggleReading(button: HTMLButtonElement) {
@@ -325,7 +333,7 @@ class ReadArticle extends HTMLElement implements CustomElement {
 								value="${SiteSettings.readingSpeed}"
 							/>
 						</input-wrapper>
-						<button type="button" name="read-article">Read article</button>
+						<button type="button" name="read-article">Read Article</button>
 					</div>
 				</details>
 			</form>
