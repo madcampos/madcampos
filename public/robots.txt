@@ -150,7 +150,6 @@ User-agent: ZanistaBot
 Disallow: /
 
 User-Agent: *
-Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Disallow: /yapping
 Disallow: /yapping/

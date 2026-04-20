@@ -1,2 +1,3 @@
+Canonical: https://madcampos.dev/.well-known/security.txt
 Contact: mailto:me@madcampos.dev
-Expires: 2027-01-01T00:00:00.000Z
+Expires: 2027-01-01T12:00:00Z

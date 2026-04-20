@@ -214,8 +214,8 @@ const post = (await listAllPosts())[0]!;
 			<span><strong>Note</strong>: This component is in the header of most pages, but only shows when CSS is <em>disabled</em>.</span>
 		</m-note>
 
-		<p><a href="/styleguide/?css=disabled">Reload Page with CSS off</a></p>
-		<p><a href="/styleguide/?css=">Reload Page with CSS back to default</a></p>
+		<p><a href="/styleguide/?css=disabled" rel="nofollow">Reload Page with CSS off</a></p>
+		<p><a href="/styleguide/?css=" rel="nofollow">Reload Page with CSS back to default</a></p>
 	</section>
 
 	<section>
@@ -351,6 +351,7 @@ const post = (await listAllPosts())[0]!;
 			end={19}
 			total={47}
 			size={10}
+			nofollow
 		/>
 	</section>
 

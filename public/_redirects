@@ -1,17 +1,13 @@
-# Moved to subdomain
-/sdrlog https://sdrlog.madcampos.dev 308
-/sdrlog/ https://sdrlog.madcampos.dev 308
-
 # Permanent redirects
-/accessibility /accessibility/ 308
+/blog/tags/:tag /blog/tags/:tag/ 301
 
-# Permanent redirects
-/blog/tags/:tag /blog/tags/:tag/ 308
-/blog/:year/:month/:slug /blog/:year/:month/:slug/ 308
-/talks/:talk /talks/:talk/ 308
+# Changelog and feed urls
+/changelog.xml/ /changelog.xml 301
+/blog/feed.xml/ /blog/feed.atom.xml 301
 
 # Test url, doesn't exist anymore, should redirect
-/blog/tags/:tag/1/ /blog/tags/:tag/ 308
+/blog/tags/:tag/1/ /blog/tags/:tag/ 301
+/blog/2024/12/1/ /blog/2024/12/ 301
 
 # Bots maze
 /*.gz /yapping

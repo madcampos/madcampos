@@ -304,6 +304,12 @@
 					"title": "Parse, Don't Validate — In a Language That Doesn't Want You To",
 					"description": "An argument for using branded types and why it is important to _parse_ things instead of scattering validation checks all over.",
 					"type": "article"
+				},
+				{
+					"url": "https://43081j.com/2026/03/three-pillars-of-javascript-bloat",
+					"title": "The Three Pillars of JavaScript Bloat",
+					"description": "Overview of what makes a js project bloated.",
+					"type": "article"
 				}
 			]
 		},
