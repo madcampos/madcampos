@@ -25,13 +25,7 @@
 		"directory": "./dist",
 		"binding": "Assets",
 		"run_worker_first": [
-			"/api/*",
-			"/tojs-styleguide",
-			"/tojs-styleguide/",
-			"/blog/2023/06/07/tabs-web-component",
-			"/blog/2023/06/07/tabs-web-component/",
-			"/yapping",
-			"/yapping/*"
+			"/api/*"
 		],
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page"
