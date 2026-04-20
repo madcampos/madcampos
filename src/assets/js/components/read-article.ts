@@ -310,7 +310,7 @@ class ReadArticle extends HTMLElement implements CustomElement {
 
 	render() {
 		this.innerHTML = `
-			<form action="" method="post">
+			<form action="" method="post" novalidate>
 				<details open>
 					<summary>Read Article</summary>
 					<div>
