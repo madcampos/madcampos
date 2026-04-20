@@ -3,7 +3,7 @@
 	@font-face {
 		font-style: normal;
 		font-weight: 100 900;
-		src: url('./fonts/cascadia-code.woff2') format('woff2-variations');
+		src: url('/assets/fonts/cascadia-code.woff2') format('woff2-variations');
 		font-family: 'Cascadia Code';
 		font-display: swap;
 		font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
@@ -13,7 +13,7 @@
 	@font-face {
 		font-style: italic;
 		font-weight: 100 900;
-		src: url('./fonts/cascadia-code-italic.woff2') format('woff2-variations');
+		src: url('/assets/fonts/cascadia-code-italic.woff2') format('woff2-variations');
 		font-family: 'Cascadia Code';
 		font-display: swap;
 		font-variant-alternates: styleset('ss01') styleset('ss02') styleset('ss03') styleset('ss19') styleset('ss20');
@@ -23,7 +23,7 @@
 	@font-face {
 		font-style: normal;
 		font-weight: 100 900;
-		src: url('./fonts/selawik.woff2') format('woff2-variations');
+		src: url('/assets/fonts/selawik.woff2') format('woff2-variations');
 		font-family: 'Selawik Variable';
 		font-display: swap;
 		font-variant-ligatures: none;
@@ -33,7 +33,7 @@
 	@font-face {
 		font-style: normal;
 		font-weight: 100;
-		src: url('./fonts/Mecano-Light.woff2') format('woff2');
+		src: url('/assets/fonts/Mecano-Light.woff2') format('woff2');
 		font-family: 'Mecano-Light';
 		font-display: optional;
 		font-variant-ligatures: common-ligatures;
@@ -42,7 +42,7 @@
 	@font-face {
 		font-style: normal;
 		font-weight: 500;
-		src: url('./fonts/Mecano.woff2') format('woff2');
+		src: url('/assets/fonts/Mecano.woff2') format('woff2');
 		font-family: 'Mecano';
 		font-display: optional;
 		font-variant-ligatures: common-ligatures;

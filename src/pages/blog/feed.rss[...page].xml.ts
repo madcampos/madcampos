@@ -1,6 +1,4 @@
 import type { APIRoute, GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
-import { getImage } from 'astro:assets';
-import defaultImage from '../../assets/images/logo/logo-blog-micro.png';
 import { encodeEmail } from '../../utils/email.js';
 import { escapeHtmlTags, inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllPosts, MAX_POSTS_PER_PAGE } from '../../utils/post.js';
@@ -16,8 +14,6 @@ export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction
 type APIProps = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const GET: APIRoute<APIProps> = async ({ props, site }) => {
-	const blogImage = await getImage({ src: defaultImage, format: 'png', width: 512, height: 512 });
-
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const baseUrl = new URL(site!);
 
@@ -72,7 +68,7 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 				<pubDate>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toUTCString()}</pubDate>
 				<lastBuildDate>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toUTCString()}</lastBuildDate>
 				<generator>Astro</generator>
-				<image>${escapeHtmlTags(new URL(blogImage.src, baseUrl).href)}</image>
+				<image>${new URL('/assets/images/logo-blog-micro.png', baseUrl).href}</image>
 				<managingEditor>${encodeEmail(true)} (Marco Campos)</managingEditor>
 				${items.join('\n')}
 			</channel>

@@ -203,6 +203,9 @@
 		--old-button-blend-mode: color;
 		--old-button-border-radius: var(--border-radius);
 
+		/* Card */
+		--card-image-radius: var(--border-radius);
+
 		/* Icons */
 		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 		--hr-decoration-icon: none;
@@ -234,8 +237,7 @@
 		border: solid currentColor var(--border-size);
 
 		&.project-card article > picture {
-			mask: none;
-			filter: var(--filter-small-pixelate);
+			position: relative;
 			border: solid currentColor var(--border-size);
 
 			img {

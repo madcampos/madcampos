@@ -2,7 +2,7 @@ import { BlobWriter, ZipWriter } from '@zip.js/zip.js';
 import type { APIRoute } from 'astro';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 
-import LogoSvg from '../../components/LogoSvg.astro';
+import LogoSvg from '../../components/Logo/LogoSvg.astro';
 
 type LogoThemes = 'hacker' | 'system' | 'uwu' | 'y2k';
 type LogoSizes = 'full' | 'micro' | 'mini';

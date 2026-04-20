@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType, PaginateFunction } from 'astro';
-import BlogPosts from '../../../../components/BlogPosts.astro';
+import BlogPosts from '../../../../components/BlogPosts/BlogPosts.astro';
 import { listPostsByYearAndMonth, MAX_POSTS_PER_PAGE } from '../../../../utils/post.js';
 
 export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {

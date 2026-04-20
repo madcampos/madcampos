@@ -1,12 +1,12 @@
 ---
 /* eslint-disable max-lines */
 
-import '../assets/css/pages/resume.css';
+import '../assets/pages/resume/resume.css';
 
 import { Icon } from 'astro-icon/components';
 import type { Icon as IconName } from 'virtual:astro-icon';
 import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
-import HtmlHead from '../components/HtmlHead.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import { encodeEmail } from '../utils/email';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
 
@@ -544,6 +544,6 @@ function dateSorter(
 				</ul>
 			</section>
 		</main>
-		<script src="../assets/js/pages/resume.ts"></script>
+		<script src="../assets/pages/resume/resume.ts"></script>
 	</body>
 </html>

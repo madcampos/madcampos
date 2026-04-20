@@ -19,7 +19,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import remarkBreaks from 'remark-breaks';
 import remarkHighlight from 'remark-flexible-markers';
 import remarkIns from 'remark-ins';
-import hcShikiTheme from './src/assets/css/hc-shiki-theme.json' with { type: 'json' };
+import hcShikiTheme from './src/assets/css/themes/hc-shiki-theme.json' with { type: 'json' };
 import { rehypePlugin as rehypeCode } from './src/utils/markdown-options/code.ts';
 import { settings as externalLinkSettings } from './src/utils/markdown-options/external-links.ts';
 import { settings as footnotesSettings } from './src/utils/markdown-options/footnotes.ts';

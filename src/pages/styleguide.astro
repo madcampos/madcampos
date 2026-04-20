@@ -1,22 +1,24 @@
 ---
-import '../assets/css/pages/styleguide.css';
-import HtmlHead from '../components/HtmlHead.astro';
-import Logo from '../components/Logo.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SvgDefs from '../components/SvgDefs.astro';
+import '../assets/pages/styleguide/styleguide.css';
 
-import BlockLevelElements from '../components/styleguide/block.astro';
-import CanvasElement from '../components/styleguide/canvas.astro';
-import Components from '../components/styleguide/components.astro';
-import EmbedElements from '../components/styleguide/embed.astro';
-import FormElements from '../components/styleguide/forms.astro';
-import InlineLevelElements from '../components/styleguide/inline.astro';
-import InteractiveElements from '../components/styleguide/interactive.astro';
-import MediaElements from '../components/styleguide/media.astro';
-import ObsoleteElements from '../components/styleguide/obsolete.astro';
-import SectioningElements from '../components/styleguide/sectioning.astro';
-import SvgAndMathElements from '../components/styleguide/svg-and-math.astro';
-import TableElement from '../components/styleguide/tables.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import Logo from '../components/Logo/Logo.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
+
+import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import BlockLevelElements from '../components/Styleguide/block.astro';
+import CanvasElement from '../components/Styleguide/canvas.astro';
+import Components from '../components/Styleguide/components.astro';
+import EmbedElements from '../components/Styleguide/embed.astro';
+import FormElements from '../components/Styleguide/forms.astro';
+import InlineLevelElements from '../components/Styleguide/inline.astro';
+import InteractiveElements from '../components/Styleguide/interactive.astro';
+import MediaElements from '../components/Styleguide/media.astro';
+import ObsoleteElements from '../components/Styleguide/obsolete.astro';
+import SectioningElements from '../components/Styleguide/sectioning.astro';
+import SvgAndMathElements from '../components/Styleguide/svg-and-math.astro';
+import TableElement from '../components/Styleguide/tables.astro';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -33,14 +35,7 @@ import TableElement from '../components/styleguide/tables.astro';
 		</skip-to-content>
 
 		<SiteNav />
-
-		<css-naked-day>
-			<hr />
-			<h2>Why this website looks so weird?</h2>
-			<p>We are celebrating CSS Naked Day!</p>
-			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025/">this blog post</a>.</p>
-			<hr />
-		</css-naked-day>
+		<CssNakedDay />
 
 		<header id="page-top">
 			<Logo
@@ -69,6 +64,6 @@ import TableElement from '../components/styleguide/tables.astro';
 		<footer></footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
-		<script src="../assets/js/pages/styleguide.ts"></script>
+		<script src="../assets/pages/styleguide/styleguide.ts"></script>
 	</body>
 </html>

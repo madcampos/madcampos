@@ -1,0 +1,26 @@
+@layer pages {
+	m-card {
+		header draft-tag {
+			font-weight: 600;
+
+			&[data-status='finished'] { background-color: limegreen; }
+			&[data-status='ongoing'] { background-color: orange; }
+
+			@media (prefers-contrast: more) {
+				&[data-status='finished'] { background-color: var(--theme-color); }
+				&[data-status='ongoing'] { background-color: var(--secondary-color); }
+			}
+
+			@media (forced-colors: active) { background-color: transparent; }
+		}
+
+		picture {
+			aspect-ratio: 1 / 1;
+
+			img {
+				border-radius: var(--card-image-radius);
+				corner-shape: var(--card-image-shape);
+			}
+		}
+	}
+}

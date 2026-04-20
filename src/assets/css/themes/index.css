@@ -1,9 +1,0 @@
-/* TODO: dynamically load themes instead of bundling it with default css */
-@import url('./cork-board.css');
-@import url('./dark.css');
-@import url('./hacker.css');
-@import url('./high-contrast.css');
-@import url('./light.css');
-@import url('./low-contrast.css');
-@import url('./uwu.css');
-@import url('./y2k.css');

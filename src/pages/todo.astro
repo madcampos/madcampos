@@ -1,11 +1,12 @@
 ---
-import '../assets/css/pages/todo.css';
-import HtmlHead from '../components/HtmlHead.astro';
-import Logo from '../components/Logo.astro';
-import OldStyleButtons from '../components/OldStyleButtons.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SvgDefs from '../components/SvgDefs.astro';
-import Webrings from '../components/Webrings.astro';
+import '../assets/pages/todo/todo.css';
+import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import Logo from '../components/Logo/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
 import { inlineMarkdownRender } from '../utils/markdown.js';
 
 interface Task {
@@ -186,14 +187,7 @@ const tasks: Task[] = [
 		</skip-to-content>
 
 		<SiteNav />
-
-		<css-naked-day>
-			<hr />
-			<h2>Why this website looks so weird?</h2>
-			<p>We are celebrating CSS Naked Day!</p>
-			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025/">this blog post</a>.</p>
-			<hr />
-		</css-naked-day>
+		<CssNakedDay />
 
 		<header>
 			<Logo
@@ -240,7 +234,7 @@ const tasks: Task[] = [
 					<a href="https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/">https://daily-dev-tips.com/posts/goodbye-comments-welcome-webmentions/</a>
 				</li>
 			</ul>
-			<script src="../assets/js/pages/todo.ts"></script>
+			<script src="../assets/pages/todo/todo.ts"></script>
 		</main>
 
 		<footer>

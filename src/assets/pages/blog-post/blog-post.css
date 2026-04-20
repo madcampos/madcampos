@@ -1,0 +1,16 @@
+@import url('../../../components/AuthorCard/author-card.css');
+@import url('../../../components/PostHeader/post-header.css');
+@import url('../../../components/RelatedPosts/related-posts.css');
+@import url('../../../components/ScrollToTop/scroll-to-top.css');
+
+@layer pages {
+	#post-license {
+		margin-block-start: var(--size-3);
+		border-radius: var(--border-radius);
+		background: var(--surface-2);
+		padding: var(--size-3);
+		font-size: var(--font-size-0);
+
+		& > *:nth-child(n+2) { margin-block-start: var(--size-3); }
+	}
+}

@@ -267,6 +267,10 @@
 		--old-button-blend-mode: normal;
 		--old-button-border-radius: 0.2rem;
 
+		/* Card */
+		--card-image-radius: var(--radius-6);
+		--card-image-shape: squircle;
+
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--code-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;

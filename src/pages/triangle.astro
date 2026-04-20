@@ -1,5 +1,5 @@
 ---
-import '../assets/css/pages/triangle.css';
+import '../assets/pages/triangle/triangle.css';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import customer from '../assets/images/piramid/customer.jpg';
@@ -8,9 +8,10 @@ import ligMa from '../assets/images/piramid/ligma.jpg';
 import mScott from '../assets/images/piramid/m-scott.jpg';
 import mrCreature from '../assets/images/piramid/mr-creature.jpg';
 import richHero from '../assets/images/piramid/rich1.png';
-import HtmlHead from '../components/HtmlHead.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SvgDefs from '../components/SvgDefs.astro';
+import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -27,14 +28,7 @@ import SvgDefs from '../components/SvgDefs.astro';
 		</skip-to-content>
 
 		<SiteNav />
-
-		<css-naked-day>
-			<hr />
-			<h2>Why this website looks so weird?</h2>
-			<p>We are celebrating CSS Naked Day!</p>
-			<p>Find out more on <a href="/blog/2025/04/css-naked-day-2025/">this blog post</a>.</p>
-			<hr />
-		</css-naked-day>
+		<CssNakedDay />
 
 		<header>
 			<h1>Welcome to QuickRichClub!</h1>
@@ -270,6 +264,6 @@ import SvgDefs from '../components/SvgDefs.astro';
 		</footer>
 		<iab-escape></iab-escape>
 		<SvgDefs />
-		<script src="../assets/js/pages/triangle.ts"></script>
+		<script src="../assets/pages/triangle/triangle.ts"></script>
 	</body>
 </html>

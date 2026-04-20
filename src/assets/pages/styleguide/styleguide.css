@@ -1,0 +1,36 @@
+@import url('../../../components/AuthorCard/author-card.css');
+@import url('../../../components/PostHeader/post-header.css');
+@import url('../../../components/RelatedPosts/related-posts.css');
+@import url('../../../components/ScrollToTop/scroll-to-top.css');
+
+@layer pages {
+	section > h3:first-child { color: var(--accent-color); }
+	form figure output {
+		inline-size: 100%;
+		block-size: 100%;
+		display: block;
+		overflow: auto;
+		min-inline-size: var(--size-content-0);
+		min-block-size: var(--size-content-0);
+		max-block-size: var(--size-content-2);
+		max-inline-size: var(--size-content-2);
+
+		ul {
+			display: flex;
+			list-style: none;
+			padding: 0;
+			gap: var(--size-2);
+			flex-wrap: wrap;
+		}
+
+		:is(img, video) {
+			inline-size: var(--size-10);
+			block-size: var(--size-10);
+		}
+
+		& > :is(img, video):only-child {
+			inline-size: var(--size-12);
+			block-size: var(--size-12);
+		}
+	}
+}

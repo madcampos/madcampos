@@ -204,6 +204,10 @@
 		--old-button-blend-mode: color;
 		--old-button-border-radius: var(--border-radius);
 
+		/* Card */
+		--card-image-radius: var(--border-radius);
+		--card-image-shape: square;
+
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--text-font-family: 'Selawik Variable', 'Selawik', 'Segoe UI', 'Roboto', 'Open Sans', 'Arial', system-ui, sans-serif;

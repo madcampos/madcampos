@@ -246,6 +246,10 @@
 		--old-button-blend-mode: color;
 		--old-button-border-radius: 0.5rem;
 
+		/* Card */
+		--card-image-radius: var(--radius-round);
+		--card-image-shape: round;
+
 		/* Fonts */
 		--headers-font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
 		--text-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
@@ -336,10 +340,6 @@
 
 		&.project-card picture {
 			position: relative;
-			mask: none;
-			overflow: visible;
-
-			img { border-radius: var(--radius-round); }
 
 			&::after {
 				display: block;

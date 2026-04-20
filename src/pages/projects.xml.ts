@@ -1,12 +1,8 @@
 import type { APIRoute } from 'astro';
-import { getImage } from 'astro:assets';
-import defaultImage from '../assets/images/logo/logo-micro.png';
 import { encodeEmail } from '../utils/email.ts';
 import { listAllProjects } from '../utils/projects.ts';
 
 export const GET: APIRoute = async (context) => {
-	const siteImage = await getImage({ src: defaultImage, format: 'png', width: 512, height: 512 });
-
 	const projectsUrl = new URL('/projects/', context.url).href;
 
 	const allProjects = await listAllProjects();
@@ -30,8 +26,8 @@ export const GET: APIRoute = async (context) => {
 			<link rel="self" type="application/atom+xml" href="${context.url}" />
 			<updated>${new Date(allProjects[0]?.data.updatedAt ?? new Date()).toISOString()}</updated>
 			<generator uri="https://astro.build/">Astro</generator>
-			<logo>${new URL(siteImage.src, context.url).href}</logo>
-			<icon>${new URL(siteImage.src, context.url).href}</icon>
+			<logo>${new URL('/assets/images/logo-micro.png', context.url).href}</logo>
+			<icon>${new URL('/assets/images/logo-micro.png', context.url).href}</icon>
 			<author>
 				<name>Marco Campos</name>
 				<email>${encodeEmail(true)}</email>

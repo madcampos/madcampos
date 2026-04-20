@@ -232,6 +232,10 @@
 		--old-button-blend-mode: ;
 		--old-button-border-radius: ;
 
+		/* Card */
+		--card-image-radius: ;
+		--card-image-shape: ;
+
 		/* Fonts */
 		--headers-font-family: ;
 		--code-font-family: ;
@@ -284,8 +288,6 @@
 
 	:is([data-theme='TEMPLATE'] m-card, m-card[data-theme='TEMPLATE']) {
 		&.project-card article > picture {
-			mask: none;
-
 			img {
 				display: none;
 

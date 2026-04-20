@@ -3,16 +3,16 @@
 
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import avatar from '../../assets/images/me.jpg';
+import avatar from '../../../public/assets/images/me.jpg';
 import { inlineMarkdownRender } from '../../utils/markdown.ts';
 import { listAllPosts } from '../../utils/post.ts';
 import { listAllProjects } from '../../utils/projects.ts';
-import Card from '../Card.astro';
-import OldStyleButtons from '../OldStyleButtons.astro';
-import Pagination from '../Pagination.astro';
-import PromptInjection from '../PromptInjection.astro';
-import SiteNav from '../SiteNav.astro';
-import Webrings from '../Webrings.astro';
+import Card from '../Card/Card.astro';
+import OldStyleButtons from '../OldStyleButtons/OldStyleButtons.astro';
+import Pagination from '../Pagination/Pagination.astro';
+import PromptInjection from '../PromptInjection/PromptInjection.astro';
+import SiteNav from '../SiteNav/SiteNav.astro';
+import Webrings from '../Webrings/Webrings.astro';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const project = (await listAllProjects())[0]!;
