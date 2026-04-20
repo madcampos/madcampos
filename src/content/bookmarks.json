@@ -486,6 +486,12 @@
 					"type": "article"
 				},
 				{
+					"url": "https://jon.chrt.dev/2026/04/15/things-you-didnt-know-about-indexes.html",
+					"title": "Things you didn't know about indexes",
+					"description": "The title says it all: Some curiosities about SQL indexes.",
+					"type": "article"
+				},
+				{
 					"url": "https://cedardb.com/blog/pagination/",
 					"title": "Offset Considered Harmful or: The Surprising Complexity of Pagination in SQL",
 					"description": "A deep dive into pagination in SQL and problems with duplicated entries when listing items.",
