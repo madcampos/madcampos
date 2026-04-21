@@ -33,7 +33,7 @@ export default defineConfig({
 	site: 'https://madcampos.dev/',
 	base: '/',
 	redirects: mode !== 'production'
-		? { '/yapping/[...params]': 'https://localhost:4242/yapping/' }
+		? { '/yapping/[hash]/[keyword]': '/yapping/[keyword]' }
 		: {},
 	trailingSlash: 'ignore',
 	devToolbar: { enabled: false },
