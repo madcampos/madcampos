@@ -45,7 +45,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 					</button>
 				</header>
 				<dialog-content>
-					<canvas hidden></canvas>
+					<canvas></canvas>
 					<svg
 						viewBox="0 0 1024 1024"
 						class="inline-share-quote-svg"
@@ -202,8 +202,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	}
 
 	#renderToCanvas(text: string) {
-		this.#quoteSvg.toggleAttribute('hidden', false);
-		this.#canvas.hidden = true;
+		this.#canvasContext.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
 
 		this.#drawText(text, this.#svgQuoteText);
 		this.#drawText(document.querySelector('h1')?.textContent ?? '', this.#svgTitleText);
@@ -212,8 +211,6 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 		img.onload = () => {
 			this.#canvasContext.drawImage(img, 0, 0, this.#canvas.width, this.#canvas.height);
-			this.#quoteSvg.toggleAttribute('hidden', true);
-			this.#canvas.hidden = false;
 		};
 
 		const svgData = new XMLSerializer().serializeToString(this.#quoteSvg);

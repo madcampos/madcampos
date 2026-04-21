@@ -12,7 +12,8 @@ import {
 } from '../../assets/js/settings.ts';
 import type { IabEscape } from '../IabEscape/iab-escape.ts';
 import type { PWABanner } from '../PwaBanner/pwa-banner.ts';
-import styles from './site-settings.css?url';
+import textSwatchesStyles from '../TextSwatch/text-swatch.css?url';
+import settingsStyles from './site-settings.css?url';
 
 interface SiteTheme {
 	id: ThemeSetting;
@@ -563,10 +564,14 @@ class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
-		const tagName = 'site-settings';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
+		[
+			{ tagName: 'site-settings', styles: settingsStyles },
+			{ tagName: 'text-swatch', styles: textSwatchesStyles }
+		].forEach(({ tagName, styles }) => {
+			if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
+				document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
+			}
+		});
 
 		this.render();
 

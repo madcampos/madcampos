@@ -39,12 +39,10 @@
 		}
 
 		& > button {
-			/* TODO: figure out why it is not correctly flipping */
 			position: absolute;
 			position-anchor: --share-overlay;
-			position-area: block-start span-all;
-			position-try-fallbacks: flip-block;
-			margin-block-end: var(--size-8);
+			position-area: block-end span-all;
+			inset-block-start: calc(anchor(end) + var(--size-8));
 
 			svg {
 				block-size: 100%;
@@ -61,6 +59,8 @@
 				aspect-ratio: 1 / 1;
 				image-rendering: optimizeQuality;
 				border: none;
+				display: block;
+				margin-inline: auto;
 
 				&[hidden] { display: none; }
 
@@ -68,6 +68,20 @@
 					inline-size: 100%;
 					block-size: auto;
 				}
+			}
+
+			svg {
+				position: absolute;
+				clip: rect(0, 0, 0, 0);
+				opacity: 0;
+				z-index: -1;
+				margin: 0;
+				padding: 0;
+				inline-size: 1px;
+				block-size: 1px;
+				overflow: hidden;
+				pointer-events: none;
+				user-select: none;
 			}
 
 			/* INFO: remove the inheriting font famliy and set the correct one here. */

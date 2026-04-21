@@ -100,8 +100,6 @@ export function parseRequestMetadata(request: Request) {
 		throw new ErrorResponse('Non browser requests are not allowed.');
 	}
 
-	// TODO: block ip addresses?
-
 	return {
 		country,
 		userAgent,
@@ -121,17 +119,6 @@ export async function generateVisitorId({
 	ipAddress
 }: RequestMetadata) {
 	const data = JSON.stringify({
-		// postalCode: request.cf?.postalCode,
-		// city: request.cf?.city,
-		// metroCode: request.cf?.metroCode,
-		// region: request.cf?.region,
-		// regionCode: request.cf?.regionCode,
-		// colo: request.cf?.colo,
-		// continent: request.cf?.continent,
-		// asn: request.cf?.asn,
-		// timezone: request.cf?.timezone,
-		// lattitude: request.cf?.latitude,
-		// longitude: request.cf?.longitude,
 		country,
 		ipAddress,
 		userAgent,
@@ -143,7 +130,6 @@ export async function generateVisitorId({
 	const dataBuffer = encoder.encode(data);
 	const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
 
-	// @ts-expect-error - Typescript is missing the string conversion method
 	return new Uint8Array(hashBuffer).toHex();
 }
 

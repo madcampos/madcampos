@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', async () => {
 	await Promise.allSettled([
-		import('../../../components/Baseline/baseline.js'),
-		import('../../../components/Codepen/codepen.js'),
-		import('../../../components/ImageLightbox/image-lightbox.js'),
-		import('../../../components/InlineShare/inline-share.js'),
-		import('../../../components/TableSorting/table-sorting.js'),
-		import('../../../components/ShareOptions/share-options.js'),
-		import('../../../components/Youtube/youtube.js'),
-		import('../../../components/RelativeTime/relative-time.js'),
-		import('../../../components/ReadArticle/read-article.js')
+		import('../../../components/Baseline/baseline.ts'),
+		import('../../../components/Codepen/codepen.ts'),
+		import('../../../components/ImageLightbox/image-lightbox.ts'),
+		import('../../../components/InlineShare/inline-share.ts'),
+		import('../../../components/TableSorting/table-sorting.ts'),
+		import('../../../components/ShareOptions/share-options.ts'),
+		import('../../../components/Youtube/youtube.ts'),
+		import('../../../components/RelativeTime/relative-time.ts'),
+		import('../../../components/ReadArticle/read-article.ts')
 	]);
 });

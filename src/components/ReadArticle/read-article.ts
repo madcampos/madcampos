@@ -174,8 +174,14 @@ class ReadArticle extends HTMLElement implements CustomElement {
 			? container as HTMLElement
 			: container.parentElement;
 
-		// TODO: check if element is in viewport before scrolling
-		containingElement?.scrollIntoView({ block: 'center', behavior: 'auto' });
+		if (containingElement) {
+			const { bottom: containerBottom, top: containerTop } = containingElement.getBoundingClientRect();
+			const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+			if (containerBottom <= 0 || containerTop >= viewportHeight) {
+				containingElement?.scrollIntoView({ block: 'center', behavior: 'auto' });
+			}
+		}
 	}
 
 	#toggleReading(button: HTMLButtonElement) {
