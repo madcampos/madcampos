@@ -50,7 +50,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	<HtmlHead
 		title={`${inlineMarkdownStrip(title)} | Marco Campos`}
 		description={inlineMarkdownStrip(summary)}
-		image={image?.src}
+		{image}
 		{imageAlt}
 		createdAt={date}
 	/>

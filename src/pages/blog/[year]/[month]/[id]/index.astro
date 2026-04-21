@@ -56,7 +56,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		title={`${inlineMarkdownStrip(title)} | Marco Campos Blog`}
 		{tags}
 		description={inlineMarkdownStrip(summary)}
-		image={image?.src}
+		{image}
 		{imageAlt}
 		{createdAt}
 		{updatedAt}

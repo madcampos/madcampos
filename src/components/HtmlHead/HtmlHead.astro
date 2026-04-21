@@ -1,5 +1,7 @@
 ---
+import { getImage } from 'astro:assets';
 import baseStyles from '../../assets/css/index.css?url';
+import defaultSocialImage from '../../assets/images/social.png';
 
 import printStylesheet from '../../assets/css/print.css?url';
 
@@ -15,7 +17,7 @@ interface Props {
 	title: string;
 	description: string;
 	tags?: string[];
-	image?: string;
+	image?: ImageMetadata;
 	imageAlt?: string;
 	createdAt?: Date;
 	updatedAt?: Date;
@@ -35,6 +37,14 @@ const {
 
 const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(Astro.url.pathname);
 const isResumeUrl = Astro.url.pathname.startsWith('/resume');
+
+const optimizedImage = await getImage({
+	src: image?.src ?? defaultSocialImage.src,
+	width: 1024,
+	height: 1024,
+	fit: 'contain',
+	format: 'png'
+});
 ---
 <head>
 	<meta charset="utf-8" />
@@ -88,6 +98,8 @@ const isResumeUrl = Astro.url.pathname.startsWith('/resume');
 	<link rel="license" href="/license/" />
 
 	<!-- Social metadata -->
+	<meta property="og:site_name" content="Madcampos" />
+	<meta name="twitter:site" content="@madcampos" />
 	<meta property="og:title" name="twitter:title" itemprop="name" content={title} />
 
 	<meta property="og:type" content="website" />
@@ -99,7 +111,9 @@ const isResumeUrl = Astro.url.pathname.startsWith('/resume');
 	<meta property="og:description" name="description" itemprop="abstract" content={description} />
 	<meta name="twitter:description" content={description} />
 
-	<meta property="og:image" name="twitter:image" itemprop="image" content={`${Astro.site?.href ?? ''}${image ?? 'assets/images/social.png'}`} />
+	<meta property="og:image" name="twitter:image" itemprop="image" content={new URL(optimizedImage.src, Astro.site?.href).href} />
+	<meta property="og:image:width" content="1024" />
+	<meta property="og:image:height" content="1024" />
 	<meta property="og:image:alt" name="twitter:image:alt" content={imageAlt ?? 'The letter "m" on a monospaced font, in blue, between curly braces.'} />
 
 	<meta property="article:author" name="author" content="Marco Campos" />
