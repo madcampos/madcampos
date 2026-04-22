@@ -628,6 +628,12 @@
 					"title": "ASCII characters are not pixels: a deep dive into ASCII rendering",
 					"description": "A deep dive on rendering ASCII art in a way that considers the characters shapes and the area shading.",
 					"type": "article"
+				},
+				{
+					"url": "https://perthirtysix.com/how-the-heck-does-shazam-work",
+					"title": "How The Heck Does Shazam Work?",
+					"description": "A techincal explanation of how music identification works.",
+					"type": "article"
 				}
 			]
 		},
