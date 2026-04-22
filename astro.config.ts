@@ -134,7 +134,8 @@ export default defineConfig({
 		sitemap({
 			changefreq: 'weekly',
 			priority: 0.7,
-			lastmod: new Date()
+			lastmod: new Date(),
+			filter: (page) => !page.includes('/yapping/')
 		}),
 		astroIcon({
 			iconDir: 'src/assets/icons'
