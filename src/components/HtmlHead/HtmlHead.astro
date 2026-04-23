@@ -86,8 +86,8 @@ const optimizedImage = await getImage({
 		isBlogPostUrl && (
 			<link rel="alternate" type="application/json+oembed" href={`${Astro.url.href}oembed.json`} title="oEmbed (JSON)" />
 			<link rel="alternate" type="text/xml+oembed" href={`${Astro.url.href}oembed.xml`} title="oEmbed (XML)" />
-			<link rel="alternate" type="text/plain" href={`${Astro.url.href}txt`} title="Plain Text Version" />
-			<link rel="alternate" type="text/markdown" href={`${Astro.url.href}md`} title="Markdown Version" />
+			<link rel="alternate" type="text/plain" href={`${Astro.url.href}plain-text.txt`} title="Plain Text Version" />
+			<link rel="alternate" type="text/markdown" href={`${Astro.url.href}markdown.md`} title="Markdown Version" />
 		)
 	}
 
