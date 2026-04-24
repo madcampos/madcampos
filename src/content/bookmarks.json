@@ -310,6 +310,18 @@
 					"title": "The Three Pillars of JavaScript Bloat",
 					"description": "Overview of what makes a js project bloated.",
 					"type": "article"
+				},
+				{
+					"url": "https://pwascore.com/",
+					"title": "PWA Score Card",
+					"description": "How browsers score against each other on PWA features",
+					"type": "reference"
+				},
+				{
+					"url": "https://runtime-compat.unjs.io/",
+					"title": "Runtime compatibility",
+					"description": "Support for \"Web APIs\" and other [Winter TG](https://wintertc.org/work) related features on different JS runtimes.",
+					"type": "reference"
 				}
 			]
 		},
@@ -461,6 +473,12 @@
 			"title": "Software Engineering",
 			"description": "Interesting architecture problems and their solutions.",
 			"links": [
+				{
+					"url": "https://lawsofsoftwareengineering.com/",
+					"title": "Laws of Software engineering",
+					"description": "A list of \"laws\" of engineering with explanations on thir importance.",
+					"type": "reference"
+				},
 				{
 					"url": "https://newsletter.manager.dev/p/the-13-software-engineering-laws",
 					"title": "The 13 software engineering laws",
