@@ -322,6 +322,12 @@
 					"title": "Runtime compatibility",
 					"description": "Support for \"Web APIs\" and other [Winter TG](https://wintertc.org/work) related features on different JS runtimes.",
 					"type": "reference"
+				},
+				{
+					"url": "https://www.stefanjudis.com/today-i-learned/the-scope-of-type-guards-and-assertion-functions/",
+					"title": "The scope of type guards and assertion functions",
+					"description": "Quick comment comparring type guards (`value is T`) and type assertions (`asserts value is T`) in typescript.",
+					"type": "article"
 				}
 			]
 		},
@@ -861,6 +867,12 @@
 					"url": "https://ergosphere.blog/posts/the-machines-are-fine/",
 					"title": "The machines are fine. I'm worried about us.",
 					"description": "A commentary of the use of AI in academia and how it shortcuts reasoning for short term results, and that causes a deterioration of science.",
+					"type": "article"
+				},
+				{
+					"url": "https://nrehiew.github.io/blog/minimal_editing/",
+					"title": "Coding Models Are Doing Too Much",
+					"description": "Analysis of coding models and it's tendency to over edit code.",
 					"type": "article"
 				}
 			]
