@@ -39,16 +39,10 @@ import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 				<Image
 					src={richHero}
 					alt="A man with a happy face and his mouth open, holding a fist in front of his body. He is confident, he is strong, he is making money baby!"
-					loading="lazy"
+					loading="eager"
 					widths={[128, 256, 512, 768, 1024]}
 					width={512}
-					sizes="
-						(max-width: 360px) 128px,
-						(max-width: 720px) 256px,
-						(max-width: 1280px) 512px,
-						(max-width: 2160px) 768px,
-						1024px
-					"
+					sizes="50vw"
 				/>
 
 				<p>
