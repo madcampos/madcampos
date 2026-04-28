@@ -1,7 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
 import baseStyles from '../../assets/css/index.css?url';
-import defaultSocialImage from '../../assets/images/social.png';
+import defaultSocialImage from '../../assets/images/social.png?url';
 
 import printStylesheet from '../../assets/css/print.css?url';
 
@@ -39,7 +39,7 @@ const isBlogPostUrl = /\/blog\/\d{4}\/\d{2}\/[a-z]/giu.test(Astro.url.pathname);
 const isResumeUrl = Astro.url.pathname.startsWith('/resume');
 
 const optimizedImage = await getImage({
-	src: image?.src ?? defaultSocialImage.src,
+	src: image ?? defaultSocialImage,
 	width: 1024,
 	height: 1024,
 	fit: 'contain',
