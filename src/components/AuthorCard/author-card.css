@@ -33,6 +33,7 @@
 			@container author-card (max-width: 35rem) {
 				place-self: center center;
 				min-inline-size: 100%;
+				justify-content: center;
 			}
 		}
 
