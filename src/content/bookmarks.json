@@ -492,6 +492,12 @@
 					"type": "article"
 				},
 				{
+					"url": "https://newsletter.manager.dev/p/the-unwritten-laws-of-software-engineering",
+					"title": "The unwritten laws of software engineering",
+					"description": "A follow with unwritten rules that you pick up with experience. Usually after screwing up the first time.",
+					"type": "article"
+				},
+				{
 					"url": "https://monica-at-mozilla.blogspot.com/2013/02/writing-for-98.html",
 					"title": "Writing for the 98%",
 					"description": "An analysis of Firefox preferences page design and the balance between good defaults and user control.",
