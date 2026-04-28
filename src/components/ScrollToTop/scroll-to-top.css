@@ -1,3 +1,9 @@
+@keyframes grow {
+	from { transform: scaleX(0); }
+
+	to { transform: scaleX(1); }
+}
+
 @layer components {
 	html {
 		container-name: body-scroller;
@@ -23,19 +29,44 @@
 		max-inline-size: var(--size-content-4);
 		transition: var(--transition-in-time) translate;
 
+		@media (prefers-reduced-motion: no-preference) {
+			&::before {
+				content: '';
+				width: 100%;
+				height: 100%;
+				display: block;
+				position: absolute;
+				background: var(--surface-1);
+				z-index: -1;
+				pointer-events: none;
+				transform-origin: center left;
+				transform: scaleX(0);
+				animation-timeline: scroll(root);
+				animation-name: grow;
+				animation-duration: 1ms;
+				animation-timing-function: linear;
+			}
+		}
+
 		&:focus-visible {
 			background-color: var(--text-1);
 			color: var(--surface-1);
+
+			&::before { background-color: var(--text-2); }
 		}
 
 		&:hover {
 			background-color: var(--theme-color);
 			color: var(--surface-1);
+
+			&::before { background-color: color-mix(in srgb, var(--surface-1), var(--theme-color) 80%); }
 		}
 
 		&:active {
 			background-color: var(--accent-color);
 			color: var(--surface-1);
+
+			&::before { background-color: color-mix(in srgb, var(--surface-1), var(--accent-color) 80%); }
 		}
 
 		@container body-scroller scroll-state(scrollable: top) { translate: 0 0; }
