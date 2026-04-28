@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import './svg-defs.css';
 ---
 <svg-defs aria-hidden="true">
+	<!-- Icons for dynamic components -->
 	<svg aria-hidden="true" role="none" width="1" height="1">
 		<!-- Table icons -->
 		<Icon name="mingcute:line-height-line" id="table-sort-icon-none" />
@@ -28,6 +29,8 @@ import './svg-defs.css';
 		<svg viewBox="0 0 24 24" id="share-icon-close">
 			<use href="#img-lightbox-icon-close" width="24" height="24" />
 		</svg>
+		<Icon name="mingcute:link-2-line" id="share-icon-link" />
+		<Icon name="mingcute:pic-line" id="share-icon-image" />
 
 		<!-- Site settings icons -->
 		<Icon name="mingcute:settings-5-line" id="site-settings-icon" />
@@ -41,6 +44,23 @@ import './svg-defs.css';
 
 		<!-- Link icons -->
 		<Icon name="mingcute:external-link-line" id="link-icon-external" />
+	</svg>
+
+	<!-- Icon mask -->
+	<svg aria-hidden="true" role="none" width="1" height="1">
+		<mask
+			id="icon-with-subicon-mask"
+			mask-type="luminance"
+			maskUnits="userSpaceOnUse"
+			maskContentUnits="userSpaceOnUse"
+			height="24"
+			width="24"
+			x="0"
+			y="0"
+		>
+			<rect x="0" y="0" width="24" height="24" fill="white" />
+			<circle cx="18" cy="18" r="8" fill="black" />
+		</mask>
 	</svg>
 
 	<!-- Logo Effects -->

@@ -42,6 +42,7 @@
 			position: absolute;
 			position-anchor: --share-overlay;
 			position-area: block-end span-all;
+			position-try-fallbacks: flip-block;
 			inset-block-start: calc(anchor(end) + var(--size-8));
 
 			svg {

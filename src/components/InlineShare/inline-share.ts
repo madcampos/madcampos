@@ -17,7 +17,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	#canvasContext: CanvasRenderingContext2D;
 	#svgQuoteText: SVGTextElement;
 	#svgTitleText: SVGTextElement;
-	#svgTestText: SVGTextElement;
+	#svgSizeTestText: SVGTextElement;
 	#quoteSvg: SVGElement;
 
 	constructor() {
@@ -97,22 +97,32 @@ export class InlineShare extends HTMLElement implements CustomElement {
 							<use href="#share-icon-share" width="24" height="24" />
 						</svg>
 					</button>
-					<button type="button" class="inline-share-copy">
+					<button type="button" class="inline-share-copy-link">
 						<sr-only>Copy Link to Quote</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-copy" width="24" height="24" />
+							<use href="#share-icon-copy" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-link" width="12" height="12" x="12" y="12" />
+						</svg>
+					</button>
+					<button type="button" class="inline-share-copy-image">
+						<sr-only>Copy Quote Image</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-copy" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-image" width="12" height="12" x="12" y="12" />
 						</svg>
 					</button>
 					<button type="button" class="inline-share-email">
-						<sr-only>Share via Email</sr-only>
+						<sr-only>Share Link via Email</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-email" width="24" height="24" />
+							<use href="#share-icon-email" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-link" width="12" height="12" x="12" y="12" />
 						</svg>
 					</button>
 					<button type="button" class="inline-share-download">
-						<sr-only>Download quote</sr-only>
+						<sr-only>Download Quote Image</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-download" width="24" height="24" />
+							<use href="#share-icon-download" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-image" width="12" height="12" x="12" y="12" />
 						</svg>
 					</button>
 				</footer>
@@ -127,7 +137,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		this.#quoteSvg = this.querySelector('svg.inline-share-quote-svg')!;
 		this.#svgQuoteText = this.querySelector('text.inline-share-quote-text')!;
 		this.#svgTitleText = this.querySelector('text.inline-share-title-text')!;
-		this.#svgTestText = this.querySelector('text.inline-share-test-text')!;
+		this.#svgSizeTestText = this.querySelector('text.inline-share-test-text')!;
 		/* eslint-enable @typescript-eslint/no-non-null-assertion */
 
 		if (!('share' in navigator)) {
@@ -145,16 +155,17 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	}
 
 	#drawText(text: string, textElement: SVGTextElement) {
-		const segments = Array.from(this.#segmenter.segment(text));
+		const sanitizedText = text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+		const segments = Array.from(this.#segmenter.segment(sanitizedText));
 
-		this.#svgTestText.textContent = '';
+		this.#svgSizeTestText.textContent = '';
 		textElement.textContent = '';
 
-		this.#svgTestText.setAttribute('text-anchor', textElement.getAttribute('text-anchor') ?? 'start');
-		this.#svgTestText.setAttribute('font-family', textElement.getAttribute('font-family') ?? 'sans-serif');
-		this.#svgTestText.setAttribute('font-size', textElement.getAttribute('font-size') ?? '45');
-		this.#svgTestText.setAttribute('font-weight', textElement.getAttribute('font-weight') ?? 'normal');
-		this.#svgTestText.setAttribute('font-style', textElement.getAttribute('font-style') ?? 'normal');
+		this.#svgSizeTestText.setAttribute('text-anchor', textElement.getAttribute('text-anchor') ?? 'start');
+		this.#svgSizeTestText.setAttribute('font-family', textElement.getAttribute('font-family') ?? 'sans-serif');
+		this.#svgSizeTestText.setAttribute('font-size', textElement.getAttribute('font-size') ?? '45');
+		this.#svgSizeTestText.setAttribute('font-weight', textElement.getAttribute('font-weight') ?? 'normal');
+		this.#svgSizeTestText.setAttribute('font-style', textElement.getAttribute('font-style') ?? 'normal');
 
 		const lines: string[] = [];
 		let currentLine = '';
@@ -176,9 +187,9 @@ export class InlineShare extends HTMLElement implements CustomElement {
 				currentLine = '';
 				currentWidth = 0;
 			} else {
-				this.#svgTestText.textContent = segment.segment;
+				this.#svgSizeTestText.textContent = segment.segment;
 
-				const wordWidth = this.#svgTestText.getComputedTextLength();
+				const wordWidth = this.#svgSizeTestText.getComputedTextLength();
 
 				if (currentWidth + wordWidth >= this.#TEXT_BOX_WIDTH) {
 					lines.push(currentLine.trim());
@@ -289,7 +300,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		}
 	}
 
-	async #getCanvasBlob() {
+	async #getCanvasBlob(mimeType = 'image/png') {
 		return new Promise<Blob>((resolve, reject) => {
 			this.#canvas.toBlob(
 				(blob) => {
@@ -300,7 +311,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 					resolve(blob);
 				},
-				'image/jpeg',
+				mimeType,
 				1
 			);
 		});
@@ -360,7 +371,8 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		const title = document.querySelector<HTMLElement>('h1')?.innerText ?? '';
 		const description = document.getSelection()?.getRangeAt(0).toString() ?? document.querySelector<HTMLElement>('meta[name="description"]')?.getAttribute('content') ??
 			'Check out this page!';
-		const file = new File([await this.#getCanvasBlob()], 'quote.jpg', { type: 'image/jpeg' });
+		const blob = await this.#getCanvasBlob();
+		const file = new File([blob], 'quote.png', { type: blob.type });
 
 		switch (target.className) {
 			case 'inline-share-os':
@@ -371,13 +383,24 @@ export class InlineShare extends HTMLElement implements CustomElement {
 					files: [file]
 				});
 				break;
-			case 'inline-share-copy':
+			case 'inline-share-copy-link':
 				{
 					const selection = document.getSelection()?.getRangeAt(0);
 
 					if (selection) {
 						const textUrl = this.#generateTextFragmentFromSelection(selection);
 						await navigator.clipboard.writeText(textUrl.href);
+					}
+				}
+				break;
+			case 'inline-share-copy-image':
+				{
+					const imageBlob = await this.#getCanvasBlob();
+
+					if (ClipboardItem.supports(imageBlob.type)) {
+						const clipboardItem = new ClipboardItem({ [imageBlob.type]: imageBlob });
+
+						await navigator.clipboard.write([clipboardItem]);
 					}
 				}
 				break;
