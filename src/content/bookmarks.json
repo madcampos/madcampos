@@ -676,6 +676,12 @@
 					"title": "How The Heck Does Shazam Work?",
 					"description": "A techincal explanation of how music identification works.",
 					"type": "article"
+				},
+				{
+					"url": "https://clig.dev/",
+					"title": "Command Line Interface Guidelines",
+					"description": "Set of guidelines for designing CLI tools.",
+					"type": "guidelines"
 				}
 			]
 		},
