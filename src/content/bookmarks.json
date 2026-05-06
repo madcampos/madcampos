@@ -568,6 +568,12 @@
 					"title": "Good APIs Age Slowly",
 					"description": "An argument on API design and why being boring is better than being magical on the long run.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.iankduncan.com/engineering/2026-02-06-bash-is-not-enough",
+					"title": "No, Really, Bash Is Not Enough: Why Large-Scale CI Needs an Orchestrator",
+					"description": "Interesting analysis of why bash scripts work for deployment and automation for smaller projects but fail to scale for larger ones.",
+					"type": "article"
 				}
 			]
 		},
@@ -885,6 +891,12 @@
 					"url": "https://nrehiew.github.io/blog/minimal_editing/",
 					"title": "Coding Models Are Doing Too Much",
 					"description": "Analysis of coding models and it's tendency to over edit code.",
+					"type": "article"
+				},
+				{
+					"url": "https://blog.happyfellow.dev/simulacrum-of-knowledge-work/",
+					"title": "Simulacrum of Knowledge Work",
+					"description": "the incentives for LLMs are not if the output is correct, but if it _looks_ correct.",
 					"type": "article"
 				}
 			]
