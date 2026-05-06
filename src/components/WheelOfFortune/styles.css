@@ -93,11 +93,55 @@ button svg {
 	height: 2.5rem;
 }
 
-:host([display='wheel']) #items-list {
-	display: block;
-	position: relative;
+:host([display='list']) #wheel-svg { display: none; }
+:host([display='wheel']) #items-list { display: none; }
+
+#wheel-container {
+	display: grid;
 	place-items: center;
-	clip-path: inset(0 0 0 0 round 50%);
+	margin: 1rem;
+	position: relative;
+}
+
+:host([display='wheel']) #list-spin { display: none; }
+:host([display='list']) #wheel-spin { display: none; }
+
+:host([display='wheel']) #wheel-container > *:not(#items-list) { grid-area: 1 / -1; }
+
+#wheel-marker {
+	align-self: start;
+	z-index: 2;
+	clip-path: polygon(0 0, 50% 100%, 100% 0, 50% 25%);
+	margin-block-start: -1rem;
+	border: none;
+	background-color: var(--accent-color, #ff4500);
+	width: 3rem;
+	height: 3rem;
+}
+
+#wheel-svg {
+	max-width: 100%;
+	height: auto;
+}
+
+#items-list {
+	width: 100%;
+	padding: 0;
+	margin: 1rem 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+#items-list li {
+	padding: 0.5rem;
+	background: var(--surface-2);
+	border-radius: var(--border-radius);
+	text-align: center;
+}
+
+:host([display='wheel']) #items-list {
 	padding: 0;
 	aspect-ratio: 1 / 1;
 	width: clamp(10rem, 50vmin, 25rem);
