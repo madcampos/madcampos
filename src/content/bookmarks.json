@@ -328,6 +328,12 @@
 					"title": "The scope of type guards and assertion functions",
 					"description": "Quick comment comparring type guards (`value is T`) and type assertions (`asserts value is T`) in typescript.",
 					"type": "article"
+				},
+				{
+					"url": "https://causality.blog/essays/what-async-promised/",
+					"title": "What Async Promised and What it Delivered",
+					"description": "An analysis, in retrospect, of how we got to `Promise`s, `async`, what it solves, and the problems it introduces.",
+					"type": "article"
 				}
 			]
 		},
