@@ -108,8 +108,8 @@
 			}
 		}
 
-		&[display='wheel'] :is(list-container, button[formaction='show-wheel']) { display: none; }
-		&[display='list'] :is(wheel-container, button[formaction='show-list']) { display: none; }
+		&[display='wheel'] :is(list-container, button[command='--show-wheel']) { display: none; }
+		&[display='list'] :is(wheel-container, button[command='--show-list']) { display: none; }
 
 		:is(.wheel-segment, li):nth-child(1) {
 			--surface-1: light-dark(var(--red-4), var(--red-9));

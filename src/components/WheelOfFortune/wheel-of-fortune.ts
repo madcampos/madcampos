@@ -288,7 +288,6 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		`).join('\n');
 
 		this.innerHTML = /* html */ `
-			<link rel="stylesheet" href={styles} />
 			<fieldset>
 				<legend>The Wheel of Fork-tune</legend>
 
@@ -305,18 +304,18 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 						</g>
 					</svg>
 
-					<button type="button" formaction="spin-wheel">Spin the wheel</button>
+					<button type="button" command="--spin-wheel">Spin the wheel</button>
 				</wheel-container>
 
 				<list-container>
-					<button type="button" formaction="spin-list">Select from list</button>
+					<button type="button" command="--spin-list">Select from list</button>
 
 					<ol id="items-list">${listItems}</ol>
 				</list-container>
 
 				<wheel-display-options>
-					<button type="button" formaction="show-list">Show list instead</button>
-					<button type="button" formaction="show-wheel">Show wheel instead</button>
+					<button type="button" command="--show-list">Show list instead</button>
+					<button type="button" command="--show-wheel">Show wheel instead</button>
 				</wheel-display-options>
 			</fieldset>
 		`;
@@ -331,17 +330,17 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		switch (new URL(event.target.formAction).pathname) {
-			case '/spin-wheel':
+		switch (event.target.getAttribute('command') ?? '') {
+			case '--spin-wheel':
 				await this.#spinWheel();
 				break;
-			case '/spin-list':
+			case '--spin-list':
 				await this.#spinList();
 				break;
-			case '/show-list':
+			case '--show-list':
 				this.#toggleDisplayMode('list');
 				break;
-			case '/show-wheel':
+			case '--show-wheel':
 				this.#toggleDisplayMode('wheel');
 				break;
 			default:
