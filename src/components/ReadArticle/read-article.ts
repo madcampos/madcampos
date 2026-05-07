@@ -6,7 +6,7 @@ interface SectionUtterance {
 	utterance: SpeechSynthesisUtterance;
 }
 
-class ReadArticle extends HTMLElement implements CustomElement {
+export class ReadArticle extends HTMLElement implements CustomElement {
 	#id = crypto.randomUUID();
 
 	#sections: SectionUtterance[] = [];

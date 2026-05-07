@@ -1,7 +1,7 @@
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './share-options.css?url';
 
-class ShareOptions extends HTMLElement implements CustomElement {
+export class ShareOptions extends HTMLElement implements CustomElement {
 	readonly #url = window.location.href;
 	readonly #title = document.querySelector<HTMLElement>('h1')?.innerText ?? '';
 	readonly #description = document.querySelector<HTMLElement>('meta[name="description"]')?.getAttribute('content') ?? 'Check out this page!';

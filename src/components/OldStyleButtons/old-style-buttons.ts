@@ -1,6 +1,6 @@
 import { SiteSettings } from '../../assets/js/settings.ts';
 
-class OldStyleButton extends HTMLElement implements CustomElement {
+export class OldStyleButton extends HTMLElement implements CustomElement {
 	constructor() {
 		super();
 

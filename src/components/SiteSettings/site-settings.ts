@@ -111,7 +111,7 @@ const fonts: SiteFontSet[] = [
 	}
 ];
 
-class SiteDisplaySettings extends HTMLElement implements CustomElement {
+export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	readonly #id = crypto.randomUUID();
 
 	#dialogElement?: HTMLDialogElement;
