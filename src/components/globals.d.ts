@@ -9,6 +9,7 @@ import type { PWABanner } from './PwaBanner/pwa-banner.ts';
 import type { ReadArticle } from './ReadArticle/read-article.ts';
 import type { ShareOptions } from './ShareOptions/share-options.ts';
 import type { SiteDisplaySettings } from './SiteSettings/site-settings.ts';
+import type { WheelOffortune } from './WheelOfFortune/wheel-of-fortune.ts';
 import type { YoutubeEmbed } from './Youtube/youtube.ts';
 
 declare global {
@@ -103,6 +104,13 @@ declare global {
 		// #region Tag List
 		'tag-list': HTMLElement;
 		'tag-item': HTMLElement;
+		// #endregion
+
+		// #region wheel of Fortune
+		'wheel-of-fortune': WheelOffortune;
+		'list-container': HTMLElement;
+		'wheel-container': HTMLElement;
+		'wheel-display-options': HTMLElement;
 		// #endregion
 
 		// #region Other components

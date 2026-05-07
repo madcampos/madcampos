@@ -6,6 +6,7 @@ import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro
 import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
+import '../assets/pages/food/food.css';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -33,7 +34,9 @@ import Webrings from '../components/Webrings/Webrings.astro';
 		</header>
 
 		<main id="main">
-			<details>
+			<wheel-of-fortune items="Tim Hortons, Subway, A&W, Ice Cream, Pizza"></wheel-of-fortune>
+
+			<details name="food-options" id="tim-hortons">
 				<summary>Tim Hortons</summary>
 
 				<strong>Coffee</strong>
@@ -54,7 +57,7 @@ import Webrings from '../components/Webrings/Webrings.astro';
 				</ul>
 			</details>
 
-			<details>
+			<details name="food-options" id="subway">
 				<summary>Subway</summary>
 
 				<ol>
@@ -65,13 +68,13 @@ import Webrings from '../components/Webrings/Webrings.astro';
 				</ol>
 			</details>
 
-			<details>
+			<details name="food-options" id="a-w">
 				<summary>A&W</summary>
 
 				<p>Beyond meet combo, with onion rings, and root beer.</p>
 			</details>
 
-			<details>
+			<details name="food-options" id="ice-cream">
 				<summary>Ice Cream flavors</summary>
 
 				<ol>
@@ -82,7 +85,7 @@ import Webrings from '../components/Webrings/Webrings.astro';
 				</ol>
 			</details>
 
-			<details>
+			<details name="food-options" id="pizza">
 				<summary>Pizza flavors</summary>
 
 				<p>Any vegetarian pizza will do, but preffered toppings are:</p>
@@ -104,5 +107,6 @@ import Webrings from '../components/Webrings/Webrings.astro';
 		</footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
+		<script src="../components/WheelOfFortune/wheel-of-fortune.ts"></script>
 	</body>
 </html>

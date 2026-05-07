@@ -1,0 +1,174 @@
+@layer components {
+	wheel-of-fortune {
+		display: block;
+		margin: var(--size-3) auto;
+		inline-size: fit-content;
+
+		legend { font-size: 2em; }
+		aside { text-align: center; }
+
+		wheel-display-options {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		wheel-container {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr;
+			place-items: center;
+			margin: var(--size-3);
+
+			.wheel-svg {
+				grid-area: 1 / 1;
+				max-width: 100%;
+				height: auto;
+				overflow: visible;
+
+				.wheel { transform-origin: 250px 250px; }
+
+				circle {
+					fill: var(--yellow-6);
+					stroke: color-mix(in srgb, var(--yellow-10), var(--yellow-6));
+					stroke-width: var(--size-1);
+
+					&:nth-of-type(2) { fill: transparent; }
+				}
+
+				.wheel-spinner {
+					transform-origin: 250px 10px;
+
+					path:nth-child(1) { fill: var(--yellow-6); }
+					path:nth-child(2) { fill: color-mix(in srgb, var(--yellow-10), transparent); }
+				}
+
+				.wheel-segment {
+					path {
+						fill: var(--surface-1);
+						stroke: var(--yellow-6);
+						stroke-width: var(--size-1);
+					}
+
+					text {
+						fill: var(--text-color);
+						text-anchor: middle;
+						dominant-baseline: middle;
+						font-size: 1rem;
+						font-family: var(--text-font-family);
+						font-weight: bold;
+					}
+
+					&[aria-current] { filter: brightness(1.7) saturate(1.7) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent)); }
+				}
+			}
+
+			button {
+				grid-area: 1 / 1;
+
+				@media (max-width: 40rem) { grid-area: -1 / 1; }
+			}
+		}
+
+		list-container {
+			--highlight-bg: light-dark(var(--yellow-9), var(--yellow-7));
+			--highlight-color: light-dark(black, black);
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			ol {
+				inline-size: 100%;
+				list-style: none;
+				text-align: center;
+				padding: 0;
+				margin: var(--size-3);
+			}
+
+			li {
+				font-size: var(--font-size-3);
+				color: var(--surface-1);
+
+				&[aria-current] {
+					background-color: var(--highlight-bg);
+					color: var(--highlight-color);
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				--highlight-bg: transparent;
+				--highlight-color: var(--text-color);
+
+				li[aria-current] {
+					background-color: light-dark(var(--yellow-9), var(--yellow-7));
+					color: light-dark(black, black);
+				}
+			}
+		}
+
+		&[display='wheel'] :is(list-container, button[formaction='show-wheel']) { display: none; }
+		&[display='list'] :is(wheel-container, button[formaction='show-list']) { display: none; }
+
+		:is(.wheel-segment, li):nth-child(1) {
+			--surface-1: light-dark(var(--red-4), var(--red-9));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(2) {
+			--surface-1: light-dark(var(--lime-4), var(--lime-11));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(3) {
+			--surface-1: light-dark(var(--choco-4), var(--choco-8));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(4) {
+			--surface-1: light-dark(var(--blue-3), var(--blue-8));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(5) {
+			--surface-1: light-dark(var(--yellow-4), var(--yellow-7));
+			--text-color: light-dark(black, black);
+		}
+
+		:is(.wheel-segment, li):nth-child(6) {
+			--surface-1: light-dark(var(--teal-3), var(--teal-9));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(7) {
+			--surface-1: light-dark(var(--pink-5), var(--pink-8));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(8) {
+			--surface-1: light-dark(var(--orange-5), var(--orange-10));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(9) {
+			--surface-1: light-dark(var(--cyan-4), var(--cyan-10));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(10) {
+			--surface-1: light-dark(var(--jungle-4), var(--jungle-10));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(11) {
+			--surface-1: light-dark(var(--indigo-3), var(--indigo-10));
+			--text-color: light-dark(black, white);
+		}
+
+		:is(.wheel-segment, li):nth-child(12) {
+			--surface-1: light-dark(var(--purple-6), var(--purple-11));
+			--text-color: light-dark(black, white);
+		}
+	}
+}
