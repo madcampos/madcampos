@@ -7,6 +7,55 @@ type DisplayMode = 'list' | 'wheel';
 export class WheelOffortune extends HTMLElement implements CustomElement {
 	#animation?: Animation;
 	#prevEndDeg = 0;
+	#audioCtx?: AudioContext;
+
+	#playTick(progress: number) {
+		if (!window.AudioContext) {
+			return;
+		}
+
+		this.#audioCtx ??= new window.AudioContext();
+
+		if (this.#audioCtx.state === 'suspended') {
+			void this.#audioCtx.resume();
+		}
+
+		const oscillator = this.#audioCtx.createOscillator();
+		const gainNode = this.#audioCtx.createGain();
+
+		const steps = [
+			{ frequency: 880, volume: 0.2 },
+			{ frequency: 830.61, volume: 0.18 },
+			{ frequency: 783.99, volume: 0.16 },
+			{ frequency: 739.99, volume: 0.14 },
+			{ frequency: 698.46, volume: 0.12 },
+			{ frequency: 659.25, volume: 0.1 },
+			{ frequency: 622.25, volume: 0.06 },
+			{ frequency: 554.37, volume: 0.04 },
+			{ frequency: 523.25, volume: 0.02 },
+			{ frequency: 493.88, volume: 0.005 },
+			{ frequency: 466.16, volume: 0.001 },
+			{ frequency: 440, volume: 0.001 }
+		];
+
+		const stepIndex = Math.min(progress, steps.length - 1);
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const { frequency, volume } = steps[stepIndex]!;
+		const duration = 0.1;
+
+		oscillator.type = 'sine';
+		oscillator.frequency.setValueAtTime(frequency, this.#audioCtx.currentTime);
+		oscillator.frequency.exponentialRampToValueAtTime(40, this.#audioCtx.currentTime + duration);
+
+		gainNode.gain.setValueAtTime(volume, this.#audioCtx.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.001, this.#audioCtx.currentTime + duration);
+
+		oscillator.connect(gainNode);
+		gainNode.connect(this.#audioCtx.destination);
+
+		oscillator.start();
+		oscillator.stop(this.#audioCtx.currentTime + duration);
+	}
 
 	get items() {
 		const itemsString = this.getAttribute('items') ?? '';
@@ -143,6 +192,31 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 		this.#animation.play();
 		spinnerAnim.play();
+
+		let lastSegmentIndex = -1;
+
+		const checkTick = () => {
+			if (!this.#animation || this.#animation.playState === 'finished') {
+				return;
+			}
+
+			const currentTime = (this.#animation.currentTime as number) || 0;
+			const progress = currentTime / animationDuration;
+			const currentRotation = this.#prevEndDeg + (randomDeg * progress);
+			const currentWinningAngle = 360 - (currentRotation % 360);
+			const currentSegmentIndex = Math.floor(currentWinningAngle / segmentAngle);
+
+			if (currentSegmentIndex !== lastSegmentIndex) {
+				const stepCount = 12;
+				const integerProgress = Math.floor(progress * stepCount);
+				this.#playTick(integerProgress);
+				lastSegmentIndex = currentSegmentIndex;
+			}
+
+			requestAnimationFrame(checkTick);
+		};
+
+		requestAnimationFrame(checkTick);
 
 		await this.#animation.finished;
 		spinnerAnim.cancel();
