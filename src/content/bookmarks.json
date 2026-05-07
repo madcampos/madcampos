@@ -676,6 +676,12 @@
 					"title": "How The Heck Does Shazam Work?",
 					"description": "A techincal explanation of how music identification works.",
 					"type": "article"
+				},
+				{
+					"url": "https://clig.dev/",
+					"title": "Command Line Interface Guidelines",
+					"description": "Set of guidelines for designing CLI tools.",
+					"type": "guidelines"
 				}
 			]
 		},
@@ -896,7 +902,13 @@
 				{
 					"url": "https://blog.happyfellow.dev/simulacrum-of-knowledge-work/",
 					"title": "Simulacrum of Knowledge Work",
-					"description": "the incentives for LLMs are not if the output is correct, but if it _looks_ correct.",
+					"description": "The incentives for LLMs are not if the output is correct, but if it _looks_ correct.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.b-list.org/weblog/2026/apr/09/llms/",
+					"title": "Let’s talk about LLMs",
+					"description": "A collection of rebutals to the most common arguments for LLM adoption.",
 					"type": "article"
 				}
 			]
