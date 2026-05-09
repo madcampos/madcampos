@@ -6,6 +6,12 @@
 			"description": "Content related to accessibility, specially web accessibility and ARIA.",
 			"links": [
 				{
+					"url": "https://www.inklusivo.nl/accessibility-fundamentals/",
+					"title": "Accessibility fundamentals",
+					"description": "Introductory article about accessibility.",
+					"type": "article"
+				},
+				{
 					"url": "https://www.w3.org/WAI/ARIA/apg/patterns/",
 					"title": "ARIA Authoring Practices - Patterns",
 					"description": "A list of patterns to follow for complex UI interactions like tabs. It describes expected interactions but does not prescribe a specific tool to use.",
@@ -922,6 +928,12 @@
 					"title": "What Does It Mean to \"Write Like You Talk\"?",
 					"description": "An article on writing and analysis of what it means to \"write like you talk\".",
 					"type": "article"
+				},
+				{
+					"url": "https://chiptune.app/",
+					"title": "Chip Player JS",
+					"description": "\"Chiptune\" player. And my [favourite](https://chiptune.app/browse/Ultimate%20Mod%20Collection/chiptune/upbeat/) [collections](https://chiptune.app/browse/Nintendo%20SNES/Chrono%20Trigger/).",
+					"type": "website"
 				}
 			]
 		}
