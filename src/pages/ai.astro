@@ -1,5 +1,6 @@
 ---
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
@@ -39,15 +40,18 @@ import { encodeEmail } from '../utils/email';
 			<h2>AI <em>is</em> used for</h2>
 
 			<ul>
-				<li>Hero images for posts</li>
 				<li>Internal images on some posts</li>
-				<li>Audio/song version of the website license</li>
+			</ul>
+
+			<h2>AI <em>is partially</em> used for</h2>
+
+			<ul>
+				<li>Generating code for the website</li>
 			</ul>
 
 			<h2>AI <em>is not</em> used for</h2>
 
 			<ul>
-				<li>Generating or writing code for the website</li>
 				<li>Writing content for the website</li>
 				<li>Designs for the website</li>
 			</ul>
@@ -61,6 +65,8 @@ import { encodeEmail } from '../utils/email';
 		</main>
 
 		<footer>
+			<DecoratedLine />
+
 			<OldStyleButtons />
 			<Webrings />
 			<hit-counter></hit-counter>

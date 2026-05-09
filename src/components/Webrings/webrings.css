@@ -1,20 +1,27 @@
 @layer components {
 	m-webrings {
-		article {
-			h3 { text-align: center; }
-			blockquote {
-				margin: 0;
-				font-style: italic;
-				text-align: center;
-				color: var(--text-2);
-			}
+		dt {
+			text-align: center;
 
-			ul {
-				display: flex;
-				justify-content: center;
-				gap: var(--size-3);
-				padding: 0;
-				list-style: none;
+			&:not(:first-of-type) { margin-block-start: var(--size-5); }
+		}
+
+		ul {
+			display: flex;
+			justify-content: center;
+			gap: var(--size-3);
+			padding: 0;
+			list-style: none;
+
+			@media (max-width: 40rem) {
+				flex-direction: column;
+				align-items: center;
+
+				li a {
+					display: flex;
+
+					svg { order: -1; }
+				}
 			}
 		}
 	}

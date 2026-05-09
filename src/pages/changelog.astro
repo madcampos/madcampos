@@ -1,5 +1,6 @@
 ---
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
@@ -72,9 +73,9 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 			}
 		</main>
 
-		<hr />
-
 		<footer>
+			<DecoratedLine />
+
 			<OldStyleButtons />
 			<Webrings />
 			<hit-counter></hit-counter>

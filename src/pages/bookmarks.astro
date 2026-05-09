@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
@@ -109,6 +110,8 @@ const blogs = await listBlogroll();
 		</main>
 
 		<footer>
+			<DecoratedLine />
+
 			<OldStyleButtons />
 			<Webrings />
 			<hit-counter></hit-counter>

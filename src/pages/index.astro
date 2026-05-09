@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../public/assets/images/me.jpg';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
@@ -137,6 +138,8 @@ import { encodeEmail } from '../utils/email';
 		</main>
 
 		<footer>
+			<DecoratedLine />
+
 			<OldButtons />
 			<Webrings />
 			<hit-counter></hit-counter>

@@ -1,6 +1,7 @@
 ---
 import '../assets/pages/sitemap/sitemap.css';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
@@ -48,12 +49,14 @@ const metaPages: PageMetadata[] = [
 	{ title: 'Changelog', url: '/changelog/', description: 'List of changes for the website.' },
 	{ title: 'Colophon', url: '/colophon/', description: 'How the site is made and governing principles principles.' },
 	{ title: 'Feeds', url: '/feeds/', description: 'All website feeds in one place.' },
+	{ title: 'Guestbook', url: '/guestbook/', description: 'A guestbook where you can leave a message.' },
 	{ title: 'License & Disclaimer', url: '/license/', description: "Legal jargon for the license of this website's content." },
 	{ title: 'Offline Page', url: '/offline/', description: 'The page that shows when you go offline and the Service Worker is working properly.' },
 	{ title: 'Privacy Statement', url: '/privacy/', description: 'Statement about privacy and that this site does not use tracking.' },
 	{ title: 'Sitemap', url: '/sitemap/', description: 'This page.' },
 	{ title: 'TODO', url: '/todo/', description: 'The list of things to do on the website', wip: true },
-	{ title: '404', url: '/404/', description: 'The error page that you get when something is not found.' }
+	{ title: '404', url: '/404/', description: 'The error page that you get when something is not found.' },
+	{ title: '410', url: '/410/', description: 'You should ot encounter this error page. It is only here to apease the Google Inxeder with the correct error.' }
 ];
 
 const coolPages: PageMetadata[] = [
@@ -193,6 +196,8 @@ const blogPages = await listPostsByYearAndMonth();
 		</main>
 
 		<footer>
+			<DecoratedLine />
+
 			<OldStyleButtons />
 			<Webrings />
 			<hit-counter></hit-counter>

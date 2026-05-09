@@ -1,6 +1,7 @@
 ---
 import '../assets/pages/guestbook/guestbook.css';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import Logo from '../components/Logo/Logo.astro';
 import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
@@ -123,6 +124,8 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 		</main>
 
 		<footer>
+			<DecoratedLine />
+
 			<OldStyleButtons />
 			<Webrings />
 			<hit-counter></hit-counter>
