@@ -96,7 +96,9 @@ The exploration and side quests are important, but the argument of "writing the 
 
 I have to think about things that _will_ change, about thing that I don't know yet, and about things that, in hindsight, will not work together and need to be adapted.
 
-Even using LLMs, the cost of things grow as we move from idea, to prototype, to product. The speed of outputting code from LLMs, just exacerbate how quickly this cost compounds.
+From [Software engineering economics](https://openlibrary.org/books/OL4267874M/Software_engineering_economics), we learn that the core principle is: the cost of things grow as we move from idea, to prototype, to product.
+The speed of outputting code from LLMs, doesn't alleviate it, in fact it exacerbate how quickly this cost compounds.
+So deciding everything upfront instead of iterating over things as you go makes the project harder to evolve and bound to the constraints set up before the problems even arise.
 
 ## Conclusion
 
