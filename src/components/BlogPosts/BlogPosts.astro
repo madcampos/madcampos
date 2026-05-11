@@ -73,7 +73,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						image={post.data.image}
 						imageAlt={post.data.imageAlt ?? ''}
 					>
-						<h2 slot="title">
+						<h2 slot="title" itemprop="name">
 							<Fragment set:html={inlineMarkdownRender(post.data.title)} />
 						</h2>
 						<small slot="subtitle">

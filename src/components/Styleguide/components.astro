@@ -129,14 +129,14 @@ const post = (await listAllPosts())[0]!;
 				<meta itemprop="operatingSystem" content="https://schema.org/AllOperatingSystem" />
 				<meta itemprop="browserRequirements" content="https://schema.org/GenericWebPlatform" />
 				<meta itemprop="applicationCategory" content="BrowserApplication" />
-				<div itemprop="offers" itemscope itemtype="https://schema.org/Offer" hidden>
+				<template itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 					<meta itemprop="availability" content="https://schema.org/InStock" />
 					<meta itemprop="price" content="0" />
 					<meta itemprop="priceCurrency" content="USD" />
-				</div>
+				</template>
 				<meta itemprop="isAccessibleForFree" content="True" />
 			</Fragment>
-			<h2 slot="title">
+			<h2 slot="title" itemprop="name">
 				<Fragment set:html={inlineMarkdownRender(project.data.title)} />
 			</h2>
 

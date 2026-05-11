@@ -71,7 +71,8 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				url="/talks/"
 				title="Talks Page"
 			/>
-			<h1 itemprop="name">
+			<h1>
+				<meta itemprop="name" content={inlineMarkdownStrip(title)} />
 				{draft && <draft-tag>Draft</draft-tag>}
 				<Fragment set:html={inlineMarkdownRender(title)} />
 			</h1>
@@ -83,13 +84,11 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				Talk info
 			</h2>
 
-			<div itemprop="location" itemscope itemtype={isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'} hidden>
+			<ul itemprop="location" itemscope itemtype={isOnline ? 'https://schema.org/VirtualLocation' : 'https://schema.org/Place'}>
 				<meta itemprop={isOnline ? 'url' : 'address'} content={isOnline ? eventUrl : address} />
 				<meta itemprop="eventAttendanceMode" content={isOnline ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode'} />
 				<meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
-			</div>
 
-			<ul>
 				{
 					event && (
 						<li>

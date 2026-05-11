@@ -19,10 +19,10 @@ const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro
 ---
 <m-card class:list={[extraClass]}>
 	<article itemscope {itemtype}>
-		<div hidden>
+		<template>
 			<meta itemprop="url" content={url} />
 			<slot name="metadata"></slot>
-		</div>
+		</template>
 
 		{
 			image && (
@@ -66,7 +66,7 @@ const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro
 		<header>
 			<card-title>
 				{draft && <draft-tag>Draft</draft-tag>}
-				<a href={url ?? null} itemprop="name">
+				<a href={url ?? null}>
 					<slot name="title"></slot>
 				</a>
 			</card-title>
