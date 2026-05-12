@@ -73,12 +73,12 @@ const themes: SiteTheme[] = [
 	// {
 	// 	id: 'cork-board',
 	// 	name: 'Cork Board',
-	// 	description: 'A theme inspired in a skeumorphic corkboard.'
+	// 	description: 'A theme inspired in a skeuomorphic corkboard.'
 	// },
 	// {
 	// 	id: 'mecha',
 	// 	name: 'Mecha',
-	// 	description: 'A post apocaliptic mecha theme.'
+	// 	description: 'A post apocalyptic mecha theme.'
 	// },
 ];
 
