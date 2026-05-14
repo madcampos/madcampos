@@ -4,28 +4,52 @@ import styles from './img-lightbox.css?url';
 export class ImageLightbox extends HTMLElement implements CustomElement {
 	readonly #id = crypto.randomUUID();
 
-	#image?: HTMLImageElement;
+	#image?: HTMLImageElement | null;
 
-	#dialogElement?: HTMLDialogElement;
-	#inputElement?: HTMLInputElement;
-	#outputElement?: HTMLOutputElement;
-	#imgZoomElement?: HTMLElement;
-	#fullscreenElement?: HTMLElement;
-	#fullscreenIconElement?: SVGUseElement;
-	#fullscreenButton?: HTMLButtonElement;
-	#downloadButton?: HTMLButtonElement;
+	#dialogElement?: HTMLDialogElement | null;
+	#inputElement?: HTMLInputElement | null;
+	#outputElement?: HTMLOutputElement | null;
+	#imgZoomElement?: HTMLElement | null;
+	#fullscreenElement?: HTMLElement | null;
+	#fullscreenIconElement?: SVGUseElement | null;
+	#fullscreenButton?: HTMLButtonElement | null;
+	#downloadButton?: HTMLButtonElement | null;
 
-	constructor() {
-		super();
-
-		this.#image = this.querySelector<HTMLImageElement>('img') ?? undefined;
-
-		if (!this.#image) {
+	#updateZoom(newValue: string) {
+		if (!this.#inputElement || !this.#outputElement || !this.#imgZoomElement) {
 			return;
 		}
 
+		this.#inputElement.value = newValue;
+		this.#outputElement.value = `${this.#inputElement.value}%`;
+		this.#imgZoomElement.style.zoom = `${this.#inputElement.value}%`;
+	}
+
+	async #toggleFullscreen() {
+		if (document.fullscreenElement) {
+			await document.exitFullscreen();
+			this.#fullscreenIconElement?.setAttribute('href', '#img-lightbox-icon-enter-fullscreen');
+		} else {
+			await this.#fullscreenElement?.requestFullscreen();
+			this.#fullscreenIconElement?.setAttribute('href', '#img-lightbox-icon-exit-fullscreen');
+		}
+	}
+
+	#downloadImage() {
+		const link = document.createElement('a');
+
+		link.href = this.#image?.src ?? '';
+		link.download = '';
+
+		document.body.appendChild(link);
+		link.click();
+
+		link.remove();
+	}
+
+	render() {
 		const fullscreenButton = document.fullscreenEnabled
-			? `
+			? /* html */ `
 				<hr />
 
 				<button type="button" id="lightbox-fullscreen-button-${this.#id}">
@@ -39,7 +63,7 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 
 		this.insertAdjacentHTML(
 			'beforeend',
-			`
+			/* html */ `
 				<img-lightbox-controls>
 					<button type="button" popovertarget="lightbox-alt-dialog-${this.#id}">
 						<sr-only>View image alternative text</sr-only>
@@ -58,7 +82,7 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 							</button>
 						</header>
 						<dialog-content>
-							<p>${this.#image.alt}</p>
+							<p>${this.#image?.alt ?? ''}</p>
 						</dialog-content>
 					</dialog>
 
@@ -80,7 +104,7 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 								</button>
 							</header>
 							<dialog-content style="zoom: 100%;">
-								${this.#image.outerHTML}
+								${this.#image?.outerHTML ?? ''}
 							</dialog-content>
 							<footer>
 								<input-wrapper>
@@ -121,37 +145,6 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 			`
 		);
 	}
-	#updateZoom(newValue: string) {
-		if (!this.#inputElement || !this.#outputElement || !this.#imgZoomElement) {
-			return;
-		}
-
-		this.#inputElement.value = newValue;
-		this.#outputElement.value = `${this.#inputElement.value}%`;
-		this.#imgZoomElement.style.zoom = `${this.#inputElement.value}%`;
-	}
-
-	async #toggleFullscreen() {
-		if (document.fullscreenElement) {
-			await document.exitFullscreen();
-			this.#fullscreenIconElement?.setAttribute('href', '#img-lightbox-icon-enter-fullscreen');
-		} else {
-			await this.#fullscreenElement?.requestFullscreen();
-			this.#fullscreenIconElement?.setAttribute('href', '#img-lightbox-icon-exit-fullscreen');
-		}
-	}
-
-	#downloadImage() {
-		const link = document.createElement('a');
-
-		link.href = this.#image?.src ?? '';
-		link.download = '';
-
-		document.body.appendChild(link);
-		link.click();
-
-		link.remove();
-	}
 
 	async handleEvent(evt: Event) {
 		switch (evt.type) {
@@ -186,6 +179,8 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
+		this.#image = this.querySelector<HTMLImageElement>('img');
+
 		if (!this.#image) {
 			return;
 		}
@@ -195,14 +190,16 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
 		}
 
-		this.#inputElement = this.querySelector(`#lightbox-zoom-dialog-${this.#id} input[type="range"]`) as HTMLInputElement;
-		this.#outputElement = this.querySelector(`#lightbox-zoom-dialog-${this.#id} output`) as HTMLOutputElement;
-		this.#imgZoomElement = this.querySelector(`#lightbox-zoom-dialog-${this.#id} dialog-content`) as HTMLElement;
-		this.#fullscreenIconElement = this.querySelector(`#lightbox-fullscreen-button-${this.#id} use`) as SVGUseElement;
-		this.#fullscreenElement = this.querySelector(`#lightbox-zoom-dialog-${this.#id} form`) as HTMLElement;
-		this.#dialogElement = this.querySelector(`#lightbox-zoom-dialog-${this.#id}`) as HTMLDialogElement;
-		this.#fullscreenButton = this.querySelector(`#lightbox-fullscreen-button-${this.#id}`) as HTMLButtonElement;
-		this.#downloadButton = this.querySelector(`#lightbox-download-button-${this.#id}`) as HTMLButtonElement;
+		this.render();
+
+		this.#inputElement = this.querySelector<HTMLInputElement>(`#lightbox-zoom-dialog-${this.#id} input[type="range"]`);
+		this.#outputElement = this.querySelector<HTMLOutputElement>(`#lightbox-zoom-dialog-${this.#id} output`);
+		this.#imgZoomElement = this.querySelector<HTMLElement>(`#lightbox-zoom-dialog-${this.#id} dialog-content`);
+		this.#fullscreenIconElement = this.querySelector<SVGUseElement>(`#lightbox-fullscreen-button-${this.#id} use`);
+		this.#fullscreenElement = this.querySelector<HTMLElement>(`#lightbox-zoom-dialog-${this.#id} form`);
+		this.#dialogElement = this.querySelector<HTMLDialogElement>(`#lightbox-zoom-dialog-${this.#id}`);
+		this.#fullscreenButton = this.querySelector<HTMLButtonElement>(`#lightbox-fullscreen-button-${this.#id}`);
+		this.#downloadButton = this.querySelector<HTMLButtonElement>(`#lightbox-download-button-${this.#id}`);
 
 		this.#dialogElement?.addEventListener('toggle', this);
 		this.#inputElement?.addEventListener('input', this);

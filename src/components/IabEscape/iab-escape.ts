@@ -4,9 +4,20 @@ import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './iab-escape.css?url';
 
 export class IabEscape extends HTMLElement implements CustomElement {
-	constructor() {
-		super();
+	open() {
+		const url = window.location.href;
 
+		let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
+
+		if (navigator.userAgent.includes('Android')) {
+			link = `intent:${url}#Intent;end`;
+		}
+
+		this.querySelector<HTMLDialogElement>('a')?.setAttribute('href', link);
+		this.querySelector<HTMLDialogElement>('dialog')?.showModal();
+	}
+
+	render() {
 		this.innerHTML = `
 			<dialog>
 				<header>
@@ -28,24 +39,13 @@ export class IabEscape extends HTMLElement implements CustomElement {
 		`;
 	}
 
-	open() {
-		const url = window.location.href;
-
-		let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
-
-		if (navigator.userAgent.includes('Android')) {
-			link = `intent:${url}#Intent;end`;
-		}
-
-		this.querySelector<HTMLDialogElement>('a')?.setAttribute('href', link);
-		this.querySelector<HTMLDialogElement>('dialog')?.showModal();
-	}
-
 	async connectedCallback() {
 		const tagName = 'iab-escape';
 		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
 			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
 		}
+
+		this.render();
 
 		const { isInApp } = inAppSpy();
 		const isSFSVC = await sFSVCExperimental();

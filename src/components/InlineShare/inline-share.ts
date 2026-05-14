@@ -2,6 +2,8 @@ import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './inline-share.css?url';
 
 export class InlineShare extends HTMLElement implements CustomElement {
+	readonly #id = crypto.randomUUID();
+
 	readonly #MIN_WORDS_FOR_SHARING = 3;
 	readonly #MAX_WORDS_FOR_SHARING = 30;
 	readonly #TEXT_BOX_WIDTH = 700;
@@ -9,163 +11,37 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	readonly #MIN_WORDS_FOR_FRAGMENT_SPLIT = 45;
 	readonly #MAX_WORDS_FOR_FRAGMENT_INFIX = 15;
 
-	#id: string;
-
 	#segmenter = new Intl.Segmenter('en-US', { granularity: 'word' });
-	#overlay: HTMLElement;
-	#canvas: HTMLCanvasElement;
-	#canvasContext: CanvasRenderingContext2D;
-	#svgQuoteText: SVGTextElement;
-	#svgTitleText: SVGTextElement;
-	#svgSizeTestText: SVGTextElement;
-	#quoteSvg: SVGElement;
-
-	constructor() {
-		super();
-
-		this.#id = crypto.randomUUID();
-		this.hidden = true;
-
-		this.innerHTML = `
-			<share-overlay></share-overlay>
-			<button type="button" popovertarget="dialog-${this.#id}" popoveraction="open">
-				<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-					<use href="#share-icon-share" width="24" height="24" />
-				</svg>
-				<span>Share quote</span>
-			</button>
-			<dialog id="dialog-${this.#id}" popover>
-				<header>
-					<h2>Share quote</h2>
-					<button type="button" popovertarget="dialog-${this.#id}" popoveraction="close">
-						<sr-only>Close quote sharing</sr-only>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-close" width="24" height="24" />
-						</svg>
-					</button>
-				</header>
-				<dialog-content>
-					<canvas></canvas>
-					<svg
-						viewBox="0 0 1024 1024"
-						class="inline-share-quote-svg"
-						width="1024"
-						height="1024"
-					>
-						<defs>
-							<linearGradient id="bg-gradient-${this.#id}" x1="100%" x2="80%" y2="100%">
-								<stop offset="50%" stop-color="#0080ff" />
-								<stop offset="100%" stop-color="#ff8000" />
-							</linearGradient>
-						</defs>
-						<rect x="0" y="0" width="100%" height="100%" rx="20" fill="url(#bg-gradient-${this.#id})" />
-						<text fill="transparent" class="inline-share-test-text"></text>
-						<text
-							x="50%"
-							y="10%"
-							text-anchor="middle"
-							font-family="'Mecano', monospace"
-							font-size="45"
-							fill="white"
-							class="inline-share-quote-text"
-						></text>
-						<text
-							x="10%"
-							y="80%"
-							text-anchor="start"
-							font-family="'Mecano', monospace"
-							font-size="35"
-							font-style="italic"
-							fill="color-mix(in srgb, white, transparent 20%)"
-						>&mdash; Marco Campos</text>
-						<text
-							x="10%"
-							y="82%"
-							text-anchor="start"
-							font-family="'Mecano', monospace"
-							font-size="25"
-							font-style="italic"
-							fill="color-mix(in srgb, white, transparent 20%)"
-							class="inline-share-title-text"
-						></text>
-					</svg>
-				</dialog-content>
-				<footer>
-					<button type="button" class="inline-share-os">
-						<sr-only>Share Quote</sr-only>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-share" width="24" height="24" />
-						</svg>
-					</button>
-					<button type="button" class="inline-share-copy-link">
-						<sr-only>Copy Link to Quote</sr-only>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-copy" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
-							<use href="#share-icon-link" width="12" height="12" x="12" y="12" />
-						</svg>
-					</button>
-					<button type="button" class="inline-share-copy-image">
-						<sr-only>Copy Quote Image</sr-only>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-copy" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
-							<use href="#share-icon-image" width="12" height="12" x="12" y="12" />
-						</svg>
-					</button>
-					<button type="button" class="inline-share-email">
-						<sr-only>Share Link via Email</sr-only>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-email" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
-							<use href="#share-icon-link" width="12" height="12" x="12" y="12" />
-						</svg>
-					</button>
-					<button type="button" class="inline-share-download">
-						<sr-only>Download Quote Image</sr-only>
-						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
-							<use href="#share-icon-download" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
-							<use href="#share-icon-image" width="12" height="12" x="12" y="12" />
-						</svg>
-					</button>
-				</footer>
-			</dialog>
-		`;
-
-		/* eslint-disable @typescript-eslint/no-non-null-assertion */
-		this.#overlay = this.querySelector('share-overlay')!;
-		this.#canvas = this.querySelector('canvas')!;
-		this.#canvasContext = this.#canvas.getContext('2d')!;
-
-		this.#quoteSvg = this.querySelector('svg.inline-share-quote-svg')!;
-		this.#svgQuoteText = this.querySelector('text.inline-share-quote-text')!;
-		this.#svgTitleText = this.querySelector('text.inline-share-title-text')!;
-		this.#svgSizeTestText = this.querySelector('text.inline-share-test-text')!;
-		/* eslint-enable @typescript-eslint/no-non-null-assertion */
-
-		if (!('share' in navigator)) {
-			this.querySelector('button.inline-share-os')?.toggleAttribute('hidden', true);
-		}
-
-		if (!('fragmentDirective' in document)) {
-			this.querySelector('button.inline-share-copy')?.toggleAttribute('hidden', true);
-		}
-	}
 
 	#resizeCanvas(width: number, height: number) {
-		this.#canvas.width = width * window.devicePixelRatio;
-		this.#canvas.height = height * window.devicePixelRatio;
+		const canvas = this.querySelector('canvas');
+
+		if (!canvas) {
+			return;
+		}
+
+		canvas.width = width * window.devicePixelRatio;
+		canvas.height = height * window.devicePixelRatio;
 	}
 
 	#drawText(text: string, textElement: SVGTextElement) {
+		const svgSizeTestText = this.querySelector<SVGTextElement>('text.inline-share-test-text');
+
+		if (!svgSizeTestText) {
+			return;
+		}
+
 		const sanitizedText = text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 		const segments = Array.from(this.#segmenter.segment(sanitizedText));
 
-		this.#svgSizeTestText.textContent = '';
+		svgSizeTestText.textContent = '';
 		textElement.textContent = '';
 
-		this.#svgSizeTestText.setAttribute('text-anchor', textElement.getAttribute('text-anchor') ?? 'start');
-		this.#svgSizeTestText.setAttribute('font-family', textElement.getAttribute('font-family') ?? 'sans-serif');
-		this.#svgSizeTestText.setAttribute('font-size', textElement.getAttribute('font-size') ?? '45');
-		this.#svgSizeTestText.setAttribute('font-weight', textElement.getAttribute('font-weight') ?? 'normal');
-		this.#svgSizeTestText.setAttribute('font-style', textElement.getAttribute('font-style') ?? 'normal');
+		svgSizeTestText.setAttribute('text-anchor', textElement.getAttribute('text-anchor') ?? 'start');
+		svgSizeTestText.setAttribute('font-family', textElement.getAttribute('font-family') ?? 'sans-serif');
+		svgSizeTestText.setAttribute('font-size', textElement.getAttribute('font-size') ?? '45');
+		svgSizeTestText.setAttribute('font-weight', textElement.getAttribute('font-weight') ?? 'normal');
+		svgSizeTestText.setAttribute('font-style', textElement.getAttribute('font-style') ?? 'normal');
 
 		const lines: string[] = [];
 		let currentLine = '';
@@ -187,9 +63,9 @@ export class InlineShare extends HTMLElement implements CustomElement {
 				currentLine = '';
 				currentWidth = 0;
 			} else {
-				this.#svgSizeTestText.textContent = segment.segment;
+				svgSizeTestText.textContent = segment.segment;
 
-				const wordWidth = this.#svgSizeTestText.getComputedTextLength();
+				const wordWidth = svgSizeTestText.getComputedTextLength();
 
 				if (currentWidth + wordWidth >= this.#TEXT_BOX_WIDTH) {
 					lines.push(currentLine.trim());
@@ -213,18 +89,28 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	}
 
 	#renderToCanvas(text: string) {
-		this.#canvasContext.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
+		const canvas = this.querySelector('canvas');
+		const canvasContext = canvas?.getContext('2d');
+		const quoteSvg = this.querySelector<SVGElement>('svg.inline-share-quote-svg');
+		const svgQuoteText = this.querySelector<SVGTextElement>('text.inline-share-quote-text');
+		const svgTitleText = this.querySelector<SVGTextElement>('text.inline-share-title-text');
 
-		this.#drawText(text, this.#svgQuoteText);
-		this.#drawText(document.querySelector('h1')?.textContent ?? '', this.#svgTitleText);
+		if (!canvas || !canvasContext || !quoteSvg || !svgQuoteText || !svgTitleText) {
+			return;
+		}
+
+		canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
+		this.#drawText(text, svgQuoteText);
+		this.#drawText(document.querySelector('h1')?.textContent ?? '', svgTitleText);
 
 		const img = new Image();
 
 		img.onload = () => {
-			this.#canvasContext.drawImage(img, 0, 0, this.#canvas.width, this.#canvas.height);
+			canvasContext.drawImage(img, 0, 0, canvas.width, canvas.height);
 		};
 
-		const svgData = new XMLSerializer().serializeToString(this.#quoteSvg);
+		const svgData = new XMLSerializer().serializeToString(quoteSvg);
 		const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
 		img.src = URL.createObjectURL(svgBlob);
 	}
@@ -232,11 +118,12 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	#resizeOverlay(range: Range) {
 		const { top, left, width, height } = range.getBoundingClientRect();
 		const { scrollX, scrollY } = window;
+		const overlay = this.querySelector('share-overlay');
 
-		this.#overlay.style.setProperty('--overlay-top', `${top + scrollY}px`);
-		this.#overlay.style.setProperty('--overlay-left', `${left + scrollX}px`);
-		this.#overlay.style.setProperty('--overlay-width', `${width}px`);
-		this.#overlay.style.setProperty('--overlay-height', `${height}px`);
+		overlay?.style.setProperty('--overlay-top', `${top + scrollY}px`);
+		overlay?.style.setProperty('--overlay-left', `${left + scrollX}px`);
+		overlay?.style.setProperty('--overlay-width', `${width}px`);
+		overlay?.style.setProperty('--overlay-height', `${height}px`);
 	}
 
 	// eslint-disable-next-line complexity
@@ -291,8 +178,15 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			const selection = document.getSelection();
 			const range = selection?.getRangeAt(0);
 
-			this.#canvasContext.imageSmoothingEnabled = true;
-			this.#canvasContext.imageSmoothingQuality = 'high';
+			const canvas = this.querySelector('canvas');
+			const canvasContext = canvas?.getContext('2d');
+
+			if (!canvas || !canvasContext) {
+				return;
+			}
+
+			canvasContext.imageSmoothingEnabled = true;
+			canvasContext.imageSmoothingQuality = 'high';
 
 			this.#resizeCanvas(1024, 1024);
 
@@ -302,7 +196,14 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 	async #getCanvasBlob(mimeType = 'image/png') {
 		return new Promise<Blob>((resolve, reject) => {
-			this.#canvas.toBlob(
+			const canvas = this.querySelector('canvas');
+
+			if (!canvas) {
+				reject(new Error("Can't find canvas element"));
+				return;
+			}
+
+			canvas.toBlob(
 				(blob) => {
 					if (!blob) {
 						reject(new Error('Unable to create blob from canvas'));
@@ -429,6 +330,111 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		}
 	}
 
+	render() {
+		this.innerHTML = /* html */ `
+			<share-overlay></share-overlay>
+			<button type="button" popovertarget="dialog-${this.#id}" popoveraction="open">
+				<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+					<use href="#share-icon-share" width="24" height="24" />
+				</svg>
+				<span>Share quote</span>
+			</button>
+			<dialog id="dialog-${this.#id}" popover>
+				<header>
+					<h2>Share quote</h2>
+					<button type="button" popovertarget="dialog-${this.#id}" popoveraction="close">
+						<sr-only>Close quote sharing</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-close" width="24" height="24" />
+						</svg>
+					</button>
+				</header>
+				<dialog-content>
+					<canvas></canvas>
+					<svg
+						viewBox="0 0 1024 1024"
+						class="inline-share-quote-svg"
+						width="1024"
+						height="1024"
+					>
+						<defs>
+							<linearGradient id="bg-gradient-${this.#id}" x1="100%" x2="80%" y2="100%">
+								<stop offset="50%" stop-color="#0080ff" />
+								<stop offset="100%" stop-color="#ff8000" />
+							</linearGradient>
+						</defs>
+						<rect x="0" y="0" width="100%" height="100%" rx="20" fill="url(#bg-gradient-${this.#id})" />
+						<text fill="transparent" class="inline-share-test-text"></text>
+						<text
+							x="50%"
+							y="10%"
+							text-anchor="middle"
+							font-family="'Mecano', monospace"
+							font-size="45"
+							fill="white"
+							class="inline-share-quote-text"
+						></text>
+						<text
+							x="10%"
+							y="80%"
+							text-anchor="start"
+							font-family="'Mecano', monospace"
+							font-size="35"
+							font-style="italic"
+							fill="color-mix(in srgb, white, transparent 20%)"
+						>&mdash; Marco Campos</text>
+						<text
+							x="10%"
+							y="82%"
+							text-anchor="start"
+							font-family="'Mecano', monospace"
+							font-size="25"
+							font-style="italic"
+							fill="color-mix(in srgb, white, transparent 20%)"
+							class="inline-share-title-text"
+						></text>
+					</svg>
+				</dialog-content>
+				<footer>
+					<button type="button" class="inline-share-os">
+						<sr-only>Share Quote</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-share" width="24" height="24" />
+						</svg>
+					</button>
+					<button type="button" class="inline-share-copy-link">
+						<sr-only>Copy Link to Quote</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-copy" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-link" width="12" height="12" x="12" y="12" />
+						</svg>
+					</button>
+					<button type="button" class="inline-share-copy-image">
+						<sr-only>Copy Quote Image</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-copy" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-image" width="12" height="12" x="12" y="12" />
+						</svg>
+					</button>
+					<button type="button" class="inline-share-email">
+						<sr-only>Share Link via Email</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-email" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-link" width="12" height="12" x="12" y="12" />
+						</svg>
+					</button>
+					<button type="button" class="inline-share-download">
+						<sr-only>Download Quote Image</sr-only>
+						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
+							<use href="#share-icon-download" width="24" height="24" mask="url(#icon-with-subicon-mask)" />
+							<use href="#share-icon-image" width="12" height="12" x="12" y="12" />
+						</svg>
+					</button>
+				</footer>
+			</dialog>
+		`;
+	}
+
 	handleEvent(evt: Event) {
 		if (evt.type === 'selectionchange') {
 			this.#handleSelectionChange();
@@ -449,6 +455,18 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		const tagName = 'inline-share';
 		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
 			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
+		}
+
+		this.hidden = true;
+
+		this.render();
+
+		if (!('share' in navigator)) {
+			this.querySelector('button.inline-share-os')?.toggleAttribute('hidden', true);
+		}
+
+		if (!('fragmentDirective' in document)) {
+			this.querySelector('button.inline-share-copy')?.toggleAttribute('hidden', true);
 		}
 
 		document.addEventListener('selectionchange', this);

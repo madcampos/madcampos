@@ -6,9 +6,20 @@ export class ShareOptions extends HTMLElement implements CustomElement {
 	readonly #title = document.querySelector<HTMLElement>('h1')?.innerText ?? '';
 	readonly #description = document.querySelector<HTMLElement>('meta[name="description"]')?.getAttribute('content') ?? 'Check out this page!';
 
-	constructor() {
-		super();
+	#smsShare() {
+		const text = `${this.#title}\n\n${this.#description}\n${this.#url}`;
 
+		window.open(`sms://;?&body=${encodeURIComponent(text)}`);
+	}
+
+	#emailShare() {
+		const subject = encodeURIComponent(this.#title);
+		const body = encodeURIComponent(`${this.#description}\n${this.#url}`);
+
+		window.open(`mailto:?subject=${subject}&body=${body}`);
+	}
+
+	render() {
 		this.innerHTML = `
 			<sr-only>Share Options</sr-only>
 
@@ -47,19 +58,6 @@ export class ShareOptions extends HTMLElement implements CustomElement {
 		if (!('share' in navigator)) {
 			this.querySelector('button[data-share="os"]-link')?.toggleAttribute('hidden', true);
 		}
-	}
-
-	#smsShare() {
-		const text = `${this.#title}\n\n${this.#description}\n${this.#url}`;
-
-		window.open(`sms://;?&body=${encodeURIComponent(text)}`);
-	}
-
-	#emailShare() {
-		const subject = encodeURIComponent(this.#title);
-		const body = encodeURIComponent(`${this.#description}\n${this.#url}`);
-
-		window.open(`mailto:?subject=${subject}&body=${body}`);
 	}
 
 	async handleEvent(evt: Event) {
@@ -102,6 +100,8 @@ export class ShareOptions extends HTMLElement implements CustomElement {
 		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
 			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
 		}
+
+		this.render();
 
 		this.querySelector('[data-share="os"]')?.addEventListener('click', this);
 		this.querySelector('[data-share="sms"]')?.addEventListener('click', this);

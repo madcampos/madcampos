@@ -7,7 +7,7 @@ interface SectionUtterance {
 }
 
 export class ReadArticle extends HTMLElement implements CustomElement {
-	#id = crypto.randomUUID();
+	readonly #id = crypto.randomUUID();
 
 	#sections: SectionUtterance[] = [];
 	#highlight = new Highlight();
