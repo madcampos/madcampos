@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 		import('../../../components/Codepen/codepen.ts'),
 		import('../../../components/ImageLightbox/image-lightbox.ts'),
 		import('../../../components/InlineShare/inline-share.ts'),
-		import('../../../components/TableSorting/table-sorting.ts'),
-		import('../../../components/ShareOptions/share-options.ts'),
-		import('../../../components/Youtube/youtube.ts'),
 		import('../../../components/ReadArticle/read-article.ts'),
-		import('../../../components/RelativeTime/relative-time.ts')
+		import('../../../components/RelativeTime/relative-time.ts'),
+		import('../../../components/ShareOptions/share-options.ts'),
+		import('../../../components/TableSorting/table-sorting.ts'),
+		import('../../../components/WheelOfFortune/wheel-of-fortune.ts'),
+		import('../../../components/Youtube/youtube.ts')
 	]);
 });
