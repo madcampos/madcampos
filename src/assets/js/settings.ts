@@ -5,6 +5,7 @@ export type FontSizeSetting = 'large' | 'medium' | 'small' | 'x-large' | 'x-smal
 export type LineHeightSetting = 'medium' | 'tight' | 'wide' | 'wider';
 export type LetterSpacingSetting = 'medium' | 'tight' | 'tighter' | 'wide' | 'wider';
 export type BorderWidthSetting = 'medium' | 'none' | 'thick' | 'thicker' | 'thin';
+export type WheelOfFortuneDisplaySetting = 'list' | 'wheel';
 
 export class SiteSettings {
 	static AVAILABLE_SETTINGS = [
@@ -25,7 +26,8 @@ export class SiteSettings {
 		'borderWidth',
 		'readingVoice',
 		'readingSpeed',
-		'wheelOfFortuneAnimation'
+		'wheelOfFortuneAnimation',
+		'wheelOfFortuneDisplay'
 	] as const;
 	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape', 'pwaBanner', 'updateUrl'] as const;
 	static PERSISTENT_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['theme'] as const;
@@ -378,6 +380,15 @@ export class SiteSettings {
 	static set wheelOfFortuneAnimation(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('wheelOfFortuneAnimation', value);
 		SiteSettings.#persistSetting('wheelOfFortuneAnimation', value);
+	}
+
+	static get wheelOfFortuneDisplay(): WheelOfFortuneDisplaySetting {
+		return SiteSettings.#getSetting<WheelOfFortuneDisplaySetting>('wheelOfFortuneDisplay') ?? 'wheel';
+	}
+
+	static set wheelOfFortuneDisplay(value: WheelOfFortuneDisplaySetting | undefined) {
+		SiteSettings.#updateSetting('wheelOfFortuneDisplay', value);
+		SiteSettings.#persistSetting('wheelOfFortuneDisplay', value);
 	}
 }
 

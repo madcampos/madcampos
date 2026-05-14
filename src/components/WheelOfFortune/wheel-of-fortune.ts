@@ -1,9 +1,7 @@
 /* eslint-disable id-length, @typescript-eslint/no-magic-numbers */
 
-import { SiteSettings } from '../../assets/js/settings.ts';
+import { type WheelOfFortuneDisplaySetting, SiteSettings } from '../../assets/js/settings.ts';
 import styles from './wheel-of-fortune.css?url';
-
-type DisplayMode = 'list' | 'wheel';
 
 export class WheelOffortune extends HTMLElement implements CustomElement {
 	readonly #id = crypto.randomUUID();
@@ -12,7 +10,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 	#prevEndDeg = 0;
 	#audioCtx?: AudioContext;
 
-	#playWheelTick(progress: number) {
+	async #playClick(progress: number) {
 		if (!window.AudioContext) {
 			return;
 		}
@@ -20,44 +18,69 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		this.#audioCtx ??= new window.AudioContext();
 
 		if (this.#audioCtx.state === 'suspended') {
-			void this.#audioCtx.resume();
+			await this.#audioCtx.resume();
+		}
+
+		const gainNode = this.#audioCtx.createGain();
+
+		const baseFrequency = 200 - (100 * progress);
+		const frequencies = [baseFrequency, baseFrequency * 1.25, baseFrequency * 1.5];
+		const volume = 0.1 * (1 - progress);
+		const duration = 0.05 + (0.15 * progress);
+
+		gainNode.gain.setValueAtTime(volume, this.#audioCtx.currentTime);
+		gainNode.gain.linearRampToValueAtTime(0, this.#audioCtx.currentTime + duration);
+		gainNode.connect(this.#audioCtx.destination);
+
+		for (const freq of frequencies) {
+			const oscillator = this.#audioCtx.createOscillator();
+			oscillator.type = 'sawtooth';
+			oscillator.frequency.setValueAtTime(freq, this.#audioCtx.currentTime);
+			oscillator.frequency.exponentialRampToValueAtTime(40, this.#audioCtx.currentTime + duration);
+			oscillator.connect(gainNode);
+			oscillator.start();
+			oscillator.stop(this.#audioCtx.currentTime + duration);
+		}
+	}
+
+	async #playDing(frequency: number, delay: number) {
+		if (!window.AudioContext) {
+			return;
+		}
+
+		this.#audioCtx ??= new window.AudioContext();
+
+		if (this.#audioCtx.state === 'suspended') {
+			await this.#audioCtx.resume();
 		}
 
 		const oscillator = this.#audioCtx.createOscillator();
 		const gainNode = this.#audioCtx.createGain();
 
-		const steps = [
-			{ frequency: 880, volume: 0.2 },
-			{ frequency: 830.61, volume: 0.18 },
-			{ frequency: 783.99, volume: 0.16 },
-			{ frequency: 739.99, volume: 0.14 },
-			{ frequency: 698.46, volume: 0.12 },
-			{ frequency: 659.25, volume: 0.1 },
-			{ frequency: 622.25, volume: 0.06 },
-			{ frequency: 554.37, volume: 0.04 },
-			{ frequency: 523.25, volume: 0.02 },
-			{ frequency: 493.88, volume: 0.005 },
-			{ frequency: 466.16, volume: 0.001 },
-			{ frequency: 440, volume: 0.001 }
-		];
-
-		const stepIndex = Math.min(progress, steps.length - 1);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const { frequency, volume } = steps[stepIndex]!;
-		const duration = 0.1;
+		const startTime = this.#audioCtx.currentTime + delay;
+		const duration = 0.5;
 
 		oscillator.type = 'sine';
-		oscillator.frequency.setValueAtTime(frequency, this.#audioCtx.currentTime);
-		oscillator.frequency.exponentialRampToValueAtTime(40, this.#audioCtx.currentTime + duration);
+		oscillator.frequency.setValueAtTime(frequency, startTime);
 
-		gainNode.gain.setValueAtTime(volume, this.#audioCtx.currentTime);
-		gainNode.gain.exponentialRampToValueAtTime(0.001, this.#audioCtx.currentTime + duration);
+		gainNode.gain.setValueAtTime(0, startTime);
+		gainNode.gain.linearRampToValueAtTime(0.2, startTime + 0.05);
+		gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
 
 		oscillator.connect(gainNode);
 		gainNode.connect(this.#audioCtx.destination);
 
-		oscillator.start();
-		oscillator.stop(this.#audioCtx.currentTime + duration);
+		oscillator.start(startTime);
+		oscillator.stop(startTime + duration);
+	}
+
+	async #playWinningSound() {
+		// INFO: A5 -> B5 -> D6 -> E6 -> G6
+		await this.#playDing(880, 0);
+		await this.#playDing(987.77, 0.2);
+		await this.#playDing(1174.66, 0.4);
+		await this.#playDing(1318.51, 0.6);
+		await this.#playDing(1567.98, 0.8);
 	}
 
 	get items() {
@@ -153,7 +176,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		let animationDuration = 4000;
 
 		if (SiteSettings.wheelOfFortuneAnimation === 'disabled') {
-			animationDuration = 1;
+			animationDuration = 0;
 		}
 
 		// #region Spin animations
@@ -208,9 +231,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 			const currentSegmentIndex = Math.floor(currentWinningAngle / segmentAngle);
 
 			if (currentSegmentIndex !== lastSegmentIndex) {
-				const stepCount = 12;
-				const integerProgress = Math.floor(progress * stepCount);
-				this.#playWheelTick(integerProgress);
+				void this.#playClick(progress);
 				lastSegmentIndex = currentSegmentIndex;
 			}
 
@@ -229,6 +250,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 		items[winningIndex]?.setAttribute('aria-current', 'true');
 		this.#showResults(items[winningIndex]?.textContent);
+		await this.#playWinningSound();
 
 		this.#prevEndDeg = newEndDeg;
 	}
@@ -275,18 +297,22 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 				this.#animation.play();
 
+				void this.#playClick(i / totalSpins);
+
 				await this.#animation.finished;
 			}
 		}
 
 		items[winningIndex]?.setAttribute('aria-current', 'true');
 		this.#showResults(items[winningIndex]?.textContent);
+		await this.#playWinningSound();
 	}
 
-	#toggleDisplayMode(displayMode: DisplayMode) {
+	#toggleDisplayMode(displayMode: WheelOfFortuneDisplaySetting) {
 		this.setAttribute('display', displayMode);
 		this.#resetState();
 		requestAnimationFrame(() => this.#animation?.cancel());
+		SiteSettings.wheelOfFortuneDisplay = displayMode;
 	}
 
 	#handleToggleAnimations() {
@@ -388,7 +414,8 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 		this.render();
 
-		this.#toggleDisplayMode(this.getAttribute('display') as DisplayMode ?? 'wheel');
+		const attributeDisplay = this.getAttribute('display') as WheelOfFortuneDisplaySetting | null;
+		this.#toggleDisplayMode(attributeDisplay ?? SiteSettings.wheelOfFortuneDisplay);
 
 		this.addEventListener('click', this);
 		this.addEventListener('input', this);
