@@ -1,15 +1,18 @@
 /* eslint-disable id-length, @typescript-eslint/no-magic-numbers */
 
+import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './wheel-of-fortune.css?url';
 
 type DisplayMode = 'list' | 'wheel';
 
 export class WheelOffortune extends HTMLElement implements CustomElement {
+	readonly #id = crypto.randomUUID();
+
 	#animation?: Animation;
 	#prevEndDeg = 0;
 	#audioCtx?: AudioContext;
 
-	#playTick(progress: number) {
+	#playWheelTick(progress: number) {
 		if (!window.AudioContext) {
 			return;
 		}
@@ -122,11 +125,6 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 	}
 
 	#resetState() {
-		if (this.#animation) {
-			// TODO: cancel child animations
-			this.#animation.cancel();
-		}
-
 		this.#prevEndDeg = 0;
 		this.querySelector('.wheel')?.removeAttribute('style');
 
@@ -136,6 +134,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 	async #spinWheel() {
 		this.#resetState();
+		this.#animation?.cancel();
 
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const wheel = this.querySelector<SVGGElement>('.wheel')!;
@@ -153,7 +152,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		const newEndDeg = this.#prevEndDeg + randomDeg;
 		let animationDuration = 4000;
 
-		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		if (SiteSettings.wheelOfFortuneAnimation === 'disabled') {
 			animationDuration = 1;
 		}
 
@@ -188,6 +187,8 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 			),
 			document.timeline
 		);
+
+		this.#animation.addEventListener('cancel', () => spinnerAnim.cancel(), { once: true });
 		// #endregion
 
 		this.#animation.play();
@@ -209,7 +210,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 			if (currentSegmentIndex !== lastSegmentIndex) {
 				const stepCount = 12;
 				const integerProgress = Math.floor(progress * stepCount);
-				this.#playTick(integerProgress);
+				this.#playWheelTick(integerProgress);
 				lastSegmentIndex = currentSegmentIndex;
 			}
 
@@ -234,6 +235,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 	async #spinList() {
 		this.#resetState();
+		this.#animation?.cancel();
 
 		const items = this.querySelectorAll('li');
 
@@ -246,7 +248,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		const initialSpins = items.length * 5;
 		const totalSpins = initialSpins + winningIndex;
 
-		if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		if (SiteSettings.wheelOfFortuneAnimation === 'enabled') {
 			for (let i = 0; i <= totalSpins; i++) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				const item = items[i % items.length]!;
@@ -267,6 +269,10 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 					document.timeline
 				);
 
+				this.#animation.addEventListener('cancel', () => {
+					i = Infinity;
+				}, { once: true });
+
 				this.#animation.play();
 
 				await this.#animation.finished;
@@ -279,6 +285,18 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 	#toggleDisplayMode(displayMode: DisplayMode) {
 		this.setAttribute('display', displayMode);
+		this.#resetState();
+		requestAnimationFrame(() => this.#animation?.cancel());
+	}
+
+	#handleToggleAnimations() {
+		const checkbox = this.querySelector<HTMLInputElement>('input[type="checkbox"]');
+
+		if (!checkbox) {
+			return;
+		}
+
+		SiteSettings.wheelOfFortuneAnimation = checkbox.checked ? 'disabled' : 'enabled';
 	}
 
 	render() {
@@ -317,33 +335,44 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 					<button type="button" command="--show-list">Show list instead</button>
 					<button type="button" command="--show-wheel">Show wheel instead</button>
 				</wheel-display-options>
+				<input-wrapper>
+					<input
+						type="checkbox"
+						${SiteSettings.wheelOfFortuneAnimation === 'enabled' ? '' : 'checked'}
+						name="wheel-animation"
+						id="wheel-animation-${this.#id}"
+					/>
+					<label for="wheel-animation-${this.#id}">Disable wheel/list animation</label>
+				</input-wrapper>
 			</fieldset>
 		`;
 	}
 
 	async handleEvent(event: Event) {
-		if (event.type !== 'click') {
-			return;
-		}
-
-		if (!(event.target instanceof HTMLButtonElement)) {
-			return;
-		}
-
-		switch (event.target.getAttribute('command') ?? '') {
-			case '--spin-wheel':
-				await this.#spinWheel();
-				break;
-			case '--spin-list':
-				await this.#spinList();
-				break;
-			case '--show-list':
-				this.#toggleDisplayMode('list');
-				break;
-			case '--show-wheel':
-				this.#toggleDisplayMode('wheel');
+		switch (event.type) {
+			case 'input':
+			case 'change':
+				this.#handleToggleAnimations();
 				break;
 			default:
+		}
+
+		if (event.type === 'click' && event.target instanceof HTMLButtonElement) {
+			switch (event.target.getAttribute('command') ?? '') {
+				case '--spin-wheel':
+					await this.#spinWheel();
+					break;
+				case '--spin-list':
+					await this.#spinList();
+					break;
+				case '--show-list':
+					this.#toggleDisplayMode('list');
+					break;
+				case '--show-wheel':
+					this.#toggleDisplayMode('wheel');
+					break;
+				default:
+			}
 		}
 	}
 
@@ -362,13 +391,19 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		this.#toggleDisplayMode(this.getAttribute('display') as DisplayMode ?? 'wheel');
 
 		this.addEventListener('click', this);
+		this.addEventListener('input', this);
+		this.addEventListener('change', this);
 	}
 
 	disconnectedCallback(): Promise<void> | void {
 		this.removeEventListener('click', this);
+		this.removeEventListener('input', this);
+		this.removeEventListener('change', this);
 	}
 }
 
-if (!customElements.get('wheel-of-fortune')) {
-	customElements.define('wheel-of-fortune', WheelOffortune);
+if (SiteSettings.js !== 'disabled') {
+	if (!customElements.get('wheel-of-fortune')) {
+		customElements.define('wheel-of-fortune', WheelOffortune);
+	}
 }

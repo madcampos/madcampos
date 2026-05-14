@@ -24,9 +24,11 @@ export class SiteSettings {
 		'hasSolidBorders',
 		'borderWidth',
 		'readingVoice',
-		'readingSpeed'
+		'readingSpeed',
+		'wheelOfFortuneAnimation'
 	] as const;
 	static VOLATILE_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['iabEscape', 'pwaBanner', 'updateUrl'] as const;
+	static PERSISTENT_SETTINGS: typeof SiteSettings.AVAILABLE_SETTINGS[number][] = ['theme'] as const;
 
 	static #searchParams?: URLSearchParams;
 
@@ -46,6 +48,10 @@ export class SiteSettings {
 
 		for (const setting of SiteSettings.AVAILABLE_SETTINGS) {
 			SiteSettings.#updateSetting(setting, SiteSettings[setting]?.toString());
+
+			if (this.PERSISTENT_SETTINGS.includes(setting)) {
+				SiteSettings.#persistSetting(setting, SiteSettings.#searchParams?.get(setting) ?? undefined);
+			}
 		}
 
 		this.#isCssNakedDay = this.#checkCssNakedDay();
@@ -68,15 +74,10 @@ export class SiteSettings {
 		if (value) {
 			document.documentElement.dataset[setting] = value;
 			SiteSettings.#searchParams?.set(setting, value);
-
-			if (!SiteSettings.VOLATILE_SETTINGS.includes(setting)) {
-				localStorage.setItem(setting, value);
-			}
 		} else {
 			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete document.documentElement.dataset[setting];
 			SiteSettings.#searchParams?.delete(setting);
-			localStorage.removeItem(setting);
 		}
 
 		const shouldUpdateUrl = (SiteSettings.debug ?? false) || (SiteSettings.updateUrl ?? false);
@@ -87,6 +88,18 @@ export class SiteSettings {
 
 			newUrl.search = SiteSettings.#searchParams?.toString() ?? '';
 			history.replaceState(null, '', newUrl);
+		}
+	}
+
+	static #persistSetting(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number], value: string | undefined) {
+		if (SiteSettings.VOLATILE_SETTINGS.includes(setting)) {
+			return;
+		}
+
+		if (value) {
+			localStorage.setItem(setting, value);
+		} else {
+			localStorage.removeItem(setting);
 		}
 	}
 
@@ -151,6 +164,7 @@ export class SiteSettings {
 
 	static set updateUrl(value: boolean | undefined) {
 		SiteSettings.#updateSetting('updateUrl', value ? 'true' : 'false');
+		SiteSettings.#persistSetting('updateUrl', value ? 'true' : 'false');
 	}
 
 	static get debug(): boolean {
@@ -159,6 +173,7 @@ export class SiteSettings {
 
 	static set debug(value: boolean | undefined) {
 		SiteSettings.#updateSetting('debug', value ? 'true' : 'false');
+		SiteSettings.#persistSetting('debug', value ? 'true' : 'false');
 	}
 
 	static get isCssNakedDay() {
@@ -185,6 +200,7 @@ export class SiteSettings {
 
 	static set css(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('css', value);
+		SiteSettings.#persistSetting('css', value);
 	}
 
 	static get isJsNakedDay() {
@@ -211,6 +227,7 @@ export class SiteSettings {
 
 	static set js(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('js', value);
+		SiteSettings.#persistSetting('js', value);
 	}
 
 	static get iabEscape(): boolean {
@@ -227,6 +244,7 @@ export class SiteSettings {
 
 	static set theme(value: ThemeSetting | undefined) {
 		SiteSettings.#updateSetting('theme', value);
+		SiteSettings.#persistSetting('theme', value);
 	}
 
 	static get font(): FontSetting {
@@ -235,6 +253,7 @@ export class SiteSettings {
 
 	static set font(value: FontSetting | undefined) {
 		SiteSettings.#updateSetting('font', value);
+		SiteSettings.#persistSetting('font', value);
 	}
 
 	static get fontSize(): FontSizeSetting {
@@ -243,6 +262,7 @@ export class SiteSettings {
 
 	static set fontSize(value: FontSizeSetting | undefined) {
 		SiteSettings.#updateSetting('fontSize', value);
+		SiteSettings.#persistSetting('fontSize', value);
 	}
 
 	static get letterSpacing(): LetterSpacingSetting {
@@ -251,6 +271,7 @@ export class SiteSettings {
 
 	static set letterSpacing(value: LetterSpacingSetting | undefined) {
 		SiteSettings.#updateSetting('letterSpacing', value);
+		SiteSettings.#persistSetting('letterSpacing', value);
 	}
 
 	static get lineHeight(): LineHeightSetting {
@@ -259,6 +280,7 @@ export class SiteSettings {
 
 	static set lineHeight(value: LineHeightSetting | undefined) {
 		SiteSettings.#updateSetting('lineHeight', value);
+		SiteSettings.#persistSetting('lineHeight', value);
 	}
 
 	static get pwaBanner(): boolean {
@@ -267,6 +289,7 @@ export class SiteSettings {
 
 	static set pwaBanner(value: boolean | undefined) {
 		SiteSettings.#updateSetting('pwaBanner', value ? 'true' : 'false');
+		SiteSettings.#persistSetting('pwaBanner', value ? 'true' : 'false');
 	}
 
 	static get logoContextMenu(): EnabledDisabledSetting {
@@ -275,6 +298,7 @@ export class SiteSettings {
 
 	static set logoContextMenu(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('logoContextMenu', value);
+		SiteSettings.#persistSetting('logoContextMenu', value);
 	}
 
 	static get isReducedMotion(): EnabledDisabledSetting {
@@ -284,11 +308,12 @@ export class SiteSettings {
 			return setting;
 		}
 
-		return 'disabled';
+		return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'enabled' : 'disabled';
 	}
 
 	static set isReducedMotion(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('isReducedMotion', value);
+		SiteSettings.#persistSetting('isReducedMotion', value);
 	}
 
 	static get hasSolidBorders(): EnabledDisabledSetting {
@@ -303,6 +328,7 @@ export class SiteSettings {
 
 	static set hasSolidBorders(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('hasSolidBorders', value);
+		SiteSettings.#persistSetting('hasSolidBorders', value);
 	}
 
 	static get borderWidth(): BorderWidthSetting {
@@ -317,6 +343,7 @@ export class SiteSettings {
 
 	static set borderWidth(value: BorderWidthSetting | undefined) {
 		SiteSettings.#updateSetting('borderWidth', value);
+		SiteSettings.#persistSetting('borderWidth', value);
 	}
 
 	static get readingVoice() {
@@ -325,6 +352,7 @@ export class SiteSettings {
 
 	static set readingVoice(value) {
 		SiteSettings.#updateSetting('readingVoice', value);
+		SiteSettings.#persistSetting('readingVoice', value);
 	}
 
 	static get readingSpeed(): number {
@@ -333,6 +361,23 @@ export class SiteSettings {
 
 	static set readingSpeed(value: number | undefined) {
 		SiteSettings.#updateSetting('readingSpeed', value !== undefined ? value.toString() : undefined);
+		SiteSettings.#persistSetting('readingSpeed', value !== undefined ? value.toString() : undefined);
+	}
+
+	static get wheelOfFortuneAnimation(): EnabledDisabledSetting {
+		const setting = SiteSettings.#getSetting<EnabledDisabledSetting>('wheelOfFortuneAnimation');
+
+		if (setting !== undefined) {
+			return setting;
+		}
+
+		// INFO: reduced motion and wheel animations are inverted
+		return SiteSettings.isReducedMotion === 'enabled' ? 'disabled' : 'enabled';
+	}
+
+	static set wheelOfFortuneAnimation(value: EnabledDisabledSetting | undefined) {
+		SiteSettings.#updateSetting('wheelOfFortuneAnimation', value);
+		SiteSettings.#persistSetting('wheelOfFortuneAnimation', value);
 	}
 }
 
