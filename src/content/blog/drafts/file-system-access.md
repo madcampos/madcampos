@@ -82,7 +82,70 @@ Now getting out of it is more interesting...
 
 ## File System _Access_ and Chrome
 
-<!-- TODO -->
+To read or write to the user's file system, outside of the browser sandbox, we do have the File System Access API. It is composed of the following methods on the `window` object:
+
+- [`showOpenfilePicker`](https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker) to get a file handle for reading, and potentially writing.
+- [`showSaveFilePicker`](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker) to get a file handle to write on.
+- [`showDirectoryPicker`](https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker) for get a directory handle for reading, and potentially writing.
+- [`DataTransferItem.getAsFileSystemHandle`](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/getAsFileSystemHandle) to integrate with drag and drop.
+
+All those are very easy to use and intuitive in what they do. And as with this entire API, if gives you a handle to the file or directory.
+With that you can do pretty much the same you can do on the OPFS.
+
+### You need permissions
+
+The caveat, and that is a big one, is that to access the file itself you need permissions, that is checked like so:
+
+```typescript
+const existingPermissions = await handle.queryPermission({ mode });
+const newPermissions = await handle.requestPermission({ mode });
+```
+
+The first method, `queryPermission`, checks the existing permissions you have for the handle, and the second one `requestPermission` prompts the user for the permission.
+
+You need to call this if the type of permission you need changes, for example, if you open a file for reading and now needs to write to that file.
+
+### You need permissions 2: Button Boogaloo
+
+The "problem" with the permissions API is that is requires [user activation](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/User_activation). It means the user has to click or type any key before you can ask for permissions.
+Security sometimes gets in the way of ease of use, this is one of the cases and we have to live with that.
+
+### Persisting access
+
+If all of that seems too much work when you can simply add a file input and the user opens it, that's because it is. For when you don't need persistent access and when you don't need to write a whole directory, that is.
+
+When you need to keep that handle and access it at a later time when the user visits your application, you can do so by simply saving the handle on IndexedDB.
+
+To make life less miserable I've used the wonderful [`idb`](https://github.com/jakearchibald/idb) library. It is just a thin wrapper over IndexedDB to handle most of the scaffolding for you.
+
+The reasons for persisting access are:
+
+- Once you have a handle persisted your application can reuse that handle.
+- Once you get permissions, the permissions stick so you don't need to re-ask for them.
+
+## Putting the access together
+
+Here is a high level sequence of what to do:
+
+1. Application loads
+2. If a handle is saved on IndexedDB
+   1. If permissions are wrong, show a "permission info" screen with a button to request the correct permissions
+3. If no handle is saved, show screen for selecting the files
+
+Pretty simple right?
+
+## Error handling
+
+One part I glossed over is that for all these operations, you need to handle errors.
+The most relevant are:
+
+- `TypeError`: if the file or directory name has invalid characters.
+- `NotAllowedError`: when you don't have permissions for that handle.
+- `NotFoundError`: If the entry the handle refers to does not exist.
+
+## The library
+
+As this is not the first time I dabbled with the File System APIs, I put together a library with some operations to make life easier.
 
 [^1]: So... IDB can be a pain to deal with, and working with that meant converting between formats from and to SQLite anyways. Using a library that allows to query and manipulate an SQLite database in the browser made it easier to work with.
 
