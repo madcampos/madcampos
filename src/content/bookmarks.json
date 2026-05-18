@@ -424,6 +424,12 @@
 					"title": "Frequent reauth doesn't make you more secure",
 					"description": "An interesting view on asking users to reauthenticate often.",
 					"type": "article"
+				},
+				{
+					"url": "https://badssl.com/",
+					"title": "Bad SSL",
+					"description": "Example links with bad SSL and the reasons for them being bad.",
+					"type": "reference"
 				}
 			]
 		},
@@ -915,6 +921,12 @@
 					"url": "https://www.b-list.org/weblog/2026/apr/09/llms/",
 					"title": "Let’s talk about LLMs",
 					"description": "A collection of rebutals to the most common arguments for LLM adoption.",
+					"type": "article"
+				},
+				{
+					"url": "https://ericwbailey.website/published/evolved-antennas-llm-generated-code-and-a-potential-antifuture/",
+					"title": "Evolved antennas, LLM-generated code, and a potential antifuture",
+					"description": "Argument in favour of the open web and against locking down platforms.",
 					"type": "article"
 				}
 			]
