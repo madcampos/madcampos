@@ -4,10 +4,10 @@ summary: How the HTML is structured for the "Back to Basics" project.
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
-  - back-to-basics
-  - FrontendDevelopment
-  - html
-  - web
+  - Back to Basics
+  - Frontend
+  - HTML
+  - Web Development
 ---
 
 First things first... As for this project there will not have any magic way to combine snippets of HTML into a full page and avoid repetition I would need to copy and paste a lot of code. Every HTML file is a full page, with all it needs to be ran by the browser. There is no magic templating engine or components here.

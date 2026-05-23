@@ -6,10 +6,10 @@ draft: true
 tags:
   - a11y
   - Accessibility
-  - coding
-  - html
-  - gaming
-  - diablo
+  - Coding
+  - HTML
+  - Gaming
+  - Diablo
 ---
 
 One of my favorite games is Diablo, I've played all entries on the franchise to the point where one of my core memories is: of me playing a werewolf druid and making way through the jungles of Act 3 on Diablo 2.

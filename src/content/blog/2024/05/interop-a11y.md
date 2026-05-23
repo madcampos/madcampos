@@ -4,9 +4,9 @@ summary: Quick note on Interop, the browser initiative for interoperability and 
 createdAt: 2024-05-29T00:09:34
 tags:
   - a11y
-  - FrontendDevelopment
-  - OpenWeb
-  - WebDevelopment
+  - Frontend
+  - Open Web
+  - Web Development
   - Interop
   - Accessibility
 image: ./assets/MAN_Atlante_fronte_1040572.jpg

@@ -3,11 +3,11 @@ title: On Automation and LLMs
 summary: A case study for how I use LLMs in my day to day work
 createdAt: 2026-04-15T10:58:30.642-04:00
 tags:
-  - ai
-  - llms
-  - automation
-  - WebDevelopment
-  - coding
+  - AI
+  - LLMs
+  - Automation
+  - Web Development
+  - Coding
 image: ./assets/PXL_20250723_161620684.RAW-02.ORIGINAL.jpg
 imageAlt: A photo of a Lego build. In the background, a waterfall on the left, and the arms of a mechanical apparatus on the right. On the foreground a minifig of an alien person, with an all black body with stars in it, they have a green head with a big smile and a flying saucer around the neck and enveloping the head. The minifig is holding a round tile with a battery symbol on it.
 imageRights: Photo from a Lego build from 2025

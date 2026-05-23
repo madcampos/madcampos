@@ -5,9 +5,9 @@ image: ./assets/one-ring.avif
 imageAlt: A screen capture of the One Ring from the Lord of the Rings movies. It is a golden ring with inscriptions glowing from it. On the background a stormy red sky with a dark tower and a volcano.
 createdAt: 2024-07-25T17:46:16
 tags:
-  - coding
-  - personal
-  - protip
+  - Coding
+  - Personal
+  - ProTip
 ---
 
 Let's talk about PowerShell...

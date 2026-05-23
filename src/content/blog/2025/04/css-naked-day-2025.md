@@ -6,8 +6,8 @@ imageAlt: A drawing of an old style ad, with a girl looking back at a dog, the d
 createdAt: 2025-04-07T23:22:57.310-04:00
 tags:
   - CSS
-  - BuildingInPublic
-  - design
+  - Building in Public
+  - Design
 ---
 
 So, April 9th is [CSS Naked Day](https://css-naked-day.org/), and I decided to join this year.

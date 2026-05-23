@@ -8,8 +8,8 @@ imageRights: "Photo by [Kyle Bushnell](https://unsplash.com/@kylebushnell?utm_so
 tags:
   - IndieWeb
   - HTML
-  - WebDevelopment
-  - OpenWeb
+  - Web Development
+  - Open Web
 relatedPosts:
   - metadata-for-the-masses
 ---

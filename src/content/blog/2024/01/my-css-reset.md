@@ -11,8 +11,8 @@ imageAlt: A photo of a blank canvas on an easel.
 imageRights: "Photo by [Justyn Warner](https://unsplash.com/@justynwarner?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/brown-wooden-table-with-white-wall-VH8w75u3LE0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 tags:
   - CSS
-  - html
-  - web
+  - HTML
+  - Web Development
 ---
 
 I was reading a newsletter the other day[^1] and an article caught my attention: [My CSS Resets](https://keithjgrant.com/posts/2024/01/my-css-resets/).

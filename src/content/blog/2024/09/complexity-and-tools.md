@@ -3,10 +3,10 @@ title: Complexity and tooling
 summary: A reflection on project complexity and modern tooling
 createdAt: 2024-09-12T23:43:58.381-04:00
 tags:
-  - WebDevelopment
-  - hot-take
-  - meta
-  - web
+  - Web Development
+  - Hot Take
+  - Meta
+  - Web Development
 ---
 
 It is interesting how cyclical the tech world is and some things seem to "slow cook" and then all of a sudden come to a "boil". Let me expand on that...

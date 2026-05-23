@@ -5,9 +5,9 @@ summary: Ramblings on the web as a platform and how to write defensive and acces
 draft: true
 tags:
   - a11y
-  - web
-  - html
-  - FrontendDevelopment
+  - Web Development
+  - HTML
+  - Frontend
 ---
 
 The web is accessible by default, we just screw it... over... and over... and over...

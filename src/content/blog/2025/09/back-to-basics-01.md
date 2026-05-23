@@ -4,12 +4,12 @@ summary: An introduction to the "back to basics" post series.
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
-  - back-to-basics
-  - FrontendDevelopment
-  - html
+  - Back to Basics
+  - Frontend
+  - HTML
   - CSS
   - JavaScript
-  - web
+  - Web Development
 ---
 
 I was invited to give a talk called "Battle of Frameworks", although I _use_ tools like react and angular for work, I am not personally _found_ of those tools. So I decided to build a demo for my part with pure vanilla, gluten-free, non GMO, vegan, organic, home grown HTML, CSS, and javascript.

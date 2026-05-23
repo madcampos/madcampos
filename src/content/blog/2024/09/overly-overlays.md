@@ -5,9 +5,9 @@ createdAt: 2024-09-13T18:57:15
 tags:
   - a11y
   - Accessibility
-  - WebDevelopment
-  - web
-  - rant
+  - Web Development
+  - Web Development
+  - Rant
 image: ./assets/naoki-suzuki-dX1cRBu2F8Y-unsplash.jpg
 imageAlt: A close shot of a cactus with a pair of stylish glasses on, the glasses have tiny beads on them representing googly eyes.
 imagerights: "Photo by [Naoki Suzuki](https://unsplash.com/@naopp?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-pair-of-red-glasses-sitting-on-top-of-a-cactus-dX1cRBu2F8Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)."

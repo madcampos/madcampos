@@ -4,10 +4,10 @@ summary: The content for the page headers for the "Back to Basics" project.
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
-  - back-to-basics
-  - FrontendDevelopment
-  - html
-  - web
+  - Back to Basics
+  - Frontend
+  - HTML
+  - Web Development
 ---
 
 Okay, so in the previous post the defined content for the header was basically a navigation menu and a hero image/video.

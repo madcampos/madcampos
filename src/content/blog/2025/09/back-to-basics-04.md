@@ -4,10 +4,10 @@ summary: The main content for the "Back to Basics" project.
 createdAt: 2025-09-02T19:13:29
 draft: true
 tags:
-  - back-to-basics
-  - FrontendDevelopment
-  - html
-  - web
+  - Back to Basics
+  - Frontend
+  - HTML
+  - Web Development
 ---
 
 Most of the main content for most pages is very boring HTML. Think your paragraphs, divs (yes, I use divs), and lists. Very boring...

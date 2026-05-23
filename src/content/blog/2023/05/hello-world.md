@@ -14,12 +14,12 @@ image: ./assets/landscape-on-the-lower-st-lawrence.jpg
 imageAlt: A watercolor, from an overlook point of view, of the lower St. Lawerence river, on the horizon a sunset sky meets with mountains, on the front of the painting small bushes open to the view of the river below.
 imageRights: "[Landscape on the Lower St. Lawrence](https://collections.rom.on.ca/objects/162409/landscape-on-the-lower-st-lawrence) from the Royal Ontario Museum collection."
 tags:
-  - BuildInTheOpen
-  - BuildingInPublic
-  - meta
-  - coding
-  - vite
-  - TS
+  - Building in the Open
+  - Building in Public
+  - Meta
+  - Coding
+  - Vite
+  - TypeScript
 relatedPosts:
   - blog-structure
   - going-astro

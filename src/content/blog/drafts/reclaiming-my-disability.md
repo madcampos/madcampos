@@ -5,8 +5,8 @@ createdAt: 2024-02-27T11:42:18.761-05:00
 draft: true
 tags:
   - a11y
-  - meta
-  - personal
+  - Meta
+  - Personal
 ---
 
 **⚠️ Trigger warning**: This post talks about disabilities, mental health and spoilers. If you are not comfortable with any of those topics, consider skipping this post.

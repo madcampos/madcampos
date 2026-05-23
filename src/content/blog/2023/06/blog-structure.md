@@ -14,16 +14,15 @@ image: ./assets/linear-a.jpg
 imageAlt: "A photo of a fragment of a clay tablet showing inscriptions in the Linear A script."
 imageRights: "Linear A tablet from the palace of Zakros, Archeological Museum of Sitia. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Sitia_Museum_Linear_A_02.jpg)"
 tags:
-  - BuildInTheOpen
-  - meta
-  - coding
-  - vite
-  - TS
+  - Building in the Open
+  - Meta
+  - Coding
+  - Vite
   - TypeScript
-  - BuildingInPublic
-  - BreakIntoTech
-  - LearnToCode
-  - FrontendDevelopment
+  - Building in Public
+  - Break Into Tech
+  - Learn to Code
+  - Frontend
 relatedPosts:
   - hello-world
   - going-astro

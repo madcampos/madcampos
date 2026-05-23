@@ -15,11 +15,11 @@ imageAlt: A book cover mocking the O'Riley covers with a line art of a lobster a
 imageRights: "[O'RLY books](https://orlybooks.com/books/copying-snippets-from-pages-made-in-2003)"
 tags:
   - XML
-  - web
+  - Web Development
   - CSS
-  - BuildInTheOpen
-  - BuildingInPublic
-  - FrontendDevelopment
+  - Building in the Open
+  - Building in Public
+  - Frontend
 ---
 
 While building this blog I included one of my favorite yet underrated features: [RSS feeds](https://aboutfeeds.com/) ([RSS Specification](https://www.rssboard.org/rss-specification)) support.

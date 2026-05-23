@@ -6,13 +6,13 @@ image: ./assets/tibor-pinter-jeLVaclNjKc-unsplash.jpg
 imageAlt: A photo of a spider web, with light reflecting on the trheads that make the web, creating a rainbow effect.
 imageRights: Photo by [Tibor Pinter](https://unsplash.com/@tribuletto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-close-up-of-a-light-jeLVaclNjKc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 tags:
-  - BuildingInPublic
-  - BuildInTheOpen
-  - coding
-  - FrontendDevelopment
-  - meta
-  - web
-  - VintageTech
+  - Building in Public
+  - Building in the Open
+  - Coding
+  - Frontend
+  - Meta
+  - Web Development
+  - Vintage Tech
 relatedPosts:
   - going-astro
   - blog-structure

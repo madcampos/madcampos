@@ -4,9 +4,9 @@ summary: Ramblings on why I'm annoyed with the whole "AI hype" going on.
 createdAt: 2026-01-29T10:38:02.324-05:00
 draft: true
 tags:
-  - llms
-  - ai
-  - rant
+  - LLMs
+  - AI
+  - Rant
 ---
 
 <m-note data-type="info">

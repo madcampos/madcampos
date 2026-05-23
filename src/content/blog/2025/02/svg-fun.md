@@ -10,11 +10,11 @@ updates:
     changes: Fixed Github URLs.
 tags:
   - SVG
-  - html
-  - coding
-  - cool
-  - design
-  - web
+  - HTML
+  - Coding
+  - Cool
+  - Design
+  - Web Development
 image: ./assets/logo-studies-2.png
 imageAlt: A screenshot of all of the logo designs for the website, laid out in a matrix on an image editing program.
 ---

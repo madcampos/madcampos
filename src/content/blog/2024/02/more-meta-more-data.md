@@ -9,13 +9,13 @@ updates:
   - date: 2026-02-04T15:18:34.000-05:00
     changes: Fixed Github URL.
 tags:
-  - BuildingInPublic
-  - BuildInTheOpen
-  - coding
-  - FrontendDevelopment
-  - meta
-  - web
-  - VintageTech
+  - Building in Public
+  - Building in the Open
+  - Coding
+  - Frontend
+  - Meta
+  - Web Development
+  - Vintage Tech
 relatedPosts:
   - going-astro
   - blog-structure

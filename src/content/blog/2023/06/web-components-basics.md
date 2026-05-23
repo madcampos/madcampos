@@ -13,16 +13,16 @@ summary: A brief introduction to web components.
 image: ./assets/spongebob-crowd.gif
 imageAlt: "A gif from the cartoon Spongebob Squarepants of a crowd of fish sitting at tables on a restaurant. Every fish is staring directly at the viewer and has a frown on their face. One of the fishes in front has a blinking animation."
 tags:
-  - web
-  - web-components
+  - Web Development
+  - Web Components
   - JavaScript
-  - html
+  - HTML
   - CSS
-  - BuildInTheOpen
-  - BuildingInPublic
-  - BreakIntoTech
-  - LearnToCode
-  - FrontendDevelopment
+  - Building in the Open
+  - Building in Public
+  - Break Into Tech
+  - Learn to Code
+  - Frontend
 relatedPosts:
   - tabs-web-component
 ---

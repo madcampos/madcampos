@@ -3,8 +3,8 @@ title: End of the year reflections, because, why not?
 summary: Witty view on the end of the year.
 createdAt: 2024-12-28T12:40:32
 tags:
-  - meta
-  - personal
+  - Meta
+  - Personal
 ---
 
 This is the result of a thinking moment during the best times to think: while washing my hair.

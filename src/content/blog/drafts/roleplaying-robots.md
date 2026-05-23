@@ -6,12 +6,14 @@ imageAlt: Close-up photo of the geisha robot from the Ghost in the Shell movie. 
 createdAt: 2026-05-06T11:15:40.811-04:00
 draft: true
 tags:
-  - llms
+  - LLMs
   - RPG
-  - rant
+  - Rant
 imageRights: "[Ghost in the Shell](https://en.wikipedia.org/wiki/Ghost_in_the_Shell_(2017_film)) movie, 2017"
 ---
+
 I've been hearing a lot of anecdotes from friends and colleagues about how the use LLMs. Most of them include some of the following points:
+
 - Roleplaying with the LLM. (E.g.: "You are a specialist in \[field of study\]...").
 - "I write a long and detailed specification".
 - "I don't spend time writing code anymore, most of my time is in writing the specification."
@@ -53,6 +55,7 @@ A Dungeon Master, or DM for short, is the person responsible for running a D&D g
 A long time ago, I was having a conversation with my brother and some of his friends about how to, as a DM, structure a "mystery" adventure. Something like a Sherlock Holmes or true crime inspired story.
 
 In terms of structure it would be simple:
+
 1. A crime has happened
 2. The players have to find clues
 3. Clues move them closer to finding who is behind it
@@ -80,6 +83,7 @@ In fact there is a lot of planning. But the big gotcha is where to stop planning
 With the DMing example from before, yes, there seems at first to be a lot of planning, that I would need to lay out the entire story up front, but that is not true.
 
 I would only need some things:
+
 - A couple, like, literally two or three places described.
 - The clues for those places.
 - The people involved in those.
@@ -111,4 +115,5 @@ No, I don't like to give up coding because it is fun and one of the main reasons
 Thanks, I hate it! 💖
 
 [^1]: Along with the daddy issues, I can't stand seeing blood for too long, it makes me dizzy and nauseous. So yeah, being a doctor is a no go.
+
 [^2]: Other names include "Game Master" or "Narrator".

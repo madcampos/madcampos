@@ -7,12 +7,12 @@ imageAlt: A picture of 3 Philippine Tarsiers, small round monkeys with huge eyes
 imageRights: "Philippine Tarsiers in Bohol. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Bohol.tarsier_jtlimphoto.JPG)"
 tags:
   - a11y
-  - colors
-  - design
+  - Colors
+  - Design
   - CSS
-  - BuildInTheOpen
-  - BuildingInPublic
-  - FrontendDevelopment
+  - Building in the Open
+  - Building in Public
+  - Frontend
 ---
 
 There was an interesting problem at work the other day. In short we have a dynamic list of things to display on the screen, all of them have a dotted border and colored text. Those colors are picked dynamically from a cycling list of colors. But _**not** all of them_ have enough contrast with the background and some are really hard to see.

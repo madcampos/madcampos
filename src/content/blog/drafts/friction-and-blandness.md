@@ -4,10 +4,10 @@ summary: I went back to playing Worlds of Warcraft and it made me think about th
 createdAt: 2025-10-16T10:09:40.599-04:00
 draft: true
 tags:
-  - RealLife
+  - Real Life
   - IRL
   - Gaming
-  - SocialCompentary
+  - Social Comentary
 ---
 
 I went back to playing World of Warcraft (WoW) recently. It is a game that I've played for years almost non stop, basically since it launched until the release of the [Legion expansion](https://en.wikipedia.org/wiki/World_of_Warcraft:_Legion) around 2016.
@@ -16,6 +16,7 @@ It is a game that was part of my teenage years and I have found memories of. But
 After all WoW is more than 20 years old, it has some design decisions that made sense at that point in time but don't make sense anymore. The people playing the game have changed, so the expectations on how the game should behave have changed too.
 
 The two main reasons that made me return were:
+
 1. I was really curious to find out how much time I had played, and I needed to log in to find that out.
 2. I just wanted to live the story that I have missed.
 
@@ -75,6 +76,7 @@ When we read or study usability, the core principle is to make the user's life e
 
 Problem is: video games _are_ about friction.
 The core loop of a video game is:
+
 1. Introducing a challenge that the player has to overcome
 2. Providing the means to overcome that challenge.
 3. Mix up with other challenges/means to overcome them.
@@ -89,4 +91,5 @@ Then it clicked again...
 The wave of enshitification that we are seeing, or why things are so bland and boring right now are a result of that in my opinion. The platforms we use are over optimized to remove friction and give us gratification for free
 
 [^1]: Fun fact: Addon development for WoW was one of my first contacts with a programming language. Modding games is what made me interested in pursuing a programming career, but experimenting with WoW addons specifically was a turning point.
+
 [^2]: Don't get me started on [Norman Doors](https://99percentinvisible.org/article/norman-doors-dont-know-whether-push-pull-blame-design/)...

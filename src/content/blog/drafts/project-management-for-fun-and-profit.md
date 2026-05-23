@@ -4,11 +4,11 @@ summary: An analysis of a couple of months into managing a volunteer ran open so
 createdAt: 2025-01-24T12:34:15.683-05:00
 draft: true
 tags:
-  - WebDevelopment
-  - ProjectManagement
-  - BuildingInPublic
-  - BuildInTheOpen
-  - BreakIntoTech
-  - personal
+  - Web Development
+  - Project Management
+  - Building in Public
+  - Building in the Open
+  - Break Into Tech
+  - Personal
   - Scrum
 ---

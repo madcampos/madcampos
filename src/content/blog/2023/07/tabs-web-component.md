@@ -10,17 +10,17 @@ image: ./assets/wahid-khene-axXa-pSVaIY-unsplash.jpg
 imageAlt: "A photo of bright colored paper folders staggered one on top of the other in a semi circular way."
 imageRights: "Photo by [Wahid Khene](https://unsplash.com/@wahidkhene?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-bunch-of-different-colored-papers-on-a-table-axXa-pSVaIY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)."
 tags:
-  - web-components
+  - Web Components
   - JavaScript
-  - html
+  - HTML
   - CSS
-  - BuildInTheOpen
-  - BuildingInPublic
-  - BreakIntoTech
-  - LearnToCode
-  - FrontendDevelopment
+  - Building in the Open
+  - Building in Public
+  - Break Into Tech
+  - Learn to Code
+  - Frontend
 relatedPosts:
-  - web-components-basics
+  - Web Components-basics
 ---
 
 This post is a deeper dive into Web Components, with a focus on building a tab navigation that is accessible. If you are not familiar with Web Components, I recommend you read my [previous post](/blog/2023/06/web-components-basics/) on the topic.

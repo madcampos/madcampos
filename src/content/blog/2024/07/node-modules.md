@@ -7,11 +7,11 @@ imageRights: Photo by [Diego Ramírez](https://unsplash.com/@natural_panoramic?u
 
 createdAt: 2024-07-09T23:37:11
 tags:
-  - node
-  - WebDevelopment
-  - backend
+  - Node.js
+  - Web Development
+  - Backend
   - JavaScript
-  - rant
+  - Rant
 ---
 
 Node has a module problem, a large, [neutron star](https://en.wikipedia.org/wiki/Neutron_star) sized one and we all know it...

@@ -4,10 +4,10 @@ summary: The tricky parts of working with the [File System API](https://develope
 createdAt: 2026-05-13T22:01:55.705-04:00
 draft: true
 tags:
-  - html
+  - HTML
   - JavaScript
-  - WebDevelopment
-  - BuildingInPublic
+  - Web Development
+  - Building in Public
 ---
 
 Yet another time I stand in front of a problem that needs to read files from the user device. Furthermore, read _and_ keep a reference to files from the user device.

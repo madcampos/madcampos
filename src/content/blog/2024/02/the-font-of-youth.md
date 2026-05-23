@@ -9,10 +9,10 @@ tags:
   - CSS
   - Fonts
   - Typography
-  - BuildingInPublic
-  - BuildInTheOpen
-  - design
-  - FrontendDevelopment
+  - Building in Public
+  - Building in the Open
+  - Design
+  - Frontend
 ---
 
 One of the ways to keep a website _fresh_ and _new_ is to have custom _fonts_!

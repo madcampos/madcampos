@@ -7,10 +7,10 @@ imageAlt: 'A screen capture of an old VHS quality ad for the "Ginsu Knife". The 
 tags:
   - URL
   - HTTP
-  - html
-  - coding
-  - meta
-  - web
+  - HTML
+  - Coding
+  - Meta
+  - Web Development
 ---
 
 As most interesting quests start, I was reading the chat on the [creatures.dev](https://creatures.dev) Discord server and people where talking about site maps.

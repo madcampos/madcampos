@@ -12,12 +12,12 @@ image: ./assets/sputnik1.jpg
 imageAlt: A picture of Sputnik, a metalic sphere, floating against a black background representing space. The sphere has four thin long metalic antenas, spreading from the sphere's side slightly outwards.
 imageRights: "Replica of Sputnik 1 in the Museum of Space and Missile Technology (Saint-Petersburg). Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg)"
 tags:
-  - BuildInTheOpen
-  - BuildingInPublic
-  - meta
-  - coding
-  - astro
-  - vite
+  - Building in the Open
+  - Building in Public
+  - Meta
+  - Coding
+  - Astro
+  - Vite
   - 11ty
 relatedPosts:
   - hello-world

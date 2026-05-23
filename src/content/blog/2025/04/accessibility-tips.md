@@ -7,10 +7,10 @@ createdAt: 2025-05-15T22:50:52
 tags:
   - a11y
   - Accessibility
-  - coding
-  - html
-  - LearnToCode
-  - ProjectManagement
+  - Coding
+  - HTML
+  - Learn to Code
+  - Project Management
 imageRights: "[Photo by Kevin Ku](https://www.pexels.com/photo/data-codes-through-eyeglasses-577585/)"
 ---
 

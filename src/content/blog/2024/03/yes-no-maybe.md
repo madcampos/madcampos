@@ -9,14 +9,14 @@ image: ./assets/8ball.png
 imageAlt: A photo of a Magic 8 ball. A plastic ball resembling a billiard 8 ball, all black, with the number "8" in a white circle in the center.
 summary: A study on intermediate state checkboxes and how to handle state in react.
 tags:
-  - BuildingInPublic
-  - BuildInTheOpen
-  - coding
-  - FrontendDevelopment
-  - web
-  - react
-  - web-components
-  - lit
+  - Building in Public
+  - Building in the Open
+  - Coding
+  - Frontend
+  - Web Development
+  - React
+  - Web Components
+  - Lit
 ---
 
 The other day I was working on a problem that required [indeterminate state checkboxes](https://developer.mozilla.org/en-US/docs/Web/CSS/:indeterminate).

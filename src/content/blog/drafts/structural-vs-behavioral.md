@@ -4,7 +4,7 @@ summary: Two different, but complimentary, ways of viewing components in web dev
 createdAt: 2025-12-27T17:04:09.966-04:00
 draft: true
 tags:
-  - WebDevelopment
+  - Web Development
   - Components
   - React
 ---

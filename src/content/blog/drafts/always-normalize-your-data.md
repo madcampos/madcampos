@@ -4,9 +4,9 @@ summary: An argument about systems design and how to handle input data
 createdAt: 2025-09-23T11:58:56.128-04:00
 draft: true
 tags:
-  - coding
-  - protip
-  - SystemsDesign
+  - Coding
+  - ProTip
+  - Systems Design
 ---
 
 So... I was reading [this article](https://43081j.com/2025/09/bloat-of-edge-case-libraries) and the gist of it resonated with something I have got into arguments at work before:

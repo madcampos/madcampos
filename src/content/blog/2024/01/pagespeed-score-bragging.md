@@ -5,11 +5,11 @@ summary: Bragging and breakdown on how I optimized my site.
 image: ./assets/doge-score.jpg
 imageAlt: A "doge meme". It shows a close up photo of a shiba dog's face with the dog looking to the camera. Overlaid on the image, in comic sans, are the phrases "Much speed!", "Such accessible!", "Many score!", "WOW!", and "100/100".
 tags:
-  - astro
-  - BuildInTheOpen
-  - FrontendDevelopment
-  - meta
-  - web
+  - Astro
+  - Building in the Open
+  - Frontend
+  - Meta
+  - Web Development
 relatedPosts:
   - going-astro
 ---

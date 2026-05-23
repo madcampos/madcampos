@@ -7,10 +7,10 @@ imageAlt: AI generated image of a crown made up of galaxies and stars. The backg
 imageRights: Photo by [Payton Tuttle](https://unsplash.com/@paytonctuttle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-skull-with-a-crown-on-top-of-it-hVpFBq-PSgQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 tags:
-  - web
-  - react
-  - rant
-  - hot-take
+  - Web Development
+  - React
+  - Rant
+  - Hot Take
 ---
 
 This is a hot take on the current react situation, so brace yourselves.

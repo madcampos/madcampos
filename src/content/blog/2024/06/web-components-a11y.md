@@ -12,10 +12,10 @@ updates:
 tags:
   - a11y
   - Accessibility
-  - coding
-  - web-components
-  - WebDevelopment
-  - FrontendDevelopment
+  - Coding
+  - Web Components
+  - Web Development
+  - Frontend
 ---
 
 Yesterday I woke up to a notification on Slack, tagging me to answer a question:

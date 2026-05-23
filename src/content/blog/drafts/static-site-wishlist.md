@@ -4,12 +4,14 @@ summary: Things that I wish a static site generator did, or how it was organized
 createdAt: 2026-02-17T18:46:40
 draft: true
 tags:
-  - astro
-  - meta
-  - web
+  - Astro
+  - Meta
+  - Web Development
 ---
+
 So, I like Astro, but it doesn't quite do things the way I think would be best... this is my take on how or what features a static site generator should have.
 Here is the list:
+
 1. Standards based as much as possible
 2. String interpolation instead of weird syntaxes
 3. Config based instead of file based routing
@@ -29,6 +31,7 @@ Plus providing colorization to the code should be separate from the actual funct
 Ideally, such string interpolation would handle a couple of things to make life easier, like converting `null` and `undefined` to empty strings and joining the items of an array.
 
 Basically:
+
 1. If the value it is `null` or `undefined`, return an empty string.
 2. If the value can be converted to a string, do so.
 3. Iterate over arrays and resolve as the previous points, then join the array.
@@ -43,11 +46,10 @@ The other point is it ends up adding extra syntax. There is no "standard" way of
 
 One potential approach would be to use a syntax similar to Vue and have a `<script>` block, along with a `<template>` block. But then it breaks the string interpolation part and you end up having to parse and handle the "html".
 
-So the solution here is have a central entrypoint providing all of the routes for the application, and those just being function  calls.
+So the solution here is have a central entrypoint providing all of the routes for the application, and those just being function calls.
 
 One thing that file based builders have that is really useful is a separation from the actual page code function and the function that generates parameters to pass to the page. Like, the route have some parameters, and those are resolved separately.
 This makes it easy to have parametrized routes while also providing early error detection for the routes.
-
 
 ## Minification by default, bundling is opt-in
 
