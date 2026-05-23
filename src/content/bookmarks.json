@@ -106,6 +106,12 @@
 					"title": "Accessible faux-nested interactive controls",
 					"description": "Suggestion of a pattern for providing _\"nested\"_ interactible elements.",
 					"type": "article"
+				},
+				{
+					"url": "https://accessibility.huit.harvard.edu/news/2026/05/deep-dive-contrast-themes",
+					"title": "A Deep Dive into Contrast Themes",
+					"description": "Guide for contrast themes (using the `forced-colors` media query).",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -339,6 +345,12 @@
 					"url": "https://causality.blog/essays/what-async-promised/",
 					"title": "What Async Promised and What it Delivered",
 					"description": "An analysis, in retrospect, of how we got to `Promise`s, `async`, what it solves, and the problems it introduces.",
+					"type": "article"
+				},
+				{
+					"url": "https://blog.gaborkoos.com/posts/2026-05-09-Your-Recursion-Is-Lying-to-You/",
+					"title": "Your Recursion Is Lying to You",
+					"description": "Recursion in Js doesn't work. It will overflow the stack. And tail call optimization was never well supported.",
 					"type": "article"
 				}
 			]
@@ -585,6 +597,12 @@
 					"url": "https://www.iankduncan.com/engineering/2026-02-06-bash-is-not-enough",
 					"title": "No, Really, Bash Is Not Enough: Why Large-Scale CI Needs an Orchestrator",
 					"description": "Interesting analysis of why bash scripts work for deployment and automation for smaller projects but fail to scale for larger ones.",
+					"type": "article"
+				},
+				{
+					"url": "https://cekrem.github.io/posts/the-tacit-dimension/",
+					"title": "The Tacit Dimension: Why Your Best Engineers Can't Tell You What They Know",
+					"description": "Reflection on \"tacit knowledge\", or the gut feeling we acquire with experience.",
 					"type": "article"
 				}
 			]
