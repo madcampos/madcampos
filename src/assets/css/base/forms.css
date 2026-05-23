@@ -150,6 +150,8 @@
 			block-size: 100%;
 			pointer-events: none;
 		}
+
+		&:not(:is(:disabled, [aria-disabled])) { @media (forced-colors: active) { forced-color-adjust: none; } }
 	}
 
 	:is(input, button):is([type='submit'], [data-primary]) {

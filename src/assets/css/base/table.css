@@ -46,6 +46,8 @@
 			:is(th, td) {
 				background-color: var(--table-header-bg);
 				color: var(--table-header-color);
+
+				@media (forced-colors: active) { forced-color-adjust: none; }
 			}
 
 			th[aria-sort] {
@@ -72,6 +74,8 @@
 			:is(th, td) {
 				color: var(--table-footer-color);
 				background-color: var(--table-footer-bg);
+
+				@media (forced-colors: active) { forced-color-adjust: none; }
 			}
 		}
 	}

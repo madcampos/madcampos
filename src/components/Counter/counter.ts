@@ -107,7 +107,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	}
 
 	async connectedCallback() {
-		const tagName = 'baseline-info';
+		const tagName = 'hit-counter';
 		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
 			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
 		}

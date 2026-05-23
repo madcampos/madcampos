@@ -80,7 +80,7 @@
 						@media (prefers-contrast: more) { border-color: var(--diff-add-color); }
 
 						@media (forced-colors: active) {
-							border-color: currentColor;
+							border: none;
 							color: LinkText;
 
 							&::before, span { color: inherit; }
@@ -98,7 +98,7 @@
 						@media (prefers-contrast: more) { border-color: var(--diff-remove-color); }
 
 						@media (forced-colors: active) {
-							border-color: currentColor;
+							border: none;
 							color: GrayText;
 
 							&::before, span { color: inherit; }
@@ -122,7 +122,7 @@
 						@media (prefers-contrast: more) { border-color: var(--highlight-error-bg); }
 
 						@media (forced-colors: active) {
-							border-color: currentColor;
+							border: none;
 							background-color: Field;
 							color: GrayText;
 						}
@@ -133,7 +133,7 @@
 						@media (prefers-contrast: more) { border-color: var(--highlight-warning-bg); }
 
 						@media (forced-colors: active) {
-							border-color: LinkText;
+							border: none;
 							background-color: Canvas;
 							color: LinkText;
 						}
@@ -149,7 +149,7 @@
 
 					@media (forced-colors: active) {
 						filter: none;
-						border: var(--border-size) solid currentColor;
+						border: none;
 						border-inline-width: 0;
 						background-color: Highlight;
 						color: HighlightText;

@@ -44,7 +44,11 @@
 		}
 	}
 
-	details[open] > summary::before { transform: rotate(90deg); }
+	details[open] > summary::before {
+		transform: rotate(90deg);
+
+		@media (forced-colors: active) { transform: rotate(90deg) translateX(0.3em) translateY(0.5em); }
+	}
 
 	dialog {
 		flex-direction: column;

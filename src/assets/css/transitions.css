@@ -1,30 +1,32 @@
 @layer pages {
-	@view-transition { navigation: auto; }
+	@media (prefers-reduced-motion: no-preference) {
+		@view-transition { navigation: auto; }
 
-	::view-transition-old(root) { animation: old-page-animation var(--transition-out-time) ease-in-out both; }
-	::view-transition-new(root) { animation: new-page-animation var(--transition-in-time) ease-in-out both; }
+		::view-transition-old(root) { animation: old-page-animation var(--transition-out-time) ease-in-out both; }
+		::view-transition-new(root) { animation: new-page-animation var(--transition-in-time) ease-in-out both; }
 
-	@keyframes new-page-animation {
-		from {
-			clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-			opacity: 0;
+		@keyframes new-page-animation {
+			from {
+				clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+				opacity: 0;
+			}
+
+			to {
+				clip-path: polygon(50% -100%, 200% 50%, 50% 200%, -100% 50%);
+				opacity: 1;
+			}
 		}
 
-		to {
-			clip-path: polygon(50% -100%, 200% 50%, 50% 200%, -100% 50%);
-			opacity: 1;
-		}
-	}
+		@keyframes old-page-animation {
+			from {
+				filter: sepia(0) blur(0);
+				opacity: 1;
+			}
 
-	@keyframes old-page-animation {
-		from {
-			filter: sepia(0) blur(0);
-			opacity: 1;
-		}
-
-		to {
-			filter: sepia(1) blur(var(--size-3));
-			opacity: 0;
+			to {
+				filter: sepia(1) blur(var(--size-3));
+				opacity: 0;
+			}
 		}
 	}
 }
