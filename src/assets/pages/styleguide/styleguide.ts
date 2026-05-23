@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		import('../../../components/Codepen/codepen.ts'),
 		import('../../../components/ImageLightbox/image-lightbox.ts'),
 		import('../../../components/InlineShare/inline-share.ts'),
+		import('../../../components/RadarChart/radar-chart.ts'),
 		import('../../../components/ReadArticle/read-article.ts'),
 		import('../../../components/RelativeTime/relative-time.ts'),
 		import('../../../components/ShareOptions/share-options.ts'),

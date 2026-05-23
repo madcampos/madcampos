@@ -8,7 +8,12 @@ import SvgDefs from '../../../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../../../components/Webrings/Webrings.astro';
 import { listPostsByTag } from '../../../utils/post';
 
-const tags = Object.keys(await listPostsByTag());
+const postsByTag = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
+	name: tag,
+	items: posts.length
+}));
+
+const tags = postsByTag.map(({ name }) => name);
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/ItemList">
@@ -41,6 +46,14 @@ const tags = Object.keys(await listPostsByTag());
 			<link itemprop="itemListOrder" href="https://schema.org/ItemListUnordered" />
 			<meta itemprop="numberOfItems" content={tags.length.toString()} />
 
+			<radar-chart
+				legend="Blog Tags"
+				subtitle="Tags shown on the blog and their post count"
+				hidden
+			>
+				{postsByTag.map((tag) => <span data-name={tag.name} data-items={tag.items}>{tag.name} ({tag.items})</span>)}
+			</radar-chart>
+
 			<tag-list>
 				<ul>
 					{
@@ -65,5 +78,6 @@ const tags = Object.keys(await listPostsByTag());
 		</footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
+		<script src="../../../assets/pages/tags/tags.ts"></script>
 	</body>
 </html>

@@ -6,6 +6,7 @@ import type { ImageLightbox } from './ImageLightbox/image-lightbox.ts';
 import type { InlineShare } from './InlineShare/inline-share.ts';
 import type { OldStyleButton } from './OldStyleButtons/old-style-buttons.ts';
 import type { PWABanner } from './PwaBanner/pwa-banner.ts';
+import type { RadarChart } from './RadarChart/radar-chart.ts';
 import type { ReadArticle } from './ReadArticle/read-article.ts';
 import type { ShareOptions } from './ShareOptions/share-options.ts';
 import type { SiteDisplaySettings } from './SiteSettings/site-settings.ts';
@@ -118,6 +119,7 @@ declare global {
 		'hit-counter': HitCounter;
 		'iab-escape': IabEscape;
 		'pwa-banner': PWABanner;
+		'radar-chart': RadarChart;
 		'read-article': ReadArticle;
 		'share-options': ShareOptions;
 		'youtube-embed': YoutubeEmbed;

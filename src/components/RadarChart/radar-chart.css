@@ -1,0 +1,62 @@
+@layer components {
+	radar-chart {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: auto;
+		grid-template-areas: 'chart legends';
+		gap: var(--size-3);
+		margin: var(--size-3);
+
+		g.circles {
+			fill: none;
+			stroke: var(--surface-2);
+			stroke-width: 0.1rem;
+		}
+
+		g.axis {
+			fill: none;
+			stroke-width: 0.1rem;
+			stroke: var(--surface-2);
+		}
+
+		g.points {
+			circle {
+				stroke-width: 0.2rem;
+				stroke: var(--text-1);
+				paint-order: stroke;
+				fill: var(--theme-color);
+			}
+
+			text {
+				fill: var(--text-1);
+				text-anchor: middle;
+			}
+		}
+
+		svg {
+			grid-area: chart;
+			overflow: visible;
+			place-self: center;
+
+			max-width: var(--size-content-2);
+		}
+
+		chart-legend {
+			grid-area: legends;
+			max-height: 30rem;
+			overflow: auto;
+
+			ol { columns: 20ch; }
+
+			@media (max-width: 50rem) { max-height: max-content; }
+		}
+
+		@media (max-width: 50rem) {
+			grid-template-rows: repeat(2, auto);
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				'chart'
+				'legends';
+		}
+	}
+}

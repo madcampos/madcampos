@@ -5,7 +5,7 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../../public/assets/images/me.jpg';
 import { inlineMarkdownRender } from '../../utils/markdown.ts';
-import { listAllPosts } from '../../utils/post.ts';
+import { listAllPosts, listPostsByTag } from '../../utils/post.ts';
 import { listAllProjects } from '../../utils/projects.ts';
 import Card from '../Card/Card.astro';
 import OldStyleButtons from '../OldStyleButtons/OldStyleButtons.astro';
@@ -21,6 +21,10 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const post = (await listAllPosts())[0]!;
+const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
+	name: tag,
+	items: posts.length
+}));
 ---
 <details open>
 	<summary>
@@ -433,6 +437,18 @@ const post = (await listAllPosts())[0]!;
 		<h3>Prompt Injection</h3>
 
 		<PromptInjection />
+	</section>
+
+	<section>
+		<h3>Radar Chart</h3>
+
+		<radar-chart
+			legend="Blog Tags"
+			subtitle="Tags shown on the blog and their post count"
+			hidden
+		>
+			{tags.map((tag) => <span data-name={tag.name} data-items={tag.items}>{tag.name} ({tag.items})</span>)}
+		</radar-chart>
 	</section>
 
 	<section>
