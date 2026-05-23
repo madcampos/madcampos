@@ -3,6 +3,16 @@
 import { type WheelOfFortuneDisplaySetting, SiteSettings } from '../../assets/js/settings.ts';
 import styles from './wheel-of-fortune.css?url';
 
+function slugify(text: string): string {
+	return text
+		.toLowerCase()
+		.trim()
+		.replace(/[^\p{L}\p{N}\s_-]/gu, '')
+		.replace(/\s+/g, '-')
+		.replace(/-+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}
+
 export class WheelOffortune extends HTMLElement implements CustomElement {
 	readonly #id = crypto.randomUUID();
 
@@ -132,11 +142,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		const winningId = winningItem
-			.toLowerCase()
-			.replaceAll(' ', '-')
-			.replaceAll('&', '-')
-			.trim();
+		const winningId = slugify(winningItem);
 
 		document.location.hash = `#${winningId}`;
 
