@@ -21,10 +21,11 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const post = (await listAllPosts())[0]!;
+const sorter = new Intl.Collator('en-CA', { usage: 'sort' });
 const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 	name: tag,
 	items: posts.length
-}));
+})).sort((first, second) => sorter.compare(first.name, second.name));
 ---
 <details open>
 	<summary>

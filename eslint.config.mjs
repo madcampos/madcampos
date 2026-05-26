@@ -108,7 +108,7 @@ const rules = {
 	'no-implicit-globals': 'warn',
 	'no-implied-eval': 'off',
 	'no-import-assign': 'error',
-	'no-inline-comments': ['warn', { ignorePattern: '(?:^\\s*?(?:sql|html|svg)\\s*?$)|(?:@vite-ignore|@ts-expect-error).+' }],
+	'no-inline-comments': ['warn', { ignorePattern: '(?:^\\s*?(?:sql|html|svg|css)\\s*?$)|(?:@vite-ignore|@ts-expect-error).+' }],
 	'no-inner-declarations': ['error', 'both'],
 	'no-invalid-regexp': 'error',
 	'no-invalid-this': 'off',

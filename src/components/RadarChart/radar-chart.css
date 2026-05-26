@@ -10,26 +10,85 @@
 		g.circles {
 			fill: none;
 			stroke: var(--surface-2);
-			stroke-width: 0.1rem;
+			stroke-width: var(--size-1);
 		}
 
 		g.axis {
 			fill: none;
-			stroke-width: 0.1rem;
+			stroke-width: var(--size-1);
 			stroke: var(--surface-2);
 		}
 
 		g.points {
+			--chart-text-offset: 20px;
+
+			color: var(--text-1);
+
 			circle {
-				stroke-width: 0.2rem;
-				stroke: var(--text-1);
+				stroke-width: var(--size-1);
+				stroke: currentColor;
 				paint-order: stroke;
 				fill: var(--theme-color);
 			}
 
 			text {
-				fill: var(--text-1);
+				fill: currentColor;
+				font-size: var(--font-size-5);
+
+				@media (max-width: 30rem) { font-size: var(--font-size-6); }
+			}
+
+			g[data-quadrant='top-left'] text {
+				text-anchor: end;
+				dominant-baseline: alphabetic;
+				translate: calc(var(--chart-text-offset) * -1) calc(var(--chart-text-offset) * -1);
+			}
+
+			g[data-quadrant='top-right'] text {
+				text-anchor: start;
+				dominant-baseline: alphabetic;
+				translate: var(--chart-text-offset) calc(var(--chart-text-offset) * -1);
+			}
+
+			g[data-quadrant='bottom-left'] text {
+				text-anchor: end;
+				dominant-baseline: hanging;
+				translate: calc(var(--chart-text-offset) * -1) var(--chart-text-offset);
+			}
+
+			g[data-quadrant='bottom-right'] text {
+				text-anchor: start;
+				dominant-baseline: hanging;
+				translate: var(--chart-text-offset) var(--chart-text-offset);
+			}
+
+			g[data-quadrant='top'] text {
 				text-anchor: middle;
+				dominant-baseline: alphabetic;
+				translate: 0 calc(var(--chart-text-offset) * -1);
+			}
+
+			g[data-quadrant='bottom'] text {
+				text-anchor: middle;
+				dominant-baseline: hanging;
+				translate: 0 var(--chart-text-offset);
+			}
+
+			g[data-quadrant='left'] text {
+				text-anchor: end;
+				dominant-baseline: middle;
+				translate: calc(var(--chart-text-offset) * -1) 0;
+			}
+
+			g[data-quadrant='right'] text {
+				text-anchor: start;
+				dominant-baseline: middle;
+				translate: var(--chart-text-offset) 0;
+			}
+
+			g[data-quadrant='center'] text {
+				text-anchor: middle;
+				dominant-baseline: middle;
 			}
 		}
 
@@ -43,12 +102,15 @@
 
 		chart-legend {
 			grid-area: legends;
-			max-height: 30rem;
-			overflow: auto;
 
-			ol { columns: 20ch; }
+			ol {
+				columns: calc(var(--size-content-1) + 2rem);
+				column-gap: var(--size-3);
+				max-block-size: 30rem;
+				overflow: auto;
 
-			@media (max-width: 50rem) { max-height: max-content; }
+				@media (max-width: 50rem) { max-block-size: max-content; }
+			}
 		}
 
 		@media (max-width: 50rem) {

@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './radar-chart.css?url';
-
-const sorter = new Intl.Collator('en-CA', { usage: 'sort' });
 
 export class RadarChart extends HTMLElement implements CustomElement {
 	#items: HTMLElement[] = [];
@@ -9,10 +9,36 @@ export class RadarChart extends HTMLElement implements CustomElement {
 	#maxItems = 0;
 
 	#polarToCartesian(angle: number, value: number) {
-		return {
-			x: Math.cos(angle - Math.PI / 2) * value,
-			y: Math.sin(angle - Math.PI / 2) * value
-		};
+		const x = Math.cos(angle - Math.PI / 2) * value;
+		const y = Math.sin(angle - Math.PI / 2) * value;
+
+		const epsilon = 1e-10;
+		const isTop = y < -epsilon;
+		const isBottom = y > epsilon;
+		const isLeft = x < -epsilon;
+		const isRight = x > epsilon;
+
+		let quadrant: 'bottom-left' | 'bottom-right' | 'bottom' | 'center' | 'left' | 'right' | 'top-left' | 'top-right' | 'top' = 'center';
+
+		if (isTop && isLeft) {
+			quadrant = 'top-left';
+		} else if (isTop && isRight) {
+			quadrant = 'top-right';
+		} else if (isBottom && isLeft) {
+			quadrant = 'bottom-left';
+		} else if (isBottom && isRight) {
+			quadrant = 'bottom-right';
+		} else if (isTop) {
+			quadrant = 'top';
+		} else if (isBottom) {
+			quadrant = 'bottom';
+		} else if (isLeft) {
+			quadrant = 'left';
+		} else if (isRight) {
+			quadrant = 'right';
+		}
+
+		return { x, y, quadrant };
 	}
 
 	#itemToAxis(index: number) {
@@ -28,22 +54,52 @@ export class RadarChart extends HTMLElement implements CustomElement {
 
 		const clamp = Number(items / this.#maxItems);
 		const angle = (Math.PI * 2 * index) / this.#totalItems;
-		const { x, y } = this.#polarToCartesian(angle, (clamp * 1000) / 2);
+		const { x, y, quadrant } = this.#polarToCartesian(angle, (clamp * 1000) / 2);
 
 		return /* svg */ `
-			<g transform="translate(${x} ${y})">
+			<g transform="translate(${x} ${y})" data-quadrant="${quadrant}">
 				<circle cx="0" cy="0" r="10" />
-				<text y="-20">${name}</text>
+				<text>${name}</text>
 			</g>
 		`;
 	}
 
 	render() {
+		const itemStyles = this.#items.map((_, i) => /* css */ `
+			:scope:has(li:nth-child(${i}):focus-within, li:nth-child(${i}):hover) g.points g:nth-child(${i}) {
+				opacity: 1;
+				color: var(--accent-color);
+
+				circle { fill: var(--accent-color); }
+			}
+
+			:scope:has(g.points g:nth-child(${i}):hover) li:nth-child(${i}) {
+				color: var(--accent-color);
+				font-weight: bold;
+			}
+		`).join('\n');
+
 		this.innerHTML = /* html */ `
 		<style>
 			@scope {
-				:scope:has(li:hover) g.points g { opacity: 0.1; }
-				${this.#items.map((_, i) => `:scope:has(li:nth-child(${i}):hover) g.points g:nth-child(${i}) { opacity: 1; }`).join('\n')}
+				:scope:has(:where(li:focus-within, li:hover, g.points g:hover)) g.points g {
+					opacity: 0.1;
+					color: var(--text-2);
+				}
+
+				:scope g.points g:hover {
+					opacity: 1;
+					color: var(--accent-color);
+
+					circle { fill: var(--accent-color); }
+				}
+
+				:scope :is(li:focus-within, li:hover) {
+					color: var(--accent-color);
+					font-weight: bold;
+				}
+
+				${itemStyles}
 			}
 		</style>
 		<svg
@@ -78,6 +134,7 @@ export class RadarChart extends HTMLElement implements CustomElement {
 		`;
 
 		this.#items.forEach((item, i) => {
+			// eslint-disable-next-line id-length
 			const li = this.querySelector(`chart-legend li:nth-child(${i + 1})`);
 
 			li?.append(item);
@@ -85,12 +142,7 @@ export class RadarChart extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
-		this.#items = Array.from(this.children as HTMLCollectionOf<HTMLElement>).sort((a, b) => {
-			const aName = a.dataset['name'] ?? '';
-			const bName = b.dataset['name'] ?? '';
-
-			return sorter.compare(aName, bName);
-		});
+		this.#items = Array.from(this.children as HTMLCollectionOf<HTMLElement>);
 
 		this.#totalItems = this.#items.length;
 		this.#maxItems = Math.max(...this.#items.map((item) => Number.parseInt(item.dataset['items'] ?? '0', 10)));

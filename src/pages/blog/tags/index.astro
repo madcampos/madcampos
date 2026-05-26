@@ -8,10 +8,12 @@ import SvgDefs from '../../../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../../../components/Webrings/Webrings.astro';
 import { listPostsByTag } from '../../../utils/post';
 
+const sorter = new Intl.Collator('en-CA', { usage: 'sort' });
+
 const postsByTag = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 	name: tag,
 	items: posts.length
-}));
+})).sort((first, second) => sorter.compare(first.name, second.name));
 
 const tags = postsByTag.map(({ name }) => name);
 ---
@@ -51,24 +53,16 @@ const tags = postsByTag.map(({ name }) => name);
 				subtitle="Tags shown on the blog and their post count"
 				hidden
 			>
-				{postsByTag.map((tag) => <span data-name={tag.name} data-items={tag.items}>{tag.name} ({tag.items})</span>)}
+				{
+					postsByTag.map((tag) => (
+						<tag-item data-name={tag.name} data-items={tag.items}>
+							<a href={`/blog/tags/${tag.name}/`} itemprop="url">
+								<span itemprop="itemListElement">{tag.name} ({tag.items})</span>
+							</a>
+						</tag-item>
+					))
+				}
 			</radar-chart>
-
-			<tag-list>
-				<ul>
-					{
-						tags.map((tag) => (
-							<li>
-								<tag-item>
-									<a href={`/blog/tags/${tag}/`} itemprop="url">
-										<span itemprop="itemListElement">{tag}</span>
-									</a>
-								</tag-item>
-							</li>
-						))
-					}
-				</ul>
-			</tag-list>
 		</main>
 
 		<footer>
