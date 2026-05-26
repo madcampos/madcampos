@@ -338,7 +338,7 @@ export class CustomTabs extends HTMLElement {
 Let's break down the code.
 
 1. The `constructor` is pretty straightforward, we set the `role` and `aria-label` attributes, create the HTML structure, keep references of the slots. We also generate an id if one is not provided.
-2. The `selected` property is used to keep track of the selected tab. It is also used to set the initial selected tab. It's setter will also find the selected tab and call the `#selectTab` method to update the selected tab.
+2. The `selected` property is used to keep track of the selected tab. It is also used to set the initial selected tab. Its setter will also find the selected tab and call the `#selectTab` method to update the selected tab.
 3. The `#associateTabs` method is used to associate the tabs with the panels. It will also generate an id for the tab and panel if one is not provided. We do this based on the tabs instead of panels because tabs will be interactive where panels are hidden by default and can be "orphans".
 4. The `#selectTab` method is used to update the selected tab and panel based on the tab element passed as argument.
 5. The `connectedCallback` is where we set up the event listeners.

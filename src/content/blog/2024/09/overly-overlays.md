@@ -70,7 +70,7 @@ To make matters worse, the overlay can and will probably miss some text where th
 
 The operating system already provides the means to do this, on Windows for example you can either use the old cursor settings and set from a couple fixed sizes, and starting with Windows 10, on the accessibility settings have finer control for the size.
 
-You can also make the cursor more obvious and change it's color in both Windows and Mac OS, so I can have my nice and orange cursor and it Just Works ™!
+You can also make the cursor more obvious and change its color in both Windows and Mac OS, so I can have my nice and orange cursor and it Just Works ™!
 
 To make things even worse, changing a cursor breaks the affordance of links, text boxes and other controls because it will simply plaster one single big cursor over everything, indiscriminate if it is a link, a text box, or whatever other type of cursor you need for something.
 

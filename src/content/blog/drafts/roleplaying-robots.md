@@ -2,7 +2,7 @@
 title: Roleplaying with the ghost in the machine
 summary: No, I don't like the whole "spend more time writing a spec" thing, here is why.
 image: ./assets/geisha.png
-imageAlt: Close-up photo of the geisha robot from the Ghost in the Shell movie. It shows a a woman face, painted in white with a red circle. The face appears made out of porcelain and has thin seams running all over it, splitting the face in multiple parts. The eyes are metallic and dark, with no pupils.
+imageAlt: Close-up photo of the geisha robot from the Ghost in the Shell movie. It shows a woman's face, painted in white with a red circle. The face appears made out of porcelain and has thin seams running all over it, splitting the face in multiple parts. The eyes are metallic and dark, with no pupils.
 createdAt: 2026-05-06T11:15:40.811-04:00
 draft: true
 tags:
@@ -39,7 +39,7 @@ On a more personal side, if I want to roleplay I would rather play D&D. To me th
 
 ## Writing long specifications
 
-That is an intersection of the previous two points, but also one on it's own. It builds upon the notion that writing code by hand is obsolete and that you have to roleplay with the LLM.
+That is an intersection of the previous two points, but also one on its own. It builds upon the notion that writing code by hand is obsolete and that you have to roleplay with the LLM.
 
 But to me the most insidious issue is that it removes agency and exploration from the process. It feels like we are back to [waterfall](https://en.wikipedia.org/wiki/Waterfall_model) and forgot about the iterative ideas of [agile](https://en.wikipedia.org/wiki/Agile_software_development).
 

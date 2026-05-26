@@ -5,7 +5,7 @@ status: ongoing
 version: 1.0.0
 repository: https://github.com/madcampos/corny-unicorn/
 image: ./assets/01-corny-unicorn.png
-imageAlt: AI generated image of a unicorn head in a pale green with a bright green mane and a corn cob for it's horn.
+imageAlt: AI generated image of a unicorn head in a pale green with a bright green mane and a corn cob for its horn.
 themeImages:
   y2k: ./assets/y2k/01-corny-unicorn.jpg
   hacker: ./assets/hacker/01-corny-unicorn.png

@@ -3,7 +3,7 @@
 	"items": [
 		{
 			"title": "Accessibility",
-			"description": "Content related to accessibility, specially web accessibility and ARIA.",
+			"description": "Content related to accessibility, especially web accessibility and ARIA.",
 			"links": [
 				{
 					"url": "https://www.inklusivo.nl/accessibility-fundamentals/",
@@ -31,14 +31,14 @@
 				},
 				{
 					"url": "https://www.w3.org/WAI/tutorials/forms/",
-					"title": "Forms Tutorial - Web Accessibility Intiative",
+					"title": "Forms Tutorial - Web Accessibility Initiative",
 					"description": "A comprehensive tutorial on forms and how to best write them for accessibility.",
 					"type": "tutorial"
 				},
 				{
 					"url": "https://adrianroselli.com/2020/03/stop-using-drop-down.html",
 					"title": "Stop Using \"Drop-Down\"",
-					"description": "A rant to stop missnaming some UI widgets.",
+					"description": "A rant to stop misnaming some UI widgets.",
 					"type": "article"
 				},
 				{
@@ -104,7 +104,7 @@
 				{
 					"url": "https://piccalil.li/blog/accessible-faux-nested-interactive-controls/",
 					"title": "Accessible faux-nested interactive controls",
-					"description": "Suggestion of a pattern for providing _\"nested\"_ interactible elements.",
+					"description": "Suggestion of a pattern for providing _\"nested\"_ interactive elements.",
 					"type": "article"
 				},
 				{
@@ -112,6 +112,12 @@
 					"title": "A Deep Dive into Contrast Themes",
 					"description": "Guide for contrast themes (using the `forced-colors` media query).",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://patrickhlauke.github.io/wcag-interpretation/",
+					"title": "These (still) aren't the SCs you're looking for...",
+					"description": "Talk about WCAG Success Criteria and subjective or objective interpretation of those.",
+					"type": "article"
 				}
 			]
 		},
@@ -208,12 +214,18 @@
 					"title": "Email address obfuscation: What works in 2026?",
 					"description": "An analysis of what techniques for email obfuscation work to help stop spam.",
 					"type": "guidelines"
+				},
+				{
+					"url": "https://susam.net/do-not-roll-your-own.html",
+					"title": "Don't Roll Your Own...",
+					"description": "Argument against rolling your own implementations of some UI patterns that are easy to get wrong and very hard to get right.",
+					"type": "guidelines"
 				}
 			]
 		},
 		{
 			"title": "CSS & SVG",
-			"description": "CSS, layouts, and all it's cool quirks.",
+			"description": "CSS, layouts, and all its cool quirks.",
 			"links": [
 				{
 					"url": "https://every-layout.dev/layouts/stack/",
@@ -716,7 +728,7 @@
 			]
 		},
 		{
-			"title": "Lego",
+			"title": "LEGO",
 			"description": "Websites with instructions, databases on sets and parts, and other related things.",
 			"links": [
 				{

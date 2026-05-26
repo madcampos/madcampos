@@ -34,7 +34,7 @@ The solution to the first problem is either using redux or signals. The second p
 
 ## Web components to the rescue
 
-This is where the mental model from web components shine. As each component is responsible for it's own state and is a [best practice](https://web.dev/articles/custom-elements-best-practices#aim-to-keep-primitive-data-attributes-and-properties-in-sync,-reflecting-from-property-to-attribute,-and-vice-versa) to expose it to the parent. You can just read the property on the HTML element and that will give you the answer, no need to couple the components or re-render anything extra.
+This is where the mental model from web components shine. As each component is responsible for its own state and is a [best practice](https://web.dev/articles/custom-elements-best-practices#aim-to-keep-primitive-data-attributes-and-properties-in-sync,-reflecting-from-property-to-attribute,-and-vice-versa) to expose it to the parent. You can just read the property on the HTML element and that will give you the answer, no need to couple the components or re-render anything extra.
 
 An interesting side effect is that even if you change the child components, it will not update the parent. If you change the parent, it will not trigger re-rendering of the children.
 

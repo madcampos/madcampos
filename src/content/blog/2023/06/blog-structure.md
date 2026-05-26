@@ -34,7 +34,7 @@ The problem with HTML tags and, by extension the problem with language in genera
 
 ## Anatomy of an Article Page
 
-Let's start with the full markup for the article page and then break it down to it's parts. I'm only showing the `body` here for brevity, but you can see the full template in the [GitHub repo](https://github.com/madcampos/madcampos/blob/9f3ada31848ab387e2d4ac3faa53f02779e13eff/src/templates/blog/post.html).
+Let's start with the full markup for the article page and then break it down to its parts. I'm only showing the `body` here for brevity, but you can see the full template in the [GitHub repo](https://github.com/madcampos/madcampos/blob/9f3ada31848ab387e2d4ac3faa53f02779e13eff/src/templates/blog/post.html).
 
 ```html
 <body>
@@ -139,7 +139,7 @@ Thus,
 2. [Open Graph](https://ogp.me/) tags,
    - Are the ones where `property` starts with `og:`.
    - Used by social media sites to display a preview of the page when sharing it.
-   - Started as as a Facebook thing, but now are used by other social media sites and search engines to display rich content.
+   - Started as a Facebook thing, but now are used by other social media sites and search engines to display rich content.
 3. [Schema.org](https://schema.org/) properties.
    - Are the `itemprop` on the page.
    - Used by search engines to display rich results.

@@ -101,6 +101,6 @@ Now that the font works, we add it to our site CSS using the following snippet:
 :root { --sans-serif-font-family: '<FONT NAME>', 'Arial', system-ui, sans-serif; }
 ```
 
-You can read more about the the `@font-face` rule at the [MDN documentation for it](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face).
+You can read more about the `@font-face` rule at the [MDN documentation for it](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face).
 
 That's it, now we are loading about 260kb _less_ on users' devices!

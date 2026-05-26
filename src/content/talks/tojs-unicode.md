@@ -1,6 +1,6 @@
 ---
 title: Zalgo - And other Unicode Eldritch Horrors
-summary: A deep dive into text encoding and JavaScript, it's challenges and how to solve them.
+summary: A deep dive into text encoding and JavaScript, its challenges and how to solve them.
 event: JS Tech Talk [In Person] - September 2024
 eventUrl: https://guild.host/events/js-tech-talk-in-person-ixwtxw
 date: 2024-09-25T18:00:00
@@ -40,7 +40,7 @@ The most interesting part is that graphemes are language dependant, what is a si
 
 All strings in JavaScript are manipulated using UTF8, that means they are split in 8bit "chunks", even though internally they are stored in UTF16.
 
-That means, when we use methods like [`split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split), it will break a surrogate pair into it's component parts.
+That means, when we use methods like [`split`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split), it will break a surrogate pair into its component parts.
 
 To avoid this, we can use a very clever trick and _destructure_ a string, that will make each part retain surrogate pairs.
 

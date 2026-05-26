@@ -168,6 +168,6 @@ My first idea was to add the hero controls to the `<hero-image>` element... But 
 
 And another point: video content _has_ to have alternatives to it. As there is no audio to the video, there is no need for captions or subtitle, but the video is still there. For that we add a video description, again using our friends `<dialog>` and `popover`.
 
-To achieve all of that, the hero controls became it's own element and were placed after the text.
+To achieve all of that, the hero controls became its own element and were placed after the text.
 
 Next up: the main contents.

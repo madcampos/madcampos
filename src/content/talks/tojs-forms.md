@@ -30,7 +30,7 @@ Yeah, you found a bad form... Unfortunately, they are the majority, but with a l
 
 We should stick to the least powerful tool to the job, that makes our applications more resilient, accessible, and lighter.
 
-The web works well and is compatible because it builds it's foundation on the simplest tools for the job, that is, structuring content with HTML, styling it with CSS, and only then adding behaviors with JS.
+The web works well and is compatible because it builds its foundation on the simplest tools for the job, that is, structuring content with HTML, styling it with CSS, and only then adding behaviors with JS.
 
 ## HTML Base
 

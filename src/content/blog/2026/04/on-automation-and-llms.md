@@ -65,7 +65,7 @@ For those cases I will usually write a prompt like the following:
 > Given this example component \[path to another component\]
 > Write a new component named `NewComponentName` that does:
 >
-> - Some behaivour
+> - Some behaviour
 > - Some other behaviour
 
 This kind of prompt provides me the scaffolding needed, but importantly, I don't go overboard with all the specific behaviour of the components.

@@ -53,7 +53,7 @@ Unfortunately there were no existing plugins for that. The only option was [Vite
 
 That meant I was about to build a plugin or at least write _some_ code myself.
 
-The investigation followed with some Multi-page application (MPA) plugins for Vite. As it was born from the Vue community it's main purpose is to build Single-page applications (SPA) and it's not the best at building MPAs, but it can be done. The one that caught my attention was [`vite-plugin-virtual-mpa`](https://github.com/emosheeep/vite-plugin-virtual-mpa/). I configured it, wrote a lot of code and then went to test...
+The investigation followed with some Multi-page application (MPA) plugins for Vite. As it was born from the Vue community its main purpose is to build Single-page applications (SPA) and it's not the best at building MPAs, but it can be done. The one that caught my attention was [`vite-plugin-virtual-mpa`](https://github.com/emosheeep/vite-plugin-virtual-mpa/). I configured it, wrote a lot of code and then went to test...
 
 BOOM! Cryptic errors showed up.
 

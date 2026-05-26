@@ -14,7 +14,7 @@ There is a saying in Brazil that goes like this:
 
 Every time I'm reading a set or rules and regulations some of those oddly specific rules stand out and they make me wonder why that rule exists?
 
-This time, I was writing an accessibility report, so I had to go over all of the success criteria (SC) of WCAG. _SC 3.2.2 - On Input_ stood out to me. Here is it's description:
+This time, I was writing an accessibility report, so I had to go over all of the success criteria (SC) of WCAG. _SC 3.2.2 - On Input_ stood out to me. Here is its description:
 
 > Changing the setting of any [user interface component](https://www.w3.org/TR/WCAG21/#dfn-user-interface-components "a part of the content that is perceived by users as a single control for a distinct function") does not automatically cause a [change of context](https://www.w3.org/TR/WCAG21/#dfn-change-of-context "major changes that, if made without user awareness, can disorient users who are not able to view the entire page simultaneously") unless the user has been advised of the behavior before using the component.
 
