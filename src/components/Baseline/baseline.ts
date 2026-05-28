@@ -114,7 +114,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 							<tr>
 								<th>
 									<sr-only>Chrome Desktop</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 256" width="24" height="24">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
 										</svg>
@@ -122,7 +122,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 								</th>
 								<th>
 									<sr-only>Chrome on Android</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 256" width="24" height="24">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-chrome" />
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 55) scale(0.5)" transform-origin="bottom right" />
@@ -131,7 +131,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 								</th>
 								<th>
 									<sr-only>Edge Desktop</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 256" width="24" height="24">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-edge" />
 										</svg>
@@ -139,7 +139,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 								</th>
 								<th>
 									<sr-only>Firefox Desktop</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 265">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
 										</svg>
@@ -148,7 +148,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 								</th>
 								<th>
 									<sr-only>Firefox on Android</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 265">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-firefox" />
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-android" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
@@ -157,7 +157,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 								</th>
 								<th>
 									<sr-only>Safari Desktop</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 256" width="24" height="24">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
 										</svg>
@@ -165,7 +165,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 								</th>
 								<th>
 									<sr-only>Safari on iOS</sr-only>
-									<baseline-browser-icon>
+									<baseline-browser-icon aria-hidden="true">
 										<svg viewBox="0 0 256 256" width="24" height="24">
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-safari" />
 											<use href="/assets/images/components/baseline/browser-icons.svg#browser-logo-ios" transform="translate(0 60) scale(0.5)" transform-origin="bottom right" />
