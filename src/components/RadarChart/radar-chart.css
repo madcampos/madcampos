@@ -120,5 +120,7 @@
 				'chart'
 				'legends';
 		}
+
+		@media (forced-colors: active) { --surface-2: GrayText; }
 	}
 }

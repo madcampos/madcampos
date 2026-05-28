@@ -385,6 +385,15 @@
 			--surface-3: LinkText;
 			--surface-4: LinkText;
 
+			/* Link colors */
+			--link-hover-color: Highlight;
+
+			/* Tag list colors */
+			--tag-hover-bg: HighlightText;
+			--tag-hover-color: Highlight;
+			--tag-focus-bg: MarkText;
+			--tag-focus-color: Mark;
+
 			/* Button Styles */
 			--button-focus-bg: Highlight;
 			--button-focus-color: revert;

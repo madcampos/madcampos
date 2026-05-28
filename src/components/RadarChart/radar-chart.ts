@@ -85,6 +85,8 @@ export class RadarChart extends HTMLElement implements CustomElement {
 				:scope:has(:where(li:focus-within, li:hover, g.points g:hover)) g.points g {
 					opacity: 0.1;
 					color: var(--text-2);
+
+					@media (forced-colors: active) { opacity: 0; }
 				}
 
 				:scope g.points g:hover {

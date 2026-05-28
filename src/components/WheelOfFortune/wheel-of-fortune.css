@@ -35,13 +35,26 @@
 					stroke-width: var(--size-1);
 
 					&:nth-of-type(2) { fill: transparent; }
+
+					@media (forced-colors: active) {
+						stroke: Mark;
+						fill: MarkText;
+					}
 				}
 
 				.wheel-spinner {
 					transform-origin: 250px 10px;
 
-					path:nth-child(1) { fill: var(--yellow-6); }
-					path:nth-child(2) { fill: color-mix(in srgb, var(--yellow-10), transparent); }
+					path:nth-child(1) {
+						fill: var(--yellow-6);
+
+						@media (forced-colors: active) { fill: Mark; }
+					}
+					path:nth-child(2) {
+						fill: color-mix(in srgb, var(--yellow-10), transparent);
+
+						@media (forced-colors: active) { fill: color-mix(in srgb, Mark, black); }
+					}
 				}
 
 				.wheel-segment {
@@ -49,6 +62,8 @@
 						fill: var(--surface-1);
 						stroke: var(--yellow-6);
 						stroke-width: var(--size-1);
+
+						@media (forced-colors: active) { stroke: Mark; }
 					}
 
 					text {
@@ -60,7 +75,16 @@
 						font-weight: bold;
 					}
 
-					&[aria-current] { filter: brightness(1.7) saturate(1.7) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent)); }
+					&[aria-current] {
+						filter: brightness(1.7) saturate(1.7) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+
+						@media (forced-colors: active) {
+							--surface-1: Highlight;
+							--text-color: HighlightText;
+
+							filter: none;
+						}
+					}
 				}
 			}
 
@@ -89,11 +113,17 @@
 
 			li {
 				font-size: var(--font-size-3);
-				color: var(--surface-1);
+				color: var(--text-color);
 
 				&[aria-current] {
 					background-color: var(--highlight-bg);
 					color: var(--highlight-color);
+
+					@media (forced-colors: active) {
+						background-color: Highlight;
+						color: HighlightText;
+						forced-color-adjust: none;
+					}
 				}
 			}
 
@@ -111,64 +141,73 @@
 		&[display='wheel'] :is(list-container, button[command='--show-wheel']) { display: none; }
 		&[display='list'] :is(wheel-container, button[command='--show-list']) { display: none; }
 
-		:is(.wheel-segment, li):nth-child(1) {
-			--surface-1: light-dark(var(--red-4), var(--red-9));
-			--text-color: light-dark(black, white);
-		}
+		:is(.wheel-segment, li) {
+			&:nth-child(1) {
+				--surface-1: light-dark(var(--red-4), var(--red-9));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(2) {
-			--surface-1: light-dark(var(--lime-4), var(--lime-11));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(2) {
+				--surface-1: light-dark(var(--lime-4), var(--lime-11));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(3) {
-			--surface-1: light-dark(var(--choco-4), var(--choco-8));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(3) {
+				--surface-1: light-dark(var(--choco-4), var(--choco-8));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(4) {
-			--surface-1: light-dark(var(--blue-3), var(--blue-8));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(4) {
+				--surface-1: light-dark(var(--blue-3), var(--blue-8));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(5) {
-			--surface-1: light-dark(var(--yellow-4), var(--yellow-7));
-			--text-color: light-dark(black, black);
-		}
+			&:nth-child(5) {
+				--surface-1: light-dark(var(--yellow-4), var(--yellow-7));
+				--text-color: light-dark(black, black);
+			}
 
-		:is(.wheel-segment, li):nth-child(6) {
-			--surface-1: light-dark(var(--teal-3), var(--teal-9));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(6) {
+				--surface-1: light-dark(var(--teal-3), var(--teal-9));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(7) {
-			--surface-1: light-dark(var(--pink-5), var(--pink-8));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(7) {
+				--surface-1: light-dark(var(--pink-5), var(--pink-8));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(8) {
-			--surface-1: light-dark(var(--orange-5), var(--orange-10));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(8) {
+				--surface-1: light-dark(var(--orange-5), var(--orange-10));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(9) {
-			--surface-1: light-dark(var(--cyan-4), var(--cyan-10));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(9) {
+				--surface-1: light-dark(var(--cyan-4), var(--cyan-10));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(10) {
-			--surface-1: light-dark(var(--jungle-4), var(--jungle-10));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(10) {
+				--surface-1: light-dark(var(--jungle-4), var(--jungle-10));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(11) {
-			--surface-1: light-dark(var(--indigo-3), var(--indigo-10));
-			--text-color: light-dark(black, white);
-		}
+			&:nth-child(11) {
+				--surface-1: light-dark(var(--indigo-3), var(--indigo-10));
+				--text-color: light-dark(black, white);
+			}
 
-		:is(.wheel-segment, li):nth-child(12) {
-			--surface-1: light-dark(var(--purple-6), var(--purple-11));
-			--text-color: light-dark(black, white);
+			&:nth-child(12) {
+				--surface-1: light-dark(var(--purple-6), var(--purple-11));
+				--text-color: light-dark(black, white);
+			}
+
+			&:nth-child(n) {
+				@media (forced-colors: active) {
+					--surface-1: Canvas;
+					--text-color: CanvasText;
+				}
+			}
 		}
 	}
 }

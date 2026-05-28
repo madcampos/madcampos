@@ -21,5 +21,7 @@
 			background-color: var(--accent-color);
 			color: var(--surface-1);
 		}
+
+		@media (forced-colors: active) { forced-color-adjust: none; }
 	}
 }

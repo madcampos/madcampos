@@ -47,7 +47,11 @@
 				background-color: var(--table-header-bg);
 				color: var(--table-header-color);
 
-				@media (forced-colors: active) { forced-color-adjust: none; }
+				@media (forced-colors: active) {
+					forced-color-adjust: none;
+
+					button { forced-color-adjust: auto; }
+				}
 			}
 
 			th[aria-sort] {
@@ -75,7 +79,11 @@
 				color: var(--table-footer-color);
 				background-color: var(--table-footer-bg);
 
-				@media (forced-colors: active) { forced-color-adjust: none; }
+				@media (forced-colors: active) {
+					forced-color-adjust: none;
+
+					button { forced-color-adjust: auto; }
+				}
 			}
 		}
 	}

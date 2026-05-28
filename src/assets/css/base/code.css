@@ -24,7 +24,7 @@
 			}
 		}
 
-		span {
+		:where(span) {
 			--code-color: light-dark(var(--shiki-light, var(--text-1)), var(--shiki-dark, var(--text-1)));
 			--code-font-style: light-dark(var(--shiki-light-font-style, normal), var(--shiki-dark-font-style, normal));
 			--code-font-weight: light-dark(var(--shiki-light-font-weight, normal), var(--shiki-dark-font-weight, normal));
@@ -127,6 +127,7 @@
 							color: GrayText;
 						}
 					}
+
 					&.warning {
 						background-color: var(--highlight-warning-bg);
 
@@ -153,7 +154,6 @@
 						border-inline-width: 0;
 						background-color: Highlight;
 						color: HighlightText;
-						forced-color-adjust: none;
 
 						span { color: inherit; }
 					}
@@ -188,14 +188,12 @@
 				.space::before { content: '·'; }
 			}
 
-			&:has(.line.focused) .line:not(.focused) {
+			&:has(.line.focused) :where(.line:not(.focused)) {
 				opacity: 0.8;
 				filter: contrast(0.8) brightness(0.8);
 
 				@media (forced-colors: active) {
-					opacity: 0.5;
 					filter: none;
-					color: LinkText;
 
 					span {
 						background-color: inherit;

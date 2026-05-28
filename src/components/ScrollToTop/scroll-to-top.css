@@ -45,6 +45,8 @@
 				animation-name: grow;
 				animation-duration: 1ms;
 				animation-timing-function: linear;
+
+				@media (forced-colors: active) { background-color: Highlight; }
 			}
 		}
 
@@ -53,6 +55,12 @@
 			color: var(--surface-1);
 
 			&::before { background-color: var(--text-2); }
+
+			@media (forced-colors: active) {
+				forced-color-adjust: none;
+
+				&::before { background-color: Highlight; }
+			}
 		}
 
 		&:hover {
@@ -60,6 +68,12 @@
 			color: var(--surface-1);
 
 			&::before { background-color: color-mix(in srgb, var(--surface-1), var(--theme-color) 80%); }
+
+			@media (forced-colors: active) {
+				forced-color-adjust: none;
+
+				&::before { background-color: Highlight; }
+			}
 		}
 
 		&:active {
