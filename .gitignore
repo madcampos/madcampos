@@ -5,6 +5,7 @@ dev-dist/
 # generated types
 .astro/
 server/env.d.ts
+env-vars.d.ts
 
 # dependencies
 node_modules/
@@ -19,6 +20,7 @@ pnpm-debug.log*
 # dotenv environment variables file
 .env
 .env.*
+!.env.schema
 !.env.example
 
 # macOS-specific files
