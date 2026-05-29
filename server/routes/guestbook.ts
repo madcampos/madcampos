@@ -47,23 +47,23 @@ export async function getMessages(request: Request) {
 	try {
 		let pageNumber = parsePaginationData(request);
 
-		const { count: totalMessages } = await env.Database.prepare(`
+		const { count: totalMessages } = await env.Database.prepare(/* sql */ `
 			SELECT COUNT(*) as count
 			FROM guestbook
 		`).first<{ count: number }>() ?? { count: 0 };
-		const lastPage = Math.ceil(totalMessages / MESSAGES_PER_PAGE);
+		const lastPage = Math.max(Math.ceil(totalMessages / MESSAGES_PER_PAGE), 1);
 
 		if (pageNumber > lastPage) {
 			pageNumber = lastPage;
 		}
 
-		const offset = MESSAGES_PER_PAGE * pageNumber;
-		const { results, success, error } = await env.Database.prepare(`
+		const offset = MESSAGES_PER_PAGE * (pageNumber - 1);
+		const { results, success, error } = await env.Database.prepare(/* sql */ `
 			SELECT name, message, timestamp
 			FROM guestbook
 			ORDER BY timestamp DESC
-			OFFSET ?
 			LIMIT ${MESSAGES_PER_PAGE}
+			OFFSET ?
 		`).bind(offset).run<Pick<MessageRecord, 'message' | 'name' | 'timestamp'>>();
 
 		if (!success) {
@@ -71,7 +71,7 @@ export async function getMessages(request: Request) {
 		}
 		const parsedUrl = new URL(request.url);
 
-		return {
+		const data: PaginatedResponse<Pick<MessageRecord, 'message' | 'name' | 'timestamp'>> = {
 			start: offset,
 			end: results.length + offset,
 			total: totalMessages,
@@ -81,12 +81,23 @@ export async function getMessages(request: Request) {
 			data: results,
 			url: {
 				current: parsedUrl.href,
-				first: new URL('/api/guestbook/', parsedUrl).href,
-				last: new URL(`/api/guestbook/${Math.ceil(totalMessages / MESSAGES_PER_PAGE)}`, parsedUrl).href,
-				prev: pageNumber > 1 ? new URL(`/api/guestbook${pageNumber - 1 === 1 ? '/' : `/${pageNumber - 1}/`}`, parsedUrl).href : undefined,
-				next: pageNumber < lastPage ? new URL(`/api/guestbook/${pageNumber + 1}`, parsedUrl).href : undefined
+				first: new URL('/api/guestbook/1/', parsedUrl).href,
+				last: new URL(`/api/guestbook/${lastPage}`, parsedUrl).href,
+				prev: pageNumber > 1 ? new URL(`/api/guestbook${pageNumber - 1 === 1 ? '/1/' : `/${pageNumber - 1}/`}`, parsedUrl).href : undefined,
+				next: pageNumber < lastPage ? new URL(`/api/guestbook/${pageNumber + 1}/`, parsedUrl).href : undefined
 			}
-		} satisfies PaginatedResponse<Pick<MessageRecord, 'message' | 'name' | 'timestamp'>>;
+		};
+
+		return new Response(
+			JSON.stringify(data),
+			{
+				status: STATUS_OK,
+				headers: {
+					...DEFAULT_HEADERS,
+					'Content-Type': 'application/json'
+				}
+			}
+		);
 	} catch (err) {
 		console.error(err);
 
@@ -150,7 +161,7 @@ export async function sendMessage(request: Request) {
 
 		const visitorId = await generateVisitorId(requestMetadata);
 
-		const recentPost = await env.Database.prepare(`
+		const recentPost = await env.Database.prepare(/* sql */ `
 			SELECT id, timestamp
 			FROM guestbook
 			WHERE
@@ -166,17 +177,15 @@ export async function sendMessage(request: Request) {
 			throw new ErrorResponse(`Only one post allowed per week. Last post: ${recentPost.timestamp}`, STATUS_CONFLICT);
 		}
 
-		const { success, error } = await env.Database.prepare(`
+		const { success, error } = await env.Database.prepare(/* sql */ `
 			INSERT INTO guestbook
 				(
-					name, message,
-					visitor_id,
+					name, message, visitor_id,
 					country, user_agent, ip_address
 				)
 			VALUES
 				(
-					?, ?,
-					?,
+					?, ?, ?,
 					?, ? , ?
 				)
 		`).bind(

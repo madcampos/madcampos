@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/only-throw-error, @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable @typescript-eslint/only-throw-error */
 import { env } from 'cloudflare:workers';
 
 export const STATUS_OK = 200;
@@ -67,6 +67,8 @@ export class ErrorResponse extends Response {
 				}
 			}
 		);
+
+		console.error({ error: true, message });
 	}
 }
 
@@ -82,7 +84,9 @@ export interface RequestMetadata {
 export function parseRequestMetadata(request: Request) {
 	const country = request.cf?.country as Iso3166Alpha2Code | 'T1' | null;
 	const userAgent = request.headers.get('User-Agent');
-	const ipAddress = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For');
+	const ipAddress = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || (env.NODE_ENV !== 'production' ? '0.0.0.0' : null);
+
+	console.log(country, userAgent, ipAddress);
 
 	if (!country || !userAgent || !ipAddress) {
 		throw new ErrorResponse('Annonymus request are not allowed.');

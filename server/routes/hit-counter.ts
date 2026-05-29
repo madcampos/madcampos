@@ -54,7 +54,7 @@ export async function getVisitorCount(request: Request) {
 	try {
 		const url = parseUrl(request);
 
-		const { totalVisitors = 0, uniqueVisitors = 0 } = (await env.Database.prepare(`
+		const { totalVisitors = 0, uniqueVisitors = 0 } = (await env.Database.prepare(/* sql */ `
 			SELECT
 				COUNT(*) as totalVisitors,
 				COUNT(DISTINCT visitor_id) as uniqueVisitors
@@ -62,7 +62,7 @@ export async function getVisitorCount(request: Request) {
 			WHERE url = ?
 		`).bind(url).first<CountResult>()) ?? {};
 
-		const recentHits = await env.Database.prepare(`
+		const recentHits = await env.Database.prepare(/* sql */ `
 			SELECT timestamp
 			FROM hit_counter
 			WHERE url = ?
@@ -121,7 +121,7 @@ export async function incrementVisitorCount(request: Request) {
 		const requestMetadata = parseRequestMetadata(request);
 		const visitorId = await generateVisitorId(requestMetadata);
 
-		const recentVisit = await env.Database.prepare(`
+		const recentVisit = await env.Database.prepare(/* sql */ `
 			SELECT id, timestamp
 			FROM hit_counter
 			WHERE
@@ -138,7 +138,7 @@ export async function incrementVisitorCount(request: Request) {
 			return new ErrorResponse(`Only one visit allowed every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
 
-		const { success, error } = await env.Database.prepare(`
+		const { success, error } = await env.Database.prepare(/* sql */ `
 			INSERT INTO hit_counter
 				(url, visitor_id, country, user_agent)
 			VALUES
