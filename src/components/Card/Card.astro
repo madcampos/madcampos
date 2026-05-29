@@ -14,8 +14,6 @@ interface Props {
 }
 
 const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro.props;
-
-// TODO: optimize image sizes so they are smaller
 ---
 <m-card class:list={[extraClass]}>
 	<article itemscope {itemtype}>

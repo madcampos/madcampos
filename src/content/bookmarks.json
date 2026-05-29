@@ -958,6 +958,18 @@
 					"title": "Evolved antennas, LLM-generated code, and a potential antifuture",
 					"description": "Argument in favour of the open web and against locking down platforms.",
 					"type": "article"
+				},
+				{
+					"url": "https://geohot.github.io//blog/jekyll/update/2026/05/24/the-eternal-sloptember.html",
+					"title": "The Ethernal Sloptember",
+					"description": "Using LLMs is more hurtful to organizations and in more insidious ways than people think.",
+					"type": "article"
+				},
+				{
+					"url": "https://androidessence.com/leave-me-behind/",
+					"title": "Leave Me Behind",
+					"description": "Don't fall to FOMO",
+					"type": "article"
 				}
 			]
 		},

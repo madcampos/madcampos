@@ -51,7 +51,24 @@ const blogs = await listBlogroll();
 		</header>
 
 		<main id="main">
-			<!-- TODO: add stats -->
+			<radar-chart
+				legend="Bookmark Stats"
+				subtitle="Bookmark categories and the number of items in them."
+				hidden
+			>
+				{
+					links.map(({ title, links }) => (
+						<a
+							data-name={title}
+							data-items={links.length}
+							href={`#${slugify(title)}`}
+						>
+							{title} ({links.length})
+						</a>
+					))
+				}
+			</radar-chart>
+
 			{
 				links.map((section) => (
 					<hgroup>
@@ -121,5 +138,6 @@ const blogs = await listBlogroll();
 		</footer>
 		<SvgDefs />
 		<iab-escape></iab-escape>
+		<script src="../components/RadarChart/radar-chart.ts"></script>
 	</body>
 </html>
