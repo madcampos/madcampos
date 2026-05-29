@@ -22,6 +22,7 @@ declare global {
 		'decorated-line': HTMLElement;
 		'dialog-content': HTMLElement;
 		'draft-tag': HTMLElement;
+		'message-list': HTMLElement;
 		'm-avatar': HTMLElement;
 		'm-logo': HTMLElement;
 		'm-note': HTMLElement;

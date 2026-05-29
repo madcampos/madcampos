@@ -68,7 +68,7 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 						></textarea>
 						<input-error>Message is required.</input-error>
 					</input-wrapper>
-					<p>
+					<input-wrapper>
 						<label for="word-count">Character count:</label>
 						<output for="message-input" aria-live="off">
 							<progress
@@ -80,22 +80,7 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 							</progress>
 							<span id="word-count-text">&mdash;</span>
 						</output>
-					</p>
-
-					<script type="module" is:inline>
-						const input = /** @type {HTMLTextAreaElement} */ (document.querySelector('#message-input'));
-						const output = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count'));
-						const outputText = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count-text'));
-
-						function updateOutput() {
-							output.value = input.value.length;
-							output.textContent = input.value.length === 0 ? '—' : `${input.value.length} characters`;
-							outputText.textContent = output.textContent;
-						}
-
-						input.addEventListener('input', updateOutput);
-						input.addEventListener('change', updateOutput);
-					</script>
+					</input-wrapper>
 
 					<input-wrapper>
 						<div
@@ -109,6 +94,7 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 					</input-wrapper>
 
 					<footer>
+						<!-- TODO: send message -->
 						<button type="submit">Submit</button>
 						<hr />
 						<button type="reset">Reset</button>
@@ -119,7 +105,9 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 			<fieldset>
 				<legend>Messages</legend>
 
-				<progress></progress>
+				<message-list>
+					<progress></progress>
+				</message-list>
 			</fieldset>
 		</main>
 
@@ -133,5 +121,6 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 		<SvgDefs />
 		<iab-escape></iab-escape>
 		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" type="module" is:inline></script>
+		<script src="../assets/pages/guestbook/guestbook.ts"></script>
 	</body>
 </html>

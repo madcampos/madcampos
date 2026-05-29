@@ -1,3 +1,5 @@
+@import url('../../../components/Card/card.css');
+
 @layer pages {
 	form {
 		inline-size: fit-content;
@@ -8,6 +10,14 @@
 			display: flex;
 			align-items: center;
 			gap: var(--size-3);
+			inline-size: 100%;
+
+			span { flex-shrink: 0; }
+
+			progress {
+				flex-grow: 1;
+				min-inline-size: auto;
+			}
 		}
 
 		footer {
@@ -17,6 +27,22 @@
 				border: none;
 				flex-shrink: 1;
 			}
+		}
+	}
+
+	message-list {
+		display: flex;
+		flex-direction: column;
+
+		progress:only-child {
+			display: block;
+			margin-inline: auto;
+		}
+
+		hr {
+			inline-size: var(--size-content-0);
+			border-block-start-style: solid;
+			border-block-start-color: var(--secondary-color);
 		}
 	}
 
