@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/only-throw-error */
 import { env } from 'cloudflare:workers';
+import { cleanHTMLString } from '../utils/html.ts';
 import {
 	type PaginatedResponse,
 	type StatusResponse,
@@ -144,6 +145,10 @@ async function parseMessageRequestData(request: Request) {
 	if (/[a-z]\.[a-z]{2,}/iu.test(data.message)) {
 		throw new ErrorResponse('Invalid "message".');
 	}
+
+	// Remove HTML tags from name and message
+	data.name = await cleanHTMLString(data.name);
+	data.message = await cleanHTMLString(data.message);
 
 	return data as { name: string, message: string, token: string };
 }

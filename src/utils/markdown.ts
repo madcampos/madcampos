@@ -1,5 +1,8 @@
 export function escapeHtmlTags(input: string) {
-	return input.replaceAll('&', '&amp;').replaceAll('<', '&lt;');
+	return input
+		.replaceAll('&', '&amp;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;');
 }
 
 export function inlineMarkdownRender(input: string) {

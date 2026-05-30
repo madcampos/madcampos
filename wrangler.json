@@ -2,7 +2,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "madcampos-site",
 	"main": "server/index.ts",
-	"compatibility_date": "2025-07-26",
+	"compatibility_date": "2026-05-30",
 	"compatibility_flags": ["nodejs_compat"],
 	"keep_vars": false,
 	"send_metrics": false,

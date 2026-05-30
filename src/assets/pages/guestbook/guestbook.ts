@@ -29,6 +29,49 @@ interface MessageRecord {
 
 const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
+function sanitizeInlineText(unsafeString?: string) {
+	if (!unsafeString) {
+		return '';
+	}
+
+	const template = document.createElement('template');
+	template.innerHTML = unsafeString;
+	const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT);
+	let cleanText = '';
+
+	let currentNode = walker.nextNode();
+	while (currentNode !== null) {
+		cleanText += currentNode.nodeValue ?? '';
+
+		currentNode = walker.nextNode();
+	}
+
+	return cleanText
+		.replaceAll('&', '&amp;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;')
+		.replaceAll('"', '&quot;')
+		.replaceAll("'", '&apos;');
+}
+
+function inlineMarkdownRender(input: string) {
+	const results = sanitizeInlineText(input)
+		// Bold
+		.replaceAll(/\*\*(.+?)\*\*|__(.+?)__/igu, '<strong>$1$2</strong>')
+		// Italics
+		.replaceAll(/\*(.+?)\*|_(.+?)_/igu, '<em>$1$2</em>')
+		// Striketrough (deleted text)
+		.replaceAll(/~~(.+?)~~/igu, '<del>$1</del>')
+		// Underline (inserted text)
+		.replaceAll(/\+\+(.+?)\+\+/igu, '<ins>$1</ins>')
+		// Highlight
+		.replaceAll(/[=]=(.+?)==/igu, '<mark>$1</mark>')
+		// Inline code
+		.replaceAll(/`(.+?)`/igu, '<code>$1</code>');
+
+	return results;
+}
+
 class MessagesList extends HTMLElement implements CustomElement {
 	#GUESTBOOK_URL = new URL('/api/guestbook/', SiteSettings.apiUrl).href;
 
@@ -60,17 +103,13 @@ class MessagesList extends HTMLElement implements CustomElement {
 
 	#addCards(messages: Pick<MessageRecord, 'message' | 'name' | 'timestamp'>[]) {
 		for (const message of messages) {
-			const messageSpan = document.createElement('span');
-
-			messageSpan.innerText = message.message;
-
 			this.#loader.insertAdjacentHTML(
 				'beforebegin',
 				/* html */ `
 				<m-card>
 					<article>
 						<header>
-							<card-title>${message.name}</card-title>
+							<card-title>${sanitizeInlineText(message.name)}</card-title>
 
 							<card-subtitle>
 								<time datetime="${message.timestamp}">${formatter.format(new Date(message.timestamp))}</time>
@@ -78,7 +117,7 @@ class MessagesList extends HTMLElement implements CustomElement {
 						</header>
 
 						<rendered-content>
-							${messageSpan.innerHTML}
+							${sanitizeInlineText(message.message)}
 						</rendered-content>
 					</article>
 				</m-card>
