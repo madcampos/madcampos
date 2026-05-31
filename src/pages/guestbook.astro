@@ -37,15 +37,17 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 		</header>
 
 		<main id="main">
-			<form action="" method="post">
+			<form action="/api/guestbook/" method="post" hidden>
 				<fieldset>
 					<legend>Sign Guestbook</legend>
+					<form-status hidden></form-status>
 					<input-wrapper>
 						<label for="name-input">Name</label>
 						<input
 							type="text"
 							name="name"
 							id="name-input"
+							minlength="1"
 							maxlength="128"
 							autocomplete="name"
 							required
@@ -64,8 +66,23 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 							spellcheck="true"
 							wrap="soft"
 							required
+							minlength="1"
 							maxlength="512"
 						></textarea>
+						<input-hint>
+							<p>You can use inline markdown for editing messages. All html is stripped though.</p>
+							<details>
+								<summary>Accepted formatting</summary>
+								<ul>
+									<li>Text between single "<code>_</code>" or "<code>*</code>" becomes <em>_italic_</em>.</li>
+									<li>Text between two "<code>_</code>" or "<code>*</code>" becomes <strong>**bold**</strong>.</li>
+									<li>Text between two "<code>~</code>" becomes <del>~~strikethrough/deleted~~</del>.</li>
+									<li>Text between two "<code>+</code>" becomes <ins>++underlined/inserted++</ins>.</li>
+									<li>Text between two "<code>=</code>" becomes <mark>==highlighted==</mark>.</li>
+									<li>Text between single "<code>`</code>" becomes <code>`inline code`</code>.</li>
+								</ul>
+							</details>
+						</input-hint>
 						<input-error>Message is required.</input-error>
 					</input-wrapper>
 					<input-wrapper>
@@ -94,7 +111,6 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 					</input-wrapper>
 
 					<footer>
-						<!-- TODO: send message -->
 						<button type="submit">Submit</button>
 						<hr />
 						<button type="reset">Reset</button>
@@ -102,12 +118,10 @@ const turnstileKey = import.meta.env.DEV ? '1x00000000000000000000AA' : '0x4AAAA
 				</fieldset>
 			</form>
 
-			<fieldset>
+			<fieldset id="messages">
 				<legend>Messages</legend>
 
-				<message-list>
-					<progress></progress>
-				</message-list>
+				<message-list></message-list>
 			</fieldset>
 		</main>
 

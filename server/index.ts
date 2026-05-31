@@ -1,5 +1,5 @@
 import { Router } from './router.ts';
-import { getMessages } from './routes/guestbook.ts';
+import { getMessages, sendMessage } from './routes/guestbook.ts';
 import { getVisitorCount, incrementVisitorCount } from './routes/hit-counter.ts';
 import { simpleOptionsResponse } from './utils/index.ts';
 
@@ -12,7 +12,8 @@ const router = new Router({
 		'OPTIONS /api/guestbook/': simpleOptionsResponse,
 		'OPTIONS /api/guestbook/:page?': simpleOptionsResponse,
 		'GET /api/guestbook/': getMessages,
-		'GET /api/guestbook/:page?': getMessages
+		'GET /api/guestbook/:page?': getMessages,
+		'POST /api/guestbook/': sendMessage
 	}
 });
 

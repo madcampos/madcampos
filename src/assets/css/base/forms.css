@@ -11,6 +11,29 @@
 		justify-content: center;
 	}
 
+	form form-status:not([hidden]) {
+		display: block;
+		padding: var(--size-2);
+		background-color: var(--note-info-bg);
+		color: var(--note-info-color);
+		border: var(--border-size) var(--border-style) var(--note-info-color);
+		border-radius: var(--border-radius);
+		width: 100%;
+		flex-grow: 1;
+
+		&[data-error] {
+			background-color: var(--input-invalid-bg);
+			color: var(--input-invalid-color);
+			border-color: var(--input-invalid-color);
+		}
+
+		&[data-success] {
+			background-color: var(--input-valid-bg);
+			color: var(--input-valid-color);
+			border-color: var(--input-valid-color);
+		}
+	}
+
 	/* Fieldset */
 
 	fieldset {

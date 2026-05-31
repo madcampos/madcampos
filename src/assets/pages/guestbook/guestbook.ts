@@ -72,6 +72,79 @@ function inlineMarkdownRender(input: string) {
 	return results;
 }
 
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+const messageInput = document.querySelector<HTMLTextAreaElement>('#message-input')!;
+const messageCountProgress = document.querySelector<HTMLProgressElement>('#word-count')!;
+const messageCountText = document.querySelector<HTMLSpanElement>('#word-count-text')!;
+const messageForm = document.querySelector<HTMLFormElement>('form')!;
+const messageSubmitButton = document.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+const messageResetButton = document.querySelector<HTMLButtonElement>('button[type="reset"]')!;
+const messageFeedback = document.querySelector<HTMLElement>('form-status')!;
+/* eslint-enable @typescript-eslint/no-non-null-assertion */
+
+function updateCharCount() {
+	messageCountProgress.value = messageInput.value.length;
+	messageCountProgress.textContent = messageInput.value.length === 0 ? '—' : messageInput.value.length.toString();
+	messageCountText.textContent = messageCountProgress.textContent;
+}
+
+messageInput.addEventListener('input', updateCharCount);
+messageInput.addEventListener('change', updateCharCount);
+
+messageForm.addEventListener('submit', async (evt) => {
+	evt.preventDefault();
+
+	if (!(evt.target instanceof HTMLFormElement)) {
+		return;
+	}
+
+	try {
+		const url = evt.target.action;
+		const formData = new FormData(evt.target);
+
+		formData.set('name', sanitizeInlineText(formData.get('name') as string));
+		formData.set('message', sanitizeInlineText(formData.get('message') as string));
+
+		messageSubmitButton.disabled = true;
+		messageResetButton.disabled = true;
+		messageFeedback.hidden = true;
+
+		const response = await fetch(new URL(new URL(url).pathname, SiteSettings.apiUrl), {
+			method: 'POST',
+			body: formData
+		});
+
+		if (!response.ok) {
+			const errorResposne: { message: string } = await response.json();
+
+			throw new Error(errorResposne.message);
+		}
+
+		messageFeedback.innerHTML = /* html */ `
+			<span>Message sent successfully!</span>
+		`;
+		messageFeedback.removeAttribute('data-error');
+		messageFeedback.toggleAttribute('data-success', true);
+		messageFeedback.hidden = false;
+
+		evt.target.reset();
+	} catch (err) {
+		messageFeedback.innerHTML = /* html */ `
+			<span>${err instanceof Error ? err.message : 'Error sending message.'}</span>
+		`;
+		messageFeedback.removeAttribute('data-success');
+		messageFeedback.toggleAttribute('data-error', true);
+		messageFeedback.hidden = false;
+
+		messageSubmitButton.disabled = false;
+		messageResetButton.disabled = false;
+	}
+});
+
+if (SiteSettings.js !== 'disabled') {
+	messageForm.hidden = false;
+}
+
 class MessagesList extends HTMLElement implements CustomElement {
 	#GUESTBOOK_URL = new URL('/api/guestbook/', SiteSettings.apiUrl).href;
 
@@ -92,10 +165,13 @@ class MessagesList extends HTMLElement implements CustomElement {
 				const messages: PaginatedResponse<Pick<MessageRecord, 'message' | 'name' | 'timestamp'>> = await response.json();
 
 				this.#totalPages = messages.lastPage;
-				this.#nextPage = messages.currentPage < messages.lastPage ? messages.currentPage + 1 : messages.lastPage;
+				this.#nextPage = messages.currentPage + 1;
 
 				return messages.data;
 			}
+		} else {
+			this.#observer?.disconnect();
+			this.#observer = undefined;
 		}
 
 		return [];
@@ -109,16 +185,17 @@ class MessagesList extends HTMLElement implements CustomElement {
 				<m-card>
 					<article>
 						<header>
-							<card-title>${sanitizeInlineText(message.name)}</card-title>
+							<card-title>
+								<strong>From:</strong>
+								<span>${sanitizeInlineText(message.name)}</span>
+							</card-title>
 
 							<card-subtitle>
 								<time datetime="${message.timestamp}">${formatter.format(new Date(message.timestamp))}</time>
 							</card-subtitle>
 						</header>
 
-						<rendered-content>
-							${sanitizeInlineText(message.message)}
-						</rendered-content>
+						<rendered-content>${inlineMarkdownRender(message.message)}</rendered-content>
 					</article>
 				</m-card>
 			`
@@ -127,6 +204,8 @@ class MessagesList extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
+		this.innerHTML = /* html */ `<progress></progress>`;
+
 		this.#observer = new IntersectionObserver(async ([entry]) => {
 			if (entry?.isIntersecting && !this.#isLoading) {
 				this.#isLoading = true;
@@ -158,18 +237,3 @@ class MessagesList extends HTMLElement implements CustomElement {
 if (SiteSettings.js !== 'disabled' && !customElements.get('message-list')) {
 	customElements.define('message-list', MessagesList);
 }
-
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-const messageInput = document.querySelector<HTMLTextAreaElement>('#message-input')!;
-const messageCountProgress = document.querySelector<HTMLProgressElement>('#word-count')!;
-const messageCountText = document.querySelector<HTMLSpanElement>('#word-count-text')!;
-/* eslint-enable @typescript-eslint/no-non-null-assertion */
-
-function updateCharCount() {
-	messageCountProgress.value = messageInput.value.length;
-	messageCountProgress.textContent = messageInput.value.length === 0 ? '—' : messageInput.value.length.toString();
-	messageCountText.textContent = messageCountProgress.textContent;
-}
-
-messageInput.addEventListener('input', updateCharCount);
-messageInput.addEventListener('change', updateCharCount);

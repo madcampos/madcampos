@@ -3,7 +3,7 @@
 @layer pages {
 	form {
 		inline-size: fit-content;
-		max-inline-size: 100%;
+		max-inline-size: var(--size-content-2);
 		margin-inline: auto;
 
 		output {
@@ -30,6 +30,8 @@
 		}
 	}
 
+	#messages:has(message-list:empty) { display: none; }
+
 	message-list {
 		display: flex;
 		flex-direction: column;
@@ -43,6 +45,11 @@
 			inline-size: var(--size-content-0);
 			border-block-start-style: solid;
 			border-block-start-color: var(--secondary-color);
+		}
+
+		m-card rendered-content {
+			text-wrap-mode: wrap;
+			white-space-collapse: preserve-breaks;
 		}
 	}
 

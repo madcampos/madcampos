@@ -15,7 +15,7 @@ import { TurnstileValidator } from '../utils/turnstile.ts';
 
 const MAX_NAME_LENGTH = 128;
 const MAX_MESSAGE_LENGTH = 512;
-const POST_TIME_THRESHOLD = '-7 days';
+const POST_TIME_THRESHOLD = '-2 days';
 const MESSAGES_PER_PAGE = 20;
 
 interface MessageRecord {
@@ -122,27 +122,7 @@ async function parseMessageRequestData(request: Request) {
 		throw new ErrorResponse('Invalid "name".');
 	}
 
-	// Name has "URL like" parts
-	if (data.name.includes('://')) {
-		throw new ErrorResponse('Invalid "message".');
-	}
-
-	// Name has "domain like" parts, maybe be a url or an email
-	if (/[a-z]\.[a-z]{2,}/iu.test(data.name)) {
-		throw new ErrorResponse('Invalid "message".');
-	}
-
 	if (typeof data.message !== 'string' || !data.message || data.message.length > MAX_MESSAGE_LENGTH) {
-		throw new ErrorResponse('Invalid "message".');
-	}
-
-	// Message has "URL like" parts
-	if (data.message.includes('://')) {
-		throw new ErrorResponse('Invalid "message".');
-	}
-
-	// Message has "domain like" parts, maybe be a url or an email
-	if (/[a-z]\.[a-z]{2,}/iu.test(data.message)) {
 		throw new ErrorResponse('Invalid "message".');
 	}
 
@@ -179,7 +159,7 @@ export async function sendMessage(request: Request) {
 		if (recentPost) {
 			// eslint-disable-next-line no-console
 			console.log({ visitorId, recentPost });
-			throw new ErrorResponse(`Only one post allowed per week. Last post: ${recentPost.timestamp}`, STATUS_CONFLICT);
+			throw new ErrorResponse(`Only one post allowed evey two days. Last post: ${recentPost.timestamp}`, STATUS_CONFLICT);
 		}
 
 		const { success, error } = await env.Database.prepare(/* sql */ `

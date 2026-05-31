@@ -59,6 +59,7 @@ declare global {
 		'input-infix': HTMLElement;
 		'input-required': HTMLElement;
 		'input-success': HTMLElement;
+		'form-status': HTMLElement;
 		// #endregion
 
 		// #region Color Swatch
