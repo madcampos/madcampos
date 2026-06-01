@@ -27,7 +27,7 @@ interface MessageRecord {
 	user_agent: string;
 }
 
-const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
 
 function sanitizeInlineText(unsafeString?: string) {
 	if (!unsafeString) {
