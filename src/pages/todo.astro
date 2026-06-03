@@ -144,29 +144,29 @@ const tasks: Task[] = [
 		]
 	},
 	{ isDone: false, text: 'Add [search functionality](https://pagefind.app/docs/)' },
-	{ isDone: true, text: 'Add [security.txt](/.wuell-known/security.txt)' },
-	{ isDone: false, text: 'Add stats board' },
+	{ isDone: true, text: 'Add [security.txt](/.well-known/security.txt)' },
+	{ isDone: true, text: 'Add stats board' },
 	{ isDone: true, text: 'Add [styleguide page](/styleguide/)' },
 	{
 		isDone: true,
 		text: 'Add debug mode',
 		children: [
 			{ isDone: true, text: 'Make debug css togglable' },
-			{ isDone: false, text: 'Add JS report for issues (?)' }
+			{ isDone: false, text: 'Add JS report for issues (?)', removed: 'Irrelevant' }
 		],
 		removed: 'Too much work for too little return. Also, styleguide page provides better solution.'
 	},
-	{ isDone: false, text: 'Add [webauthn](https://webauthn.io/) (?)' },
-	{ isDone: false, text: 'Add [web monetization](https://webmonetization.org/docs/) (?)' },
+	{ isDone: false, text: 'Add [webauthn](https://webauthn.io/) (?)', removed: 'Nothing to auth about' },
+	{ isDone: false, text: 'Add [web monetization](https://webmonetization.org/docs/) (?)', removed: 'Spec is dead/zombie' },
 	{ isDone: true, text: 'Add a "[uses](/colophon/)" page' },
 	{ isDone: true, text: 'Add [webfinger](/.well-known/webfinger) endpoint' },
 	{
-		isDone: false,
+		isDone: true,
 		text: 'Add [webrings](https://brisray.com/web/webring-list.htm)',
 		children: [
 			{ isDone: false, text: '[Queer Coded](https://isaacfish.neocities.org/webring/)', removed: 'Seems to be overloaded with applications 😭' },
-			{ isDone: false, text: '[CSS Joy](https://cs.sjoy.lol/)' },
-			{ isDone: false, text: '[Bucketfish](https://webring.bucketfish.me/)' }
+			{ isDone: false, text: '[CSS Joy](https://cs.sjoy.lol/)', removed: "I'm not pursuing it anymore" },
+			{ isDone: false, text: '[Bucketfish](https://webring.bucketfish.me/)', removed: "I'm not pursuing it anymore" }
 		]
 	},
 	{ isDone: true, text: 'Add a [CSS Naked day](https://css-naked-day.github.io/)' },

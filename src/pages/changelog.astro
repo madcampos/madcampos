@@ -8,6 +8,7 @@ import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { listAllChangelogs } from '../utils/changelog.ts';
+import { slugify } from '../utils/slug';
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'UTC' });
 const changelogs = await listAllChangelogs();
@@ -16,6 +17,7 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 
 	return {
 		Content,
+		id: changelog.id,
 		title: changelog.title,
 		date: changelog.data.date,
 		draft: changelog.data.draft
@@ -49,8 +51,8 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 
 		<main id="main">
 			{
-				renderedChangelogs.map(({ date, title, draft, Content }) => (
-					<details>
+				renderedChangelogs.map(({ id, date, title, draft, Content }) => (
+					<details id={slugify(id)}>
 						<summary>
 							<header>
 								<h2>

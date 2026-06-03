@@ -194,7 +194,7 @@ export async function listPostsByTag(sorting: PostSorting = 'descending') {
 		for (const tag of post.data.tags ?? []) {
 			tags[tag] ??= [];
 
-			tags[tag]?.push(post as Post);
+			tags[tag]?.push(post);
 		}
 	}
 

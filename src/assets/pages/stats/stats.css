@@ -1,0 +1,24 @@
+@layer page {
+	dl {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--size-3);
+		justify-content: center;
+
+		div {
+			border: var(--border-style) var(--border-size) var(--theme-color);
+			border-radius: var(--border-radius);
+			background-color: var(--surface-2);
+			padding: var(--size-3);
+			inline-size: var(--size-content-1);
+			text-align: center;
+
+			dt {
+				font-size: var(--font-size-2);
+				text-decoration: none;
+			}
+
+			dd { margin: 0; }
+		}
+	}
+}

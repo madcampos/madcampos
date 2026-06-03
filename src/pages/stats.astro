@@ -1,0 +1,118 @@
+---
+import '../assets/pages/stats/stats.css';
+
+import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import Logo from '../components/Logo/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
+import { listBookmarks } from '../utils/bookmarks';
+import { listAllChangelogs } from '../utils/changelog';
+import { listAllPosts } from '../utils/post';
+import { slugify } from '../utils/slug';
+
+const posts = await listAllPosts();
+const changelogs = await listAllChangelogs();
+const bookmarks = await listBookmarks();
+
+const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+---
+
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
+	<HtmlHead
+		title="Madcampos Site Statistics"
+		description="Website statistics."
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+		<CssNakedDay />
+
+		<header id="page-top">
+			<Logo
+				subtitle="Statistics"
+				shortSubtitle="Stats"
+				title="Statistics"
+			/>
+			<h1>Site Stats</h1>
+		</header>
+
+		<main id="main">
+			<dl>
+				<div>
+					<dt>Site Age</dt>
+					<dd>
+						<time id="site-date" datetime="2023-01-05T01:12:21.000Z">January 4, 2023</time>
+					</dd>
+				</div>
+				<div>
+					<dt>Last released version</dt>
+					<dd>
+						<a href={`/changelog#${slugify(changelogs[0]?.id ?? '')}`}>{changelogs[0]?.title ?? ''}</a>
+					</dd>
+				</div>
+				<div>
+					<dt>Latest blog post</dt>
+					<dd>
+						<a href={`/blog/${posts[0]?.url}`}>
+							<span>{posts[0]?.data.title}</span>
+						</a>
+						<span>
+							(<time datetime={posts[0]?.data.createdAt.toISOString() ?? ''}>{formatter.format(posts[0]?.data.createdAt)}</time>)
+						</span>
+					</dd>
+				</div>
+				<div>
+					<dt>Number of posts</dt>
+					<dd>
+						<a href="/blog">
+							<var>{posts.length}</var>
+						</a>
+					</dd>
+				</div>
+				<div>
+					<dt>Total word count</dt>
+					<dd>
+						<var>~{posts.reduce((acc, { wordCount }) => acc + wordCount, 0)}</var>
+					</dd>
+				</div>
+				<div>
+					<dt>Number of tags</dt>
+					<dd>
+						<a href="/blog/tags/">
+							<var>{[...new Set(posts.flatMap(({ data: { tags } }) => tags ?? []))].length}</var>
+						</a>
+					</dd>
+				</div>
+				<div>
+					<dt>Total bookmarks</dt>
+					<dd>
+						<a href="/bookmarks/">
+							<var>{bookmarks.reduce((acc, { links }) => acc + links.length, 0)}</var>
+						</a>
+					</dd>
+				</div>
+			</dl>
+		</main>
+
+		<footer>
+			<DecoratedLine />
+
+			<OldStyleButtons />
+			<Webrings />
+			<hit-counter></hit-counter>
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+		<script src="../assets/pages/stats/stats.ts"></script>
+	</body>
+</html>
