@@ -38,12 +38,21 @@
 		color: var(--text-2);
 	}
 
-	:is(abbr, u, s, ins, del) {
+	:is(abbr, u, ins) {
 		text-decoration: underline;
 		text-decoration-style: var(--link-underline);
 		text-decoration-thickness: 0.11em;
 		text-decoration-skip-ink: auto;
 		text-underline-offset: 0.2em;
+	}
+
+	:is(abbr) { text-decoration-style: dotted; }
+
+	:is(s, del) {
+		text-decoration-line: line-through;
+		text-decoration-style: solid;
+		text-decoration-thickness: 0.11em;
+		text-decoration-color: color-mix(in srgb, currentColor, transparent);
 	}
 
 	:is(strong, b) { font-weight: 900; }
@@ -65,8 +74,6 @@
 		color: var(--highlight-mark-color);
 		background-color: var(--highlight-mark-bg);
 	}
-
-	:is(s, del) { text-decoration-line: line-through; }
 
 	ins {
 		color: var(--diff-add-color);
