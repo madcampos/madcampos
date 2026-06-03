@@ -46,10 +46,10 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 				shortSubtitle="Log"
 				title="Changelog page"
 			/>
-			<h1>Changelog</h1>
+			<h1 data-pagefind-meta="title">Changelog</h1>
 		</header>
 
-		<main id="main">
+		<main data-pagefind-body id="main">
 			{
 				renderedChangelogs.map(({ id, date, title, draft, Content }) => (
 					<details id={slugify(id)}>

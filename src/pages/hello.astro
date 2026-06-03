@@ -27,10 +27,10 @@ import { encodeEmail } from '../utils/email';
 				shortSubtitle="Hi"
 				title="Hello Page"
 			/>
-			<h1>Hello</h1>
+			<h1 data-pagefind-meta="title">Hello</h1>
 		</header>
 
-		<main>
+		<main data-pagefind-body>
 			<p>
 				Hi! My preferred contact method is via <Fragment set:html={`<a href="mailto:${encodeEmail(true)}">email</a>`} />.
 			</p>

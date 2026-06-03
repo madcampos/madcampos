@@ -34,12 +34,19 @@ import { encodeEmail } from '../utils/email';
 				shortSubtitle="me"
 				title="About Page"
 			/>
-			<h1>About Me</h1>
+			<h1 data-pagefind-meta="title">About Me</h1>
 		</header>
 
 		<!-- TODO: https://www.youtube.com/watch?v=DuowDNn3TNc -->
 
-		<main id="main" class="h-card vcard" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
+		<main
+			data-pagefind-body
+			id="main"
+			class="h-card vcard"
+			itemprop="mainEntity"
+			itemtype="https://schema.org/Person"
+			itemscope
+		>
 			<div class="p-note note" itemprop="description">
 				<p>
 					Hey! Name is <strong class="p-name fn n" itemprop="name">Marco</strong>, best known online by the moniker &ldquo;<em

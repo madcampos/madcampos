@@ -63,7 +63,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 			<h1>{title ? title : "Marco Campos' Blog"}</h1>
 		</header>
 
-		<main id="main">
+		<main data-pagefind-body id="main">
 			{
 				posts.map((post) => (
 					<Card
@@ -79,6 +79,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						<small slot="subtitle">
 							<time
 								data-relative-time
+								data-pagefind-sort="date[datetime]"
 								datetime={post.data.createdAt.toISOString()}
 							>{formatter.format(post.data.createdAt)}</time>
 						</small>

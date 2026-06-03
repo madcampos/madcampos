@@ -46,10 +46,10 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone
 				shortSubtitle="Proj."
 				title="Projects Page"
 			/>
-			<h1>Project Highlight</h1>
+			<h1 data-pagefind-meta="title">Project Highlight</h1>
 		</header>
 
-		<main id="main">
+		<main data-pagefind-body id="main">
 			{
 				projects.map(({ Content, data }) => (
 					<Card
