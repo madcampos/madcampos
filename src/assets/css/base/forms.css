@@ -354,6 +354,11 @@
 		min-inline-size: 0;
 		inline-size: var(--size-8);
 		block-size: var(--size-7);
+		overflow: hidden;
+
+		&::-webkit-color-swatch-wrapper { padding: 0; }
+		&::-webkit-color-swatch { border: none; }
+		&::-moz-color-swatch { border: none; }
 	}
 
 	input[type='search']:not(:focus, :active)::-webkit-search-cancel-button { display: none; }
