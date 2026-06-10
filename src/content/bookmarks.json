@@ -980,7 +980,25 @@
 				{
 					"url": "https://androidessence.com/leave-me-behind/",
 					"title": "Leave Me Behind",
-					"description": "Don't fall to FOMO",
+					"description": "Don't fall to FOMO!",
+					"type": "article"
+				},
+				{
+					"url": "https://julienreszka.com/blog/the-better-the-autopilot-the-worse-the-pilot/",
+					"title": "The Better the Autopilot, the Worse the Pilot",
+					"description": "Short comment that relying on tools makes we loose the skill they replace.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.codingwithjesse.com/blog/rockstar-developers/",
+					"title": "Cleaning up after AI rockstar developers",
+					"description": "Maintaining AI generated code is even worst than maintaining code from the \"10x\" devs.",
+					"type": "article"
+				},
+				{
+					"url": "https://human-in-the-loop.bearblog.dev/llms-are-eroding-my-software-engineering-career-and-i-dont-know-what-to-do/",
+					"title": "LLMs are eroding my software engineering career and I don't know what to do",
+					"description": "The anxiety from LLMs swarming everything is real.",
 					"type": "article"
 				}
 			]
