@@ -730,6 +730,12 @@
 					"title": "Command Line Interface Guidelines",
 					"description": "Set of guidelines for designing CLI tools.",
 					"type": "guidelines"
+				},
+				{
+					"url": "https://www.jacquescorbytuech.com/writing/what-apple-and-google-are-doing-your-push-notifications",
+					"title": "What Apple and Google are doing to your push notifications",
+					"description": "In-depth dive to push notifications and how they work.",
+					"type": "article"
 				}
 			]
 		},
