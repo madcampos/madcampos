@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon/components';
+import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
+import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
+import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
+import Logo from '../components/Logo/Logo.astro';
+import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
+import SiteNav from '../components/SiteNav/SiteNav.astro';
+import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
+import Webrings from '../components/Webrings/Webrings.astro';
+---
+<!DOCTYPE html>
+<html lang="en-US" itemscope itemtype="https://schema.org/ItemList">
+	<HtmlHead
+		title="Search | Marco Campos"
+		description="Search the website"
+	/>
+	<body>
+		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>
+
+		<skip-to-content>
+			<a href="#main">Skip to main content</a>
+		</skip-to-content>
+
+		<SiteNav />
+		<CssNakedDay />
+
+		<header>
+			<Logo
+				subtitle="Search"
+				shortSubtitle="Find"
+				title="Seaarch Page"
+			/>
+			<h1>Search</h1>
+		</header>
+
+		<main id="main">
+			<search>
+				<form action="" method="GET">
+					<input-wrapper>
+						<label for="search-input">Search:</label>
+						<input type="search" id="search-input" name="q" placeholder="What would you like to find?" />
+					</input-wrapper>
+					<button type="submit">
+						<sr-only>Search</sr-only>
+						<Icon name="mingcute:search-3-line" aria-hidden="true" />
+					</button>
+				</form>
+			</search>
+		</main>
+
+		<footer>
+			<DecoratedLine />
+
+			<OldStyleButtons />
+			<Webrings />
+			<hit-counter></hit-counter>
+		</footer>
+		<SvgDefs />
+		<iab-escape></iab-escape>
+		<script src="../assets/pages/search/search.ts"></script>
+	</body>
+</html>
