@@ -42,7 +42,6 @@
 			grid-area: subtitle;
 			font-family: var(--headers-font-family);
 			font-size: var(--font-size-1);
-			font-style: italic;
 			color: var(--theme-color);
 
 			small {
@@ -65,7 +64,7 @@
 			address { font-style: normal; }
 		}
 
-		@media (max-width: 50rem) {
+		@media screen and (max-width: 50rem) {
 			grid-template-columns: auto;
 			grid-template-rows: repeat(2, auto) var(--size-3) repeat(2, auto);
 			grid-template-areas:
@@ -104,7 +103,7 @@
 			dt {
 				display: flex;
 
-				@media (max-width: 50rem) { flex-direction: column; }
+				@media screen and (max-width: 50rem) { flex-direction: column; }
 			}
 		}
 	}
@@ -132,6 +131,7 @@
 		p {
 			padding-inline: var(--size-2);
 			margin-block: 0 var(--size-3);
+			font-style: normal;
 		}
 	}
 
@@ -159,14 +159,6 @@
 		padding-inline: var(--size-4);
 
 		@media (max-width: 40rem) { flex-direction: column; }
-
-		@media print {
-			display: block;
-			columns: 3;
-			column-gap: var(--size-3);
-			inline-size: fit-content;
-			margin-inline: auto;
-		}
 	}
 
 	#skill-list {

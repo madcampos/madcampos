@@ -9,6 +9,7 @@ import resume from '../../public/assets/documents/resume.json' with { type: 'jso
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import { encodeEmail } from '../utils/email';
 import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import { encodePhoneNumber } from '../utils/phone-number';
 
 const MAX_EXPERIENCE_PRINT = 3;
 const MAX_CLIENTS_PRINT = 2;
@@ -86,29 +87,28 @@ function dateSorter(
 						<Icon name="mingcute:mail-line" aria-hidden="true" />
 						<Fragment
 							set:html={`<a
-							href="mailto:${encodeEmail(true, resume.basics.email)}"
+							href="mailto:${encodeEmail(resume.basics.email)}"
 							target="_blank"
 							rel="noopener noreferrer me"
 							referrerpolicy="no-referrer"
 							itemprop="email"
 							class="u-email"
-						>${encodeEmail(false, resume.basics.email)}</a>`}
+						>${encodeEmail(resume.basics.email, true)}</a>`}
 						/>
 					</li>
-					<!-- INFO: phone not added for privacy reasons -->
-					<!--
-						<li>
-							<Icon name="mingcute:phone-line" aria-hidden="true" />
-							<a
-								href={`tel:${resume.basics.phone}`}
-								target="_blank"
-								rel="noopener noreferrer"
-								referrerpolicy="no-referrer"
-								itemprop="telephone"
-								class="p-tel"
-							>{resume.basics.phone}</a>
-						</li>
-					-->
+					<li>
+						<Icon name="mingcute:phone-line" aria-hidden="true" />
+						<Fragment
+							set:html={`<a
+							href="tel:${encodePhoneNumber(resume.basics.phone)}"
+							target="_blank"
+							rel="noopener noreferrer me"
+							referrerpolicy="no-referrer"
+							itemprop="email"
+							class="u-email"
+						>${encodePhoneNumber(resume.basics.phone, true)}</a>`}
+						/>
+					</li>
 					<li>
 						<Icon name="mingcute:link-line" aria-hidden="true" />
 						<a
@@ -297,6 +297,43 @@ function dateSorter(
 			</section>
 
 			<section>
+				<h2>Education</h2>
+				<dl>
+					{
+						resume.education.toSorted(dateSorter).map((
+							{ institution, area, studyType, highlights },
+							index
+						) => (
+							<div
+								class="h-event"
+								itemprop="hasCredential"
+								itemscope
+								itemtype="https://schema.org/EducationalOccupationalCredential"
+								data-old-entry={index >= MAX_EDUCATION_PRINT ? '' : null}
+							>
+								<dt>
+									<entry-title class="p-name" itemprop="educationalLevel">{studyType} in {area}</entry-title>
+									<entry-subtitle
+										class="h-card"
+										itemprop="recognizedBy"
+										itemscope
+										itemtype="https://schema.org/Organization"
+									>
+										<span class="p-name" itemprop="name">{institution}</span>
+									</entry-subtitle>
+								</dt>
+								<dd class="p-summary" itemprop="description">
+									<ul>
+										{highlights.map((highlight) => <li>{highlight}</li>)}
+									</ul>
+								</dd>
+							</div>
+						))
+					}
+				</dl>
+			</section>
+
+			<section>
 				<h2>Volunteering</h2>
 				<dl>
 					{
@@ -352,56 +389,6 @@ function dateSorter(
 								<dd class="p-summary" itemprop="description">
 									<p>{summary}</p>
 
-									<ul>
-										{highlights.map((highlight) => <li>{highlight}</li>)}
-									</ul>
-								</dd>
-							</div>
-						))
-					}
-				</dl>
-			</section>
-
-			<section>
-				<h2>Education</h2>
-				<dl>
-					{
-						resume.education.toSorted(dateSorter).map((
-							{ startDate, endDate, institution, area, studyType, highlights, location },
-							index
-						) => (
-							<div
-								class="h-event"
-								itemprop="hasCredential"
-								itemscope
-								itemtype="https://schema.org/EducationalOccupationalCredential"
-								data-old-entry={index >= MAX_EDUCATION_PRINT ? '' : null}
-							>
-								<dt>
-									<entry-title class="p-name" itemprop="educationalLevel">{studyType} {area}</entry-title>
-									<entry-subtitle
-										class="h-card"
-										itemprop="recognizedBy"
-										itemscope
-										itemtype="https://schema.org/Organization"
-									>
-										<span class="p-name" itemprop="name">{institution}</span>
-									</entry-subtitle>
-									<entry-date>
-										<meta itemprop="temporalCoverage" content={`${startDate} — ${endDate ?? 'Present'}`} />
-										<time datetime={new Date(startDate).toISOString()}>{formatter.format(new Date(startDate))}</time>
-										<span>&mdash;</span>
-										{
-											endDate
-												? <time datetime={new Date(endDate).toISOString()}>{formatter.format(new Date(endDate))}</time>
-											: <span>Present</span>
-										}
-									</entry-date>
-									<entry-location>
-										<address class="p-location">{location}</address>
-									</entry-location>
-								</dt>
-								<dd class="p-summary" itemprop="description">
 									<ul>
 										{highlights.map((highlight) => <li>{highlight}</li>)}
 									</ul>

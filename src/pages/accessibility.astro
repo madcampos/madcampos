@@ -59,7 +59,7 @@ import { encodeEmail } from '../utils/email';
 
 			<p>
 				If you have any issues with the site, please feel free to contact me at <em><Fragment
-						set:html={`<a href="mailto:${encodeEmail(true)}">${encodeEmail()}</a>`}
+						set:html={`<a href="mailto:${encodeEmail()}">${encodeEmail('', true)}</a>`}
 					/></em>.
 			</p>
 

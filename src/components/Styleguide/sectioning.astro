@@ -14,7 +14,7 @@ import { encodeEmail } from '../../utils/email';
 		<address>
 			123 M.A.D. Way<br />
 			Fieldstown, Interwebs<br />
-			<Fragment set:html={`<a href="mailto:${encodeEmail(true)}">${encodeEmail()}</a>`} />
+			<Fragment set:html={`<a href="mailto:${encodeEmail()}">${encodeEmail('', true)}</a>`} />
 		</address>
 	</section>
 

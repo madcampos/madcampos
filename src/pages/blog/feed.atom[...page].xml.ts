@@ -68,7 +68,7 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 			<icon>${escapeHtmlTags(new URL('/assets/images/logo-blog-micro.png', baseUrl).href)}</icon>
 			<author>
 				<name>Marco Campos</name>
-				<email>${encodeEmail(true)}</email>
+				<email>${encodeEmail()}</email>
 				<uri>https://madcampos.dev/</uri>
 			</author>
 			${items.join('\n')}

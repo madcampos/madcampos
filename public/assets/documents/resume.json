@@ -11,6 +11,7 @@
 		"email": "me@madcampos.dev",
 		"image": "https://madcampos.dev/assets/images/me.jpg",
 		"url": "https://madcampos.dev/",
+		"phone": "+1 647 867-6157",
 		"location": {
 			"city": "Toronto",
 			"region": "Ontario",
@@ -48,7 +49,8 @@
 			"description": "Software Agency",
 			"location": "Toronto, Canada (Hybrid)",
 			"startDate": "2024-01",
-			"summary": "Work on projects for clients long term, providing full stack skills, input on architecture decisions, and knowhow on development.",
+			"endDate": "2026-06",
+			"summary": "Worked on projects for clients long term, providing full stack skills, input on architecture decisions, and knowhow on development.",
 			"highlights": [
 				"Maintain a good relationship with clients, with always positive feedback.",
 				"Deliver new features and bug fixes swiftly."
@@ -60,9 +62,13 @@
 					"description": "AI FinTech",
 					"location": "Toronto, Canada (Remote)",
 					"startDate": "2026-01",
-					"summary": "Work creating automation tools for financial institutions to improve backoffice speed.",
+					"endDate": "2026-04",
+					"summary": "Worked creating AI based automation tools for financial institutions to improve backoffice speed.",
 					"highlights": [
-						"Delivered a new feature in the second week of work."
+						"Delivered a new feature in the second week of work.",
+						"Integrated LLM calls into new workflows for data analysis.",
+						"Built integration with two third party service APIs.",
+						"Improved accuracy on data analysis for an existing workflow."
 					]
 				},
 				{
@@ -191,7 +197,7 @@
 			"summary": "Organized and hosted events for the community.",
 			"highlights": [
 				"Presented in 4 talks at \"Teck Talk\" events.",
-				"Hosted \"Code Club\" event focused on mob programming and pair coding.",
+				"Hosted \"Code Club\" event focused on mob programming and pair coding for 2 years.",
 				"Worked as project manager for a volunteer management system, managing goals and a team of 10 developers while providing feedback and mentoring to the junior developers on the team."
 			]
 		},
@@ -231,7 +237,7 @@
 			"endDate": "2019",
 			"highlights": [
 				"Worked in academic research on usability, accessibility, and user experience.",
-				"Published 3 research papers."
+				"Published 3 research papers in Human-Computer Interaction (HCI)."
 			]
 		}
 	],

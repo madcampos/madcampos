@@ -30,7 +30,7 @@ export const GET: APIRoute = async (context) => {
 			<icon>${new URL('/assets/images/logo-micro.png', context.url).href}</icon>
 			<author>
 				<name>Marco Campos</name>
-				<email>${encodeEmail(true)}</email>
+				<email>${encodeEmail()}</email>
 				<uri>https://madcampos.dev/</uri>
 			</author>
 			${items.join('\n')}

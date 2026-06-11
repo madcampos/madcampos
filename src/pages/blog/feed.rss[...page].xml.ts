@@ -69,7 +69,7 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 				<lastBuildDate>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toUTCString()}</lastBuildDate>
 				<generator>Astro</generator>
 				<image>${new URL('/assets/images/logo-blog-micro.png', baseUrl).href}</image>
-				<managingEditor>${encodeEmail(true)} (Marco Campos)</managingEditor>
+				<managingEditor>${encodeEmail()} (Marco Campos)</managingEditor>
 				${items.join('\n')}
 			</channel>
 		</rss>
