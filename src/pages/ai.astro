@@ -7,7 +7,6 @@ import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro
 import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
-import { encodeEmail } from '../utils/email';
 ---
 <!DOCTYPE html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
@@ -35,33 +34,33 @@ import { encodeEmail } from '../utils/email';
 		</header>
 
 		<main data-pagefind-body id="main">
-			<p>I do use AI tools to generate some of the content published on this website. Below are places and situations where AI is used, and those where it is not.</p>
+			<p>I do not use LLMs to generate the content published on this website.</p>
+			<p>Below are places and situations where LLMs were used, and those where it is not.</p>
 
-			<h2>AI <em>is</em> used for</h2>
-
-			<ul>
-				<li>Internal images on some posts</li>
-			</ul>
-
-			<h2>AI <em>is partially</em> used for</h2>
+			<h2>LLMs <em>were</em> used for</h2>
 
 			<ul>
-				<li>Generating code for the website</li>
+				<li>Images for blog posts, which are now replaced.</li>
+				<li>Writing the "Wheel of Fortune" component on the <a href="/food/">"food"</a> page.</li>
+				<li>The logo, images, and seed data for the database for the <a href="https://github.com/madcampos/corny-unicorn/">Corny Unicorn</a> project were AI generated.</li>
+				<li>The images and content for the <a href="/triangle/">Pyramid Scheme</a> easter egg page were <em>intentionally</em> AI generated.</li>
+				<li>
+					<span>Talk images</span>
+					<ul>
+						<li>In <a href="/talks/tojs-web-components/">"Web components for fun and profit"</a> the title slide image is AI generated.</li>
+						<li>In <a href="/talks/tojs-forms/">"Form validation with (almost) no JS"</a> my avatar is AI edited.</li>
+					</ul>
+				</li>
 			</ul>
 
-			<h2>AI <em>is not</em> used for</h2>
+			<h2>LLMs <em>are not</em> used for</h2>
 
 			<ul>
-				<li>Writing content for the website</li>
-				<li>Designs for the website</li>
+				<li>Writing blog content, drafts, posts, or other writings.</li>
+				<li>Writing code.</li>
+				<li>Graphical design.</li>
+				<li>Accessibility testing and improvements.</li>
 			</ul>
-
-			<h2>Is your art misused or stolen?</h2>
-
-			<p>If you feel like your art has been stolen or scraped by AI, first I'm sorry.</p>
-			<p>Although I cannot remove your art from the datasets used to train these AI models, what I <em>can</em> do is remove the results from my website.</p>
-			<p>If you would like me to do so, please contact me at <em><Fragment set:html={`<a href="mailto:${encodeEmail()}">${encodeEmail('', true)}</a>`} /></em>.</p>
-			<p>If you have the technical knowledge, an alternative is to open an issue <a href="https://github.com/madcampos/madcampos/issues/new">on GitHub</a>.</p>
 		</main>
 
 		<footer>

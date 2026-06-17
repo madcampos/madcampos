@@ -736,6 +736,12 @@
 					"title": "What Apple and Google are doing to your push notifications",
 					"description": "In-depth dive to push notifications and how they work.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.crunchydata.com/blog/british-columbia-and-time-zone-changes",
+					"title": "British Columbia, Time Zones, and Postgres",
+					"description": "Note with very practical example of saving dates in UTC.",
+					"type": "article"
 				}
 			]
 		},
