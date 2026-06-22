@@ -74,7 +74,7 @@
 			svg {
 				position: absolute;
 				clip: rect(0, 0, 0, 0);
-				opacity: 0;
+				opacity: 0.00001;
 				z-index: -1;
 				margin: 0;
 				padding: 0;

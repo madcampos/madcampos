@@ -56,7 +56,7 @@
 
 				input[type='radio'] {
 					position: absolute;
-					opacity: 0;
+					opacity: 0.00001;
 					inline-size: 100%;
 					block-size: 100%;
 				}
