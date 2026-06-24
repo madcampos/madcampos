@@ -459,10 +459,10 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 	</section>
 
 	<section>
-		<h3>Related Posts</h3>
+		<h3 id="related-posts-label">Related Posts</h3>
 
 		<related-posts>
-			<nav>
+			<nav aria-labelledby="related-posts-label">
 				<ul>
 					{
 						post.relatedPosts.map((relatedPost) => (
