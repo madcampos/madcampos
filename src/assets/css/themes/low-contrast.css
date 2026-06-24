@@ -106,11 +106,35 @@
 
 		/* Progress styles */
 		--progress-bg: var(--surface-2);
-		--progress-color: var(--theme-2);
+		--progress-fg: var(--theme-2);
 		--progress-border: var(--border-size) solid var(--theme-2);
 		--progress-hover-bg: var(--surface-1);
-		--progress-hover-color: var(--accent-color);
+		--progress-hover-fg: var(--accent-color);
 		--progress-hover-border-color: var(--accent-color);
+		--progress-indeterminate-fg: linear-gradient(
+			to right,
+			transparent 0,
+			var(--theme-2) 0,
+			var(--theme-2) var(--size-3),
+			transparent var(--size-3)
+		);
+		--progress-indeterminate-size: var(--size-3);
+		--progress-indeterminate-static-fg: linear-gradient(
+			to right,
+			transparent 0,
+			var(--theme-2) 0,
+			var(--theme-2) var(--size-3),
+			transparent var(--size-3),
+			transparent calc(var(--size-3) * 2),
+			var(--theme-2) calc(var(--size-3) * 2),
+			var(--theme-2) calc(var(--size-3) * 3),
+			transparent calc(var(--size-3) * 3),
+			transparent calc(var(--size-3) * 4),
+			var(--theme-2) calc(var(--size-3) * 4),
+			var(--theme-2) calc(var(--size-3) * 5),
+			transparent calc(var(--size-3) * 5)
+		);
+		--progress-indeterminate-static-size: calc(var(--size-3) * 5);
 
 		/* Meter styles */
 		--meter-background: var(--surface-2);

@@ -107,11 +107,34 @@
 
 		/* Progress styles */
 		--progress-bg: lightgray;
-		--progress-color: darkblue;
+		--progress-fg: darkblue;
 		--progress-border: var(--border-size) inset lightgray;
 		--progress-hover-bg: lightgray;
-		--progress-hover-color: midnightblue;
+		--progress-hover-fg: midnightblue;
 		--progress-hover-border-color: lightgray;
+		--progress-indeterminate-fg: linear-gradient(
+			to right,
+			transparent 0,
+			var(--theme-color) 0,
+			var(--theme-color) var(--size-3),
+			transparent var(--size-3),
+			transparent var(--size-1)
+		);
+		--progress-indeterminate-size: calc(var(--size-3) + var(--size-1));
+		--progress-indeterminate-static-fg: linear-gradient(
+			to right,
+			var(--theme-color) 0,
+			var(--theme-color) var(--size-3),
+			transparent var(--size-3),
+			transparent calc(var(--size-3) + var(--size-1)),
+			var(--theme-color) calc(var(--size-3) + var(--size-1)),
+			var(--theme-color) calc(var(--size-3) * 2 + var(--size-1)),
+			transparent calc(var(--size-3) * 2 + var(--size-1)),
+			transparent calc(var(--size-3) * 2 + var(--size-1) * 2),
+			var(--theme-color) calc(var(--size-3) * 2 + var(--size-1) * 2),
+			var(--theme-color) calc(var(--size-3) * 3 + var(--size-1) * 2)
+		);
+		--progress-indeterminate-static-size: calc(var(--size-3) * 3 + var(--size-1) * 2);
 
 		/* Meter styles */
 		--meter-background: lightgray;

@@ -136,11 +136,13 @@
 
 		/* Progress styles */
 		--progress-bg: ;
-		--progress-color: ;
+		--progress-fg: ;
 		--progress-border: ;
 		--progress-hover-bg: ;
-		--progress-hover-color: ;
+		--progress-hover-fg: ;
 		--progress-hover-border-color: ;
+		--progress-indeterminate-fg: ;
+		--progress-indeterminate-static-fg: ;
 
 		/* Meter styles */
 		--meter-background: ;

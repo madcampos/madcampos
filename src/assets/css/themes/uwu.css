@@ -150,11 +150,15 @@
 
 		/* Progress styles */
 		--progress-bg: var(--secondary-10);
-		--progress-color: var(--accent-5);
+		--progress-fg: var(--accent-5);
 		--progress-border: var(--accent-10);
 		--progress-hover-bg: var(--secondary-0);
-		--progress-hover-color: var(--accent-12);
+		--progress-hover-fg: var(--accent-12);
 		--progress-hover-border-color: var(--accent-12);
+		--progress-indeterminate-fg: url('./uwu/details1.svg');
+		--progress-indeterminate-size: var(--size-3);
+		--progress-indeterminate-static-fg: url('./uwu/details1.svg');
+		--progress-indeterminate-static-size: var(--size-3);
 
 		/* Meter styles */
 		--meter-background: var(--secondary-10);

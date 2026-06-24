@@ -542,34 +542,32 @@
 		appearance: none;
 		border: var(--progress-border);
 		border-radius: var(--border-radius);
-		background-color: var(--progress-bg);
+		background: var(--progress-bg);
 		inline-size: 100%;
 		min-inline-size: var(--size-content-0);
 		max-inline-size: var(--size-content-2);
 		block-size: var(--size-3);
 
-		&::-webkit-progress-bar { background-color: var(--progress-bg); }
-		&::-webkit-progress-value { background-color: var(--progress-color); }
+		&::-webkit-progress-bar { background: var(--progress-bg); }
+		&::-webkit-progress-value { background: var(--progress-fg); }
 
-		&::-moz-progress-bar { background-color: var(--progress-color); }
+		&::-moz-progress-bar { background: var(--progress-fg); }
 
 		&:hover { border-color: var(--progress-hover-border-color); }
-		&:hover::-webkit-progress-bar { background-color: var(--progress-hover-bg); }
-		&:hover::-webkit-progress-value { background-color: var(--progress-hover-color); }
+		&:hover::-webkit-progress-bar { background: var(--progress-hover-bg); }
+		&:hover::-webkit-progress-value { background: var(--progress-hover-fg); }
 
-		&:hover::-moz-progress-bar { background-color: var(--progress-hover-color); }
+		&:hover::-moz-progress-bar { background: var(--progress-hover-fg); }
 
 		&:indeterminate {
+			background-image: var(--progress-indeterminate-static-fg);
+			background-size: var(--progress-indeterminate-static-size);
+			background-position: center;
+			background-repeat: no-repeat;
+
 			@media (prefers-reduced-motion: no-preference) {
-				background-image: linear-gradient(
-					to right,
-					transparent 0,
-					var(--progress-color) 0,
-					var(--progress-color) var(--size-3),
-					transparent var(--size-3)
-				);
-				background-size: var(--size-3);
-				background-repeat: no-repeat;
+				background-image: var(--progress-indeterminate-fg);
+				background-size: var(--progress-indeterminate-size);
 				animation-name: indeterminate;
 				animation-duration: 3s;
 				animation-timing-function: steps(6, jump-none);
@@ -579,7 +577,11 @@
 			}
 
 			&::-moz-progress-bar { width: 0; }
-			&::-webkit-progress-bar { background-color: transparent; }
+
+			&::-webkit-progress-bar {
+				background-color: transparent;
+				width: 0;
+			}
 		}
 	}
 

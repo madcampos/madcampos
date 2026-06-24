@@ -108,10 +108,10 @@
 
 		/* Progress styles */
 		--progress-bg: var(--surface-2);
-		--progress-color: var(--theme-color);
+		--progress-fg: var(--theme-color);
 		--progress-border: var(--border-size) solid var(--theme-color);
 		--progress-hover-bg: var(--surface-1);
-		--progress-hover-color: var(--accent-color);
+		--progress-hover-fg: var(--accent-color);
 		--progress-hover-border-color: var(--accent-color);
 
 		/* Meter styles */
