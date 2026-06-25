@@ -147,6 +147,9 @@ The most relevant are:
 
 As this is not the first time I dabbled with the File System APIs, I put together a library with some operations to make life easier.
 
+<!-- Ref: https://developer.chrome.com/blog/persistent-permissions-for-the-file-system-access-api#the_new_way_whats_changing_and_when -->
+<!-- Ref: https://developer.chrome.com/docs/capabilities/web-apis/file-system-access#storing_file_handles_or_directory_handles_in_indexeddb -->
+
 [^1]: So... IDB can be a pain to deal with, and working with that meant converting between formats from and to SQLite anyways. Using a library that allows to query and manipulate an SQLite database in the browser made it easier to work with.
 
 [^2]: There is a quotas and there are other details like [eviction](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria) to take care of, but that is beyond the scope of this post due to extra complexity.

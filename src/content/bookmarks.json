@@ -118,6 +118,37 @@
 					"title": "These (still) aren't the SCs you're looking for...",
 					"description": "Talk about WCAG Success Criteria and subjective or objective interpretation of those.",
 					"type": "article"
+				},
+				{
+					"url": "https://tetralogical.com/blog/2024/05/01/why-are-my-live-regions-not-working/",
+					"title": "Why are my live regions not working?",
+					"description": "Troubleshooting guide for live regions.",
+					"type": "reference"
+				},
+				{
+					"url": "https://www.stevefrenzel.dev/posts/menu-and-navigation-the-difference/",
+					"title": "Menu and navigation: The difference",
+					"description": "An explanation on the difference between _\"menu\"_ and _\"navigation\"_.",
+					"type": "reference"
+				},
+				{
+					"url": "https://github.blog/engineering/user-experience/considerations-for-making-a-tree-view-component-accessible/",
+					"title": "Considerations for making a tree view component accessible",
+					"description": "Things to be aware when implementing a tree view.",
+					"type": "reference"
+				},
+				{
+					"url": "https://adrianroselli.com/2025/06/where-to-put-focus-when-opening-a-modal-dialog.html",
+					"title": "Where to Put Focus When Opening a Modal Dialog",
+					"description": "A missed opportunity for the name: \"Fantastic Modals: and Where to Focus Them\".",
+					"type": "guidelines"
+				},
+				{
+					"url": "https://www.unseen-godot.com/",
+					"title": "Unseen Godot",
+					"description": "Resource about developing games for blind people.",
+					"note": "Game Development related. It applies to using [Godot](https://godotengine.org/).",
+					"type": "reference"
 				}
 			]
 		},
@@ -228,6 +259,12 @@
 			"description": "CSS, layouts, and all its cool quirks.",
 			"links": [
 				{
+					"url": "https://www.craigabbott.co.uk/blog/2026/our-css-isnt-opinionated-enough/",
+					"title": "Our CSS isn't opinionated enough",
+					"description": "Hot take on how to organize CSS and why not to use classes for everything.",
+					"type": "article"
+				},
+				{
 					"url": "https://every-layout.dev/layouts/stack/",
 					"title": "The Stack - Every Layout",
 					"description": "An interesting approach to the problem of laying out a stack of things.",
@@ -292,6 +329,48 @@
 					"title": "Using safe-area-inset to build mobile-safe layouts",
 					"description": "How to use the safe area inset CSS variables to show content behind the notch and browser overlays.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://css-generators.com/",
+					"title": "CSS Generators",
+					"description": "Tools to generate some CSS only things, like dividers, fancy shapes and borders, and patterns.",
+					"type": "reference"
+				},
+				{
+					"url": "https://philiprogers.com/svgpatterns/",
+					"title": "SVG Patterns Gallery",
+					"description": "Image patterns, in SVG",
+					"type": "reference"
+				},
+				{
+					"url": "https://projects.verou.me/css3patterns/",
+					"title": "CSS3 Patterns Gallery",
+					"description": "Image patterns, in CSS",
+					"type": "reference"
+				},
+				{
+					"url": "https://www.toptal.com/designers/subtlepatterns/",
+					"title": "Subtle Patterns",
+					"description": "Image patterns, but more subtle.",
+					"type": "reference"
+				},
+				{
+					"url": "https://heropatterns.com/",
+					"title": "Hero Patterns",
+					"description": "Image patterns, in SVG and customizable.",
+					"type": "reference"
+				},
+				{
+					"url": "https://www.transparenttextures.com/",
+					"title": "Transparent Textures",
+					"description": "Image patterns, but semi-transparent.",
+					"type": "reference"
+				},
+				{
+					"url": "https://www.eggradients.com/",
+					"title": "Eggradients",
+					"description": "Colour gradients, with funny names.",
+					"type": "website"
 				}
 			]
 		},
@@ -436,6 +515,18 @@
 					"title": "Why Design Systems Fail",
 					"description": "Reflection on the causes for design systems to not work.",
 					"type": "article"
+				},
+				{
+					"url": "https://unblast.com/",
+					"title": "Unblast",
+					"description": "Collection of mockups, templates, and other assets.",
+					"type": "website"
+				},
+				{
+					"url": "https://paletton.com/",
+					"title": "Paletton",
+					"description": "Colour palette generator.",
+					"type": "website"
 				}
 			]
 		},
@@ -628,6 +719,12 @@
 					"title": "Hey, N00b, We Didn't Hire You to Complete Tasks",
 					"description": "A \"curtain pull\" that reveals the though process of seniors evaluating less experienced people and their progress.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.redblobgames.com/",
+					"title": "Red Blob Games",
+					"description": "Lots of articles on Game Development algorithms and concepts.",
+					"type": "website"
 				}
 			]
 		},
@@ -748,6 +845,18 @@
 					"title": "British Columbia, Time Zones, and Postgres",
 					"description": "Note with very practical example of saving dates in UTC.",
 					"type": "article"
+				},
+				{
+					"url": "https://ss64.com/nt/",
+					"title": "An A-Z Index of Windows CMD commands",
+					"description": "List of CMD commands.",
+					"type": "website"
+				},
+				{
+					"url": "https://iquilezles.org/articles/warp/",
+					"title": "Domain warping",
+					"description": "A tutorial for texture warping.",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -850,6 +959,42 @@
 					"title": "Open Game Art",
 					"description": "Free game assets.",
 					"type": "website"
+				},
+				{
+					"url": "http://www.fantasticmaps.com/",
+					"title": "Fantastic Maps",
+					"description": "Blog on how to draw fantasy maps.",
+					"type": "website"
+				},
+				{
+					"url": "https://rpgmapshare.com/",
+					"title": "RPG Map Share",
+					"description": "Website with tokens and objects for VTTs.",
+					"type": "website"
+				},
+				{
+					"url": "https://brm.io/game-physics-for-beginners/",
+					"title": "Game physics from scratch",
+					"description": "References for understanding and implementing video game physics.",
+					"type": "reference"
+				},
+				{
+					"url": "https://www.gridsagegames.com/blog/2014/06/procedural-map-generation/",
+					"title": "Procedural Map Generation",
+					"description": "Intro guide to procedural maps algorithms.",
+					"type": "tutorial"
+				},
+				{
+					"url": "https://web.archive.org/web/20161208175647/https://ondras.zarovi.cz/algo/",
+					"title": "A collection of interesting dungeon-related algorithms",
+					"description": "A few examples of dungeon generation algorithms.",
+					"type": "reference"
+				},
+				{
+					"url": "https://web.archive.org/web/20171113072156/http://www.futuredatalab.com/proceduraldungeon/",
+					"title": "Procedural Dungeon generator",
+					"description": "Tutorial explaining algorithms for dungeon generation.",
+					"type": "tutorial"
 				}
 			]
 		},

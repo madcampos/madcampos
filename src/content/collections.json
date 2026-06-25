@@ -1,0 +1,342 @@
+{
+	"$schema": "../schemas/collections.schema.json",
+	"items": [
+		{
+			"title": "Crochet Dinos",
+			"links": [
+				{
+					"title": "Pterodactyl Dinosaur Amigurumi Course – Club Crochet",
+					"url": "https://clubcrochet.com/courses/pterodactyl-dinosaur-amigurumi-course/"
+				},
+				{
+					"title": "Plesiosaur Dinosaur Amigurumi Course – Club Crochet",
+					"url": "https://clubcrochet.com/courses/plesiosaur-dinosaur-amigurumi-course/"
+				},
+				{
+					"title": "Raptor Dinosaur Amigurumi Course – Club Crochet",
+					"url": "https://clubcrochet.com/courses/raptor-dinosaur-amigurumi-course/"
+				},
+				{
+					"title": "Ankylosaurus Dinosaur Amigurumi Course – Club Crochet",
+					"url": "https://clubcrochet.com/courses/ankylosaurus-dinosaur-amigurumi-course/"
+				},
+				{
+					"title": "Parasaurolophus Dinosaur Amigurumi Course – Club Crochet",
+					"url": "https://clubcrochet.com/courses/parasaurolophus-dinosaur-amigurumi-course/"
+				},
+				{
+					"title": "Volcano Bag Amigurumi – Club Crochet",
+					"url": "https://clubcrochet.com/lessons/volcano-bag-amigurumi/#section1"
+				}
+			]
+		},
+		{
+			"title": "Game Dev Assets",
+			"links": [
+				{
+					"title": "The Mechs - Game Sprites by pzUH",
+					"url": "https://pzuh.itch.io/the-mechs-game-sprites"
+				},
+				{
+					"title": "Kay Lousberg - itch.io",
+					"url": "https://kaylousberg.itch.io/"
+				},
+				{
+					"title": "Kenney Game Assets All-in-1 by Kenney",
+					"url": "https://kenney.itch.io/kenney-game-assets"
+				},
+				{
+					"title": "Alien Onslaught - Game Sprites by pzUH",
+					"url": "https://pzuh.itch.io/alien-onslaught-game-sprites"
+				},
+				{
+					"title": "The Bots - Game Sprites by pzUH",
+					"url": "https://pzuh.itch.io/the-bots-game-sprites"
+				},
+				{
+					"title": "Top Down Space Shooter 2 by pzUH",
+					"url": "https://pzuh.itch.io/top-down-space-shooter-2"
+				},
+				{
+					"title": "Top Down Space Shooter 1 by pzUH",
+					"url": "https://pzuh.itch.io/top-down-space-shooter-1"
+				},
+				{
+					"title": "Aseprite",
+					"url": "https://www.aseprite.org/"
+				},
+				{
+					"title": "LDtk",
+					"url": "https://ldtk.io/"
+				}
+			]
+		},
+		{
+			"title": "Surface RT",
+			"links": [
+				{
+					"title": "Surface RT (1 and 2) Jailbreak | mariowstech's Surface RT Jailbreak",
+					"url": "https://mariowstech.gitbook.io/mariowstechs-surface-rt-jailbreak"
+				},
+				{
+					"title": "Open Surface RT Home | Open Surface RT",
+					"url": "https://open-rt.gitbook.io/open-surfacert"
+				},
+				{
+					"title": "Windows RT Development and Hacking | XDA Forums",
+					"url": "https://xdaforums.com/f/windows-rt-development-and-hacking.2130/"
+				},
+				{
+					"title": "Unleashing the Power of Surface RT with Linux",
+					"url": "https://linuxvox.com/blog/surface-rt-linux/"
+				},
+				{
+					"title": "Installing Linux on a Microsoft Surface RT",
+					"url": "https://github.com/boyreau/Linux_Surface_RT"
+				},
+				{
+					"title": "Ubuntu Wiki - Surface RT",
+					"url": "https://wiki.ubuntu.com/ARM/SurfaceRT"
+				},
+				{
+					"title": "Surface RT: PostmarketOS",
+					"url": "https://www.reddit.com/r/SurfaceLinux/comments/1djt4vb/surface_rt_postmarketos/"
+				},
+				{
+					"title": "SurfaceRT-Images / Raspbian",
+					"url": "https://e3ndr.github.io/SurfaceRT-Images/Raspbian.html"
+				}
+			]
+		},
+		{
+			"title": "Lego Adjacent",
+			"links": [
+				{
+					"title": "Home / Crazy Bricks",
+					"url": "https://crazybricks.bigcartel.com/"
+				},
+				{
+					"title": "Fx Bricks",
+					"url": "https://shop.fxbricks.com/"
+				},
+				{
+					"title": "ToroLUG – Toronto and GTA Lego User's Group",
+					"url": "http://torolug.ca/"
+				},
+				{
+					"title": "Ktown Bricks: Custom printed LEGO parts and Minifigs – ktownbricks",
+					"url": "https://ktownbricks.com/"
+				},
+				{
+					"title": "The Finest in Custom Printed Lego® Minifigs and Bricks – Citizen Brick",
+					"url": "https://citizenbrick.com/"
+				}
+			]
+		},
+		{
+			"title": "Shopping list",
+			"links": [
+				{
+					"title": "Whatstheirface",
+					"url": "https://whatstheirface.shop/"
+				},
+				{
+					"title": "Nomad Backpack in Dark Green | Hemp and Weatherproof – 8000Kicks",
+					"url": "https://www.8000kicks.com/products/nomad-backpack-dark-green"
+				},
+
+				{
+					"title": "Wool-Ease® Thick & Quick® Yarn – Lion Brand Yarn",
+					"url": "https://www.lionbrand.com/collections/yarn-weight-6-super-bulky/products/wool-ease-thick-and-quick-yarn?variant=32420962566237"
+				},
+				{
+					"title": "Curated Gift Boxes from Indigenous Box",
+					"url": "https://www.indigenousbox.ca/collections/curated-gift-boxes"
+				},
+				{
+					"title": "Dark Fantasy Collection | Dungeon Soup",
+					"url": "https://dungeon-soup-shop.fourthwall.com/en-cad/collections/dark-fantasy-collection"
+				},
+				{
+					"title": "Empower Native Voice",
+					"url": "https://empowernativevoice.com/"
+				},
+				{
+					"title": "Mega Fallout Red Rocket : Target",
+					"url": "https://www.target.com/p/mega-fallout-red-rocket/-/A-92357170"
+				},
+				{
+					"title": "Barbie™ x Aille Design: This Barbie is Inclusive Girls T-Shirt",
+					"url": "https://ailledesign.com/en-ca/products/barbie-inclusive-pink-braille-shirt-youth?variant=41630903631950"
+				},
+				{
+					"title": "MEGA Showcase Microsoft Xbox 360 | Mattel",
+					"url": "https://shop.mattel.com/en-ca/products/mega-showcase-microsoft-xbox-360-hww15-en-ca"
+				},
+				{
+					"title": "Anti Javascript Javascript Club | Bonfire",
+					"url": "https://www.bonfire.com/anti-javascript-javascript-club/"
+				},
+				{
+					"title": "Xbox Wireless Controller – Sky Cipher Special Edition | Xbox",
+					"url": "https://www.xbox.com/en-ca/accessories/controllers/sky-cipher-special-edition"
+				},
+				{
+					"title": "The Goblin Reservation | Indigo",
+					"url": "https://www.indigo.ca/en-ca/the-goblin-reservation/9781504045735.html"
+				},
+				{
+					"title": "Awesome Socks Club",
+					"url": "https://good.store/collections/all-socks"
+				},
+				{
+					"title": "Aye, Dark Overlord! The Red Box | Board Game | BoardGameGeek",
+					"url": "https://boardgamegeek.com/boardgame/18723/aye-dark-overlord-red-box#buyacopy"
+				},
+				{
+					"title": "First Nations, Métis and Inuit handcrafted Products | The Cedar Basket",
+					"url": "https://thecedarbasket.com/"
+				}
+			]
+		},
+		{
+			"title": "Books and Sci-Fi",
+			"links": [
+				{
+					"title": "Farley Mowat - Wikipedia",
+					"url": "https://en.m.wikipedia.org/wiki/Farley_Mowat"
+				},
+				{
+					"title": "Against Technoableism | Ashley Shew | W. W. Norton & Company",
+					"url": "https://wwnorton.com/books/9781324036661"
+				},
+				{
+					"title": "I Heard the Owl Call My Name - Wikipedia",
+					"url": "https://en.m.wikipedia.org/wiki/I_Heard_the_Owl_Call_My_Name"
+				},
+				{
+					"title": "The Root Cellar - Wikipedia",
+					"url": "https://en.m.wikipedia.org/wiki/The_Root_Cellar"
+				},
+				{
+					"title": "Xanth - Wikipedia",
+					"url": "https://en.wikipedia.org/wiki/Xanth"
+				},
+				{
+					"title": "The Rose Code | Indigo",
+					"url": "https://www.indigo.ca/en-ca/the-rose-code/9780062943477.html"
+				},
+				{
+					"title": "Night Watch (Lukyanenko novel) - Wikipedia",
+					"url": "https://en.wikipedia.org/wiki/Night_Watch_(Lukyanenko_novel)"
+				},
+				{
+					"title": "The Bookstore On Pluto",
+					"url": "https://www.thebookstoreonpluto.ca/"
+				},
+				{
+					"title": "Blindsight (Watts novel) - Wikipedia",
+					"url": "https://en.wikipedia.org/wiki/Blindsight_(Watts_novel)"
+				}
+			]
+		},
+		{
+			"title": "Epub and printing",
+			"links": [
+				{
+					"title": "The Components",
+					"url": "https://thansen0.github.io/Building-an-epub-file/components.html"
+				},
+				{
+					"title": "How HTML changes in ePub - HTMHell",
+					"url": "https://www.htmhell.dev/adventcalendar/2025/11/"
+				},
+				{
+					"title": "standardebooks/tools: The Standard Ebooks toolset for producing our ebook files.",
+					"url": "https://github.com/standardebooks/tools"
+				},
+				{
+					"title": "MobileRead Wiki - ePub 3",
+					"url": "https://wiki.mobileread.com/wiki/EPub_3"
+				},
+				{
+					"title": "IDPF/epub3-samples: EPUB 3 Sample Documents",
+					"url": "https://github.com/IDPF/epub3-samples"
+				},
+				{
+					"title": "EPUB Accessibility 1.1",
+					"url": "https://www.w3.org/TR/epub-a11y-11/#"
+				},
+				{
+					"title": "EPUB Reading Systems 3.3",
+					"url": "https://www.w3.org/TR/epub-rs-33/#"
+				},
+				{
+					"title": "EPUB 3 Overview",
+					"url": "https://www.w3.org/TR/epub-overview-33/#"
+				},
+				{
+					"title": "EPUB 3.3",
+					"url": "https://www.w3.org/TR/epub/#sec-publication-resources"
+				},
+				{
+					"title": "creation - What is the minimum required content for a valid ePub? - Ebooks Stack Exchange",
+					"url": "https://ebooks.stackexchange.com/questions/1183/what-is-the-minimum-required-content-for-a-valid-epub"
+				},
+				{
+					"title": "Paged.js —",
+					"url": "https://pagedjs.org/"
+				},
+				{
+					"title": "@page - CSS: Cascading Style Sheets | MDN",
+					"url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@page"
+				},
+				{
+					"title": "AlexDawsonUK/Printed: A Print Friendly CSS Library.",
+					"url": "https://github.com/AlexDawsonUK/Printed"
+				},
+				{
+					"title": "readium/readium-css: 🌈 A set of reference stylesheets for EPUB Reading Systems, starting with Readium Mobile",
+					"url": "https://github.com/readium/readium-css/tree/master"
+				}
+			]
+		},
+		{
+			"title": "Crochet",
+			"links": [
+				{
+					"title": "Patterns — Shop — Nichet Crochet - Crochet Opossums",
+					"url": "https://www.nichetcrochet.com/shop/patterns"
+				},
+				{
+					"title": "All – MINI CRAFTS",
+					"url": "https://minicrafts.co/collections/all?page=1"
+				},
+				{
+					"title": "Browse – Club Crochet",
+					"url": "https://clubcrochet.com/browse/"
+				},
+				{
+					"title": "AMIGURUMI SCHNAUZER DOG WITH FUR | FREE CROCHET PATTERN – Projectarian",
+					"url": "https://www.projectarian.com/amigurumi-dog-fur-free-crochet/"
+				},
+				{
+					"title": "• Canada's largest selection of model paints, kits, hobby tools, airbrushing, and crafts with online shipping and up to date inventory.",
+					"url": "https://www.sunwardhobbies.ca/"
+				},
+				{
+					"title": "Creative Crochet Corner: Top Instagram Bio Links - Smart.bio",
+					"url": "https://smart.bio/creativecrochetcorner/"
+				},
+				{
+					"title": "Hobbii_yarn at Taplink",
+					"url": "https://taplink.cc/hobbii_yarn"
+				},
+				{
+					"title": "Best quality Yarn imported from Europe – Anasa",
+					"url": "https://anasa.ca/"
+				}
+			]
+		}
+	]
+}

@@ -28,6 +28,18 @@ export interface Post extends Omit<CollectionEntry<'blog'>, 'id' | 'relatedPosts
 	letterCount: number;
 }
 
+// TODO: implement post "ease of reading" algorithms
+// TODO: implement hyphenation from references: https://github.com/guslatho/syllabificator/tree/main/algorithms
+
+/**
+ * Refs:
+ * - https://en.wikipedia.org/wiki/Fry_readability_formula
+ * - https://en.wikipedia.org/wiki/Dale%E2%80%93Chall_readability_formula
+ * - https://en.wikipedia.org/wiki/SMOG
+ * - https://en.wikipedia.org/wiki/Gunning_fog_index
+ * - https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests
+ */
+
 function sortPostsByDate(first: Post, second: Post, sorting: PostSorting) {
 	const firstDate = new Date(first.data.createdAt);
 	const secondDate = new Date(second.data.createdAt);
