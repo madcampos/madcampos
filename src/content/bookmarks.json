@@ -449,6 +449,12 @@
 					"title": "Your Recursion Is Lying to You",
 					"description": "Recursion in Js doesn't work. It will overflow the stack. And tail call optimization was never well supported.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.jayfreestone.com/writing/you-might-not-need-a-service-worker/",
+					"title": "You might not need… a service worker",
+					"description": "Opinion piece on _why_ you might not need a service worker for some things.",
+					"type": "article"
 				}
 			]
 		},
@@ -725,6 +731,12 @@
 					"title": "Red Blob Games",
 					"description": "Lots of articles on Game Development algorithms and concepts.",
 					"type": "website"
+				},
+				{
+					"url": "https://swizec.com/blog/code-is-the-easy-part-or-how-we-refactored-half-the-business-to-fix-a-janky-script/",
+					"title": "Code is the easy part, or how we refactored half the business to fix a janky script",
+					"description": "Story \"from the trenches\" of a refactoring and how the author proceeded to do it.",
+					"type": "article"
 				}
 			]
 		},
