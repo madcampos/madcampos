@@ -371,6 +371,12 @@
 					"title": "Eggradients",
 					"description": "Colour gradients, with funny names.",
 					"type": "website"
+				},
+				{
+					"url": "https://jakearchibald.com/2026/goldilocks-select-height/",
+					"title": "The Goldilocks customizable select height",
+					"description": "In depth dive into [customizable selects](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select) and [anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using).",
+					"type": "article"
 				}
 			]
 		},
@@ -717,13 +723,13 @@
 				{
 					"url": "https://cekrem.github.io/posts/the-tacit-dimension/",
 					"title": "The Tacit Dimension: Why Your Best Engineers Can't Tell You What They Know",
-					"description": "Reflection on \"tacit knowledge\", or the gut feeling we acquire with experience.",
+					"description": "Reflection on tacit knowledge, or the gut feeling we acquire with experience.",
 					"type": "article"
 				},
 				{
 					"url": "https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete",
 					"title": "Hey, N00b, We Didn't Hire You to Complete Tasks",
-					"description": "A \"curtain pull\" that reveals the though process of seniors evaluating less experienced people and their progress.",
+					"description": "A curtain pull that reveals the though process of seniors evaluating less experienced people and their progress.",
 					"type": "article"
 				},
 				{
@@ -736,6 +742,12 @@
 					"url": "https://swizec.com/blog/code-is-the-easy-part-or-how-we-refactored-half-the-business-to-fix-a-janky-script/",
 					"title": "Code is the easy part, or how we refactored half the business to fix a janky script",
 					"description": "Story \"from the trenches\" of a refactoring and how the author proceeded to do it.",
+					"type": "article"
+				},
+				{
+					"url": "https://anatoliybabushka.com/blog/when-to-rewrite-working-code.html",
+					"title": "Most rewrites serve the engineer, not the business",
+					"description": "Argument against meaningless rewrites.",
 					"type": "article"
 				}
 			]
