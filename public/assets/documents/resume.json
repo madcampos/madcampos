@@ -83,7 +83,8 @@
 						"Improved performance of data heavy react app from 1 minute to under 3 seconds.",
 						"Implemented UI and logic for loading app data via SSH.",
 						"Forked a Google project and added features to it while maintaining more than 95% compatibility.",
-						"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes."
+						"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes.",
+						"improved semantic and WCAG compliance of existing app."
 					]
 				}
 			]
@@ -118,7 +119,7 @@
 			"highlights": [
 				"Improved applciation load times, making the user experience smoother.",
 				"Refactored and consolidated multiple components to share code, improving code maintainability and design consistency.",
-				"Refactored the codebase to remove old dependencies, improving reliability and moving code closer to standards."
+				"Refactored the codebase to remove old dependencies, improving reliability, UI semantic and WCAG compliance."
 			]
 		},
 		{
@@ -131,7 +132,8 @@
 			"summary": "Designed and implemented websites and web applications for clients.",
 			"highlights": [
 				"Introduced scrum methodology to the development team, improving delivery times and reliability.",
-				"Implemented a complex feature for date tracking in an extensible manner, with fast performance, and observability for the results."
+				"Implemented a complex feature for date tracking in an extensible manner, with fast performance, and observability for the results.",
+				"Built UIs with focus on accessibility and WCAG compliance."
 			]
 		},
 		{
@@ -321,6 +323,7 @@
 	"skills": [
 		{ "name": "JavaScript", "level": "15+ years" },
 		{ "name": "TypeScript", "level": "8 years" },
+		{ "name": "Accessibility", "level": "4 years" },
 		{ "name": "MongoDB", "level": "5 years" },
 		{ "name": "Vue.js", "level": "2 years" },
 		{ "name": "Node.js", "level": "15+ years" },
