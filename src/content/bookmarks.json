@@ -885,8 +885,14 @@
 				{
 					"url": "https://lyra.horse/blog/2026/06/reddit-spam-internals/",
 					"title": "A peek into Reddit's anti-spam internals",
-					"description": "Deep dive into the many spam moderation tools used by Reddit",
+					"description": "Deep dive into the many spam moderation tools used by Reddit.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://tn1ck.com/blog/abuse-hdr-images-for-marketing",
+					"title": "Why some images look brighter than your screen",
+					"description": "How to abuse HDR brightness in images to make them blinding on social media.",
+					"type": "article"
 				}
 			]
 		},
