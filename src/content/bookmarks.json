@@ -881,6 +881,12 @@
 					"title": "Domain warping",
 					"description": "A tutorial for texture warping.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://lyra.horse/blog/2026/06/reddit-spam-internals/",
+					"title": "A peek into Reddit's anti-spam internals",
+					"description": "Deep dive into the many spam moderation tools used by Reddit",
+					"type": "tutorial"
 				}
 			]
 		},
