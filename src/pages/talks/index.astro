@@ -1,4 +1,5 @@
 ---
+import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import Card from '../../components/Card/Card.astro';
 import CssNakedDay from '../../components/CssNakedDay/CssNakedDay.astro';
@@ -8,7 +9,7 @@ import OldStyleButtons from '../../components/OldStyleButtons/OldStyleButtons.as
 import SiteNav from '../../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../../components/Webrings/Webrings.astro';
-import { inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
+import { inlineMarkdownStrip } from '../../utils/markdown.js';
 import { listAllTalks } from '../../utils/talks.js';
 
 const talks = await listAllTalks();
@@ -62,7 +63,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						</Fragment>
 						<h2 slot="title">
 							<meta itemprop="name" content={inlineMarkdownStrip(talk.data.title)} />
-							<Fragment set:html={inlineMarkdownRender(talk.data.title)} />
+							<Fragment set:html={markdown.inline(talk.data.title)} />
 						</h2>
 
 						<Fragment slot="subtitle">
@@ -97,14 +98,14 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 
 										<Icon name="mingcute:calendar-2-line" title="Event name" />
 										<span>
-											<Fragment set:html={inlineMarkdownRender(talk.data.event)} />
+											<Fragment set:html={markdown.inline(talk.data.event)} />
 										</span>
 									</span>
 								)
 							}
 						</Fragment>
 
-						<Fragment set:html={inlineMarkdownRender(talk.data.summary)} />
+						<Fragment set:html={markdown.inline(talk.data.summary)} />
 
 						<Fragment slot="links">
 							<a href={`/talks/${talk.id}/`} itemprop="url">

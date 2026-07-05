@@ -1,4 +1,5 @@
 ---
+import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
 import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
@@ -9,7 +10,6 @@ import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { listBlogroll, listBookmarks } from '../utils/bookmarks.ts';
-import { inlineMarkdownRender } from '../utils/markdown.ts';
 import { slugify } from '../utils/slug';
 
 const ICON_MAP = {
@@ -83,17 +83,17 @@ const blogs = await listBlogroll();
 								<dt class="h-entry">
 									<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
 									<a class="u-bookmark-of h-cite" href={bookmark.url}>
-										<Fragment set:html={inlineMarkdownRender(bookmark.title)} />
+										<Fragment set:html={markdown.inline(bookmark.title)} />
 									</a>
 								</dt>
 								<dd>
-									<Fragment set:html={inlineMarkdownRender(bookmark.description || '—')} />
+									<Fragment set:html={markdown.inline(bookmark.description || '—')} />
 									{
 										bookmark.note && (
 											<m-note data-type="info">
 												<Icon name="mingcute:information-line" aira-hidden="true" />
 												<rendered-content>
-													<Fragment set:html={inlineMarkdownRender(bookmark.note)} />
+													<Fragment set:html={markdown.inline(bookmark.note)} />
 												</rendered-content>
 											</m-note>
 										)
@@ -121,7 +121,7 @@ const blogs = await listBlogroll();
 					blogs.map(({ url, title }) => (
 						<li>
 							<a href={url}>
-								<Fragment set:html={inlineMarkdownRender(title)} />
+								<Fragment set:html={markdown.inline(title)} />
 							</a>
 						</li>
 					))

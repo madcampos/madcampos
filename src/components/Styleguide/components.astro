@@ -1,10 +1,10 @@
 ---
 /* eslint-disable max-lines */
 
+import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../../public/assets/images/me.jpg';
-import { inlineMarkdownRender } from '../../utils/markdown.ts';
 import { listAllPosts, listPostsByTag } from '../../utils/post.ts';
 import { listAllProjects } from '../../utils/projects.ts';
 import Card from '../Card/Card.astro';
@@ -142,7 +142,7 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 				<meta itemprop="isAccessibleForFree" content="True" />
 			</Fragment>
 			<h2 slot="title" itemprop="name">
-				<Fragment set:html={inlineMarkdownRender(project.data.title)} />
+				<Fragment set:html={markdown.inline(project.data.title)} />
 			</h2>
 
 			<Fragment slot="subtitle">
@@ -367,7 +367,7 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 			<header>
 				{post.data.draft && <draft-tag>Draft</draft-tag>}
 				<a class="u-uid u-url" href={Astro.url.pathname}>
-					<h1 class="p-name" itemprop="headline"><Fragment set:html={inlineMarkdownRender(post.data.title)} /></h1>
+					<h1 class="p-name" itemprop="headline"><Fragment set:html={markdown.inline(post.data.title)} /></h1>
 				</a>
 
 				{
@@ -379,13 +379,13 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 								itemprop="image"
 								loading="eager"
 							/>
-							{post.data.imageRights && <figcaption><Fragment set:html={inlineMarkdownRender(post.data.imageRights)} /></figcaption>}
+							{post.data.imageRights && <figcaption><Fragment set:html={markdown.inline(post.data.imageRights)} /></figcaption>}
 						</figure>
 					)
 				}
 
 				<blockquote class="p-summary" itemprop="description">
-					<p><Fragment set:html={inlineMarkdownRender(post.data.summary)} /></p>
+					<p><Fragment set:html={markdown.inline(post.data.summary)} /></p>
 				</blockquote>
 
 				<post-metadata>
@@ -473,8 +473,8 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 									image={relatedPost.image}
 									imageAlt={relatedPost.imageAlt ?? ''}
 								>
-									<Fragment slot="title" set:html={inlineMarkdownRender(relatedPost.title)} />
-									<Fragment set:html={inlineMarkdownRender(relatedPost.summary)} />
+									<Fragment slot="title" set:html={markdown.inline(relatedPost.title)} />
+									<Fragment set:html={markdown.inline(relatedPost.summary)} />
 								</Card>
 							</li>
 						))

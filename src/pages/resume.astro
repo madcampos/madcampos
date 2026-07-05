@@ -3,12 +3,13 @@
 
 import '../assets/pages/resume/resume.css';
 
+import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import type { Icon as IconName } from 'virtual:astro-icon';
 import resume from '../../public/assets/documents/resume.json' with { type: 'json' };
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
 import { encodeEmail } from '../utils/email';
-import { inlineMarkdownRender, inlineMarkdownStrip } from '../utils/markdown.js';
+import { inlineMarkdownStrip } from '../utils/markdown.js';
 import { encodePhoneNumber } from '../utils/phone-number';
 
 const MAX_EXPERIENCE_PRINT = 3;
@@ -139,7 +140,7 @@ function dateSorter(
 			</div>
 
 			<blockquote class="p-summary">
-				<Fragment set:html={inlineMarkdownRender(resume.basics.summary)} />
+				<Fragment set:html={markdown.inline(resume.basics.summary)} />
 			</blockquote>
 		</header>
 

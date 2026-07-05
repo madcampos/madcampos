@@ -1,5 +1,6 @@
 ---
-import { inlineMarkdownRender, inlineMarkdownStrip } from '../../utils/markdown.js';
+import { markdown } from '@astropub/md';
+import { inlineMarkdownStrip } from '../../utils/markdown.js';
 import type { Post } from '../../utils/post.js';
 import Card from '../Card/Card.astro';
 import CssNakedDay from '../CssNakedDay/CssNakedDay.astro';
@@ -74,7 +75,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 						imageAlt={post.data.imageAlt ?? ''}
 					>
 						<h2 slot="title" itemprop="name">
-							<Fragment set:html={inlineMarkdownRender(post.data.title)} />
+							<Fragment set:html={markdown.inline(post.data.title)} />
 						</h2>
 						<small slot="subtitle">
 							<time
@@ -84,7 +85,7 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							>{formatter.format(post.data.createdAt)}</time>
 						</small>
 
-						<Fragment set:html={inlineMarkdownRender(post.data.summary)} />
+						<Fragment set:html={markdown.inline(post.data.summary)} />
 
 						<a slot="links" href={`/blog/${post.url}`}>
 							<span>Read more</span>

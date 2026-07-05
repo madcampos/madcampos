@@ -1,5 +1,6 @@
 ---
 import '../assets/pages/todo/todo.css';
+import { markdown } from '@astropub/md';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
 import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
@@ -8,7 +9,6 @@ import OldStyleButtons from '../components/OldStyleButtons/OldStyleButtons.astro
 import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
-import { inlineMarkdownRender } from '../utils/markdown.js';
 
 interface Task {
 	isDone: boolean;
@@ -40,7 +40,7 @@ function renderTask(task: Task) {
 					${task.isDone ? 'checked' : ''}
 					${task.removed ? 'disabled' : ''}
 				/>
-				<span>${inlineMarkdownRender(task.text)}</span>
+				<span>${markdown.inline(task.text)}</span>
 				${task.removed ? `<m-note data-type="info"><small>${task.removed}</small></m-note>` : ''}
 			</label>
 			${childTasks}
