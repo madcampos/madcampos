@@ -52,6 +52,7 @@ Here is an example of expectations for a button from the [ARIA Authoring Practic
 > - If the button is a toggle button, it has an [aria-pressed](https://w3c.github.io/aria/#aria-pressed) state. When the button is toggled on, the value of this state is `true`, and when toggled off, the state is `false`.
 
 That is a lot... Not to mention that the button also need to be:
+
 - Clickable, and work with the mouse.
 - Touchable, and work with touch screens.
 - Depending on it's type, it will submit a form, reset it, or not do anything to the form.
@@ -85,10 +86,12 @@ So we have to add the events. Starting with click.
 ```
 
 For completeness sake, let's also add two more events:
+
 - `ontouchend` for handling when the user lifts their finger from the element. There is no equivalent of the `click` event for touch.
 - `onpointerup` for handling other pointer devices, like styluses. Again, there is no equivalent of the `click` event here.
 
 Now our component looks like this:
+
 ```html
 <sagan-button
 	role="button"
