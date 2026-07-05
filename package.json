@@ -39,6 +39,7 @@
 		"@astrojs/check": "0.9.9",
 		"@astrojs/markdown-remark": "7.1.2",
 		"@astrojs/sitemap": "3.7.2",
+		"@astropub/md": "^1.0.0",
 		"@iconify-json/fa6-brands": "1.2.6",
 		"@iconify-json/mingcute": "1.2.7",
 		"@shikijs/transformers": "4.1.0",

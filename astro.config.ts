@@ -1,5 +1,6 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
+import markdownIntegration from '@astropub/md';
 import {
 	transformerMetaHighlight,
 	transformerMetaWordHighlight,
@@ -131,6 +132,7 @@ export default defineConfig({
 		}
 	},
 	integrations: [
+		markdownIntegration(),
 		sitemap({
 			changefreq: 'weekly',
 			priority: 0.7,
