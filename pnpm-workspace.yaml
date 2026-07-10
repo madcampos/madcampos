@@ -5,6 +5,7 @@ minimumReleaseAgeExclude:
   - "workerd"
   - "miniflare"
   - "@cloudflare/*"
+  - "@mad-c/config"
 trustPolicy: "no-downgrade"
 trustPolicyExclude:
   - "chokidar@4.0.3"
