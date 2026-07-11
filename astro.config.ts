@@ -1,4 +1,4 @@
-import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import { rehypeHeadingIds, unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import markdownIntegration from '@astropub/md';
 import {
@@ -113,23 +113,25 @@ export default defineConfig({
 				transformerMetaWordHighlight()
 			]
 		},
-		remarkPlugins: [
-			remarkBreaks,
-			remarkIns,
-			[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }]
-		],
-		rehypePlugins: [
-			rehypeHeadingIds,
-			[rehypeAutolinkHeadings, { behavior: 'wrap' }],
-			[rehypeExternalLinks, externalLinkSettings],
-			rehypeTables,
-			rehypeCode,
-			rehypeImages
-		],
-		remarkRehype: {
-			allowDangerousHtml: true,
-			...footnotesSettings
-		}
+		processor: unified({
+			remarkPlugins: [
+				remarkBreaks,
+				remarkIns,
+				[remarkHighlight, { markerClassName: () => [''], markerProperties: (color?: string) => ({ 'data-color': color ?? 'default' }) }]
+			],
+			rehypePlugins: [
+				rehypeHeadingIds,
+				[rehypeAutolinkHeadings, { behavior: 'wrap' }],
+				[rehypeExternalLinks, externalLinkSettings],
+				rehypeTables,
+				rehypeCode,
+				rehypeImages
+			],
+			remarkRehype: {
+				allowDangerousHtml: true,
+				...footnotesSettings
+			}
+		})
 	},
 	integrations: [
 		markdownIntegration(),

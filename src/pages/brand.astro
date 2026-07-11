@@ -11,7 +11,7 @@ import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import TextSwatch from '../components/TextSwatch/TextSwatch.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
 		title="Brand | Marco Campos"
@@ -48,10 +48,30 @@ import Webrings from '../components/Webrings/Webrings.astro';
 			<h2 id="colours">Colours</h2>
 
 			<color-swatch-group>
-				<ColorSwatch color="#0080ff" name="Blissful Blue" />
-				<ColorSwatch color="#ff8000" name="Zany Orange" />
-				<ColorSwatch color="#00309b" name="Slumbering Blue" />
-				<ColorSwatch color="#f03e3e" name="Whacky Red" />
+				<ColorSwatch
+					name="Blissful Blue"
+					colorHex="#0080ff"
+					colorOklch="oklch(61.51% 0.21 256.1deg)"
+					colorHsl="hsl(209.88deg 100% 50%)"
+				/>
+				<ColorSwatch
+					name="Zany Orange"
+					colorHex="#ff8000"
+					colorOklch="oklch(73.19% 0.19 52.98deg)"
+					colorHsl="hsl(30.12deg 100% 50%)"
+				/>
+				<ColorSwatch
+					name="Slumbering Blue"
+					colorHex="#00309b"
+					colorOklch="oklch(36.72% 0.18 262.66deg)"
+					colorHsl="hsl(221.42deg 100% 30.39%)"
+				/>
+				<ColorSwatch
+					name="Whacky Red"
+					colorHex="#f03e3e"
+					colorOklch="oklch(63.24% 0.21 25.84deg)"
+					colorHsl="hsl(0deg 85.58% 59.22%)"
+				/>
 			</color-swatch-group>
 
 			<h2 id="fonts">Fonts</h2>
