@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
+// oxlint-disable no-magic-numbers
 import { SiteSettings } from '../../assets/js/settings.ts';
 
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });

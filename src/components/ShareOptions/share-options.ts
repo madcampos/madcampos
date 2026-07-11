@@ -65,13 +65,15 @@ export class ShareOptions extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		const target = evt.target as HTMLElement;
-
-		if (!target.dataset['share']) {
+		if (!(evt.target instanceof HTMLElement)) {
 			return;
 		}
 
-		switch (target.dataset['share']) {
+		if (!evt.target.dataset['share']) {
+			return;
+		}
+
+		switch (evt.target.dataset['share']) {
 			case 'os':
 				await navigator.share({
 					url: this.#url,

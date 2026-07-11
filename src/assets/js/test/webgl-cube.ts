@@ -1,7 +1,7 @@
+// oxlint-disable no-magic-numbers no-bitwise
 /**
  * Based on: https://www.geeksforgeeks.org/javascript/how-to-load-3d-models-in-webgl/
  */
-/* eslint-disable no-bitwise, @typescript-eslint/no-magic-numbers */
 
 import { mat4 } from 'gl-matrix';
 
@@ -23,7 +23,9 @@ interface Buffers {
 	indices: WebGLBuffer;
 }
 
-const canvas = document.querySelector('#canvas-3d') as HTMLCanvasElement;
+// oxlint-disable-next-line typescript/no-non-null-assertion
+const canvas = document.querySelector<HTMLCanvasElement>('#canvas-3d')!;
+// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 const glContext = (canvas.getContext('webgl') ?? canvas.getContext('experimental-webgl')) as WebGLRenderingContext;
 
 let curWidth = 0;
@@ -126,7 +128,7 @@ function drawScene(programInfo: ProgramInfo, buffers: Buffers, deltaTime: number
 	glContext.clear(glContext.COLOR_BUFFER_BIT | glContext.DEPTH_BUFFER_BIT);
 
 	const fieldOfView = (45 * Math.PI) / 180;
-	const aspect = (glContext.canvas as HTMLCanvasElement).width / (glContext.canvas as HTMLCanvasElement).height;
+	const aspect = glContext.canvas.width / glContext.canvas.height;
 	const projectionMatrix = mat4.create();
 	mat4.perspective(projectionMatrix, fieldOfView, aspect, 1, Infinity);
 
@@ -206,6 +208,7 @@ function resizeCanvas(width: number, height: number) {
 }
 
 function main() {
+	// oxlint-disable-next-line typescript/no-unnecessary-condition
 	if (!glContext) {
 		return;
 	}

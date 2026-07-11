@@ -1,3 +1,4 @@
+// oxlint-disable no-magic-numbers
 import { SiteSettings } from '../../js/settings.ts';
 
 const listFormat = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
@@ -6,6 +7,7 @@ function getSiteDate(date: Date): string {
 	const now = new Date();
 	let diffInMs = Math.abs(date.getTime() - now.getTime());
 
+	// oxlint-disable-next-line id-length
 	const units: { label: Intl.RelativeTimeFormatUnit, ms: number }[] = [
 		{ label: 'year', ms: 1000 * 60 * 60 * 24 * 365 },
 		{ label: 'month', ms: 1000 * 60 * 60 * 24 * 30 },

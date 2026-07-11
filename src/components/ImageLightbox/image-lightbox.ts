@@ -150,10 +150,12 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 		switch (evt.type) {
 			case 'input':
 			case 'change':
-				this.#updateZoom((evt.target as HTMLInputElement).value);
+				if (evt.target instanceof HTMLInputElement) {
+					this.#updateZoom(evt.target.value);
+				}
 				break;
 			case 'toggle':
-				if ((evt as ToggleEvent).newState === 'closed') {
+				if (evt instanceof ToggleEvent && evt.newState === 'closed') {
 					this.#updateZoom('100');
 				}
 				break;
@@ -168,9 +170,9 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 				}
 				break;
 			case 'click':
-				if ((evt.target as HTMLElement).id === this.#fullscreenButton?.id) {
+				if (evt.target instanceof HTMLElement && evt.target.id === this.#fullscreenButton?.id) {
 					await this.#toggleFullscreen();
-				} else if ((evt.target as HTMLElement).id === this.#downloadButton?.id) {
+				} else if (evt.target instanceof HTMLElement && evt.target.id === this.#downloadButton?.id) {
 					this.#downloadImage();
 				}
 				break;

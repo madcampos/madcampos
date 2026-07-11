@@ -12,6 +12,7 @@
 		<p>Visited link: <a href="/styleguide/">This Page</a></p>
 		<p>Not visited link: <a href="#" id="random-link" rel="nofollow">Random Error Page</a></p>
 		<script type="module" is:inline>
+			// oxlint-disable-next-line no-inline-comments
 			(/** @type {HTMLAnchorElement} */ (document.querySelector('#random-link'))).href = crypto.randomUUID();
 		</script>
 	</section>
@@ -79,6 +80,7 @@
 
 		<p>Current date and time: <time datetime="" id="cur-time">&mdash;</time></p>
 		<script type="module" is:inline>
+			// oxlint-disable-next-line no-inline-comments
 			const curTimeElement = /** @type {HTMLTimeElement} */ (document.querySelector('#cur-time'));
 
 			setInterval(() => {
@@ -86,6 +88,7 @@
 
 				curTimeElement.dateTime = now.toISOString();
 				curTimeElement.innerText = now.toLocaleString();
+				// oxlint-disable-next-line no-magic-numbers
 			}, 1000);
 		</script>
 	</section>
@@ -108,8 +111,8 @@
 
 		<p>Here is some text intentionally right-to-left:</p>
 		<p>
-			The Hebrew word "<bdo dir="rtl">שָׁלוֹם</bdo>" (Shalom) and the Arabic word "<bdi>سَلَام</bdi>" (Salām) share the same etymologic root. Both have a literal meaning of
-			"peace".
+			The Hebrew word "<bdo dir="rtl">שָׁלוֹם</bdo>" (Shalom) and the Arabic word "<bdi>سَلَام</bdi>" (Salām) share the same etymologic root. Both have a
+			literal meaning of "peace".
 		</p>
 	</section>
 

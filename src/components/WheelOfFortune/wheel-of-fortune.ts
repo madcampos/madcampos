@@ -1,5 +1,4 @@
-/* eslint-disable id-length, @typescript-eslint/no-magic-numbers */
-
+// oxlint-disable no-magic-numbers id-length
 import { type WheelOfFortuneDisplaySetting, SiteSettings } from '../../assets/js/settings.ts';
 import styles from './wheel-of-fortune.css?url';
 
@@ -8,9 +7,9 @@ function slugify(text: string): string {
 		.toLowerCase()
 		.trim()
 		.replace(/[^\p{L}\p{N}\s_-]/gu, '')
-		.replace(/\s+/g, '-')
-		.replace(/-+/g, '-')
-		.replace(/^-+|-+$/g, '');
+		.replace(/\s+/gu, '-')
+		.replace(/-+/gu, '-')
+		.replace(/^-+|-+$/gu, '');
 }
 
 export class WheelOffortune extends HTMLElement implements CustomElement {
@@ -21,6 +20,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 	#audioCtx?: AudioContext;
 
 	async #playClick(progress: number) {
+		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		if (!window.AudioContext) {
 			return;
 		}
@@ -54,6 +54,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 	}
 
 	async #playDing(frequency: number, delay: number) {
+		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		if (!window.AudioContext) {
 			return;
 		}
@@ -165,13 +166,13 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		this.#resetState();
 		this.#animation?.cancel();
 
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// oxlint-disable-next-line typescript/no-non-null-assertion
 		const wheel = this.querySelector<SVGGElement>('.wheel')!;
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// oxlint-disable-next-line typescript/no-non-null-assertion
 		const spinner = this.querySelector<SVGGElement>('.wheel-spinner')!;
 		const items = this.querySelectorAll('.wheel-segment');
 
-		if (items?.length === 0) {
+		if (items.length === 0) {
 			return;
 		}
 
@@ -230,6 +231,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 				return;
 			}
 
+			// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 			const currentTime = (this.#animation.currentTime as number) || 0;
 			const progress = currentTime / animationDuration;
 			const currentRotation = this.#prevEndDeg + (randomDeg * progress);
@@ -248,7 +250,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 		await this.#animation.finished;
 		spinnerAnim.cancel();
-		this.#animation?.commitStyles();
+		this.#animation.commitStyles();
 
 		const finalRotation = newEndDeg % 360;
 		const winningAngle = 360 - finalRotation;
@@ -278,7 +280,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 		if (SiteSettings.wheelOfFortuneAnimation === 'enabled') {
 			for (let i = 0; i <= totalSpins; i++) {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				// oxlint-disable-next-line typescript/no-non-null-assertion
 				const item = items[i % items.length]!;
 
 				this.#animation = new Animation(
@@ -305,6 +307,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 				void this.#playClick(i / totalSpins);
 
+				// oxlint-disable-next-line no-await-in-loop
 				await this.#animation.finished;
 			}
 		}
@@ -420,6 +423,7 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 
 		this.render();
 
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		const attributeDisplay = this.getAttribute('display') as WheelOfFortuneDisplaySetting | null;
 		this.#toggleDisplayMode(attributeDisplay ?? SiteSettings.wheelOfFortuneDisplay);
 

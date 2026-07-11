@@ -3,6 +3,7 @@ import logoBaseCss from './logo-base.css?url';
 
 function createLogoUrl(logoElement: HTMLElement, size: 'full' | 'micro' | 'mini', theme = 'system') {
 	const serializer = new XMLSerializer();
+	// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 	const logoClone = logoElement.cloneNode(true) as SVGElement;
 	logoClone.querySelectorAll(`[data-theme]:not([data-theme="${theme}"], .pixelated-logo, .noise-logo, .overlay-logo)`).forEach((node) => node.remove());
 
@@ -43,18 +44,20 @@ if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
 		const miniLogoUrl = createLogoUrl(logoElement, 'mini');
 		const microLogoUrl = createLogoUrl(logoElement, 'micro');
 
-		/* eslint-disable @typescript-eslint/no-non-null-assertion */
+		// oxlint-disable typescript/no-non-null-assertion
 		const dialog = logoElement.querySelector('dialog')!;
 		dialog.querySelector<HTMLAnchorElement>('a[download="full.svg"]')!.href = fullLogoUrl;
 		dialog.querySelector<HTMLAnchorElement>('a[download="mini.svg"]')!.href = miniLogoUrl;
 		dialog.querySelector<HTMLAnchorElement>('a[download="micro.svg"]')!.href = microLogoUrl;
-		/* eslint-enable @typescript-eslint/no-non-null-assertion */
+		// oxlint-enable typescript/no-non-null-assertion
 
 		logoElement.addEventListener('contextmenu', (evt) => {
-			const target = evt.target as HTMLElement;
+			if (!(evt.target instanceof HTMLElement)) {
+				return;
+			}
 
-			if (target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
-				if (dialog && SiteSettings.logoContextMenu !== 'disabled') {
+			if (evt.target.matches('m-logo, m-logo *:not(dialog, dialog *)')) {
+				if (SiteSettings.logoContextMenu !== 'disabled') {
 					evt.preventDefault();
 					dialog.showPopover();
 				}

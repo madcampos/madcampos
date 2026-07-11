@@ -25,8 +25,10 @@ export class Router {
 		Object.entries(routes).forEach(([methodAndPath, route]) => {
 			const { method = 'get', path = '' } = (/^(?:(?<method>[a-z]+) )?(?<path>.+?)$/iu.exec(methodAndPath))?.groups ?? {};
 
+			// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 			const methodRoutes = this.#routes[method.toUpperCase() as HTTPMethod];
 
+			// oxlint-disable-next-line typescript/no-unnecessary-condition
 			if (methodRoutes) {
 				methodRoutes.push([new URLPattern({ pathname: path }), route]);
 			} else {
@@ -37,6 +39,7 @@ export class Router {
 
 	async fetch<CfHostMetadata = unknown>(request: Request<CfHostMetadata, IncomingRequestCfProperties<CfHostMetadata>>, env: Env, context: ExecutionContext) {
 		const resolvedUrl = new URL(request.url);
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		const methodRoutes = this.#routes[request.method as HTTPMethod];
 		const [pattern, routeHandler] = methodRoutes.find(([curPattern]) => curPattern.test(resolvedUrl.href)) ?? [];
 

@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 
 export async function listAllProjects() {
 	const collectionEntries = await getCollection('projects');
+	// oxlint-disable-next-line typescript/no-empty-object-type
 	const collectionFiles = import.meta.glob<MarkdownInstance<{}>>('../content/projects/**/*.md', { eager: true });
 
 	const entries = collectionEntries

@@ -14,7 +14,7 @@ export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction
 type APIProps = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const GET: APIRoute<APIProps> = async ({ props, site }) => {
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	// oxlint-disable-next-line typescript/no-non-null-assertion
 	const baseUrl = new URL(site!);
 
 	baseUrl.protocol = 'https:';

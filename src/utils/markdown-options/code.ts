@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-unnecessary-condition typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 import type { Element as HastElement, Root as HastRoot } from 'hast';
 import { visit } from 'unist-util-visit';
 

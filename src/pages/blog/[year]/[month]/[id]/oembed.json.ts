@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 import type { APIRoute, GetStaticPathsResult } from 'astro';
 import { listAllPosts } from '../../../../../utils/post.ts';
 
@@ -16,7 +14,7 @@ export const GET: APIRoute<Awaited<ReturnType<typeof listAllPosts>>[number]> = a
 		height: 480,
 		...(props.data.image ?
 			{
-				thumbnail_url: props.data.image?.src,
+				thumbnail_url: props.data.image.src,
 				thumbnail_width: props.data.image.width,
 				thumbnail_height: props.data.image.height
 			} :

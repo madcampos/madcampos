@@ -72,7 +72,7 @@ function inlineMarkdownRender(input: string) {
 	return results;
 }
 
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+// oxlint-disable typescript/no-non-null-assertion
 const messageInput = document.querySelector<HTMLTextAreaElement>('#message-input')!;
 const messageCountProgress = document.querySelector<HTMLProgressElement>('#word-count')!;
 const messageCountText = document.querySelector<HTMLSpanElement>('#word-count-text')!;
@@ -80,7 +80,7 @@ const messageForm = document.querySelector<HTMLFormElement>('form')!;
 const messageSubmitButton = document.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 const messageResetButton = document.querySelector<HTMLButtonElement>('button[type="reset"]')!;
 const messageFeedback = document.querySelector<HTMLElement>('form-status')!;
-/* eslint-enable @typescript-eslint/no-non-null-assertion */
+// oxlint-enable typescript/no-non-null-assertion
 
 function updateCharCount() {
 	messageCountProgress.value = messageInput.value.length;
@@ -102,7 +102,9 @@ messageForm.addEventListener('submit', async (evt) => {
 		const url = evt.target.action;
 		const formData = new FormData(evt.target);
 
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		formData.set('name', sanitizeInlineText(formData.get('name') as string));
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		formData.set('message', sanitizeInlineText(formData.get('message') as string));
 
 		messageSubmitButton.disabled = true;
@@ -155,6 +157,7 @@ class MessagesList extends HTMLElement implements CustomElement {
 
 	#nextPage = 1;
 	#totalPages = 1;
+	// oxlint-disable-next-line no-magic-numbers
 	#MAX_PAGES = 100;
 
 	async #fecthMoreData() {
@@ -222,7 +225,7 @@ class MessagesList extends HTMLElement implements CustomElement {
 			}
 		}, {});
 
-		this.#observer?.observe(this.#loader);
+		this.#observer.observe(this.#loader);
 
 		this.replaceChildren();
 		this.insertAdjacentElement('beforeend', this.#loader);

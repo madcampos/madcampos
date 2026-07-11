@@ -1,3 +1,4 @@
+// oxlint-disable no-magic-numbers
 import styles from './counter.css?url';
 
 interface HitCountResponse {
@@ -56,7 +57,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	}
 
 	async #checkVisitUpdates() {
-		const deltaTimeSec = Math.trunc((new Date().getTime() - (this.#lastChecked?.getTime() ?? 0)) / 1000);
+		const deltaTimeSec = Math.trunc((new Date().getTime() - this.#lastChecked.getTime()) / 1000);
 
 		if (deltaTimeSec >= this.#visitData.visitTimeAvgInSec) {
 			this.#lastChecked = new Date();
@@ -75,6 +76,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 			const json: StatusResponse = await response.json();
 
 			if (!response.ok || !json.success) {
+				// oxlint-disable-next-line typescript/no-unnecessary-condition
 				throw new Error(json?.message ?? 'Request failed.');
 			}
 
@@ -85,6 +87,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	}
 
 	render() {
+		// oxlint-disable-next-line typescript/no-misused-spread
 		const textSpans = [...this.#visitData.totalVisitors.toString().padStart(this.#MAX_LENGTH, '0')]
 			.slice(-this.#MAX_LENGTH)
 			.map((num) => `<tspan>${num}</tspan>`)

@@ -60,7 +60,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		return '2';
 	}
 
-	// eslint-disable-next-line complexity
+	// oxlint-disable-next-line complexity
 	async render() {
 		if (!this.feature) {
 			this.innerHTML = '';
@@ -75,15 +75,15 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 			data = await response.json();
 		}
 
-		const baselineDate = data?.status?.baseline_high_date ?? data?.status?.baseline_low_date;
+		const baselineDate = data.status?.baseline_high_date ?? data.status?.baseline_low_date;
 		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '&mdash;';
 
 		this.innerHTML = `
 			<baseline-icon>
-				<sr-only>Baseline status: ${baselineStatus.get(data?.status?.baseline)}</sr-only>
+				<sr-only>Baseline status: ${baselineStatus.get(data.status?.baseline)}</sr-only>
 				<svg viewBox="0 0 36 20" width="36" height="20" aria-hidden="true">
-					<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${data?.status?.baseline.toString() ?? 'no-data'}" />
+					<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${data.status?.baseline.toString() ?? 'no-data'}" />
 				</svg>
 			</baseline-icon>
 
@@ -91,11 +91,11 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 				<baseline-heading
 					role="heading"
 					aria-level="${this.headingLevel}"
-					data-baseline="${data?.status?.baseline.toString() ?? 'no-data'}"
-				>${data?.name ?? 'Unknown feature'}</baseline-heading>
+					data-baseline="${data.status?.baseline.toString() ?? 'no-data'}"
+				>${data.name ?? 'Unknown feature'}</baseline-heading>
 
 				<p>
-					<span>${baselineStatus.get(data?.status?.baseline)}</span>
+					<span>${baselineStatus.get(data.status?.baseline)}</span>
 					<span>${formattedBaselineDate}</span>
 				</p>
 			</hgroup>
@@ -104,7 +104,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 				<summary>Browser support & details</summary>
 
 				<p>
-					${data?.description_html ?? data?.description ?? 'No data on this feature'}
+					${data.description_html ?? data.description ?? 'No data on this feature'}
 				</p>
 
 				<table-wrapper role="region" tabindex="0" aria-labelledby="browser-support-table-${this.#id}">
@@ -176,13 +176,13 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 						</thead>
 						<tbody>
 							<tr>
-								<td>${data?.status?.support.chrome ?? '&mdash;'}</td>
-								<td>${data?.status?.support.chrome_android ?? '&mdash;'}</td>
-								<td>${data?.status?.support.edge ?? '&mdash;'}</td>
-								<td>${data?.status?.support.firefox ?? '&mdash;'}</td>
-								<td>${data?.status?.support.firefox_android ?? '&mdash;'}</td>
-								<td>${data?.status?.support.safari ?? '&mdash;'}</td>
-								<td>${data?.status?.support.safari_ios ?? '&mdash;'}</td>
+								<td>${data.status?.support.chrome ?? '&mdash;'}</td>
+								<td>${data.status?.support.chrome_android ?? '&mdash;'}</td>
+								<td>${data.status?.support.edge ?? '&mdash;'}</td>
+								<td>${data.status?.support.firefox ?? '&mdash;'}</td>
+								<td>${data.status?.support.firefox_android ?? '&mdash;'}</td>
+								<td>${data.status?.support.safari ?? '&mdash;'}</td>
+								<td>${data.status?.support.safari_ios ?? '&mdash;'}</td>
 							</tr>
 						</tbody>
 					</table>

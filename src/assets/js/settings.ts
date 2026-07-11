@@ -1,3 +1,5 @@
+// oxlint-disable id-length
+
 export type EnabledDisabledSetting = 'disabled' | 'enabled';
 export type ThemeSetting = 'dark' | 'hacker' | 'high-contrast' | 'light' | 'low-contrast' | 'system' | 'uwu' | 'y2k';
 export type FontSetting = 'browser' | 'comic-sans' | 'default' | 'legibility';
@@ -52,7 +54,7 @@ export class SiteSettings {
 			SiteSettings.#updateSetting(setting, SiteSettings[setting]?.toString());
 
 			if (this.PERSISTENT_SETTINGS.includes(setting)) {
-				SiteSettings.#persistSetting(setting, SiteSettings.#searchParams?.get(setting) ?? undefined);
+				SiteSettings.#persistSetting(setting, SiteSettings.#searchParams.get(setting) ?? undefined);
 			}
 		}
 
@@ -60,11 +62,13 @@ export class SiteSettings {
 		this.#isJsNakedDay = this.#checkJsNakedDay();
 	}
 
+	// oxlint-disable-next-line typescript/no-unnecessary-type-parameters
 	static #getSetting<T extends string>(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
 		if (!this.#isInitialized) {
 			SiteSettings.initializeSettings();
 		}
 
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		return (SiteSettings.#searchParams?.get(setting) ?? localStorage.getItem(setting) ?? undefined) as T | undefined;
 	}
 
@@ -77,12 +81,12 @@ export class SiteSettings {
 			document.documentElement.dataset[setting] = value;
 			SiteSettings.#searchParams?.set(setting, value);
 		} else {
-			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+			// oxlint-disable-next-line typescript/no-dynamic-delete
 			delete document.documentElement.dataset[setting];
 			SiteSettings.#searchParams?.delete(setting);
 		}
 
-		const shouldUpdateUrl = (SiteSettings.debug ?? false) || (SiteSettings.updateUrl ?? false);
+		const shouldUpdateUrl = SiteSettings.debug || SiteSettings.updateUrl;
 		const hasSearchParams = SiteSettings.#searchParams !== undefined && SiteSettings.#searchParams.size > 0;
 
 		if (shouldUpdateUrl && hasSearchParams) {

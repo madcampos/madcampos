@@ -59,12 +59,14 @@ if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
 	});
 
 	document.body.addEventListener('click', (evt) => {
-		const target = evt.target as HTMLButtonElement;
-
-		if (!target.matches('table thead th[aria-sort] button')) {
+		if (!(evt.target instanceof HTMLButtonElement)) {
 			return;
 		}
 
-		sortTable(target);
+		if (!evt.target.matches('table thead th[aria-sort] button')) {
+			return;
+		}
+
+		sortTable(evt.target);
 	});
 }

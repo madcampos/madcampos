@@ -1,6 +1,6 @@
 {
 	"extends": "./node_modules/@mad-c/config/src/tsconfig.json",
-	"include": ["astro.config.ts", ".astro/**/*", "build/**/*", "src/**/*", "src/**/*.json"],
+	"include": ["astro.config.ts", ".astro/**/*", "build/**/*", "src/**/*", "src/**/*.json", "public/assets/document/resume.json"],
 	"exclude": ["node_modules/**/*", "dist/**/*", "server/**/*"],
 	"compilerOptions": {
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],

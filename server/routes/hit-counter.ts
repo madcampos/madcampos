@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/only-throw-error */
-
+// oxlint-disable typescript/only-throw-error no-console
 import { env } from 'cloudflare:workers';
 import { type StatusResponse, DEFAULT_HEADERS, ErrorResponse, generateVisitorId, parseRequestMetadata, STATUS_CONFLICT, STATUS_OK } from '../utils/index.ts';
 
@@ -72,6 +71,7 @@ export async function getVisitorCount(request: Request) {
 
 		let visitTimeAvgInSec = 0;
 
+		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		if (recentHits.results && recentHits.results.length >= MIN_HIT_RESULTS) {
 			const timestamps = recentHits.results.map((result) => new Date(result.timestamp)).reverse();
 			const intervals: number[] = [];
@@ -84,6 +84,7 @@ export async function getVisitorCount(request: Request) {
 			}
 
 			const avgMs = intervals.reduce((first, last) => first + last, 0) / intervals.length;
+			// oxlint-disable-next-line no-magic-numbers
 			visitTimeAvgInSec = Math.round(avgMs / 1000);
 		}
 
@@ -133,7 +134,6 @@ export async function incrementVisitorCount(request: Request) {
 		`).bind(url, visitorId).first<Pick<HitRecord, 'id' | 'timestamp'>>();
 
 		if (recentVisit) {
-			// eslint-disable-next-line no-console
 			console.log({ visitorId, recentVisit });
 			return new ErrorResponse(`Only one visit allowed every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
@@ -145,9 +145,9 @@ export async function incrementVisitorCount(request: Request) {
 				(?, ?, ?, ?)
 		`).bind(url, visitorId, requestMetadata.country, requestMetadata.userAgent).run();
 
-		// eslint-disable-next-line no-console
 		console.log({ visitorId });
 
+		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		return new Response(JSON.stringify({ success, message: error ?? '+1' } satisfies StatusResponse), {
 			status: STATUS_OK,
 			headers: {

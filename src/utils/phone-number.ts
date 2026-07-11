@@ -6,10 +6,11 @@ export function encodePhoneNumber(phoneNumber?: string, formatNumber = false) {
 
 	if (formatNumber) {
 		const numberSplit = Math.floor(Math.random() * (number.length - 1)) + 1;
-		const firstPart = number.slice(0, numberSplit);
-		const secondPart = number.slice(numberSplit);
+		const formattedFirstPart = number.slice(0, numberSplit);
+		const formattedSecondPart = number.slice(numberSplit);
 
-		return `+${htmlEncode(country)} <!-- beep -->${htmlEncode(area)}<!-- boop --> ${htmlEncode(prefix)}-${htmlEncode(firstPart)}<!-- foo bar -->${htmlEncode(secondPart)}`;
+		// dprint-ignore-line
+		return `+${htmlEncode(country)} <!-- beep -->${htmlEncode(area)}<!-- boop --> ${htmlEncode(prefix)}-${htmlEncode(formattedFirstPart)}<!-- foo bar -->${htmlEncode(formattedSecondPart)}`;
 	}
 
 	const joinedNumber = `${country}${area}${prefix}${number}`;

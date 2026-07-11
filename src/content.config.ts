@@ -1,5 +1,5 @@
 // @ts-expect-error - This is required so typescript can find zod
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line no-unused-vars
 import { z as zod } from 'astro/zod';
 
 import { file, glob } from 'astro/loaders';
@@ -20,7 +20,7 @@ const changelogCollection = defineCollection({
 	loader: glob({
 		pattern: '**/*.md',
 		base: './src/content/changelog',
-		generateId: (({ entry }) => entry.replace('.md', ''))
+		generateId: ({ entry }) => entry.replace('.md', '')
 	}),
 	schema: changelogSchema
 });

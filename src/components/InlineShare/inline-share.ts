@@ -117,16 +117,15 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 	#resizeOverlay(range: Range) {
 		const { top, left, width, height } = range.getBoundingClientRect();
-		const { scrollX, scrollY } = window;
+		const { scrollX: windowScrollX, scrollY: windowScrollY } = window;
 		const overlay = this.querySelector('share-overlay');
 
-		overlay?.style.setProperty('--overlay-top', `${top + scrollY}px`);
-		overlay?.style.setProperty('--overlay-left', `${left + scrollX}px`);
+		overlay?.style.setProperty('--overlay-top', `${top + windowScrollY}px`);
+		overlay?.style.setProperty('--overlay-left', `${left + windowScrollX}px`);
 		overlay?.style.setProperty('--overlay-width', `${width}px`);
 		overlay?.style.setProperty('--overlay-height', `${height}px`);
 	}
 
-	// eslint-disable-next-line complexity
 	#handleSelectionChange() {
 		if (this.querySelector('dialog')?.matches(':popover-open')) {
 			return;
@@ -140,8 +139,9 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		const ancestor = range.commonAncestorContainer;
-		const isRenderedContent = (ancestor as Element)?.matches?.('rendered-content') ?? false;
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
+		const ancestor = range.commonAncestorContainer as unknown as Element;
+		const isRenderedContent = ancestor.matches('rendered-content');
 		const isInsideRenderedContent = Boolean(ancestor.parentElement?.closest('rendered-content'));
 
 		if (!isRenderedContent && !isInsideRenderedContent) {
@@ -156,7 +156,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		const isCodeBlock = (ancestor as Element)?.matches?.('code-wrapper') ?? false;
+		const isCodeBlock = ancestor.matches('code-wrapper');
 		const isInsideCodeBlock = Boolean(ancestor.parentElement?.closest('code-wrapper'));
 
 		if (isCodeBlock || isInsideCodeBlock) {
@@ -188,6 +188,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			canvasContext.imageSmoothingEnabled = true;
 			canvasContext.imageSmoothingQuality = 'high';
 
+			// oxlint-disable-next-line no-magic-numbers
 			this.#resizeCanvas(1024, 1024);
 
 			this.#renderToCanvas(range?.toString() ?? '');
@@ -262,9 +263,11 @@ export class InlineShare extends HTMLElement implements CustomElement {
 	}
 
 	async #handleButtonClick(evt: MouseEvent) {
-		const target = evt.target as HTMLElement;
+		if (!(evt.target instanceof HTMLElement)) {
+			return;
+		}
 
-		if (!target.matches('button')) {
+		if (!evt.target.matches('button')) {
 			return;
 		}
 
@@ -275,7 +278,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		const blob = await this.#getCanvasBlob();
 		const file = new File([blob], 'quote.png', { type: blob.type });
 
-		switch (target.className) {
+		switch (evt.target.className) {
 			case 'inline-share-os':
 				await navigator.share({
 					url,

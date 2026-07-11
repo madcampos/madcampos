@@ -54,7 +54,9 @@ function sortPostsByDate(first: Post, second: Post, sorting: PostSorting) {
 function getPostDate(post: CollectionEntry<'blog'>) {
 	const postDate = new Date(post.data.createdAt);
 	const year = postDate.getFullYear().toString();
+	// oxlint-disable-next-line no-magic-numbers
 	const month = (postDate.getMonth() + 1).toString().padStart(2, '0');
+	// oxlint-disable-next-line no-magic-numbers
 	const day = postDate.getDate().toString().padStart(2, '0');
 
 	return {
@@ -103,7 +105,7 @@ async function getRelatedPosts(post: CollectionEntry<'blog'>) {
 	return relatedPosts;
 }
 
-function countWords(text: string) {
+function countWords(text?: string) {
 	const words = (text?.split(/\s+/giu) ?? [])
 		.filter((wordCandidate) => wordCandidate.length > 0)
 		.filter((wordCandidate) => {
@@ -124,7 +126,7 @@ function calculateReadingTime(text: string) {
 	return Math.ceil(minutes);
 }
 
-function countLetters(text: string) {
+function countLetters(text?: string) {
 	const letters = (text?.split('') ?? []).filter((letter) => (/[a-z]/iu).exec(letter));
 
 	return letters.length;
@@ -150,6 +152,7 @@ async function formatPostMetadata(post: CollectionEntry<'blog'>) {
 
 export async function listAllPosts(sorting: PostSorting = 'descending') {
 	const posts = await getCollection('blog');
+	// oxlint-disable-next-line typescript/no-empty-object-type
 	const postFiles = import.meta.glob<MarkdownInstance<{}>>('../content/blog/**/*.md', { eager: true });
 
 	const filteredPosts = posts.filter(({ data: { draft } }) => !draft || import.meta.env.DEV);
@@ -206,7 +209,7 @@ export async function listPostsByTag(sorting: PostSorting = 'descending') {
 		for (const tag of post.data.tags ?? []) {
 			tags[tag] ??= [];
 
-			tags[tag]?.push(post);
+			tags[tag].push(post);
 		}
 	}
 

@@ -29,6 +29,7 @@ import { rehypePlugin as rehypeTables } from './src/utils/markdown-options/table
 
 const mode = process.env['NODE_ENV'] === 'production' ? 'production' : 'development';
 
+// oxlint-disable-next-line import/no-default-export
 export default defineConfig({
 	output: 'static',
 	site: 'https://madcampos.dev/',

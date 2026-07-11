@@ -1,4 +1,5 @@
 export function htmlEncode(input: string) {
+	// oxlint-disable-next-line typescript/no-misused-spread
 	return [...input].map((char) => `&#${char.codePointAt(0)};`).join('');
 }
 

@@ -3,6 +3,7 @@ import { SiteSettings } from '../../js/settings.ts';
 type InputSavedState = 'false' | 'indeterminate' | 'true';
 
 function getInputState(input: HTMLInputElement) {
+	// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 	return (localStorage.getItem(input.id) ?? 'false') as InputSavedState;
 }
 
@@ -57,7 +58,7 @@ function setInputState(input: HTMLInputElement) {
 		input.indeterminate = false;
 	}
 
-	localStorage.setItem(input.id, (input.indeterminate ? 'indeterminate' : input.checked.toString()) as InputSavedState);
+	localStorage.setItem(input.id, input.indeterminate ? 'indeterminate' : input.checked.toString());
 }
 
 function setParentInputState(input: HTMLInputElement) {
@@ -84,27 +85,29 @@ function updateInput(input: HTMLInputElement) {
 
 if (SiteSettings.js === 'enabled') {
 	document.addEventListener('change', (evt) => {
-		const target = evt.target as HTMLInputElement;
-
-		if (!target.matches('input[type="checkbox"]')) {
+		if (!(evt.target instanceof HTMLInputElement)) {
 			return;
 		}
 
-		if (target.hasAttribute('checked')) {
+		if (!evt.target.matches('input[type="checkbox"]')) {
+			return;
+		}
+
+		if (evt.target.hasAttribute('checked')) {
 			evt.preventDefault();
 			evt.stopPropagation();
 
 			return;
 		}
 
-		if (target.disabled || target.ariaDisabled === 'true') {
+		if (evt.target.disabled || evt.target.ariaDisabled === 'true') {
 			evt.preventDefault();
 			evt.stopPropagation();
 
 			return;
 		}
 
-		updateInput(target);
+		updateInput(evt.target);
 	});
 
 	// FIXME: first load is not working

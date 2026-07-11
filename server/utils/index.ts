@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/only-throw-error */
+// oxlint-disable no-console typescript/only-throw-error
 import { env } from 'cloudflare:workers';
 
 export const STATUS_OK = 200;
@@ -82,8 +82,10 @@ export interface RequestMetadata {
 }
 
 export function parseRequestMetadata(request: Request) {
+	// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 	const country = request.cf?.country as Iso3166Alpha2Code | 'T1' | null;
 	const userAgent = request.headers.get('User-Agent');
+	// oxlint-disable-next-line typescript/prefer-nullish-coalescing
 	const ipAddress = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || (env.NODE_ENV !== 'production' ? '0.0.0.0' : null);
 
 	console.log(country, userAgent, ipAddress);

@@ -1,6 +1,4 @@
 ---
-/* eslint-disable max-lines */
-
 import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
@@ -14,12 +12,12 @@ import PromptInjection from '../PromptInjection/PromptInjection.astro';
 import SiteNav from '../SiteNav/SiteNav.astro';
 import Webrings from '../Webrings/Webrings.astro';
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+// oxlint-disable-next-line typescript/no-non-null-assertion
 const project = (await listAllProjects())[0]!;
 const ProjectContent = (await project.render()).Content;
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' });
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+// oxlint-disable-next-line typescript/no-non-null-assertion
 const post = (await listAllPosts())[0]!;
 const sorter = new Intl.Collator('en-CA', { usage: 'sort' });
 const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
@@ -147,9 +145,8 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 
 			<Fragment slot="subtitle">
 				<draft-tag data-status={project.data.status}>
-					<Icon name={project.data.status === 'ongoing' ? 'mingcute:time-line' : 'mingcute:check-circle-line'} title="Project status" /> {
-						project.data.status === 'ongoing' ? 'Ongoing' : 'Finished'
-					}
+					<Icon name={project.data.status === 'ongoing' ? 'mingcute:time-line' : 'mingcute:check-circle-line'} title="Project status" />
+					{project.data.status === 'ongoing' ? 'Ongoing' : 'Finished'}
 				</draft-tag>
 				<span>
 					<Icon name="mingcute:calendar-2-line" title="Date started" />
@@ -158,15 +155,13 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 						datetime={project.data.createdAt.toISOString()}
 						itemprop="dateCreated"
 					>{formatter.format(project.data.createdAt)}</time>
-					{
-						project.data.updatedAt && (
-							<span>&mdash; <time
-									data-relative-time
-									datetime={project.data.updatedAt.toISOString()}
-									itemprop="dateModified"
-								>{formatter.format(project.data.updatedAt)}</time></span>
-						)
-					}
+					{project.data.updatedAt && (
+						<span>&mdash; <time
+								data-relative-time
+								datetime={project.data.updatedAt.toISOString()}
+								itemprop="dateModified"
+							>{formatter.format(project.data.updatedAt)}</time></span>
+					)}
 				</span>
 				<span itemprop="softwareVersion">
 					<Icon name="mingcute:package-2-line" title="Current version" /> {project.data.version}
@@ -176,23 +171,19 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 			<ProjectContent />
 
 			<Fragment slot="links">
-				{
-					project.data.url && (
-						<a href={project.data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
-							<Icon name="mingcute:link-2-line" aria-hidden="true" />
-							View Project
-						</a>
-					)
-				}
+				{project.data.url && (
+					<a href={project.data.url} rel="noopener noreferrer" referrerpolicy="no-referrer" itemprop="installUrl">
+						<Icon name="mingcute:link-2-line" aria-hidden="true" />
+						View Project
+					</a>
+				)}
 				&nbsp;
-				{
-					project.data.repository && (
-						<a href={project.data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
-							<Icon name="mingcute:github-line" aria-hidden="true" />
-							View Repository
-						</a>
-					)
-				}
+				{project.data.repository && (
+					<a href={project.data.repository} rel="noopener noreferrer" referrerpolicy="no-referrer">
+						<Icon name="mingcute:github-line" aria-hidden="true" />
+						View Repository
+					</a>
+				)}
 			</Fragment>
 
 			<details slot="footer">
@@ -370,19 +361,17 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 					<h1 class="p-name" itemprop="headline"><Fragment set:html={markdown.inline(post.data.title)} /></h1>
 				</a>
 
-				{
-					post.data.image && (
-						<figure>
-							<Image
-								src={post.data.image}
-								alt={post.data.imageAlt ?? ''}
-								itemprop="image"
-								loading="eager"
-							/>
-							{post.data.imageRights && <figcaption><Fragment set:html={markdown.inline(post.data.imageRights)} /></figcaption>}
-						</figure>
-					)
-				}
+				{post.data.image && (
+					<figure>
+						<Image
+							src={post.data.image}
+							alt={post.data.imageAlt ?? ''}
+							itemprop="image"
+							loading="eager"
+						/>
+						{post.data.imageRights && <figcaption><Fragment set:html={markdown.inline(post.data.imageRights)} /></figcaption>}
+					</figure>
+				)}
 
 				<blockquote class="p-summary" itemprop="description">
 					<p><Fragment set:html={markdown.inline(post.data.summary)} /></p>
@@ -398,33 +387,29 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 						>{formatter.format(post.data.createdAt)}</time>.
 					</span>
 
-					{
-						post.data.updatedAt && (
-							<span>
-								Updated on <time
-									data-relative-time
-									itemprop="dateModified"
-									class="dt-updated"
-									datetime={post.data.updatedAt.toISOString()}
-								>{formatter.format(post.data.updatedAt)}</time>.
-							</span>
-						)
-					}
+					{post.data.updatedAt && (
+						<span>
+							Updated on <time
+								data-relative-time
+								itemprop="dateModified"
+								class="dt-updated"
+								datetime={post.data.updatedAt.toISOString()}
+							>{formatter.format(post.data.updatedAt)}</time>.
+						</span>
+					)}
 
-					{
-						post.readingTime && (
-							<span>
-								<time
-									itemprop="timeRequired"
-									class="dt-duration"
-									datetime={`PT${post.readingTime}M`}
-								>
-									{post.readingTime} minute read
-								</time>
-								{post.wordCount && <span> &mdash; {post.wordCount} words</span>}
-							</span>
-						)
-					}
+					{post.readingTime && (
+						<span>
+							<time
+								itemprop="timeRequired"
+								class="dt-duration"
+								datetime={`PT${post.readingTime}M`}
+							>
+								{post.readingTime} minute read
+							</time>
+							{post.wordCount && <span> &mdash; {post.wordCount} words</span>}
+						</span>
+					)}
 				</post-metadata>
 
 				<share-options></share-options>
@@ -464,21 +449,19 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 		<related-posts>
 			<nav aria-labelledby="related-posts-label">
 				<ul>
-					{
-						post.relatedPosts.map((relatedPost) => (
-							<li>
-								<Card
-									url={`/blog/${relatedPost.url}`}
-									itemtype="https://schema.org/BlogPosting"
-									image={relatedPost.image}
-									imageAlt={relatedPost.imageAlt ?? ''}
-								>
-									<Fragment slot="title" set:html={markdown.inline(relatedPost.title)} />
-									<Fragment set:html={markdown.inline(relatedPost.summary)} />
-								</Card>
-							</li>
-						))
-					}
+					{post.relatedPosts.map((relatedPost) => (
+						<li>
+							<Card
+								url={`/blog/${relatedPost.url}`}
+								itemtype="https://schema.org/BlogPosting"
+								image={relatedPost.image}
+								imageAlt={relatedPost.imageAlt ?? ''}
+							>
+								<Fragment slot="title" set:html={markdown.inline(relatedPost.title)} />
+								<Fragment set:html={markdown.inline(relatedPost.summary)} />
+							</Card>
+						</li>
+					))}
 				</ul>
 			</nav>
 		</related-posts>
@@ -522,6 +505,7 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 		<button type="button" id="focus-skip-link">Focus skip link</button>
 		<script type="module" is:inline>
 			document.querySelector('#focus-skip-link')?.addEventListener('click', () => {
+				// oxlint-disable-next-line no-inline-comments
 				(/** @type {HTMLAnchorElement} */ (document.querySelector('skip-to-content a')))?.focus({
 					preventScroll: false,
 					focusVisible: true
@@ -542,15 +526,13 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 
 		<tag-list>
 			<ul>
-				{
-					post.data.tags?.map((tag) => (
-						<li class="p-category">
-							<tag-item>
-								<a href={`/blog/tags/${tag}/`}>{tag}</a>
-							</tag-item>
-						</li>
-					))
-				}
+				{post.data.tags?.map((tag) => (
+					<li class="p-category">
+						<tag-item>
+							<a href={`/blog/tags/${tag}/`}>{tag}</a>
+						</tag-item>
+					</li>
+				))}
 			</ul>
 		</tag-list>
 	</section>

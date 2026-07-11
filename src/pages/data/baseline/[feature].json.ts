@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import type * as BaselineData from 'web-features';
 import baselineData from 'web-features/data.json' with { type: 'json' };
 
+// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 const baselineFeatures = (baselineData as typeof BaselineData).features;
 
 export const GET: APIRoute = ({ params }) => {

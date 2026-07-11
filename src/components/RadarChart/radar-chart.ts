@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
+// oxlint-disable no-magic-numbers
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './radar-chart.css?url';
 
@@ -52,7 +51,7 @@ export class RadarChart extends HTMLElement implements CustomElement {
 		const name = item.dataset['name'] ?? '';
 		const items = Number.parseInt(item.dataset['items'] ?? '0', 10);
 
-		const clamp = Number(items / this.#maxItems);
+		const clamp = items / this.#maxItems;
 		const angle = (Math.PI * 2 * index) / this.#totalItems;
 		const { x, y, quadrant } = this.#polarToCartesian(angle, (clamp * 1000) / 2);
 
@@ -136,7 +135,7 @@ export class RadarChart extends HTMLElement implements CustomElement {
 		`;
 
 		this.#items.forEach((item, i) => {
-			// eslint-disable-next-line id-length
+			// oxlint-disable-next-line id-length
 			const li = this.querySelector(`chart-legend li:nth-child(${i + 1})`);
 
 			li?.append(item);
@@ -144,6 +143,7 @@ export class RadarChart extends HTMLElement implements CustomElement {
 	}
 
 	connectedCallback() {
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		this.#items = Array.from(this.children as HTMLCollectionOf<HTMLElement>);
 
 		this.#totalItems = this.#items.length;

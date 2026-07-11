@@ -4,7 +4,7 @@ const ASCII_OFFSET = 95;
 
 export const settings: Partial<RemarkRehype> = {
 	clobberPrefix: '',
-	footnoteBackContent: (referenceIndex, rereferenceIndex) => {
+	footnoteBackContent: (referenceIndex: number, rereferenceIndex: number) => {
 		if (rereferenceIndex <= 1) {
 			return [
 				{

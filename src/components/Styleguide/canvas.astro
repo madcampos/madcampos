@@ -10,6 +10,7 @@
 		<h3>2D Canvas</h3>
 		<canvas width="320" height="240" id="canvas-2d"></canvas>
 		<script type="module" is:inline>
+			// oxlint-disable no-inline-comments no-implicit-globals no-magic-numbers
 			const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d'));
 			const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
 			let curHeight = 0;

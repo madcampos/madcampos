@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+// oxlint-disable max-lines
 
 import {
 	type BorderWidthSetting,
@@ -114,11 +114,11 @@ const fonts: SiteFontSet[] = [
 export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	readonly #id = crypto.randomUUID();
 
-	#dialogElement?: HTMLDialogElement;
+	#dialogElement?: HTMLDialogElement | null;
 
-	#iabEscapeButton?: HTMLButtonElement;
-	#pwaBannerButton?: HTMLButtonElement;
-	#cleanCacheButton?: HTMLButtonElement;
+	#iabEscapeButton?: HTMLButtonElement | null;
+	#pwaBannerButton?: HTMLButtonElement | null;
+	#cleanCacheButton?: HTMLButtonElement | null;
 
 	#renderThemes() {
 		const themeList = this.querySelector<HTMLElement>('theme-list');
@@ -284,6 +284,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	#updateSettings(form: HTMLFormElement) {
 		const formData = new FormData(form);
 
+		// oxlint-disable typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		SiteSettings.theme = formData.get('theme') as ThemeSetting;
 		SiteSettings.font = formData.get('font') as FontSetting;
 		SiteSettings.fontSize = formData.get('font-size') as FontSizeSetting;
@@ -294,16 +295,18 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		SiteSettings.borderWidth = formData.get('border-width') as BorderWidthSetting;
 
 		if (SiteSettings.debug) {
-			SiteSettings.css = formData.get('css') as EnabledDisabledSetting ?? 'enabled';
-			SiteSettings.js = formData.get('js') as EnabledDisabledSetting ?? 'enabled';
-			SiteSettings.logoContextMenu = formData.get('logo-context-menu') as EnabledDisabledSetting ?? 'enabled';
+			SiteSettings.css = formData.get('css') as EnabledDisabledSetting | undefined ?? 'enabled';
+			SiteSettings.js = formData.get('js') as EnabledDisabledSetting | undefined ?? 'enabled';
+			SiteSettings.logoContextMenu = formData.get('logo-context-menu') as EnabledDisabledSetting | undefined ?? 'enabled';
 		}
+		// oxlint-enable typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 	}
 
 	async #cleanSiteStorageAndServiceWorkers() {
 		if ('caches' in window) {
 			const cacheNames = await caches.keys();
 			for (const cacheName of cacheNames) {
+				// oxlint-disable-next-line no-await-in-loop
 				await caches.delete(cacheName);
 			}
 		}
@@ -311,6 +314,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		if ('serviceWorker' in navigator) {
 			const registrations = await navigator.serviceWorker.getRegistrations();
 			for (const registration of registrations) {
+				// oxlint-disable-next-line no-await-in-loop
 				await registration.unregister();
 			}
 		}
@@ -541,22 +545,26 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 				evt.stopPropagation();
 				this.#dialogElement?.hidePopover();
 
-				this.#updateSettings(evt.target as HTMLFormElement);
+				if (evt.target instanceof HTMLFormElement) {
+					this.#updateSettings(evt.target);
+				}
 				break;
 			case 'reset':
 				this.#resetSettings();
 				break;
 			case 'click':
-				if ((evt.target as HTMLElement).id === this.#iabEscapeButton?.id) {
-					this.#dialogElement?.hidePopover();
-					document.querySelector<IabEscape>('iab-escape')?.open();
-				} else if ((evt.target as HTMLElement).id === this.#pwaBannerButton?.id) {
-					this.#dialogElement?.hidePopover();
-					document.querySelector<PWABanner>('pwa-banner')?.open();
-				} else if ((evt.target as HTMLElement).id === this.#cleanCacheButton?.id) {
-					this.#dialogElement?.hidePopover();
-					await this.#cleanSiteStorageAndServiceWorkers();
-					document.location.reload();
+				if (evt.target instanceof HTMLElement) {
+					if (evt.target.id === this.#iabEscapeButton?.id) {
+						this.#dialogElement?.hidePopover();
+						document.querySelector<IabEscape>('iab-escape')?.open();
+					} else if (evt.target.id === this.#pwaBannerButton?.id) {
+						this.#dialogElement?.hidePopover();
+						document.querySelector<PWABanner>('pwa-banner')?.open();
+					} else if (evt.target.id === this.#cleanCacheButton?.id) {
+						this.#dialogElement?.hidePopover();
+						await this.#cleanSiteStorageAndServiceWorkers();
+						document.location.reload();
+					}
 				}
 				break;
 			default:
@@ -580,10 +588,10 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 
 		this.#initializeSettings();
 
-		this.#dialogElement = this.querySelector(`#site-settings-dialog-${this.#id}`) as HTMLDialogElement;
-		this.#iabEscapeButton = this.querySelector(`#iab-escape-button-${this.#id}`) as HTMLButtonElement;
-		this.#pwaBannerButton = this.querySelector(`#pwa-banner-button-${this.#id}`) as HTMLButtonElement;
-		this.#cleanCacheButton = this.querySelector(`#clean-cache-button-${this.#id}`) as HTMLButtonElement;
+		this.#dialogElement = this.querySelector<HTMLDialogElement>(`#site-settings-dialog-${this.#id}`);
+		this.#iabEscapeButton = this.querySelector<HTMLButtonElement>(`#iab-escape-button-${this.#id}`);
+		this.#pwaBannerButton = this.querySelector<HTMLButtonElement>(`#pwa-banner-button-${this.#id}`);
+		this.#cleanCacheButton = this.querySelector<HTMLButtonElement>(`#clean-cache-button-${this.#id}`);
 
 		this.querySelector('form')?.addEventListener('submit', this);
 		this.querySelector('form')?.addEventListener('reset', this);

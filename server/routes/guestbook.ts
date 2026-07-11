@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/only-throw-error */
+// oxlint-disable typescript/only-throw-error no-console
 import { env } from 'cloudflare:workers';
 import { cleanHTMLString } from '../utils/html.ts';
 import {
@@ -67,7 +67,9 @@ export async function getMessages(request: Request) {
 			OFFSET ?
 		`).bind(offset).run<Pick<MessageRecord, 'message' | 'name' | 'timestamp'>>();
 
+		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		if (!success) {
+			// oxlint-disable-next-line typescript/no-unnecessary-condition
 			throw new Error(error ?? 'DB Error');
 		}
 		const parsedUrl = new URL(request.url);
@@ -130,6 +132,7 @@ async function parseMessageRequestData(request: Request) {
 	data.name = await cleanHTMLString(data.name);
 	data.message = await cleanHTMLString(data.message);
 
+	// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 	return data as { name: string, message: string, token: string };
 }
 
@@ -157,7 +160,6 @@ export async function sendMessage(request: Request) {
 		`).bind(visitorId).first<Pick<MessageRecord, 'id' | 'timestamp'>>();
 
 		if (recentPost) {
-			// eslint-disable-next-line no-console
 			console.log({ visitorId, recentPost });
 			throw new ErrorResponse(`Only one post allowed evey two days. Last post: ${recentPost.timestamp}`, STATUS_CONFLICT);
 		}
@@ -182,9 +184,9 @@ export async function sendMessage(request: Request) {
 			requestMetadata.ipAddress
 		).run();
 
-		// eslint-disable-next-line no-console
 		console.log({ visitorId });
 
+		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		return new Response(JSON.stringify({ success, message: error ?? '+1' } satisfies StatusResponse), {
 			status: STATUS_OK,
 			headers: {

@@ -38,7 +38,7 @@ declare class CustomElement extends HTMLElement {
 /** Constructor interface for custom elements. */
 interface CustomElementConstructor<T = CustomElement> {
 	/** Creates a new instance of the custom element. */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// oxlint-disable-next-line typescript/no-explicit-any
 	new (...args: any[]): HTMLElement & T;
 
 	/** List of attributes to observe for changes, invoking `attributeChangedCallback`. */
@@ -49,6 +49,7 @@ interface CustomElementConstructor<T = CustomElement> {
 }
 
 /** Provides methods for registering custom elements and querying registered elements. [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomElementRegistry) */
+// oxlint-disable-next-line no-shadow
 declare class CustomElementRegistry {
 	/** Adds a definition for a custom element to the custom element registry. [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomElementRegistry/define) */
 	define(name: string, constructor: CustomElementConstructor, options?: ElementDefinitionOptions): void;

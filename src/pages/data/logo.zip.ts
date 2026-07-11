@@ -74,6 +74,7 @@ async function createZipFile(files: File[]) {
 	});
 
 	for (const file of files) {
+		// oxlint-disable-next-line no-await-in-loop
 		await zipWriter.add(file.name, file.stream());
 	}
 

@@ -203,8 +203,11 @@ import DecoratedLine from '../DecoratedLine/DecoratedLine.astro';
 			<li><button type="button" id="menu-button-3">Say "Hey Ho"</button></li>
 		</menu>
 		<script type="module" is:inline>
+			// oxlint-disable-next-line no-alert
 			document.querySelector('#menu-button-1')?.addEventListener('click', () => alert('Hey!'));
+			// oxlint-disable-next-line no-alert
 			document.querySelector('#menu-button-2')?.addEventListener('click', () => alert('Ho!'));
+			// oxlint-disable-next-line no-alert
 			document.querySelector('#menu-button-3')?.addEventListener('click', () => alert('Hey Ho!'));
 		</script>
 	</section>

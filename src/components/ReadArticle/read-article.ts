@@ -171,6 +171,7 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 
 		const container = range.commonAncestorContainer;
 		const containingElement = container.nodeType === Node.ELEMENT_NODE
+			// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 			? container as HTMLElement
 			: container.parentElement;
 
@@ -179,7 +180,7 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 			const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
 			if (containerBottom <= 0 || containerTop >= viewportHeight) {
-				containingElement?.scrollIntoView({ block: 'center', behavior: 'auto' });
+				containingElement.scrollIntoView({ block: 'center', behavior: 'auto' });
 			}
 		}
 	}
@@ -189,7 +190,7 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 			speechSynthesis.pause();
 			button.textContent = 'Read Article';
 		} else if (this.#currentSection === 0) {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			// oxlint-disable-next-line typescript/no-non-null-assertion
 			speechSynthesis.speak(this.#sections[0]!.utterance);
 			button.textContent = 'Pause Reading';
 		} else {
@@ -291,6 +292,7 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 
 	handleEvent(evt: Event) {
 		switch (evt.type) {
+			// oxlint-disable typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 			case 'boundary':
 				this.#highlightWord(evt as SpeechSynthesisEvent);
 				break;
@@ -312,6 +314,7 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 				this.#handleVoiceChange();
 				break;
 			default:
+				// oxlint-enable typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		}
 	}
 
