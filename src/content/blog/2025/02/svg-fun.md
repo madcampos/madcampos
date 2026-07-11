@@ -146,11 +146,11 @@ So, we can do some things like in this example:
 
 ```html
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <circle cx="20" cy="20" r="5" id="circle" />
+	    <circle cx="20" cy="20" r="5" id="circle" />
 
-    <use xlink:href="#circle" x="50" y="50" fill="blue" />
-    <use xlink:href="#circle" x="40" y="60" fill="red" />
-    <use xlink:href="#circle" x="30" y="40" fill="green" />
+	    <use xlink:href="#circle" x="50" y="50" fill="blue" />
+	    <use xlink:href="#circle" x="40" y="60" fill="red" />
+	    <use xlink:href="#circle" x="30" y="40" fill="green" />
 </svg>
 ```
 
@@ -182,20 +182,23 @@ So, I tried something like the following:
 
 ```html
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Have all definitions in one place... -->
-    <defs>
-        <circle cx="20" cy="20" r="5" id="circle" />
-    </defs>
+	    <!-- Have all definitions in one place... -->
+	    <defs>
+		        <circle cx="20" cy="20" r="5" id="circle" />
+		   
+	</defs>
 
-    <!-- Then use it inside of another SVG -->
-    <svg viewBox="0 0 30 30">
-        <use xlink:href="#circle" fill="blue" />
-    </svg>
+	    <!-- Then use it inside of another SVG -->
+	    <svg viewBox="0 0 30 30">
+		        <use xlink:href="#circle" fill="blue" />
+		   
+	</svg>
 
-    <!-- And another SVG -->
-    <svg viewBox="0 0 100 100">
-        <use xlink:href="#circle" x="50" y="50" fill="red" />
-    </svg>
+	    <!-- And another SVG -->
+	    <svg viewBox="0 0 100 100">
+		        <use xlink:href="#circle" x="50" y="50" fill="red" />
+		   
+	</svg>
 </svg>
 ```
 

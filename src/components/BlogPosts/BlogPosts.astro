@@ -38,7 +38,7 @@ const {
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'UTC' });
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/Blog">
 	<HtmlHead
 		title={`${title ? `${title} | ` : ''}Marco Campos' Blog`}
@@ -65,56 +65,50 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		</header>
 
 		<main data-pagefind-body id="main">
-			{
-				posts.map((post) => (
-					<Card
-						url={`/blog/${post.url}`}
-						itemtype="https://schema.org/BlogPosting"
-						draft={post.data.draft}
-						image={post.data.image}
-						imageAlt={post.data.imageAlt ?? ''}
-					>
-						<h2 slot="title" itemprop="name">
-							<Fragment set:html={markdown.inline(post.data.title)} />
-						</h2>
-						<small slot="subtitle">
-							<time
-								data-relative-time
-								data-pagefind-sort="date[datetime]"
-								datetime={post.data.createdAt.toISOString()}
-							>{formatter.format(post.data.createdAt)}</time>
-						</small>
+			{posts.map((post) => (
+				<Card
+					url={`/blog/${post.url}`}
+					itemtype="https://schema.org/BlogPosting"
+					draft={post.data.draft}
+					image={post.data.image}
+					imageAlt={post.data.imageAlt ?? ''}
+				>
+					<h2 slot="title" itemprop="name">
+						<Fragment set:html={markdown.inline(post.data.title)} />
+					</h2>
+					<small slot="subtitle">
+						<time
+							data-relative-time
+							data-pagefind-sort="date[datetime]"
+							datetime={post.data.createdAt.toISOString()}
+						>{formatter.format(post.data.createdAt)}</time>
+					</small>
 
-						<Fragment set:html={markdown.inline(post.data.summary)} />
+					<Fragment set:html={markdown.inline(post.data.summary)} />
 
-						<a slot="links" href={`/blog/${post.url}`}>
-							<span>Read more</span>
-							<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
-							<span>...</span>
-						</a>
-						{
-							post.data.tags && post.data.tags.length > 0 && (
-								<details slot="footer">
-									<summary>Tags</summary>
-									<tag-list>
-										<ul>
-											{
-												post.data.tags.map((tag) => (
-													<li class="p-category">
-														<tag-item>
-															<a href={`/blog/tags/${tag}/`}>{tag}</a>
-														</tag-item>
-													</li>
-												))
-											}
-										</ul>
-									</tag-list>
-								</details>
-							)
-						}
-					</Card>
-				))
-			}
+					<a slot="links" href={`/blog/${post.url}`}>
+						<span>Read more</span>
+						<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
+						<span>...</span>
+					</a>
+					{post.data.tags && post.data.tags.length > 0 && (
+						<details slot="footer">
+							<summary>Tags</summary>
+							<tag-list>
+								<ul>
+									{post.data.tags.map((tag) => (
+										<li class="p-category">
+											<tag-item>
+												<a href={`/blog/tags/${tag}/`}>{tag}</a>
+											</tag-item>
+										</li>
+									))}
+								</ul>
+							</tag-list>
+						</details>
+					)}
+				</Card>
+			))}
 		</main>
 
 		<footer>

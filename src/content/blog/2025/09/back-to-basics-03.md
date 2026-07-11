@@ -16,69 +16,69 @@ I want to make it as reusable as possible, so we will start with some custom ele
 
 ```html
 <header>
-  <a id="skip-to-main" href="#main">Skip to main</a>
+	<a id="skip-to-main" href="#main">Skip to main</a>
 
-  <main-menu>
-    <button type="button" popovertarget="main-menu-mobile">
-      <sr-only>Open menu</sr-only>
-      <x-icon role="none" aria-hidden="true"></x-icon>
-    </button>
+	<main-menu>
+		<button type="button" popovertarget="main-menu-mobile">
+			<sr-only>Open menu</sr-only>
+			<x-icon role="none" aria-hidden="true"></x-icon>
+		</button>
 
-    <dialog popover id="main-menu-mobile">
-      <button type="button" popovertarget="main-menu-mobile">
-        <sr-only>Close menu</sr-only>
-        <x-icon role="none" aria-hidden="true"></x-icon>
-      </button>
-      <nav aria-labelledby="main-menu-label">
-        <sr-only id="main-menu-label">Main Menu</sr-only>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/menu/">Menu</a></li>
-          <li><a href="/recipes/">Recipes</a></li>
-          <li><a href="/book/">Book a Table</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
-      </nav>
-    </dialog>
-  </main-menu>
+		<dialog popover id="main-menu-mobile">
+			<button type="button" popovertarget="main-menu-mobile">
+				<sr-only>Close menu</sr-only>
+				<x-icon role="none" aria-hidden="true"></x-icon>
+			</button>
+			<nav aria-labelledby="main-menu-label">
+				<sr-only id="main-menu-label">Main Menu</sr-only>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about/">About</a></li>
+					<li><a href="/menu/">Menu</a></li>
+					<li><a href="/recipes/">Recipes</a></li>
+					<li><a href="/book/">Book a Table</a></li>
+					<li><a href="/contact/">Contact</a></li>
+				</ul>
+			</nav>
+		</dialog>
+	</main-menu>
 
-  <hero-image>
-    <video></video>
-  </hero-image>
+	<hero-image>
+		<video></video>
+	</hero-image>
 
-  <hgroup>
-    <h1>Marco&rsquo;s Trattoria</h1>
-    <p>A delight in each bite</p>
-  </hgroup>
+	<hgroup>
+		<h1>Marco&rsquo;s Trattoria</h1>
+		<p>A delight in each bite</p>
+	</hgroup>
 
-  <hero-controls hidden>
-    <button type="button" id="video-play-pause-button">
-      <span id="video-play-icon">
-        <sr-only>Play Video</sr-only>
-        <x-icon role="none" aria-hidden="true"></x-icon>
-      </span>
-      <span id="video-pause-icon" hidden>
-        <sr-only>Pause Video</sr-only>
-        <x-icon role="none" aria-hidden="true"></x-icon>
-      </span>
-    </button>
-    <button type="button" popovertarget="video-description">
-      <sr-only>Video Description</sr-only>
-      <x-icon role="none" aria-hidden="true"></x-icon>
-    </button>
-    <dialog popover="auto" id="video-description">
-      <header>
-        <h2>Video Description</h2>
-        <button type="button" popovertarget="video-description">
-          <sr-only>Close Video Description</sr-only>
-          <x-icon role="none" aria-hidden="true"></x-icon>
-        </button>
-      </header>
+	<hero-controls hidden>
+		<button type="button" id="video-play-pause-button">
+			<span id="video-play-icon">
+				<sr-only>Play Video</sr-only>
+				<x-icon role="none" aria-hidden="true"></x-icon>
+			</span>
+			<span id="video-pause-icon" hidden>
+				<sr-only>Pause Video</sr-only>
+				<x-icon role="none" aria-hidden="true"></x-icon>
+			</span>
+		</button>
+		<button type="button" popovertarget="video-description">
+			<sr-only>Video Description</sr-only>
+			<x-icon role="none" aria-hidden="true"></x-icon>
+		</button>
+		<dialog popover="auto" id="video-description">
+			<header>
+				<h2>Video Description</h2>
+				<button type="button" popovertarget="video-description">
+					<sr-only>Close Video Description</sr-only>
+					<x-icon role="none" aria-hidden="true"></x-icon>
+				</button>
+			</header>
 
-      <!--Video description goes here -->
-    </dialog>
-  </hero-controls>
+			<!-- Video description goes here -->
+		</dialog>
+	</hero-controls>
 </header>
 ```
 

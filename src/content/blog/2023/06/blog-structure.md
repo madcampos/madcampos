@@ -127,7 +127,7 @@ The relevant tags inside the `<head>` looks somewhat like this:
 <meta property="og:url" itemprop="url" content="{{url}}" />
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:dnt" content="on">
+<meta name="twitter:dnt" content="on" />
 ```
 
 Thus,

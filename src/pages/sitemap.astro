@@ -83,7 +83,7 @@ const talkPages: PageMetadata[] = (await listAllTalks()).map(({ id, data }) => (
 
 const blogPages = await listPostsByYearAndMonth();
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
 		title="Site Map | Marco Campos"
@@ -111,69 +111,61 @@ const blogPages = await listPostsByYearAndMonth();
 		<main data-pagefind-body id="main">
 			<h2>About Pages</h2>
 			<dl>
-				{
-					aboutPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-hidden={hidden ?? null}>
-							<a href={url}>
-								<Fragment set:html={markdown.inline(title)} />
-								{wip && <draft-tag>WIP</draft-tag>}
-							</a>
-						</dt>
-						<dd>
-							<Fragment set:html={markdown.inline(description)} />
-						</dd>
-					))
-				}
+				{aboutPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={markdown.inline(title)} />
+							{wip && <draft-tag>WIP</draft-tag>}
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={markdown.inline(description)} />
+					</dd>
+				))}
 			</dl>
 			<h2>Pages related to the website</h2>
 			<dl>
-				{
-					metaPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-hidden={hidden ?? null}>
-							<a href={url}>
-								<Fragment set:html={markdown.inline(title)} />
-								{wip && <draft-tag>WIP</draft-tag>}
-							</a>
-						</dt>
-						<dd>
-							<Fragment set:html={markdown.inline(description)} />
-						</dd>
-					))
-				}
+				{metaPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={markdown.inline(title)} />
+							{wip && <draft-tag>WIP</draft-tag>}
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={markdown.inline(description)} />
+					</dd>
+				))}
 			</dl>
 			<h2>Cool Pages</h2>
 			<dl>
-				{
-					coolPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-hidden={hidden ?? null}>
-							<a href={url}>
-								<Fragment set:html={markdown.inline(title)} />
-								{wip && <draft-tag>WIP</draft-tag>}
-							</a>
-						</dt>
-						<dd>
-							<Fragment set:html={markdown.inline(description)} />
-						</dd>
-					))
-				}
+				{coolPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={markdown.inline(title)} />
+							{wip && <draft-tag>WIP</draft-tag>}
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={markdown.inline(description)} />
+					</dd>
+				))}
 			</dl>
 			<h2>Talk Pages</h2>
 			<dl>
 				<dt><a href="/talks/">Talks Home</a></dt>
 				<dd>A list of talks that I've presented before.</dd>
-				{
-					talkPages.map(({ url, title, description, hidden, wip }) => (
-						<dt data-hidden={hidden ?? null}>
-							<a href={url}>
-								<Fragment set:html={markdown.inline(title)} />
-								{wip && <draft-tag>WIP</draft-tag>}
-							</a>
-						</dt>
-						<dd>
-							<Fragment set:html={markdown.inline(description)} />
-						</dd>
-					))
-				}
+				{talkPages.map(({ url, title, description, hidden, wip }) => (
+					<dt data-hidden={hidden ?? null}>
+						<a href={url}>
+							<Fragment set:html={markdown.inline(title)} />
+							{wip && <draft-tag>WIP</draft-tag>}
+						</a>
+					</dt>
+					<dd>
+						<Fragment set:html={markdown.inline(description)} />
+					</dd>
+				))}
 			</dl>
 			<h2>Blog</h2>
 			<dl>
@@ -183,16 +175,14 @@ const blogPages = await listPostsByYearAndMonth();
 				<dt><a href="/blog/tags/">Blog tags</a></dt>
 				<dd>List of tags used in the blog.</dd>
 
-				{
-					blogPages.entries().map(([year, months]) => (
-						<dt><a href={`/blog/${year}/`}>{year}</a></dt>
-						<dd>
-							<dl>
-								{months.entries().map(([month]) => <dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>)}
-							</dl>
-						</dd>
-					))
-				}
+				{blogPages.entries().map(([year, months]) => (
+					<dt><a href={`/blog/${year}/`}>{year}</a></dt>
+					<dd>
+						<dl>
+							{months.entries().map(([month]) => <dt><a href={`/blog/${year}/${month}/`}>{monthMap[month]}</a></dt>)}
+						</dl>
+					</dd>
+				))}
 			</dl>
 		</main>
 

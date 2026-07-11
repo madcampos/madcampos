@@ -24,7 +24,7 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 	};
 }));
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
 		title="Changelog | Marco Campos"
@@ -50,29 +50,27 @@ const renderedChangelogs = await Promise.all(changelogs.map(async (changelog) =>
 		</header>
 
 		<main data-pagefind-body id="main">
-			{
-				renderedChangelogs.map(({ id, date, title, draft, Content }) => (
-					<details id={slugify(id)}>
-						<summary>
-							<header>
-								<h2>
-									{draft && <draft-tag>Draft</draft-tag>}
-									<Fragment set:html={title} />
-								</h2>
-								<p>
-									<time
-										data-relative-time
-										datetime={date.toISOString()}
-									>{formatter.format(date)}</time>
-								</p>
-							</header>
-						</summary>
-						<article>
-							<Content />
-						</article>
-					</details>
-				))
-			}
+			{renderedChangelogs.map(({ id, date, title, draft, Content }) => (
+				<details id={slugify(id)}>
+					<summary>
+						<header>
+							<h2>
+								{draft && <draft-tag>Draft</draft-tag>}
+								<Fragment set:html={title} />
+							</h2>
+							<p>
+								<time
+									data-relative-time
+									datetime={date.toISOString()}
+								>{formatter.format(date)}</time>
+							</p>
+						</header>
+					</summary>
+					<article>
+						<Content />
+					</article>
+				</details>
+			))}
 		</main>
 
 		<footer>

@@ -25,7 +25,7 @@ const ICON_MAP = {
 const links = await listBookmarks();
 const blogs = await listBlogroll();
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
 		title="Bookmarks | Marco Campos"
@@ -56,54 +56,46 @@ const blogs = await listBlogroll();
 				subtitle="Bookmark categories and the number of items in them."
 				hidden
 			>
-				{
-					links.map(({ title, links }) => (
-						<a
-							data-name={title}
-							data-items={links.length}
-							href={`#${slugify(title)}`}
-						>
-							{title} ({links.length})
-						</a>
-					))
-				}
+				{links.map(({ title, links }) => (
+					<a
+						data-name={title}
+						data-items={links.length}
+						href={`#${slugify(title)}`}
+					>
+						{title} ({links.length})
+					</a>
+				))}
 			</radar-chart>
 
-			{
-				links.map((section) => (
-					<hgroup>
-						<a href={`#${slugify(section.title)}`}>
-							<h2 id={slugify(section.title)}>{section.title}</h2>
-						</a>
-						<p>{section.description}</p>
-					</hgroup>
-					<dl>
-						{
-							section.links.map((bookmark) => (
-								<dt class="h-entry">
-									<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
-									<a class="u-bookmark-of h-cite" href={bookmark.url}>
-										<Fragment set:html={markdown.inline(bookmark.title)} />
-									</a>
-								</dt>
-								<dd>
-									<Fragment set:html={markdown.inline(bookmark.description || '—')} />
-									{
-										bookmark.note && (
-											<m-note data-type="info">
-												<Icon name="mingcute:information-line" aira-hidden="true" />
-												<rendered-content>
-													<Fragment set:html={markdown.inline(bookmark.note)} />
-												</rendered-content>
-											</m-note>
-										)
-									}
-								</dd>
-							))
-						}
-					</dl>
-				))
-			}
+			{links.map((section) => (
+				<hgroup>
+					<a href={`#${slugify(section.title)}`}>
+						<h2 id={slugify(section.title)}>{section.title}</h2>
+					</a>
+					<p>{section.description}</p>
+				</hgroup>
+				<dl>
+					{section.links.map((bookmark) => (
+						<dt class="h-entry">
+							<Icon name={ICON_MAP[bookmark.type]} title={`(${bookmark.type})`} role="presentation" />
+							<a class="u-bookmark-of h-cite" href={bookmark.url}>
+								<Fragment set:html={markdown.inline(bookmark.title)} />
+							</a>
+						</dt>
+						<dd>
+							<Fragment set:html={markdown.inline(bookmark.description || '—')} />
+							{bookmark.note && (
+								<m-note data-type="info">
+									<Icon name="mingcute:information-line" aira-hidden="true" />
+									<rendered-content>
+										<Fragment set:html={markdown.inline(bookmark.note)} />
+									</rendered-content>
+								</m-note>
+							)}
+						</dd>
+					))}
+				</dl>
+			))}
 
 			<hgroup id="blogroll">
 				<h2>Blogroll</h2>
@@ -117,15 +109,13 @@ const blogs = await listBlogroll();
 				}
 			</style>
 			<ul id="blogroll-items">
-				{
-					blogs.map(({ url, title }) => (
-						<li>
-							<a href={url}>
-								<Fragment set:html={markdown.inline(title)} />
-							</a>
-						</li>
-					))
-				}
+				{blogs.map(({ url, title }) => (
+					<li>
+						<a href={url}>
+							<Fragment set:html={markdown.inline(title)} />
+						</a>
+					</li>
+				))}
 			</ul>
 		</main>
 

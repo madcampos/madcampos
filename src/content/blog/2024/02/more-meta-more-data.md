@@ -73,33 +73,38 @@ Here is an example of the app shell on an app from one of my [personal projects]
 
 		<!-- App Metadata -->
 		<link rel="icon" href="icons/favicon.svg" />
-		<meta name="theme-color" content="#9400d3">
+		<meta name="theme-color" content="#9400d3" />
 
 		<!-- Social metadata -->
 		<meta name="keywords" content="shadowrun, sdr, rpg, books" />
 
 		<meta property="og:title" name="twitter:title" itemprop="name" content="Shadowrun Catalog" />
-		<meta property="og:description" name="description" itemprop="description" content="An interactive list of Shadowrun published material (books, tabletop, video games, etc.). Information about the items and can be linked to local files." />
+		<meta
+			property="og:description"
+			name="description"
+			itemprop="description"
+			content="An interactive list of Shadowrun published material (books, tabletop, video games, etc.). Information about the items and can be linked to local files."
+		/>
 		<meta property="og:image" name="twitter:image" itemprop="image" content="icons/transparent/manifest-icon-512.png" />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:url" content="https://sdrlog.madcampos.dev/" />
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:dnt" content="on">
+		<meta name="twitter:dnt" content="on" />
 
-		<meta name="pinterest" content="nopin" description="Pintrest not allowed here!">
+		<meta name="pinterest" content="nopin" description="Pintrest not allowed here!" />
 
 		<!-- Search -->
 		<!-- <link rel="search" href="/open-search.xml" type="application/opensearchdescription+xml" title="Shadowrun Catalog"> -->
 
 		<!-- Site configuration -->
-		<meta name="referrer" content="no-referrer">
-		<meta name="format-detection" content="telephone=no">
+		<meta name="referrer" content="no-referrer" />
+		<meta name="format-detection" content="telephone=no" />
 		<meta name="google" content="notranslate" />
-		<link rel="license" href="#copyright">
+		<link rel="license" href="#copyright" />
 
 		<!-- Changelog -->
-		<link rel="alternate" type="application/rss+xml" href="https://sdrlog.madcampos.dev/changelog.rss" title="Changelog (Version History)">
+		<link rel="alternate" type="application/rss+xml" href="https://sdrlog.madcampos.dev/changelog.rss" title="Changelog (Version History)" />
 
 		<!-- Styles -->
 		<link rel="stylesheet" href="./css/base.css" />
@@ -108,7 +113,7 @@ Here is an example of the app shell on an app from one of my [personal projects]
 	<body class="notranslate" translate="no">
 		<div id="splash-screen">
 			<div id="load-overlay">
-				<img src="images/base-covers/loading-anim.svg" alt="Animation of the Shadowrun logo" role="presentation">
+				<img src="images/base-covers/loading-anim.svg" alt="Animation of the Shadowrun logo" role="presentation" />
 				<div>
 					<progress id="load-progress"></progress>
 					<p id="load-text">Loading Data...</p>

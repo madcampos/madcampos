@@ -35,20 +35,20 @@ The whole restaurant menu is built with them, it works perfectly for this kind o
 
 ```html
 <dl>
-  <dt>Focaccia</dt>
-  <dd>House made focaccia, olive oil, and rosemary.</dd>
+	<dt>Focaccia</dt>
+	<dd>House made focaccia, olive oil, and rosemary.</dd>
 
-  <dt>Brucceta al Pomodoro</dt>
-  <dd>Grilled bread topped with marinated tomatoes, garlic, and basil.</dd>
+	<dt>Brucceta al Pomodoro</dt>
+	<dd>Grilled bread topped with marinated tomatoes, garlic, and basil.</dd>
 
-  <dt>Arancini Siciliani</dt>
-  <dd>Crispy risotto balls filled with mozzarella and vegan ragù.</dd>
+	<dt>Arancini Siciliani</dt>
+	<dd>Crispy risotto balls filled with mozzarella and vegan ragù.</dd>
 
-  <dt>Prosciutto e Melone</dt>
-  <dd>Sweet cantaloupe paired with smoked mushroom slices, in the style of Parma ham.</dd>
+	<dt>Prosciutto e Melone</dt>
+	<dd>Sweet cantaloupe paired with smoked mushroom slices, in the style of Parma ham.</dd>
 
-  <dt>Insalata Caprese</dt>
-  <dd>Fresh mozzarella, tomatoes, basil, and extra virgin olive oil.</dd>
+	<dt>Insalata Caprese</dt>
+	<dd>Fresh mozzarella, tomatoes, basil, and extra virgin olive oil.</dd>
 </dl>
 ```
 
@@ -66,12 +66,12 @@ Here is an example markup:
 
 ```html
 <figure>
-  <img
-    width="480"
-    src="/assets/images/pizza.webp"
-    alt="A top shot of a pizza topped with olives, onions, zuccini, red and yellow peppers, corn, cilantro, and sesame seeds."
-  />
-  <figcaption>Brazillian Style Pizza</figcaption>
+	<img
+		width="480"
+		src="/assets/images/pizza.webp"
+		alt="A top shot of a pizza topped with olives, onions, zuccini, red and yellow peppers, corn, cilantro, and sesame seeds."
+	/>
+	<figcaption>Brazillian Style Pizza</figcaption>
 </figure>
 ```
 

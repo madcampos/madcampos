@@ -17,7 +17,7 @@ const postsByTag = Object.entries(await listPostsByTag()).map(([tag, posts]) => 
 
 const tags = postsByTag.map(({ name }) => name);
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/ItemList">
 	<HtmlHead
 		title="Tags | Marco Campos' Blog"
@@ -53,15 +53,13 @@ const tags = postsByTag.map(({ name }) => name);
 				subtitle="Tags used on the blog and their post count"
 				hidden
 			>
-				{
-					postsByTag.map((tag) => (
-						<tag-item data-name={tag.name} data-items={tag.items}>
-							<a href={`/blog/tags/${tag.name}/`} itemprop="url">
-								<span itemprop="itemListElement">{tag.name} ({tag.items})</span>
-							</a>
-						</tag-item>
-					))
-				}
+				{postsByTag.map((tag) => (
+					<tag-item data-name={tag.name} data-items={tag.items}>
+						<a href={`/blog/tags/${tag.name}/`} itemprop="url">
+							<span itemprop="itemListElement">{tag.name} ({tag.items})</span>
+						</a>
+					</tag-item>
+				))}
 			</radar-chart>
 		</main>
 

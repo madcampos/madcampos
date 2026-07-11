@@ -101,7 +101,8 @@ customElements.define('semi-accessible-component', SemiAccessibleComponent);
 You can also do this from the HTML side:
 
 ```html
-<semi-accessible-component role="region" aria-label="Custom region from a web component"> <!-- [!code highlight] -->
+<semi-accessible-component role="region" aria-label="Custom region from a web component">
+	<!-- [!code highlight] -->
 	<template shadowrootmode="open">
 		Content from inside a custom region
 	</template>

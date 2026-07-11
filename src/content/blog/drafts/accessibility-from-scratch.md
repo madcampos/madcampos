@@ -66,6 +66,7 @@ If that didn't scare you already of trying to re-implement a button from scratch
 First thing is to create a new tag, we do so because custom tags have no implicit role associated with them. So we add a `role` of `button` to it. Now it will be exposed to the accessibility tree as a button.
 
 I will skip styling for this post for two reasons:
+
 1. It will make things unnecessarily longer.
 2. Custom elements can be styled however you like, so you can CSS the heck out of this "button".
 
@@ -78,9 +79,11 @@ So far so good...
 ## Naming things
 
 Our button should also have an accessible label, luckily from us, it is derived from the element contents. That solves one of the problems for us.
+
 ## Interactions
 
 Click, touch, and pointer interactions are ways to interact with an element with those modalities:
+
 - Click is for mouse, by using the mouse buttons, left, right, middle, and any other available button your neat gamer mouse may have.
 - Touch is four touch screens, it usually means a single tap, but we also have information on all the touch points on the device.
 - Pointer is a generic version of the previous ones, plus support for stylus and whatever other similar pointer device.
@@ -131,22 +134,22 @@ class SaganButton extends HTMLElement {
 	// A reference to the element internals, we will assign it in the constructor.
 	// It is also a private property (prfixed by a hashtag `#`).
 	#internals: ElementInternals;
-	
+
 	constructor() {
 		super();
 
 		// We attach the shadow DOM to the element.
-		// Using the `open` mode here makes the shadow root available on `this.shadowRoot`. 
+		// Using the `open` mode here makes the shadow root available on `this.shadowRoot`.
 		this.attachShadow({ mode: 'open' });
-		
+
 		// Now we assign the internals of the element.
 		// This gives us control over forms and ARIA.
 		this.#internals = this.attachInternals();
-		
+
 		// Add back the `button` role.
 		this.role = 'button';
 	}
-	
+
 	// This method is called when the element is added to the DOM.
 	connectedCallback() {
 		// Here we define the element's internal HTML structure.
@@ -155,24 +158,24 @@ class SaganButton extends HTMLElement {
 		this.shadowRoot.innerHTML = `
 			<slot></slot>
 		`;
-		
+
 		// Now we re-add the event handlers...
 		// It using a pattern explained below.
 		this.addEventListener('click', this);
 		this.addEventListener('touchend', this);
 		this.addEventListener('pointerup', this);
 	}
-	
+
 	disconnectedCallback() {
 		// We do some cleanup of the event listeners...
 		this.removeEventListener('click', this);
 		this.removeEventListener('touchend', this);
 		this.removeEventListener('pointerup', this);
 	}
-	
+
 	// This method allows us to centralize event handling.
 	// It also makes easier to add and remove event handlers,
-	// without having to keep references to the event handlers themselves. 
+	// without having to keep references to the event handlers themselves.
 	handleEvent(evt: Event) {
 		// We here filter by event type
 		switch (evt.type) {
@@ -185,7 +188,7 @@ class SaganButton extends HTMLElement {
 				break;
 		}
 	}
-	
+
 	#doButtonAction() {
 		// Implementation to come after.
 	}
@@ -200,6 +203,7 @@ Okay, we are back to where we were, but now with more complexity! 🎉
 ## Keyboard interaction
 
 The button is clickable, tappable, and pointable (?), but still not accessible via keyboard. To do so, we need to add a couple of things:
+
 - Add a `tabindex`, so it can be reached when pressing <kbd>tab</kbd>.
 - Add a `keypress` event listener so it can be interacted with.
 
@@ -210,40 +214,40 @@ Please note this is the bare minimum for a semi working keyboard accessible butt
 ```typescript
 class SaganButton extends HTMLElement {
 	constructor() {
-		//...
-		
+		// ...
+
 		// Add a tabindex of `0` so the element is added to the tab order of the page.
 		this.tabindex = 0;
 	}
-	
+
 	connectedCallback() {
 		this.addEventListener('keyup', this);
-		//...
+		// ...
 	}
-	
+
 	disconnectedCallback() {
 		this.removeEventListener('keyup', this);
-		//...
+		// ...
 	}
-	
+
 	handleEvent(evt: Event) {
 		switch (evt.type) {
 			// Add an event handler for the keyboard.
 			// Here we will use a method to better organize the code.
 			case 'keyup':
-				this.#handleKeyEvent(evt)
+				this.#handleKeyEvent(evt);
 				break;
-			//...
+				// ...
 		}
 	}
-	
+
 	// Handles the keyboard events...
 	#handleKeyEvent(evt: KeyboardEvent) {
 		// We only care about the "space" and "enter" keys.
 		if (evt.key !== ' ' || evt.key !== 'Enter') {
 			return;
 		}
-		
+
 		this.#doButtonAction();
 	}
 }
@@ -269,23 +273,23 @@ class SaganButton extends HTMLElement {
 	// That will allow us to keep HTML attributes and element properties in sync.
 	set autoFocus(newValue: boolean) {
 		this.toggleAttribute('auto-focus', newValue);
-		
+
 		// If the attribute is set, we focus the element
 		if (newValue) {
 			this.focus();
 		}
 	}
-	
+
 	get autoFocus(): boolean {
 		return this.hasAttribute('auto-focus');
 	}
-	
+
 	// When the HTML value changes, set the property.
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) {
 			return;
 		}
-		
+
 		switch (name) {
 			case 'auto-focus':
 				// Note: removed attributes have a value of `null`.
@@ -306,29 +310,29 @@ Moving on to the `disabled` attribute, this one is simpler. We set the `ariaDisa
 class SaganButton extends HTMLElement {
 	static observedAttributes = [
 		'disabled'
-		//...
+		// ...
 	];
 
 	// Again: using a getter and a setter.
 	set disabled(newValue: boolean) {
 		this.toggleAttribute('disabled', newValue);
-	
+
 		// Note: `aria-disabled` is a string of "true" or "false", not a boolean.
-		this.#internals.ariaDisabled = newValue ? 'true' : 'false';	
+		this.#internals.ariaDisabled = newValue ? 'true' : 'false';
 	}
-	
+
 	get disabled(): boolean {
 		return this.hasAttribute('disabled');
 	}
-	
+
 	attributeChangedCallback(name, oldValue, newValue) {
-		//...
-		
+		// ...
+
 		switch (name) {
 			case 'disabled':
 				this.disabled = newValue !== null;
 				break;
-			//...
+				// ...
 		}
 	}
 }
@@ -337,11 +341,12 @@ class SaganButton extends HTMLElement {
 ## Form association and button type
 
 Here is a handful of attributes, all related to forms:
+
 - `type`: The button type, it can be one of 3 options (`submit`, `reset`, `button`). The options trigger the associated form submission, form reset, or don't do anything.
 - `form`: the associated form, this is useful for the case where the button is not a child of the form element.
 - `formaction`: a URL to submit the form to, this is so you can have different buttons submitting the form to different URLs.
 - `formmethod`: Same as the above, different buttons can send different methods. HTML baby!
-- `formenctype`: This also allows for different ways of sending the form data over the wire[^3]. 
+- `formenctype`: This also allows for different ways of sending the form data over the wire[^3].
 - `formnovalidate`: Says this button should skip form validation.
 - `formtarget`: If the form should open a new tab on submission or not.
 - `name` and `value`: if present it is added to the form on submission.
@@ -364,7 +369,7 @@ class SaganButton extends HTMLElement {
 		'formtarget',
 		'name',
 		'value'
-		//...
+		// ...
 	];
 
 	// The default for button types is "submit",
@@ -376,18 +381,18 @@ class SaganButton extends HTMLElement {
 			this.setAttribute('type', 'submit');
 		}
 	}
-	
+
 	get type(): string {
 		// If it is not set we still want to return a default.
 		return this.getAttribute('type') ?? 'submit';
 	}
-	
+
 	set form(newValue: string | null) {
 		if (newValue === null) {
 			this.deleteAttribute('form');
 			return;
 		}
-		
+
 		// Here we need to check if the form is a valid element.
 		// If it is, we then set the attribute.
 		const form = document.getElementbyId(newValue);
@@ -395,33 +400,33 @@ class SaganButton extends HTMLElement {
 			this.setAttribute('form', newValue);
 		}
 	}
-	
+
 	get form(): HTMLFormElement | null {
 		// Here we get from the attribute as the first option,
 		// Then fallback to whatever the browser has set.
 		let form = this.#internals.form;
-		
+
 		const formId = this.getAttribute('form');
 		if (formId) {
 			form = document.getElementbyId(formId);
 		}
-				
+
 		return form;
 	}
-	
+
 	set formAction(newValue: string | null) {
 		if (newValue === null) {
 			this.deleteAttribute('formaction');
 			return;
 		}
-		
+
 		this.setAttribute('formaction', newValue);
 	}
-	
+
 	get formAction(): string | null {
 		return this.getAttribute('formaction');
 	}
-	
+
 	set formMethod(newValue: string | null) {
 		if (['post', 'get', 'dialog'].includes(newValue.toLowerCase())) {
 			this.setAttribute('formmethod', newValue);
@@ -429,35 +434,37 @@ class SaganButton extends HTMLElement {
 			this.setAttribute('formmethod', 'get');
 		}
 	}
-	
+
 	get formMethod(): string {
 		return this.getAttribute('formmethod') ?? 'get';
 	}
-	
+
 	set formEnctype(newValue: string | null) {
-		if ([
-			'application/x-www-form-urlencoded',
-			'multipart/form-data',
-			'text/plain'
-		].includes(newValue.toLowerCase())) {
+		if (
+			[
+				'application/x-www-form-urlencoded',
+				'multipart/form-data',
+				'text/plain'
+			].includes(newValue.toLowerCase())
+		) {
 			this.setAttribute('formenctype', newValue);
 		} else {
 			this.setAttribute('formenctype', 'application/x-www-form-urlencoded');
 		}
 	}
-	
+
 	get formEnctype(): string {
 		return this.getAttribute('formenctype') ?? 'application/x-www-form-urlencoded';
 	}
-	
+
 	set formNoValidate(newValue: boolean) {
 		this.toggleAttribute('formnovalidate', newValue);
 	}
-	
+
 	get formNoValidate(): boolean {
 		return this.hasAttribute('formnovalidate');
 	}
-	
+
 	set formTarget(newValue: string | null) {
 		if (['_self', '_blank', '_parent', '_top'].includes(newValue.toLowerCase())) {
 			this.setAttribute('formtarget', newValue);
@@ -465,71 +472,71 @@ class SaganButton extends HTMLElement {
 			this.setAttribute('formtarget', '_self');
 		}
 	}
-	
+
 	get formTarget(): string {
 		return this.getAttribute('formtarget') ?? '_self';
 	}
-	
+
 	set name(newValue: string | null) {
 		if (newValue === null) {
 			this.deleteAttribute('name');
 			return;
 		}
-		
+
 		this.setAttribute('name');
 	}
-	
+
 	get name(): string | null {
 		return this.getAttribute('name');
 	}
-	
+
 	set value(newValue: string | null) {
 		if (newValue === null) {
 			this.deleteAttribute('value');
 			return;
 		}
-		
+
 		this.setAttribute('value');
-		
+
 		// We need to set the button's value.
 		this.#internals.setFormValue(newValue);
 		// And it's validation state.
 		this.#internals.setValidity({});
 	}
-	
+
 	get value(): string | null {
 		return this.getAttribute('value');
 	}
-	
+
 	// We also need to add the validation state of the button...
 	get willValidate() {
 		// All those checks come from MDN's docs on the button `willValidate` property.
 		if (this.type === 'button' || this.type === 'reset') {
 			return false;
 		}
-		
+
 		if (this.closest('datalist')) {
 			return false;
 		}
-		
+
 		if (this.disabled) {
 			return false;
 		}
-		
+
 		return this.#internals.willValidate;
 	}
-	
+
 	get validationMessage() {
 		return this.willValidate ? this.#internals.validationMessage : '';
 	}
-	
+
 	get validity() {
 		return this.#internals.validity;
 	}
-	
+
 	attributeChangedCallback(name, oldValue, newValue) {
-		//...
-		
+		// ...
+
 		switch (name) {
 			case 'type':
 				this.type = newValue;
@@ -558,7 +565,7 @@ class SaganButton extends HTMLElement {
 			case 'value':
 				this.value = newValue;
 				break;
-			//...
+				// ...
 		}
 	}
 }
@@ -576,19 +583,19 @@ class SaganButton extends HTMLElement {
 		if (this.disabled) {
 			return;
 		}
-		
+
 		// Then check the button type.
 		if (this.type === 'button') {
 			// Do... something else?
 			return;
 		}
-		
+
 		// Here we reset the form if the button is a reset one.
 		if (this.type === 'reset') {
 			this.form?.reset();
 			return;
 		}
-		
+
 		// Finally, if it is a submit button,
 		// AND IF we wired everything correctly,
 		// The form will be handled by the browser.
@@ -615,7 +622,6 @@ I will skip those though because they require extra code or relate to other elem
 
 That's is. Don't reinvent the wheel if you don't need to.
 It is too much work, and extra burden for you to maintain.
-
 
 [^1]: In this case "see" is working both as visibly seeing the thing on the screen but also, hearing the element being announced, or getting it represented in the accessibility tree somehow that represents what is expected. And that was a very convoluted way to put it...
 

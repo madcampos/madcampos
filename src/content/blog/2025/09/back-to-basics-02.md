@@ -34,7 +34,7 @@ Aside from the obvious `<head>` and `<body>` tags, I still needed a skeleton of 
 For now, this will do:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-CA">
 	<head>
 		<meta charset="UTF-8" />
@@ -77,7 +77,7 @@ If you already know about the basic HTML structure, like the `html`, `head`, and
 Due to legacy reasons, we need the first line:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 ```
 
 At least it is now short and doesn't need the [weird shenanigans of yore](https://www.w3.org/QA/2002/04/valid-dtd-list.html). So yeah, we just add it and don't question. Moving on...

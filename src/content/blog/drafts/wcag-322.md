@@ -30,16 +30,16 @@ We have the following form:
 
 	<p><strong>Answers:</strong></p>
 	<div>
-		<input type="radio" name="answer" id="answer-1"/>
+		<input type="radio" name="answer" id="answer-1" />
 		<label for="answer-1">Fast</label>
 
-		<input type="radio" name="answer" id="answer-2"/>
+		<input type="radio" name="answer" id="answer-2" />
 		<label for="answer-2">1 520 640 in/s</label>
 
-		<input type="radio" name="answer" id="answer-3"/>
+		<input type="radio" name="answer" id="answer-3" />
 		<label for="answer-3">An European or an African swallow?</label>
 
-		<input type="radio" name="answer" id="answer-4"/>
+		<input type="radio" name="answer" id="answer-4" />
 		<label for="answer-4">11 m/s</label>
 	</div>
 

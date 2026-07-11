@@ -56,14 +56,14 @@ Here is an example of the link with a logo image on the header:
 ```xml
 <a id="logo">
 	<xsl:attribute name="href">
-		<xsl:value-of select="/rss/channel/link"/>
+		<xsl:value-of select="/rss/channel/link" />
 	</xsl:attribute>
 	<img>
 		<xsl:attribute name="src">
-			<xsl:value-of select="/rss/channel/image/url"/>
+			<xsl:value-of select="/rss/channel/image/url" />
 		</xsl:attribute>
 		<xsl:attribute name="alt">
-			<xsl:value-of select="/rss/channel/image/title"/>
+			<xsl:value-of select="/rss/channel/image/title" />
 		</xsl:attribute>
 	</img>
 </a>
@@ -73,7 +73,7 @@ Which outputs:
 
 ```html
 <a id="logo" href="https://madcampos.dev/blog/">
-	<img src="https://madcampos.dev/icons/transparent/manifest-icon-512.png" alt="Marco Campos' Blog">
+	<img src="https://madcampos.dev/icons/transparent/manifest-icon-512.png" alt="Marco Campos' Blog" />
 </a>
 ```
 

@@ -6,24 +6,24 @@
 		::view-transition-new(root) { animation: new-page-animation var(--transition-in-time) ease-in-out both; }
 
 		@keyframes new-page-animation {
-			from {
+			0% {
 				clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
 				opacity: 0;
 			}
 
-			to {
+			100% {
 				clip-path: polygon(50% -100%, 200% 50%, 50% 200%, -100% 50%);
 				opacity: 1;
 			}
 		}
 
 		@keyframes old-page-animation {
-			from {
+			0% {
 				filter: sepia(0) blur(0);
 				opacity: 1;
 			}
 
-			to {
+			100% {
 				filter: sepia(1) blur(var(--size-3));
 				opacity: 0;
 			}

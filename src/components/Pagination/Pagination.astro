@@ -58,17 +58,15 @@ const navLinks = Array(lastPageInNav - firstPageInNav + 1).fill(undefined).map((
 				{firstPageInNav > 1 && <li><a href={baseUrl} rel={nofollow ? 'nofollow' : null}>1</a></li>}
 				{firstPageInNav > 2 && <li><span>…</span></li>}
 
-				{
-					navLinks.map(({ url, label, isCurrentPage }) => (
-						<li>
-							<a
-								href={url}
-								aria-current={isCurrentPage ? 'page' : null}
-								rel={nofollow ? 'nofollow' : null}
-							>{label}</a>
-						</li>
-					))
-				}
+				{navLinks.map(({ url, label, isCurrentPage }) => (
+					<li>
+						<a
+							href={url}
+							aria-current={isCurrentPage ? 'page' : null}
+							rel={nofollow ? 'nofollow' : null}
+						>{label}</a>
+					</li>
+				))}
 
 				{lastPageInNav < lastPage - 1 && <li><span>…</span></li>}
 				{lastPageInNav < lastPage && <li><a href={`${baseUrl}${lastPage}/`} rel={nofollow ? 'nofollow' : null}>{lastPage}</a></li>}

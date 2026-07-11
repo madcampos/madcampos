@@ -68,18 +68,18 @@ Here is an abridged version of how the head of my home page looks like:
 
 ```html
 <head>
-	<meta charset="utf-8">
-	<link rel="canonical" href="http://madcampos.dev/">
+	<meta charset="utf-8" />
+	<link rel="canonical" href="http://madcampos.dev/" />
 
 	<title>Marco Campos | Senior Web Developer</title>
 
-	<link rel="icon" href="http://localhost:3000/icons/favicon.svg" sizes="any" type="image/svg+xml">
+	<link rel="icon" href="http://localhost:3000/icons/favicon.svg" sizes="any" type="image/svg+xml" />
 
-	<meta name="description" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript">
-	<meta name="author" content="Marco Campos">
-	<meta name="keywords" content="Senior web developer, web developer, vue.js, vue, node.js, javascript, typescript, webdev">
+	<meta name="description" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript" />
+	<meta name="author" content="Marco Campos" />
+	<meta name="keywords" content="Senior web developer, web developer, vue.js, vue, node.js, javascript, typescript, webdev" />
 
-	<link rel="alternate" type="application/rss+xml" href="http://madcampos.dev/changelog.xml" title="Changelog (Version History)">
+	<link rel="alternate" type="application/rss+xml" href="http://madcampos.dev/changelog.xml" title="Changelog (Version History)" />
 </head>
 ```
 
@@ -97,13 +97,13 @@ Here is an example of the OpenGraph tags on the head of my home page:
 
 ```html
 <head>
-	<meta property="og:title" content="Marco Campos | Senior Web Developer">
-	<meta property="og:type" content="website">
-	<meta property="og:locale" content="en_US">
-	<meta property="og:url" content="http://madcampos.dev/">
-	<meta property="og:description" name="description" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript">
-	<meta property="og:image" content="https://madcampos.dev/_astro/logo-micro.niOL6vSR.png">
-	<meta property="og:image:alt" content="Logo for madcampos' site consisting of stylized &quot;{m}&quot; in blue.">
+	<meta property="og:title" content="Marco Campos | Senior Web Developer" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:url" content="http://madcampos.dev/" />
+	<meta property="og:description" name="description" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript" />
+	<meta property="og:image" content="https://madcampos.dev/_astro/logo-micro.niOL6vSR.png" />
+	<meta property="og:image:alt" content="Logo for madcampos' site consisting of stylized &quot;{m}&quot; in blue." />
 </head>
 ```
 
@@ -132,13 +132,13 @@ Here is the HTML, now with Microdata properties (`itemprop`, `itemscope`, and `i
 ```html
 <html lang="en-US" itemscope itemtype="https://schema.org/ProfilePage">
 	<head>
-		<meta property="og:title" name="twitter:title" itemprop="name" content="Marco Campos | Senior Web Developer">
-		<meta property="og:locale" itemprop="inLanguage" content="en_US">
-		<meta property="og:url" itemprop="url" content="https://madcampos.dev/">
-		<meta property="og:description" name="description" itemprop="headline" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript">
-		<meta name="twitter:description" itemprop="abstract" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript">
-		<meta property="og:image" name="twitter:image" itemprop="image" content="https://madcampos.dev/_astro/logo-micro.niOL6vSR.png">
-		<meta name="keywords" itemprop="keywords" property="article:tag" content="Senior web developer, web developer, vue.js, vue, node.js, javascript, typescript, webdev">
+		<meta property="og:title" name="twitter:title" itemprop="name" content="Marco Campos | Senior Web Developer" />
+		<meta property="og:locale" itemprop="inLanguage" content="en_US" />
+		<meta property="og:url" itemprop="url" content="https://madcampos.dev/" />
+		<meta property="og:description" name="description" itemprop="headline" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript" />
+		<meta name="twitter:description" itemprop="abstract" content="Marco Campos - Senior Web Developer - Vue.js, Node.js, TypeScript, JavaScript" />
+		<meta property="og:image" name="twitter:image" itemprop="image" content="https://madcampos.dev/_astro/logo-micro.niOL6vSR.png" />
+		<meta name="keywords" itemprop="keywords" property="article:tag" content="Senior web developer, web developer, vue.js, vue, node.js, javascript, typescript, webdev" />
 	</head>
 
 	<body>
@@ -146,14 +146,20 @@ Here is the HTML, now with Microdata properties (`itemprop`, `itemscope`, and `i
 			<section id="about" itemprop="mainEntity" itemtype="https://schema.org/Person" itemscope>
 				<aside>
 					<picture itemprop="image" itemscope="" itemtype="https://schema.org/ImageObject">
-						<img src="/_astro/me.Aph_RU_e_1ffEBR.webp" itemprop="contentUrl" alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf.">
+						<img
+							src="/_astro/me.Aph_RU_e_1ffEBR.webp"
+							itemprop="contentUrl"
+							alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
+						/>
 					</picture>
 				</aside>
 				<article>
 					<div itemprop="description">
 						<p>
-							Hi there! My name is <em itemprop="name"><span itemprop="givenName">Marco</span> <span itemprop="familyName">Campos</span></em> (<em>@</em><em itemprop="alternateName">madcampos</em> on most social networks)!
-							<br>
+							Hi there! My name is <em itemprop="name"><span itemprop="givenName">Marco</span> <span itemprop="familyName">Campos</span></em> (<em>@</em><em
+								itemprop="alternateName"
+							>madcampos</em> on most social networks)!
+							<br />
 							I'm a <span itemprop="jobTitle">Senior Web Developer</span> based in <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
 								<span itemprop="addressLocality">Toronto</span>,
 								<span itemprop="addressCountry">Canada</span>

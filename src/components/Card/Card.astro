@@ -22,44 +22,40 @@ const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro
 			<slot name="metadata"></slot>
 		</template>
 
-		{
-			image && (
-				<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+		{image && (
+			<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+				<Image
+					itemprop="contentUrl"
+					src={image}
+					alt={inlineMarkdownStrip(imageAlt ?? '')}
+					loading="lazy"
+					widths={[64, 128, 256, 512]}
+					width={256}
+					sizes={`
+							(max-width: 25rem) 128px,
+							(max-width: 40rem) 256px,
+							512px
+						`}
+				/>
+				{Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
 					<Image
 						itemprop="contentUrl"
-						src={image}
+						data-theme-image={theme}
+						src={themeImage}
 						alt={inlineMarkdownStrip(imageAlt ?? '')}
 						loading="lazy"
 						widths={[64, 128, 256, 512]}
 						width={256}
 						sizes={`
-							(max-width: 25rem) 128px,
-							(max-width: 40rem) 256px,
-							512px
-						`}
-					/>
-					{
-						Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
-							<Image
-								itemprop="contentUrl"
-								data-theme-image={theme}
-								src={themeImage}
-								alt={inlineMarkdownStrip(imageAlt ?? '')}
-								loading="lazy"
-								widths={[64, 128, 256, 512]}
-								width={256}
-								sizes={`
 									(max-width: 25rem) 128px,
 									(max-width: 40rem) 256px,
 									512px
 								`}
-								hidden
-							/>
-						))
-					}
-				</picture>
-			)
-		}
+						hidden
+					/>
+				))}
+			</picture>
+		)}
 
 		<header>
 			<card-title>

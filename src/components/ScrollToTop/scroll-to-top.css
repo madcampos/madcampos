@@ -1,7 +1,7 @@
 @keyframes grow {
-	from { transform: scaleX(0); }
+	0% { transform: scaleX(0); }
 
-	to { transform: scaleX(1); }
+	100% { transform: scaleX(1); }
 }
 
 @layer components {
