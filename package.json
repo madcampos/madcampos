@@ -35,7 +35,7 @@
 		"db:migrations:local": "wrangler d1 migrations apply madcampos-site-db",
 		"db:migrations:remote": "wrangler d1 migrations apply madcampos-site-db --remote",
 		"version": "pnpm version --sign-git-tag --message \"chore: update package version\"",
-		"postversion": "pnpm run changelog --output \"docs/changelog\" --push --create-release"
+		"postversion": "changelog --output \"docs/changelog\" --push --create-release"
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.9",
