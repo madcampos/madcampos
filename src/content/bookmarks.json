@@ -749,6 +749,12 @@
 					"title": "Most rewrites serve the engineer, not the business",
 					"description": "Argument against meaningless rewrites.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.gingerbill.org/article/2026/07/10/good-tools-are-invisible/",
+					"title": "Goog Tools Are Invisible",
+					"description": "The author talks about why \"hacking\" can be detrimental, and that tools should provide good default out of the box, with escape hatches for advanced functionality.",
+					"type": "article"
 				}
 			]
 		},
