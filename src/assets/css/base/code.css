@@ -54,7 +54,7 @@
 				margin-inline-end: var(--line-counter-margin-right);
 				margin-inline-start: calc((var(--line-counter-width) + var(--line-counter-margin-right)) * -1);
 				inline-size: var(--line-counter-width);
-				content: counter(step, decimal-leading-zero);
+				content: counter(step, decimal-leading-zero) / 'Line ' counter(step, decimal-leading-zero);
 				color: var(--surface-3);
 				text-align: right;
 			}
@@ -73,7 +73,7 @@
 						background-color: var(--diff-add-bg);
 
 						&::before {
-							content: '++';
+							content: '++' / 'Inserted line';
 							color: var(--diff-add-color);
 						}
 
@@ -91,7 +91,7 @@
 						background-color: var(--diff-remove-bg);
 
 						&::before {
-							content: '--';
+							content: '--' / 'Removed line';
 							color: var(--diff-remove-color);
 						}
 
@@ -184,8 +184,8 @@
 				}
 
 				:is(.tab, .space)::before { opacity: 0.1; }
-				.tab::before { content: '⇥\00A0\00A0'; }
-				.space::before { content: '·'; }
+				.tab::before { content: '⇥\00A0\00A0' / ''; }
+				.space::before { content: '·' / ' '; }
 			}
 
 			&:has(.line.focused) :where(.line:not(.focused)) {
