@@ -35,7 +35,9 @@ export default defineConfig({
 	site: 'https://madcampos.dev/',
 	base: '/',
 	redirects: mode !== 'production'
-		? { '/yapping/[hash]/[keyword]': '/yapping/[keyword]' }
+		? {
+			// '/yapping/[hash]/[keyword]': '/yapping/[keyword]'
+		}
 		: {},
 	trailingSlash: 'ignore',
 	devToolbar: { enabled: false },
