@@ -66,8 +66,6 @@
 				padding-inline-start: calc(var(--line-counter-width) + var(--line-counter-margin-right));
 				inline-size: 100%;
 
-				&:empty { display: none; }
-
 				&.diff {
 					&.add {
 						background-color: var(--diff-add-bg);
