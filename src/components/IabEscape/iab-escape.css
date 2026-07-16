@@ -1,1 +1,15 @@
-@layer components { iab-escape dialog { text-align: center; } }
+@layer components {
+	iab-escape dialog {
+		inline-size: fit-content;
+		max-inline-size: 100dvi;
+		block-size: fit-content;
+		max-block-size: 100dvb;
+		text-align: center;
+
+		footer {
+			flex-direction: column;
+			text-align: center;
+			align-items: center;
+		}
+	}
+}

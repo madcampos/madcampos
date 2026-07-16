@@ -15,6 +15,7 @@ export class SiteSettings {
 		'css',
 		'js',
 		'iabEscape',
+		'hideIabWarning',
 		'theme',
 		'pwaBanner',
 		'logoContextMenu',
@@ -242,6 +243,15 @@ export class SiteSettings {
 
 	static set iabEscape(value: boolean | undefined) {
 		SiteSettings.#updateSetting('iabEscape', value ? 'true' : 'false');
+	}
+
+	static get hideIabWarning(): boolean {
+		return SiteSettings.#getSetting('hideIabWarning') === 'true';
+	}
+
+	static set hideIabWarning(value: boolean | undefined) {
+		SiteSettings.#updateSetting('hideIabWarning', value ? 'true' : 'false');
+		SiteSettings.#persistSetting('hideIabWarning', value ? 'true' : 'false');
 	}
 
 	static get theme(): ThemeSetting {

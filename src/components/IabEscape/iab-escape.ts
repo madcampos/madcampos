@@ -5,16 +5,27 @@ import styles from './iab-escape.css?url';
 
 export class IabEscape extends HTMLElement implements CustomElement {
 	open() {
+		this.querySelector<HTMLDialogElement>('dialog')?.showModal();
+	}
+
+	get url() {
 		const url = window.location.href;
 
-		let link = `shortcuts://x-callback-url/run-shortcut?name=${crypto.randomUUID()}&x-error=${encodeURIComponent(url)}`;
+		let link = `x-safari-${url}`;
 
 		if (navigator.userAgent.includes('Android')) {
 			link = `intent:${url}#Intent;end`;
 		}
 
-		this.querySelector<HTMLDialogElement>('a')?.setAttribute('href', link);
-		this.querySelector<HTMLDialogElement>('dialog')?.showModal();
+		return link;
+	}
+
+	get browserString() {
+		if (!navigator.userAgent.includes('Android')) {
+			return 'Safari';
+		}
+
+		return 'your default browser';
 	}
 
 	render() {
@@ -24,16 +35,17 @@ export class IabEscape extends HTMLElement implements CustomElement {
 					<h2>It's a trap!</h2>
 				</header>
 				<dialog-content>
-					<p>You are locked inside an In-App Browser.</p>
 					<p>
-						Those are made to lock you inside a platform and control all your data.
+						Looks like you are reading this from an In-App Browser.
 						<br />
-						They may promise you privacy, but dont'respect that.
+						Those are "browsers" inside an app like Facebook or Instagram.
 					</p>
-					<p>Tap the link below to open this page in your default browser.</p>
+					<p>Click the link below to try and open this page in ${this.browserString}.</p>
+					<p>Or click the button to dismiss this message.</p>
 				</dialog-content>
 				<footer>
-					<a href="#" target="_blank">Escape this trap</a>
+					<a href="${this.url}" target="_blank">Open in ${this.browserString}</a>
+					<button type="button">Dismiss Warning</button>
 				</footer>
 			</dialog>
 		`;
@@ -50,9 +62,18 @@ export class IabEscape extends HTMLElement implements CustomElement {
 		const { isInApp } = inAppSpy();
 		const isSFSVC = await sFSVCExperimental();
 
-		if (isInApp || isSFSVC || SiteSettings.iabEscape) {
+		if ((isInApp || isSFSVC) && !SiteSettings.hideIabWarning) {
 			this.open();
 		}
+
+		if (SiteSettings.iabEscape) {
+			this.open();
+		}
+
+		this.querySelector('footer button')?.addEventListener('click', () => {
+			this.querySelector<HTMLDialogElement>('dialog')?.close();
+			SiteSettings.hideIabWarning = true;
+		});
 	}
 }
 
