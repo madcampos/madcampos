@@ -1,1 +1,12 @@
-@layer pages { /* TODO */ }
+@import url('../../../components/Card/card.css');
+
+@layer pages {
+	search-results {
+		margin-inline: auto;
+
+		progress {
+			margin-inline-start: 50%;
+			transform: translateX(-50%);
+		}
+	}
+}

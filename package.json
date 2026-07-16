@@ -21,7 +21,7 @@
 		"start": "astro dev --site=https://localhost:3000/",
 		"prebuild": "pnpm run bootstrap",
 		"build": "astro build",
-		"postbuild": "pagefind --site dist",
+		"postbuild": "pagefind",
 		"build:resume": "node --experimental-strip-types ./build/save-resume-pdf.ts",
 		"prepreview": "pnpm run build",
 		"preview": "astro preview --site=https://localhost:3000/",

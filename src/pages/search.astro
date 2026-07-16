@@ -1,4 +1,5 @@
 ---
+import '../assets/pages/search/search.css';
 import { Icon } from 'astro-icon/components';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
 import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
@@ -35,7 +36,7 @@ import Webrings from '../components/Webrings/Webrings.astro';
 		</header>
 
 		<main id="main">
-			<search>
+			<search hidden>
 				<form action="" method="GET">
 					<input-wrapper>
 						<label for="search-input">Search:</label>
@@ -47,6 +48,8 @@ import Webrings from '../components/Webrings/Webrings.astro';
 					</button>
 				</form>
 			</search>
+
+			<search-results></search-results>
 		</main>
 
 		<footer>

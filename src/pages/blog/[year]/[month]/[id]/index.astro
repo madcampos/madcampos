@@ -240,7 +240,10 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 							{tags.map((tag) => (
 								<li class="p-category">
 									<tag-item>
-										<a href={`/blog/tags/${tag}/`}>{tag}</a>
+										<a
+											href={`/blog/tags/${tag}/`}
+											data-pagefind-filter="tag"
+										>{tag}</a>
 									</tag-item>
 								</li>
 							))}

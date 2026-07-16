@@ -1,0 +1,6 @@
+{
+	"site": "dist",
+	"exclude_selectors": [
+		"[data-external-link]"
+	]
+}
