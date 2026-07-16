@@ -74,9 +74,11 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 		<post-header>
 			<header>
 				{draft && <draft-tag>Draft</draft-tag>}
-				<a class="u-uid u-url" href={Astro.url.pathname}>
-					<h1 class="p-name" itemprop="headline"><Fragment set:html={markdown.inline(title)} /></h1>
-				</a>
+				<hgroup>
+					<a class="u-uid u-url" href={Astro.url.pathname}>
+						<h1 class="p-name" itemprop="headline"><Fragment set:html={markdown.inline(title)} /></h1>
+					</a>
+				</hgroup>
 
 				{image && (
 					<figure>

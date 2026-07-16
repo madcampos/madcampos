@@ -9,7 +9,7 @@
 
 		[data-footnotes] a[data-footnote-backref] { text-decoration: none; }
 
-		img {
+		:not(img-lightbox) > img {
 			display: inline;
 			min-inline-size: revert;
 			min-block-size: revert;

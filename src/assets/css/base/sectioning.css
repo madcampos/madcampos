@@ -19,6 +19,15 @@
 		color: var(--theme-color);
 		font-size: var(--font-size-6);
 		text-align: center;
+		hyphenate-character: '-';
+		hyphenate-limit-chars: 8 3 2;
+		padding: var(--size-3);
+		-webkit-hyphens: auto;
+		hyphens: auto;
+		line-break: loose;
+		overflow-wrap: break-word;
+		text-wrap: balance;
+		word-break: break-word;
 	}
 
 	h2 { font-size: var(--font-size-5); }
