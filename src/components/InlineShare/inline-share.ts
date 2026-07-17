@@ -127,6 +127,34 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		overlay?.style.setProperty('--overlay-height', `${height}px`);
 	}
 
+	#getSelectionElementBoundary() {
+		const selection = document.getSelection();
+
+		if (!selection?.toString()) {
+			return {};
+		}
+
+		const range = selection.getRangeAt(0);
+		const startElement = range.startContainer instanceof Element ? range.startContainer : range.startContainer.parentElement;
+		const endElement = range.endContainer instanceof Element ? range.endContainer : range.endContainer.parentElement;
+
+		return {
+			startElement,
+			endElement,
+			range
+		};
+	}
+
+	#getClosestElementMatch<T extends Element>(element: Element, selector: string) {
+		if (element.matches(selector)) {
+			// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
+			return element as T;
+		}
+
+		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unnecessary-type-assertion
+		return element.closest(selector) as T | null;
+	}
+
 	#handleSelectionChange() {
 		if (this.querySelector('dialog')?.matches(':popover-open')) {
 			return;
@@ -134,37 +162,28 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 		this.hidden = true;
 
-		const range = document.getSelection()?.getRangeAt(0);
+		const { startElement, endElement, range } = this.#getSelectionElementBoundary();
 
-		if (!range) {
+		if (!startElement || !endElement) {
 			return;
 		}
 
-		const ancestor = range.commonAncestorContainer;
+		const startRenderedContent = this.#getClosestElementMatch(startElement, 'rendered-content');
+		const endRenderedContent = this.#getClosestElementMatch(endElement, 'rendered-content');
 
-		if (!(ancestor instanceof Element)) {
+		if (!startRenderedContent || !endRenderedContent) {
 			return;
 		}
 
-		const isRenderedContent = ancestor.matches('rendered-content');
-		const isInsideRenderedContent = Boolean(ancestor.parentElement?.closest('rendered-content'));
-
-		if (!isRenderedContent && !isInsideRenderedContent) {
+		const parentRenderedContent = this.closest('rendered-content');
+		if (startRenderedContent !== parentRenderedContent || endRenderedContent !== parentRenderedContent) {
 			return;
 		}
 
-		if (isRenderedContent && ancestor !== this.closest('rendered-content')) {
-			return;
-		}
+		const startCodeBlock = this.#getClosestElementMatch(startElement, 'code-wrapper');
+		const endCodeBlock = this.#getClosestElementMatch(endElement, 'code-wrapper');
 
-		if (isInsideRenderedContent && ancestor.parentElement?.closest('rendered-content') !== this.closest('rendered-content')) {
-			return;
-		}
-
-		const isCodeBlock = ancestor.matches('code-wrapper');
-		const isInsideCodeBlock = Boolean(ancestor.parentElement?.closest('code-wrapper'));
-
-		if (isCodeBlock || isInsideCodeBlock) {
+		if (startCodeBlock || endCodeBlock) {
 			return;
 		}
 
