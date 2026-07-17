@@ -15,7 +15,7 @@ import { TurnstileValidator } from '../utils/turnstile.ts';
 
 const MAX_NAME_LENGTH = 128;
 const MAX_MESSAGE_LENGTH = 512;
-const POST_TIME_THRESHOLD = '-2 days';
+const POST_TIME_THRESHOLD = '-24 hours';
 const MESSAGES_PER_PAGE = 20;
 
 interface MessageRecord {
@@ -102,6 +102,10 @@ export async function getMessages(request: Request) {
 			}
 		);
 	} catch (err) {
+		if (err instanceof ErrorResponse) {
+			return err;
+		}
+
 		console.error(err);
 
 		return new ErrorResponse('Failed to process request.');
@@ -160,8 +164,8 @@ export async function sendMessage(request: Request) {
 		`).bind(visitorId).first<Pick<MessageRecord, 'id' | 'timestamp'>>();
 
 		if (recentPost) {
-			console.log({ visitorId, recentPost });
-			throw new ErrorResponse(`Only one post allowed evey two days. Last post: ${recentPost.timestamp}`, STATUS_CONFLICT);
+			console.error({ visitorId, status: 'multiple posts' });
+			throw new ErrorResponse(`Only one post allowed evey 24 hours. Last post: ${recentPost.timestamp}`, STATUS_CONFLICT);
 		}
 
 		const { success, error } = await env.Database.prepare(/* sql */ `
@@ -184,7 +188,7 @@ export async function sendMessage(request: Request) {
 			requestMetadata.ipAddress
 		).run();
 
-		console.log({ visitorId });
+		console.log({ visitorId, status: 'new message' });
 
 		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		return new Response(JSON.stringify({ success, message: error ?? '+1' } satisfies StatusResponse), {

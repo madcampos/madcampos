@@ -1,4 +1,4 @@
-// oxlint-disable no-console typescript/only-throw-error
+// oxlint-disable typescript/only-throw-error
 import { env } from 'cloudflare:workers';
 
 export const STATUS_OK = 200;
@@ -81,14 +81,29 @@ export interface RequestMetadata {
 	acceptEncoding: string;
 }
 
-export function parseRequestMetadata(request: Request) {
-	// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
-	const country = request.cf?.country as Iso3166Alpha2Code | 'T1' | null;
-	const userAgent = request.headers.get('User-Agent');
-	// oxlint-disable-next-line typescript/prefer-nullish-coalescing
-	const ipAddress = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || (env.NODE_ENV !== 'production' ? '0.0.0.0' : null);
+function getUserIp(request: Request) {
+	const connectingIp = request.headers.get('CF-Connecting-IP');
+	const forwarded = request.headers.get('X-Forwarded-For');
+	const realIp = request.headers.get('X-Real-IP');
+	const devIp = env.NODE_ENV !== 'production' ? '0.0.0.0' : null;
 
-	console.log(country, userAgent, ipAddress);
+	// oxlint-disable-next-line typescript/prefer-nullish-coalescing
+	return connectingIp || forwarded?.split(',')[0] || realIp || devIp;
+}
+
+function getUserAgent(request: Request) {
+	return request.headers.get('User-Agent');
+}
+
+function getUserCountry(request: Request) {
+	// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
+	return request.cf?.country as Iso3166Alpha2Code | 'T1' | null;
+}
+
+export function parseRequestMetadata(request: Request) {
+	const country = getUserCountry(request);
+	const ipAddress = getUserIp(request);
+	const userAgent = getUserAgent(request);
 
 	if (!country || !userAgent || !ipAddress) {
 		throw new ErrorResponse('Annonymus request are not allowed.');

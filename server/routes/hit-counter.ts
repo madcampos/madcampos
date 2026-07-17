@@ -134,7 +134,7 @@ export async function incrementVisitorCount(request: Request) {
 		`).bind(url, visitorId).first<Pick<HitRecord, 'id' | 'timestamp'>>();
 
 		if (recentVisit) {
-			console.log({ visitorId, recentVisit });
+			console.error({ visitorId, status: 'multiple hits' });
 			return new ErrorResponse(`Only one visit allowed every 30 minutes. Last visit: ${recentVisit.timestamp}`, STATUS_CONFLICT);
 		}
 
@@ -145,7 +145,7 @@ export async function incrementVisitorCount(request: Request) {
 				(?, ?, ?, ?)
 		`).bind(url, visitorId, requestMetadata.country, requestMetadata.userAgent).run();
 
-		console.log({ visitorId });
+		console.log({ visitorId, status: 'new hit' });
 
 		// oxlint-disable-next-line typescript/no-unnecessary-condition
 		return new Response(JSON.stringify({ success, message: error ?? '+1' } satisfies StatusResponse), {
