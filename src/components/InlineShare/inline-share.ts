@@ -140,8 +140,12 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			return;
 		}
 
-		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
-		const ancestor = range.commonAncestorContainer as unknown as Element;
+		const ancestor = range.commonAncestorContainer;
+
+		if (!(ancestor instanceof Element)) {
+			return;
+		}
+
 		const isRenderedContent = ancestor.matches('rendered-content');
 		const isInsideRenderedContent = Boolean(ancestor.parentElement?.closest('rendered-content'));
 
