@@ -1,4 +1,5 @@
 // oxlint-disable no-magic-numbers id-length
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { type WheelOfFortuneDisplaySetting, SiteSettings } from '../../assets/js/settings.ts';
 import styles from './wheel-of-fortune.css?url';
 
@@ -411,16 +412,12 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		}
 	}
 
-	connectedCallback() {
+	async connectedCallback() {
 		if (!this.items.length) {
 			return;
 		}
 
-		const tagName = 'wheel-of-fortune';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
-
+		await loadComponentCss('wheel-of-fortune', styles);
 		this.render();
 
 		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion

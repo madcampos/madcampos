@@ -1,3 +1,4 @@
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './read-article.css?url';
 
@@ -350,15 +351,12 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 		`;
 	}
 
-	connectedCallback() {
+	async connectedCallback() {
 		if (!('speechSynthesis' in window) || !('highlights' in CSS)) {
 			return;
 		}
 
-		const tagName = 'read-article';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
+		await loadComponentCss('read-article', styles);
 
 		speechSynthesis.cancel();
 		speechSynthesis.addEventListener('voiceschanged', this);

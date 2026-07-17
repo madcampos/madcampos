@@ -1,5 +1,6 @@
 // Ref: https://frontendmasters.com/blog/the-pitfalls-of-in-app-browsers/
 import inAppSpy, { SFSVCExperimental as sFSVCExperimental } from 'inapp-spy';
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './iab-escape.css?url';
 
@@ -52,10 +53,7 @@ export class IabEscape extends HTMLElement implements CustomElement {
 	}
 
 	async connectedCallback() {
-		const tagName = 'iab-escape';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
+		await loadComponentCss('iab-escape', styles);
 
 		this.render();
 

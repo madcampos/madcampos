@@ -13,6 +13,7 @@ interface StatusResponse {
 	message: string;
 }
 
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 
 const HIT_COUNTER_URL = new URL('/api/counter/', SiteSettings.apiUrl).href;
@@ -110,10 +111,7 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	}
 
 	async connectedCallback() {
-		const tagName = 'hit-counter';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
+		await loadComponentCss('hit-counter', styles);
 
 		this.render();
 

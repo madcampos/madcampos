@@ -1,5 +1,6 @@
 // oxlint-disable max-lines
 
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import {
 	type BorderWidthSetting,
 	type EnabledDisabledSetting,
@@ -571,16 +572,9 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		}
 	}
 
-	connectedCallback() {
-		[
-			{ tagName: 'site-settings', styles: settingsStyles },
-			{ tagName: 'text-swatch', styles: textSwatchesStyles }
-		].forEach(({ tagName, styles }) => {
-			if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-				document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-			}
-		});
-
+	async connectedCallback() {
+		await loadComponentCss('site-settings', settingsStyles);
+		await loadComponentCss('text-swatch', textSwatchesStyles);
 		this.render();
 
 		this.#renderThemes();

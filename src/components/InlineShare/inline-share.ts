@@ -1,3 +1,4 @@
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './inline-share.css?url';
 
@@ -454,14 +455,10 @@ export class InlineShare extends HTMLElement implements CustomElement {
 		}
 	}
 
-	connectedCallback() {
-		const tagName = 'inline-share';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
+	async connectedCallback() {
+		await loadComponentCss('inline-share', styles);
 
 		this.hidden = true;
-
 		this.render();
 
 		if (!('share' in navigator)) {

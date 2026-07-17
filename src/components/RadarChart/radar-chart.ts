@@ -1,4 +1,5 @@
 // oxlint-disable no-magic-numbers
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './radar-chart.css?url';
 
@@ -142,17 +143,14 @@ export class RadarChart extends HTMLElement implements CustomElement {
 		});
 	}
 
-	connectedCallback() {
+	async connectedCallback() {
+		await loadComponentCss('radar-chart', styles);
+
 		// oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 		this.#items = Array.from(this.children as HTMLCollectionOf<HTMLElement>);
 
 		this.#totalItems = this.#items.length;
 		this.#maxItems = Math.max(...this.#items.map((item) => Number.parseInt(item.dataset['items'] ?? '0', 10)));
-
-		const tagName = 'radar-chart';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
 
 		this.render();
 	}

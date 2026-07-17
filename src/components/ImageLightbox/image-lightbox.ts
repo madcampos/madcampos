@@ -1,3 +1,4 @@
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './img-lightbox.css?url';
 
@@ -180,17 +181,14 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 		}
 	}
 
-	connectedCallback() {
+	async connectedCallback() {
 		this.#image = this.querySelector<HTMLImageElement>('img');
 
 		if (!this.#image) {
 			return;
 		}
 
-		const tagName = 'img-lightbox';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
+		await loadComponentCss('img-lightbox', styles);
 
 		this.render();
 

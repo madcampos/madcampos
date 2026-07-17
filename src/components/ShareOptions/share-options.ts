@@ -1,3 +1,4 @@
+import { loadComponentCss } from '../../assets/js/custom-element.ts';
 import { SiteSettings } from '../../assets/js/settings.ts';
 import styles from './share-options.css?url';
 
@@ -97,19 +98,16 @@ export class ShareOptions extends HTMLElement implements CustomElement {
 		}
 	}
 
-	connectedCallback() {
-		const tagName = 'share-options';
-		if (!document.head.querySelector(`link[rel="stylesheet"][data-component="${tagName}"]`)) {
-			document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" fetchpriority="low" data-component="${tagName}" href="${styles}" />`);
-		}
-
-		this.render();
+	async connectedCallback() {
+		await loadComponentCss('share-options', styles);
 
 		this.querySelector('[data-share="os"]')?.addEventListener('click', this);
 		this.querySelector('[data-share="sms"]')?.addEventListener('click', this);
 		this.querySelector('[data-share="email"]')?.addEventListener('click', this);
 		this.querySelector('[data-share="copy"]')?.addEventListener('click', this);
 		this.querySelector('[data-share="print"]')?.addEventListener('click', this);
+
+		this.render();
 	}
 
 	disconnectedCallback() {
