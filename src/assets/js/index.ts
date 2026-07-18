@@ -1,6 +1,9 @@
 // INFO: Make sure the browser blocks IAB
 import '../../components/IabEscape/iab-escape.ts';
 
+// INFO: Ensure search is loaded
+import '../../components/Search/search.ts';
+
 document.addEventListener('DOMContentLoaded', async () => {
 	// Global functionality
 	await Promise.allSettled([

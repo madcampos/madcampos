@@ -32,6 +32,26 @@ const {
 } = Astro.props.page;
 const { year, month } = Astro.params;
 const formatter = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const createdAt = posts.reduce((curDate, { data: { createdAt: createdDate } }) => {
+	if (createdDate.getDate() > curDate.getDate()) {
+		return createdDate;
+	}
+
+	return curDate;
+}, new Date(`${year}-01-01T00:00:00Z`));
+
+const updatedAt = posts.reduce<Date | undefined>((curDate, { data: { updatedAt: updatedDate } }) => {
+	if (!updatedDate) {
+		return curDate;
+	}
+
+	if (curDate && updatedDate.getDate() > curDate.getDate()) {
+		return updatedDate;
+	}
+
+	return curDate;
+}, undefined);
 ---
 <BlogPosts
 	title={`Posts from: "${formatter.format(new Date(`${year}-${month}-01T00:00:00Z`))}"`}
@@ -43,4 +63,6 @@ const formatter = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric'
 	{end}
 	{total}
 	{size}
+	{createdAt}
+	{updatedAt}
 />

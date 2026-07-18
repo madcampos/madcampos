@@ -22,6 +22,8 @@ interface Props {
 	end: number;
 	total: number;
 	size: number;
+	createdAt: Date;
+	updatedAt?: Date;
 }
 
 const {
@@ -33,7 +35,9 @@ const {
 	start,
 	end,
 	total,
-	size
+	size,
+	createdAt,
+	updatedAt
 } = Astro.props;
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'UTC' });
@@ -43,6 +47,8 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 	<HtmlHead
 		title={`${title ? `${title} | ` : ''}Marco Campos' Blog`}
 		description="A space where I talk about web development and other programming related (or not) things"
+		{createdAt}
+		{updatedAt}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>

@@ -21,6 +21,26 @@ const projects = await Promise.all((await listAllProjects()).map(async (project)
 		Content
 	};
 }));
+const createdAt = projects.reduce((curDate, { data: { createdAt: createdDate } }) => {
+	if (createdDate.getDate() > curDate.getDate()) {
+		return createdDate;
+	}
+
+	return curDate;
+	// oxlint-disable-next-line typescript/no-non-null-assertion
+}, projects[0]!.data.createdAt);
+
+const updatedAt = projects.reduce<Date | undefined>((curDate, { data: { updatedAt: updatedDate } }) => {
+	if (!updatedDate) {
+		return curDate;
+	}
+
+	if (curDate && updatedDate.getDate() > curDate.getDate()) {
+		return updatedDate;
+	}
+
+	return curDate;
+}, undefined);
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' });
 ---
@@ -29,6 +49,8 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone
 	<HtmlHead
 		title="Project Highlight | Marco Campos"
 		description="A list of projects I've worked on, or am currently working on. Mostly web development"
+		{createdAt}
+		{updatedAt}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>

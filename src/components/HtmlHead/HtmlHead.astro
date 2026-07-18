@@ -141,11 +141,11 @@ const optimizedImage = await getImage({
 		content={(tags ?? ['Staff developer', 'Senior web developer', 'web developer', 'full stack developer', 'node.js', 'javascript', 'typescript', 'webdev']).join(', ')}
 	/>
 	{publishedDate && (
-		<meta property="article:published_time" content={publishedDate.toISOString()} />
+		<meta property="article:published_time" data-pagefind-sort="published_at[content]" content={publishedDate.toISOString()} />
 		<meta name="publish_date" property="og:publish_date" content={publishedDate.toISOString()} />
 	)}
 	{updatedDate && (
-		<meta property="article:modified_time" content={updatedDate.toISOString()} />
+		<meta property="article:modified_time" data-pagefind-sort="updated_at[content]" content={updatedDate.toISOString()} />
 		<meta name="updated_date" property="og:updated_date" content={updatedDate.toISOString()} />
 	)}
 

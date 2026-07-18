@@ -15,12 +15,25 @@ import { listAllTalks } from '../../utils/talks.js';
 const talks = await listAllTalks();
 
 const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'UTC' });
+
+const createdAt = talks.reduce<Date | undefined>((curDate, { data: { date } }) => {
+	if (!date) {
+		return curDate;
+	}
+
+	if (curDate && date.getDate() > curDate.getDate()) {
+		return date;
+	}
+
+	return curDate;
+}, undefined);
 ---
 <!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/WebPage">
 	<HtmlHead
 		title="Talks | Marco Campos"
 		description="A list of talks I've given on meetups, conferences, or other events."
+		{createdAt}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>

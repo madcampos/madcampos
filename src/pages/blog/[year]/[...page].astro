@@ -28,6 +28,26 @@ const {
 	size
 } = Astro.props.page;
 const { year } = Astro.params;
+
+const createdAt = posts.reduce((curDate, { data: { createdAt: createdDate } }) => {
+	if (createdDate.getDate() > curDate.getDate()) {
+		return createdDate;
+	}
+
+	return curDate;
+}, new Date(`${year}-01-01T00:00:00Z`));
+
+const updatedAt = posts.reduce<Date | undefined>((curDate, { data: { updatedAt: updatedDate } }) => {
+	if (!updatedDate) {
+		return curDate;
+	}
+
+	if (curDate && updatedDate.getDate() > curDate.getDate()) {
+		return updatedDate;
+	}
+
+	return curDate;
+}, undefined);
 ---
 <BlogPosts
 	title={`Posts from: "${year}"`}
@@ -39,4 +59,6 @@ const { year } = Astro.params;
 	{end}
 	{total}
 	{size}
+	{createdAt}
+	{updatedAt}
 />

@@ -22,6 +22,27 @@ const {
 	total,
 	size
 } = Astro.props.page;
+
+const createdAt = posts.reduce((curDate, { data: { createdAt: createdDate } }) => {
+	if (createdDate.getDate() > curDate.getDate()) {
+		return createdDate;
+	}
+
+	return curDate;
+	// oxlint-disable-next-line typescript/no-non-null-assertion
+}, posts[0]!.data.createdAt);
+
+const updatedAt = posts.reduce<Date | undefined>((curDate, { data: { updatedAt: updatedDate } }) => {
+	if (!updatedDate) {
+		return curDate;
+	}
+
+	if (curDate && updatedDate.getDate() > curDate.getDate()) {
+		return updatedDate;
+	}
+
+	return curDate;
+}, undefined);
 ---
 <BlogPosts
 	baseUrl="/blog/"
@@ -32,4 +53,6 @@ const {
 	{end}
 	{total}
 	{size}
+	{createdAt}
+	{updatedAt}
 />

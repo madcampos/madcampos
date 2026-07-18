@@ -1,0 +1,6 @@
+@layer components {
+	::highlight(search-query) {
+		color: var(--highlight-mark-color);
+		background-color: var(--highlight-mark-bg);
+	}
+}

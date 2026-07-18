@@ -6,7 +6,7 @@ import OldStyleButtons from '../../../components/OldStyleButtons/OldStyleButtons
 import SiteNav from '../../../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../../../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../../../components/Webrings/Webrings.astro';
-import { listPostsByTag } from '../../../utils/post';
+import { listAllPosts, listPostsByTag } from '../../../utils/post';
 
 const sorter = new Intl.Collator('en-CA', { usage: 'sort' });
 
@@ -16,12 +16,36 @@ const postsByTag = Object.entries(await listPostsByTag()).map(([tag, posts]) => 
 })).sort((first, second) => sorter.compare(first.name, second.name));
 
 const tags = postsByTag.map(({ name }) => name);
+
+const allPosts = await listAllPosts();
+const createdAt = allPosts.reduce((curDate, { data: { createdAt: createdDate } }) => {
+	if (createdDate.getDate() > curDate.getDate()) {
+		return createdDate;
+	}
+
+	return curDate;
+	// oxlint-disable-next-line typescript/no-non-null-assertion
+}, allPosts[0]!.data.createdAt);
+
+const updatedAt = allPosts.reduce<Date | undefined>((curDate, { data: { updatedAt: updatedDate } }) => {
+	if (!updatedDate) {
+		return curDate;
+	}
+
+	if (curDate && updatedDate.getDate() > curDate.getDate()) {
+		return updatedDate;
+	}
+
+	return curDate;
+}, undefined);
 ---
 <!doctype html>
 <html lang="en-US" itemscope itemtype="https://schema.org/ItemList">
 	<HtmlHead
 		title="Tags | Marco Campos' Blog"
 		description="Tags for Marco Campos' blog"
+		{createdAt}
+		{updatedAt}
 	/>
 	<body>
 		<a href="/yapping" rel="nofollow" hidden>Don't follow this link</a>

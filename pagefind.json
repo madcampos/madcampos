@@ -1,6 +1,8 @@
 {
 	"site": "dist",
 	"exclude_selectors": [
-		"[data-external-link]"
+		"[data-external-link]",
+		"a[href^='mailto:']",
+		"a[href^='tel:']"
 	]
 }

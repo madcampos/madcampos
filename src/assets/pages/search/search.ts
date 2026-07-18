@@ -4,6 +4,7 @@ const pageFindUrl = import.meta.env.DEV ? '../../../../dist/pagefind/pagefind.js
 const pagefind: PagefindInstance = await import(/* @vite-ignore */ pageFindUrl);
 
 await pagefind.options({
+	baseUrl: '/',
 	highlightParam: 'q',
 	ranking: {
 		diacriticSimilarity: 0.8,
@@ -15,12 +16,11 @@ await pagefind.options({
 			image: 0.5,
 			image_alt: 0.5
 		}
-	}
+	},
+	excerptLength: 50
 });
 
 await pagefind.init();
-
-// TODO: handle query string on load
 
 document.querySelector('form')?.addEventListener('submit', async (evt) => {
 	evt.preventDefault();
@@ -43,7 +43,8 @@ document.querySelector('form')?.addEventListener('submit', async (evt) => {
 	searchResults.innerHTML = '<progress></progress>';
 	evt.target.ariaDisabled = 'true';
 
-	const { results } = await pagefind.search(query);
+	const response = await pagefind.search(query);
+	const { results } = response;
 
 	const data = await Promise.all(results.map(async ({ data: dataCb }) => dataCb()));
 
@@ -72,7 +73,11 @@ document.querySelector('form')?.addEventListener('submit', async (evt) => {
 						</header>
 
 						<rendered-content itemprop="description">
-							<blockquote>${excerpt}</blockquote>
+							<blockquote>
+								<span>[...]</span>
+								<span>${excerpt}</span>
+								<span>[...]</span>
+							</blockquote>
 						</rendered-content>
 					</article>
 			</m-card>
@@ -84,3 +89,14 @@ document.querySelector('form')?.addEventListener('submit', async (evt) => {
 });
 
 document.querySelector('search')?.removeAttribute('hidden');
+
+const searchParams = new URLSearchParams(window.location.search);
+if (searchParams.has('q')) {
+	const searchInput = document.querySelector<HTMLInputElement>('input[type="search"]');
+
+	if (searchInput) {
+		searchInput.value = searchParams.get('q') ?? '';
+
+		document.querySelector<HTMLFormElement>('search form')?.requestSubmit();
+	}
+}
