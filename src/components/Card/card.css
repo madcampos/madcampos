@@ -73,6 +73,8 @@
 					block-size: 100%;
 					object-fit: contain;
 					object-position: center;
+					max-inline-size: var(--image-size);
+					max-block-size: var(--image-size);
 				}
 
 				:where(img[data-theme-image]) { display: none; }

@@ -1,5 +1,7 @@
 @layer components {
 	post-header {
+		--image-size: var(--size-content-2);
+
 		display: block;
 		container-name: post-header;
 		container-type: inline-size;
@@ -44,7 +46,14 @@
 				grid-area: draft;
 			}
 
-			figure { grid-area: hero-image; }
+			figure {
+				grid-area: hero-image;
+
+				img {
+					max-inline-size: var(--size-content-2);
+					max-block-size: var(--size-content-2);
+				}
+			}
 			hgroup {
 				grid-area: title;
 				padding: var(--size-3);
