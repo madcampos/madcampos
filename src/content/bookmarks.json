@@ -377,6 +377,12 @@
 					"title": "The Goldilocks customizable select height",
 					"description": "In depth dive into [customizable selects](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select) and [anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using).",
 					"type": "article"
+				},
+				{
+					"url": "https://polypane.app/blog/using-safe-area-inset-to-build-mobile-safe-layouts/",
+					"title": "Using safe-area-inset to build mobile-safe layouts",
+					"description": "Guide to use `safe-area-inset` CSS variables to create layouts that take into account the safe browser areas.",
+					"type": "article"
 				}
 			]
 		},
