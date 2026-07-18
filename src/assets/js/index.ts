@@ -3,6 +3,7 @@ import '../../components/IabEscape/iab-escape.ts';
 
 // INFO: Ensure search is loaded
 import '../../components/Search/search.ts';
+import { SiteSettings } from './settings.ts';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	// Global functionality
@@ -19,4 +20,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 		import('../../components/SiteSettings/site-settings.ts'),
 		import('../../components/Counter/counter.ts')
 	]);
+});
+
+// INFO: re-apply settings when using back/forward cache to avoid FOUC
+window.addEventListener('pageshow', (evt) => {
+	if (!evt.persisted) {
+		return;
+	}
+
+	SiteSettings.initializeSettings();
 });
