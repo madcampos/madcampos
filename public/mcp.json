@@ -1,0 +1,18 @@
+{
+	"mcpServers": {
+		"madcampos-site": {
+			"url": "https://madcampos.dev/mcp",
+			"description": "Access tools and resources from Marco Campos' personal website.",
+			"tools": [
+				{
+					"name": "get_visitor_count",
+					"description": "Retrieves the current hit counter for the site."
+				},
+				{
+					"name": "send_guestbook_message",
+					"description": "Posts a new message to the site's guestbook."
+				}
+			]
+		}
+	}
+}
