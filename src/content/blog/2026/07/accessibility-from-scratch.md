@@ -10,6 +10,10 @@ tags:
   - HTML
 image: ./assets/apple-pie.jpg
 imageAlt: 'A still from the "Cosmos" TV series, with Carl Sagan seated at a table with an apple pie in front of him. Overlayed on the apple pie is a button reading: "W3C WAI-AAA WCAG 2.2".'
+updatedAt: 2026-07-20T14:40:00.000-04:00
+updates:
+  - date: 2026-07-20T14:40:00.000-04:00
+    changes: Updated the part about emojis and icon buttons.
 ---
 
 The title is a tongue-in-cheek parody of a [quote from Carl Sagan](https://www.youtube.com/watch?v=s4VIc8Qt5xM).
@@ -95,20 +99,40 @@ It will be read by a screen reader as something like[^1]:
 
 > Button, pile of poo
 
-There are a few issues here:
+The biggest thing here is that using _only emojis_ as the content of an element is a _**very bad pattern**_ in general. Here is a list of some of the issues with doing this:
 
-- Emojis are read out loud, by their [full legal name](https://www.unicode.org/emoji/charts-16.0/full-emoji-list.html).
-- Not all browsers/operating systems support all emojis. It may display as a [replacement character](https://en.wikipedia.org/wiki/Specials_(Unicode_block)#Replacement_character).
-- This gives no clue to the user what that button _does_.
+- Emojis are read out loud, by their [full legal name](https://www.unicode.org/emoji/charts-16.0/full-emoji-list.html). That may not be descriptive of their meaning on that context.
+- Not all browsers/operating systems support all emojis, and it may display as a [replacement character](https://en.wikipedia.org/wiki/Specials_(Unicode_block)#Replacement_character). On that case the browser may not even know the emoji's name or may convey incorrect information to the user, causing even more confusion.
+- This pattern gives no clue to the user what that button _does in the context it is in_. What does a specific icon mean in that context?
 - It starts failing WCAG [SC 2.4.6](https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html) and [SC 4.1.2](https://www.w3.org/WAI/WCAG22/Understanding/name-role-value).
 
-To remediate this we could add a label to the button, and mark the emoji as presentational and/or hide it, so it is not announced by screen readers.
+All those problems also apply for icon fonts, with the added problems that:
+
+- Some icon fonts use [private use areas of Unicode](https://en.wikipedia.org/wiki/Private_Use_Areas). Characters on those areas have no inherent name, so it compounds even further on the naming problems.
+- If the font doesn't load, your icons will break.
+- If the font takes longer to load, it may cause layout shifts or a fallback to kick in.
+
+The best alternative is to use SVG icons. Here are a few resources on SVG icons:
+
+- https://kittygiraudel.com/2020/12/10/accessible-icon-links/
+- https://www.sarasoueidan.com/blog/accessible-icon-buttons/
+- https://css-tricks.com/accessible-svgs/#icons
+
+For this exercise, we will remediate the emoji icon problem by:
+
+1. Adding a label to the button
+2. Changing the emoji to an inline SVG (icon code omitted for brevity).
+3. Hiding the inline SVG.
+
+That way the SVG will not get announced by screen readers, but the button still have a label.
 
 The code will look as follows:
 
-```html /aria-label/ /role="presentation"/ /aria-hidden/
+```html /aria-label/ /aria-hidden/
 <sagan-button role="button" aria-label="Data Sharing Options">
-	<span role="presentation" aria-hidden="true">💩</span>
+	<svg aria-hidden="true">
+		<!-- ... -->
+	</svg>
 </sagan-button>
 ```
 
@@ -125,7 +149,9 @@ This will make the element become part of the [tab order of the page](https://de
 	aria-label="Data Sharing Options"
 	tabindex="0"
 >
-	<span role="presentation" aria-hidden="true">💩</span>
+	<svg aria-hidden="true">
+		<!-- ... -->
+	</svg>
 </sagan-button>
 ```
 
@@ -153,7 +179,9 @@ We then add the events. Starting with the `mouseup` for handling mouse events:
 	tabindex="0"
 	onomouseup="console.log('mouse')"
 >
-	<span role="presentation" aria-hidden="true">💩</span>
+	<svg aria-hidden="true">
+		<!-- ... -->
+	</svg>
 </sagan-button>
 ```
 
@@ -173,7 +201,9 @@ Now our component looks like this:
 	ontouchend="console.log('touch')"
 	onpointerup="console.log('pointer')"
 >
-	<span role="presentation" aria-hidden="true">💩</span>
+	<svg aria-hidden="true">
+		<!-- ... -->
+	</svg>
 </sagan-button>
 ```
 
