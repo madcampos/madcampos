@@ -177,7 +177,7 @@ We then add the events. Starting with the `mouseup` for handling mouse events:
 	role="button"
 	aria-label="Data Sharing Options"
 	tabindex="0"
-	onomouseup="console.log('mouse')"
+	onmouseup="console.log('mouse')"
 >
 	<svg aria-hidden="true">
 		<!-- ... -->
