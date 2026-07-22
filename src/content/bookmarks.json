@@ -549,7 +549,7 @@
 				{
 					"url": "https://anthonyhobday.com/sideprojects/saferules/",
 					"title": "Visual design rules you can safely follow every time",
-					"description": "Some \"rules of thumb\"  to make designing easier.",
+					"description": "Some \"rules of thumb\" to make designing easier.",
 					"type": "article"
 				}
 			]
@@ -1216,6 +1216,30 @@
 					"url": "https://human-in-the-loop.bearblog.dev/llms-are-eroding-my-software-engineering-career-and-i-dont-know-what-to-do/",
 					"title": "LLMs are eroding my software engineering career and I don't know what to do",
 					"description": "The anxiety from LLMs swarming everything is real.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.smashingmagazine.com/2026/07/people-dont-want-more-ai/",
+					"title": "No, People Don’t Want More AI In Their Life",
+					"description": "Exactly as the title says.",
+					"type": "article"
+				},
+				{
+					"url": "https://pydantic.dev/articles/the-human-in-the-loop-is-tired",
+					"title": "The Human-in-the-Loop is Tired",
+					"description": "LLMs are burning out people.",
+					"type": "article"
+				},
+				{
+					"url": "https://hermit-tech.com/blog/ai-mania-is-eviscerating-global-decisionmaking",
+					"title": "AI Mania Is Eviscerating Global Decision-Making",
+					"description": "Warnings against the danger of drinking the AI Kool-Aid.",
+					"type": "article"
+				},
+				{
+					"url": "https://rachelbythebay.com/w/2026/05/05/404/",
+					"title": "No, that post never existed. Stop listening to that thing.",
+					"description": "The other side of the hallucination, what happens when you get requests for a link that doesn't exist over and over?",
 					"type": "article"
 				}
 			]
