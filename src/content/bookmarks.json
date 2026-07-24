@@ -773,6 +773,12 @@
 					"title": "SQLite should have (Rust-style) editions",
 					"description": "Some comments on the drawbacks of the defaults for SQLite and options to make it better.",
 					"type": "article"
+				},
+				{
+					"url": "https://iev.ee/blog/the-quadratic-problem-nobody-fixed/",
+					"title": "finding all regex matches has always been O(n²). even in the engines built to prevent it",
+					"description": "Interesting read on regexes and what does it even mean to execute a regex in \"linear time\".",
+					"type": "article"
 				}
 			]
 		},
