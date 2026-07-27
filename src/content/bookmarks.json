@@ -149,6 +149,12 @@
 					"description": "Resource about developing games for blind people.",
 					"note": "Game Development related. It applies to using [Godot](https://godotengine.org/).",
 					"type": "reference"
+				},
+				{
+					"url": "https://chrisyoong.com/blog/react-router-language-toggle-accessibility-wcag",
+					"title": "React's architectural accessibility gaps",
+					"description": "An example of one of the many shortcomings of react, specifically when dealign with document translation and chanigng the document's language.",
+					"type": "article"
 				}
 			]
 		},
