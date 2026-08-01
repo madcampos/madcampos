@@ -55,7 +55,9 @@
 			"highlights": [
 				"Maintained a good relationship with clients, with always positive feedback.",
 				"Delivered new features and bug fixes swiftly.",
-				"Helped guide the future of new and existing projects."
+				"Helped guide the future of new and existing projects.",
+				"Planned, built and deployed multi-tenant application for the real estate market.",
+				"Built deep integrated AI analysis tool using Gemini."
 			],
 			"clients": [
 				{
@@ -68,7 +70,7 @@
 					"endDate": "2026-04",
 					"summary": "Worked creating AI based automation tools for financial institutions to improve back-office speed.",
 					"highlights": [
-						"Delivered a new feature in the second week of work.",
+						"Leveraged AI-assisted development with Cursor and delivered a new feature in the second week of work.",
 						"Integrated LLM calls into new workflows for data analysis.",
 						"Built integration with two third party service APIs.",
 						"Improved accuracy on data analysis for an existing workflow."
@@ -105,7 +107,7 @@
 			"summary": "Responsible for writing backend code, communicate with the finance team, and bridge communications between teams in Canada and Europe.",
 			"highlights": [
 				"Improved delivery time of the project by acting as Scrum Master and managing tasks for the team.",
-				"Responsible for improving the core product backend and improving experience for users across Canada and Europe.",
+				"Partnered with cross-functional product teams to improve experience for users across Canada and Europe",
 				"Reduced costs with third-party services by refactoring part of the application and removing redundant calls to external services.",
 				"Improved delivery time by acting as a scrum master, where I improved visibility on project status and current bugs.",
 				"Facilitated knowledge sharing between team members and worked as an onboarding partner for three new team members.",
@@ -137,10 +139,11 @@
 			"url": "https://www.linkedin.com/company/dompixel/",
 			"startDate": "2020-05",
 			"endDate": "2020-10",
-			"summary": "Planned, designed, and implemented multiple web sites and applications for clients.",
+			"summary": "Planned, designed, and implemented multiple web sites and applications for different clients.",
 			"highlights": [
 				"Introduced scrum methodology to the development team, improving delivery times and reliability.",
 				"Architected an extensible date-tracking system engine from the ground up, designing the underlying data structure and state management for optimal query performance and observability.",
+				"Planned and helped implement multi-tenant application for community management in churches.",
 				"Built UIs with focus on accessibility and WCAG compliance."
 			]
 		},
