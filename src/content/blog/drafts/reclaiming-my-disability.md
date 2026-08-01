@@ -40,7 +40,7 @@ It is so engrained and pervasive in us the thought of being "normal" that we fig
 
 I dare to say that the "disabled" label is harder to accept and understand than perceive and embracing my sexuality (but let's leave [intersectionality](https://en.wikipedia.org/wiki/Intersectionality) for another post).
 
-After all, wearing glasses is socially acceptable and even a sign of "intelligence". I also like to read so the "fake 'til I make it" mantra works on the dyslexia side as I use big words quite freequently.
+After all, wearing glasses is socially acceptable and even a sign of "intelligence". I also like to read so the "fake 'til I make it" mantra works on the dyslexia side as I use big words quite frequently.
 
 So, yeah... Perceiving my glasses and dyslexia as disabilities is surprisingly more subtle than _marrying another man_.
 

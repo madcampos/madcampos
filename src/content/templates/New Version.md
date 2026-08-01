@@ -1,6 +1,0 @@
----
-versionName:
-date:
----
-
-## Features

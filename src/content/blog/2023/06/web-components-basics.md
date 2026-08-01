@@ -6,12 +6,12 @@ updates:
   - date: 2023-07-21T02:11:12.000-04:00
     changes: Added cross-link to tabs post.
   - date: 2024-01-29T00:36:05.000-05:00
-    changes: Updated embedded codepen iframe.
+    changes: Updated embedded Codepen iframe.
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
 summary: A brief introduction to web components.
 image: ./assets/spongebob-crowd.gif
-imageAlt: "A gif from the cartoon Spongebob Squarepants of a crowd of fish sitting at tables on a restaurant. Every fish is staring directly at the viewer and has a frown on their face. One of the fishes in front has a blinking animation."
+imageAlt: "A gif from the cartoon SpongeBob SquarePants of a crowd of fish sitting at tables on a restaurant. Every fish is staring directly at the viewer and has a frown on their face. One of the fishes in front has a blinking animation."
 tags:
   - Web Development
   - Web Components

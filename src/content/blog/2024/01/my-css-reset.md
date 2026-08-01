@@ -117,7 +117,7 @@ For example:
 > If you set a `width` of `100px`, a `margin` of `1px`, a `padding` of `2px`, and a `border` of `3px`.
 > Your box would have a _total size_ of `100px + (1px * 2) + (2px * 2) + (3px * 2)` for a total of `112px`!
 
-![The meme of "Math Lady", with four panels focusing on the face of a wooman looking clearly confused. Overlayed on the panels are multiple math equations.](./assets/nazare-confusa.jpg)
+![The meme of "Math Lady", with four panels focusing on the face of a woman looking clearly confused. Overlayed on the panels are multiple math equations.](./assets/nazare-confusa.jpg)
 
 So, this makes some complex layouts get _more_ complex and _faster_. Ironically, we got saved by Internet Explorer who had the sane idea of calculating the size by setting it based on the `width` and then _subtracting_ things from it to get how much space is left for the content.
 

@@ -3,7 +3,7 @@ title: Make the web open again!
 createdAt: 2024-02-16T00:44:00.000-05:00
 summary: Thoughts on how the web should be open. It is also an ode to the IndieWeb movement and the breaking of silos.
 image: ./assets/kyle-bushnell-yHjtJGP1aZM-unsplash.jpg
-imageAlt: A photo of a hand holding a protest sign up saying "Don't entertain authoritarism"
+imageAlt: A photo of a hand holding a protest sign up saying "Don't entertain authoritarianism"
 imageRights: "Photo by [Kyle Bushnell](https://unsplash.com/@kylebushnell?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/person-holding-white-and-black-quote-board-yHjtJGP1aZM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 tags:
   - IndieWeb
@@ -42,7 +42,7 @@ Yet there seems to also be a feeling of tiredness of all this. A unquenchable th
 
 I present to you, dear reader, a concept that I myself found recently but it seems to be the solution that I've been looking for (also because I like to thinker).
 
-![A close up shot of a smiling Reggie Fils-Aimé, ex CEO of Nintendo of america with the caption "my body is ready".](./assets/my-body-is-ready.png)
+![A close up shot of a smiling Reggie Fils-Aimé, ex CEO of Nintendo of America with the caption "my body is ready".](./assets/my-body-is-ready.png)
 
 This solution is: the [IndieWeb](https://indieweb.org/)!
 

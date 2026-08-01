@@ -4,12 +4,12 @@ createdAt: 2024-01-14T11:45:00.000-05:00
 updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:
   - date: 2024-03-24T10:46:00.000-05:00
-    changes: Added a conclusion to the RSS image size validation and how it was propperly fixed.
+    changes: Added a conclusion to the RSS image size validation and how it was properly fixed.
   - date: 2026-02-04T15:18:34.000-05:00
-    changes: Fixed Github URL.
-summary: A tale of how I went from a vite site to an astro site and the hurdles along the way.
+    changes: Fixed GitHub URL.
+summary: A tale of how I went from a Vite site to an astro site and the hurdles along the way.
 image: ./assets/sputnik1.jpg
-imageAlt: A picture of Sputnik, a metalic sphere, floating against a black background representing space. The sphere has four thin long metalic antenas, spreading from the sphere's side slightly outwards.
+imageAlt: A picture of Sputnik, a metallic sphere, floating against a black background representing space. The sphere has four thin long metallic antenas, spreading from the sphere's side slightly outwards.
 imageRights: "Replica of Sputnik 1 in the Museum of Space and Missile Technology (Saint-Petersburg). Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg)"
 tags:
   - Building in the Open
@@ -65,7 +65,7 @@ Migrating the blog was a couple days of light work, not very hard to do and I wa
 
 ## There are always roadblocks
 
-![A photo of an orange plastic net with a sign attached that reads: "Danger - Contruction Area - Keep Out"](./assets/john-cardamone-p_Q4pUuip6U-unsplash.jpg)[^1]
+![A photo of an orange plastic net with a sign attached that reads: "Danger - Construction Area - Keep Out"](./assets/john-cardamone-p_Q4pUuip6U-unsplash.jpg)[^1]
 
 I'm _extremely_ particular about my XMLs, [RSS](/blog/2023/06/xml-is-not-dead/) and [SVGs](https://codepen.io/madcampos/pen/NWRdOeW) and I'd like to keep it that way. One issue that kept me going in circles for a while was generating the post images for the RSS feeds.
 

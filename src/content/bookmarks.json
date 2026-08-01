@@ -80,7 +80,7 @@
 				{
 					"url": "https://aaardvarkaccessibility.com/wcag-plain-english/",
 					"title": "WCAG in Plain English",
-					"description": "The WCAG but in plain english.",
+					"description": "The WCAG but in plain English.",
 					"type": "reference"
 				},
 				{
@@ -153,7 +153,7 @@
 				{
 					"url": "https://chrisyoong.com/blog/react-router-language-toggle-accessibility-wcag",
 					"title": "React's architectural accessibility gaps",
-					"description": "An example of one of the many shortcomings of react, specifically when dealign with document translation and chanigng the document's language.",
+					"description": "An example of one of the many shortcomings of react, specifically when dealing with document translation and changing the document's language.",
 					"type": "article"
 				}
 			]
@@ -389,12 +389,30 @@
 					"title": "Using safe-area-inset to build mobile-safe layouts",
 					"description": "Guide to use `safe-area-inset` CSS variables to create layouts that take into account the safe browser areas.",
 					"type": "article"
+				},
+				{
+					"url": "https://codefronts.com/",
+					"title": "Codefronts",
+					"description": "List of CSS patterns.",
+					"type": "website"
+				},
+				{
+					"url": "https://www.carmenansio.com/articles/svg-filters-on-type/",
+					"title": "SVG Filters on Type",
+					"description": "Some SVG filters to apply on text.",
+					"type": "tutorial"
+				},
+				{
+					"url": "https://nerdy.dev/css-infinity-use-cases",
+					"title": "CSS Infinity Use Cases",
+					"description": "Examples of uses for CSS' `infinity`.",
+					"type": "tutorial"
 				}
 			]
 		},
 		{
 			"title": "JS",
-			"description": "Javascript in all it's quirky glory",
+			"description": "JavaScript in all it's quirky glory",
 			"links": [
 				{
 					"url": "https://www.lorenstew.art/blog/reactive-state-manager-with-proxies",
@@ -435,7 +453,7 @@
 				{
 					"url": "https://43081j.com/2026/03/three-pillars-of-javascript-bloat",
 					"title": "The Three Pillars of JavaScript Bloat",
-					"description": "Overview of what makes a js project bloated.",
+					"description": "Overview of what makes a JS project bloated.",
 					"type": "article"
 				},
 				{
@@ -453,7 +471,7 @@
 				{
 					"url": "https://www.stefanjudis.com/today-i-learned/the-scope-of-type-guards-and-assertion-functions/",
 					"title": "The scope of type guards and assertion functions",
-					"description": "Quick comment comparring type guards (`value is T`) and type assertions (`asserts value is T`) in typescript.",
+					"description": "Quick comment comparing type guards (`value is T`) and type assertions (`asserts value is T`) in typescript.",
 					"type": "article"
 				},
 				{
@@ -465,7 +483,7 @@
 				{
 					"url": "https://blog.gaborkoos.com/posts/2026-05-09-Your-Recursion-Is-Lying-to-You/",
 					"title": "Your Recursion Is Lying to You",
-					"description": "Recursion in Js doesn't work. It will overflow the stack. And tail call optimization was never well supported.",
+					"description": "Recursion in JS doesn't work. It will overflow the stack. And tail call optimization was never well supported.",
 					"type": "article"
 				},
 				{
@@ -513,7 +531,7 @@
 				{
 					"url": "https://uxplanet.org/designing-systematic-colors-b5d2605b15c",
 					"title": "Designing Systematic Colors",
-					"description": "An approach to creating color palletes systematically.",
+					"description": "An approach to creating color palettes systematically.",
 					"type": "article"
 				},
 				{
@@ -543,7 +561,7 @@
 				{
 					"url": "https://unblast.com/",
 					"title": "Unblast",
-					"description": "Collection of mockups, templates, and other assets.",
+					"description": "Collection of mock-ups, templates, and other assets.",
 					"type": "website"
 				},
 				{
@@ -557,6 +575,12 @@
 					"title": "Visual design rules you can safely follow every time",
 					"description": "Some \"rules of thumb\" to make designing easier.",
 					"type": "article"
+				},
+				{
+					"url": "https://namethatui.com/",
+					"title": "Name that UI",
+					"description": "Reference for some UI patterns.",
+					"type": "website"
 				}
 			]
 		},
@@ -616,7 +640,7 @@
 		},
 		{
 			"title": "Project Management",
-			"description": "Thought on how to manage softare engineering teams.",
+			"description": "Thought on how to manage software engineering teams.",
 			"links": [
 				{
 					"url": "https://charity.wtf/2025/06/19/in-praise-of-normal-engineers/",
@@ -651,13 +675,13 @@
 				{
 					"url": "https://lawsofsoftwareengineering.com/",
 					"title": "Laws of Software engineering",
-					"description": "A list of \"laws\" of engineering with explanations on thir importance.",
+					"description": "A list of \"laws\" of engineering with explanations on their importance.",
 					"type": "reference"
 				},
 				{
 					"url": "https://newsletter.manager.dev/p/the-13-software-engineering-laws",
 					"title": "The 13 software engineering laws",
-					"description": "A list of \"laws\" of engineering with explanations on thir importance.",
+					"description": "A list of \"laws\" of engineering with explanations on their importance.",
 					"type": "article"
 				},
 				{
@@ -785,6 +809,30 @@
 					"title": "finding all regex matches has always been O(n²). even in the engines built to prevent it",
 					"description": "Interesting read on regexes and what does it even mean to execute a regex in \"linear time\".",
 					"type": "article"
+				},
+				{
+					"url": "https://www.seangoedecke.com/you-dont-have-to-be-smart-if-you-think-clearly/",
+					"title": "You don't have to be smart if you can think clearly",
+					"description": "Quick article on problem solving.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.architecture-weekly.com/p/fixing-bugs-in-event-sourcing-is",
+					"title": "Fixing bugs in Event Sourcing is hard, for real?",
+					"description": "Argument on why having a \"ledger\" or log of events, and an append only at that, is important.",
+					"type": "article"
+				},
+				{
+					"url": "https://testing.googleblog.com/2026/07/prefactoring-clear-way-for-your-new.html",
+					"title": "Prefactoring: Clear the Way for Your New Feature",
+					"description": "Laying the ground work for new features is a good practice.",
+					"type": "article"
+				},
+				{
+					"url": "https://frantic.im/mirage/",
+					"title": "The Productivity Mirage",
+					"description": "Shine setups don't help if you don't know what to build.",
+					"type": "article"
 				}
 			]
 		},
@@ -885,7 +933,7 @@
 				{
 					"url": "https://perthirtysix.com/how-the-heck-does-shazam-work",
 					"title": "How The Heck Does Shazam Work?",
-					"description": "A techincal explanation of how music identification works.",
+					"description": "A technical explanation of how music identification works.",
 					"type": "article"
 				},
 				{
@@ -993,7 +1041,7 @@
 				{
 					"url": "https://isthereanydeal.com/",
 					"title": "Is There any Deal?",
-					"description": "Market tracker for games, includding multiple stores and bundle sites. Good for scavanging discounts.",
+					"description": "Market tracker for games, including multiple stores and bundle sites. Good for scavenging discounts.",
 					"type": "website"
 				},
 				{
@@ -1077,13 +1125,13 @@
 				{
 					"url": "https://www.youtube.com/watch?v=ShusuVq32hc",
 					"title": "Model Collapse Ends AI Hype",
-					"description": "Video from an AI researcher demistifying things that LLMs _are not_.",
+					"description": "Video from an AI researcher demystifying things that LLMs _are not_.",
 					"type": "video"
 				},
 				{
 					"url": "https://www.williamjbowman.com/blog/2026/03/05/against-vibes-when-is-a-generative-model-useful/",
 					"title": "Against Vibes: When is a Generative Model Useful",
-					"description": "Article asking the question \"when is a generatibe model measurably useful?\"",
+					"description": "Article asking the question \"when is a generative model measurably useful?\"",
 					"type": "article"
 				},
 				{
@@ -1119,13 +1167,13 @@
 				{
 					"url": "https://erikjohannes.no/posts/20260130-outsourcing-thinking/index.html",
 					"title": "Outsourcing thinking",
-					"description": "An argument that outsorcing thinking to an LLM erodes our cognition. And even for menial tasks, it is still harmful.",
+					"description": "An argument that outsourcing thinking to an LLM erodes our cognition. And even for menial tasks, it is still harmful.",
 					"type": "article"
 				},
 				{
 					"url": "https://addyo.substack.com/p/the-80-problem-in-agentic-coding",
 					"title": "The 80% Problem in Agentic Coding",
-					"description": "Discussion on the problem that by using LLMs we stop building fundational understanding of what a project does and how it works.",
+					"description": "Discussion on the problem that by using LLMs we stop building foundational understanding of what a project does and how it works.",
 					"type": "article"
 				},
 				{
@@ -1137,7 +1185,7 @@
 				{
 					"url": "https://andrewmurphy.io/blog/if-you-thought-the-speed-of-writing-code-was-your-problem-you-have-bigger-problems",
 					"title": "If you thought the speed of writing code was your problem - you have bigger problems",
-					"description": "Coding speed was never the problem, and \"shipping faster\" only makes thigns worse.",
+					"description": "Coding speed was never the problem, and \"shipping faster\" only makes things worse.",
 					"type": "article"
 				},
 				{
@@ -1161,7 +1209,7 @@
 				{
 					"url": "https://lucumr.pocoo.org/2026/3/20/some-things-just-take-time/",
 					"title": "Some Things Just Take Time",
-					"description": "Things take time, and that is okay. Trying to pursue endless speed is a sysyphean task.",
+					"description": "Things take time, and that is okay. Trying to pursue endless speed is a Sisyphean task.",
 					"type": "article"
 				},
 				{
@@ -1191,7 +1239,7 @@
 				{
 					"url": "https://www.b-list.org/weblog/2026/apr/09/llms/",
 					"title": "Let’s talk about LLMs",
-					"description": "A collection of rebutals to the most common arguments for LLM adoption.",
+					"description": "A collection of rebuttals to the most common arguments for LLM adoption.",
 					"type": "article"
 				},
 				{
@@ -1202,7 +1250,7 @@
 				},
 				{
 					"url": "https://geohot.github.io//blog/jekyll/update/2026/05/24/the-eternal-sloptember.html",
-					"title": "The Ethernal Sloptember",
+					"title": "The Eternal Sloptember",
 					"description": "Using LLMs is more hurtful to organizations and in more insidious ways than people think.",
 					"type": "article"
 				},
@@ -1253,12 +1301,24 @@
 					"title": "No, that post never existed. Stop listening to that thing.",
 					"description": "The other side of the hallucination, what happens when you get requests for a link that doesn't exist over and over?",
 					"type": "article"
+				},
+				{
+					"url": "https://www.ethansmith2000.com/post/the-mean-preference-is-a-bad-estimate-of-preferences",
+					"title": "The mean preference is a bad estimate of preferences.",
+					"description": "Argument and explanation for why the average method used for reinforcement learning is bad.",
+					"type": "article"
+				},
+				{
+					"url": "https://jcs.org/2026/07/23/ai",
+					"title": "On AI",
+					"description": "Clash in philosophy about writing software for vintage computers and the AI era.",
+					"type": "article"
 				}
 			]
 		},
 		{
 			"title": "Other Random Stuff",
-			"description": "Other thigns that are not related to the topics above.",
+			"description": "Other things that are not related to the topics above.",
 			"links": [
 				{
 					"url": "https://arjunpanickssery.substack.com/p/what-does-it-mean-to-write-like-you",

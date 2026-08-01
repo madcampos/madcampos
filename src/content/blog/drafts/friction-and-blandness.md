@@ -24,7 +24,7 @@ The two main reasons that made me return were:
 
 I was presented to the interface I kinda knew, full of buttons and stuff. Cool. I'm kinda at home.
 
-Some things have changed, the interface looks more sleek and "modern". And that was a bummer for me, as the [skeumorphic](https://en.wikipedia.org/wiki/Skeuomorph) interface was something I really liked. But now as I'm a developer I do understand the tradeoffs of a detailed interface and scaling it, the needs of assets and all. So, a bummer but not a huge deal.
+Some things have changed, the interface looks more sleek and "modern". And that was a bummer for me, as the [skeuomorphic](https://en.wikipedia.org/wiki/Skeuomorph) interface was something I really liked. But now as I'm a developer I do understand the trade-offs of a detailed interface and scaling it, the needs of assets and all. So, a bummer but not a huge deal.
 
 One of WoW's biggest strengths in my opinion is that it allows you to have AddOns. Those are pieces of code that you run on the game, they can't do things that would break the game, but they are super powerful and make life easier[^1].
 

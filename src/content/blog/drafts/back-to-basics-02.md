@@ -82,7 +82,7 @@ Due to legacy reasons, we need the first line:
 
 At least it is now short and doesn't need the [weird shenanigans of yore](https://www.w3.org/QA/2002/04/valid-dtd-list.html). So yeah, we just add it and don't question. Moving on...
 
-Then of course, the `<html>` element itself with a `lang` tag to identify the language of the document. Not having this attribute is an [accessibility failure](https://www.w3.org/WAI/WCAG21/Understanding/language-of-page), besides, it gets added automatically by the [emmet shortcut in VSCode](https://code.visualstudio.com/docs/languages/emmet) for a basic HTML structure. Neat!
+Then of course, the `<html>` element itself with a `lang` tag to identify the language of the document. Not having this attribute is an [accessibility failure](https://www.w3.org/WAI/WCAG21/Understanding/language-of-page), besides, it gets added automatically by the [Emmet shortcut in VSCode](https://code.visualstudio.com/docs/languages/emmet) for a basic HTML structure. Neat!
 
 **#ProTip**:
 
@@ -171,7 +171,7 @@ Okay, back to the element...
 
 To load icons on the page, the best way is to use inline SVGs. They allow for the icons to follow the colour of the text, be styled independently, and run animations. In short, those are cool and have none of the drawbacks of using fonts for icons (that was a terrible idea, even when it was brand new).
 
-But to make things more optimized and not repeating the whole SVG definition over and over again, a clever technique is to add an SVG "spritesheet", which means adding an SVG element to hold all of the icons and then referencing them, like this:
+But to make things more optimized and not repeating the whole SVG definition over and over again, a clever technique is to add an SVG "sprite sheet", which means adding an SVG element to hold all of the icons and then referencing them, like this:
 
 ```html
 <svg-defs>
@@ -212,7 +212,7 @@ For now there is only a `<footer>` tag but here will be some content like the re
 
 [^1]: Again, by "research" I mean googling "Italian restaurant website template" and seeing what people are doing.
 
-[^2]: The absolutely strictly necessary entity encoding needed is `&lt;` to encode `<` and avoid opening tags, but, just for better compatibility and avoiding issues you should also encode: `&amp;`, `&gt;`, and `&quot;`. Which respectively translate to: `&`, `>`, and `"`. Those will avoid 99% of the issues with weird characters in html. For the rest just use straight up unicode and you will be good.
+[^2]: The absolutely strictly necessary entity encoding needed is `&lt;` to encode `<` and avoid opening tags, but, just for better compatibility and avoiding issues you should also encode: `&amp;`, `&gt;`, and `&quot;`. Which respectively translate to: `&`, `>`, and `"`. Those will avoid 99% of the issues with weird characters in html. For the rest just use straight up Unicode and you will be good.
 
 [^3]: _Technically_, other browsers that rendered HTML already existed in mobile phones. But those were more like "specialized" apps, than the "general" type of browser for desktops and the ones we have today. The iPhone innovation on that space was using the same technology stack as the desktop counterpart. So you could, in theory, for the first time write things only once and they would work in multiple very different devices. In reality things were more interesting, but that is a story for another time and maybe two shots of tequila.
 

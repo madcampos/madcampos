@@ -3,7 +3,7 @@ title: How I got 100 score on PageSpeed
 createdAt: 2024-01-26T01:26:00.000-05:00
 summary: Bragging and breakdown on how I optimized my site.
 image: ./assets/doge-score.jpg
-imageAlt: A "doge meme". It shows a close up photo of a shiba dog's face with the dog looking to the camera. Overlaid on the image, in comic sans, are the phrases "Much speed!", "Such accessible!", "Many score!", "WOW!", and "100/100".
+imageAlt: A "doge meme". It shows a close up photo of a Shiba dog's face with the dog looking to the camera. Overlaid on the image, in comic sans, are the phrases "Much speed!", "Such accessible!", "Many score!", "WOW!", and "100/100".
 tags:
   - Astro
   - Building in the Open
@@ -81,7 +81,7 @@ So, the question now is:
 
 > How did you get such a perfect score?
 
-![A "doge meme". It shows a close up photo of a shiba dog's face with the dog looking to the camera. Overlaid on the image, in comic sans, are the phrases "Much speed!", "Such accessible!", "Many score!", "WOW!", and "100/100".](./assets/doge-score.jpg)
+![A "doge meme". It shows a close up photo of a Shiba dog's face with the dog looking to the camera. Overlaid on the image, in comic sans, are the phrases "Much speed!", "Such accessible!", "Many score!", "WOW!", and "100/100".](./assets/doge-score.jpg)
 
 The secret sauce is simplicity and no JavaScript! Don't get me wrong, I earn a living by programming in JavaScript. _BUT_, when it comes to tools, I must choose the one that is better suited to my use case.
 

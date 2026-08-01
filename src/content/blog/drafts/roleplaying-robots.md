@@ -22,7 +22,7 @@ And I hate all of those.
 
 ## Not writing code
 
-I won't dabble too much here but the new buzzword for this seems to be ["comprehension debt"](https://addyosmani.com/blog/comprehension-debt/). That means you literally have to workout your skills or else those [get atrophied](https://erikjohannes.no/posts/20260130-outsourcing-thinking/index.html) and you don't understand how thigns work anymore. Plain and simple.
+I won't dabble too much here but the new buzzword for this seems to be ["comprehension debt"](https://addyosmani.com/blog/comprehension-debt/). That means you literally have to workout your skills or else those [get atrophied](https://erikjohannes.no/posts/20260130-outsourcing-thinking/index.html) and you don't understand how things work anymore. Plain and simple.
 
 The hard earned skills that make senior devs be senior in the first place, that LLMs are supposed to make easier end up making people lose their edge and skill.
 
@@ -89,7 +89,7 @@ I would only need some things:
 - The people involved in those.
 
 The other places and the rest of the story, like the bad guy's lair can be as vague as "there is a bad guy lair" and it is _fine_.
-I won't expect nor want the players to figure everything out in a 4 hour session of playing. I want them longing for more, stopping at a cliffhanger with questions, with theories, with ideas about what is going to happen next.
+I won't expect nor want the players to figure everything out in a 4 hour session of playing. I want them longing for more, stopping at a cliff-hanger with questions, with theories, with ideas about what is going to happen next.
 
 _I_ won't even know what happens next. And that is the genius of it!
 

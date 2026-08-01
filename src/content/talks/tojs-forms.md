@@ -2,8 +2,8 @@
 title: Form validation with (almost) no JS
 summary: A view on how to do form validation using mostly HTML and CSS.
 image: ./assets/tojs-forms.png
-imageAlt: A parchement page showing a drawing of Tiamat, the god dragon from Dungeons & Dragons on the left side.
-event: "TorontoJS [ ONLINE ] TechTalk /w Evert Pot & Marco Campos: Choosing Arhitecture For Small Projects / Form Validation With Almost No Javascript"
+imageAlt: A parchment page showing a drawing of Tiamat, the god dragon from Dungeons & Dragons on the left side.
+event: "TorontoJS [ ONLINE ] TechTalk /w Evert Pot & Marco Campos: Choosing Architecture For Small Projects / Form Validation With Almost No JavaScript"
 eventUrl: https://guild.host/events/torontojs-online-techtalk-z9gqim
 isOnline: true
 date: 2024-08-29

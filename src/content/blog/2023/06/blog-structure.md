@@ -8,7 +8,7 @@ updates:
   - date: 2024-02-02T03:21:00.000-05:00
     changes: Added an image to the post.
   - date: 2026-02-04T15:18:34.000-05:00
-    changes: Fixed Github URL.
+    changes: Fixed GitHub URL.
 summary: A dive into the semantic html of a blog.
 image: ./assets/linear-a.jpg
 imageAlt: "A photo of a fragment of a clay tablet showing inscriptions in the Linear A script."

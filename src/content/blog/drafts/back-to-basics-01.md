@@ -12,7 +12,7 @@ tags:
   - Web Development
 ---
 
-I was invited to give a talk called "Battle of Frameworks", although I _use_ tools like react and angular for work, I am not personally _found_ of those tools. So I decided to build a demo for my part with pure vanilla, gluten-free, non GMO, vegan, organic, home grown HTML, CSS, and javascript.
+I was invited to give a talk called "Battle of Frameworks", although I _use_ tools like react and angular for work, I am not personally _found_ of those tools. So I decided to build a demo for my part with pure vanilla, gluten-free, non GMO, vegan, organic, home grown HTML, CSS, and JavaScript.
 
 Don't get me wrong, those frameworks and tools get the work done, help pay the bills and usually I have no problems with them. Besides, trying to build applications with the complexity I work day to day[^1] _without_ the help of those tools would be an herculean task that I'm not willing to take, nor are my employers willing to pay for.
 
@@ -24,11 +24,11 @@ Now that the justification is done and hopefully I got the message that this doe
 
 ## The "why"
 
-I think the "javascript fatigue" have caught on to me and I yearn for, not necessarily less _complex_, but "simpler" websites in terms of tooling and technologies used.
+I think the "JavaScript fatigue" have caught on to me and I yearn for, not necessarily less _complex_, but "simpler" websites in terms of tooling and technologies used.
 
 I want to showcase what the platform can do by itself, without needing extra tools.
 
-We are in a moment where the platform is very much capable of doing almost all we need it to do with what it offers, yet (again, due to inertia) we end up bringing a [neutron star](https://en.wikipedia.org/wiki/Neutron_star) in weight of javascript to achieve things that are better suited for HTML and CSS.
+We are in a moment where the platform is very much capable of doing almost all we need it to do with what it offers, yet (again, due to inertia) we end up bringing a [neutron star](https://en.wikipedia.org/wiki/Neutron_star) in weight of JavaScript to achieve things that are better suited for HTML and CSS.
 
 ![An comparison of the mass of "astronomical objects" warping a plane representing "space" (in the physics sense). All objects are aligned on the top of the image. First the Sun with almost no bend at all. Second a neutron star bending the plane halfway to the bottom of the image. Third a black hole warping the plane almost touching the bottom of the image. Lastly "node_modules" with a warp that goes outside the image.](./assets/20250918132124.png)
 

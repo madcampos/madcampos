@@ -7,7 +7,7 @@ createdAt: 2024-02-27T01:06:43+00:00
 updatedAt: 2026-02-04T15:18:34.000-05:00
 updates:
   - date: 2026-02-04T15:18:34.000-05:00
-    changes: Fixed Github URL.
+    changes: Fixed GitHub URL.
 tags:
   - Building in Public
   - Building in the Open

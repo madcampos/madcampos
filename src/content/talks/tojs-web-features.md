@@ -45,7 +45,7 @@ You can check a demo for it here: https://googlechrome.github.io/samples/payment
 
 ## Popover Attribute
 
-This HTML attribute adds the ability to create interactions like dropdown menus without the use of javascript.
+This HTML attribute adds the ability to create interactions like dropdown menus without the use of JavaScript.
 
 You can check a demo here: https://mdn.github.io/dom-examples/popover-api/
 
@@ -65,7 +65,7 @@ You can find an article about it here: https://developer.chrome.com/docs/css-ui/
 
 ## What Else?
 
-The web platform is ever evolving, so it is good to check every so ofter what proposals are out there. Here is a list of links where those proposals happen:
+The web platform is ever evolving, so it is good to check every so often what proposals are out there. Here is a list of links where those proposals happen:
 
 - Interop every year – [https://wpt.fyi/interop-2024](https://wpt.fyi/interop-2024)
 - Web Incubator Community Group – [https://github.com/WICG](https://github.com/WICG)

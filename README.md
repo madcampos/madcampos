@@ -1,7 +1,7 @@
 # Hello You! 🙋‍♂️
 
 I am a developer and designer who likes colorful and beautiful things, good food and puzzles.
-My language of choice is javascript, but I do work with whatever tool gets the job done.
+My language of choice is JavaScript, but I do work with whatever tool gets the job done.
 
 ## 📢 Reach me at
 

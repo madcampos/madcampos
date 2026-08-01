@@ -7,7 +7,7 @@ updates:
   - date: 2025-02-18T00:58:32.000-04:00
     changes: Added demos, code examples, and images.
   - date: 2026-02-04T15:18:34.000-05:00
-    changes: Fixed Github URLs.
+    changes: Fixed GitHub URLs.
 tags:
   - SVG
   - HTML
@@ -154,9 +154,9 @@ So, we can do some things like in this example:
 </svg>
 ```
 
-And here is it on codepen: https://codepen.io/madcampos/pen/GgRpwQW
+And here is it on CodePen: https://codepen.io/madcampos/pen/GgRpwQW
 
-Now, that happens to be exactly the case! The different logo sizes are based on one another, many of the elements repeat themselves! It is a win! Horray!
+Now, that happens to be exactly the case! The different logo sizes are based on one another, many of the elements repeat themselves! It is a win! Hurray!
 
 One interesting thing about the `<use>` tag is that you are not limited to only, well, _using_ the thing, you can also change it in some ways, like moving around, scaling, rotating, and changing colors. Some of that is done in the example above.
 

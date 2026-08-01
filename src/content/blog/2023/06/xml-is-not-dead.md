@@ -11,7 +11,7 @@ updates:
     changes: Fixed feed URL.
 summary: A quick post about styling XML feeds and other uses for XML.
 image: ./assets/copying-snippets-from-pages-made-in-2003.jpg
-imageAlt: A book cover mocking the O'Riley covers with a line art of a lobster andthe text "Copying snippets frompages made in 2003 - The definitive Guide"
+imageAlt: A book cover mocking the O'Riley covers with a line art of a lobster and the text "Copying snippets from pages made in 2003 - The definitive Guide"
 imageRights: "[O'RLY books](https://orlybooks.com/books/copying-snippets-from-pages-made-in-2003)"
 tags:
   - XML

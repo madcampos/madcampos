@@ -58,7 +58,7 @@ I like using AI tools to automate repetitive and annoying tasks from my day to d
 ### Scaffold components
 
 When writing components, in the sense of "reusable pieces of code", usually there is some inherent boilerplate around it.
-For example, if we take a react component or an api endpoint with open api, both follow some structure and some _pattern_.
+For example, if we take a react component or an API endpoint with Open API, both follow some structure and some _pattern_.
 
 For those cases I will usually write a prompt like the following:
 
@@ -79,12 +79,12 @@ The hard problem here is recognizing what "too complex" means.
 
 The case here is when writing a schema validation, or consuming a third-party API that has lots of fields. It is easier to just prompt and get what you need, iterating over as necessary.
 
-A concrete example was recently I had to integrate with a third party API and normalize the data, providing fallbacks to the fields. The only things I had were a dream and a 5k line json response.
+A concrete example was recently I had to integrate with a third party API and normalize the data, providing fallbacks to the fields. The only things I had were a dream and a 5k line JSON response.
 
-So I gave the LLM the json and prompted:
+So I gave the LLM the JSON and prompted:
 
-> \[path to json object\]
-> Given this json object coming from an API, write a normalization function that:
+> \[path to JSON object\]
+> Given this JSON object coming from an API, write a normalization function that:
 >
 > - Takes an `unknown` input
 > - Maps all fields to camel case versions of them
@@ -109,7 +109,7 @@ It is important to always verify if the LLM output is indeed what you are lookin
 
 ### Generate helper functions
 
-The case here is simple to understand: no one wants to parse dates in Javascript[^7].
+The case here is simple to understand: no one wants to parse dates in JavaScript[^7].
 
 But sometimes we have to do it and don't want to bring in an entire library like [`moment`](https://momentjs.com/) (which has been deprecated and unmaintained for years now), or [`date-fns`](https://date-fns.org/) to do _one_ parsing. It is overkill.
 

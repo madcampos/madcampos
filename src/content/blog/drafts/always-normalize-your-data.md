@@ -65,7 +65,7 @@ This normalization function should take care of making the input data coming fro
 - Deriving complex values based on the data received.
 - Handling and normalizing dates (i.e. timestamps and date formats).
 - Transforming values from one format to another.
-- Handle [unicode](https://madcampos.dev/talks/tojs-unicode/).
+- Handle [Unicode](https://madcampos.dev/talks/tojs-unicode/).
 
 It is a lot, it is long, it is boring, it is dull, and it is verbose.
 
@@ -73,7 +73,7 @@ It is a lot, it is long, it is boring, it is dull, and it is verbose.
 
 Those are actually good qualities of this type of code. This is the place in the code where an object with 100 lines where each property is explicitly defined is _actually good_.
 
-It may seem counter intuitive, specially when we sing the mantra of DRYness, but when transforming input data we need to be very explicit to avoid introducing extraneous data that may break unintended parts of the system and to specifically handle every part we need to.
+It may seem counter intuitive, specially when we sing the mantra of DRY-ness, but when transforming input data we need to be very explicit to avoid introducing extraneous data that may break unintended parts of the system and to specifically handle every part we need to.
 
 As verbose as it seems this code is usually very readable and will help with debugging in the future.
 

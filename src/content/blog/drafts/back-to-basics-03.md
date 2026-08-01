@@ -104,7 +104,7 @@ One of the nice features that enables dialogs is the concept of "top layer". It 
 
 The other cool feature that is very hard to achieve without is keyboard trapping. The dialog element will trap the keyboard inside it, so tabbing to other elements will not get out of the dialog. This is borderline impossible to do with JS and can get complex quickly.
 
-So yeah, with 0 lines of javascript this just works, well almost...
+So yeah, with 0 lines of JavaScript this just works, well almost...
 
 ### The `popover` attribute
 
@@ -120,7 +120,7 @@ Okay, you may be asking why all this complexity for a menu, where we can get it 
 
 Well it is to provide one of those nice hamburger menus on mobile, of course! With the current structure the menu is there, it can be made visible or hidden depending on the viewport size. Just adding some CSS achieves the result.
 
-But then a problem arrises: remember the top layer thing a couple of paragraphs above? Yeah, that... It breaks screen readers as they become trapped on the menu, so for desktop the menu needs to be duplicated _outside_ a `<dialog>`... Oh well... The final code has twice the menus, but they still switch between mobile and desktop. 🤷‍♂️
+But then a problem arises: remember the top layer thing a couple of paragraphs above? Yeah, that... It breaks screen readers as they become trapped on the menu, so for desktop the menu needs to be duplicated _outside_ a `<dialog>`... Oh well... The final code has twice the menus, but they still switch between mobile and desktop. 🤷‍♂️
 
 ## The hero ~~image~~ video
 

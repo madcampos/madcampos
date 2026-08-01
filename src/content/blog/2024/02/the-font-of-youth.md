@@ -3,7 +3,7 @@ title: The font of youth
 summary: Quick tutorial on shrinking font sizes for variable fonts.
 createdAt: 2024-02-16T18:20:18.915-05:00
 image: ./assets/828977-the-fall-of-the-sunwell.jpg
-imageAlt: A screen capture of the game World of Warcraft protraying the fall of the Sunwell. In it a massive beam of light emanates from the ground with smaller energy trails going around. A giant skeleton creature is in the center with heroes fighting it.
+imageAlt: A screen capture of the game World of Warcraft portraying the fall of the Sunwell. In it a massive beam of light emanates from the ground with smaller energy trails going around. A giant skeleton creature is in the center with heroes fighting it.
 imageRights: "[The Fall of the Sunwell](https://www.wowhead.com/quest=54096/the-fall-of-the-sunwell#screenshots:id=828977)"
 tags:
   - CSS

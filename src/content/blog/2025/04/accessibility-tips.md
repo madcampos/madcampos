@@ -34,7 +34,7 @@ For the VMS we have lots of passionate developer that are awesome to work with. 
 
 What happens is most of them are just starting their careers, so their contact with accessibility is usually very limited. In most cases it went just as far to know that semantic HTML is important, but not _why_, and not exactly what "semantic" even means.
 
-That gap in knowledge is not a problem, after all, we learn everything we do and no one was born knowing everything. It just made me realize I should take the scenic route and expand upon the whats, hows, and whys.
+That gap in knowledge is not a problem, after all, we learn everything we do and no one was born knowing everything. It just made me realize I should take the scenic route and expand upon the what's, how's, and why's.
 
 ## Tip #1: Explain _why_
 
@@ -44,7 +44,7 @@ It helps to give people the context they need to understand things and learn how
 
 ## Tip #2: Reference reputable sources
 
-We are talking about web development, so here _the_ "go to" source should be the [Mozilla Developers Network (MDN)](https://developer.mozilla.org/en-US/) docs[^1]. They are maintained by Mozilla, but the data there is [available on github](https://github.com/mdn/content) and anyone can contribute! Other browser vendors also contribute to make that the best source for documentation about the web.
+We are talking about web development, so here _the_ "go to" source should be the [Mozilla Developers Network (MDN)](https://developer.mozilla.org/en-US/) docs[^1]. They are maintained by Mozilla, but the data there is [available on GitHub](https://github.com/mdn/content) and anyone can contribute! Other browser vendors also contribute to make that the best source for documentation about the web.
 
 Another source, specifically for accessibility is the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/), it is a collection of patterns, examples, and explanations on what are the expectations in terms of accessibility for some interactions on the web. One example of that is tabs, they list what is needed for making an accessible tabs component and what types of interactions are expected, with examples.
 

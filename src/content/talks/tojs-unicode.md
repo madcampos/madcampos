@@ -20,7 +20,7 @@ What happens when you are faced with some of the most mind bending things in com
 
 ## Understanding Unicode
 
-In the ancient times, there was no standard on how to represent text by computers. Then IBM created ASCII, a way to represent text by computers. It was good but only represented latin scripts, so everything else was excluded.
+In the ancient times, there was no standard on how to represent text by computers. Then IBM created ASCII, a way to represent text by computers. It was good but only represented Latin scripts, so everything else was excluded.
 
 Then came the idea to represent every and all possible scripts made by humans (including things like [Linear A](https://en.wikipedia.org/wiki/Linear_A) and [Linear B](https://en.wikipedia.org/wiki/Linear_B)). The problem then became the size those "characters" would take. Even the most simple text would explode in size as we would need more bits to represent everything.
 

@@ -975,7 +975,7 @@ On the plus side, if you ever need some other functionality, it is already there
 
 ### Question: But what if the element doesn't allow me to use my brand colours?
 
-Styling elements would have been a big issue on <span style="font-family: var(--font-old-style);">ye olde IE days</span>. Nowadays it is mostly okay.
+Styling elements would have been a big issue on <span style="font-family: var(--font-old-style);">Ye Olde IE days</span>. Nowadays it is mostly okay.
 This [MDN guide on styling forms](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Styling_web_forms#types_of_widgets) gives a good breakdown of what is easy and what is not. Even for the harder ones it requires more CSS massaging, but it is still technically feasible.
 Also, have you heard about [custom selects](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select)?
 

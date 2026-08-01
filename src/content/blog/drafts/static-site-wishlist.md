@@ -20,7 +20,7 @@ Here is the list:
 
 # Standards based
 
-The code should be based in standards, as in: html, css, and js as much as possible, without introducing newer syntax and ways of doing things that are incompatible with the web.
+The code should be based in standards, as in: html, CSS, and JS as much as possible, without introducing newer syntax and ways of doing things that are incompatible with the web.
 This helps keeping things lean and interoperable, simple as that.
 
 ## String interpolation
@@ -46,14 +46,14 @@ The other point is it ends up adding extra syntax. There is no "standard" way of
 
 One potential approach would be to use a syntax similar to Vue and have a `<script>` block, along with a `<template>` block. But then it breaks the string interpolation part and you end up having to parse and handle the "html".
 
-So the solution here is have a central entrypoint providing all of the routes for the application, and those just being function calls.
+So the solution here is have a central entry point providing all of the routes for the application, and those just being function calls.
 
 One thing that file based builders have that is really useful is a separation from the actual page code function and the function that generates parameters to pass to the page. Like, the route have some parameters, and those are resolved separately.
 This makes it easy to have parametrized routes while also providing early error detection for the routes.
 
 ## Minification by default, bundling is opt-in
 
-Yeah, this is a hot take: I think we should stop overbundling our code. An even hotter take is to ship less js!
+Yeah, this is a hot take: I think we should stop over-bundling our code. An even hotter take is to ship less JS!
 
 What I mean here is that, as developers, we know better about the reusable parts of our code than any tool, this means that we already know which parts can be easily shared and be kept in bundles.
 

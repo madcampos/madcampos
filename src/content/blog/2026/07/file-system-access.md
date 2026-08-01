@@ -174,7 +174,7 @@ Here are the most relevant ones:
 ## The library
 
 As this is not the first time I dabbled with the File System APIs, I put together a library with some operations to make life easier.
-It is available on npm: [`@mad-c/file-system-helpers`](https://www.npmjs.com/package/@mad-c/file-system-helpers)
+It is available on NPM: [`@mad-c/file-system-helpers`](https://www.npmjs.com/package/@mad-c/file-system-helpers)
 
 ## References
 

@@ -17,7 +17,7 @@ In any case, I was thinking of how this year have been and decided to write abou
 
 It was an interesting year from a career perspective as I switched jobs in the beginning of 2024 and that switch was interesting.
 
-Previously I've been working with backend, so my mind was full of database normalizations, APIs, and other server goodies. Now it was full of CSS, props, and semantic HTML. To be honest, I've always worked with the whole full stack spectrum, and front-end is not alien to me, at all (see previous posts and all of my [Codepen](https://codepen.io/madcampos) portfolio).
+Previously I've been working with backend, so my mind was full of database normalizations, APIs, and other server goodies. Now it was full of CSS, props, and semantic HTML. To be honest, I've always worked with the whole full stack spectrum, and front-end is not alien to me, at all (see previous posts and all of my [CodePen](https://codepen.io/madcampos) portfolio).
 
 But it has been a while since I've worked with front-end in a _work_ settings. Since the "before times" (pre-pandemic). Anyways, that was a welcoming change and I do like working with that, so cheers to work!
 
