@@ -17,7 +17,7 @@
 			"region": "Ontario",
 			"countryCode": "CA"
 		},
-		"summary": "Full stack developer with **15+ years** of experience working with **TypeScript**, **JavaScript**, **node.js**, **React**, and web technologies.\nStrong expertise in finance and AI industries.\nSolid team and leadership experience for over 3 years, including managing a full team of developers, working as a Scrum Master, and menthoring other developers.",
+		"summary": "Full stack developer with **15+ years** of experience working with **TypeScript**, **JavaScript**, **node.js**, **React**, and web technologies.\nWith strong expertise in finance and AI industries.\n\nProven track record of evaluating core tech stacks and architecting APIs for all stages of the software lifecycle (from inception, to maintenance).\n\nSolid team and leadership experience for over 3 years, including managing a full team of developers, working as a Scrum Master, and mentoring other developers.",
 		"profiles": [
 			{
 				"network": "LinkedIn",
@@ -48,12 +48,14 @@
 			"position": "Staff Developer — Full Stack",
 			"description": "Software Agency",
 			"location": "Toronto, Canada (Hybrid)",
+			"url": "https://lightsonsoftware.com/",
 			"startDate": "2024-01",
 			"endDate": "2026-06",
-			"summary": "Worked on projects for clients long term, providing full stack skills, input on architecture decisions, and knowhow on development.",
+			"summary": "Worked on projects for clients long term, providing full stack skills, architecture decisions, and knowhow on development.",
 			"highlights": [
-				"Maintain a good relationship with clients, with always positive feedback.",
-				"Deliver new features and bug fixes swiftly."
+				"Maintained a good relationship with clients, with always positive feedback.",
+				"Delivered new features and bug fixes swiftly.",
+				"Helped guide the future of new and existing projects."
 			],
 			"clients": [
 				{
@@ -61,9 +63,10 @@
 					"position": "Staff Developer — Full Stack",
 					"description": "AI FinTech",
 					"location": "Toronto, Canada (Remote)",
+					"url": "https://saris.ai/",
 					"startDate": "2026-01",
 					"endDate": "2026-04",
-					"summary": "Worked creating AI based automation tools for financial institutions to improve backoffice speed.",
+					"summary": "Worked creating AI based automation tools for financial institutions to improve back-office speed.",
 					"highlights": [
 						"Delivered a new feature in the second week of work.",
 						"Integrated LLM calls into new workflows for data analysis.",
@@ -76,13 +79,15 @@
 					"position": "Staff Developer — Full Stack",
 					"description": "AI Hardware Manufacturer",
 					"location": "Toronto, Canada (Hybrid)",
+					"url": "https://tenstorrent.com/",
 					"startDate": "2024-01",
 					"endDate": "2026-01",
 					"summary": "Worked on data visualization tools for analyzing large performance datasets.",
 					"highlights": [
-						"Improved performance of data heavy react app from 1 minute to under 3 seconds.",
-						"Implemented UI and logic for loading app data via SSH.",
-						"Forked a Google project and added features to it while maintaining more than 95% compatibility.",
+						"Improved performance of [data heavy react app](https://github.com/tenstorrent/route-ui) from 1 minute to under 3 seconds.",
+						"Implemented UI and logic for syncing app data via SSH with fallback strategies.",
+						"Forked a [Google project](https://github.com/tenstorrent/model-explorer) and added features to it while maintaining more than 95% compatibility.",
+						"Integrated existing project into a new application and helped plan the merge of two applications into one.",
 						"Implemented data analysis app with \"human in the loop\" model for quick feedback on data changes.",
 						"improved semantic and WCAG compliance of existing app."
 					]
@@ -94,6 +99,7 @@
 			"position": "Senior Backend Developer",
 			"description": "Stock trading application",
 			"location": "Toronto, Canada (Remote)",
+			"url": "https://www.mogo.ca/",
 			"startDate": "2021-03",
 			"endDate": "2023-12",
 			"summary": "Responsible for writing backend code, communicate with the finance team, and bridge communications between teams in Canada and Europe.",
@@ -103,7 +109,7 @@
 				"Reduced costs with third-party services by refactoring part of the application and removing redundant calls to external services.",
 				"Improved delivery time by acting as a scrum master, where I improved visibility on project status and current bugs.",
 				"Facilitated knowledge sharing between team members and worked as an onboarding partner for three new team members.",
-				"Built and deployed new services and APIs using Docker and Node.js.",
+				"Built and deployed a greenfield application APIs using Docker and Node.js.",
 				"Implemented AWS lambdas to process a pipeline to buy and sell on the stock market.",
 				"Worked on integration with third party provides, including Braze and Contentful, to provide backend proxies to those providers."
 			]
@@ -113,26 +119,28 @@
 			"position": "Senior Full Stack Developer",
 			"description": "Gmail integration app",
 			"location": "UK (Remote)",
+			"url": "https://www.dragapp.com/",
 			"startDate": "2020-10",
 			"endDate": "2021-03",
 			"summary": "Responsible for improving the application code and implementing new features.",
 			"highlights": [
-				"Improved applciation load times, making the user experience smoother.",
+				"Improved application load times by 20%, making the user experience smoother.",
 				"Refactored and consolidated multiple components to share code, improving code maintainability and design consistency.",
 				"Refactored the codebase to remove old dependencies, improving reliability, UI semantic and WCAG compliance."
 			]
 		},
 		{
 			"name": "DomPixel",
-			"position": "Web Applciation Developer",
+			"position": "Web Application Developer",
 			"description": "Design and software agency",
 			"location": "Brazil (In-Person)",
+			"url": "https://www.linkedin.com/company/dompixel/",
 			"startDate": "2020-05",
 			"endDate": "2020-10",
-			"summary": "Designed and implemented websites and web applications for clients.",
+			"summary": "Planned, designed, and implemented multiple web sites and applications for clients.",
 			"highlights": [
 				"Introduced scrum methodology to the development team, improving delivery times and reliability.",
-				"Implemented a complex feature for date tracking in an extensible manner, with fast performance, and observability for the results.",
+				"Architected an extensible date-tracking system engine from the ground up, designing the underlying data structure and state management for optimal query performance and observability.",
 				"Built UIs with focus on accessibility and WCAG compliance."
 			]
 		},
@@ -141,6 +149,7 @@
 			"position": "Coding School Coordinator",
 			"description": "Coding school for kids",
 			"location": "Brazil (In-Person)",
+			"url": "https://happy.com.br/",
 			"startDate": "2018-06",
 			"endDate": "2020-05",
 			"summary": "Coordinated a team of teachers, ensuring student satisfaction, program and calendar planning, and teaching classes.",
@@ -157,7 +166,7 @@
 			"location": "Brazil (In-Person)",
 			"startDate": "2017-03",
 			"endDate": "2018-02",
-			"summary": "Implemented mobile apps using cross platform tools, using a wrapper for web aplication. With focus in compatibility between OSes.",
+			"summary": "Implemented mobile apps using cross platform tools, using a wrapper for web application. With focus in compatibility between OSes.",
 			"highlights": [
 				"Improved communication between development team and key project stakeholders.",
 				"Oversaw the release of a complex feature under a tight schedule, with maintainable and testable code."
@@ -172,7 +181,7 @@
 			"endDate": "2015-02",
 			"summary": "Created and deployed a news blog for the university's research projects.",
 			"highlights": [
-				"Created customized Wordpress theme from the ground up.",
+				"Created customized WordPress theme from the ground up.",
 				"Ensured browser compatibility and accessibility for the existing design."
 			]
 		},
@@ -191,16 +200,16 @@
 	],
 	"volunteer": [
 		{
-			"organization": "Toronto Javascript",
+			"organization": "Toronto JavaScript",
 			"position": "Dev Community Volunteer",
 			"url": "https://torontojs.com/",
 			"startDate": "2022-11",
 			"endDate": "2025-09",
 			"summary": "Organized and hosted events for the community.",
 			"highlights": [
+				"Led the initial architecture and development of an internal volunteer management platform, defining system architecture, data models, and component libraries while mentoring 10 junior developers.",
 				"Presented in 4 talks at \"Teck Talk\" events.",
-				"Hosted \"Code Club\" event focused on mob programming and pair coding for 2 years.",
-				"Worked as project manager for a volunteer management system, managing goals and a team of 10 developers while providing feedback and mentoring to the junior developers on the team."
+				"Hosted \"Code Club\" event focused on mob programming and pair coding for 2 years."
 			]
 		},
 		{
@@ -304,12 +313,12 @@
 			"startDate": "2023-07-27",
 			"endDate": "2023-07-27",
 			"url": "https://madcampos.dev/talks/tojs-web-components/",
-			"description": "An intermedite level quick talk about Web Components. Starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility."
+			"description": "An intermediate level quick talk about Web Components. Starting with a basic example on how they work, then describing how to integrate them with forms and add accessibility."
 		}
 	],
 	"awards": [
 		{
-			"title": "2nd place at GovHack MT Hackaton",
+			"title": "2nd place at GovHack MT Hackathon",
 			"awarder": "GovHack MT",
 			"date": "2016-11"
 		}
@@ -333,10 +342,13 @@
 		{ "name": "WordPress", "level": "5 years" },
 		{ "name": "Docker", "level": "4 years" },
 		{ "name": "AWS", "level": "3 years" },
-		{ "name": "Scrum", "level": "5 years" },
+		{ "name": "Scrum/Agile", "level": "5 years" },
 		{ "name": "React", "level": "4 years" },
 		{ "name": "Angular", "level": "4 years" },
 		{ "name": "Python", "level": "1 year" },
-		{ "name": "Git", "level": "10 years" }
+		{ "name": "Git", "level": "10 years" },
+		{ "name": "Leadership", "level": "4 years" },
+		{ "name": "Mentoring", "level": "4 years" },
+		{ "name": "Systems Design", "level": "4 years" }
 	]
 }

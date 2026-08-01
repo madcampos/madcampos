@@ -15,4 +15,22 @@ await page.pdf({
 	scale: 1
 });
 
+await page.evaluate(() => {
+	const fullResumeRadio = document.querySelector<HTMLInputElement>('#resume-type-full');
+	if (!fullResumeRadio) {
+		throw new Error('Full resume radio input not found');
+	}
+	fullResumeRadio.checked = true;
+	fullResumeRadio.dispatchEvent(new Event('change', { bubbles: true }));
+});
+
+await page.pdf({
+	path: './public/assets/documents/resume-full.pdf',
+	displayHeaderFooter: false,
+	format: 'letter',
+	preferCSSPageSize: true,
+	printBackground: true,
+	scale: 1
+});
+
 await browser.close();

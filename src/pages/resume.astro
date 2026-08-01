@@ -15,7 +15,6 @@ import resume from '../../public/assets/documents/resume.json' with { type: 'jso
 
 const MAX_EXPERIENCE_PRINT = 3;
 const MAX_CLIENTS_PRINT = 2;
-const MAX_VOLUNTEERING_PRINT = 1;
 const MAX_EDUCATION_PRINT = 2;
 
 const formatter = new Intl.DateTimeFormat('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -63,6 +62,37 @@ function dateSorter(
 		itemscope
 		itemprop="https://schema.org/Person"
 	>
+		<m-note data-type="info" hidden>
+			<form action="#" novalidate>
+				<div>
+					<fieldset>
+						<legend>Resume Print Length</legend>
+
+						<input-wrapper>
+							<input
+								type="radio"
+								name="resume-type"
+								id="resume-type-short"
+								value="short"
+								checked
+							/>
+							<label for="resume-type-short">Short</label>
+						</input-wrapper>
+						<input-wrapper>
+							<input
+								type="radio"
+								name="resume-type"
+								id="resume-type-full"
+								value="full"
+							/>
+							<label for="resume-type-full">Full</label>
+						</input-wrapper>
+					</fieldset>
+				</div>
+
+				<button type="submit">Print Resume</button>
+			</form>
+		</m-note>
 		<header>
 			<hgroup>
 				<h1 class="p-name" itemprop="name">{resume.basics.name}</h1>
@@ -73,8 +103,32 @@ function dateSorter(
 				<summary>Other File Formats</summary>
 
 				<ul>
-					<li><a href="/assets/documents/resume.pdf" download="Marco Campos - Staff Developer.pdf"><abbr title="Portable Document File">PDF</abbr></a></li>
-					<li><a href="/assets/documents/resume.json" download="Marco Campos - Staff Developer.json"><abbr title="JavaScript Object Notation">JSON</abbr></a></li>
+					<li>
+						<a
+							href="/assets/documents/resume.pdf"
+							download="Marco Campos - Staff Developer.pdf"
+						>
+							<abbr title="Portable Document File">PDF</abbr>
+							<span>(short version)</span>
+						</a>
+					</li>
+					<li>
+						<a
+							href="/assets/documents/resume-full.pdf"
+							download="Marco Campos - Staff Developer (full resume).pdf"
+						>
+							<abbr title="Portable Document File">PDF</abbr>
+							<span>(full version)</span>
+						</a>
+					</li>
+					<li>
+						<a
+							href="/assets/documents/resume.json"
+							download="Marco Campos - Staff Developer.json"
+						>
+							<abbr title="JavaScript Object Notation">JSON</abbr>
+						</a>
+					</li>
 				</ul>
 			</details>
 
@@ -138,7 +192,7 @@ function dateSorter(
 			</div>
 
 			<blockquote class="p-summary">
-				<Fragment set:html={markdown.inline(resume.basics.summary)} />
+				<Fragment set:html={markdown(resume.basics.summary)} />
 			</blockquote>
 		</header>
 
@@ -175,7 +229,7 @@ function dateSorter(
 
 				<dl>
 					{resume.work.toSorted(dateSorter).map((
-						{ name, position, description, highlights, location, startDate, endDate, summary, clients },
+						{ name, position, description, highlights, location, startDate, endDate, summary, clients, url },
 						index
 					) => (
 						<div
@@ -193,8 +247,15 @@ function dateSorter(
 									itemscope
 									itemtype="https://schema.org/Organization"
 								>
-									<span class="p-name" itemprop="name">{name}</span>
-									<small class="p-description" itemprop="description">{description}</small>
+									{url ? (
+										<a href={url}>
+											<span class="p-name" itemprop="name">{name}</span>
+											<small class="p-description" itemprop="description">{description}</small>
+										</a>
+									) : (
+										 <span class="p-name" itemprop="name">{name}</span>
+										 <small class="p-description" itemprop="description">{description}</small>
+									 )}
 								</entry-subtitle>
 								<entry-date>
 									<time
@@ -219,10 +280,10 @@ function dateSorter(
 								</entry-location>
 							</dt>
 							<dd class="p-summary" itemprop="description">
-								<p>{summary}</p>
+								<p><Fragment set:html={markdown.inline(summary)} /></p>
 
 								<ul>
-									{highlights.map((highlight) => <li>{highlight}</li>)}
+									{highlights.map((highlight) => <li><Fragment set:html={markdown.inline(highlight)} /></li>)}
 								</ul>
 								{clients && (
 									<h3>Clients</h3>
@@ -242,8 +303,15 @@ function dateSorter(
 														itemscope
 														itemtype="https://schema.org/Organization"
 													>
-														<span class="p-name" itemprop="name">{client.name}</span>
-														<small class="p-description" itemprop="description">{client.description}</small>
+														{client.url ? (
+															<a href={client.url}>
+																<span class="p-name" itemprop="name">{client.name}</span>
+																<small class="p-description" itemprop="description">{client.description}</small>
+															</a>
+														) : (
+															 <span class="p-name" itemprop="name">{client.name}</span>
+															 <small class="p-description" itemprop="description">{client.description}</small>
+														 )}
 													</entry-subtitle>
 													<entry-date>
 														<time
@@ -265,10 +333,10 @@ function dateSorter(
 													</entry-date>
 												</dt>
 												<dd class="p-summary" itemprop="description">
-													<p>{client.summary}</p>
+													<p><Fragment set:html={markdown.inline(client.summary)} /></p>
 
 													<ul>
-														{client.highlights.map((highlight) => <li>{highlight}</li>)}
+														{client.highlights.map((highlight) => <li><Fragment set:html={markdown.inline(highlight)} /></li>)}
 													</ul>
 												</dd>
 											</div>
@@ -308,7 +376,7 @@ function dateSorter(
 							</dt>
 							<dd class="p-summary" itemprop="description">
 								<ul>
-									{highlights.map((highlight) => <li>{highlight}</li>)}
+									{highlights.map((highlight) => <li><Fragment set:html={markdown.inline(highlight)} /></li>)}
 								</ul>
 							</dd>
 						</div>
@@ -316,19 +384,17 @@ function dateSorter(
 				</dl>
 			</section>
 
-			<section>
+			<section data-old-entry>
 				<h2>Volunteering</h2>
 				<dl>
 					{resume.volunteer.toSorted(dateSorter).map((
-						{ position, highlights, startDate, endDate, summary, organization, url },
-						index
+						{ position, highlights, startDate, endDate, summary, organization, url }
 					) => (
 						<div
 							class="h-event"
 							itemprop="hasOccupation"
 							itemscope
 							itemtype="https://schema.org/Role"
-							data-old-entry={index >= MAX_VOLUNTEERING_PRINT ? '' : null}
 						>
 							<dt>
 								<entry-title class="p-name" itemprop="name">{position}</entry-title>
@@ -367,10 +433,10 @@ function dateSorter(
 								</entry-date>
 							</dt>
 							<dd class="p-summary" itemprop="description">
-								<p>{summary}</p>
+								<p><Fragment set:html={markdown.inline(summary)} /></p>
 
 								<ul>
-									{highlights.map((highlight) => <li>{highlight}</li>)}
+									{highlights.map((highlight) => <li><Fragment set:html={markdown.inline(highlight)} /></li>)}
 								</ul>
 							</dd>
 						</div>
@@ -435,7 +501,7 @@ function dateSorter(
 								</entry-date>
 							</dt>
 							<dd class="p-summary" itemprop="description">
-								<p>{description}</p>
+								<p><Fragment set:html={markdown.inline(description)} /></p>
 							</dd>
 						</div>
 					))}

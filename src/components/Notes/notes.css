@@ -1,5 +1,5 @@
 @layer components {
-	m-note {
+	m-note:not([hidden]) {
 		background-color: var(--surface-2);
 		color: var(--text-2);
 		padding: var(--size-2);

@@ -18,3 +18,9 @@ document.querySelectorAll<HTMLDivElement>('div:not([data-old-entry]):has(time[da
 
 	element.toggleAttribute('data-old-entry');
 });
+
+document.querySelector('form')?.addEventListener('submit', (evt) => {
+	evt.preventDefault();
+	window.print();
+});
+document.querySelector('m-note')?.toggleAttribute('hidden', false);

@@ -1,4 +1,47 @@
 @layer page {
+	m-note {
+		form {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			inline-size: 100%;
+			justify-content: space-between;
+			gap: var(--size-2);
+
+			div { display: flow-root; }
+
+			fieldset {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: var(--size-2);
+
+				border: none;
+				margin: 0;
+				padding: 0;
+
+				legend {
+					font-size: inherit;
+					font-weight: normal;
+					float: inline-start;
+
+					&::after { content: ':'; }
+
+					@media (max-width: 30rem) { float: none; }
+				}
+
+				input-wrapper {
+					margin: 0;
+					padding: 0;
+				}
+			}
+
+			@media (max-width: 30rem) { justify-content: space-evenly; }
+		}
+
+		@media print { display: none; }
+	}
+
 	:is(dt, li:has(entry-title)) {
 		display: grid;
 		grid-template-columns: 1fr var(--size-7) auto;
@@ -50,6 +93,8 @@
 				&::before { content: '('; }
 				&::after { content: ')'; }
 			}
+
+			a { color: inherit; }
 		}
 
 		entry-date {
@@ -109,7 +154,7 @@
 	}
 
 	/* Hide older experiences from printed resume */
-	[data-old-entry] { @media print { display: none; } }
+	body:has(#resume-type-short:checked) [data-old-entry] { @media print { display: none; } }
 
 	header details {
 		ul {
