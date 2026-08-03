@@ -9,6 +9,7 @@ imageAlt: AI generated image of a unicorn head in a pale green with a bright gre
 themeImages:
   y2k: ./assets/y2k/01-corny-unicorn.jpg
   hacker: ./assets/hacker/01-corny-unicorn.png
+  uwu: ./assets/uwu/01-corny-unicorn.png
 techStack:
   - HTML
   - CSS

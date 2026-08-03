@@ -10,6 +10,7 @@ imageAlt: Shadowrun's logo in a hot pink color with glitch effects applied to it
 themeImages:
   y2k: ./assets/y2k/05-sdrlog.jpg
   hacker: ./assets/hacker/05-sdrlog.png
+  uwu: ./assets/uwu/05-sdrlog.png
 techStack:
   - HTML
   - CSS

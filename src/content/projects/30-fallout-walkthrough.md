@@ -10,6 +10,7 @@ imageAlt: "Fallout PipBoy's mascot: A cartoon face of a white guy with blond hai
 themeImages:
   y2k: ./assets/y2k/30-fallout-walkthrough.jpg
   hacker: ./assets/hacker/30-fallout-walkthrough.png
+  uwu: ./assets/uwu/30-fallout-walkthrough.png
 techStack:
   - HTML
   - CSS

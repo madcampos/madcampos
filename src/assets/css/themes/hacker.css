@@ -245,18 +245,6 @@
 
 				&[data-theme-image='hacker'] { display: block; }
 			}
-
-			&::after {
-				display: block;
-				position: absolute;
-				opacity: 0.8;
-				mix-blend-mode: color;
-				inset: 0;
-				background: radial-gradient(ellipse at center, var(--theme-color), var(--accent-color));
-				inline-size: 100%;
-				block-size: 100%;
-				content: '';
-			}
 		}
 	}
 

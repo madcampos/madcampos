@@ -9,6 +9,7 @@ imageAlt: An orange circle representing an orange slice with 4 segments, with th
 themeImages:
   y2k: ./assets/y2k/40-noriture.jpg
   hacker: ./assets/hacker/40-noriture.png
+  uwu: ./assets/uwu/40-noriture.png
 techStack:
   - GitHub Pages
   - Hono

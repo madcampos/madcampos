@@ -345,6 +345,12 @@
 		&.project-card picture {
 			position: relative;
 
+			img {
+				display: none;
+
+				&[data-theme-image='uwu'] { display: block; }
+			}
+
 			&::after {
 				display: block;
 				position: absolute;

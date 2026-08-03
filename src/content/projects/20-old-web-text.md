@@ -10,6 +10,7 @@ imageAlt: A serif upper case "t" in white with an outlined sans-serif uppercase 
 themeImages:
   y2k: ./assets/y2k/20-oldwebtext.jpg
   hacker: ./assets/hacker/20-oldwebtext.png
+  uwu: ./assets/uwu/20-oldwebtext.png
 techStack:
   - HTML
   - CSS
