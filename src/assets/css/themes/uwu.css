@@ -1,3 +1,27 @@
+@counter-style uwu-list-first-level {
+	system: fixed;
+	symbols: '💖';
+	suffix: ' ';
+	speak-as: bullets;
+	fallback: disk;
+}
+
+@counter-style uwu-list-second-level {
+	system: fixed;
+	symbols: '🦋';
+	suffix: ' ';
+	speak-as: bullets;
+	fallback: circle;
+}
+
+@counter-style uwu-list-third-level {
+	system: fixed;
+	symbols: '🦄';
+	suffix: ' ';
+	speak-as: bullets;
+	fallback: square;
+}
+
 @layer theme {
 	[data-theme='uwu'] {
 		/* Border */
@@ -294,12 +318,12 @@
 	}
 
 	[data-theme='uwu'] ul, ul[data-theme='uwu'] {
-		list-style: '💖 ';
+		list-style-type: uwu-list-first-level;
 
 		ul {
-			list-style: '🦋 ';
+			list-style-type: uwu-list-second-level;
 
-			ul { list-style: '🦄 '; }
+			ul { list-style-type: uwu-list-third-level; }
 		}
 	}
 

@@ -1,3 +1,27 @@
+@counter-style list-first-level {
+	system: cyclic;
+	symbols: '◆';
+	suffix: ' ';
+	speak-as: bullets;
+	fallback: disk;
+}
+
+@counter-style list-second-level {
+	system: cyclic;
+	symbols: '◇';
+	suffix: ' ';
+	speak-as: bullets;
+	fallback: circle;
+}
+
+@counter-style list-third-level {
+	system: cyclic;
+	symbols: '✢';
+	suffix: ' ';
+	speak-as: bullets;
+	fallback: square;
+}
+
 @layer base {
 	blockquote {
 		margin: var(--size-2);
@@ -43,18 +67,18 @@
 		inline-size: clamp(--size-content-0, 70vw, var(--size-content-3));
 	}
 
-	ul { list-style: '◆ '; }
-	ol { list-style: decimal-leading-zero; }
+	ul { list-style-type: list-first-level; }
+	ol { list-style-type: decimal-leading-zero; }
 
 	:is(ol, ul) {
 		padding-inline-start: var(--size-7);
 
-		ul { list-style: '◇ '; }
-		ol { list-style: lower-latin; }
+		ul { list-style-type: list-second-level; }
+		ol { list-style-type: lower-latin; }
 
 		:is(ol, ul) {
-			ul { list-style: '✢ '; }
-			ol { list-style: lower-roman; }
+			ul { list-style-type: list-third-level; }
+			ol { list-style-type: lower-roman; }
 		}
 	}
 
