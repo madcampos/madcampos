@@ -309,7 +309,7 @@
 				{
 					"url": "https://frontendmasters.com/blog/the-coyier-css-starter/",
 					"title": "The Coyier CSS Starter",
-					"description": "Chris Coyer's 2025 re-take on \"CSS resets\". It explains _why_ each option is choosen.",
+					"description": "Chris Coyer's 2025 re-take on \"CSS resets\". It explains _why_ each option is chosen.",
 					"type": "reference"
 				},
 				{
@@ -1244,7 +1244,7 @@
 				},
 				{
 					"url": "https://ericwbailey.website/published/evolved-antennas-llm-generated-code-and-a-potential-antifuture/",
-					"title": "Evolved antennas, LLM-generated code, and a potential antifuture",
+					"title": "Evolved antennas, LLM-generated code, and a potential anti-future",
 					"description": "Argument in favour of the open web and against locking down platforms.",
 					"type": "article"
 				},
@@ -1312,6 +1312,12 @@
 					"url": "https://jcs.org/2026/07/23/ai",
 					"title": "On AI",
 					"description": "Clash in philosophy about writing software for vintage computers and the AI era.",
+					"type": "article"
+				},
+				{
+					"url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
+					"title": "“Code was never the hard part” is an insult to all programmers",
+					"description": "A rebuttal to the commonly used argument that \"code was never the hard part\".",
 					"type": "article"
 				}
 			]
