@@ -833,6 +833,18 @@
 					"title": "The Productivity Mirage",
 					"description": "Shine setups don't help if you don't know what to build.",
 					"type": "article"
+				},
+				{
+					"url": "https://parksb.github.io/en/article/32.html",
+					"title": "But yak shaving is fun",
+					"description": "Doing \"unrelated\" work is important.",
+					"type": "article"
+				},
+				{
+					"url": "https://mikemai.net/blog/2026/08/07/the-case-for-side-quests.html",
+					"title": "The Case for Side Quests",
+					"description": "Doing things we are not good at, that we don't know, is important.",
+					"type": "article"
 				}
 			]
 		},
