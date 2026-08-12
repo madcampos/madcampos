@@ -1,0 +1,44 @@
+<svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path d="M280,280l-280,0l40,-40l200,0l40,40Z" style="fill: url(#_Linear2)" />
+	<path d="M280,0l0,280l-40,-40l0,-200l40,-40Z" style="fill: url(#_Linear3)" />
+	<path d="M0,280l0,-280l40,40l0,200l-40,40Z" style="fill: url(#_Linear4)" />
+	<path d="M0,0l280,0l-40,40l-200,0l-40,-40Z" style="fill: url(#_Linear5)" />
+	<defs>
+		<linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(2.44929e-15,40,-40,2.44929e-15,140,240)">
+			<stop offset="0" style="stop-color: #c3c0a2; stop-opacity: 1" />
+			<stop offset="0.1" style="stop-color: #c3c0a2; stop-opacity: 1" />
+			<stop offset="0.28" style="stop-color: #e2e2c7; stop-opacity: 1" />
+			<stop offset="0.5" style="stop-color: #eaebd1; stop-opacity: 1" />
+			<stop offset="0.72" style="stop-color: #d3d1b7; stop-opacity: 1" />
+			<stop offset="0.9" style="stop-color: #7f6e54; stop-opacity: 1" />
+			<stop offset="1" style="stop-color: #7f6e54; stop-opacity: 1" />
+		</linearGradient>
+		<linearGradient id="_Linear3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(40,-3.9443e-31,3.9443e-31,40,240,140)">
+			<stop offset="0" style="stop-color: #c3c0a2; stop-opacity: 1" />
+			<stop offset="0.1" style="stop-color: #c3c0a2; stop-opacity: 1" />
+			<stop offset="0.28" style="stop-color: #e2e2c7; stop-opacity: 1" />
+			<stop offset="0.5" style="stop-color: #eaebd1; stop-opacity: 1" />
+			<stop offset="0.72" style="stop-color: #d3d1b7; stop-opacity: 1" />
+			<stop offset="0.9" style="stop-color: #7f6e54; stop-opacity: 1" />
+			<stop offset="1" style="stop-color: #7f6e54; stop-opacity: 1" />
+		</linearGradient>
+		<linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-40,4.89859e-15,-4.89859e-15,-40,40,140)">
+			<stop offset="0" style="stop-color: #7f6e54; stop-opacity: 1" />
+			<stop offset="0.1" style="stop-color: #7f6e54; stop-opacity: 1" />
+			<stop offset="0.28" style="stop-color: #d3d1b7; stop-opacity: 1" />
+			<stop offset="0.5" style="stop-color: #eaebd1; stop-opacity: 1" />
+			<stop offset="0.72" style="stop-color: #e2e2c7; stop-opacity: 1" />
+			<stop offset="0.9" style="stop-color: #c3c0a2; stop-opacity: 1" />
+			<stop offset="1" style="stop-color: #c3c0a2; stop-opacity: 1" />
+		</linearGradient>
+		<linearGradient id="_Linear5" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(2.44929e-15,-40,40,2.44929e-15,140,40)">
+			<stop offset="0" style="stop-color: #7f6e54; stop-opacity: 1" />
+			<stop offset="0.1" style="stop-color: #7f6e54; stop-opacity: 1" />
+			<stop offset="0.28" style="stop-color: #d3d1b7; stop-opacity: 1" />
+			<stop offset="0.5" style="stop-color: #eaebd1; stop-opacity: 1" />
+			<stop offset="0.72" style="stop-color: #e2e2c7; stop-opacity: 1" />
+			<stop offset="0.9" style="stop-color: #c3c0a2; stop-opacity: 1" />
+			<stop offset="1" style="stop-color: #c3c0a2; stop-opacity: 1" />
+		</linearGradient>
+	</defs>
+</svg>

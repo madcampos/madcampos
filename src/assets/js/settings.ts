@@ -1,7 +1,7 @@
 // oxlint-disable id-length
 
 export type EnabledDisabledSetting = 'disabled' | 'enabled';
-export type ThemeSetting = 'dark' | 'hacker' | 'high-contrast' | 'light' | 'low-contrast' | 'system' | 'uwu' | 'y2k';
+export type ThemeSetting = 'dark' | 'hacker' | 'high-contrast' | 'light' | 'low-contrast' | 'system' | 'uwu' | 'y2k' | 'cork-board';
 export type FontSetting = 'browser' | 'comic-sans' | 'default' | 'legibility';
 export type FontSizeSetting = 'large' | 'medium' | 'small' | 'x-large' | 'x-small';
 export type LineHeightSetting = 'medium' | 'tight' | 'wide' | 'wider';
