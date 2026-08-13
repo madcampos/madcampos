@@ -845,6 +845,12 @@
 					"title": "The Case for Side Quests",
 					"description": "Doing things we are not good at, that we don't know, is important.",
 					"type": "article"
+				},
+				{
+					"url": "https://blog.helsing.ai/posts/on-comments/",
+					"title": "On Comments",
+					"description": "Comments on commenting code (pun intended).",
+					"type": "article"
 				}
 			]
 		},
