@@ -24,9 +24,9 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	// 1 hour
 	readonly #MIN_CHECK_INTERVAL_SEC = 60 * 60;
 	// 30 minutes
-	readonly #MIN_INCREMENT_TIME_DELTA_SEC = 30 * 60;
+	readonly #MIN_INCREMENT_TIME_DELTA_SEC = 1;
 
-	#lastChecked = new Date();
+	#lastChecked = new Date('0000-01-01T00:00:00Z');
 	#visitData: HitCountResponse = {
 		url: document.location.pathname,
 		totalVisitors: 0,
@@ -37,6 +37,8 @@ export class HitCounter extends HTMLElement implements CustomElement {
 	#updateCallbackRef?: NodeJS.Timeout | number = undefined;
 
 	async #fetchVisits() {
+		this.#lastChecked = new Date();
+
 		if (this.#retryCount <= this.#MAX_RETRIES) {
 			try {
 				const url = new URL(HIT_COUNTER_URL);
@@ -46,28 +48,40 @@ export class HitCounter extends HTMLElement implements CustomElement {
 				const response = await fetch(url);
 				const json: HitCountResponse = await response.json();
 
-				return json;
+				this.#visitData = json;
+				this.#retryCount = 0;
 			} catch (err) {
 				console.error(err);
 
 				this.#retryCount += 1;
 			}
 		}
-
-		return this.#visitData;
 	}
 
 	async #checkVisitUpdates() {
 		const deltaTimeSec = Math.trunc((new Date().getTime() - this.#lastChecked.getTime()) / 1000);
-
 		if (deltaTimeSec >= this.#visitData.visitTimeAvgInSec) {
-			this.#lastChecked = new Date();
-			this.#visitData = await this.#fetchVisits();
+			await this.#fetchVisits();
 			this.render();
 		}
+
+		const intervalTimeMs = (
+			this.#visitData.visitTimeAvgInSec < this.#MIN_CHECK_INTERVAL_SEC
+				? this.#MIN_CHECK_INTERVAL_SEC
+				: this.#visitData.visitTimeAvgInSec
+		) * 1000;
+
+		clearTimeout(this.#updateCallbackRef);
+		this.#updateCallbackRef = setTimeout(async () => this.#checkVisitUpdates(), intervalTimeMs);
 	}
 
 	async #fetchNewVisit() {
+		const savedLastIncrement = localStorage.getItem(`visit-${document.location.pathname}`) ?? '0000-01-01T00:00:00Z';
+		const deltaTimeSec = Math.trunc((new Date().getTime() - new Date(savedLastIncrement).getTime()) / 1000);
+		if (deltaTimeSec < this.#MIN_INCREMENT_TIME_DELTA_SEC) {
+			return;
+		}
+
 		try {
 			const url = new URL(HIT_COUNTER_URL);
 
@@ -82,6 +96,8 @@ export class HitCounter extends HTMLElement implements CustomElement {
 			}
 
 			localStorage.setItem(`visit-${document.location.pathname}`, new Date().toISOString());
+
+			await this.#fetchVisits();
 		} catch (err) {
 			console.error(err);
 		}
@@ -115,30 +131,13 @@ export class HitCounter extends HTMLElement implements CustomElement {
 
 		this.render();
 
-		this.#lastChecked = new Date();
-		this.#visitData = await this.#fetchVisits();
+		await this.#fetchNewVisit();
+		await this.#checkVisitUpdates();
 		this.render();
-
-		const intervalTimeMs = (
-			this.#visitData.visitTimeAvgInSec < this.#MIN_CHECK_INTERVAL_SEC
-				? this.#MIN_CHECK_INTERVAL_SEC
-				: this.#visitData.visitTimeAvgInSec
-		) * 1000;
-		this.#updateCallbackRef = setInterval(async () => this.#checkVisitUpdates(), intervalTimeMs);
-
-		const savedLastIncrement = localStorage.getItem(`visit-${document.location.pathname}`);
-		if (!savedLastIncrement) {
-			await this.#fetchNewVisit();
-		} else {
-			const deltaTimeSec = Math.trunc((new Date().getTime() - new Date(savedLastIncrement).getTime()) / 1000);
-			if (deltaTimeSec >= this.#MIN_INCREMENT_TIME_DELTA_SEC) {
-				await this.#fetchNewVisit();
-			}
-		}
 	}
 
 	disconnectedCallback() {
-		clearInterval(this.#updateCallbackRef);
+		clearTimeout(this.#updateCallbackRef);
 	}
 }
 

@@ -136,13 +136,11 @@ export async function generateVisitorId({
 	acceptEncoding,
 	acceptLanguage,
 	country,
-	userAgent,
 	ipAddress
 }: RequestMetadata) {
 	const data = JSON.stringify({
 		country,
 		ipAddress,
-		userAgent,
 		accept,
 		acceptLanguage,
 		acceptEncoding
