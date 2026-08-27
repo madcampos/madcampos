@@ -269,13 +269,11 @@
 		}
 	}
 
-	:is([data-theme='cork-board'] m-card, m-card[data-theme='cork-board']) {
-		&.project-card article > picture {
-			img {
-				display: none;
+	:is([data-theme='cork-board'] themed-image, themed-image[data-theme='cork-board']) {
+		:has(img[data-theme-image='cork-board']) img {
+			display: none;
 
-				&[data-theme-image='hacker'] { display: block; }
-			}
+			&[data-theme-image='hacker'] { display: block; }
 		}
 	}
 

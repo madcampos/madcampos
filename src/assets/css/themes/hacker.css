@@ -329,4 +329,6 @@
 			--code-text-decoration: var(--shiki-contrast-text-decoration, none);
 		}
 	}
+
+	:is([data-theme='hacker'] radar-chart, radar-chart[data-theme='hacker']) { g.circles, g.axis { stroke: var(--camo-12); } }
 }

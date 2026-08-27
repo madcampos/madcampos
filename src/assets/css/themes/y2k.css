@@ -378,4 +378,6 @@
 			--code-text-decoration: var(--shiki-light-text-decoration, none);
 		}
 	}
+
+	:is([data-theme='y2k'] radar-chart, radar-chart[data-theme='y2k']) { g.circles, g.axis { stroke: dimgray; } }
 }

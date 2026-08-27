@@ -461,6 +461,8 @@
 		}
 	}
 
+	:is([data-theme='uwu'] related-posts, related-posts[data-theme='uwu']) ul { list-style-type: none; }
+
 	@keyframes uwu-cursor-normal {
 		0% { cursor: url('./uwu/cursors/normal/1.svg') 2 2, auto; }
 		20% { cursor: url('./uwu/cursors/normal/2.svg') 2 2, auto; }
