@@ -30,40 +30,25 @@
 				.wheel { transform-origin: 250px 250px; }
 
 				circle {
-					fill: var(--yellow-6);
-					stroke: color-mix(in srgb, var(--yellow-10), var(--yellow-6));
+					fill: var(--wheel-fill);
+					stroke: var(--wheel-stroke);
 					stroke-width: var(--size-1);
 
 					&:nth-of-type(2) { fill: transparent; }
-
-					@media (forced-colors: active) {
-						stroke: Mark;
-						fill: MarkText;
-					}
 				}
 
 				.wheel-spinner {
 					transform-origin: 250px 10px;
 
-					path:nth-child(1) {
-						fill: var(--yellow-6);
-
-						@media (forced-colors: active) { fill: Mark; }
-					}
-					path:nth-child(2) {
-						fill: color-mix(in srgb, var(--yellow-10), transparent);
-
-						@media (forced-colors: active) { fill: color-mix(in srgb, Mark, black); }
-					}
+					path:nth-child(1) { fill: var(--wheel-spinner-fill); }
+					path:nth-child(2) { fill: var(--wheel-spinner-fill-shadow); }
 				}
 
 				.wheel-segment {
 					path {
 						fill: var(--surface-1);
-						stroke: var(--yellow-6);
+						stroke: var(--wheel-segment-stroke);
 						stroke-width: var(--size-1);
-
-						@media (forced-colors: active) { stroke: Mark; }
 					}
 
 					text {
@@ -76,7 +61,7 @@
 					}
 
 					&[aria-current] {
-						filter: brightness(1.7) saturate(1.7) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+						filter: var(--wheel-highlight-filter);
 
 						@media (forced-colors: active) {
 							--surface-1: Highlight;
@@ -96,8 +81,8 @@
 		}
 
 		list-container {
-			--highlight-bg: light-dark(var(--yellow-9), var(--yellow-7));
-			--highlight-color: light-dark(black, black);
+			--highlight-bg: var(--list-highlight-bg);
+			--highlight-color: var(--list-highlight-color);
 
 			display: flex;
 			flex-direction: column;
@@ -112,12 +97,15 @@
 			}
 
 			li {
+				background-color: var(--surface-1);
 				font-size: var(--font-size-3);
 				color: var(--text-color);
 
 				&[aria-current] {
 					background-color: var(--highlight-bg);
 					color: var(--highlight-color);
+					font-weight: bold;
+					font-size: var(--font-size-4);
 
 					@media (forced-colors: active) {
 						background-color: Highlight;
@@ -132,8 +120,8 @@
 				--highlight-color: var(--text-color);
 
 				li[aria-current] {
-					background-color: light-dark(var(--yellow-9), var(--yellow-7));
-					color: light-dark(black, black);
+					background-color: var(--list-highlight-bg);
+					color: var(--list-highlight-color);
 				}
 			}
 		}
@@ -143,70 +131,63 @@
 
 		:is(.wheel-segment, li) {
 			&:nth-child(1) {
-				--surface-1: light-dark(var(--red-4), var(--red-9));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-1-bg);
+				--text-color: var(--wheel-segment-1-color);
 			}
 
 			&:nth-child(2) {
-				--surface-1: light-dark(var(--lime-4), var(--lime-11));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-2-bg);
+				--text-color: var(--wheel-segment-2-color);
 			}
 
 			&:nth-child(3) {
-				--surface-1: light-dark(var(--choco-4), var(--choco-8));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-3-bg);
+				--text-color: var(--wheel-segment-3-color);
 			}
 
 			&:nth-child(4) {
-				--surface-1: light-dark(var(--blue-3), var(--blue-8));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-4-bg);
+				--text-color: var(--wheel-segment-4-color);
 			}
 
 			&:nth-child(5) {
-				--surface-1: light-dark(var(--yellow-4), var(--yellow-7));
-				--text-color: light-dark(black, black);
+				--surface-1: var(--wheel-segment-5-bg);
+				--text-color: var(--wheel-segment-5-color);
 			}
 
 			&:nth-child(6) {
-				--surface-1: light-dark(var(--teal-3), var(--teal-9));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-6-bg);
+				--text-color: var(--wheel-segment-6-color);
 			}
 
 			&:nth-child(7) {
-				--surface-1: light-dark(var(--pink-5), var(--pink-8));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-7-bg);
+				--text-color: var(--wheel-segment-7-color);
 			}
 
 			&:nth-child(8) {
-				--surface-1: light-dark(var(--orange-5), var(--orange-10));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-8-bg);
+				--text-color: var(--wheel-segment-8-color);
 			}
 
 			&:nth-child(9) {
-				--surface-1: light-dark(var(--cyan-4), var(--cyan-10));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-9-bg);
+				--text-color: var(--wheel-segment-9-color);
 			}
 
 			&:nth-child(10) {
-				--surface-1: light-dark(var(--jungle-4), var(--jungle-10));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-10-bg);
+				--text-color: var(--wheel-segment-10-color);
 			}
 
 			&:nth-child(11) {
-				--surface-1: light-dark(var(--indigo-3), var(--indigo-10));
-				--text-color: light-dark(black, white);
+				--surface-1: var(--wheel-segment-11-bg);
+				--text-color: var(--wheel-segment-11-color);
 			}
 
 			&:nth-child(12) {
-				--surface-1: light-dark(var(--purple-6), var(--purple-11));
-				--text-color: light-dark(black, white);
-			}
-
-			&:nth-child(n) {
-				@media (forced-colors: active) {
-					--surface-1: Canvas;
-					--text-color: CanvasText;
-				}
+				--surface-1: var(--wheel-segment-12-bg);
+				--text-color: var(--wheel-segment-12-color);
 			}
 		}
 	}

@@ -238,6 +238,44 @@
 		--card-image-radius: ;
 		--card-image-shape: ;
 
+		/* Wheel of fortune */
+		--wheel-stroke: ;
+		--wheel-fill: ;
+
+		--wheel-spinner-fill: ;
+		--wheel-spinner-fill-shadow: ;
+
+		--wheel-segment-stroke: ;
+
+		--list-highlight-bg: ;
+		--list-highlight-color: ;
+		--wheel-highlight-filter: ;
+
+		--wheel-segment-1-bg: ;
+		--wheel-segment-1-color: ;
+		--wheel-segment-2-bg: ;
+		--wheel-segment-2-color: ;
+		--wheel-segment-3-bg: ;
+		--wheel-segment-3-color: ;
+		--wheel-segment-4-bg: ;
+		--wheel-segment-4-color: ;
+		--wheel-segment-5-bg: ;
+		--wheel-segment-5-color: ;
+		--wheel-segment-6-bg: ;
+		--wheel-segment-6-color: ;
+		--wheel-segment-7-bg: ;
+		--wheel-segment-7-color: ;
+		--wheel-segment-8-bg: ;
+		--wheel-segment-8-color: ;
+		--wheel-segment-9-bg: ;
+		--wheel-segment-9-color: ;
+		--wheel-segment-10-bg: ;
+		--wheel-segment-10-color: ;
+		--wheel-segment-11-bg: ;
+		--wheel-segment-11-color: ;
+		--wheel-segment-12-bg: ;
+		--wheel-segment-12-color: ;
+
 		/* Fonts */
 		--headers-font-family: ;
 		--code-font-family: ;
@@ -288,13 +326,11 @@
 		}
 	}
 
-	:is([data-theme='TEMPLATE'] m-card, m-card[data-theme='TEMPLATE']) {
-		&.project-card article > picture {
-			img {
-				display: none;
+	:is([data-theme='TEMPLATE'] themed-image, themed-image[data-theme='TEMPLATE']) {
+		:has(img[data-theme-image='TEMPLATE']) img {
+			display: none;
 
-				&[data-theme-image='hacker'] { display: block; }
-			}
+			&[data-theme-image='TEMPLATE'] { display: block; }
 		}
 	}
 

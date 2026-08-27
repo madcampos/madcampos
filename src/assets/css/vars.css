@@ -295,6 +295,44 @@
 		--card-image-radius: var(--radius-6);
 		--card-image-shape: squircle;
 
+		/* Wheel of fortune */
+		--wheel-stroke: color-mix(in srgb, var(--yellow-10), var(--yellow-6));
+		--wheel-fill: var(--yellow-6);
+
+		--wheel-spinner-fill: var(--yellow-6);
+		--wheel-spinner-fill-shadow: color-mix(in srgb, var(--yellow-10), transparent);
+
+		--wheel-segment-stroke: var(--wheel-fill);
+
+		--list-highlight-bg: white;
+		--list-highlight-color: var(--yellow-9);
+		--wheel-highlight-filter: brightness(1.8) saturate(1.8) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+
+		--wheel-segment-1-bg: var(--red-4);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--lime-4);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--choco-4);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--blue-3);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--yellow-4);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--teal-3);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--pink-5);
+		--wheel-segment-7-color: black;
+		--wheel-segment-8-bg: var(--orange-5);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--cyan-4);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--jungle-4);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--indigo-3);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--purple-6);
+		--wheel-segment-12-color: black;
+
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--code-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
@@ -392,6 +430,36 @@
 			--baseline-limited-bg: var(--gray-7);
 			--baseline-no-data-color: var(--gray-5);
 			--baseline-no-data-bg: var(--gray-5);
+
+			/* Wheel of fortune */
+			--list-highlight-bg: black;
+			--list-highlight-color: var(--yellow-7);
+			--wheel-highlight-filter: brightness(1.7) saturate(1.7) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+
+			--wheel-segment-1-bg: var(--red-9);
+			--wheel-segment-1-color: white;
+			--wheel-segment-2-bg: var(--lime-11);
+			--wheel-segment-2-color: white;
+			--wheel-segment-3-bg: var(--choco-8);
+			--wheel-segment-3-color: white;
+			--wheel-segment-4-bg: var(--blue-8);
+			--wheel-segment-4-color: white;
+			--wheel-segment-5-bg: var(--yellow-7);
+			--wheel-segment-5-color: black;
+			--wheel-segment-6-bg: var(--teal-9);
+			--wheel-segment-6-color: white;
+			--wheel-segment-7-bg: var(--pink-8);
+			--wheel-segment-7-color: white;
+			--wheel-segment-8-bg: var(--orange-10);
+			--wheel-segment-8-color: white;
+			--wheel-segment-9-bg: var(--cyan-10);
+			--wheel-segment-9-color: white;
+			--wheel-segment-10-bg: var(--jungle-10);
+			--wheel-segment-10-color: white;
+			--wheel-segment-11-bg: var(--indigo-10);
+			--wheel-segment-11-color: white;
+			--wheel-segment-12-bg: var(--purple-11);
+			--wheel-segment-12-color: white;
 		}
 	}
 }

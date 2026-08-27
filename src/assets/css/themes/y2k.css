@@ -230,6 +230,44 @@
 		--card-image-radius: var(--border-radius);
 		--card-image-shape: square;
 
+		/* Wheel of fortune */
+		--wheel-stroke: silver;
+		--wheel-fill: dimgray;
+
+		--wheel-spinner-fill: silver;
+		--wheel-spinner-fill-shadow: color-mix(in srgb, dimgray, transparent);
+
+		--wheel-segment-stroke: var(--wheel-fill);
+
+		--list-highlight-bg: silver;
+		--list-highlight-color: black;
+		--wheel-highlight-filter: invert(1);
+
+		--wheel-segment-1-bg: darkred;
+		--wheel-segment-1-color: white;
+		--wheel-segment-2-bg: forestgreen;
+		--wheel-segment-2-color: white;
+		--wheel-segment-3-bg: chocolate;
+		--wheel-segment-3-color: white;
+		--wheel-segment-4-bg: dodgerblue;
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: goldenrod;
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: darkcyan;
+		--wheel-segment-6-color: white;
+		--wheel-segment-7-bg: deeppink;
+		--wheel-segment-7-color: white;
+		--wheel-segment-8-bg: orangered;
+		--wheel-segment-8-color: white;
+		--wheel-segment-9-bg: seagreen;
+		--wheel-segment-9-color: white;
+		--wheel-segment-10-bg: springgreen;
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: royalblue;
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: purple;
+		--wheel-segment-12-color: white;
+
 		/* Icons */
 		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='aqua' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 		--select-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg %3E%3Cpath fill='black' d='M12.707 15.707a1 1 0 0 1-1.414 0L5.636 10.05A1 1 0 1 1 7.05 8.636l4.95 4.95l4.95-4.95a1 1 0 0 1 1.414 1.414z'/%3E%3C/g%3E%3C/svg%3E");

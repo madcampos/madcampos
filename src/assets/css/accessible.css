@@ -190,6 +190,42 @@
 			--card-image-radius: var(--border-radius);
 			--card-image-shape: square;
 
+			/* Wheel of fortune */
+			--wheel-stroke: var(--accent-color);
+			--wheel-fill: var(--surface-1);
+
+			--wheel-spinner-fill: var(--accent-color);
+			--wheel-spinner-fill-shadow: color-mix(in srgb, var(--accent-color), transparent);
+
+			--list-highlight-bg: black;
+			--list-highlight-color: white;
+			--wheel-highlight-filter: invert(1);
+
+			--wheel-segment-1-bg: var(--yellow-0);
+			--wheel-segment-1-color: black;
+			--wheel-segment-2-bg: var(--orange-2);
+			--wheel-segment-2-color: black;
+			--wheel-segment-3-bg: var(--yellow-4);
+			--wheel-segment-3-color: black;
+			--wheel-segment-4-bg: var(--yellow-6);
+			--wheel-segment-4-color: black;
+			--wheel-segment-5-bg: var(--yellow-8);
+			--wheel-segment-5-color: black;
+			--wheel-segment-6-bg: var(--yellow-12);
+			--wheel-segment-6-color: black;
+			--wheel-segment-7-bg: var(--orange-0);
+			--wheel-segment-7-color: black;
+			--wheel-segment-8-bg: var(--orange-2);
+			--wheel-segment-8-color: black;
+			--wheel-segment-9-bg: var(--orange-4);
+			--wheel-segment-9-color: black;
+			--wheel-segment-10-bg: var(--orange-6);
+			--wheel-segment-10-color: black;
+			--wheel-segment-11-bg: var(--orange-8);
+			--wheel-segment-11-color: black;
+			--wheel-segment-12-bg: var(--orange-10);
+			--wheel-segment-12-color: black;
+
 			/* Icons */
 			--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='goldenrod' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 
@@ -401,6 +437,44 @@
 			--card-image-radius: var(--radius-6);
 			--card-image-shape: squircle;
 
+			/* Wheel of fortune */
+			--wheel-stroke: var(--yellow-3);
+			--wheel-fill: var(--yellow-4);
+
+			--wheel-spinner-fill: var(--yellow-4);
+			--wheel-spinner-fill-shadow: color-mix(in srgb, var(--yellow-8), transparent);
+
+			--wheel-segment-stroke: var(--wheel-fill);
+
+			--list-highlight-bg: white;
+			--list-highlight-color: black;
+			--wheel-highlight-filter: brightness(1.8) saturate(1.6) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+
+			--wheel-segment-1-bg: var(--red-2);
+			--wheel-segment-1-color: black;
+			--wheel-segment-2-bg: var(--lime-2);
+			--wheel-segment-2-color: black;
+			--wheel-segment-3-bg: var(--choco-2);
+			--wheel-segment-3-color: black;
+			--wheel-segment-4-bg: var(--blue-2);
+			--wheel-segment-4-color: black;
+			--wheel-segment-5-bg: var(--yellow-2);
+			--wheel-segment-5-color: black;
+			--wheel-segment-6-bg: var(--teal-2);
+			--wheel-segment-6-color: black;
+			--wheel-segment-7-bg: var(--pink-3);
+			--wheel-segment-7-color: black;
+			--wheel-segment-8-bg: var(--orange-3);
+			--wheel-segment-8-color: black;
+			--wheel-segment-9-bg: var(--cyan-2);
+			--wheel-segment-9-color: black;
+			--wheel-segment-10-bg: var(--jungle-2);
+			--wheel-segment-10-color: black;
+			--wheel-segment-11-bg: var(--indigo-2);
+			--wheel-segment-11-color: black;
+			--wheel-segment-12-bg: var(--purple-2);
+			--wheel-segment-12-color: black;
+
 			color-scheme: light;
 		}
 
@@ -461,6 +535,40 @@
 			/* Card */
 			--card-image-radius: var(--border-radius);
 			--card-image-shape: square;
+
+			/* Wheel of fortune */
+			--wheel-stroke: Mark;
+			--wheel-fill: MarkText;
+
+			--wheel-spinner-fill: Mark;
+			--wheel-spinner-fill-shadow: color-mix(in srgb, Mark, black);
+
+			--wheel-segment-stroke: Mark;
+
+			--wheel-segment-1-bg: Canvas;
+			--wheel-segment-1-color: CanvasText;
+			--wheel-segment-2-bg: Canvas;
+			--wheel-segment-2-color: CanvasText;
+			--wheel-segment-3-bg: Canvas;
+			--wheel-segment-3-color: CanvasText;
+			--wheel-segment-4-bg: Canvas;
+			--wheel-segment-4-color: CanvasText;
+			--wheel-segment-5-bg: Canvas;
+			--wheel-segment-5-color: CanvasText;
+			--wheel-segment-6-bg: Canvas;
+			--wheel-segment-6-color: CanvasText;
+			--wheel-segment-7-bg: Canvas;
+			--wheel-segment-7-color: CanvasText;
+			--wheel-segment-8-bg: Canvas;
+			--wheel-segment-8-color: CanvasText;
+			--wheel-segment-9-bg: Canvas;
+			--wheel-segment-9-color: CanvasText;
+			--wheel-segment-10-bg: Canvas;
+			--wheel-segment-10-color: CanvasText;
+			--wheel-segment-11-bg: Canvas;
+			--wheel-segment-11-color: CanvasText;
+			--wheel-segment-12-bg: Canvas;
+			--wheel-segment-12-color: CanvasText;
 		}
 
 		code-wrapper pre {

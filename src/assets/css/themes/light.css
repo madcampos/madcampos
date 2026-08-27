@@ -81,6 +81,36 @@
 		--note-debug-bg: var(--violet-2);
 		--note-debug-color: var(--purple-12);
 
+		/* Wheel of fortune */
+		--list-highlight-bg: var(--yellow-9);
+		--list-highlight-color: black;
+		--wheel-highlight-filter: brightness(1.8) saturate(1.8) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+
+		--wheel-segment-1-bg: var(--red-4);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--lime-4);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--choco-4);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--blue-3);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--yellow-4);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--teal-3);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--pink-5);
+		--wheel-segment-7-color: black;
+		--wheel-segment-8-bg: var(--orange-5);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--cyan-4);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--jungle-4);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--indigo-3);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--purple-6);
+		--wheel-segment-12-color: black;
+
 		/* Global settings */
 		color-scheme: light;
 	}

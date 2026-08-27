@@ -208,6 +208,42 @@
 		--card-image-radius: var(--border-radius);
 		--card-image-shape: square;
 
+		/* Wheel of fortune */
+		--wheel-stroke: var(--accent-color);
+		--wheel-fill: var(--surface-1);
+
+		--wheel-spinner-fill: var(--accent-color);
+		--wheel-spinner-fill-shadow: color-mix(in srgb, var(--accent-color), transparent);
+
+		--list-highlight-bg: black;
+		--list-highlight-color: white;
+		--wheel-highlight-filter: invert(1);
+
+		--wheel-segment-1-bg: var(--yellow-0);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--orange-2);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--yellow-4);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--yellow-6);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--yellow-8);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--yellow-12);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--orange-0);
+		--wheel-segment-7-color: black;
+		--wheel-segment-8-bg: var(--orange-2);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--orange-4);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--orange-6);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--orange-8);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--orange-10);
+		--wheel-segment-12-color: black;
+
 		/* Fonts */
 		--headers-font-family: 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace;
 		--text-font-family: 'Selawik Variable', 'Selawik', 'Segoe UI', 'Roboto', 'Open Sans', 'Arial', system-ui, sans-serif;

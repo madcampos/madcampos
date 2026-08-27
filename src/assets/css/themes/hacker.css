@@ -206,6 +206,44 @@
 		/* Card */
 		--card-image-radius: var(--border-radius);
 
+		/* Wheel of fortune */
+		--wheel-stroke: var(--lime-10);
+		--wheel-fill: var(--lime-6);
+
+		--wheel-spinner-fill: var(--lime-8);
+		--wheel-spinner-fill-shadow: color-mix(in srgb, var(--lime-10), transparent);
+
+		--wheel-segment-stroke: var(--wheel-fill);
+
+		--list-highlight-bg: black;
+		--list-highlight-color: var(--accent-color);
+		--wheel-highlight-filter: brightness(1.7) saturate(1.7) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--lime-6), transparent));
+
+		--wheel-segment-1-bg: var(--lime-0);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--lime-2);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--lime-4);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--lime-6);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--lime-8);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--lime-10);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--lime-12);
+		--wheel-segment-7-color: white;
+		--wheel-segment-8-bg: var(--camo-0);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--camo-2);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--camo-4);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--camo-6);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--camo-8);
+		--wheel-segment-12-color: black;
+
 		/* Icons */
 		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='lime' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
 		--hr-decoration-icon: none;

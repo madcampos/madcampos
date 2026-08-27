@@ -278,6 +278,44 @@
 		--card-image-radius: var(--radius-round);
 		--card-image-shape: round;
 
+		/* Wheel of fortune */
+		--wheel-stroke: var(--accent-0);
+		--wheel-fill: var(--accent-4);
+
+		--wheel-spinner-fill: var(--accent-0);
+		--wheel-spinner-fill-shadow: color-mix(in srgb, var(--accent-4), transparent);
+
+		--wheel-segment-stroke: var(--wheel-fill);
+
+		--list-highlight-bg: white;
+		--list-highlight-color: var(--accent-12);
+		--wheel-highlight-filter: brightness(1.8) saturate(1.8) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--accent-12), transparent));
+
+		--wheel-segment-1-bg: var(--red-2);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--green-2);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--choco-2);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--blue-2);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--orange-2);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--cyan-2);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--pink-2);
+		--wheel-segment-7-color: black;
+		--wheel-segment-8-bg: var(--yellow-2);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--camo-2);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--lime-2);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--indigo-2);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--purple-2);
+		--wheel-segment-12-color: black;
+
 		/* Fonts */
 		--headers-font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
 		--text-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
