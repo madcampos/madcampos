@@ -121,9 +121,12 @@ export class WheelOffortune extends HTMLElement implements CustomElement {
 		const largeArcFlag = angleStep > 180 ? 1 : 0;
 		const pathData = `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
 
-		const textAngle = startAngle + angleStep / 2;
-		const textX = centerX + radius * 0.7 * Math.cos((Math.PI * (textAngle - 90)) / 180);
-		const textY = centerY + radius * 0.7 * Math.sin((Math.PI * (textAngle - 90)) / 180);
+		const textInset = total > 7 ? 0.6 : 0.7;
+		const textRotation = total > 7 ? 90 : 0;
+		const textPositionRotation = total > 7 ? 0 : 90;
+		const textAngle = (startAngle + angleStep / 2) - textRotation;
+		const textX = centerX + radius * textInset * Math.cos((Math.PI * (textAngle - textPositionRotation)) / 180);
+		const textY = centerY + radius * textInset * Math.sin((Math.PI * (textAngle - textPositionRotation)) / 180);
 
 		return /* svg */ `
 			<g class="wheel-segment">
