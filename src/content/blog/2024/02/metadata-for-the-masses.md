@@ -46,7 +46,7 @@ To give another example, my home page without metadata looks like this:
 > - [Talks I've given](http://localhost:3000/talks)
 > - [GitHub](https://github.com/madcampos)
 > - [CodePen](https://codepen.io/madcampos)
-> - [LinkedIn](https://www.linkedin.com/in/madcampos/)
+> - [LinkedIn](https://linkedin.com/in/madcampos/)
 
 For us _humans_, this is fairly easy to understand, but for a _computer_ it is just a bunch of scrambled zeroes and ones. And no, AI doesn't "understand" you, it is just a super fancy auto complete.
 
@@ -117,7 +117,7 @@ But for completeness sake, here are some links on documentation for other proper
 
 - [Twitter](https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started)
 - [Pinterest](https://developers.pinterest.com/docs/rich-pins/rich-pins/)
-- [LinkedIn](https://www.linkedin.com/post-inspector/)
+- [LinkedIn](https://linkedin.com/post-inspector/)
 
 ## Yet another _schema_
 
@@ -173,7 +173,7 @@ Here is the HTML, now with Microdata properties (`itemprop`, `itemscope`, and `i
 					<ul>
 						<li><a href="https://github.com/madcampos" itemprop="sameAs">GitHub</a></li>
 						<li><a href="https://codepen.io/madcampos" itemprop="sameAs">CodePen</a></li>
-						<li><a href="https://www.linkedin.com/in/madcampos/" itemprop="sameAs">LinkedIn</a></li>
+						<li><a href="https://linkedin.com/in/madcampos/" itemprop="sameAs">LinkedIn</a></li>
 						<li><a href="/projects">Project Highlights</a></li>
 						<li><a href="/talks">Talks I've given</a></li>
 						<li><a href="/blog" rel="noreferrer noopener">My Blog</a></li>

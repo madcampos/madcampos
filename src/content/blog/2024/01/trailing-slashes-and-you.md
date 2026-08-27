@@ -13,7 +13,7 @@ tags:
   - Web Development
 ---
 
-As most interesting quests start, I was reading the chat on the [creatures.dev](https://creatures.dev) Discord server and people where talking about site maps.
+As most interesting quests start, I was reading the chat on the [creatures.dev](http://web.archive.org/web/20240602051745/https://creatures.dev/) Discord server and people where talking about site maps.
 
 The problem arose from a comment that removing trailing slashes (e.g.: the last `/` in `https://example.com/`) caused the astro plugin for generating site maps to fail.
 

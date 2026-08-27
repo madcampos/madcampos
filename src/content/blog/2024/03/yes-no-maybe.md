@@ -25,7 +25,7 @@ Now that is not something we need everyday and can be tricky to work with. But I
 
 ## "Lifting the state up"
 
-React's response when you have to access data from a child component is to ["lift the state up"](https://react.dev/learn/sharing-State-between-components). But that can become problematic really fast for two reasons:
+React's response when you have to access data from a child component is to ["lift the state up"](https://react.dev/learn/sharing-state-between-components). But that can become problematic really fast for two reasons:
 
 1. When you lift the state up, you are basically telling react that it should re-render everything from that component down, even if there is no state change on the children and you are only _reading_ some data and not _writing_ anything[^1].
 2. Your components start to become tightly coupled together or full of indirections. Instead of having the component being self contained, it _has to_ depend on the parent or expose a bunch of handlers to manipulate it and be generic.

@@ -23,7 +23,7 @@ relatedPosts:
   - metadata-for-the-masses
 ---
 
-On my previous post about metadata, I got a comment from [Jack Zhou](https://www.linkedin.com/in/haopengzhou/) asking to expand on how that applies to dynamic content and frameworks like react and decided to cover this topic here.
+On my previous post about metadata, I got a comment from [Jack Zhou](https://linkedin.com/in/haopengzhou/) asking to expand on how that applies to dynamic content and frameworks like react and decided to cover this topic here.
 
 Well, in short meta tags don't work with react. Good night and thank you for coming to my TED talk.
 

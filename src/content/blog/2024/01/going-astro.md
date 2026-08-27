@@ -71,7 +71,7 @@ I'm _extremely_ particular about my XMLs, [RSS](/blog/2023/06/xml-is-not-dead/) 
 
 The problem with that is that the RSS specification requires that you specify the image size in bytes. And as much as Astro is helpful it doesn't provide a way to get the image size at build time.
 
-A huge shout-out to the [creatures.dev](https://creatures.dev) community, they are amazing and proposed a solution: make a [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) call to get the image and use the [`Content-Length` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length) to get the size in bytes of the image.
+A huge shout-out to the [creatures.dev](http://web.archive.org/web/20240602051745/https://creatures.dev/) community, they are amazing and proposed a solution: make a [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) call to get the image and use the [`Content-Length` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length) to get the size in bytes of the image.
 
 That didn't work. `fetch` was trying to get the image from an online server and it was returning a `404 - Not Found` error because the image was not online yet.
 
