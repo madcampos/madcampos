@@ -324,6 +324,14 @@
 		[data-theme] { display: none; }
 	}
 
+	:is([data-theme='y2k'] themed-image, themed-image[data-theme='y2k']) {
+		:has(img[data-theme-image='y2k']) img {
+			display: none;
+
+			&[data-theme-image='y2k'] { display: block; }
+		}
+	}
+
 	[data-theme='y2k'] m-logo,
 	m-logo[data-theme='y2k'] {
 		[data-theme] { visibility: hidden; }
@@ -357,12 +365,6 @@
 			fill-opacity: 0.5;
 			transform: translate(2.5rem, 2.5rem);
 		}
-	}
-
-	:is([data-theme='y2k'] m-card, m-card[data-theme='y2k']).project-card article > picture img {
-		display: none;
-
-		&[data-theme-image='y2k'] { display: block; }
 	}
 
 	:is([data-theme='y2k'] code-wrapper, code-wrapper[data-theme='y2k']) pre {

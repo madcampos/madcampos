@@ -3,6 +3,7 @@ import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import avatar from '../../../public/assets/images/me.jpg';
+import { inlineMarkdownStrip } from '../../utils/markdown';
 import { listAllPosts, listPostsByTag } from '../../utils/post.ts';
 import { listAllProjects } from '../../utils/projects.ts';
 import Card from '../Card/Card.astro';
@@ -119,6 +120,8 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 	<section>
 		<h3>Card</h3>
 
+		<p>Project card:</p>
+
 		<Card
 			url={project.data.url}
 			draft={project.data.draft}
@@ -200,6 +203,51 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 					</ul>
 				</tag-list>
 			</details>
+		</Card>
+
+		<p>Post card:</p>
+
+		<Card
+			url={`/blog/${post.url}`}
+			itemtype="https://schema.org/BlogPosting"
+			draft={post.data.draft}
+			image={post.data.image}
+			imageAlt={post.data.imageAlt ?? ''}
+		>
+			<h2 slot="title" itemprop="name">
+				<Fragment set:html={markdown.inline(post.data.title)} />
+			</h2>
+			<small slot="subtitle">
+				<time
+					data-relative-time
+					data-pagefind-sort="date[datetime]"
+					datetime={post.data.createdAt.toISOString()}
+				>{formatter.format(post.data.createdAt)}</time>
+			</small>
+
+			<Fragment set:html={markdown.inline(post.data.summary)} />
+
+			<a slot="links" href={`/blog/${post.url}`}>
+				<span>Read more</span>
+				<sr-only>about "{inlineMarkdownStrip(post.data.title)}"</sr-only>
+				<span>...</span>
+			</a>
+			{post.data.tags && post.data.tags.length > 0 && (
+				<details slot="footer">
+					<summary>Tags</summary>
+					<tag-list>
+						<ul>
+							{post.data.tags.map((tag) => (
+								<li class="p-category">
+									<tag-item>
+										<a href={`/blog/tags/${tag}/`}>{tag}</a>
+									</tag-item>
+								</li>
+							))}
+						</ul>
+					</tag-list>
+				</details>
+			)}
 		</Card>
 	</section>
 

@@ -274,15 +274,17 @@
 	:is([data-theme='hacker'] m-card, m-card[data-theme='hacker']) {
 		border: solid currentColor var(--border-size);
 
-		&.project-card article > picture {
+		&.project-card article themed-image picture {
 			position: relative;
 			border: solid currentColor var(--border-size);
+		}
+	}
 
-			img {
-				display: none;
+	:is([data-theme='hacker'] themed-image, themed-image[data-theme='hacker']) {
+		:has(img[data-theme-image='hacker']) img {
+			display: none;
 
-				&[data-theme-image='hacker'] { display: block; }
-			}
+			&[data-theme-image='hacker'] { display: block; }
 		}
 	}
 

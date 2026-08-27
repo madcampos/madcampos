@@ -1,0 +1,47 @@
+---
+import './themed-image.css';
+import { Image } from 'astro:assets';
+import { inlineMarkdownStrip } from '../../utils/markdown.ts';
+
+interface Props {
+	image: ImageMetadata;
+	imageAlt?: string;
+	themeImages?: Record<string, ImageMetadata>;
+}
+
+const { image, imageAlt, themeImages } = Astro.props;
+---
+<themed-image>
+	<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+		<Image
+			itemprop="contentUrl"
+			src={image}
+			alt={inlineMarkdownStrip(imageAlt ?? '')}
+			loading="lazy"
+			widths={[64, 128, 256, 512]}
+			width={256}
+			sizes={`
+				(max-width: 25rem) 128px,
+				(max-width: 40rem) 256px,
+				512px
+			`}
+		/>
+		{Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
+			<Image
+				itemprop="contentUrl"
+				data-theme-image={theme}
+				src={themeImage}
+				alt={inlineMarkdownStrip(imageAlt ?? '')}
+				loading="lazy"
+				widths={[64, 128, 256, 512]}
+				width={256}
+				sizes={`
+					(max-width: 25rem) 128px,
+					(max-width: 40rem) 256px,
+					512px
+				`}
+				hidden
+			/>
+		))}
+	</picture>
+</themed-image>

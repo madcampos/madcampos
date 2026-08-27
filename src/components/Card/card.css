@@ -5,8 +5,6 @@
 		container-type: inline-size;
 
 		article {
-			--image-size: var(--size-header-2);
-
 			display: grid;
 			grid-template-rows: auto 1fr auto auto;
 			grid-template-columns: var(--image-size) 1fr;
@@ -30,8 +28,6 @@
 					'content'
 					'links'
 					'footer';
-
-				picture { display: none; }
 			}
 
 			header {
@@ -62,22 +58,9 @@
 				}
 			}
 
-			picture {
-				display: block;
+			themed-image picture {
 				grid-area: picture;
 				place-self: start center;
-				border-radius: var(--border-radius);
-
-				img {
-					inline-size: 100%;
-					block-size: 100%;
-					object-fit: contain;
-					object-position: center;
-					max-inline-size: var(--image-size);
-					max-block-size: var(--image-size);
-				}
-
-				:where(img[data-theme-image]) { display: none; }
 
 				@container card (max-width: 30rem) { align-self: center; }
 			}

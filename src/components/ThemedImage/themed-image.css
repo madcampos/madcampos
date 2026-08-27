@@ -1,0 +1,23 @@
+@layer components {
+	themed-image {
+		--image-size: var(--size-header-2);
+
+		display: contents;
+
+		picture {
+			display: block;
+			border-radius: var(--border-radius);
+
+			img {
+				inline-size: 100%;
+				block-size: 100%;
+				object-fit: contain;
+				object-position: center;
+				max-inline-size: var(--image-size);
+				max-block-size: var(--image-size);
+			}
+
+			:where(img[data-theme-image]) { display: none; }
+		}
+	}
+}

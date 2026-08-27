@@ -407,12 +407,6 @@
 		&.project-card picture {
 			position: relative;
 
-			img {
-				display: none;
-
-				&[data-theme-image='uwu'] { display: block; }
-			}
-
 			&::after {
 				display: block;
 				position: absolute;
@@ -426,6 +420,14 @@
 				pointer-events: none;
 				content: '';
 			}
+		}
+	}
+
+	:is([data-theme='uwu'] themed-image, themed-image[data-theme='uwu']) {
+		:has(img[data-theme-image='uwu']) img {
+			display: none;
+
+			&[data-theme-image='uwu'] { display: block; }
 		}
 	}
 

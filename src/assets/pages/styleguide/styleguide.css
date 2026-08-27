@@ -3,6 +3,8 @@
 @import url('../../../components/RelatedPosts/related-posts.css');
 @import url('../../../components/ScrollToTop/scroll-to-top.css');
 
+@import url('../../pages/projects/projects.css');
+
 @layer pages {
 	section > h3:first-child { color: var(--accent-color); }
 	form figure output {

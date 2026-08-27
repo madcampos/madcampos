@@ -1,7 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import { inlineMarkdownStrip } from '../../utils/markdown.ts';
 import './card.css';
+import ThemedImage from '../ThemedImage/ThemedImage.astro';
 
 interface Props {
 	itemtype: string;
@@ -23,38 +22,11 @@ const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro
 		</template>
 
 		{image && (
-			<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-				<Image
-					itemprop="contentUrl"
-					src={image}
-					alt={inlineMarkdownStrip(imageAlt ?? '')}
-					loading="lazy"
-					widths={[64, 128, 256, 512]}
-					width={256}
-					sizes={`
-							(max-width: 25rem) 128px,
-							(max-width: 40rem) 256px,
-							512px
-						`}
-				/>
-				{Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
-					<Image
-						itemprop="contentUrl"
-						data-theme-image={theme}
-						src={themeImage}
-						alt={inlineMarkdownStrip(imageAlt ?? '')}
-						loading="lazy"
-						widths={[64, 128, 256, 512]}
-						width={256}
-						sizes={`
-									(max-width: 25rem) 128px,
-									(max-width: 40rem) 256px,
-									512px
-								`}
-						hidden
-					/>
-				))}
-			</picture>
+			<ThemedImage
+				{image}
+				{imageAlt}
+				{themeImages}
+			/>
 		)}
 
 		<header>
