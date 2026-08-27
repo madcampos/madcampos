@@ -12,7 +12,7 @@ import {
 	transformerRemoveNotationEscape,
 	transformerRenderWhitespace
 } from '@shikijs/transformers';
-import { transformerTwoslash } from '@shikijs/twoslash';
+// import { transformerTwoslash } from '@shikijs/twoslash';
 import astroIcon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -102,10 +102,10 @@ export default defineConfig({
 			wrap: true,
 			transformers: [
 				transformerRemoveNotationEscape(),
-				transformerTwoslash({
-					explicitTrigger: true,
-					rendererRich: { errorRendering: 'hover' }
-				}),
+				// transformerTwoslash({
+				// 	explicitTrigger: true,
+				// 	rendererRich: { errorRendering: 'hover' }
+				// }),
 				transformerNotationDiff({ matchAlgorithm: 'v3' }),
 				transformerNotationHighlight({ matchAlgorithm: 'v3' }),
 				transformerNotationWordHighlight({ matchAlgorithm: 'v3' }),
