@@ -52,7 +52,7 @@ const optimizedImage = await getImage({
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="text-scale" content="scale" />
 
-	<title>{title}</title>
+	<title itemprop="name">{title}</title>
 
 	<!-- Prefetch speculation rules -->
 	<!-- dprint-ignore -->
@@ -80,49 +80,34 @@ const optimizedImage = await getImage({
 	<link rel="author" href="/humans.txt" />
 	<link rel="indieweb" href="/indieweb.txt" />
 	<link rel="sitemap" href="/sitemap.xml" />
-	<link rel="alternate" type="application/atom+xml" href="/blog/feed.atom.xml" title="Marco Campos' Blog" />
-	<link rel="alternate" type="application/rss+xml" href="/blog/feed.rss.xml" title="Marco Campos' Blog" />
+	<link rel="alternate" type="application/atom+xml" href="/blog/feed.atom.xml" title="Marco Campos' Blog Feed (Atom)" />
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed.rss.xml" title="Marco Campos' Blog Feed (RSS)" />
 
 	{isBlogPostUrl && (
 		<link rel="alternate" type="application/json+oembed" href={`${Astro.url.href}oembed.json`} title="oEmbed (JSON)" />
 		<link rel="alternate" type="text/xml+oembed" href={`${Astro.url.href}oembed.xml`} title="oEmbed (XML)" />
-		<link rel="alternate" type="text/plain" href={`${Astro.url.href}plain-text.txt`} title="Plain Text Version" />
-		<link rel="alternate" type="text/markdown" href={`${Astro.url.href}markdown.md`} title="Markdown Version" />
+		<link rel="alternate" type="text/plain" href={`${Astro.url.href}plain-text.txt`} title="Plain Text" />
+		<link rel="alternate" type="text/markdown" href={`${Astro.url.href}markdown.md`} title="Markdown" />
 	)}
 
 	<!-- App Metadata -->
-	<link rel="icon" href="/assets/pwa/icons/icon.svg" sizes="any" type="image/svg+xml" />
-	<link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />
+	<link rel="icon" href="/assets/pwa/icons/icon.svg" type="image/svg+xml" />
 	<link rel="manifest" href="/site.webmanifest" />
 	<link rel="license" href="/license/" />
 	<meta name="mobile-web-app-capable" content="yes" />
 
 	<!-- Social metadata -->
-	<meta property="og:site_name" content="Madcampos" />
-	<meta name="twitter:site" content="@madcampos" />
-	<meta property="og:title" name="twitter:title" itemprop="name" content={title} />
-
-	<meta property="og:type" content="website" />
-	<meta name="twitter:card" content="summary_large_image" />
-
-	<meta property="og:locale" itemprop="inLanguage" content="en_US" />
 	<meta property="og:url" itemprop="url" content={Astro.url.href} />
-
-	<meta property="og:description" name="description" itemprop="abstract" content={description} />
-	<meta name="twitter:description" content={description} />
+	<meta name="description" itemprop="abstract" content={description} />
 
 	<meta
 		property="og:image"
-		name="twitter:image"
 		itemprop="image"
 		data-pagefind-meta="image[content]"
 		content={new URL(optimizedImage.src, Astro.site?.href).href}
 	/>
-	<meta property="og:image:width" content="1024" />
-	<meta property="og:image:height" content="1024" />
 	<meta
 		property="og:image:alt"
-		name="twitter:image:alt"
 		data-pagefind-meta="image_alt[content]"
 		content={imageAlt ?? 'The letter "m" on a monospaced font, in blue, between curly braces.'}
 	/>
@@ -130,10 +115,10 @@ const optimizedImage = await getImage({
 	<meta property="article:author" name="author" content="Marco Campos" />
 	<meta name="twitter:creator" content="@madcampos" />
 
+	<!-- Social Media Privacy -->
 	<meta name="twitter:dnt" content="on" />
 	<meta name="twitter:widgets:csp" content="on" />
 	<meta name="twitter:widgets:autoload" content="off" />
-	<meta name="twitter:widgets:theme" content="dark" />
 
 	<meta
 		name="keywords"
