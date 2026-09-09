@@ -68,8 +68,20 @@ interface WaybackResponse {
 }
 
 interface DeadLink {
+	isDead: boolean;
 	originalUrl: string;
 	archivedUrl?: string;
+	sourceFile: string;
+}
+
+interface CachedLiveLink {
+	isDead: false;
+	sourceFile: string;
+}
+
+interface CachedDeadLink {
+	isDead: true;
+	archiveUrl?: string;
 	sourceFile: string;
 }
 
@@ -93,8 +105,7 @@ const DOMAIN_BLOCKLIST = [
 const LINK_TIMEOUT_MS = 10 * 1000;
 const ARCHIVE_TIMEOUT_MS = 15 * 1000;
 const USER_AGENT = 'madcampos-dead-link-checker/1.0 (+https://madcampos.dev/)';
-const linkCache = new Map<string, boolean>();
-const archiveCache = new Map<string, string | undefined>();
+const linksCache = new Map<string, CachedLiveLink | CachedDeadLink>();
 
 function isAllowedUrl(url: string) {
 	try {
@@ -129,10 +140,11 @@ async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: numbe
 	}
 }
 
-async function isDeadLink(url: string) {
-	if (linkCache.has(url)) {
-		// oxlint-disable-next-line typescript/no-non-null-assertion
-		return linkCache.get(url)!;
+async function resolveLink(url: string, sourceFile: string) {
+	const cachedLink = linksCache.get(url);
+
+	if (cachedLink) {
+		return cachedLink;
 	}
 
 	try {
@@ -140,125 +152,118 @@ async function isDeadLink(url: string) {
 		const isHeadHealthy = headResponse.ok && headResponse.status < 400;
 
 		if (isHeadHealthy) {
-			linkCache.set(url, false);
+			const healthLink: CachedLiveLink = { isDead: false, sourceFile };
 
-			return false;
+			linksCache.set(url, healthLink);
+
+			return healthLink;
 		}
 
+		// INFO: retry with a get request
 		if ([403, 405, 429].includes(headResponse.status)) {
 			const getResponse = await fetchWithTimeout(url, { method: 'GET', redirect: 'follow' }, LINK_TIMEOUT_MS);
-			const isLive = getResponse.ok && getResponse.status < 400;
+			const linkStatus: CachedDeadLink | CachedLiveLink = {
+				isDead: getResponse.ok && getResponse.status < 400,
+				sourceFile
+			};
 
-			linkCache.set(url, !isLive);
+			linksCache.set(url, linkStatus);
 
-			return !isLive;
+			return linkStatus;
 		}
 
-		linkCache.set(url, true);
-
-		return true;
-	} catch {
-		linkCache.set(url, true);
-
-		return true;
-	}
-}
-
-async function getLatestArchiveUrl(url: string) {
-	if (archiveCache.has(url)) {
-		return archiveCache.get(url);
-	}
-
-	try {
-		const response = await fetchWithTimeout(
+		const archiveResponse = await fetchWithTimeout(
 			`https://archive.org/wayback/available?url=${encodeURIComponent(url)}`,
 			{ method: 'GET', redirect: 'follow' },
 			ARCHIVE_TIMEOUT_MS
 		);
 
-		if (!response.ok) {
-			archiveCache.set(url, undefined);
+		if (!archiveResponse.ok) {
+			const deadLink: CachedDeadLink = { isDead: true, sourceFile };
+			linksCache.set(url, deadLink);
 
-			return undefined;
+			return deadLink;
 		}
 
-		const payload: WaybackResponse = await response.json();
+		const payload: WaybackResponse = await archiveResponse.json();
 		const archiveUrl = payload.archived_snapshots?.closest?.url;
 
-		archiveCache.set(url, archiveUrl);
+		const archivedLink: CachedDeadLink = { isDead: true, archiveUrl, sourceFile };
+		linksCache.set(url, archivedLink);
 
-		return archiveUrl ?? undefined;
+		return archivedLink;
 	} catch {
-		archiveCache.set(url, undefined);
+		const deadLink: CachedDeadLink = { isDead: true, sourceFile };
+		linksCache.set(url, deadLink);
 
-		return undefined;
+		return deadLink;
+	}
+}
+try {
+	const existingLinks = await fs.readFile(options.output, 'utf8');
+	const savedFile: DeadLink[] = JSON.parse(existingLinks);
+
+	for (const deadLink of savedFile) {
+		linksCache.set(deadLink.originalUrl, {
+			isDead: deadLink.isDead,
+			archiveUrl: deadLink.archivedUrl,
+			sourceFile: deadLink.sourceFile
+		});
+	}
+} catch {
+	// NOOP
+}
+
+const htmlFiles: string[] = [];
+
+const entries = await fs.readdir(options.source, { withFileTypes: true });
+while (entries.length > 0) {
+	// oxlint-disable-next-line typescript/no-non-null-assertion
+	const entry = entries.pop()!;
+	const fullPath = path.join(options.source, entry.name);
+
+	if (entry.isDirectory()) {
+		entries.push(...await fs.readdir(options.source, { withFileTypes: true }));
+		continue;
+	}
+
+	if (entry.isFile() && entry.name.endsWith('.html')) {
+		htmlFiles.push(fullPath);
 	}
 }
 
-async function findDeadLinksInHtml(html: string, filePath: string) {
+const deadLinks: DeadLink[] = [];
+for (const file of htmlFiles) {
+	const source = await fs.readFile(file, 'utf8');
 	const hrefPattern = /href\s*=\s*(['"])(https?:\/\/[^'"\s]+)\1/giu;
-	const matches = [...html.matchAll(hrefPattern)];
+	const matches = [...source.matchAll(hrefPattern)];
 
 	if (matches.length === 0) {
-		return [];
+		continue;
 	}
 
-	const links: DeadLink[] = [];
 	for (const match of matches) {
 		const originalUrl = match[2];
 		if (!originalUrl || !isAllowedUrl(originalUrl)) {
 			continue;
 		}
 
-		if (!(await isDeadLink(originalUrl))) {
-			continue;
-		}
+		const resolvedLink = await resolveLink(originalUrl, file);
 
-		const archivedUrl = await getLatestArchiveUrl(originalUrl);
-
-		links.push({
+		deadLinks.push({
+			isDead: resolvedLink.isDead,
 			originalUrl,
-			archivedUrl,
-			sourceFile: filePath
+			archivedUrl: resolvedLink.isDead ? resolvedLink.archiveUrl : undefined,
+			sourceFile: file
 		});
 	}
-
-	return links;
-}
-
-async function findHtmlFiles(directory: string): Promise<string[]> {
-	const entries = await fs.readdir(directory, { withFileTypes: true });
-	const files: string[] = [];
-
-	for (const entry of entries) {
-		const fullPath = path.join(directory, entry.name);
-
-		if (entry.isDirectory()) {
-			files.push(...await findHtmlFiles(fullPath));
-			continue;
-		}
-
-		if (entry.isFile() && entry.name.endsWith('.html')) {
-			files.push(fullPath);
-		}
-	}
-
-	return files;
-}
-
-const htmlFiles = await findHtmlFiles(options.source);
-
-const deadLinks: DeadLink[] = [];
-for (const file of htmlFiles) {
-	const source = await fs.readFile(file, 'utf8');
-
-	deadLinks.push(...await findDeadLinksInHtml(source, file));
 }
 
 try {
 	const deadLinksText = JSON.stringify(deadLinks, null, '\t');
 	await writeFile(options.output, deadLinksText, { encoding: 'utf8' });
 
+	// oxlint-disable-next-line no-console
 	console.log(`${styleText('cyanBright', '[dead-link-check]')} Dead links list saved to: ${options.output}`);
 	process.exit(0);
 } catch (err) {
