@@ -491,6 +491,18 @@
 					"title": "You might not need… a service worker",
 					"description": "Opinion piece on _why_ you might not need a service worker for some things.",
 					"type": "article"
+				},
+				{
+					"url": "https://kciter.so/posts/the-expensive-main-thread/en/",
+					"title": "The Browser's Main Thread Is Expensive",
+					"description": "Intro to JS execution on the main thread and expensive work, as well as techniques to mitigate expensive blocking work.",
+					"type": "reference"
+				},
+				{
+					"url": "https://blog.gaborkoos.com/posts/2026-09-08-Half-Past-Fetch/",
+					"title": "Half Past Fetch",
+					"description": "When a fetch is awaited, does the request stop? What information you have available at that time?",
+					"type": "article"
 				}
 			]
 		},
@@ -581,6 +593,12 @@
 					"title": "Name that UI",
 					"description": "Reference for some UI patterns.",
 					"type": "website"
+				},
+				{
+					"url": "https://contemporary-home-computing.org/prof-dr-style/",
+					"title": "Prof. Dr. Style",
+					"description": "Analysis of old style web design, and it's preservation in recent history. **Note**: the article is a few years old, so some links are broken. Check them with the web archive.",
+					"type": "reference"
 				}
 			]
 		},
@@ -665,6 +683,12 @@
 					"title": "How NOT to Answer the Salary Question",
 					"description": "An article discussing how to approach the question about salary on job interviews.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.itamarnovick.com/intro-to-startup-anti-pattern-series/",
+					"title": "Intro to Startup anti-pattern Series",
+					"description": "List of \"anti-patterns\" that companies, specially startups follow.",
+					"type": "reference"
 				}
 			]
 		},
@@ -850,6 +874,12 @@
 					"url": "https://blog.helsing.ai/posts/on-comments/",
 					"title": "On Comments",
 					"description": "Comments on commenting code (pun intended).",
+					"type": "article"
+				},
+				{
+					"url": "https://jyn.dev/simple-is-not-the-same-as-small/",
+					"title": "simple is not small",
+					"description": "Explanation of the distinction between \"simple\" and \"small\" in software tools, and what they both mean.",
 					"type": "article"
 				}
 			]
@@ -1348,6 +1378,12 @@
 					"url": "https://xn--gckvb8fzb.com/the-temu-fication-of-software-digital-goods-services/",
 					"title": "The TEMU-fication of Software, Digital Goods & Services",
 					"description": "A sort of prediction of how the software market is moving to.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.hermit-tech.com/blog/ai-can-make-you-suck-faster-too",
+					"title": "AI Can Make You Suck Faster Too",
+					"description": "If you are already mediocre, AI will just exacerbate that.",
 					"type": "article"
 				}
 			]
