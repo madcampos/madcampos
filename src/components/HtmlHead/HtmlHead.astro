@@ -52,7 +52,7 @@ const optimizedImage = await getImage({
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="text-scale" content="scale" />
 
-	<title itemprop="name">{title}</title>
+	<title>{title}</title>
 
 	<!-- Prefetch speculation rules -->
 	<!-- dprint-ignore -->
@@ -91,23 +91,38 @@ const optimizedImage = await getImage({
 	)}
 
 	<!-- App Metadata -->
-	<link rel="icon" href="/assets/pwa/icons/icon.svg" type="image/svg+xml" />
+	<link rel="icon" href="/assets/pwa/icons/icon.svg" sizes="any" type="image/svg+xml" />
+	<link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />
 	<link rel="manifest" href="/site.webmanifest" />
 	<link rel="license" href="/license/" />
 	<meta name="mobile-web-app-capable" content="yes" />
 
 	<!-- Social metadata -->
+	<meta property="og:site_name" content="Madcampos" />
+	<meta name="twitter:site" content="@madcampos" />
+	<meta property="og:title" name="twitter:title" itemprop="name" content={title} />
+
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+
+	<meta property="og:locale" itemprop="inLanguage" content="en_US" />
 	<meta property="og:url" itemprop="url" content={Astro.url.href} />
-	<meta name="description" itemprop="abstract" content={description} />
+
+	<meta property="og:description" name="description" itemprop="abstract" content={description} />
+	<meta name="twitter:description" content={description} />
 
 	<meta
 		property="og:image"
+		name="twitter:image"
 		itemprop="image"
 		data-pagefind-meta="image[content]"
 		content={new URL(optimizedImage.src, Astro.site?.href).href}
 	/>
+	<meta property="og:image:width" content="1024" />
+	<meta property="og:image:height" content="1024" />
 	<meta
 		property="og:image:alt"
+		name="twitter:image:alt"
 		data-pagefind-meta="image_alt[content]"
 		content={imageAlt ?? 'The letter "m" on a monospaced font, in blue, between curly braces.'}
 	/>
@@ -119,6 +134,7 @@ const optimizedImage = await getImage({
 	<meta name="twitter:dnt" content="on" />
 	<meta name="twitter:widgets:csp" content="on" />
 	<meta name="twitter:widgets:autoload" content="off" />
+	<meta name="twitter:widgets:theme" content="dark" />
 
 	<meta
 		name="keywords"
