@@ -23,6 +23,134 @@ export type LineHeightSetting = 'medium' | 'tight' | 'wide' | 'wider';
 export type LetterSpacingSetting = 'medium' | 'tight' | 'tighter' | 'wide' | 'wider';
 export type BorderWidthSetting = 'medium' | 'none' | 'thick' | 'thicker' | 'thin';
 export type WheelOfFortuneDisplaySetting = 'list' | 'wheel';
+export interface SiteTheme {
+	id: ThemeSetting;
+	name: string;
+	description: string;
+	accessible?: boolean;
+	dual?: [ThemeSetting, ThemeSetting];
+}
+
+export const themes: SiteTheme[] = [
+	{
+		id: 'system',
+		name: 'System Default',
+		description: 'The default theme for the operating system, either light or dark.',
+		accessible: true,
+		dual: ['light', 'dark']
+	},
+	{
+		id: 'system-inverse',
+		name: 'System Reverse',
+		description: 'The default theme for the operating system, either light or dark, but with a twist: the reverse of it.',
+		accessible: true,
+		dual: ['dark', 'light']
+	},
+	{
+		id: 'light',
+		name: 'Light',
+		description: 'The default light theme.',
+		accessible: true
+	},
+	{
+		id: 'dark',
+		name: 'Dark',
+		description: 'The default dark theme.',
+		accessible: true
+	},
+	{
+		id: 'high-contrast',
+		name: 'High Contrast',
+		description: 'A high contrast dark and yellow theme.',
+		accessible: true
+	},
+	{
+		id: 'low-contrast',
+		name: 'Low Contrast',
+		description: 'A low contrast light blue theme.',
+		accessible: true
+	},
+	{
+		id: 'uwu',
+		name: 'UwU',
+		description: 'A cute anime inspired theme.'
+	},
+	{
+		id: 'y2k',
+		name: 'Y2K',
+		description: "A theme inspired on the 90's internet."
+	},
+	{
+		id: 'hacker',
+		name: 'Hacker',
+		description: 'A theme inspired by old CRT monitors.'
+	},
+	// {
+	// 	id: 'negative',
+	// 	name: 'Photo Negatve',
+	// 	description: 'A "photo negative" theme.'
+	// },
+	// {
+	// 	id: 'halloween',
+	// 	name: 'Halloween',
+	// 	description: 'A Halloween theme.'
+	// },
+	// {
+	// 	id: 'christmas',
+	// 	name: 'Christmas',
+	// 	description: 'A Christmas theme.'
+	// // },
+	// {
+	// 	id: 'cork-board',
+	// 	name: 'Cork Board',
+	// 	description: 'A theme inspired in a skeuomorphic corkboard.'
+	// },
+	// {
+	// 	id: 'mecha',
+	// 	name: 'Mecha',
+	// 	description: 'A post apocalyptic mecha theme.'
+	// },
+	{
+		id: 'random',
+		name: 'Random',
+		description: 'Randomly selects one of the other themes.'
+	},
+	{
+		id: 'accessible-random',
+		name: 'Random (Accessible)',
+		description: 'Randomly selects one of the accessible themes.',
+		accessible: true
+	}
+];
+
+export interface SiteFontSet {
+	id: FontSetting;
+	name: string;
+	description: string;
+}
+
+export const fonts: SiteFontSet[] = [
+	{
+		id: 'default',
+		name: 'Theme Default',
+		description: 'Uses the default fonts for the selected theme.'
+	},
+	{
+		id: 'browser',
+		name: 'Browser Defaults',
+		description: "The browser's default fonts."
+	},
+	{
+		id: 'legibility',
+		name: 'Increased Legibility',
+		description: 'A set of fonts that have increased general legibility.'
+	},
+	{
+		id: 'comic-sans',
+		name: 'Comic Sans',
+		description: 'The name says it all.'
+	}
+];
 
 export class SiteSettings {
 	static AVAILABLE_SETTINGS = [
@@ -93,7 +221,13 @@ export class SiteSettings {
 		}
 
 		if (value) {
-			document.documentElement.dataset[setting] = value;
+			let resolvedValue = value;
+
+			if (setting === 'theme') {
+				resolvedValue = SiteSettings.#resolveDisplayTheme(value);
+			}
+
+			document.documentElement.dataset[setting] = resolvedValue;
 			SiteSettings.#searchParams?.set(setting, value);
 		} else {
 			// oxlint-disable-next-line typescript/no-dynamic-delete
@@ -122,6 +256,20 @@ export class SiteSettings {
 		} else {
 			localStorage.removeItem(setting);
 		}
+	}
+
+	static #resolveDisplayTheme(value: string) {
+		if (value === 'random') {
+			const filteredThemes = themes.filter(({ id }) => !id.includes('random'));
+			return filteredThemes[Math.floor(Math.random() * filteredThemes.length)]?.id ?? 'system';
+		}
+
+		if (value === 'accessible-random') {
+			const filteredThemes = themes.filter(({ accessible, id }) => accessible && !id.includes('random'));
+			return filteredThemes[Math.floor(Math.random() * filteredThemes.length)]?.id ?? 'system';
+		}
+
+		return value;
 	}
 
 	static #checkCssNakedDay() {

@@ -9,141 +9,14 @@ import {
 	type LetterSpacingSetting,
 	type LineHeightSetting,
 	type ThemeSetting,
-	SiteSettings
+	fonts,
+	SiteSettings,
+	themes
 } from '../../assets/js/settings.ts';
 import type { IabEscape } from '../IabEscape/iab-escape.ts';
 import type { PWABanner } from '../PwaBanner/pwa-banner.ts';
 import textSwatchesStyles from '../TextSwatch/text-swatch.css?url';
 import settingsStyles from './site-settings.css?url';
-
-export interface SiteTheme {
-	id: ThemeSetting;
-	name: string;
-	description: string;
-	accessible?: boolean;
-	dual?: [ThemeSetting, ThemeSetting];
-}
-
-export const themes: SiteTheme[] = [
-	{
-		id: 'system',
-		name: 'System Default',
-		description: 'The default theme for the operating system, either light or dark.',
-		accessible: true,
-		dual: ['light', 'dark']
-	},
-	{
-		id: 'system-inverse',
-		name: 'System Reverse',
-		description: 'The default theme for the operating system, either light or dark, but with a twist: the reverse of it.',
-		accessible: true,
-		dual: ['dark', 'light']
-	},
-	{
-		id: 'light',
-		name: 'Light',
-		description: 'The default light theme.',
-		accessible: true
-	},
-	{
-		id: 'dark',
-		name: 'Dark',
-		description: 'The default dark theme.',
-		accessible: true
-	},
-	{
-		id: 'high-contrast',
-		name: 'High Contrast',
-		description: 'A high contrast dark and yellow theme.',
-		accessible: true
-	},
-	{
-		id: 'low-contrast',
-		name: 'Low Contrast',
-		description: 'A low contrast light blue theme.',
-		accessible: true
-	},
-	{
-		id: 'uwu',
-		name: 'UwU',
-		description: 'A cute anime inspired theme.'
-	},
-	{
-		id: 'y2k',
-		name: 'Y2K',
-		description: "A theme inspired on the 90's internet."
-	},
-	{
-		id: 'hacker',
-		name: 'Hacker',
-		description: 'A theme inspired by old CRT monitors.'
-	},
-	// {
-	// 	id: 'negative',
-	// 	name: 'Photo Negatve',
-	// 	description: 'A "photo negative" theme.'
-	// },
-	// {
-	// 	id: 'halloween',
-	// 	name: 'Halloween',
-	// 	description: 'A Halloween theme.'
-	// },
-	// {
-	// 	id: 'christmas',
-	// 	name: 'Christmas',
-	// 	description: 'A Christmas theme.'
-	// // },
-	// {
-	// 	id: 'cork-board',
-	// 	name: 'Cork Board',
-	// 	description: 'A theme inspired in a skeuomorphic corkboard.'
-	// },
-	// {
-	// 	id: 'mecha',
-	// 	name: 'Mecha',
-	// 	description: 'A post apocalyptic mecha theme.'
-	// },
-	{
-		id: 'random',
-		name: 'Random',
-		description: 'Randomly selects one of the other themes.'
-	},
-	{
-		id: 'accessible-random',
-		name: 'Random (Accessible)',
-		description: 'Randomly selects one of the accessible themes.',
-		accessible: true
-	}
-];
-
-export interface SiteFontSet {
-	id: FontSetting;
-	name: string;
-	description: string;
-}
-
-export const fonts: SiteFontSet[] = [
-	{
-		id: 'default',
-		name: 'Theme Default',
-		description: 'Uses the default fonts for the selected theme.'
-	},
-	{
-		id: 'browser',
-		name: 'Browser Defaults',
-		description: "The browser's default fonts."
-	},
-	{
-		id: 'legibility',
-		name: 'Increased Legibility',
-		description: 'A set of fonts that have increased general legibility.'
-	},
-	{
-		id: 'comic-sans',
-		name: 'Comic Sans',
-		description: 'The name says it all.'
-	}
-];
 
 export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	readonly #id = crypto.randomUUID();
@@ -429,18 +302,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		const formData = new FormData(form);
 
 		// oxlint-disable typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
-		let theme = formData.get('theme') as ThemeSetting;
-		if (theme === 'random') {
-			const filteredThemes = themes.filter(({ id }) => !id.includes('random'));
-			theme = filteredThemes[Math.floor(Math.random() * filteredThemes.length)]?.id ?? 'system';
-		} else if (theme === 'accessible-random') {
-			const filteredThemes = themes.filter(({ accessible, id }) => accessible && !id.includes('random'));
-			theme = filteredThemes[Math.floor(Math.random() * filteredThemes.length)]?.id ?? 'system';
-		}
-		// oxlint-disable-next-line typescript/no-non-null-assertion
-		this.querySelector<HTMLInputElement>(`input[name="theme"][value="${theme}"]`)!.checked = true;
-		SiteSettings.theme = theme;
-
+		SiteSettings.theme = formData.get('theme') as ThemeSetting;
 		SiteSettings.font = formData.get('font') as FontSetting;
 		SiteSettings.fontSize = formData.get('font-size') as FontSizeSetting;
 		SiteSettings.lineHeight = formData.get('line-height') as LineHeightSetting;
