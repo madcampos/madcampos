@@ -103,8 +103,8 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 						</g>
 
 						<g data-theme="light" transform="rotate(30) scale(2) translate(37.5, 22.5)" transform-origin="50% 50%">
-							<path fill="var(--surface-2)" stroke="var(--text-2)" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
-							<path fill="none" stroke="var(--text-2)" stroke-width="2" d="M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0ZM9 8.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm7-7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z" />
+							<path fill="var(--surface-2)" stroke="var(--accent-color)" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+							<path fill="none" stroke="var(--accent-color)" stroke-width="2" d="M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0ZM9 8.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm7-7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z" />
 						</g>
 					</svg>
 				`;
@@ -143,8 +143,8 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 						</g>
 
 						<g data-theme="light" transform="rotate(30) scale(2) translate(37.5, 22.5)" transform-origin="50% 50%">
-							<path fill="var(--surface-2)" stroke="var(--text-2)" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
-							<path fill="none" stroke="var(--text-2)" stroke-width="2" d="M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0ZM9 8.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm7-7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z" />
+							<path fill="var(--surface-2)" stroke="var(--accent-color)" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+							<path fill="none" stroke="var(--accent-color)" stroke-width="2" d="M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0ZM9 8.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm7-7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z" />
 						</g>
 					</svg>
 				`;
@@ -171,6 +171,14 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 						</g>
 					</svg>
 				`;
+
+				if (theme.id === 'system-inverse') {
+					themeSvg += /* svg */ `
+						<g data-theme="light" transform="rotate(30) scale(2) translate(37.5, 22.5)" transform-origin="50% 50%">
+							<path fill="none" stroke="var(--accent-color)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.5 6H11a7 7 0 0 0-7 7v1M14.5 3.5L17 6l-2.5 2.5m-7 9.5H13a7 7 0 0 0 7-7v-1M9.5 20.5L7 18l2.5-2.5" />
+						</g>
+					`;
+				}
 			}
 
 			themeList.insertAdjacentHTML(
