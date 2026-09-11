@@ -85,11 +85,11 @@ export const themes: SiteTheme[] = [
 		name: 'Hacker',
 		description: 'A theme inspired by old CRT monitors.'
 	},
-	// {
-	// 	id: 'negative',
-	// 	name: 'Photo Negatve',
-	// 	description: 'A "photo negative" theme.'
-	// },
+	{
+		id: 'negative',
+		name: 'Photo Negatve',
+		description: 'A "photo negative" theme.'
+	},
 	// {
 	// 	id: 'halloween',
 	// 	name: 'Halloween',

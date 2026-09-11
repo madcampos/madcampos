@@ -1,0 +1,132 @@
+@layer theme {
+	[data-theme='negative'] {
+		/* Theme colors */
+		--theme-color: var(--theme-6);
+		--secondary-color: var(--theme-10);
+		--accent-color: var(--accent-6);
+		--complementary-color: var(--red-7);
+
+		/* Base colors */
+		--text-1: var(--gray-11);
+		--text-2: var(--gray-9);
+		--surface-1: color-mix(in oklch increasing hue, var(--gray-0) 85%, var(--theme-0));
+		--surface-2: color-mix(in oklch increasing hue, var(--gray-1) 80%, var(--theme-2));
+		--surface-3: color-mix(in oklch increasing hue, var(--gray-6) 80%, var(--theme-6));
+		--surface-4: transparent;
+
+		/* Link colors */
+		--link-color: var(--theme-12);
+		--link-visited-color: var(--theme-10);
+		--link-hover-color: var(--accent-9);
+		--link-active-color: var(--accent-12);
+
+		/* Code colors */
+		--diff-add-color: var(--green-12);
+		--diff-add-bg: color-mix(in srgb, var(--green-3), transparent 80%);
+		--diff-remove-color: var(--red-12);
+		--diff-remove-bg: color-mix(in srgb, var(--red-3), transparent 80%);
+		--highlight-color: var(--gray-7);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-1), transparent);
+		--highlight-error-color: var(--red-12);
+		--highlight-error-bg: color-mix(in srgb, var(--red-2), transparent);
+		--highlight-warning-color: var(--yellow-7);
+		--highlight-warning-bg: color-mix(in srgb, var(--choco-7), transparent);
+		--highlight-mark-bg: var(--accent-5);
+		--highlight-mark-color: var(--gray-10);
+
+		/* Table styles */
+		--table-header-bg: var(--theme-2);
+		--table-header-color: var(--gray-10);
+		--table-header-border: var(--border-size) var(--border-style) var(--theme-color);
+
+		--table-rows-odd: var(--surface-1);
+		--table-rows-even: var(--surface-2);
+		--table-rows-hover: var(--surface-3);
+
+		--table-footer-bg: var(--theme-1);
+		--table-footer-color: var(--text-2);
+		--table-footer-border: var(--border-size) var(--border-style) var(--theme-color);
+
+		/* Button styles */
+		--button-bg: white;
+		--button-color: var(--theme-8);
+		--button-border: var(--border-style) var(--border-size) var(--theme-8);
+		--button-disabled-bg: var(--gray-5);
+		--button-disabled-color: var(--gray-7);
+		--button-disabled-border-color: var(--gray-7);
+		--button-primary-bg: var(--theme-9);
+		--button-primary-color: var(--theme-0);
+		--button-primary-border-color: var(--theme-0);
+		--button-secondary-bg: var(--surface-2);
+		--button-secondary-color: var(--secondary-color);
+		--button-secondary-border-color: var(--secondary-color);
+
+		/* Input styles */
+		--input-valid-bg: var(--green-2);
+		--input-valid-color: var(--lime-12);
+		--input-invalid-bg: var(--red-1);
+		--input-invalid-color: var(--red-12);
+
+		/* Note styles */
+		--note-success-bg: var(--green-2);
+		--note-success-color: var(--lime-12);
+		--note-error-bg: var(--red-1);
+		--note-error-color: var(--red-12);
+		--note-warning-bg: var(--yellow-2);
+		--note-warning-color: var(--brown-12);
+		--note-alert-bg: var(--teal-2);
+		--note-alert-color: var(--teal-11);
+		--note-info-bg: var(--blue-2);
+		--note-info-color: var(--blue-12);
+		--note-debug-bg: var(--violet-2);
+		--note-debug-color: var(--purple-12);
+
+		/* Wheel of fortune */
+		--list-highlight-bg: var(--yellow-9);
+		--list-highlight-color: black;
+		--wheel-highlight-filter: brightness(1.8) saturate(1.8) drop-shadow(0 0 var(--size-4) color-mix(in srgb, var(--yellow-6), transparent));
+
+		--wheel-segment-1-bg: var(--red-4);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--lime-4);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--choco-4);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--blue-3);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--yellow-4);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--teal-3);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--pink-5);
+		--wheel-segment-7-color: black;
+		--wheel-segment-8-bg: var(--orange-5);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--cyan-4);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--jungle-4);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--indigo-3);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--purple-6);
+		--wheel-segment-12-color: black;
+
+		/* Global settings */
+		color-scheme: light;
+		filter: grayscale(30%) sepia(20%) brightness(150%) contrast(90%) invert(100%);
+	}
+
+	[data-theme='negative'] dialog { filter: grayscale(30%) sepia(20%) brightness(150%) contrast(90%) invert(100%); }
+
+	html[data-theme='negative'] body {
+		padding: 1rem 2rem;
+
+		background-color: white;
+		background-image:
+			url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width='30' height='30'%3E%3Crect width='30' height='30' fill='white' /%3E%3Crect x='4' y='2' width='22' height='14' rx='4' fill='black' /%3E%3C/svg%3E"),
+			url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width='30' height='30'%3E%3Crect width='30' height='30' fill='white' /%3E%3Crect x='4' y='2' width='22' height='14' rx='4' fill='black' /%3E%3C/svg%3E");
+		background-repeat: repeat-y;
+		background-position: top left, top right;
+		background-size: 2rem;
+	}
+}
