@@ -16,21 +16,28 @@ import type { PWABanner } from '../PwaBanner/pwa-banner.ts';
 import textSwatchesStyles from '../TextSwatch/text-swatch.css?url';
 import settingsStyles from './site-settings.css?url';
 
-interface SiteTheme {
+export interface SiteTheme {
 	id: ThemeSetting;
 	name: string;
 	description: string;
 	accessible?: boolean;
-	dual?: boolean;
+	dual?: [ThemeSetting, ThemeSetting];
 }
 
-const themes: SiteTheme[] = [
+export const themes: SiteTheme[] = [
 	{
 		id: 'system',
 		name: 'System Default',
 		description: 'The default theme for the operating system, either light or dark.',
 		accessible: true,
-		dual: true
+		dual: ['light', 'dark']
+	},
+	{
+		id: 'system-inverse',
+		name: 'System Reverse',
+		description: 'The default theme for the operating system, either light or dark, but with a twist: the reverse of it.',
+		accessible: true,
+		dual: ['dark', 'light']
 	},
 	{
 		id: 'light',
@@ -70,7 +77,22 @@ const themes: SiteTheme[] = [
 		id: 'hacker',
 		name: 'Hacker',
 		description: 'A theme inspired by old CRT monitors.'
-	}
+	},
+	// {
+	// 	id: 'negative',
+	// 	name: 'Photo Negatve',
+	// 	description: 'A "photo negative" theme.'
+	// },
+	// {
+	// 	id: 'halloween',
+	// 	name: 'Halloween',
+	// 	description: 'A Halloween theme.'
+	// },
+	// {
+	// 	id: 'christmas',
+	// 	name: 'Christmas',
+	// 	description: 'A Christmas theme.'
+	// // },
 	// {
 	// 	id: 'cork-board',
 	// 	name: 'Cork Board',
@@ -81,15 +103,26 @@ const themes: SiteTheme[] = [
 	// 	name: 'Mecha',
 	// 	description: 'A post apocalyptic mecha theme.'
 	// },
+	{
+		id: 'random',
+		name: 'Random',
+		description: 'Randomly selects one of the other themes.'
+	},
+	{
+		id: 'accessible-random',
+		name: 'Random (Accessible)',
+		description: 'Randomly selects one of the accessible themes.',
+		accessible: true
+	}
 ];
 
-interface SiteFontSet {
+export interface SiteFontSet {
 	id: FontSetting;
 	name: string;
 	description: string;
 }
 
-const fonts: SiteFontSet[] = [
+export const fonts: SiteFontSet[] = [
 	{
 		id: 'default',
 		name: 'Theme Default',
@@ -130,9 +163,146 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 
 		themeList.innerHTML = '';
 		themes.forEach((theme) => {
+			const themeImageSvg = /* svg */ `
+				<rect x="5" y="2.5" rx="3" width="90" height="30" fill="var(--surface-1)" stroke="var(--surface-3)" />
+				<text x="10" y="27" font-size="30" font-family="var(--headers-font-family)" fill="var(--text-1)">Aa</text>
+
+				<circle cx="70" cy="10" r="5" fill="var(--theme-color)" />
+				<circle cx="85" cy="10" r="5" fill="var(--secondary-color)" />
+				<circle cx="70" cy="25" r="5" fill="var(--accent-color)" />
+				<circle cx="85" cy="25" r="5" fill="var(--complementary-color)" />
+
+
+				<rect x="5" y="35" rx="3" width="90" height="30" fill="var(--surface-2)" stroke="var(--surface-4)" />
+				<text x="10" y="60" font-size="30" font-family="var(--text-font-family)" fill="var(--text-2)">Aa</text>
+
+				<circle cx="70" cy="42.5" r="5" fill="var(--theme-color)" />
+				<circle cx="85" cy="42.5" r="5" fill="var(--secondary-color)" />
+				<circle cx="70" cy="57.5" r="5" fill="var(--accent-color)" />
+				<circle cx="85" cy="57.5" r="5" fill="var(--complementary-color)" />
+			`;
+
+			let themeSvg = /* svg */ `
+				<svg
+					viewBox="0 0 100 70"
+					data-theme="${theme.id}"
+					role="presentation"
+					aria-hidden="true"
+					width="100"
+					height="70"
+				>
+					${themeImageSvg}
+				</svg>
+			`;
+
+			if (theme.id === 'random') {
+				themeSvg = /* svg */ `
+					<svg
+						viewBox="0 0 100 70"
+						role="presentation"
+						aria-hidden="true"
+						width="100"
+						height="70"
+					>
+						<defs>
+							<clipPath id="theme-preview-random-mask1-${theme.id}-${this.#id}">
+								<polygon points="100,0 100,70 50,35" />
+							</clipPath>
+							<clipPath id="theme-preview-random-mask2-${theme.id}-${this.#id}">
+								<polygon points="100,70 0,70 50,35" />
+							</clipPath>
+							<clipPath id="theme-preview-random-mask3-${theme.id}-${this.#id}">
+								<polygon points="0,0 0,70 50,35" />
+							</clipPath>
+						</defs>
+
+						<g data-theme="uwu">
+							${themeImageSvg}
+						</g>
+						<g data-theme="high-contrast" clip-path="url(#theme-preview-random-mask1-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+						<g data-theme="y2k" clip-path="url(#theme-preview-random-mask2-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+						<g data-theme="light" clip-path="url(#theme-preview-random-mask3-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+
+						<g data-theme="light" transform="rotate(30) scale(2) translate(37.5, 22.5)" transform-origin="50% 50%">
+							<path fill="var(--surface-2)" stroke="var(--text-2)" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+							<path fill="none" stroke="var(--text-2)" stroke-width="2" d="M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0ZM9 8.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm7-7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z" />
+						</g>
+					</svg>
+				`;
+			} else if (theme.id === 'accessible-random') {
+				themeSvg = /* svg */ `
+					<svg
+						viewBox="0 0 100 70"
+						role="presentation"
+						aria-hidden="true"
+						width="100"
+						height="70"
+					>
+						<defs>
+							<clipPath id="theme-preview-random-mask1-${theme.id}-${this.#id}">
+								<polygon points="100,0 100,70 50,35" />
+							</clipPath>
+							<clipPath id="theme-preview-random-mask2-${theme.id}-${this.#id}">
+								<polygon points="100,70 0,70 50,35" />
+							</clipPath>
+							<clipPath id="theme-preview-random-mask3-${theme.id}-${this.#id}">
+								<polygon points="0,0 0,70 50,35" />
+							</clipPath>
+						</defs>
+
+						<g data-theme="light">
+							${themeImageSvg}
+						</g>
+						<g data-theme="dark" clip-path="url(#theme-preview-random-mask1-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+						<g data-theme="high-contrast" clip-path="url(#theme-preview-random-mask2-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+						<g data-theme="low-contrast" clip-path="url(#theme-preview-random-mask3-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+
+						<g data-theme="light" transform="rotate(30) scale(2) translate(37.5, 22.5)" transform-origin="50% 50%">
+							<path fill="var(--surface-2)" stroke="var(--text-2)" stroke-width="2" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+							<path fill="none" stroke="var(--text-2)" stroke-width="2" d="M12.5 12a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0ZM9 8.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm7-7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm0 7a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z" />
+						</g>
+					</svg>
+				`;
+			} else if (theme.dual) {
+				themeSvg += /* svg */ `
+					<svg
+						viewBox="0 0 100 70"
+						role="presentation"
+						aria-hidden="true"
+						width="100"
+						height="70"
+					>
+						<defs>
+							<clipPath id="theme-preview-dual-mask-${theme.id}-${this.#id}">
+								<polygon points="0,70 100,0 100,70" />
+							</clipPath>
+						</defs>
+
+						<g data-theme="${theme.dual[0]}">
+							${themeImageSvg}
+						</g>
+						<g data-theme="${theme.dual[1]}" clip-path="url(#theme-preview-dual-mask-${theme.id}-${this.#id})">
+							${themeImageSvg}
+						</g>
+					</svg>
+				`;
+			}
+
 			themeList.insertAdjacentHTML(
 				'beforeend',
-				`
+				/* svg */ `
 					<label for="theme-input-${theme.id}-${this.#id}">
 						<input
 							type="radio"
@@ -142,40 +312,13 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 						/>
 						<svg
 							viewBox="0 0 100 70"
-							data-theme="${theme.id === 'system' ? 'light' : theme.id}"
+							data-theme="${theme.dual ? theme.dual[0] : theme.id}"
 							role="presentation"
 							aria-hidden="true"
 							width="100"
 							height="70"
-							${theme.dual ? 'data-dual-theme' : ''}
 						>
-							<g id="theme-image-${theme.id}-${this.#id}">
-								<rect x="5" y="2.5" rx="3" width="90" height="30" fill="var(--surface-1)" stroke="var(--surface-3)" />
-								<text x="10" y="27" font-size="30" fill="var(--text-1)">Aa</text>
-
-								<circle cx="70" cy="10" r="5" fill="var(--theme-color)" />
-								<circle cx="85" cy="10" r="5" fill="var(--secondary-color)" />
-								<circle cx="70" cy="25" r="5" fill="var(--accent-color)" />
-								<circle cx="85" cy="25" r="5" fill="var(--complementary-color)" />
-
-
-								<rect x="5" y="35" rx="3" width="90" height="30" fill="var(--surface-2)" stroke="var(--surface-4)" />
-								<text x="10" y="60" font-size="30" fill="var(--text-2)">Aa</text>
-
-								<circle cx="70" cy="42.5" r="5" fill="var(--theme-color)" />
-								<circle cx="85" cy="42.5" r="5" fill="var(--secondary-color)" />
-								<circle cx="70" cy="57.5" r="5" fill="var(--accent-color)" />
-								<circle cx="85" cy="57.5" r="5" fill="var(--complementary-color)" />
-							</g>
-							<clipPath id="theme-preview-system-mask-${this.#id}">
-								<polygon points="0,70 100,0 100,70" />
-							</clipPath>
-							<use
-								data-theme="dark"
-								clip-path="url(#theme-preview-system-mask-${this.#id})"
-								href="#theme-image-${theme.id}-${this.#id}"
-								display="none"
-							/>
+							${themeSvg}
 						</svg>
 						<strong>${theme.name}</strong>
 						<small><em>${theme.description}</em></small>
@@ -286,7 +429,18 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		const formData = new FormData(form);
 
 		// oxlint-disable typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
-		SiteSettings.theme = formData.get('theme') as ThemeSetting;
+		let theme = formData.get('theme') as ThemeSetting;
+		if (theme === 'random') {
+			const filteredThemes = themes.filter(({ id }) => !id.includes('random'));
+			theme = filteredThemes[Math.floor(Math.random() * filteredThemes.length)]?.id ?? 'system';
+		} else if (theme === 'accessible-random') {
+			const filteredThemes = themes.filter(({ accessible, id }) => accessible && !id.includes('random'));
+			theme = filteredThemes[Math.floor(Math.random() * filteredThemes.length)]?.id ?? 'system';
+		}
+		// oxlint-disable-next-line typescript/no-non-null-assertion
+		this.querySelector<HTMLInputElement>(`input[name="theme"][value="${theme}"]`)!.checked = true;
+		SiteSettings.theme = theme;
+
 		SiteSettings.font = formData.get('font') as FontSetting;
 		SiteSettings.fontSize = formData.get('font-size') as FontSizeSetting;
 		SiteSettings.lineHeight = formData.get('line-height') as LineHeightSetting;

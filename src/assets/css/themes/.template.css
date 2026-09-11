@@ -335,14 +335,14 @@
 	}
 
 	:is([data-theme='TEMPLATE'] code-wrapper, code-wrapper[data-theme='TEMPLATE']) pre {
-		--code-bg: var(--shiki--bg, var(--surface-1));
-		--code-color: var(--shiki-, var(--text-1));
+		--code-bg: var(--shiki-TEMPLATE-bg, var(--surface-1));
+		--code-color: var(--shiki-TEMPLATE, var(--text-1));
 
 		span {
-			--code-color: var(--shiki-, var(--text-1));
-			--code-font-style: var(--shiki--font-style, normal);
-			--code-font-weight: var(--shiki--font-weight, normal);
-			--code-text-decoration: var(--shiki--text-decoration, none);
+			--code-color: var(--shiki-TEMPLATE, var(--text-1));
+			--code-font-style: var(--shiki-TEMPLATE-font-style, normal);
+			--code-font-weight: var(--shiki-TEMPLATE-font-weight, normal);
+			--code-text-decoration: var(--shiki-TEMPLATE-text-decoration, none);
 		}
 	}
 }

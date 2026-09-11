@@ -1,7 +1,22 @@
 // oxlint-disable id-length
 
 export type EnabledDisabledSetting = 'disabled' | 'enabled';
-export type ThemeSetting = 'dark' | 'hacker' | 'high-contrast' | 'light' | 'low-contrast' | 'system' | 'uwu' | 'y2k' | 'cork-board';
+export type ThemeSetting =
+	| 'dark'
+	| 'hacker'
+	| 'high-contrast'
+	| 'light'
+	| 'low-contrast'
+	| 'system'
+	| 'uwu'
+	| 'y2k'
+	| 'cork-board'
+	| 'negative'
+	| 'system-inverse'
+	| 'random'
+	| 'accessible-random'
+	| 'halloween'
+	| 'christmas';
 export type FontSetting = 'browser' | 'comic-sans' | 'default' | 'legibility';
 export type FontSizeSetting = 'large' | 'medium' | 'small' | 'x-large' | 'x-small';
 export type LineHeightSetting = 'medium' | 'tight' | 'wide' | 'wider';
@@ -63,7 +78,6 @@ export class SiteSettings {
 		this.#isJsNakedDay = this.#checkJsNakedDay();
 	}
 
-	// oxlint-disable-next-line typescript/no-unnecessary-type-parameters
 	static #getSetting<T extends string>(setting: typeof SiteSettings.AVAILABLE_SETTINGS[number]) {
 		if (!this.#isInitialized) {
 			SiteSettings.initializeSettings();
