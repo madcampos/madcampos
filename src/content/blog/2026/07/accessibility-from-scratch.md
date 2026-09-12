@@ -995,7 +995,7 @@ Unfortunately LLMs generate inaccessible code by default, but not all is lost, [
 
 All the glorious almost 500 lines of it!
 
-[Component code available here](/assets/documents/js/sagan-button.js)
+[Component code available here](/assets/code/sagan-button.js)
 
 [^1]: The exact reading by the screen reader is not the point here, the main problem is that emojis are read out loud by a name that is usually not intuitive.
 

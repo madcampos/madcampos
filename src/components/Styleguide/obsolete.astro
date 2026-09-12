@@ -1,10 +1,10 @@
 ---
 const framesetHtml = `
 	<frameset cols="50%, 50%" rows="50%, 50%">
-		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
-		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
-		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
-		<frame src="/assets/documents/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/test/tic-tac-toe.html"></frame>
+		<frame src="/assets/test/tic-tac-toe.html"></frame>
 	</frameset>
 `;
 ---
@@ -102,7 +102,7 @@ const framesetHtml = `
 
 		{/* @ts-expect-error - Astro considers an error using the src attribute. */}
 		<image
-			src="/assets/images/test/good-parts.webp"
+			src="/assets/test/good-parts.webp"
 			alt="A photo of two books, side by side, with the first being much bigger than the second. The books are, respectively: Javascript the Definitive Guide; and Javascript the Good Parts"
 			width="512"
 		/>
@@ -187,7 +187,7 @@ const framesetHtml = `
 
 		<p>Flash file (<a href="hhttps://ruffle.rs/" target="_blank" rel="noopener noreferrer">Ruffle</a>'s logo):</p>
 		<object
-			data="/assets/ruffle-logo.swf"
+			data="/assets/test/ruffle-logo.swf"
 			type="application/x-shockwave-flash"
 			width="320"
 			height="240"
@@ -225,7 +225,7 @@ const framesetHtml = `
 		<p>This element will make <strong><em>EVERYTHING</em></strong> after it to render as plain text.</p>
 
 		<iframe
-			src="/assets/documents/test/plaintext.html"
+			src="/assets/test/plaintext.html"
 			loading="lazy"
 			title="An example of the plaintext element"
 		></iframe>
@@ -287,7 +287,7 @@ const framesetHtml = `
 			<span><strong>Note:</strong> This element ignores HTML tags inside of it, making it error prone.</span>
 		</m-note>
 		<iframe
-			src="/assets/documents/test/xmp.html"
+			src="/assets/test/xmp.html"
 			loading="lazy"
 			title="An example of the plaintext element"
 		></iframe>
