@@ -101,21 +101,17 @@ const optimizedImage = await getImage({
 
 	<!-- Social metadata -->
 	<meta property="og:site_name" content="Madcampos" />
-	<meta name="twitter:site" content="@madcampos" />
-	<meta property="og:title" name="twitter:title" itemprop="name" content={title} />
+	<meta property="og:title" itemprop="name" content={title} />
 
 	<meta property="og:type" content="website" />
-	<meta name="twitter:card" content="summary_large_image" />
 
 	<meta property="og:locale" itemprop="inLanguage" content="en_US" />
 	<meta property="og:url" itemprop="url" content={Astro.url.href} />
 
-	<meta property="og:description" name="description" itemprop="abstract" content={description} />
-	<meta name="twitter:description" content={description} />
+	<meta name="description" property="og:description" itemprop="abstract" content={description} />
 
 	<meta
 		property="og:image"
-		name="twitter:image"
 		itemprop="image"
 		data-pagefind-meta="image[content]"
 		content={new URL(optimizedImage.src, Astro.site?.href).href}
@@ -124,19 +120,11 @@ const optimizedImage = await getImage({
 	<meta property="og:image:height" content="1024" />
 	<meta
 		property="og:image:alt"
-		name="twitter:image:alt"
 		data-pagefind-meta="image_alt[content]"
 		content={imageAlt ?? 'The letter "m" on a monospaced font, in blue, between curly braces.'}
 	/>
 
 	<meta property="article:author" name="author" content="Marco Campos" />
-	<meta name="twitter:creator" content="@madcampos" />
-
-	<!-- Social Media Privacy -->
-	<meta name="twitter:dnt" content="on" />
-	<meta name="twitter:widgets:csp" content="on" />
-	<meta name="twitter:widgets:autoload" content="off" />
-	<meta name="twitter:widgets:theme" content="dark" />
 
 	<meta
 		name="keywords"
