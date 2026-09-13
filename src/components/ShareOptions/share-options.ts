@@ -21,7 +21,7 @@ export class ShareOptions extends HTMLElement implements CustomElement {
 	}
 
 	render() {
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<sr-only>Share Options</sr-only>
 
 			<button type="button" data-share="os">

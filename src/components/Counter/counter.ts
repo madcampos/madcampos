@@ -107,10 +107,10 @@ export class HitCounter extends HTMLElement implements CustomElement {
 		// oxlint-disable-next-line typescript/no-misused-spread
 		const textSpans = [...this.#visitData.totalVisitors.toString().padStart(this.#MAX_LENGTH, '0')]
 			.slice(-this.#MAX_LENGTH)
-			.map((num) => `<tspan>${num}</tspan>`)
+			.map((num) => /* svg */ `<tspan>${num}</tspan>`)
 			.join('');
 
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<small>Page Visitors</small>
 			<svg viewBox="0 0 100 20" width="100" height="20" role="none">
 				<text

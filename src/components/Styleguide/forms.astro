@@ -557,7 +557,7 @@
 						return;
 					}
 
-					output.innerHTML = `<img alt="" src="${URL.createObjectURL(file)}" width="256" height="256" />`;
+					output.innerHTML = /* html */ `<img alt="" src="${URL.createObjectURL(file)}" width="256" height="256" />`;
 				}
 
 				input.addEventListener('input', updateOutput);
@@ -607,7 +607,7 @@
 						return;
 					}
 
-					output.innerHTML = `<img alt="" src="${URL.createObjectURL(file)}" width="256" height="256" />`;
+					output.innerHTML = /* html */ `<img alt="" src="${URL.createObjectURL(file)}" width="256" height="256" />`;
 				}
 
 				input.addEventListener('input', updateOutput);
@@ -640,7 +640,7 @@
 				</output>
 			</figure>
 			<script type="module" is:inline>
-				// oxlint-disable no-inline-comments no-implicit-globals
+				// oxlint-disable no-implicit-globals
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-dir'));
 				const output = /** @type {HTMLUListElement} */ (document.querySelector('#output-file-dir'));
 
@@ -657,7 +657,7 @@
 
 						output.insertAdjacentHTML(
 							'beforeend',
-							`<li><a href="${url}" targer="_blank">${file.webkitRelativePath}</a></li>`
+							/* html */ `<li><a href="${url}" targer="_blank">${file.webkitRelativePath}</a></li>`
 						);
 					}
 				}
@@ -706,12 +706,12 @@
 
 					for (const file of input.files) {
 						const url = URL.createObjectURL(file);
-						let result = `<li><a href="${url}" targer="_blank">${file.name ?? 'Untitled'}</a></li>`;
+						let result = /* html */ `<li><a href="${url}" targer="_blank">${file.name ?? 'Untitled'}</a></li>`;
 
 						if (file.type.startsWith('image/')) {
-							result = `<img alt="" src="${url}" width="256" height="256" />`;
+							result = /* html */ `<img alt="" src="${url}" width="256" height="256" />`;
 						} else if (file.type.startsWith('video/')) {
-							result = `<video controls playsinline src="${url}" width="256" height="256"></video>`;
+							result = /* html */ `<video controls playsinline src="${url}" width="256" height="256"></video>`;
 						}
 
 						output.insertAdjacentHTML('beforeend', result);

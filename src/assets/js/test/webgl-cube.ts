@@ -213,7 +213,7 @@ function main() {
 		return;
 	}
 
-	const vsSource = `
+	const vsSource = /* glsl */ `
         attribute vec4 aVertexPosition;
         attribute vec4 aVertexColor;
         uniform mat4 uModelViewMatrix;
@@ -226,7 +226,7 @@ function main() {
         }
     `;
 
-	const fsSource = `
+	const fsSource = /* glsl */ `
         varying lowp vec4 vColor;
         void main(void) {
             gl_FragColor = vColor;

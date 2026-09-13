@@ -226,7 +226,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 		fonts.forEach((font) => {
 			fontList.insertAdjacentHTML(
 				'beforeend',
-				`
+				/* html */ `
 					<label for="font-input-${font.id}-${this.#id}">
 						<input
 							type="radio"

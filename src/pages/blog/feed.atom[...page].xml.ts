@@ -30,11 +30,11 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 
 	const items = await Promise.all(props.page.data.map(async (post) => {
 		const image = await post.getImage();
-		const imageTag = image ? `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
+		const imageTag = image ? /* html */ `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
 
-		const postTags = post.data.tags?.map((tag) => `<category term="${tag}" />`).join('\n') ?? '';
+		const postTags = post.data.tags?.map((tag) => /* xml */ `<category term="${tag}" />`).join('\n') ?? '';
 
-		return `<entry>
+		return /* xml */ `<entry>
 			<id>${new URL(post.url, blogUrl).toString()}</id>
 			<title>${escapeHtmlTags(inlineMarkdownStrip(post.data.title))}</title>
 			<updated>${post.data.updatedAt ?? post.data.createdAt}</updated>
@@ -49,7 +49,7 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 		</entry>`;
 	}));
 
-	const atomFeed = `<?xml version="1.0" encoding="UTF-8"?>
+	const atomFeed = /* xml */ `<?xml version="1.0" encoding="UTF-8"?>
 		<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
 			<title>Marco Campos' Blog</title>
 			<subtitle>Marco Campos' Blog — A space where I talk about web development and other programming related (or not) things.</subtitle>
@@ -58,8 +58,8 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 			<link rel="self" type="application/atom+xml" href="${currentPageUrl}" />
 
 			<link rel="first" href="${new URL('./feed.atom.xml', blogUrl).toString()}" />
-			${prevPageUrl ? `<link rel="previous" href="${prevPageUrl}" />` : ''}
-			${nextPageUrl ? `<link rel="next" href="${nextPageUrl}" />` : ''}
+			${prevPageUrl ? /* xml */ `<link rel="previous" href="${prevPageUrl}" />` : ''}
+			${nextPageUrl ? /* xml */ `<link rel="next" href="${nextPageUrl}" />` : ''}
 			<link rel="last" href="${new URL(`./feed.atom${props.page.lastPage}.xml`, blogUrl).toString()}" />
 
 			<updated>${new Date().toISOString()}</updated>

@@ -135,7 +135,7 @@ import { encodeEmail } from '../utils/email';
 						<li>
 							<Icon name="mingcute:mail-line" aria-hidden="true" />
 							<Fragment
-								set:html={`<a href="mailto:${encodeEmail()}" rel="me">
+								set:html={/* html */ `<a href="mailto:${encodeEmail()}" rel="me">
 								<span class="u-email email" itemprop="email">${encodeEmail('', true)}</span>
 							</a>`}
 							/>

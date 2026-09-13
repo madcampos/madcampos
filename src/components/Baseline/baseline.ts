@@ -80,7 +80,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '&mdash;';
 
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<baseline-icon>
 				<sr-only>Baseline status: ${baselineStatus.get(data.status?.baseline)}</sr-only>
 				<svg viewBox="0 0 36 20" width="36" height="20" aria-hidden="true">

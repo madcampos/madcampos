@@ -85,7 +85,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 
 		const x = textElement.getAttribute('x') ?? '0';
 		for (const line of lines) {
-			textElement.insertAdjacentHTML('beforeend', `<tspan dy="1lh" x="${x}">${line}</tspan>`);
+			textElement.insertAdjacentHTML('beforeend', /* svg */ `<tspan dy="1lh" x="${x}">${line}</tspan>`);
 		}
 	}
 

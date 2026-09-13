@@ -22,14 +22,14 @@ function renderTask(task: Task) {
 	let childTasks = '';
 
 	if (task.children) {
-		childTasks = `
+		childTasks = /* html */ `
 			<ul>
 				${task.children.map((childTask) => renderTask(childTask)).join('\n')}
 			</ul>
 		`;
 	}
 
-	return `
+	return /* html */ `
 		<li>
 			<label id="label-${taskId}" for="${taskId}">
 				<input
@@ -41,7 +41,7 @@ function renderTask(task: Task) {
 					${task.removed ? 'disabled' : ''}
 				/>
 				<span>${markdown.inline(task.text)}</span>
-				${task.removed ? `<m-note data-type="info"><small>${task.removed}</small></m-note>` : ''}
+				${task.removed ? /* html */ `<m-note data-type="info"><small>${task.removed}</small></m-note>` : ''}
 			</label>
 			${childTasks}
 		</li>

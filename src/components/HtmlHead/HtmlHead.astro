@@ -8,6 +8,7 @@ import printStylesheet from '../../assets/css/print.css?url';
 import corkBoardThemeCss from '../../assets/css/themes/cork-board.css?url';
 import darkThemeCss from '../../assets/css/themes/dark.css?url';
 import hackerThemeCss from '../../assets/css/themes/hacker.css?url';
+import halloweenThemeCss from '../../assets/css/themes/halloween.css?url';
 import highContrastThemeCss from '../../assets/css/themes/high-contrast.css?url';
 import lightThemeCss from '../../assets/css/themes/light.css?url';
 import lowContrastThemeCss from '../../assets/css/themes/low-contrast.css?url';
@@ -98,6 +99,7 @@ const optimizedImage = await getImage({
 	<link rel="manifest" href="/site.webmanifest" />
 	<link rel="license" href="/license/" />
 	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="color-scheme" content="light dark" />
 
 	<!-- Social metadata -->
 	<meta property="og:site_name" content="Madcampos" />
@@ -167,4 +169,5 @@ const optimizedImage = await getImage({
 	<link rel="stylesheet" type="text/css" href={corkBoardThemeCss} fetchpriority="low" />
 	<link rel="stylesheet" type="text/css" href={systemInverseThemeCss} fetchpriority="low" />
 	<link rel="stylesheet" type="text/css" href={negativeThemeCss} fetchpriority="low" />
+	<link rel="stylesheet" type="text/css" href={halloweenThemeCss} fetchpriority="low" />
 </head>

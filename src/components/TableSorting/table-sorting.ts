@@ -45,7 +45,7 @@ if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
 		const span = document.createElement('span');
 		const id = Math.trunc(Math.random() * 1000000).toString(16);
 
-		span.innerHTML = `
+		span.innerHTML = /* html */ `
 			<label for="sort-button-${id}" id="sort-button-${id}-label"></label>
 			<button type="button" id="sort-button-${id}">
 				<sr-only>Sort table by</sr-only>

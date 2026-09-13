@@ -43,12 +43,12 @@ function generateUniqueId() {
 
 function generateSubtitle(paddingStart: number, paddingEnd: number, subtitleString: string) {
 	// oxlint-disable-next-line unicorn/no-new-array
-	const padStartSvg = `<tspan class="logo-text-padding-start">${new Array(paddingStart).fill('<tspan>-</tspan>').join('')}</tspan>`;
+	const padStartSvg = /* svg */ `<tspan class="logo-text-padding-start">${new Array(paddingStart).fill('<tspan>-</tspan>').join('')}</tspan>`;
 	// oxlint-disable-next-line unicorn/no-new-array
-	const padEndSvg = `<tspan class="logo-text-padding-end">${new Array(paddingEnd).fill('<tspan>-</tspan>').join('')}</tspan>`;
-	const subtitleSvg = [...subtitleString].map((char) => `<tspan>${char}</tspan>`).join('');
+	const padEndSvg = /* svg */ `<tspan class="logo-text-padding-end">${new Array(paddingEnd).fill('<tspan>-</tspan>').join('')}</tspan>`;
+	const subtitleSvg = [...subtitleString].map((char) => /* svg */ `<tspan>${char}</tspan>`).join('');
 
-	return `${padStartSvg}<tspan class="logo-text-content">${subtitleSvg}</tspan>${padEndSvg}`;
+	return /* svg */ `${padStartSvg}<tspan class="logo-text-content">${subtitleSvg}</tspan>${padEndSvg}`;
 }
 
 const logoLabelId = generateUniqueId();

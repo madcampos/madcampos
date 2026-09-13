@@ -6,7 +6,7 @@ export const GET: APIRoute = async (context) => {
 
 	const allTalks = await listAllTalks();
 	const items = await Promise.all(allTalks.map(async (talk) =>
-		`<entry>
+		/* xml */ `<entry>
 			<id>${new URL(`#${talk.id}`, context.url).href}</id>
 			<title><![CDATA[${talk.data.draft ? 'DRAFT - ' : ''}${talk.data.title}]]></title>
 			<updated>${(talk.data.date ?? new Date()).toISOString()}</updated>
@@ -16,7 +16,7 @@ export const GET: APIRoute = async (context) => {
 		</entry>`
 	));
 
-	const atomFeed = `<?xml version="1.0" encoding="UTF-8"?>
+	const atomFeed = /* xml */ `<?xml version="1.0" encoding="UTF-8"?>
 		<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
 			<title>Marco Campos' Site Changelog</title>
 			<subtitle>Changelog (Version History) for Marco Campos' Website, containing all recent changes.</subtitle>

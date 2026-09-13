@@ -50,7 +50,7 @@ export class YoutubeEmbed extends HTMLElement implements CustomElement {
 	}
 
 	render() {
-		this.shadowRoot.innerHTML = `
+		this.shadowRoot.innerHTML = /* html */ `
 			<style>
 				iframe {
 					display: block;

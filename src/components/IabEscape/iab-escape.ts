@@ -30,7 +30,7 @@ export class IabEscape extends HTMLElement implements CustomElement {
 	}
 
 	render() {
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<dialog>
 				<header>
 					<h2>It's a trap!</h2>

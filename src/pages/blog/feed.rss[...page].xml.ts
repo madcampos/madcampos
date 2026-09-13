@@ -31,11 +31,11 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 	const allPosts = await listAllPosts();
 	const items = await Promise.all(allPosts.map(async (post) => {
 		const image = await post.getImage();
-		const imageTag = image ? `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
+		const imageTag = image ? /* html */ `<img src="${new URL(image.src, baseUrl).toString()}" alt="${post.data.imageAlt ?? ''}" height="128" width="128" />` : '';
 
-		const postTags = post.data.tags?.map((tag) => `<category>${tag}</category>`).join('\n') ?? '';
+		const postTags = post.data.tags?.map((tag) => /* xml */ `<category>${tag}</category>`).join('\n') ?? '';
 
-		return `<item>
+		return /* xml */ `<item>
 			<guid>${new URL(post.url, blogUrl).toString()}</guid>
 			<title>${escapeHtmlTags(inlineMarkdownStrip(post.data.title))}</title>
 			<pubDate>${post.data.updatedAt ?? post.data.createdAt}</pubDate>
@@ -51,7 +51,7 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 		</item>`;
 	}));
 
-	const atomFeed = `<?xml version="1.0" encoding="UTF-8"?>
+	const atomFeed = /* xml */ `<?xml version="1.0" encoding="UTF-8"?>
 		<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
 			<channel>
 				<title>Marco Campos' Blog</title>
@@ -60,8 +60,8 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 				<atom:link rel="self" type="application/atom+xml" href="${currentPageUrl}" />
 
 				<atom:link rel="first" href="${new URL('./feed.atom.xml', blogUrl).toString()}" />
-				${prevPageUrl ? `<atom:link rel="previous" href="${prevPageUrl}" />` : ''}
-				${nextPageUrl ? `<atom:link rel="next" href="${nextPageUrl}" />` : ''}
+				${prevPageUrl ? /* xml */ `<atom:link rel="previous" href="${prevPageUrl}" />` : ''}
+				${nextPageUrl ? /* xml */ `<atom:link rel="next" href="${nextPageUrl}" />` : ''}
 				<atom:link rel="last" href="${new URL(`./feed.atom${props.page.lastPage}.xml`, blogUrl).toString()}" />
 
 				<language>en-US</language>

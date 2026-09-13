@@ -9,7 +9,7 @@ function createLogoUrl(logoElement: HTMLElement, size: 'full' | 'micro' | 'mini'
 
 	logoClone.querySelector('title')?.insertAdjacentHTML(
 		'afterend',
-		`<style>
+		/* html */ `<style>
 			${logoBaseCss}
 	</style>`
 	);
@@ -32,7 +32,7 @@ function createLogoUrl(logoElement: HTMLElement, size: 'full' | 'micro' | 'mini'
 	});
 
 	const logoString = serializer.serializeToString(logoClone);
-	const logoBlob = new Blob([`<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n`, logoString], { type: 'image/svg+xml' });
+	const logoBlob = new Blob([/* xml */ `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n`, logoString], { type: 'image/svg+xml' });
 	const logoUrl = URL.createObjectURL(logoBlob);
 
 	return logoUrl;

@@ -3,7 +3,7 @@ import { escapeHtmlTags, inlineMarkdownStrip } from '../../../../../utils/markdo
 import { listAllPosts } from '../../../../../utils/post.ts';
 
 export const GET: APIRoute<Awaited<ReturnType<typeof listAllPosts>>[number]> = async ({ props }) => {
-	const text = `<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+	const text = /* xml */ `<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <oembed>
 	<version>1.0</version>
 	<type>rich</type>
@@ -16,7 +16,7 @@ export const GET: APIRoute<Awaited<ReturnType<typeof listAllPosts>>[number]> = a
 	<height>480</height>
 	${
 		props.data.image
-			? `
+			? /* xml */ `
 			<thumbnail_url>${escapeHtmlTags(props.data.image.src)}</thumbnail_url>
 			<thumbnail_width>${props.data.image.width}</thumbnail_width>
 			<thumbnail_height>${props.data.image.height}</thumbnail_height>

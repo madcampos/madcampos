@@ -130,7 +130,7 @@ export class RadarChart extends HTMLElement implements CustomElement {
 				<p>${this.getAttribute('subtitle') ?? ''}</p>
 			</hgroup>
 			<ol>
-				${this.#items.map(() => `<li></li>`).join('\n')}
+				${this.#items.map(() => /* html */ `<li></li>`).join('\n')}
 			</ol>
 		</chart-legend>
 		`;

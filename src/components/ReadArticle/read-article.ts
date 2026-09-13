@@ -67,12 +67,14 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 		const voices = this.#listVoices();
 
 		return Object.entries(voices)
-			.map(([lang, voiceAvailabilityList]) => `
+			.map(([lang, voiceAvailabilityList]) => /* html */ `
 				<optgroup label="${lang}">
 					${
-				Object.entries(voiceAvailabilityList).map(([availability, voiceList]) => `
+				Object.entries(voiceAvailabilityList).map(([availability, voiceList]) => /* html */ `
 						<optgroup label="${availability}">
-							${voiceList.map((voice) => `<option ${SiteSettings.readingVoice === voice.name || voice.default ? 'selected' : ''}>${voice.name}</option>`).join('\n')}
+							${
+					voiceList.map((voice) => /* html */ `<option ${SiteSettings.readingVoice === voice.name || voice.default ? 'selected' : ''}>${voice.name}</option>`).join('\n')
+				}
 						</optgroup>
 					`).join('\n')
 			}
@@ -320,7 +322,7 @@ export class ReadArticle extends HTMLElement implements CustomElement {
 	}
 
 	render() {
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<form action="" method="post" novalidate>
 				<details open>
 					<summary>Read Article</summary>
