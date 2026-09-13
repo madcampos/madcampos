@@ -363,7 +363,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 	}
 
 	render() {
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<button
 				type="button"
 				popovertarget="site-settings-dialog-${this.#id}"
@@ -391,19 +391,19 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 				</header>
 				<form action="./" method="get">
 					<dialog-content>
-						<details name="settings-group" open>
+						<details name="settings-group-${this.#id}" open>
 							<summary><h3>Themes</h3></summary>
 
 							<theme-list id="theme-list-${this.#id}"></theme-list>
 						</details>
 
-						<details name="settings-group">
+						<details name="settings-group-${this.#id}">
 							<summary><h3>Fonts</h3></summary>
 
 							<font-list id="font-list-${this.#id}"></font-list>
 						</details>
 
-						<details name="settings-group">
+						<details name="settings-group-${this.#id}">
 							<summary><h3>Text Adjusts</h3></summary>
 
 							<input-wrapper>
@@ -448,7 +448,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 							</input-wrapper>
 						</details>
 
-						<details name="settings-group">
+						<details name="settings-group-${this.#id}">
 							<summary><h3>Borders & Motion</h3></summary>
 
 							<input-wrapper>
@@ -486,7 +486,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 							</input-wrapper>
 						</details>
 
-						<details name="settings-group">
+						<details name="settings-group-${this.#id}">
 							<summary><h3>Controller Support</h3></summary>
 
 							<m-note data-type="alert">
@@ -497,7 +497,7 @@ export class SiteDisplaySettings extends HTMLElement implements CustomElement {
 							<!-- TODO: controller mapping -->
 						</details>
 
-						<details name="settings-group" ${!SiteSettings.debug ? 'hidden' : ''}>
+						<details name="settings-group-${this.#id}" ${!SiteSettings.debug ? 'hidden' : ''}>
 							<summary><h3>Debug/Test</h3></summary>
 
 							<input-wrapper>
