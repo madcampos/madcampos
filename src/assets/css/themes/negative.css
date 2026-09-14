@@ -111,6 +111,10 @@
 		--wheel-segment-12-bg: var(--purple-6);
 		--wheel-segment-12-color: black;
 
+		/* Fonts */
+		--headers-font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+		--text-font-family: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+
 		/* Global settings */
 		color-scheme: light;
 		filter: grayscale(30%) sepia(20%) brightness(150%) contrast(90%) invert(100%);
