@@ -2,6 +2,8 @@
 import { markdown } from '@astropub/md';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import type * as BaselineData from 'web-features';
+import baselineData from 'web-features/data.json' with { type: 'json' };
 import avatar from '../../../public/assets/images/me.jpg';
 import { inlineMarkdownStrip } from '../../utils/markdown';
 import { listAllPosts, listPostsByTag } from '../../utils/post.ts';
@@ -25,6 +27,12 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 	name: tag,
 	items: posts.length
 })).sort((first, second) => sorter.compare(first.name, second.name));
+
+// oxlint-disable-next-line typescript/consistent-type-assertions
+const baselineFeatures = Object.entries((baselineData as unknown as typeof BaselineData).features);
+const highBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.status.baseline === 'high')?.[0];
+const lowBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.status.baseline === 'low')?.[0];
+const limitedBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.status.baseline === false)?.[0];
 ---
 <details open>
 	<summary>
@@ -111,9 +119,9 @@ const tags = Object.entries(await listPostsByTag()).map(([tag, posts]) => ({
 	<section>
 		<h3>Baseline Info</h3>
 
-		<baseline-info feature="conic-gradients"></baseline-info>
-		<baseline-info feature="declarative-shadow-dom"></baseline-info>
-		<baseline-info feature="network-information"></baseline-info>
+		<baseline-info feature={highBaselineFeature ?? 'conic-gradients'}></baseline-info>
+		<baseline-info feature={lowBaselineFeature ?? 'declarative-shadow-dom'}></baseline-info>
+		<baseline-info feature={limitedBaselineFeature ?? 'network-information'}></baseline-info>
 		<baseline-info feature="foo-bar-baz"></baseline-info>
 	</section>
 

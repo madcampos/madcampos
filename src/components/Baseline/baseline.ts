@@ -61,6 +61,13 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 		return '2';
 	}
 
+	#escapeHtmlTags(input: string) {
+		return input
+			.replaceAll('&', '&amp;')
+			.replaceAll('<', '&lt;')
+			.replaceAll('>', '&gt;');
+	}
+
 	// oxlint-disable-next-line complexity
 	async render() {
 		if (!this.feature) {
@@ -78,7 +85,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 
 		const baselineDate = data.status?.baseline_high_date ?? data.status?.baseline_low_date;
 		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '&mdash;';
+		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '';
 
 		this.innerHTML = /* html */ `
 			<baseline-icon>
@@ -93,7 +100,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 					role="heading"
 					aria-level="${this.headingLevel}"
 					data-baseline="${data.status?.baseline.toString() ?? 'no-data'}"
-				>${data.name ?? 'Unknown feature'}</baseline-heading>
+				>${this.#escapeHtmlTags(data.name ?? 'Unknown feature')}</baseline-heading>
 
 				<p>
 					<span>${baselineStatus.get(data.status?.baseline)}</span>
@@ -105,7 +112,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 				<summary>Browser support & details</summary>
 
 				<p>
-					${data.description_html ?? data.description ?? 'No data on this feature'}
+					${data.description_html ?? this.#escapeHtmlTags(data.description ?? 'No data on this feature')}
 				</p>
 
 				<table-wrapper role="region" tabindex="0" aria-labelledby="browser-support-table-${this.#id}">
