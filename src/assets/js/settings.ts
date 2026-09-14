@@ -90,11 +90,11 @@ export const themes: SiteTheme[] = [
 		name: 'Photo Negatve',
 		description: 'A "photo negative" theme.'
 	},
-	// {
-	// 	id: 'halloween',
-	// 	name: 'Halloween',
-	// 	description: 'A Halloween theme.'
-	// },
+	{
+		id: 'halloween',
+		name: 'Halloween',
+		description: 'A Halloween theme.'
+	},
 	// {
 	// 	id: 'christmas',
 	// 	name: 'Christmas',

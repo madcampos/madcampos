@@ -1,0 +1,314 @@
+@layer theme {
+	[data-theme='halloween'] {
+		/* Border */
+		--border-size: var(--border-size-2);
+		--border-style: dashed;
+		--link-underline: dotted;
+		--border-radius: var(--radius-3);
+		--focus-outline: var(--theme-color) var(--border-style) var(--border-size);
+
+		/* Theme colors */
+		--theme-color: var(--orange-8);
+		--secondary-color: var(--yellow-7);
+		--accent-color: var(--yellow-5);
+		--complementary-color: var(--yellow-10);
+
+		/* Base colors */
+		--text-1: var(--yellow-1);
+		--text-2: var(--yellow-3);
+		--surface-1: color-mix(in oklch, var(--gray-12) 85%, var(--choco-12));
+		--surface-2: color-mix(in oklch, var(--gray-9) 85%, var(--choco-9));
+		--surface-3: color-mix(in oklch, var(--gray-7) 85%, var(--choco-7));
+		--surface-4: color-mix(in oklch, var(--gray-6) 80%, var(--choco-6));
+
+		/* Link colors */
+		--link-color: var(--purple-6);
+		--link-visited-color: var(--purple-3);
+		--link-hover-color: var(--purple-8);
+		--link-active-color: var(--purple-10);
+
+		/* Code colors */
+		--diff-add-color: var(--lime-5);
+		--diff-add-bg: color-mix(in srgb, var(--lime-8), transparent);
+		--diff-remove-color: var(--red-2);
+		--diff-remove-bg: color-mix(in srgb, var(--red-8), transparent);
+		--highlight-color: var(--gray-5);
+		--highlight-default-bg: color-mix(in srgb, var(--gray-8), transparent);
+		--highlight-error-color: var(--red-8);
+		--highlight-error-bg: color-mix(in srgb, var(--red-10), transparent);
+		--highlight-warning-color: var(--yellow-8);
+		--highlight-warning-bg: color-mix(in srgb, var(--yellow-6), transparent);
+		--highlight-mark-bg: var(--accent-color);
+		--highlight-mark-color: var(--surface-1);
+
+		/* Table styles */
+		--table-header-bg: var(--choco-12);
+		--table-header-color: var(--text-1);
+		--table-header-border: var(--border-size) var(--border-style) var(--text-1);
+
+		--table-rows-odd: var(--surface-1);
+		--table-rows-even: var(--surface-2);
+		--table-rows-hover: var(--yellow-12);
+
+		--table-footer-bg: var(--choco-10);
+		--table-footer-color: var(--text-2);
+		--table-footer-border: var(--border-size) var(--border-style) var(--text-2);
+
+		/* Input styles */
+		--input-bg: var(--surface-1);
+		--input-color: var(--text-1);
+		--input-border: var(--border-size) var(--border-style) var(--theme-color);
+		--input-thumb-color: var(--theme-color);
+
+		--input-placeholder-color: var(--text-2);
+
+		--input-valid-bg: var(--lime-9);
+		--input-valid-color: var(--lime-3);
+		--input-invalid-bg: var(--red-12);
+		--input-invalid-color: var(--red-2);
+		--input-hover-bg: var(--surface-2);
+		--input-hover-color: var(--yellow-1);
+		--input-hover-border-color: var(--yellow-1);
+		--input-focus-bg: var(--surface-2);
+		--input-focus-color: var(--text-2);
+		--input-disabled-bg: var(--surface-1);
+		--input-disabled-color: var(--gray-7);
+		--input-readonly-bg: var(--gray-10);
+		--input-readonly-color: var(--gray-7);
+
+		--select-option-bg: var(--input-bg);
+		--select-option-color: var(--text-1);
+		--select-option-selected-bg: var(--surface-2);
+		--select-option-selected-color: var(--text-2);
+
+		--fieldset-border: var(--border-style) var(--border-size) var(--theme-color);
+
+		/* Button styles */
+		--button-bg: var(--surface-2);
+		--button-color: var(--theme-color);
+		--button-border: var(--border-style) var(--border-size) var(--theme-color);
+		--button-hover-bg: var(--surface-2);
+		--button-hover-color: var(--accent-color);
+		--button-hover-border-color: var(--accent-color);
+		--button-focus-bg: var(--theme-color);
+		--button-focus-color: var(--surface-1);
+		--button-focus-border-color: var(--surface-1);
+		--button-active-bg: var(--accent-color);
+		--button-active-color: var(--text-1);
+		--button-active-border-color: var(--text-1);
+		--button-disabled-bg: var(--gray-5);
+		--button-disabled-color: var(--gray-10);
+		--button-disabled-border-color: var(--gray-10);
+		--button-primary-bg: var(--secondary-color);
+		--button-primary-color: var(--surface-1);
+		--button-primary-border-color: var(--theme-color);
+		--button-secondary-bg: var(--surface-2);
+		--button-secondary-color: var(--secondary-color);
+		--button-secondary-border-color: var(--secondary-color);
+
+		/* Progress styles */
+		--progress-bg: transparent;
+		--progress-fg: var(--theme-color);
+		--progress-border: var(--border-size) solid var(--theme-color);
+		--progress-hover-bg: transparent;
+		--progress-hover-fg: var(--accent-color);
+		--progress-hover-border-color: var(--accent-color);
+
+		/* Meter styles */
+		--meter-background: var(--surface-2);
+		--meter-optimal-color: var(--green-2);
+		--meter-suboptimal-color: var(--yellow-5);
+		--meter-subsuboptimal-color: var(--red-12);
+		--meter-size-adjust: calc(var(--border-size) * 2);
+		--meter-border: var(--border-size) solid var(--theme-color);
+
+		/* Note styles */
+		--note-success-bg: color-mix(in srgb, var(--lime-10), transparent);
+		--note-success-color: var(--lime-3);
+		--note-error-bg: color-mix(in srgb, var(--red-8), transparent 60%);
+		--note-error-color: var(--red-2);
+		--note-warning-bg: color-mix(in srgb, var(--yellow-6), transparent 60%);
+		--note-warning-color: var(--yellow-3);
+		--note-alert-bg: color-mix(in srgb, var(--teal-8), transparent);
+		--note-alert-color: var(--teal-3);
+		--note-info-bg: color-mix(in srgb, var(--indigo-8), transparent);
+		--note-info-color: var(--blue-2);
+		--note-debug-bg: color-mix(in srgb, var(--purple-8), transparent);
+		--note-debug-color: var(--violet-2);
+
+		/* Baseline colors */
+		--baseline-high-color: var(--lime-8);
+		--baseline-high-bg: var(--green-10);
+		--baseline-low-color: var(--indigo-6);
+		--baseline-low-bg: var(--blue-10);
+		--baseline-limited-color: var(--yellow-6);
+		--baseline-limited-bg: var(--gray-7);
+		--baseline-no-data-color: var(--gray-4);
+		--baseline-no-data-bg: var(--gray-8);
+
+		/* Tag list colors */
+		--tag-bg: var(--surface-2);
+		--tag-color: var(--theme-color);
+		--tag-hover-bg: var(--surface-3);
+		--tag-hover-color: var(--accent-color);
+		--tag-focus-bg: var(--surface-3);
+		--tag-focus-color: var(--theme-color);
+
+		/* Logo styles */
+		--logo-part-color: var(--theme-color);
+		--logo-part-stroke: transparent;
+		--logo-part-stroke-width: 0;
+		--logo-extras-color: #282828;
+		--logo-extras-stroke: transparent;
+		--logo-extras-stroke-width: 0;
+		--logo-text-color: var(--accent-color);
+		--logo-text-stroke: transparent;
+		--logo-text-stroke-width: 0;
+		--logo-font: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		--logo-font-weight: 300;
+
+		--logo-pixel-color: #282828;
+		--logo-overlay-color: var(--lime-5);
+		--logo-noise-color: snow;
+
+		--logo-part-hover-color: var(--violet-7);
+		--logo-part-hover-stroke: transparent;
+		--logo-extras-hover-color: var(--purple-12);
+		--logo-extras-hover-stroke: transparent;
+		--logo-text-hover-color: var(--theme-color);
+		--logo-text-hover-stroke: transparent;
+
+		--logo-part-focus-color: var(--text-1);
+		--logo-part-focus-stroke: transparent;
+		--logo-extras-focus-color: var(--secondary-color);
+		--logo-extras-focus-stroke: transparent;
+		--logo-text-focus-color: var(--theme-color);
+		--logo-text-focus-stroke: transparent;
+
+		--logo-part-active-color: var(--purple-12);
+		--logo-part-active-stroke: transparent;
+		--logo-extras-active-color: var(--violet-12);
+		--logo-extras-active-stroke: transparent;
+		--logo-text-active-color: var(--violet-12);
+		--logo-text-active-stroke: transparent;
+
+		/* Avatar styles */
+		--avatar-overlay: linear-gradient(to bottom, var(--orange-6), var(--red-10));
+		--avatary-overlay-opacity: 1;
+		--avatary-overlay-blend-mode: multiply;
+
+		/* Old Buttons */
+		--old-button-border: none;
+		--old-button-border-visibility: visible;
+		--old-button-tint: transparent;
+		--old-button-blend-mode: normal;
+		--old-button-border-radius: 0;
+
+		/* Card */
+		--card-image-radius: var(--radius-4);
+		--card-image-shape: scoop;
+
+		/* Wheel of fortune */
+		--wheel-stroke: var(--accent-color);
+		--wheel-fill: var(--surface-1);
+
+		--wheel-spinner-fill: var(--accent-color);
+		--wheel-spinner-fill-shadow: var(--secondary-color);
+
+		--list-highlight-bg: black;
+		--list-highlight-color: white;
+		--wheel-highlight-filter: invert(1);
+
+		--wheel-segment-1-bg: var(--yellow-0);
+		--wheel-segment-1-color: black;
+		--wheel-segment-2-bg: var(--orange-2);
+		--wheel-segment-2-color: black;
+		--wheel-segment-3-bg: var(--yellow-4);
+		--wheel-segment-3-color: black;
+		--wheel-segment-4-bg: var(--yellow-6);
+		--wheel-segment-4-color: black;
+		--wheel-segment-5-bg: var(--yellow-8);
+		--wheel-segment-5-color: black;
+		--wheel-segment-6-bg: var(--yellow-12);
+		--wheel-segment-6-color: black;
+		--wheel-segment-7-bg: var(--orange-0);
+		--wheel-segment-7-color: black;
+		--wheel-segment-8-bg: var(--orange-2);
+		--wheel-segment-8-color: black;
+		--wheel-segment-9-bg: var(--orange-4);
+		--wheel-segment-9-color: black;
+		--wheel-segment-10-bg: var(--orange-6);
+		--wheel-segment-10-color: black;
+		--wheel-segment-11-bg: var(--orange-8);
+		--wheel-segment-11-color: black;
+		--wheel-segment-12-bg: var(--orange-10);
+		--wheel-segment-12-color: black;
+
+		/* Fonts */
+		--headers-font-family: 'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+		--text-font-family: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+
+		/* Icons */
+		--details-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='orange' d='M15.707 11.293a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 1 1-1.414-1.414l4.95-4.95l-4.95-4.95a1 1 0 0 1 1.414-1.414z'/%3E%3C/svg%3E");
+
+		/* Global settings */
+		accent-color: var(--theme-color);
+		color-scheme: dark;
+	}
+
+	[data-theme='halloween'] decorated-line,
+	decorated-line[data-theme='halloween'] {
+		[data-theme] { display: none; }
+		[data-theme='halloween'] { display: block; }
+	}
+
+	[data-theme='halloween'] m-logo,
+	m-logo[data-theme='halloween'] {
+		[data-theme] { visibility: hidden; }
+
+		[data-theme='halloween'] {
+			&:where([data-size='full']) { visibility: visible; }
+
+			@container logo (max-width: 25rem) { visibility: hidden; }
+			&:where([data-size='mini']) { @container logo (max-width: 25rem) { visibility: visible; } }
+
+			@container logo (max-width: 15rem) { visibility: hidden; }
+			&:where([data-size='micro']) { @container logo (max-width: 15rem) { visibility: visible; } }
+		}
+
+		&[full] {
+			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
+			:where([data-theme='halloween'][data-size='full']) { visibility: visible; }
+		}
+
+		&[mini] {
+			:is([data-size='micro'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='halloween'][data-size='mini']) { visibility: visible; }
+		}
+
+		&[micro] {
+			:is([data-size='mini'], [data-size='full']) { visibility: hidden; }
+			:where([data-theme='halloween'][data-size='micro']) { visibility: visible; }
+		}
+	}
+
+	:is([data-theme='halloween'] themed-image, themed-image[data-theme='halloween']) {
+		:has(img[data-theme-image='halloween']) img {
+			display: none;
+
+			&[data-theme-image='halloween'] { display: block; }
+		}
+	}
+
+	:is([data-theme='halloween'] code-wrapper, code-wrapper[data-theme='halloween']) pre {
+		--code-bg: var(--shiki-contrast-bg, var(--surface-1));
+		--code-color: var(--shiki-contrast, var(--text-1));
+
+		span {
+			--code-color: var(--shiki-contrast, var(--text-1));
+			--code-font-style: var(--shiki-contrast-font-style, normal);
+			--code-font-weight: var(--shiki-contrast-font-weight, normal);
+			--code-text-decoration: var(--shiki-contrast-text-decoration, none);
+		}
+	}
+}
