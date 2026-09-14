@@ -312,7 +312,7 @@
 
 		&[full] {
 			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
-			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+			:where([data-theme='TEMPLATE'][data-size='full']) { visibility: visible; }
 		}
 
 		&[mini] {

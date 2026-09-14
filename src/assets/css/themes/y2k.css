@@ -348,7 +348,7 @@
 
 		&[full] {
 			:is([data-size='micro'], [data-size='mini']) { visibility: hidden; }
-			:where([data-theme='TEMPALTE'][data-size='full']) { visibility: visible; }
+			:where([data-theme='y2k'][data-size='full']) { visibility: visible; }
 		}
 
 		&[mini] {
