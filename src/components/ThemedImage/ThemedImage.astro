@@ -7,17 +7,21 @@ interface Props {
 	image: ImageMetadata;
 	imageAlt?: string;
 	themeImages?: Record<string, ImageMetadata>;
+	extraClasses?: string[];
+	isEager?: boolean;
 }
 
-const { image, imageAlt, themeImages } = Astro.props;
+const { image, imageAlt, themeImages, extraClasses, isEager } = Astro.props;
 ---
 <themed-image>
 	<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
 		<Image
 			itemprop="contentUrl"
+			class:list={extraClasses}
 			src={image}
 			alt={inlineMarkdownStrip(imageAlt ?? '')}
-			loading="lazy"
+			loading={isEager ? 'eager' : 'lazy'}
+			fetchpriority={isEager ? 'high' : 'auto'}
 			widths={[64, 128, 256, 512]}
 			width={256}
 			sizes={`
