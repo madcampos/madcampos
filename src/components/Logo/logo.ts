@@ -38,7 +38,7 @@ function createLogoUrl(logoElement: HTMLElement, size: 'full' | 'micro' | 'mini'
 	return logoUrl;
 }
 
-if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
+if (SiteSettings.js !== 'disabled' && document.querySelector('m-logo')) {
 	document.querySelectorAll<HTMLElement>('m-logo').forEach((logoElement) => {
 		const fullLogoUrl = createLogoUrl(logoElement, 'full');
 		const miniLogoUrl = createLogoUrl(logoElement, 'mini');
@@ -62,6 +62,6 @@ if (SiteSettings.js !== 'disabled' && !customElements.get('hit-counter')) {
 					dialog.showPopover();
 				}
 			}
-		}, { capture: false });
+		}, { capture: true });
 	});
 }

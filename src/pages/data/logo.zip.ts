@@ -4,8 +4,10 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 
 import LogoSvg from '../../components/Logo/LogoSvg.astro';
 
-type LogoThemes = 'hacker' | 'system' | 'uwu' | 'y2k';
+type LogoThemes = 'hacker' | 'halloween' | 'system' | 'uwu' | 'y2k';
+export type AllLogoThemes = 'all' | LogoThemes;
 type LogoSizes = 'full' | 'micro' | 'mini';
+export type AllLogoSizes = 'all' | LogoSizes;
 
 interface LogoItemStyle {
 	fill?: string;
@@ -41,12 +43,16 @@ const sytles: Record<LogoThemes, LogoStyle> = {
 			strokeWidth: '0.5rem',
 			font: "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive",
 			fontWeight: '700'
-		},
-		extras: { fill: 'deeppink', styles: 'fill-opacity: 0.5; transform: translate(2.5rem, 2.5rem);' }
+		}
 	},
 	hacker: {
 		part: { fill: 'lime' },
 		text: { fill: 'seagreen', font: "'Chicago', 'Cascadia Code', 'Fira Code', 'Roboto Mono', 'Monaco', 'Courier New', 'Courier', monospace", fontWeight: '700' }
+	},
+	halloween: {
+		part: { fill: 'orange' },
+		extras: { fill: '#282828' },
+		text: { fill: 'goldenrod', font: "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive" }
 	}
 };
 

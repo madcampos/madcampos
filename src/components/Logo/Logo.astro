@@ -2,9 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import LogoSvg from './LogoSvg.astro';
 import './logo.css';
-
-type LogoThemes = 'all' | 'hacker' | 'system' | 'uwu' | 'y2k';
-type LogoSizes = 'all' | 'full' | 'micro' | 'mini';
+import type { AllLogoSizes, AllLogoThemes } from '../../pages/data/logo.zip';
 
 interface Props {
 	title: string;
@@ -16,7 +14,7 @@ interface Props {
 	mini?: boolean;
 	full?: boolean;
 	glitch?: boolean;
-	theme?: LogoThemes;
+	theme?: AllLogoThemes;
 	setSvgSize?: boolean;
 }
 
@@ -28,7 +26,7 @@ const { url, title, subtitle, shortSubtitle, micro, mini, full, glitch, theme, s
 
 const logoLabelId = generateUniqueId();
 
-let svgSize: LogoSizes = 'all';
+let svgSize: AllLogoSizes = 'all';
 
 if (setSvgSize && full) {
 	svgSize = 'full';
