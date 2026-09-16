@@ -10,8 +10,9 @@ themeImages:
   y2k: ./assets/y2k/40-noriture.jpg
   hacker: ./assets/hacker/40-noriture.png
   uwu: ./assets/uwu/40-noriture.png
+  halloween: ./assets/halloween/40-noriture.png
 techStack:
-  - GitHub Pages
+  - Cloudflare Worker Pages
   - Hono
   - IndexedDB
   - JavaScript

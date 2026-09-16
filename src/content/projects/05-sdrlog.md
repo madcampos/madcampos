@@ -11,6 +11,7 @@ themeImages:
   y2k: ./assets/y2k/05-sdrlog.jpg
   hacker: ./assets/hacker/05-sdrlog.png
   uwu: ./assets/uwu/05-sdrlog.png
+  halloween: ./assets/halloween/05-sdrlog.png
 techStack:
   - HTML
   - CSS
@@ -19,7 +20,7 @@ techStack:
   - Service Worker
   - IndexedDB
   - Web App Manifest
-  - GitHub Pages
+  - Cloudflare Worker Pages
   - Web Components
   - lit-html
   - Web Assembly

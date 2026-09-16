@@ -11,11 +11,12 @@ themeImages:
   y2k: ./assets/y2k/30-fallout-walkthrough.jpg
   hacker: ./assets/hacker/30-fallout-walkthrough.png
   uwu: ./assets/uwu/30-fallout-walkthrough.png
+  halloween: ./assets/halloween/30-fallout-walkthrough.png
 techStack:
   - HTML
   - CSS
   - JavaScript
-  - GitHub Pages
+  - Cloudflare Worker Pages
 ---
 
 A re-format of the incredible "Nearly Ultimate guide for Fallout 2" by Per Jorner ([archived version here](https://web.archive.org/web/20171116020222/https://user.tninet.se/~jyg699a/fallout2.html)). It also contains all the addition from the ["Fallout 2 Restoration Project"](https://github.com/BGforgeNet/Fallout2_Restoration_Project) mod originally by Killap.

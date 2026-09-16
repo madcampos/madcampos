@@ -11,11 +11,12 @@ themeImages:
   y2k: ./assets/y2k/20-oldwebtext.jpg
   hacker: ./assets/hacker/20-oldwebtext.png
   uwu: ./assets/uwu/20-oldwebtext.png
+  halloween: ./assets/halloween/20-oldwebtext.png
 techStack:
   - HTML
   - CSS
   - JavaScript
-  - GitHub Pages
+  - Cloudflare Worker Pages
   - Regular Expressions
   - Unicode strings
 ---
