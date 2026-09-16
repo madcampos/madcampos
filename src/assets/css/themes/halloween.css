@@ -193,7 +193,7 @@
 		--logo-text-active-stroke: transparent;
 
 		/* Avatar styles */
-		--avatar-overlay: linear-gradient(to bottom, var(--orange-6), var(--red-10));
+		--avatar-overlay: url('./halloween/avatar-overlay.png');
 		--avatary-overlay-opacity: 1;
 		--avatary-overlay-hover-opacity: 0;
 		--avatary-overlay-blend-mode: normal;

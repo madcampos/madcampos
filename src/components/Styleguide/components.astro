@@ -4,7 +4,6 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import type * as BaselineData from 'web-features';
 import baselineData from 'web-features/data.json' with { type: 'json' };
-import avatar from '../../../public/assets/images/me.jpg';
 import { inlineMarkdownStrip } from '../../utils/markdown';
 import { listAllPosts, listPostsByTag } from '../../utils/post.ts';
 import { listAllProjects } from '../../utils/projects.ts';
@@ -13,7 +12,14 @@ import OldStyleButtons from '../OldStyleButtons/OldStyleButtons.astro';
 import Pagination from '../Pagination/Pagination.astro';
 import PromptInjection from '../PromptInjection/PromptInjection.astro';
 import SiteNav from '../SiteNav/SiteNav.astro';
+import ThemedImage from '../ThemedImage/ThemedImage.astro';
 import Webrings from '../Webrings/Webrings.astro';
+
+import avatar from '../../../public/assets/images/me.jpg';
+import hackerAvatar from '../../assets/css/themes/hacker/avatar.png';
+import halloweenAvatar from '../../assets/css/themes/halloween/avatar.png';
+import uwuAvatar from '../../assets/css/themes/uwu/avatar.png';
+import y2kAvatar from '../../assets/css/themes/y2k/avatar.png';
 
 // oxlint-disable-next-line typescript/no-non-null-assertion
 const project = (await listAllProjects())[0]!;
@@ -46,29 +52,19 @@ const limitedBaselineFeature = baselineFeatures.find(([, feature]) => feature.ki
 			<div itemprop="author" itemscope itemtype="https://schema.org/Person">
 				<a href="https://madcampos.dev/">
 					<m-avatar>
-						<picture
-							class="user-avatar"
-							itemprop="image"
-							itemscope
-							itemtype="https://schema.org/ImageObject"
-						>
-							<Image
-								class="u-photo photo"
-								itemprop="contentUrl"
-								src={avatar}
-								alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
-								loading="lazy"
-								widths={[128, 256, 512, 768, 1024]}
-								width={512}
-								sizes="
-									auto,
-									(max-width: 25rem) 256px,
-									(max-width: 40rem) 388px,
-									(max-width: 50rem) 448px,
-									512px
-								"
-							/>
-						</picture>
+						<ThemedImage
+							image={avatar}
+							imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+							isEager
+							extraClasses={['u-photo', 'photo']}
+							format="jpg"
+							themeImages={{
+								uwu: uwuAvatar,
+								y2k: y2kAvatar,
+								hacker: hackerAvatar,
+								halloween: halloweenAvatar
+							}}
+						/>
 					</m-avatar>
 				</a>
 
@@ -90,29 +86,18 @@ const limitedBaselineFeature = baselineFeatures.find(([, feature]) => feature.ki
 		<h3>Avatar</h3>
 
 		<m-avatar>
-			<picture
-				class="user-avatar"
-				itemprop="image"
-				itemscope
-				itemtype="https://schema.org/ImageObject"
-			>
-				<Image
-					class="u-photo photo"
-					itemprop="contentUrl"
-					src={avatar}
-					alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
-					loading="lazy"
-					widths={[128, 256, 512, 768, 1024]}
-					width={512}
-					sizes="
-						auto,
-						(max-width: 25rem) 256px,
-						(max-width: 40rem) 388px,
-						(max-width: 50rem) 448px,
-						512px
-					"
-				/>
-			</picture>
+			<ThemedImage
+				image={avatar}
+				imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+				isEager
+				extraClasses={['u-photo', 'photo']}
+				themeImages={{
+					uwu: uwuAvatar,
+					y2k: y2kAvatar,
+					hacker: hackerAvatar,
+					halloween: halloweenAvatar
+				}}
+			/>
 		</m-avatar>
 	</section>
 
@@ -597,6 +582,47 @@ const limitedBaselineFeature = baselineFeatures.find(([, feature]) => feature.ki
 		<h3>Site Setting</h3>
 
 		<site-settings></site-settings>
+	</section>
+
+	<section>
+		<h3>Themed Image</h3>
+
+		<div style="display: flex; flex-wrap: wrap; gap: var(--size-3)">
+			<ThemedImage
+				image={avatar}
+				imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+				themeImages={{
+					uwu: uwuAvatar,
+					y2k: y2kAvatar,
+					hacker: hackerAvatar,
+					halloween: halloweenAvatar
+				}}
+			/>
+
+			<ThemedImage
+				theme="uwu"
+				image={avatar}
+				imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+				themeImages={{
+					uwu: uwuAvatar,
+					y2k: y2kAvatar,
+					hacker: hackerAvatar,
+					halloween: halloweenAvatar
+				}}
+			/>
+
+			<ThemedImage
+				theme="hacker"
+				image={avatar}
+				imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+				themeImages={{
+					uwu: uwuAvatar,
+					y2k: y2kAvatar,
+					hacker: hackerAvatar,
+					halloween: halloweenAvatar
+				}}
+			/>
+		</div>
 	</section>
 
 	<section>

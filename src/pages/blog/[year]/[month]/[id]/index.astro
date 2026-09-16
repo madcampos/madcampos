@@ -4,7 +4,6 @@ import { markdown } from '@astropub/md';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import avatar from '../../../../../../public/assets/images/me.jpg';
 import Card from '../../../../../components/Card/Card.astro';
 import CssNakedDay from '../../../../../components/CssNakedDay/CssNakedDay.astro';
 import DecoratedLine from '../../../../../components/DecoratedLine/DecoratedLine.astro';
@@ -13,9 +12,16 @@ import OldStyleButtons from '../../../../../components/OldStyleButtons/OldStyleB
 import PromptInjection from '../../../../../components/PromptInjection/PromptInjection.astro';
 import SiteNav from '../../../../../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../../../../../components/SvgDefs/SvgDefs.astro';
+import ThemedImage from '../../../../../components/ThemedImage/ThemedImage.astro';
 import Webrings from '../../../../../components/Webrings/Webrings.astro';
 import { inlineMarkdownStrip } from '../../../../../utils/markdown.js';
 import { listAllPosts } from '../../../../../utils/post.js';
+
+import avatar from '../../../../../../public/assets/images/me.jpg';
+import hackerAvatar from '../../../../../assets/css/themes/hacker/avatar.png';
+import halloweenAvatar from '../../../../../assets/css/themes/halloween/avatar.png';
+import uwuAvatar from '../../../../../assets/css/themes/uwu/avatar.png';
+import y2kAvatar from '../../../../../assets/css/themes/y2k/avatar.png';
 
 export const getStaticPaths = (async () =>
 	(await listAllPosts()).map((post) => ({
@@ -176,28 +182,17 @@ const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyl
 				<div itemprop="author" itemscope itemtype="https://schema.org/Person">
 					<a href="https://madcampos.dev/">
 						<m-avatar>
-							<picture
-								class="user-avatar"
-								itemprop="image"
-								itemscope
-								itemtype="https://schema.org/ImageObject"
-							>
-								<Image
-									class="u-photo photo"
-									itemprop="contentUrl"
-									src={avatar}
-									alt="A picture of my face with a smile looking at the camera. I'm wearing aviator glasses, a fake fur winter hat and an orange scarf."
-									loading="lazy"
-									widths={[128, 256, 512, 768, 1024]}
-									width={512}
-									sizes="
-										auto,
-										(max-width: 25rem) 128px,
-										(max-width: 40rem) 256px,
-										512px
-									"
-								/>
-							</picture>
+							<ThemedImage
+								image={avatar}
+								imageAlt="A picture of my face with a smile looking at the camera. I&apos;m wearing aviator glasses, a fake fur winter hat and an orange scarf."
+								extraClasses={['u-photo', 'photo']}
+								themeImages={{
+									uwu: uwuAvatar,
+									y2k: y2kAvatar,
+									hacker: hackerAvatar,
+									halloween: halloweenAvatar
+								}}
+							/>
 						</m-avatar>
 					</a>
 

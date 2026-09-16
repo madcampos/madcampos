@@ -1,6 +1,8 @@
 ---
 import './themed-image.css';
+import type { ImageOutputFormat } from 'astro';
 import { Image } from 'astro:assets';
+import type { ThemeSetting } from '../../assets/js/settings';
 import { inlineMarkdownStrip } from '../../utils/markdown.ts';
 
 interface Props {
@@ -9,11 +11,13 @@ interface Props {
 	themeImages?: Record<string, ImageMetadata>;
 	extraClasses?: string[];
 	isEager?: boolean;
+	format?: ImageOutputFormat;
+	theme?: ThemeSetting;
 }
 
-const { image, imageAlt, themeImages, extraClasses, isEager } = Astro.props;
+const { image, imageAlt, themeImages, extraClasses, isEager, format, theme } = Astro.props;
 ---
-<themed-image>
+<themed-image data-theme={theme}>
 	<picture itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
 		<Image
 			itemprop="contentUrl"
@@ -29,6 +33,7 @@ const { image, imageAlt, themeImages, extraClasses, isEager } = Astro.props;
 				(max-width: 40rem) 256px,
 				512px
 			`}
+			{format}
 		/>
 		{Object.entries(themeImages ?? {}).map(([theme, themeImage]) => (
 			<Image
@@ -45,6 +50,7 @@ const { image, imageAlt, themeImages, extraClasses, isEager } = Astro.props;
 					512px
 				`}
 				hidden
+				{format}
 			/>
 		))}
 	</picture>
