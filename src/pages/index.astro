@@ -1,10 +1,11 @@
 ---
 import '../assets/pages/home/home.css';
+import '../components/Logo/logo.css';
 import { Icon } from 'astro-icon/components';
 import CssNakedDay from '../components/CssNakedDay/CssNakedDay.astro';
 import DecoratedLine from '../components/DecoratedLine/DecoratedLine.astro';
 import HtmlHead from '../components/HtmlHead/HtmlHead.astro';
-import Logo from '../components/Logo/Logo.astro';
+import LogoSvg from '../components/Logo/LogoSvg.astro';
 import OldButtons from '../components/OldStyleButtons/OldStyleButtons.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import ThemedImage from '../components/ThemedImage/ThemedImage.astro';
@@ -30,13 +31,41 @@ import y2kAvatar from '../assets/css/themes/y2k/avatar.png';
 		<CssNakedDay />
 
 		<header>
-			<h1>
-				<Logo
-					subtitle=""
-					shortSubtitle=""
-					title="Home page"
-				/>
-			</h1>
+			<m-logo>
+				<h1>
+					<a href={Astro.url.pathname} class="u-url url">
+						<LogoSvg
+							subtitle=""
+							shortSubtitle=""
+							title="Home page"
+							size="all"
+							url={Astro.url.pathname}
+						/>
+					</a>
+				</h1>
+
+				<dialog popover="manual" closedby="closerequest" id="logo-menu-home">
+					<header>
+						<h2>Logo Menu</h2>
+						<button type="button" popovertarget="logo-menu-home" popovertargetaction="hide">
+							<sr-only>Close Menu</sr-only>
+							<Icon name="mingcute:close-line" aria-hidden="true" />
+						</button>
+					</header>
+					<dialog-content>
+						<ul>
+							<li><a download="full.svg">Download the "Full Logo"</a></li>
+							<li><a download="mini.svg">Download the "Mini Logo"</a></li>
+							<li><a download="micro.svg">Download the "Micro Logo"</a></li>
+							<li><hr /></li>
+							<li><a href="/data/logo.zip">Download all logos</a></li>
+							<li><a href="/brand/">Go to the Brand Page</a></li>
+							<li><hr /></li>
+							<li><a href={Astro.url.pathname}>Go to "Marco Campos — Staff Developer"</a></li>
+						</ul>
+					</dialog-content>
+				</dialog>
+			</m-logo>
 		</header>
 
 		<main

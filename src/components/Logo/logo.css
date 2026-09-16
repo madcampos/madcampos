@@ -10,6 +10,8 @@
 		margin-inline: auto;
 		inline-size: clamp(var(--size-header-0), 70vmin, var(--size-header-4));
 
+		h1 { display: contents; }
+
 		.logo-part {
 			fill: var(--logo-part-color);
 			stroke: var(--logo-part-stroke);
