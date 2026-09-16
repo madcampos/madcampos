@@ -217,6 +217,7 @@
 		/* Avatar styles */
 		--avatar-overlay: none;
 		--avatary-overlay-opacity: 0;
+		--avatary-overlay-hover-opacity: 0;
 		--avatary-overlay-blend-mode: normal;
 
 		/* Old Buttons */

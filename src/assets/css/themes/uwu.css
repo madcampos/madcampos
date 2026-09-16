@@ -265,6 +265,7 @@
 		/* Avatar styles */
 		--avatar-overlay: radial-gradient(circle at bottom, var(--accent-color), var(--surface-1));
 		--avatary-overlay-opacity: 1;
+		--avatary-overlay-hover-opacity: 0.4;
 		--avatary-overlay-blend-mode: hard-light;
 
 		/* Old Buttons */

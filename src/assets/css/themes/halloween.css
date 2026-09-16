@@ -195,7 +195,8 @@
 		/* Avatar styles */
 		--avatar-overlay: linear-gradient(to bottom, var(--orange-6), var(--red-10));
 		--avatary-overlay-opacity: 1;
-		--avatary-overlay-blend-mode: multiply;
+		--avatary-overlay-hover-opacity: 0;
+		--avatary-overlay-blend-mode: normal;
 
 		/* Old Buttons */
 		--old-button-border: none;
@@ -205,8 +206,8 @@
 		--old-button-border-radius: 0;
 
 		/* Card */
-		--card-image-radius: var(--radius-4);
-		--card-image-shape: scoop;
+		--card-image-radius: 0;
+		--card-image-shape: square;
 
 		/* Wheel of fortune */
 		--wheel-stroke: var(--accent-color);

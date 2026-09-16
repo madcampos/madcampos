@@ -282,6 +282,7 @@
 		/* Avatar styles */
 		--avatar-overlay: radial-gradient(circle at bottom, var(--accent-color), var(--theme-color));
 		--avatary-overlay-opacity: 0.2;
+		--avatary-overlay-hover-opacity: 0.4;
 		--avatary-overlay-blend-mode: normal;
 
 		/* Old Buttons */
