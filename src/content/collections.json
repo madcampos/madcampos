@@ -349,6 +349,27 @@
 					"url": "https://anasa.ca/"
 				}
 			]
+		},
+		{
+			"title": "Site Syndication",
+			"links": [
+				{
+					"title": "Publishing on the Atmosphere with Standard.site",
+					"url": "https://piccalil.li/blog/publishing-on-the-atmosphere-with-standardsite/"
+				},
+				{
+					"title": "ActivityPub Rocks",
+					"url": "https://activitypub.rocks/"
+				},
+				{
+					"title": "Guide for new ActivityPub implementers",
+					"url": "https://socialhub.activitypub.rocks/pub/guide-for-new-activitypub-implementers"
+				},
+				{
+					"title": "A guide to implement ActivityPub in a static site (or any website)",
+					"url": "https://web.archive.org/web/20260606081809/https://maho.dev/2024/02/a-guide-to-implement-activitypub-in-a-static-site-or-any-website/"
+				}
+			]
 		}
 	]
 }

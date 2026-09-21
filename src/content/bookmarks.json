@@ -257,6 +257,12 @@
 					"title": "Don't Roll Your Own...",
 					"description": "Argument against rolling your own implementations of some UI patterns that are easy to get wrong and very hard to get right.",
 					"type": "guidelines"
+				},
+				{
+					"url": "https://vale.rocks/posts/html-relics",
+					"title": "Antiquated HTML Snippets and Artefacts",
+					"description": "Look at historical HTML snippets that don't make sense anymore.",
+					"type": "article"
 				}
 			]
 		},
@@ -407,6 +413,12 @@
 					"title": "CSS Infinity Use Cases",
 					"description": "Examples of uses for CSS' `infinity`.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://vale.rocks/posts/css-relics",
+					"title": "CSS Curiosities of the Past",
+					"description": "Historical look of some browser hacks and antique techniques.",
+					"type": "article"
 				}
 			]
 		},
@@ -503,6 +515,12 @@
 					"title": "Half Past Fetch",
 					"description": "When a fetch is awaited, does the request stop? What information you have available at that time?",
 					"type": "article"
+				},
+				{
+					"url": "https://evilmartians.com/chronicles/the-secure-way-to-release-an-npm-package",
+					"title": "The secure way to release an npm package in 2026",
+					"description": "Guide for publishing a NPM package.",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -878,9 +896,15 @@
 				},
 				{
 					"url": "https://jyn.dev/simple-is-not-the-same-as-small/",
-					"title": "simple is not small",
+					"title": "Simple is not small",
 					"description": "Explanation of the distinction between \"simple\" and \"small\" in software tools, and what they both mean.",
 					"type": "article"
+				},
+				{
+					"url": "https://jeremymorrell.dev/blog/a-practitioners-guide-to-wide-events/",
+					"title": "A Practitioner's Guide to Wide Events",
+					"description": "A practical guide to apply the concept of \"wide events\" to an applciation.",
+					"type": "tutorial"
 				}
 			]
 		},
