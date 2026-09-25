@@ -263,6 +263,12 @@
 					"title": "Antiquated HTML Snippets and Artefacts",
 					"description": "Look at historical HTML snippets that don't make sense anymore.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.scottohara.me/blog/2021/10/21/menu.html",
+					"title": "Semantic <menu> context",
+					"description": "The troubled history of the `<menu>` element.",
+					"type": "article"
 				}
 			]
 		},
@@ -1408,6 +1414,12 @@
 					"url": "https://www.hermit-tech.com/blog/ai-can-make-you-suck-faster-too",
 					"title": "AI Can Make You Suck Faster Too",
 					"description": "If you are already mediocre, AI will just exacerbate that.",
+					"type": "article"
+				},
+				{
+					"url": "https://martinfowler.com/articles/2026-dont-like-llms.html",
+					"title": "I don't like LLMs",
+					"description": "Some mixed feelings and opinions.",
 					"type": "article"
 				}
 			]
