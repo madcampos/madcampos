@@ -141,6 +141,10 @@
 		--baseline-limited-bg: ;
 		--baseline-no-data-color: ;
 		--baseline-no-data-bg: ;
+		--baseline-deprecated-color: ;
+		--baseline-deprecated-bg: ;
+		--baseline-to-be-removed-color: ;
+		--baseline-to-be-removed-bg: ;
 
 		/* Tag list colors */
 		--tag-bg: ;

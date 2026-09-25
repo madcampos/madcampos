@@ -144,7 +144,11 @@
 		--baseline-limited-color: var(--orange-6);
 		--baseline-limited-bg: var(--gray-7);
 		--baseline-no-data-color: var(--gray-5);
-		--baseline-no-data-bg: var(--gray-8);
+		--baseline-no-data-bg: var(--gray-5);
+		--baseline-deprecated-color: var(--gray-5);
+		--baseline-deprecated-bg: var(--gray-5);
+		--baseline-to-be-removed-color: var(--red-6);
+		--baseline-to-be-removed-bg: var(--red-10);
 
 		/* Tag list colors */
 		--tag-bg: var(--surface-1);

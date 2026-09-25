@@ -5,6 +5,14 @@ import styles from './baseline.css?url';
 type BrowserIdentifier = 'chrome_android' | 'chrome' | 'edge' | 'firefox_android' | 'firefox' | 'safari_ios' | 'safari';
 type BaselineHighLow = 'high' | 'low';
 
+interface BaselineDiscouraged {
+	according_to: [string, ...string[]];
+	alternatives?: [string, ...string[]];
+	reason: string;
+	reason_html: string;
+	removal_date?: string;
+}
+
 interface BaselineStatus {
 	baseline: BaselineHighLow | false;
 	baseline_low_date?: string;
@@ -19,12 +27,15 @@ interface BaselineFeature {
 	description_html: string;
 	spec: string[];
 	status: BaselineStatus;
+	discouraged?: BaselineDiscouraged;
 }
 
-const baselineStatus = new Map<BaselineHighLow | false | undefined, string>([
+const baselineStatus = new Map<BaselineHighLow | false | undefined | 'deprecated' | 'to-be-removed', string>([
 	['high', '<strong>Baseline</strong> Widely Available'],
 	['low', '<strong>Baseline</strong> Newly Available'],
 	[false, 'Limited Availability'],
+	['deprecated', '<em>Deprecated</em>'],
+	['to-be-removed', '<em>Up for removal</em>'],
 	[undefined, '<strong>No data on this feature</strong>']
 ]);
 
@@ -68,7 +79,53 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 			.replaceAll('>', '&gt;');
 	}
 
-	// oxlint-disable-next-line complexity
+	#resolveStatus(feature: Partial<BaselineFeature>) {
+		if (feature.discouraged?.removal_date) {
+			return {
+				status: 'to-be-removed',
+				htmlText: baselineStatus.get('to-be-removed') ?? ''
+			};
+		} else if (feature.discouraged) {
+			return {
+				status: 'deprecated',
+				htmlText: baselineStatus.get('deprecated') ?? ''
+			};
+		}
+
+		return {
+			status: feature.status?.baseline.toString() ?? 'no-data',
+			htmlText: baselineStatus.get(feature.status?.baseline) ?? ''
+		};
+	}
+
+	#resolveName(feature: Partial<BaselineFeature>) {
+		return this.#escapeHtmlTags(feature.name ?? 'Unknown feature');
+	}
+
+	#resolveDescription(feature: Partial<BaselineFeature>) {
+		return feature.description_html ?? this.#escapeHtmlTags(feature.description ?? 'No data on this feature');
+	}
+
+	#resolveDate(feature: Partial<BaselineFeature>) {
+		const baselineDate = feature.status?.baseline_high_date ?? feature.status?.baseline_low_date;
+		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+		const formattedDate = baselineDate ? formatter.format(new Date(baselineDate)) : '';
+
+		return formattedDate;
+	}
+
+	#resolveBrowserSupport(feature: Partial<BaselineFeature>) {
+		return {
+			chrome: feature.status?.support.chrome ?? '&mdash;',
+			chromeAndroid: feature.status?.support.chrome_android ?? '&mdash;',
+			edge: feature.status?.support.edge ?? '&mdash;',
+			firefox: feature.status?.support.firefox ?? '&mdash;',
+			firefoxAndroid: feature.status?.support.firefox_android ?? '&mdash;',
+			safari: feature.status?.support.safari ?? '&mdash;',
+			safariIos: feature.status?.support.safari_ios ?? '&mdash;'
+		};
+	}
+
 	async render() {
 		if (!this.feature) {
 			this.innerHTML = '';
@@ -77,21 +134,20 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 
 		const response = await fetch(`/data/baseline/${this.feature}.json`);
 
-		let data: Partial<BaselineFeature> = {};
+		let feature: Partial<BaselineFeature> = {};
 
 		if (response.ok) {
-			data = await response.json();
+			feature = await response.json();
 		}
 
-		const baselineDate = data.status?.baseline_high_date ?? data.status?.baseline_low_date;
-		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-		const formattedBaselineDate = baselineDate ? formatter.format(new Date(baselineDate)) : '';
+		const { status, htmlText: statusText } = this.#resolveStatus(feature);
+		const browserSupport = this.#resolveBrowserSupport(feature);
 
 		this.innerHTML = /* html */ `
 			<baseline-icon>
-				<sr-only>Baseline status: ${baselineStatus.get(data.status?.baseline)}</sr-only>
-				<svg viewBox="0 0 36 20" width="36" height="20" aria-hidden="true">
-					<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${data.status?.baseline.toString() ?? 'no-data'}" />
+				<sr-only>Baseline status: ${statusText}</sr-only>
+				<svg viewBox="0 0 540 300" width="36" height="20" aria-hidden="true">
+					<use href="/assets/images/components/baseline/baseline-status.svg#baseline-status-${status}" />
 				</svg>
 			</baseline-icon>
 
@@ -99,12 +155,12 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 				<baseline-heading
 					role="heading"
 					aria-level="${this.headingLevel}"
-					data-baseline="${data.status?.baseline.toString() ?? 'no-data'}"
-				>${this.#escapeHtmlTags(data.name ?? 'Unknown feature')}</baseline-heading>
+					data-baseline="${status}"
+				>${this.#resolveName(feature)}</baseline-heading>
 
 				<p>
-					<span>${baselineStatus.get(data.status?.baseline)}</span>
-					<span>${formattedBaselineDate}</span>
+					<span>${statusText}</span>
+					<span>${this.#resolveDate(feature)}</span>
 				</p>
 			</hgroup>
 
@@ -112,7 +168,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 				<summary>Browser support & details</summary>
 
 				<p>
-					${data.description_html ?? this.#escapeHtmlTags(data.description ?? 'No data on this feature')}
+					${this.#resolveDescription(feature)}
 				</p>
 
 				<table-wrapper role="region" tabindex="0" aria-labelledby="browser-support-table-${this.#id}">
@@ -184,13 +240,13 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 						</thead>
 						<tbody>
 							<tr>
-								<td>${data.status?.support.chrome ?? '&mdash;'}</td>
-								<td>${data.status?.support.chrome_android ?? '&mdash;'}</td>
-								<td>${data.status?.support.edge ?? '&mdash;'}</td>
-								<td>${data.status?.support.firefox ?? '&mdash;'}</td>
-								<td>${data.status?.support.firefox_android ?? '&mdash;'}</td>
-								<td>${data.status?.support.safari ?? '&mdash;'}</td>
-								<td>${data.status?.support.safari_ios ?? '&mdash;'}</td>
+								<td>${browserSupport.chrome}</td>
+								<td>${browserSupport.chromeAndroid}</td>
+								<td>${browserSupport.edge}</td>
+								<td>${browserSupport.firefox}</td>
+								<td>${browserSupport.firefoxAndroid}</td>
+								<td>${browserSupport.safari}</td>
+								<td>${browserSupport.safariIos}</td>
 							</tr>
 						</tbody>
 					</table>

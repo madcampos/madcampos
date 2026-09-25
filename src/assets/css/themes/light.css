@@ -81,6 +81,20 @@
 		--note-debug-bg: var(--violet-2);
 		--note-debug-color: var(--purple-12);
 
+		/* Baseline colors */
+		--baseline-high-color: var(--green-9);
+		--baseline-high-bg: var(--green-4);
+		--baseline-low-color: var(--blue-9);
+		--baseline-low-bg: var(--blue-4);
+		--baseline-limited-color: var(--orange-9);
+		--baseline-limited-bg: var(--gray-5);
+		--baseline-no-data-color: var(--gray-5);
+		--baseline-no-data-bg: var(--gray-5);
+		--baseline-deprecated-color: var(--gray-7);
+		--baseline-deprecated-bg: var(--gray-7);
+		--baseline-to-be-removed-color: var(--red-7);
+		--baseline-to-be-removed-bg: var(--red-3);
+
 		/* Wheel of fortune */
 		--list-highlight-bg: var(--yellow-9);
 		--list-highlight-color: black;

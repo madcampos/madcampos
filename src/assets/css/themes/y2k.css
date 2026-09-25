@@ -167,6 +167,10 @@
 		--baseline-limited-bg: silver;
 		--baseline-no-data-color: silver;
 		--baseline-no-data-bg: dimgray;
+		--baseline-deprecated-color: lightgray;
+		--baseline-deprecated-bg: lightgray;
+		--baseline-to-be-removed-color: red;
+		--baseline-to-be-removed-bg: maroon;
 
 		/* Tag list colors */
 		--tag-bg: dimgray;

@@ -1,38 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 20" width="36" height="20">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 300" width="36" height="20">
 	<symbol id="baseline-status-high">
-		<g fill="var(--baseline-high-color)">
-			<path d="M18 8L20 10L18 12L16 10L18 8Z" />
-			<path d="M26 0L28 2L10 20L0 10L2 8L10 16L26 0Z" />
-		</g>
-		<g fill="var(--baseline-high-bg)">
-			<path d="M28 2L26 4L32 10L26 16L22 12L20 14L26 20L36 10L28 2Z" />
-			<path d="M10 0L2 8L4 10L10 4L14 8L16 6L10 0Z" />
-		</g>
+		<path fill="var(--baseline-high-bg, #125225)" d="m420 30-30 30 90 90-90 90-60-60-30 30 90 90 150-150zM150 0 30 120l30 30 90-90 60 60 30-30z" />
+		<path fill="var(--baseline-high-color, #1ea446)" d="m390 0 30 30-270 270L0 150l30-30 120 120z" />
 	</symbol>
 	<symbol id="baseline-status-low">
 		<path
-			fill="var(--baseline-low-bg)"
-			d="m10 0 2 2-2 2-2-2 2-2Zm4 4 2 2-2 2-2-2 2-2Zm16 0 2 2-2 2-2-2 2-2Zm4 4 2 2-2 2-2-2 2-2Zm-4 4 2 2-2 2-2-2 2-2Zm-4 4 2 2-2 2-2-2 2-2Zm-4-4 2 2-2 2-2-2 2-2ZM6 4l2 2-2 2-2-2 2-2Z"
+			fill="var(--baseline-low-bg, #2d509e)"
+			d="m150 0 30 30-30 30-30-30zm60 60 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zm60 60 30 30-30 30-30-30zm-60 60 30 30-30 30-30-30zm-60 60 30 30-30 30-30-30zm-60-60 30 30-30 30-30-30zM90 60l30 30-30 30-30-30z"
 		/>
-		<path fill="var(--baseline-low-color)" d="m26 0 2 2-18 18L0 10l2-2 8 8L26 0Z" />
+		<path fill="var(--baseline-low-color, #4185ff)" d="m390 0 30 30-270 270L0 150l30-30 120 120z" />
 	</symbol>
 	<symbol id="baseline-status-false">
-		<g fill="var(--baseline-limited-color)">
-			<path d="M10 0L16 6L14 8L8 2L10 0Z" />
-			<path d="M22 12L20 14L26 20L28 18L22 12Z" />
-			<path d="M26 0L28 2L10 20L8 18L26 0Z" />
-		</g>
-		<g fill="var(--baseline-limited-bg)">
-			<path d="M8 2L10 4L4 10L10 16L8 18L0 10L8 2Z" />
-			<path d="M28 2L36 10L28 18L26 16L32 10L26 4L28 2Z" />
-		</g>
+		<path fill="var(--baseline-limited-bg, #57452b)" d="m420 30 120 120-120 120-30-30 90-90-90-90zm-300 0 30 30-90 90 90 90-30 30L0 150z" />
+		<path fill="var(--baseline-limited-color, #f09409)" d="m150 0 90 90-30 30-90-90zm180 180-30 30 90 90 30-30zM390 0l30 30-270 270-30-30z" />
 	</symbol>
 	<symbol id="baseline-status-no-data">
-		<g fill="var(--baseline-no-data-color)">
-			<path d="M18 8L20 10L18 12L16 10L18 8Z" />
-			<path d="M28 2L26 4L32 10L26 16L22 12L20 14L26 20L36 10L28 2Z" />
-			<path d="M10 0L2 8L4 10L10 4L14 8L16 6L10 0Z" />
-			<path d="M26 0L28 2L10 20L0 10L2 8L10 16L26 0Z" />
+		<g fill="var(--baseline-no-data-bg, #c6c6c6)">
+			<path d="m420 30 120 120-120 120-30-30 90-90-90-90zm-300 0 30 30-90 90 90 90-30 30L0 150z" />
+			<path d="m150 0 90 90-30 30-90-90zm180 180-30 30 90 90 30-30zM390 0l30 30-270 270-30-30z" />
 		</g>
+	</symbol>
+	<symbol id="baseline-status-deprecated">
+		<path
+			fill="var(--baseline-deprecated-bg, #c6c6c6)"
+			d="m150 0 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM210 60l30 30-30 30-30-30zm240 0 30 30-30 30-30-30zm60 60 30 30-30 30-30-30zm-300 60 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zm-300 60 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM90 180l30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM30 120l30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM90 60l30 30-30 30-30-30zm240 0 30 30-30 30-30-30z"
+		/>
+	</symbol>
+	<symbol id="baseline-status-to-be-removed">
+		<path
+			fill="var(--baseline-to-be-removed-bg, #c6c6c6)"
+			d="m150 0 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM210 60l30 30-30 30-30-30zm240 0 30 30-30 30-30-30zm60 60 30 30-30 30-30-30zm-300 60 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zm-300 60 30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM90 180l30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM30 120l30 30-30 30-30-30zm240 0 30 30-30 30-30-30zM90 60l30 30-30 30-30-30zm240 0 30 30-30 30-30-30z"
+		/>
+		<path fill="var(--baseline-to-be-removed-color, red)" d="m150 0 90 90-30 30-90-90zm180 180-30 30 90 90 30-30zM390 0l30 30-270 270-30-30z" />
 	</symbol>
 </svg>

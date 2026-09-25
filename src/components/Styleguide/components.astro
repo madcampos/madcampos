@@ -39,6 +39,8 @@ const baselineFeatures = Object.entries((baselineData as unknown as typeof Basel
 const highBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.status.baseline === 'high')?.[0];
 const lowBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.status.baseline === 'low')?.[0];
 const limitedBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.status.baseline === false)?.[0];
+const deprecatedBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.discouraged && !feature.discouraged.removal_date)?.[0];
+const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => feature.kind === 'feature' && feature.discouraged?.removal_date)?.[0];
 ---
 <details open>
 	<summary>
@@ -107,6 +109,8 @@ const limitedBaselineFeature = baselineFeatures.find(([, feature]) => feature.ki
 		<baseline-info feature={highBaselineFeature ?? 'conic-gradients'}></baseline-info>
 		<baseline-info feature={lowBaselineFeature ?? 'declarative-shadow-dom'}></baseline-info>
 		<baseline-info feature={limitedBaselineFeature ?? 'network-information'}></baseline-info>
+		<baseline-info feature={deprecatedBaselineFeature ?? 'svg-discouraged'}></baseline-info>
+		<baseline-info feature={toBeRemovedBaselineFeature ?? 'portal'}></baseline-info>
 		<baseline-info feature="foo-bar-baz"></baseline-info>
 	</section>
 

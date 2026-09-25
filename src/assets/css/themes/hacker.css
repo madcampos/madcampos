@@ -138,12 +138,16 @@
 		/* Baseline colors */
 		--baseline-high-color: var(--green-9);
 		--baseline-high-bg: var(--green-12);
-		--baseline-low-color: var(--blue-5);
-		--baseline-low-bg: var(--blue-12);
-		--baseline-limited-color: var(--yellow-7);
-		--baseline-limited-bg: var(--gray-8);
-		--baseline-no-data-color: var(--gray-4);
-		--baseline-no-data-bg: var(--gray-8);
+		--baseline-low-color: var(--green-9);
+		--baseline-low-bg: var(--green-12);
+		--baseline-limited-color: var(--green-9);
+		--baseline-limited-bg: var(--green-12);
+		--baseline-no-data-color: var(--green-9);
+		--baseline-no-data-bg: var(--green-12);
+		--baseline-deprecated-color: var(--green-9);
+		--baseline-deprecated-bg: var(--green-12);
+		--baseline-to-be-removed-color: var(--green-9);
+		--baseline-to-be-removed-bg: var(--green-12);
 
 		/* Tag list colors */
 		--tag-bg: black;

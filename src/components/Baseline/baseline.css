@@ -42,6 +42,8 @@
 				&[data-baseline='low'] { color: var(--baseline-low-color); }
 				&[data-baseline='false'] { color: var(--baseline-limited-color); }
 				&[data-baseline='no-data'] { color: var(--baseline-no-data-color); }
+				&[data-baseline='deprecated'] { color: var(--baseline-deprecated-color); }
+				&[data-baseline='to-be-removed'] { color: var(--baseline-to-be-removed-color); }
 			}
 
 			p { margin: 0; }
