@@ -103,15 +103,39 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 	}
 
 	#resolveDescription(feature: Partial<BaselineFeature>) {
-		return feature.description_html ?? this.#escapeHtmlTags(feature.description ?? 'No data on this feature');
+		const isDiscouraged = feature.discouraged;
+		const description = feature.description_html ?? this.#escapeHtmlTags(feature.description ?? 'No data on this feature');
+
+		if (isDiscouraged) {
+			const reason = feature.discouraged?.reason_html ?? this.#escapeHtmlTags(feature.discouraged?.reason ?? 'No readon given for not using this feature.');
+
+			return /* html */ `
+			<m-note data-type="warning">
+				<rendered-content>
+					<p>${reason}</p>
+				</rendered-content>
+			</m-note>
+
+				<p><s>${description}</s></p>
+			`;
+		}
+
+		return /* html */ `<p>${description}</p>`;
 	}
 
 	#resolveDate(feature: Partial<BaselineFeature>) {
-		const baselineDate = feature.status?.baseline_high_date ?? feature.status?.baseline_low_date;
 		const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-		const formattedDate = baselineDate ? formatter.format(new Date(baselineDate)) : '';
 
-		return formattedDate;
+		const baselineDate = feature.status?.baseline_high_date ?? feature.status?.baseline_low_date;
+		if (baselineDate) {
+			return formatter.format(new Date(baselineDate));
+		}
+
+		if (feature.discouraged?.removal_date) {
+			return formatter.format(new Date(feature.discouraged.removal_date));
+		}
+
+		return '';
 	}
 
 	#resolveBrowserSupport(feature: Partial<BaselineFeature>) {
@@ -142,6 +166,7 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 
 		const { status, htmlText: statusText } = this.#resolveStatus(feature);
 		const browserSupport = this.#resolveBrowserSupport(feature);
+		const resolvedDate = this.#resolveDate(feature);
 
 		this.innerHTML = /* html */ `
 			<baseline-icon>
@@ -160,16 +185,14 @@ export class BaselineInfo extends HTMLElement implements CustomElement {
 
 				<p>
 					<span>${statusText}</span>
-					<span>${this.#resolveDate(feature)}</span>
+					<span ${!resolvedDate ? 'hidden' : ''}>(since ${resolvedDate})</span>
 				</p>
 			</hgroup>
 
 			<details>
 				<summary>Browser support & details</summary>
 
-				<p>
-					${this.#resolveDescription(feature)}
-				</p>
+				${this.#resolveDescription(feature)}
 
 				<table-wrapper role="region" tabindex="0" aria-labelledby="browser-support-table-${this.#id}">
 					<table>
