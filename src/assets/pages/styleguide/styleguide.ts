@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		import('../../../components/ShareOptions/share-options.ts'),
 		import('../../../components/TableSorting/table-sorting.ts'),
 		import('../../../components/WheelOfFortune/wheel-of-fortune.ts'),
-		import('../../../components/Youtube/youtube.ts')
+		import('../../../components/Youtube/youtube.ts'),
+		import('../../../components/TableOfContents/toc.ts')
 	]);
 });

@@ -1,0 +1,10 @@
+@layer components {
+	table-of-contents {
+		/* TODO: resolve where it is on the page */
+		& > button {
+			position: fixed;
+			bottom: 1rem;
+			right: 1rem;
+		}
+	}
+}

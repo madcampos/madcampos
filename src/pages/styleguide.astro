@@ -45,10 +45,13 @@ import TableElement from '../components/Styleguide/tables.astro';
 				shortSubtitle="Style"
 				title="Style Guide"
 			/>
-			<h1 data-pagefind-meta="title">Style Guide</h1>
+			<h1>Style Guide</h1>
 		</header>
 
-		<main data-pagefind-body id="main">
+		<table-of-contents></table-of-contents>
+
+		<main>
+			<!-- TODO: add the element names to the sections -->
 			<SectioningElements />
 			<BlockLevelElements />
 			<InlineLevelElements />
