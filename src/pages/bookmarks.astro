@@ -10,6 +10,7 @@ import SiteNav from '../components/SiteNav/SiteNav.astro';
 import SvgDefs from '../components/SvgDefs/SvgDefs.astro';
 import Webrings from '../components/Webrings/Webrings.astro';
 import { listBlogroll, listBookmarks } from '../utils/bookmarks.ts';
+import { escapeHtmlTags } from '../utils/markdown';
 import { slugify } from '../utils/slug';
 
 const ICON_MAP = {
@@ -72,7 +73,7 @@ const blogs = await listBlogroll();
 			{links.map((section) => (
 				<hgroup>
 					<a href={`#${slugify(section.title)}`}>
-						<h2 id={slugify(section.title)}>{section.title}</h2>
+						<h2 id={slugify(section.title)}>{escapeHtmlTags(section.title)}</h2>
 					</a>
 					<p>{section.description}</p>
 				</hgroup>
