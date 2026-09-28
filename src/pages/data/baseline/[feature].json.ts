@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import type * as BaselineData from 'web-features';
 import baselineData from 'web-features/data.json' with { type: 'json' };
 
+// @ts-expect-error - Typescript errors out with the type for some reason
 // oxlint-disable-next-line typescript/consistent-type-assertions typescript/no-unsafe-type-assertion
 const baselineFeatures = (baselineData as typeof BaselineData).features;
 

@@ -1,4 +1,4 @@
-// oxlint-disable id-length
+// oxlint-disable id-length max-lines
 
 export type EnabledDisabledSetting = 'disabled' | 'enabled';
 export type ThemeSetting =

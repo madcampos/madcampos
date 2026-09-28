@@ -247,7 +247,6 @@
 				<input-success>It is today, yay!</input-success>
 			</input-wrapper>
 			<script type="module" is:inline>
-				// oxlint-disable  no-inline-comments
 				const dateInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-date'));
 				const now = new Date();
 				// oxlint-disable-next-line no-magic-numbers
@@ -327,7 +326,6 @@
 				<input-success>Wake me up, when September ends... 🎵</input-success>
 			</input-wrapper>
 			<script type="module" is:inline>
-				// oxlint-disable  no-inline-comments
 				const monthInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-month'));
 				const targetDate = new Date();
 
@@ -391,7 +389,6 @@
 				<input-success>Thank you, your manager appreciates the input.</input-success>
 			</input-wrapper>
 			<script type="module" is:inline>
-				// oxlint-disable  no-inline-comments
 				const weekInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-week'));
 				const now = new Date();
 
@@ -540,7 +537,7 @@
 				<output for="input-file" id="output-file" aria-live="off">&mdash;</output>
 			</figure>
 			<script type="module" is:inline>
-				// oxlint-disable  no-inline-comments no-implicit-globals
+				// oxlint-disable  no-implicit-globals
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file'));
 				const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file'));
 
@@ -590,7 +587,7 @@
 				<output for="input-file-capture" id="output-file-capture" aria-live="off">&mdash;</output>
 			</figure>
 			<script type="module" is:inline>
-				// oxlint-disable  no-inline-comments no-implicit-globals
+				// oxlint-disable  no-implicit-globals
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-capture'));
 				const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-file-capture'));
 
@@ -692,7 +689,7 @@
 				</output>
 			</figure>
 			<script type="module" is:inline>
-				// oxlint-disable no-inline-comments no-implicit-globals
+				// oxlint-disable no-implicit-globals
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-multiple'));
 				const output = /** @type {HTMLUListElement} */ (document.querySelector('#output-file-multiple'));
 
@@ -733,7 +730,6 @@
 				/>
 			</input-wrapper>
 			<script is:inline>
-				// oxlint-disable no-inline-comments
 				const disabledFileInput = /** @type {HTMLInputElement} */ (document.querySelector('#input-file-disabled'));
 				const dataTransfer = new DataTransfer();
 				const stubFile = new File([], 'spicy-photo.jpg');
@@ -788,7 +784,7 @@
 				</input-hint>
 			</input-wrapper>
 			<script type="module" is:inline>
-				// oxlint-disable no-inline-comments no-implicit-globals no-magic-numbers
+				// oxlint-disable no-implicit-globals no-magic-numbers
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-password'));
 				const output = /** @type {HTMLMeterElement} */ (document.querySelector('#password-strength'));
 				const inputSuccess = /** @type {HTMLElement} */ (document.querySelector('#input-password-success'));
@@ -857,7 +853,7 @@
 				<input-success>Spam on the way.</input-success>
 			</input-wrapper>
 			<script type="module" is:inline>
-				// oxlint-disable no-inline-comments no-implicit-globals
+				// oxlint-disable no-implicit-globals
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-range'));
 				const output = /** @type {HTMLOutputElement} */ (document.querySelector('#output-range'));
 
@@ -1093,7 +1089,7 @@
 			</p>
 
 			<script type="module" is:inline>
-				// oxlint-disable no-inline-comments no-implicit-globals no-magic-numbers
+				// oxlint-disable no-implicit-globals no-magic-numbers
 				const input = /** @type {HTMLInputElement} */ (document.querySelector('#input-textarea'));
 				const output = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count'));
 				const outputText = /** @type {HTMLProgressElement} */ (document.querySelector('#word-count-text'));
@@ -1125,7 +1121,6 @@
 				<input type="checkbox" name="maybe" id="input-intermediate" value="maybe" />
 				<label for="input-intermediate">It's checked, maybe.</label>
 				<script type="module" is:inline>
-					// oxlint-disable no-inline-comments
 					const intermediateCheckbox = /** @type {HTMLInputElement} */ (document.querySelector('#input-intermediate'));
 
 					intermediateCheckbox.indeterminate = true;

@@ -95,7 +95,7 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 				this.#setHeadingId(curHeading, prevHeadingId);
 				this.#addHeadingLink(curHeading);
 
-				// eslint-disable-next-line @typescript-eslint/no-loop-func
+				// oxlint-disable-next-line no-loop-func
 				const nextSameLevelIndex = headingList.findIndex((heading, index) => index > curIndex && heading.tagName === curHeading.tagName);
 
 				// Last item
@@ -218,7 +218,6 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 
 		// TODO: add click listener to close the popover when a link is clicked
 		// tocDialog.addEventListener('click', (evt) => {
-		// 	// eslint-disable-next-line @typescript-eslint/prefer-destructuring
 		// 	const target = /** @type {HTMLElement} */ (evt.target);
 
 		// 	if (target.matches('a')) {

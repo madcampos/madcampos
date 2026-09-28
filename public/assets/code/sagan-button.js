@@ -1,3 +1,5 @@
+// @ts-nocheck
+/* eslint-disable */
 export class SaganButton extends HTMLElement {
 	static formAssociated = true;
 	static observedAttributes = [

@@ -550,7 +550,6 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 		<button type="button" id="focus-skip-link">Focus skip link</button>
 		<script type="module" is:inline>
 			document.querySelector('#focus-skip-link')?.addEventListener('click', () => {
-				// oxlint-disable-next-line no-inline-comments
 				(/** @type {HTMLAnchorElement} */ (document.querySelector('skip-to-content a')))?.focus({
 					preventScroll: false,
 					focusVisible: true
