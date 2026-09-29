@@ -39,6 +39,10 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 		template.innerHTML = text;
 
 		[...template.content.querySelectorAll(':not(b, i, em, strong, code, s, u)')].forEach((element) => {
+			if (element.matches('a:not(.header-link)')) {
+				element.insertAdjacentHTML('afterend', element.innerHTML);
+			}
+
 			element.remove();
 		});
 

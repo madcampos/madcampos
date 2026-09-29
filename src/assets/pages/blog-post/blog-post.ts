@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		import('../../../components/ShareOptions/share-options.ts'),
 		import('../../../components/Youtube/youtube.ts'),
 		import('../../../components/RelativeTime/relative-time.ts'),
-		import('../../../components/ReadArticle/read-article.ts')
+		import('../../../components/ReadArticle/read-article.ts'),
+		import('../../../components/TableOfContents/toc.ts')
 	]);
 });
