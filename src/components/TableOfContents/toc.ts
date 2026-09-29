@@ -34,19 +34,24 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 	}
 
 	#escapeHtml(text: string) {
-		return text
-			.replaceAll('&', '&amp;')
-			.replaceAll('<', '&lt;')
-			.replaceAll('>', '&gt;');
+		const template = document.createElement('template');
+
+		template.innerHTML = text;
+
+		[...template.content.querySelectorAll(':not(b, i, em, strong, code, s, u)')].forEach((element) => {
+			element.remove();
+		});
+
+		return template.innerHTML.trim();
 	}
 
 	#setHeadingId(heading: HTMLHeadingElement, prevHeadingId: string) {
-		if (!heading.id) {
+		if (heading.id) {
 			return;
 		}
 
-		if (heading.textContent) {
-			const textSlug = heading.textContent
+		if (heading.innerText) {
+			const textSlug = heading.innerText
 				.toLowerCase()
 				.trim()
 				.replace(/[^\p{L}\p{N}\s_-]/gu, '')
@@ -90,7 +95,7 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 					continue;
 				}
 
-				const headingLabel = this.#escapeHtml(curHeading.textContent);
+				const headingLabel = this.#escapeHtml(curHeading.innerHTML);
 
 				this.#setHeadingId(curHeading, prevHeadingId);
 				this.#addHeadingLink(curHeading);
@@ -153,22 +158,16 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 		}
 
 		const headings = [...root.querySelectorAll<HTMLHeadingElement>(':is(h2, h3, h4, h5, h6):not([data-ignore-toc])')];
-		const filteredHeadings = headings.filter((heading) => !heading.closest('table-of-contents'));
+		const filteredHeadings = headings.filter((heading) => !heading.closest('table-of-contents') && !heading.closest('[data-ignore-toc]'));
 
 		if (filteredHeadings.length === 0) {
-			return /* html */ `
-				<nav aria-label="Table of contents">
-					<p>No headings found.</p>
-				</nav>
-			`;
+			return /* html */ `<p>No headings found.</p>`;
 		}
 
 		return /* html */ `
-			<nav aria-label="Table of contents">
-				<ol>
-					${this.#buildHeadingLists(filteredHeadings)}
-				</ol>
-			</nav>
+			<ol>
+				${this.#buildHeadingLists(filteredHeadings)}
+			</ol>
 		`;
 	}
 
@@ -216,14 +215,14 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 
 		this.#render();
 
-		// TODO: add click listener to close the popover when a link is clicked
-		// tocDialog.addEventListener('click', (evt) => {
-		// 	const target = /** @type {HTMLElement} */ (evt.target);
+		const dialog = this.querySelector('dialog');
+		dialog?.addEventListener('click', (evt) => {
+			if (!(evt.target instanceof HTMLAnchorElement)) {
+				return;
+			}
 
-		// 	if (target.matches('a')) {
-		// 		tocDialog.hidePopover();
-		// 	}
-		// }, { passive: true });
+			dialog.hidePopover();
+		}, { passive: true });
 	}
 
 	disconnectedCallback() {
@@ -237,8 +236,10 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 
 		switch (name) {
 			case 'root':
+				this.rootSelector = newValue;
 				break;
 			case 'toc-title':
+				this.tocTitle = newValue;
 				break;
 			default:
 		}

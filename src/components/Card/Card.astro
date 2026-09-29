@@ -40,7 +40,7 @@ const { itemtype, url, draft, image, imageAlt, themeImages, extraClass } = Astro
 			<card-subtitle><slot name="subtitle"></slot></card-subtitle>
 		</header>
 
-		<rendered-content itemprop="description">
+		<rendered-content itemprop="description" data-ignore-toc>
 			<slot></slot>
 		</rendered-content>
 

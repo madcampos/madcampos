@@ -1,10 +1,23 @@
 @layer components {
 	table-of-contents {
-		/* TODO: resolve where it is on the page */
-		& > button {
-			position: fixed;
-			bottom: 1rem;
-			right: 1rem;
+		dialog-content > ol {
+			list-style: decimal;
+
+			& ol {
+				list-style: lower-alpha;
+
+				ol { list-style: lower-roman; }
+			}
+		}
+
+		li::marker {
+			font-size: large;
+			font-weight: bold;
+		}
+
+		details {
+			display: inline-block;
+			vertical-align: top;
 		}
 	}
 }

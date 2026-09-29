@@ -3,11 +3,11 @@
 ---
 <details open>
 	<summary>
-		<h2>Interactive Elements</h2>
+		<h2 id="interactive-elements">Interactive Elements</h2>
 	</summary>
 
 	<section>
-		<h3>Details & Summary</h3>
+		<h3 id="details-summary">Details & Summary (<code>&lt;details&gt;</code> &amp; <code>&lt;summary&gt;</code>)</h3>
 
 		<p>Regular one:</p>
 
@@ -37,13 +37,17 @@
 	</section>
 
 	<section>
-		<h3>Dialog</h3>
+		<h3 id="dialog">Dialog (<code>&lt;dialog&gt;</code>)</h3>
+
+		<m-note data-type="info">
+			<p>Dialogs have extra styling for <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, and <code>&lt;dialog-content&gt;</code> elements.</p>
+		</m-note>
 
 		<p>Regular dialog:</p>
 		<button type="button" id="dialog-regular-open">Open Sesame</button>
 		<dialog id="dialog-regular">
 			<header>
-				<h2>Regular popover</h2>
+				<h2 data-ignore-toc>Regular popover</h2>
 			</header>
 			<dialog-content>
 				<p>Hi, I'm Sesame, you can close me now.</p>
@@ -65,7 +69,7 @@
 		<button type="button" id="dialog-light-open">Open Sesame Light</button>
 		<dialog id="dialog-light" closedby="any">
 			<header>
-				<h2>Light dismiss dialog</h2>
+				<h2 data-ignore-toc>Light dismiss dialog</h2>
 			</header>
 			<dialog-content>
 				<p>Hi, I'm Sesame Light, you can close me now.</p>
@@ -94,7 +98,7 @@
 		</button>
 		<dialog id="dialog-popover" closedby="any" popover>
 			<header>
-				<h2>Popover dialog</h2>
+				<h2 data-ignore-toc>Popover dialog</h2>
 			</header>
 			<dialog-content>
 				<p>Hi, I'm Sesame Pop, you can close me now.</p>

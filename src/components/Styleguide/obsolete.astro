@@ -10,11 +10,11 @@ const framesetHtml = /* html */ `
 ---
 <details open>
 	<summary>
-		<h2>Obsolete Elements</h2>
+		<h2 id="obsolete-elements">Obsolete Elements</h2>
 	</summary>
 
 	<section>
-		<h3>Acronym Element</h3>
+		<h3 id="acronym">Acronym Element (<code>&lt;iframe&gt;</code>)</h3>
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;abbr&gt;</code> element instead.</span>
 		</m-note>
@@ -23,7 +23,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Applet Element</h3>
+		<h3 id="applet">Applet Element (<code>&lt;applet&gt;</code>)</h3>
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;embed&gt;</code> or <code>&lt;object&gt;</code> elements instead.</span>
 		</m-note>
@@ -34,7 +34,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Base Font Element</h3>
+		<h3 id="basefont">Base Font Element (<code>&lt;basefont&gt;</code>)</h3>
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use CSS instead.</span>
 		</m-note>
@@ -48,7 +48,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Big Text Element</h3>
+		<h3 id="big">Big Text Element (<code>&lt;big&gt;</code>)</h3>
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the CSS <code>font-size</code> property instead.</span>
 		</m-note>
@@ -57,7 +57,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Blink Element</h3>
+		<h3 id="blink">Blink Element (<code>&lt;blink&gt;</code>)</h3>
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the CSS animations instead.</span>
 		</m-note>
@@ -70,7 +70,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Background Sound Element</h3>
+		<h3 id="bgsound">Background Sound Element (<code>&lt;bgsound&gt;</code>)</h3>
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;audio&gt;</code> element instead.</span>
 		</m-note>
@@ -83,7 +83,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Text Centering Element</h3>
+		<h3 id="center">Text Centering Element (<code>&lt;center&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use CSS for this instead.</span>
@@ -93,7 +93,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Directory Listing Element</h3>
+		<h3 id="dir">Directory Listing Element (<code>&lt;dir&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span>
@@ -117,7 +117,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Font Element</h3>
+		<h3 id="font">Font Element (<code>&lt;font&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use CSS instead.</span>
@@ -127,7 +127,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Frameset & Frame Elements</h3>
+		<h3 id="frameset-frame">Frameset & Frame Elements (<code>&lt;frameset&gt;</code> &amp; <code>&lt;frame&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;iframe&gt;</code> element instead.</span>
@@ -141,7 +141,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Image Element</h3>
+		<h3 id="image">Image Element (<code>&lt;image&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;img&gt;</code> element instead.</span>
@@ -160,7 +160,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Is Index Element</h3>
+		<h3 id="isindex">Is Index Element (<code>&lt;isindex&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use a <code>&lt;form&gt;</code> and <code>&lt;input&gt;</code> elements combination instead.</span>
@@ -175,7 +175,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Keygen Element</h3>
+		<h3 id="keygen">Keygen Element (<code>&lt;keygen&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>Web Crypto API</code> instead.</span>
@@ -186,14 +186,14 @@ const framesetHtml = /* html */ `
 		</m-note>
 
 		<p>
-			<label for="keygen">Keygen:</label>
+			<label for="keygen-input">Keygen:</label>
 			<!-- dprint-ignore -->
-			<keygen id="keygen" name="key" challenge="supersecretchallange" />
+			<keygen id="keygen-input" name="key" challenge="supersecretchallange" />
 		</p>
 	</section>
 
 	<section>
-		<h3>Listing Element</h3>
+		<h3 id="listing">Listing Element (<code>&lt;listing&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;pre&gt;</code> or <code>&lt;code&gt;</code> elements instead.</span>
@@ -207,7 +207,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Marquee Element</h3>
+		<h3 id="marquee">Marquee Element (<code>&lt;marquee&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use CSS instead.</span>
@@ -225,7 +225,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Menu Item Element</h3>
+		<h3 id="menuitem">Menu Item Element (<code>&lt;menuitem&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Implement a listener for the <code>contextmenu</code> event.</span>
@@ -253,7 +253,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Multicolumn Element</h3>
+		<h3 id="multicol">Multicolumn Element (<code>&lt;multicol&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>columns</code> CSS property instead.</span>
@@ -273,7 +273,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>NeXT ID Element</h3>
+		<h3 id="nextid">NeXT ID Element (<code>&lt;nextid&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use other ways to provide ID's such as the <code>crypto.randomUUID()</code> method instead.</span>
@@ -289,7 +289,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Non-Breaking Text Element</h3>
+		<h3 id="nobr">Non-Breaking Text Element (<code>&lt;nobr&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>white-space</code> CSS property instead.</span>
@@ -301,7 +301,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>No Embed Element</h3>
+		<h3 id="noembed">No Embed Element (<code>&lt;noembed&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span>
@@ -316,7 +316,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>No Frames Element</h3>
+		<h3 id="noframes">No Frames Element (<code>&lt;noframes&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;object&gt;</code> or <code>&lt;iframe&gt;</code> elements instead if this functionality is needed.</span>
@@ -327,7 +327,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Object Parameter Element</h3>
+		<h3 id="param">Object Parameter Element (<code>&lt;param&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Plugins are unsupported in modern browsers. If you need to pass data to an element use the <code>data-*</code> attributes instead.</span>
@@ -352,7 +352,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Plain Text Element</h3>
+		<h3 id="plaintext">Plain Text Element (<code>&lt;plaintext&gt;</code>)</h3>
 
 		<m-note data-type="alert">
 			<span><strong>Note: <em>DON'T USE THIS ELEMENT.</em></strong></span>
@@ -380,7 +380,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Ruby Base & Ruby Text Container Elements</h3>
+		<h3 id="rb-rtc">Ruby Base & Ruby Text Container Elements (<code>&lt;rb&gt;</code> &amp; <code>&lt;rtc&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use just the text inside a <code>&lt;ruby&gt;</code> element instead.</span>
@@ -402,7 +402,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Spacer Element</h3>
+		<h3 id="spacer">Spacer Element (<code>&lt;spacer&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use CSS instead.</span>
@@ -412,7 +412,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Strikethrough Element</h3>
+		<h3 id="strike">Strikethrough Element (<code>&lt;strike&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;s&gt;</code> element instead.</span>
@@ -422,7 +422,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Teletype Text Element</h3>
+		<h3 id="tt">Teletype Text Element (<code>&lt;tt&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span>
@@ -435,7 +435,7 @@ const framesetHtml = /* html */ `
 	</section>
 
 	<section>
-		<h3>Example Element</h3>
+		<h3 id="xmp">Example Element (<code>&lt;xmp&gt;</code>)</h3>
 
 		<m-note data-type="warning">
 			<span><strong>Note:</strong> Use the <code>&lt;pre&gt;</code> element instead.</span>

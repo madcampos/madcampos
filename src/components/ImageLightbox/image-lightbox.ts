@@ -74,7 +74,7 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 					</button>
 					<dialog id="lightbox-alt-dialog-${this.#id}" popover>
 						<header>
-							<h2>Image Alternative Text</h2>
+							<h2 data-ignore-toc>Image Alternative Text</h2>
 							<button type="button" popovertarget="lightbox-alt-dialog-${this.#id}">
 								<sr-only>Close alternative text</sr-only>
 									<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>
@@ -96,7 +96,7 @@ export class ImageLightbox extends HTMLElement implements CustomElement {
 					<dialog id="lightbox-zoom-dialog-${this.#id}" popover>
 						<form action="">
 							<header>
-								<h2>Full Image</h2>
+								<h2 data-ignore-toc>Full Image</h2>
 								<button type="button" popovertarget="lightbox-zoom-dialog-${this.#id}">
 									<sr-only>Close full image</sr-only>
 										<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>

@@ -2,8 +2,9 @@
 
 ---
 <details open>
+	<!-- TODO: add ids -->
 	<summary>
-		<h2>Forms</h2>
+		<h2 id="form-elements">Forms</h2>
 	</summary>
 
 	<form action="#" method="post" enctype="multipart/form-data">
@@ -897,14 +898,15 @@
 			</input-wrapper>
 
 			<input-wrapper>
-				<label for="input-email-disabled">Friends to never add to our newsletter:</label>
+				<label for="input-email-multiple-disabled">Friends to never add to our newsletter:</label>
 				<input
 					type="email"
 					name="global-optout-emails"
-					id="input-email-disabled"
+					id="input-email-multiple-disabled"
 					inputmode="email"
+					multiple
 					disabled
-					placeholder="E.g.: lancelot@camelot.com, galahad@camelot.com"
+					placeholder="E.g.: that-one@heck.com, that-other-one@heck.com"
 				/>
 			</input-wrapper>
 
@@ -1334,8 +1336,8 @@
 				<input type="button" id="input-button" value="Button, but input" />
 			</p>
 			<p>
-				<button type="button" id="button-button" disabled>Disabled</button>
-				<input type="button" id="input-button" disabled value="Button, but disabled input" />
+				<button type="button" id="button-disabled" disabled>Disabled</button>
+				<input type="button" id="input-button-disabled" disabled value="Button, but disabled input" />
 			</p>
 
 			<script type="module" is:inline>

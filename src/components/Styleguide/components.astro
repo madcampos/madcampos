@@ -20,6 +20,7 @@ import hackerAvatar from '../../assets/css/themes/hacker/avatar.png';
 import halloweenAvatar from '../../assets/css/themes/halloween/avatar.png';
 import uwuAvatar from '../../assets/css/themes/uwu/avatar.png';
 import y2kAvatar from '../../assets/css/themes/y2k/avatar.png';
+import DecoratedLine from '../DecoratedLine/DecoratedLine.astro';
 
 // oxlint-disable-next-line typescript/no-non-null-assertion
 const project = (await listAllProjects())[0]!;
@@ -44,11 +45,11 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 ---
 <details open>
 	<summary>
-		<h2>Components</h2>
+		<h2 id="components">Components</h2>
 	</summary>
 
 	<section>
-		<h3>Author Card</h3>
+		<h3 id="author-card">Author Card (<code>&lt;author-card&gt;</code>)</h3>
 
 		<author-card>
 			<div itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -71,7 +72,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 				</a>
 
 				<a class="p-author h-card author-name" rel="author" itemprop="url" href="https://madcampos.dev/">
-					<h2 itemprop="name">Marco Campos</h2>
+					<h2 itemprop="name" data-ignore-toc>Marco Campos</h2>
 				</a>
 
 				<p>
@@ -85,7 +86,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Avatar</h3>
+		<h3 id="avatar">Avatar (<code>&lt;m-avatar&gt;</code>)</h3>
 
 		<m-avatar>
 			<ThemedImage
@@ -104,7 +105,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Baseline Info</h3>
+		<h3 id="baseline-info">Baseline Info (<code>&lt;baseline-info&gt;</code>)</h3>
 
 		<baseline-info feature={highBaselineFeature ?? 'conic-gradients'}></baseline-info>
 		<baseline-info feature={lowBaselineFeature ?? 'declarative-shadow-dom'}></baseline-info>
@@ -115,9 +116,9 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Card</h3>
+		<h3 id="card">Card (<code>&lt;m-card&gt;</code>)</h3>
 
-		<p>Project card:</p>
+		<p id="project-card">Project card:</p>
 
 		<Card
 			url={project.data.url}
@@ -139,7 +140,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 				</template>
 				<meta itemprop="isAccessibleForFree" content="True" />
 			</Fragment>
-			<h2 slot="title" itemprop="name">
+			<h2 slot="title" itemprop="name" data-ignore-toc>
 				<Fragment set:html={markdown.inline(project.data.title)} />
 			</h2>
 
@@ -202,7 +203,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 			</details>
 		</Card>
 
-		<p>Post card:</p>
+		<p id="post-card">Post card:</p>
 
 		<Card
 			url={`/blog/${post.url}`}
@@ -211,7 +212,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 			image={post.data.image}
 			imageAlt={post.data.imageAlt ?? ''}
 		>
-			<h2 slot="title" itemprop="name">
+			<h2 slot="title" itemprop="name" data-ignore-toc>
 				<Fragment set:html={markdown.inline(post.data.title)} />
 			</h2>
 			<small slot="subtitle">
@@ -249,7 +250,31 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>CSS Naked Day Info</h3>
+		<h3 id="code-wrapper">Code wrapper (<code>&lt;code-wrapper&gt;</code>)</h3>
+
+		<p>
+			Code example (pre-rendered through <a href="https://shiki.style/" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">Shiki</a>).
+			<strong>Note:</strong> the code only highlights when inside a <code>&lt;code-wrapper&gt;</code> element:
+		</p>
+
+		<code-wrapper>
+			<pre
+				class="astro-code astro-code-themes light-plus dark-plus Noctis High Contrast has-diff has-highlighted has-focused"
+				style="--shiki-light: #000000; --shiki-dark: #d4d4d4; --shiki-contrast: #ffffff; --shiki-light-bg: #ffffff; --shiki-dark-bg: #1e1e1e; --shiki-contrast-bg: #000000; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word"
+				tabindex="0"
+				data-language="ts"
+			><code><span class="line"><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic">//</span><span class="space"> </span><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic" class="highlighted-word">Code</span><span style="--shiki-light:#008000;--shiki-light-font-style:inherit;--shiki-dark:#6A9955;--shiki-dark-font-style:inherit;--shiki-contrast:#888;--shiki-contrast-font-style:italic"> block</span></span>
+	<span class="line diff remove"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Hewwo, World!'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line diff add"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Hello, World!'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Highlighted'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted error"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">error</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Error'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line highlighted warning"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">warn</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Warning'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span>
+	<span class="line focused"><span style="--shiki-light:#001080;--shiki-dark:#9CDCFE;--shiki-contrast:#FFB966">console</span><span style="--shiki-light:#000000;--shiki-light-font-weight:inherit;--shiki-dark:#D4D4D4;--shiki-dark-font-weight:inherit;--shiki-contrast:#FF669C;--shiki-contrast-font-weight:bold">.</span><span style="--shiki-light:#795E26;--shiki-dark:#DCDCAA;--shiki-contrast:#00B4CC">log</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">(</span><span style="--shiki-light:#A31515;--shiki-dark:#CE9178;--shiki-contrast:#66FFBF">'Focused'</span><span style="--shiki-light:#000000;--shiki-dark:#D4D4D4;--shiki-contrast:#DDD3CC">);</span></span></code></pre>
+		</code-wrapper>
+	</section>
+
+	<section>
+		<h3 id="css-naked-day">CSS Naked Day Info (<code>&lt;css-naked-day&gt;</code>)</h3>
 
 		<m-note data-type="info">
 			<span><strong>Note</strong>: This component is in the header of most pages, but only shows when CSS is <em>disabled</em>.</span>
@@ -260,19 +285,28 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Draft Tag</h3>
+		<h3 id="decorated-line">Decorated line (<code>&lt;decorated-line&gt;</code>)</h3>
+
+		<p>
+			Line with <a href="https://en.wikipedia.org/wiki/Fleuron_(typography)" target="_blank" referrerpolicy="no-referrer" rel="noopener noreferrer">fleuron</a>:
+		</p>
+		<DecoratedLine />
+	</section>
+
+	<section>
+		<h3 id="draft-tag">Draft Tag (<code>&lt;draft-tag&gt;</code>)</h3>
 
 		<p>Marks when a post or other entry is a "draft".</p>
 		<p>This is a <draft-tag>Draft</draft-tag></p>
 	</section>
 
 	<section>
-		<h3>Hit Counter</h3>
+		<h3 id="hit-counter">Hit Counter (<code>&lt;hit-counter&gt;</code>)</h3>
 		<hit-counter></hit-counter>
 	</section>
 
 	<section>
-		<h3>Image Lightbox</h3>
+		<h3 id="image-lightbox">Image Lightbox (<code>&lt;img-lightbox&gt;</code>)</h3>
 
 		<p>This enables extra features to images when they are inside a <code>&lt;img-lightbox&gt;</code> component.</p>
 
@@ -287,7 +321,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Inline Share</h3>
+		<h3 id="inline-share">Inline Share (<code>&lt;inline-share&gt;</code>)</h3>
 
 		<rendered-content>
 			<p>Select this text to show the inline share options.</p>
@@ -314,7 +348,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>In-App Browser Escape</h3>
+		<h3 id="iab-escape">In-App Browser Escape (<code>&lt;iab-escape&gt;</code>)</h3>
 		<m-note data-type="info">
 			<span>For various reasons, In-App Browsers are a <strong>curse</strong>. This JS component loads when you are in one of those.</span>
 		</m-note>
@@ -324,13 +358,13 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Logo</h3>
+		<h3 id="logo">Logo (<code>&lt;m-logo&gt;</code>)</h3>
 
 		<p><a href="/brand/">For logo information, see the brand page</a></p>
 	</section>
 
 	<section>
-		<h3>Notes</h3>
+		<h3 id="note">Notes (<code>&lt;m-note&gt;</code>)</h3>
 
 		<m-note data-type="success">
 			<Icon name="mingcute:check-circle-line" aira-hidden="true" />
@@ -376,13 +410,13 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Old Style Buttons</h3>
+		<h3 id="old-style-buttons">Old Style Buttons (<code>&lt;old-style-buttons&gt;</code> &amp; <code>&lt;old-style-button&gt;</code>)</h3>
 
 		<OldStyleButtons />
 	</section>
 
 	<section>
-		<h3>Pagination</h3>
+		<h3 id="pagination">Pagination (<code>&lt;m-pagination&gt;</code>)</h3>
 
 		<Pagination
 			baseUrl="/err/"
@@ -397,13 +431,13 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Post Header</h3>
+		<h3 id="post-header">Post Header (<code>&lt;post-header&gt;</code>)</h3>
 
 		<post-header>
 			<header>
 				{post.data.draft && <draft-tag>Draft</draft-tag>}
 				<a class="u-uid u-url" href={Astro.url.pathname}>
-					<h1 class="p-name" itemprop="headline"><Fragment set:html={markdown.inline(post.data.title)} /></h1>
+					<h1 class="p-name" itemprop="headline" data-ignore-toc><Fragment set:html={markdown.inline(post.data.title)} /></h1>
 				</a>
 
 				{post.data.image && (
@@ -465,34 +499,35 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Prompt Injection</h3>
+		<h3 id="prompt-injection">Prompt Injection (<code>&lt;pro-em-pt-br&gt;</code> &amp; <code>&lt;super-important&gt;</code>)</h3>
 
 		<PromptInjection />
 	</section>
 
 	<section>
-		<h3>Radar Chart</h3>
+		<h3 id="radar-chart">Radar Chart (<code>&lt;radar-chart&gt;</code>)</h3>
 
 		<radar-chart
 			legend="Blog Tags"
 			subtitle="Tags shown on the blog and their post count"
 			hidden
+			data-ignore-toc
 		>
 			{tags.map((tag) => <span data-name={tag.name} data-items={tag.items}>{tag.name} ({tag.items})</span>)}
 		</radar-chart>
 	</section>
 
 	<section>
-		<h3>Read Article</h3>
+		<h3 id="read-article">Read Article (<code>&lt;read-article&gt;</code>)</h3>
 
 		<read-article></read-article>
 	</section>
 
 	<section>
-		<h3 id="related-posts-label">Related Posts</h3>
+		<h3 id="related-posts">Related Posts (<code>&lt;related-posts&gt;</code>)</h3>
 
 		<related-posts>
-			<nav aria-labelledby="related-posts-label">
+			<nav aria-labelledby="related-posts">
 				<ul>
 					{post.relatedPosts.map((relatedPost) => (
 						<li>
@@ -513,7 +548,7 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Scroll to Top</h3>
+		<h3 id="scroll-to-top">Scroll to Top (<code>&lt;scroll-to-top&gt;</code>)</h3>
 
 		<p>This will be visible overlaying the content as a link to the top of the page.</p>
 
@@ -531,19 +566,19 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Share Options</h3>
+		<h3 id="share-options">Share Options (<code>&lt;share-options&gt;</code>)</h3>
 
 		<share-options></share-options>
 	</section>
 
 	<section>
-		<h3>Site Nav</h3>
+		<h3 id="site-nav">Site Nav (<code>&lt;site-nav&gt;</code>)</h3>
 
 		<SiteNav />
 	</section>
 
 	<section>
-		<h3>Skip to Main Content</h3>
+		<h3 id="skip-to-content">Skip to Main Content (<code>&lt;skip-to-content&gt;</code>)</h3>
 
 		<p>This is the first element, and will be visible only when focused.</p>
 
@@ -559,14 +594,14 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Screen Reader Only</h3>
+		<h3 id="sr-only">Screen Reader Only (<code>&lt;sr-only&gt;</code>)</h3>
 
 		<p>The text below will not be rendered visibly, but will still be available to screen readers.</p>
 		<sr-only>This text will only be read by screen readers.</sr-only>
 	</section>
 
 	<section>
-		<h3>Tag List</h3>
+		<h3 id="tag-list">Tag List (<code>&lt;tag-list&gt;</code>)</h3>
 
 		<tag-list>
 			<ul>
@@ -582,21 +617,19 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Site Setting</h3>
+		<h3 id="site-settings">Site Setting (<code>&lt;site-settings&gt;</code>)</h3>
 
 		<site-settings></site-settings>
 	</section>
 
 	<section>
-		<h3>Table of contents</h3>
+		<h3 id="toc">Table of contents (<code>&lt;table-of-contents&gt;</code>)</h3>
 
-		<m-note data-type="info">
-			<span><strong>Note</strong>: this component will show on the bottom right page and not in the middle of it.</span>
-		</m-note>
+		<table-of-contents></table-of-contents>
 	</section>
 
 	<section>
-		<h3>Themed Image</h3>
+		<h3 id="themed-image">Themed Image (<code>&lt;themed-image&gt;</code>)</h3>
 
 		<div style="display: flex; flex-wrap: wrap; gap: var(--size-3)">
 			<ThemedImage
@@ -637,13 +670,13 @@ const toBeRemovedBaselineFeature = baselineFeatures.find(([, feature]) => featur
 	</section>
 
 	<section>
-		<h3>Web Rings</h3>
+		<h3 id="m-webrings">Web Rings (<code>&lt;m-webrings&gt;</code>)</h3>
 
 		<Webrings />
 	</section>
 
 	<section>
-		<h3>Wheel of Fortune</h3>
+		<h3 id="wheel-of-fortune">Wheel of Fortune (<code>&lt;wheel-of-fortune&gt;</code>)</h3>
 
 		<wheel-of-fortune items="Tim Hortons, Subway, A&W, Ice Cream, Pizza, Cinnamon Roll, Phở, Spring rolls, Nachos, Ramen, Hummus, Samosas"></wheel-of-fortune>
 	</section>

@@ -36,7 +36,7 @@ import TableElement from '../components/Styleguide/tables.astro';
 			<a href="#main">Skip to main content</a>
 		</skip-to-content>
 
-		<SiteNav />
+		<SiteNav includeToc />
 		<CssNakedDay />
 
 		<header id="page-top">
@@ -48,10 +48,7 @@ import TableElement from '../components/Styleguide/tables.astro';
 			<h1>Style Guide</h1>
 		</header>
 
-		<table-of-contents></table-of-contents>
-
 		<main>
-			<!-- TODO: add the element names to the sections -->
 			<SectioningElements />
 			<BlockLevelElements />
 			<InlineLevelElements />

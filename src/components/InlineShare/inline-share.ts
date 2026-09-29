@@ -368,7 +368,7 @@ export class InlineShare extends HTMLElement implements CustomElement {
 			</button>
 			<dialog id="dialog-${this.#id}" popover>
 				<header>
-					<h2>Share quote</h2>
+					<h2 data-ignore-toc>Share quote</h2>
 					<button type="button" popovertarget="dialog-${this.#id}" popoveraction="close">
 						<sr-only>Close quote sharing</sr-only>
 						<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon>

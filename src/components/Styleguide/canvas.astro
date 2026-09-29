@@ -3,15 +3,15 @@
 ---
 <details open>
 	<summary>
-		<h2>Canvas</h2>
+		<h2 id="canvas">Canvas (<code>&lt;canvas&gt;</code>)</h2>
 	</summary>
 
 	<section>
-		<h3>2D Canvas</h3>
-		<canvas width="320" height="240" id="canvas-2d"></canvas>
+		<h3 id="canvas-2d">2D Canvas</h3>
+		<canvas width="320" height="240" id="canvas-2d-canvas"></canvas>
 		<script type="module" is:inline>
 			// oxlint-disable no-implicit-globals no-magic-numbers
-			const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d'));
+			const canvas = /** @type {HTMLCanvasElement}*/ (document.querySelector('#canvas-2d-canvas'));
 			const ctx = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'));
 			let curHeight = 0;
 			let curWidth = 0;
@@ -67,7 +67,7 @@
 	</section>
 
 	<section>
-		<h3>3D Canvas</h3>
+		<h3 id="3d-canvas">3D Canvas</h3>
 		<canvas width="320" height="240" id="canvas-3d"></canvas>
 		<script src="../../assets/js/test/webgl-cube.ts"></script>
 	</section>
