@@ -82,7 +82,7 @@ const optimizedImage = await getImage({
 	<link rel="canonical" href={Astro.url.href} />
 	<link rel="author" href="/humans.txt" />
 	<link rel="indieweb" href="/indieweb.txt" />
-	<link rel="sitemap" href="/sitemap.xml" />
+	<link rel="sitemap" href="/sitemap-index.xml" />
 	<link rel="alternate" type="application/atom+xml" href="/blog/feed.atom.xml" title="Marco Campos' Blog Feed (Atom)" />
 	<link rel="alternate" type="application/rss+xml" href="/blog/feed.rss.xml" title="Marco Campos' Blog Feed (RSS)" />
 
@@ -170,4 +170,13 @@ const optimizedImage = await getImage({
 	<link rel="stylesheet" type="text/css" href={systemInverseThemeCss} fetchpriority="low" />
 	<link rel="stylesheet" type="text/css" href={negativeThemeCss} fetchpriority="low" />
 	<link rel="stylesheet" type="text/css" href={halloweenThemeCss} fetchpriority="low" />
+
+	<!-- Website metadata -->
+	<template itemscope itemtype="https://schema.org/WebSite">
+		<link itemprop="url" href="http://madcampos.dev/" />
+		<meta itemprop="name" content="Marco Campos" />
+
+		<meta itemprop="alternateName" content="MADCampos" />
+		<meta itemprop="alternateName" content="madcampos" />
+	</template>
 </head>
