@@ -114,8 +114,12 @@
 					filter: contrast(0.9) brightness(1.2);
 					background-color: var(--highlight-default-bg);
 
+					&::before { color: var(--highlight-color); }
+
 					&.error {
 						background-color: var(--highlight-error-bg);
+
+						&::before { color: var(--highlight-error-color); }
 
 						@media (prefers-contrast: more) { border-color: var(--highlight-error-bg); }
 
@@ -128,6 +132,8 @@
 
 					&.warning {
 						background-color: var(--highlight-warning-bg);
+
+						&::before { color: var(--highlight-warning-color); }
 
 						@media (prefers-contrast: more) { border-color: var(--highlight-warning-bg); }
 
@@ -160,6 +166,8 @@
 				&.focused {
 					opacity: 1;
 					filter: contrast(1.2) brightness(1.2);
+
+					&::before { color: var(--highlight-color); }
 
 					@media (forced-colors: active) {
 						opacity: 1;
