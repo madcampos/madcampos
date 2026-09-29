@@ -29,6 +29,13 @@ export interface SiteTheme {
 	description: string;
 	accessible?: boolean;
 	dual?: [ThemeSetting, ThemeSetting];
+	userPreference: {
+		colorScheme?: 'light' | 'dark',
+		reducedMotion?: true,
+		contrast?: 'less' | 'more',
+		reducedTransparency?: true,
+		reducedData?: true
+	};
 }
 
 export const themes: SiteTheme[] = [
@@ -37,63 +44,74 @@ export const themes: SiteTheme[] = [
 		name: 'System Default',
 		description: 'The default theme for the operating system, either light or dark.',
 		accessible: true,
-		dual: ['light', 'dark']
+		dual: ['light', 'dark'],
+		userPreference: {}
 	},
 	{
 		id: 'system-inverse',
 		name: 'System Reverse',
 		description: 'The default theme for the operating system, either light or dark, but with a twist: the reverse of it.',
 		accessible: true,
-		dual: ['dark', 'light']
+		dual: ['dark', 'light'],
+		userPreference: {}
 	},
 	{
 		id: 'light',
 		name: 'Light',
 		description: 'The default light theme.',
-		accessible: true
+		accessible: true,
+		userPreference: { colorScheme: 'light' }
 	},
 	{
 		id: 'dark',
 		name: 'Dark',
 		description: 'The default dark theme.',
-		accessible: true
+		accessible: true,
+		userPreference: { colorScheme: 'dark' }
 	},
 	{
 		id: 'high-contrast',
 		name: 'High Contrast',
 		description: 'A high contrast dark and yellow theme.',
-		accessible: true
+		accessible: true,
+		userPreference: { colorScheme: 'dark', contrast: 'more' }
 	},
 	{
 		id: 'low-contrast',
 		name: 'Low Contrast',
 		description: 'A low contrast light blue theme.',
-		accessible: true
+		accessible: true,
+		userPreference: { colorScheme: 'light', contrast: 'less' }
 	},
 	{
 		id: 'uwu',
 		name: 'UwU',
-		description: 'A cute anime inspired theme.'
+		description: 'A cute anime inspired theme.',
+		userPreference: { colorScheme: 'light' }
 	},
 	{
 		id: 'y2k',
 		name: 'Y2K',
-		description: "A theme inspired on the 90's internet."
+		description: "A theme inspired on the 90's internet.",
+		userPreference: { colorScheme: 'dark' }
 	},
 	{
 		id: 'hacker',
 		name: 'Hacker',
-		description: 'A theme inspired by old CRT monitors.'
+		description: 'A theme inspired by old CRT monitors.',
+		userPreference: { colorScheme: 'dark' }
 	},
 	{
 		id: 'negative',
 		name: 'Photo Negatve',
-		description: 'A "photo negative" theme.'
+		description: 'A "photo negative" theme.',
+		userPreference: { colorScheme: 'light' }
 	},
 	{
 		id: 'halloween',
 		name: 'Halloween',
-		description: 'A Halloween theme.'
+		description: 'A Halloween theme.',
+		userPreference: { colorScheme: 'dark' }
 	},
 	// {
 	// 	id: 'christmas',
@@ -113,13 +131,15 @@ export const themes: SiteTheme[] = [
 	{
 		id: 'random',
 		name: 'Random',
-		description: 'Randomly selects one of the other themes.'
+		description: 'Randomly selects one of the other themes.',
+		userPreference: {}
 	},
 	{
 		id: 'accessible-random',
 		name: 'Random (Accessible)',
 		description: 'Randomly selects one of the accessible themes.',
-		accessible: true
+		accessible: true,
+		userPreference: {}
 	}
 ];
 
@@ -423,6 +443,22 @@ export class SiteSettings {
 	static set theme(value: ThemeSetting | undefined) {
 		SiteSettings.#updateSetting('theme', value);
 		SiteSettings.#persistSetting('theme', value);
+
+		if ('preferences' in navigator) {
+			const { userPreference = {} } = themes.find(({ id }) => id === value) ?? {};
+
+			if (userPreference.colorScheme && navigator.preferences.colorScheme.override !== userPreference.colorScheme) {
+				void navigator.preferences.colorScheme.requestOverride(userPreference.colorScheme);
+			} else if (navigator.preferences.colorScheme.override) {
+				navigator.preferences.colorScheme.clearOverride();
+			}
+
+			if (userPreference.contrast && navigator.preferences.contrast.override !== userPreference.contrast) {
+				void navigator.preferences.contrast.requestOverride(userPreference.contrast);
+			} else if (navigator.preferences.contrast.override) {
+				navigator.preferences.contrast.clearOverride();
+			}
+		}
 	}
 
 	static get font(): FontSetting {
@@ -492,6 +528,17 @@ export class SiteSettings {
 	static set isReducedMotion(value: EnabledDisabledSetting | undefined) {
 		SiteSettings.#updateSetting('isReducedMotion', value);
 		SiteSettings.#persistSetting('isReducedMotion', value);
+
+		if ('preferences' in navigator) {
+			const preferenceOverride = navigator.preferences.reducedMotion.override;
+			if (preferenceOverride === 'reduce' && value === 'disabled') {
+				void navigator.preferences.reducedMotion.requestOverride('no-preference');
+			} else if ((preferenceOverride === 'no-preference') && value === 'enabled') {
+				void navigator.preferences.reducedMotion.requestOverride('reduce');
+			} else if (preferenceOverride) {
+				navigator.preferences.reducedMotion.clearOverride();
+			}
+		}
 	}
 
 	static get hasSolidBorders(): EnabledDisabledSetting {
