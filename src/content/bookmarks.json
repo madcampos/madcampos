@@ -269,6 +269,12 @@
 					"title": "Semantic <menu> context",
 					"description": "The troubled history of the `<menu>` element.",
 					"type": "article"
+				},
+				{
+					"url": "https://hawksley.dev/blog/json-ld-explained-for-personal-websites",
+					"title": "JSON-LD explained for personal websites",
+					"description": "Guide on how to add `JSON-LD` to your personal website.",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -304,6 +310,12 @@
 					"url": "https://css-tricks.com/dropdown-menus-with-more-forgiving-mouse-movement-paths/",
 					"title": "Dropdown Menus with More Forgiving Mouse Movement Paths",
 					"description": "A classic tutorial on how to create dropdown menus that don't require precise mouse movements.",
+					"type": "tutorial"
+				},
+				{
+					"url": "https://www.smashingmagazine.com/2023/08/better-context-menus-safe-triangles/",
+					"title": "Better Context Menus With Safe Triangles",
+					"description": "Update on the CSS tricks article on context menus.",
 					"type": "tutorial"
 				},
 				{
@@ -911,6 +923,12 @@
 					"title": "A Practitioner's Guide to Wide Events",
 					"description": "A practical guide to apply the concept of \"wide events\" to an applciation.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://darkounity.com/blog/how-i-learned-unity-the-wrong-way",
+					"title": "How I learned Unity the wrong way",
+					"description": "A developer's journey and the hard leassons learned on not skipping the fundamentals and paying attention to the instructions.",
+					"type": "article"
 				}
 			]
 		},
@@ -1420,6 +1438,12 @@
 					"url": "https://martinfowler.com/articles/2026-dont-like-llms.html",
 					"title": "I don't like LLMs",
 					"description": "Some mixed feelings and opinions.",
+					"type": "article"
+				},
+				{
+					"url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705",
+					"title": "How to keep enjoying programming in a world of LLMs",
+					"description": "Comment on how to keep having fun while sorrounded by LLMs.",
 					"type": "article"
 				}
 			]
