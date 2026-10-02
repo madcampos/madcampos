@@ -1,6 +1,7 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
+  # Connection-Allowlist: (response-origin); redirects=allow
 
 /.well-known/webfinger
   Content-Type: application/jrd+json
