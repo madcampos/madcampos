@@ -3,7 +3,6 @@ import styles from './toc.css?url';
 
 export class TableOfContents extends HTMLElement implements CustomElement {
 	static observedAttributes = ['root', 'toc-title'];
-	#observer?: MutationObserver;
 
 	readonly #id = crypto.randomUUID();
 
@@ -227,10 +226,6 @@ export class TableOfContents extends HTMLElement implements CustomElement {
 
 			dialog.hidePopover();
 		}, { passive: true });
-	}
-
-	disconnectedCallback() {
-		this.#observer?.disconnect();
 	}
 
 	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
