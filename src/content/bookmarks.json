@@ -155,6 +155,12 @@
 					"title": "React's architectural accessibility gaps",
 					"description": "An example of one of the many shortcomings of react, specifically when dealing with document translation and changing the document's language.",
 					"type": "article"
+				},
+				{
+					"url": "https://www.craigabbott.co.uk/blog/2026/the-dunning-kruger-effect-in-accessibility/",
+					"title": "The Dunning-Kruger effect in accessibility",
+					"description": "A reflection on why the gap in knowledge is so insidious in accessibility practice.",
+					"type": "article"
 				}
 			]
 		},
@@ -539,6 +545,12 @@
 					"title": "The secure way to release an npm package in 2026",
 					"description": "Guide for publishing a NPM package.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://www.bram.us/2026/09/20/npm-publish-subfolder/",
+					"title": "Ship cleaner packages (without the `./dist` or `./src` folder) by publishing a subfolder to NPM",
+					"description": "Guide to publishing a package from a subfolder instead of from the root folder of a project.",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -650,7 +662,7 @@
 				},
 				{
 					"url": "https://tailscale.com/blog/frequent-reauth-security",
-					"title": "Frequent reauth doesn't make you more secure",
+					"title": "Frequent re-authentication doesn't make you more secure",
 					"description": "An interesting view on asking users to reauthenticate often.",
 					"type": "article"
 				},
@@ -725,6 +737,12 @@
 					"title": "Intro to Startup anti-pattern Series",
 					"description": "List of \"anti-patterns\" that companies, specially startups follow.",
 					"type": "reference"
+				},
+				{
+					"url": "https://www.evalapply.org/posts/side-step-secretary-problem-hiring/index.html",
+					"title": "Side-stepping the Secretary Problem, unwittingly.",
+					"description": "A story and some guidelines about hiring people.",
+					"type": "article"
 				}
 			]
 		},
@@ -921,13 +939,13 @@
 				{
 					"url": "https://jeremymorrell.dev/blog/a-practitioners-guide-to-wide-events/",
 					"title": "A Practitioner's Guide to Wide Events",
-					"description": "A practical guide to apply the concept of \"wide events\" to an applciation.",
+					"description": "A practical guide to apply the concept of \"wide events\" to an application.",
 					"type": "tutorial"
 				},
 				{
 					"url": "https://darkounity.com/blog/how-i-learned-unity-the-wrong-way",
 					"title": "How I learned Unity the wrong way",
-					"description": "A developer's journey and the hard leassons learned on not skipping the fundamentals and paying attention to the instructions.",
+					"description": "A developer's journey and the hard lessons learned on not skipping the fundamentals and paying attention to the instructions.",
 					"type": "article"
 				}
 			]
@@ -1274,7 +1292,7 @@
 				},
 				{
 					"url": "https://atmoio.substack.com/p/after-two-years-of-vibecoding-im",
-					"title": "After two years of vibecoding, I'm back to writing by hand",
+					"title": "After two years of vibe coding, I'm back to writing by hand",
 					"description": "The story of how a developer went from vibe coding back to actually writing code because the LLM generated code is actually bad.",
 					"type": "article"
 				},
@@ -1443,7 +1461,7 @@
 				{
 					"url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705",
 					"title": "How to keep enjoying programming in a world of LLMs",
-					"description": "Comment on how to keep having fun while sorrounded by LLMs.",
+					"description": "Comment on how to keep having fun while surrounded by LLMs.",
 					"type": "article"
 				}
 			]
