@@ -9,13 +9,13 @@ My language of choice is JavaScript, but I do work with whatever tool gets the j
 
 ## 🛠 Current work
 
-Working @[LightsOn Software](https://lightsonsoftware.com/), with lots of Javascript.
+Working @[Square One Insurance Services](https://www.squareone.ca/), with PHP and Vue.
 
 ## 🧠 I'm studying
 
-- React
-- Typescript
-- PowerShell
+- Web Components
+- New JS Proposals
+- PHP
 
 ## ℹ Fun facts
 
