@@ -272,7 +272,7 @@
 				},
 				{
 					"url": "https://www.scottohara.me/blog/2021/10/21/menu.html",
-					"title": "Semantic <menu> context",
+					"title": "Semantic `<menu>` context",
 					"description": "The troubled history of the `<menu>` element.",
 					"type": "article"
 				},
@@ -361,12 +361,6 @@
 					"type": "website"
 				},
 				{
-					"url": "https://polypane.app/blog/using-safe-area-inset-to-build-mobile-safe-layouts/",
-					"title": "Using safe-area-inset to build mobile-safe layouts",
-					"description": "How to use the safe area inset CSS variables to show content behind the notch and browser overlays.",
-					"type": "tutorial"
-				},
-				{
 					"url": "https://css-generators.com/",
 					"title": "CSS Generators",
 					"description": "Tools to generate some CSS only things, like dividers, fancy shapes and borders, and patterns.",
@@ -416,7 +410,7 @@
 				},
 				{
 					"url": "https://polypane.app/blog/using-safe-area-inset-to-build-mobile-safe-layouts/",
-					"title": "Using safe-area-inset to build mobile-safe layouts",
+					"title": "Using `safe-area-inset` to build mobile-safe layouts",
 					"description": "Guide to use `safe-area-inset` CSS variables to create layouts that take into account the safe browser areas.",
 					"type": "article"
 				},
@@ -555,7 +549,7 @@
 			]
 		},
 		{
-			"title": "UX and Design",
+			"title": "UX & Design",
 			"description": "Usability, Design, and all things around the user experience.",
 			"links": [
 				{
@@ -671,6 +665,12 @@
 					"title": "Bad SSL",
 					"description": "Example links with bad SSL and the reasons for them being bad.",
 					"type": "reference"
+				},
+				{
+					"url": "https://royfish.dev/fingerprints-are-the-new-cookies",
+					"title": "Fingerprints are the new cookies",
+					"description": "Article about fingerprinting techniques and how pervasive that is.",
+					"type": "article"
 				}
 			]
 		},
@@ -1462,6 +1462,12 @@
 					"url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705",
 					"title": "How to keep enjoying programming in a world of LLMs",
 					"description": "Comment on how to keep having fun while surrounded by LLMs.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.sicpers.info/2026/10/reasons-to-dislike-ai-coding/",
+					"title": "Reasons to dislike AI coding",
+					"description": "Exactly what it says in the tin.",
 					"type": "article"
 				}
 			]
