@@ -25,6 +25,7 @@
 		text {
 			fill: var(--theme-color);
 			font-family: var(--code-font-family);
+			font-variant-numeric: tabular-nums;
 		}
 	}
 }
