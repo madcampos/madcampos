@@ -73,9 +73,9 @@ const blogs = await listBlogroll();
 			{links.map((section) => (
 				<hgroup>
 					<a href={`#${slugify(section.title)}`}>
-						<h2 id={slugify(section.title)}>{escapeHtmlTags(section.title)}</h2>
+						<h2 id={slugify(section.title)}><Fragment set:html={escapeHtmlTags(section.title)} /></h2>
 					</a>
-					<p>{section.description}</p>
+					<p><Fragment set:html={escapeHtmlTags(section.description)} /></p>
 				</hgroup>
 				<dl>
 					{section.links.map((bookmark) => (
