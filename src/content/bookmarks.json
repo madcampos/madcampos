@@ -281,6 +281,12 @@
 					"title": "JSON-LD explained for personal websites",
 					"description": "Guide on how to add `JSON-LD` to your personal website.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://adactio.com/journal/20618",
+					"title": "HTML web components",
+					"description": "HTML will outlive frameworks, so build with HTML.",
+					"type": "article"
 				}
 			]
 		},
@@ -1468,6 +1474,12 @@
 					"url": "https://www.sicpers.info/2026/10/reasons-to-dislike-ai-coding/",
 					"title": "Reasons to dislike AI coding",
 					"description": "Exactly what it says in the tin.",
+					"type": "article"
+				},
+				{
+					"url": "https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html",
+					"title": "Asking LLM for confidence",
+					"description": "\"Confidence\" on an LLM is just another piece random generated text. No confidence at all.",
 					"type": "article"
 				}
 			]
