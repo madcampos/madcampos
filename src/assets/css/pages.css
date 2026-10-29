@@ -8,14 +8,14 @@
 		color: var(--text-1);
 	}
 
-	body > header {
+	:where(body > header) {
 		display: flex;
 		flex-direction: column;
 		place-items: center stretch;
 		gap: var(--size-3);
 	}
 
-	body > main {
+	:where(body > main) {
 		flex-grow: 1;
 		inline-size: 100%;
 		max-inline-size: var(--size-content-4);
@@ -23,7 +23,7 @@
 		padding-inline: clamp(var(--size-3), 6vw, var(--size-10));
 	}
 
-	body > footer {
+	:where(body > footer) {
 		display: flex;
 		flex-direction: column;
 		justify-content: end;

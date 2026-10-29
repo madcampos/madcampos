@@ -6,6 +6,11 @@
 			&:not(:first-of-type) { margin-block-start: var(--size-5); }
 		}
 
+		dd {
+			container-type: inline-size;
+			margin-inline-start: 0;
+		}
+
 		ul {
 			display: flex;
 			justify-content: center;
@@ -13,14 +18,14 @@
 			padding: 0;
 			list-style: none;
 
-			@media (max-width: 40rem) {
+			@container (max-width: 30rem) {
 				flex-direction: column;
 				align-items: center;
 
 				li a {
 					display: flex;
 
-					svg { order: -1; }
+					svg[data-icon] { order: -1; }
 				}
 			}
 		}
