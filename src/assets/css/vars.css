@@ -2,7 +2,7 @@
 	:root {
 		/* Default size for body text */
 		/* INFO: set as a percentage to allow for OS level sizing */
-		--base-font-size: 112.5%;
+		--base-font-size: calc(112.5% * env(preferred-text-scale, 1));
 		--line-height-adjust: 1;
 
 		/* Size overrides */
