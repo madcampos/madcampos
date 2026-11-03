@@ -287,6 +287,18 @@
 					"title": "HTML web components",
 					"description": "HTML will outlive frameworks, so build with HTML.",
 					"type": "article"
+				},
+				{
+					"url": "https://arielsalminen.com/2026/progressive-web-components/",
+					"title": "Progressive Web Components",
+					"description": "Framework for categorizing web components.",
+					"type": "article"
+				},
+				{
+					"url": "https://aboard.com/the-web-is-more-than-enough/",
+					"title": "The Web Is More Than Enough",
+					"description": "Testament to the power of the modern web.",
+					"type": "article"
 				}
 			]
 		},
