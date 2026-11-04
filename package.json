@@ -45,15 +45,15 @@
 		"@iconify-json/fa6-brands": "1.2.6",
 		"@iconify-json/mingcute": "1.2.8",
 		"@mad-c/config": "^4.2.1",
-		"@shikijs/transformers": "4.4.3",
-		"@shikijs/twoslash": "4.4.3",
+		"@shikijs/transformers": "4.5.0",
+		"@shikijs/twoslash": "4.5.0",
 		"@types/hast": "3.0.5",
 		"@types/node": "26.6.2",
 		"@typescript/lib-dom": "npm:modern-web-types@^0.6.0",
-		"@zip.js/zip.js": "2.17.0",
+		"@zip.js/zip.js": "2.23.0",
 		"astro": "7.3.3",
 		"astro-icon": "1.2.0",
-		"oxlint": "^1.85.0",
+		"oxlint": "^1.87.0",
 		"oxlint-tsgolint": "^7.0.2002",
 		"pagefind": "^1.5.2",
 		"puppeteer": "25.11.0",
@@ -65,7 +65,7 @@
 		"sharp": "^0.35.4",
 		"typescript": "7.0.2",
 		"unist-util-visit": "5.1.0",
-		"wrangler": "4.143.0"
+		"wrangler": "4.149.0"
 	},
 	"overrides": {
 		"es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
@@ -78,7 +78,7 @@
 		"gl-matrix": "3.4.4",
 		"inapp-spy": "5.0.10",
 		"open-props": "1.7.23",
-		"varlock": "^1.20.0",
-		"web-features": "3.40.0"
+		"varlock": "^1.22.0",
+		"web-features": "3.42.0"
 	}
 }
