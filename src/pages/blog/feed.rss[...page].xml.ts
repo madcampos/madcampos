@@ -52,17 +52,20 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 	}));
 
 	const atomFeed = /* xml */ `<?xml version="1.0" encoding="UTF-8"?>
-		<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+		<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
 			<channel>
 				<title>Marco Campos' Blog</title>
 				<description>Marco Campos' Blog — A space where I talk about web development and other programming related (or not) things.</description>
 				<link>${blogUrl}</link>
-				<atom:link rel="self" type="application/atom+xml" href="${currentPageUrl}" />
+				<atom:link rel="self" type="application/rss+xml" href="${currentPageUrl}" />
 
 				<atom:link rel="first" href="${new URL('./feed.atom.xml', blogUrl).toString()}" />
 				${prevPageUrl ? /* xml */ `<atom:link rel="previous" href="${prevPageUrl}" />` : ''}
 				${nextPageUrl ? /* xml */ `<atom:link rel="next" href="${nextPageUrl}" />` : ''}
 				<atom:link rel="last" href="${new URL(`./feed.atom${props.page.lastPage}.xml`, blogUrl).toString()}" />
+
+				<sy:updatePeriod>monthly</sy:updatePeriod>
+				<sy:updateFrequency>1</sy:updateFrequency>
 
 				<language>en-US</language>
 				<pubDate>${new Date(allPosts[0]?.data.createdAt ?? new Date()).toUTCString()}</pubDate>

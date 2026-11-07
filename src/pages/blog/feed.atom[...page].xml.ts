@@ -50,10 +50,11 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 	}));
 
 	const atomFeed = /* xml */ `<?xml version="1.0" encoding="UTF-8"?>
-		<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
+		<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
 			<title>Marco Campos' Blog</title>
 			<subtitle>Marco Campos' Blog — A space where I talk about web development and other programming related (or not) things.</subtitle>
 			<id>${blogUrl}</id>
+
 			<link rel="alternate" type="text/html" href="${blogUrl}" />
 			<link rel="self" type="application/atom+xml" href="${currentPageUrl}" />
 
@@ -61,6 +62,9 @@ export const GET: APIRoute<APIProps> = async ({ props, site }) => {
 			${prevPageUrl ? /* xml */ `<link rel="previous" href="${prevPageUrl}" />` : ''}
 			${nextPageUrl ? /* xml */ `<link rel="next" href="${nextPageUrl}" />` : ''}
 			<link rel="last" href="${new URL(`./feed.atom${props.page.lastPage}.xml`, blogUrl).toString()}" />
+
+			<sy:updatePeriod>monthly</sy:updatePeriod>
+			<sy:updateFrequency>1</sy:updateFrequency>
 
 			<updated>${new Date().toISOString()}</updated>
 			<generator uri="https://astro.build/">Astro</generator>
