@@ -299,6 +299,12 @@
 					"title": "The Web Is More Than Enough",
 					"description": "Testament to the power of the modern web.",
 					"type": "article"
+				},
+				{
+					"url": "https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/",
+					"title": "If you love a website, back it up",
+					"description": "Tools and guides to help archiving the web.",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -1492,6 +1498,24 @@
 					"url": "https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html",
 					"title": "Asking LLM for confidence",
 					"description": "\"Confidence\" on an LLM is just another piece random generated text. No confidence at all.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.soren.work/writing/the-slopnami-is-an-accessibility-problem/",
+					"title": "The Slopnami is an accessibility problem",
+					"description": "Slop is noise, and it ends up overloading who should benefit from less noise.",
+					"type": "article"
+				},
+				{
+					"url": "https://www.youtube.com/watch?v=gIvVjepvdMg",
+					"title": "The Joy of Coding Is Gone: My Honest Take on AI",
+					"description": "\"Solving hard problems\" is the exciting part for many people, LLMa remove that.",
+					"type": "video"
+				},
+				{
+					"url": "https://shawnsmucker.substack.com/p/please-use-ai",
+					"title": "Please use AI",
+					"description": "Poem on connection and the use of AI.",
 					"type": "article"
 				}
 			]
