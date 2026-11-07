@@ -143,6 +143,9 @@ const optimizedImage = await getImage({
 		<meta name="updated_date" property="og:updated_date" content={updatedDate.toISOString()} />
 	)}
 
+	<!-- Robots directives -->
+	<meta name="robots" content="index, follow" />
+
 	<!-- Webmention -->
 	<!-- TODO: migrate to own webmentions service -->
 	<link rel="webmention" href="https://webmention.io/madcampos.dev/webmention" />
