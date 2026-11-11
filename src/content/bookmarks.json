@@ -1517,6 +1517,18 @@
 					"title": "Please use AI",
 					"description": "Poem on connection and the use of AI.",
 					"type": "article"
+				},
+				{
+					"url": "https://uxdesign.cc/nobody-asked-for-the-sparkle-button-ae54ab5065c6",
+					"title": "Nobody asked for the sparkle button",
+					"description": "Build thigns with AI, not AI things.",
+					"type": "article"
+				},
+				{
+					"url": "https://zonderlabs.com/slop",
+					"title": "Why is AI Slop so Frustrating to Read?",
+					"description": "It's not the em dashes, and is is not the \"delve\"s nor the \"loadbearing\"s.",
+					"type": "article"
 				}
 			]
 		},
