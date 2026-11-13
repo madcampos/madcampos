@@ -3,7 +3,6 @@
 
 	html { background-color: var(--surface-1); }
 	body {
-		background-attachment: fixed;
 		background-image: linear-gradient(to bottom, var(--surface-2), var(--surface-1));
 		background-repeat: no-repeat;
 	}
