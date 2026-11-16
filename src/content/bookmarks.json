@@ -665,6 +665,12 @@
 					"title": "Prof. Dr. Style",
 					"description": "Analysis of old style web design, and it's preservation in recent history. **Note**: the article is a few years old, so some links are broken. Check them with the web archive.",
 					"type": "reference"
+				},
+				{
+					"url": "https://rakhim.exotext.com/i-wish-tech-companies-knew-more-about-me",
+					"title": "I wish tech companies knew more about me",
+					"description": "Observation on how ads work and the nonsensical idea that showing you ads for something you just bought somehow makes perfect sense.",
+					"type": "article"
 				}
 			]
 		},
@@ -970,6 +976,12 @@
 					"url": "https://darkounity.com/blog/how-i-learned-unity-the-wrong-way",
 					"title": "How I learned Unity the wrong way",
 					"description": "A developer's journey and the hard lessons learned on not skipping the fundamentals and paying attention to the instructions.",
+					"type": "article"
+				},
+				{
+					"url": "https://stackoverflow.blog/2026/11/05/don-t-build-the-reusable-component-yet",
+					"title": "Don’t Build the Reusable Component Yet",
+					"description": "Trying to DRY the code too early is actually a bad practice.",
 					"type": "article"
 				}
 			]
@@ -1528,6 +1540,12 @@
 					"url": "https://zonderlabs.com/slop",
 					"title": "Why is AI Slop so Frustrating to Read?",
 					"description": "It's not the em dashes, and is is not the \"delve\"s nor the \"loadbearing\"s.",
+					"type": "article"
+				},
+				{
+					"url": "https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/",
+					"title": "AI usage generates a fragile codebase",
+					"description": "Argument for why AI codebases are move brittle.",
 					"type": "article"
 				}
 			]
