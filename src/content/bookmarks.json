@@ -1127,6 +1127,12 @@
 					"title": "Why some images look brighter than your screen",
 					"description": "How to abuse HDR brightness in images to make them blinding on social media.",
 					"type": "article"
+				},
+				{
+					"url": "https://linebender.org/wiki/curves/squircle/",
+					"title": "Squircles",
+					"description": "Comparison of \"squircle\" (superellipses) implementations.",
+					"type": "article"
 				}
 			]
 		},
@@ -1265,6 +1271,70 @@
 					"title": "Procedural Dungeon generator",
 					"description": "Tutorial explaining algorithms for dungeon generation.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://www.meeplemart.com/",
+					"title": "Meeplemart",
+					"description": "Board games store based in Toronto.",
+					"note": "The site is old, but the catalog is good and they have store pickup.",
+					"type": "website"
+				},
+				{
+					"url": "https://store.401games.ca/",
+					"title": "401 Games",
+					"description": "Board games store based in Toronto.",
+					"note": "They offer store pickup and have a quite good collection.",
+					"type": "website"
+				},
+				{
+					"url": "https://hairyt.com/",
+					"title": "Hairy Tarantula",
+					"description": "Board games store based in Toronto.",
+					"note": "The site search is horrible and shows a lot of Magic cards.",
+					"type": "website"
+				},
+				{
+					"url": "https://www.boardgamebliss.com/",
+					"title": "BoardGame Bliss",
+					"description": "Board games store based in Canada.",
+					"type": "website"
+				},
+				{
+					"url": "https://imaginaire.com/en/",
+					"title": "Imaginaire",
+					"description": "Board games store based in Canada.",
+					"type": "website"
+				},
+				{
+					"url": "https://www.hobbiesville.com/",
+					"title": "Hobbiesville",
+					"description": "Board games store based in Canada.",
+					"type": "website"
+				},
+				{
+					"url": "https://www.sentrybox.com/",
+					"title": "The Sentry Box",
+					"description": "Board games store based in Calgary.",
+					"type": "website"
+				},
+				{
+					"url": "https://levalet.com/en/",
+					"title": "Le Valet D'cœur",
+					"description": "Board games store based in Quebec.",
+					"type": "website"
+				},
+				{
+					"url": "https://bgemporium.ca/",
+					"title": "Boardgame emporium",
+					"description": "Board games store based in Canada.",
+					"type": "website"
+				},
+				{
+					"url": "https://ca.nobleknight.com/",
+					"title": "Noble Knight Games",
+					"description": "Board games store based in the US.",
+					"note": "They deliver to Canada and have used/rarer finds.",
+					"type": "website"
 				}
 			]
 		},
