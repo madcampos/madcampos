@@ -305,6 +305,12 @@
 					"title": "If you love a website, back it up",
 					"description": "Tools and guides to help archiving the web.",
 					"type": "tutorial"
+				},
+				{
+					"url": "https://www.keithcirkel.co.uk/html-graphs/",
+					"title": "Charts in HTML and CSS",
+					"description": "Some CSS magic on top of regular HTML elements to turn them into charts.",
+					"type": "tutorial"
 				}
 			]
 		},
@@ -1616,6 +1622,12 @@
 					"url": "https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/",
 					"title": "AI usage generates a fragile codebase",
 					"description": "Argument for why AI codebases are move brittle.",
+					"type": "article"
+				},
+				{
+					"url": "https://naildrivin5.com/blog/2026/11/11/how-can-you-be-responsible-for-code-you-don-t-understand.html",
+					"title": "How Can You Be Responsible for Code You Don't Understand, Especially When You Can No Longer Program?",
+					"description": "You can't be responsible for what you don't understand.",
 					"type": "article"
 				}
 			]
