@@ -5,6 +5,7 @@ import type { IabEscape } from './IabEscape/iab-escape.ts';
 import type { ImageLightbox } from './ImageLightbox/image-lightbox.ts';
 import type { InlineShare } from './InlineShare/inline-share.ts';
 import type { OldStyleButton } from './OldStyleButtons/old-style-buttons.ts';
+import type { PageStats } from './PageStats/page-stats.ts';
 import type { PWABanner } from './PwaBanner/pwa-banner.ts';
 import type { RadarChart } from './RadarChart/radar-chart.ts';
 import type { ReadArticle } from './ReadArticle/read-article.ts';
@@ -120,6 +121,7 @@ declare global {
 		'codepen-embed': CodepenEmbed;
 		'hit-counter': HitCounter;
 		'iab-escape': IabEscape;
+		'page-stats': PageStats;
 		'pwa-banner': PWABanner;
 		'radar-chart': RadarChart;
 		'read-article': ReadArticle;
